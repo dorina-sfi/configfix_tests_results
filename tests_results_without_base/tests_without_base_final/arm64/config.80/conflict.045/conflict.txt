@@ -1,0 +1,32 @@
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
+
+MD_RAID1: y => mod
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+
+CHARGER_BQ24190: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && EXTCON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+FPGA_MGR_ICE40_SPI: m => yes
+      Direct dependencies: FPGA [=m] && OF [=y] && SPI [=y]
+
+COMEDI_DAS16M1: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+KASAN_VMALLOC: y => no
+      Direct dependencies: KASAN [=y] && KASAN_GENERIC [=y] && HAVE_ARCH_KASAN_VMALLOC [=y]
+      Reverse dependencies: ARM64 [=y] && KASAN_GENERIC [=y]
+
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
+
+RADIO_SI4713: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m]
+

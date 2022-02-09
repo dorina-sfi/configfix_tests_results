@@ -1,0 +1,32 @@
+FB_TFT: m => yes
+      Direct dependencies: STAGING [=y] && FB [=m] && SPI [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+
+HZ_1000: y => no
+      Direct dependencies: <choice>
+
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
+
+REGULATOR_RT5033: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_RT5033 [=m]
+
+MD_RAID0: y => mod
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+
+DA311: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
+
+MOST_DIM2: m => yes
+      Direct dependencies: STAGING [=y] && MOST_COMPONENTS [=m] && HAS_IOMEM [=y] && OF [=y]
+
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=m] && IIO [=y] && SPI_MASTER [=y] || AD7768_1 [=n] && IIO [=y] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
+
+RTC_DRV_RX8581: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
+
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
+

@@ -1,0 +1,24 @@
+DRM_LEGACY: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+      Reverse dependencies: NOUVEAU_LEGACY_CTX_SUPPORT [=y] && HAS_IOMEM [=y] && DRM_NOUVEAU [=y]
+
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+
+CRYPTO_LIB_BLAKE2S: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=n] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=n])
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n])
+
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
+
+THUNDER_NIC_BGX: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y]
+      Reverse dependencies: THUNDER_NIC_PF [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y]
+
+ISCSI_BOOT_SYSFS: y => no
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=y]
+      Reverse dependencies: ISCSI_IBFT [=n] && ACPI [=n] && SCSI [=y] && SCSI_LOWLEVEL [=y] || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || QEDI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && UIO [=y] && QED [=y]
+

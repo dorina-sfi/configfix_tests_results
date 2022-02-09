@@ -1,0 +1,32 @@
+CORESIGHT_LINK_AND_SINK_TMC: m => yes
+      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINKS_AND_SINKS [=m]
+
+DVB_CX24123: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+NET_DSA: m => yes
+      Direct dependencies: NET [=y] && (BRIDGE [=m] || BRIDGE [=m]=n) && (HSR [=m] || HSR [=m]=n) && INET [=y] && NETDEVICES [=y]
+
+USERIO: m => yes
+      Direct dependencies: SERIO [=m]
+
+NET_VENDOR_BROADCOM: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && (SSB_POSSIBLE [=y] && HAS_DMA [=y] || PCI [=y] || BCM63XX || SIBYTE_SB1xxx_SOC)
+      Reverse dependencies: SCSI_BNX2_ISCSI [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && NET [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y] || SCSI_BNX2X_FCOE [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && LIBFC [=m] && LIBFCOE [=n] && MMU [=y]
+
+SERIO_AMBAKMI: m => yes
+      Direct dependencies: SERIO [=m] && ARM_AMBA [=y]
+
+FSI_SBEFIFO: m => yes
+      Direct dependencies: FSI [=m] && OF_ADDRESS [=y]
+
+CPU_LITTLE_ENDIAN: y => no
+      Direct dependencies: <choice>
+
+B53_SERDES: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m]
+
+LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY: y => no
+      Direct dependencies: <choice>
+

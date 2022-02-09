@@ -1,0 +1,31 @@
+MCTP_TEST: y => no
+      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
+
+BLK_DEV_MD: y => no
+      Direct dependencies: MD [=y]
+      Reverse dependencies: DM_RAID [=m] && MD [=y] && BLK_DEV_DM [=m]
+
+LPC_SCH: m => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=y] && X86 && PCI [=y]
+
+FAT_KUNIT_TEST: y => mod
+      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=y]
+
+DM_ZERO: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+SCSI_SMARTPQI: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && !S390
+
+NET_DSA_TAG_BRCM_PREPEND: m => no
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: B53 [=m] && NETDEVICES [=y] && NET_DSA [=m]
+
+XZ_DEC: y => mod
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MELLANOX [=y] || SQUASHFS_XZ [=y] && MISC_FILESYSTEMS [=y] && SQUASHFS [=y] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
+
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
+

@@ -1,0 +1,20 @@
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
+
+SPI_ALTERA_CORE: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ALTERA [=y] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
+
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+
+CRYPTO_CHACHA20_NEON: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && (ARM || ARM64 [=y] && KERNEL_MODE_NEON [=y])
+
+NET_DSA_TAG_BRCM: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: B53 [=y] && NETDEVICES [=y] && NET_DSA [=y] || NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
+

@@ -1,0 +1,22 @@
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
+
+SI7005: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+GPIO_SIOX: m => yes
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && SIOX [=m]
+
+INV_ICM42600_SPI: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
+
+MMA9551: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+ARMADA_37XX_RWTM_MBOX: y => mod
+      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n]) && OF [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
+
