@@ -1,0 +1,22 @@
+NAMESPACES: y => no
+      Direct dependencies: MULTIUSER [=y]
+
+IIO_ST_MAGN_3AXIS: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=n] && IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=y] && !SENSORS_LIS3_SPI [=y]
+
+SECURITYFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=n] && INTEGRITY [=n]
+
+HID_LOGITECH_HIDPP: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_LOGITECH [=m]
+      Reverse dependencies: HID_LOGITECH_DJ [=m] && INPUT [=y] && HID [=y] && USB_HID [=y] && HIDRAW [=y] && HID_LOGITECH [=m]
+
+VCNL4035: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+ARM64_MODULE_PLTS: y => no
+      Direct dependencies: MODULES [=y]
+      Reverse dependencies: RANDOMIZE_BASE [=n] && MODULES [=y] || ARM64_ERRATUM_843419 [=y] && MODULES [=y]
+

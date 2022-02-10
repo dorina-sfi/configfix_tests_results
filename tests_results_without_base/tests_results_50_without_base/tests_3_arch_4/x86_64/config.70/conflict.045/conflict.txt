@@ -1,0 +1,14 @@
+MTD_ABSENT: m => yes
+      Direct dependencies: MTD [=m]
+
+REGULATOR_SY8827N: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
+
+CPU_FREQ_GOV_ONDEMAND: y => mod
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_ONDEMAND [=y] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n])
+
+I2C_GPIO: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: VIDEO_MMP_CAMERA [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && I2C [=m] && VIDEO_V4L2 [=n] && (ARCH_MMP || COMPILE_TEST [=n]) && COMMON_CLK [=y]
+

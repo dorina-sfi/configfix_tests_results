@@ -1,0 +1,23 @@
+INPUT_REGULATOR_HAPTIC: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && REGULATOR [=y]
+
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+
+REGULATOR_PCF50633: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_PCF50633 [=m]
+
+INPUT_PALMAS_PWRBUTTON: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && MFD_PALMAS [=y]
+
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
+
+W1_SLAVE_DS2805: m => yes
+      Direct dependencies: W1 [=m]
+
+IPQ_APSS_PLL: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: IPQ_APSS_6018 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] && (QCOM_APCS_IPC [=y] || COMPILE_TEST [=y])
+

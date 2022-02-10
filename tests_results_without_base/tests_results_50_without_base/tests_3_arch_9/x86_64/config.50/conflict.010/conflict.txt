@@ -1,0 +1,30 @@
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=y] && COMMON_CLK [=y]
+
+RAPIDIO_TSI57X: m => yes
+      Direct dependencies: RAPIDIO [=m]
+
+KEYSTONE_USB_PHY: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+
+ACPI_PROCESSOR: y => mod
+      Direct dependencies: ACPI [=y] && (X86 [=y] || IA64 || ARM64 || LOONGARCH)
+      Reverse dependencies: X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y] && ACPI [=y]
+
+TYPEC_HD3SS3220: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && I2C [=y] && USB_ROLE_SWITCH [=y]
+
+RAPIDIO_CPS_XX: m => yes
+      Direct dependencies: RAPIDIO [=m]
+
+IR_IMG: m => yes
+      Direct dependencies: RC_DEVICES [=y] && RC_CORE [=m] && (MIPS || COMPILE_TEST [=y])
+
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+
+BATTERY_INGENIC: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && (MIPS || COMPILE_TEST [=y]) && INGENIC_ADC [=m]
+

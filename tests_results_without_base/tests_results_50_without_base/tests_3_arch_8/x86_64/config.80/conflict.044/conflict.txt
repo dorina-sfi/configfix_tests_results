@@ -1,0 +1,29 @@
+HID_MONTEREY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
+
+MTD_PARSER_IMAGETAG: y => mod
+      Direct dependencies: MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=m] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+
+ATM_MPOA: m => yes
+      Direct dependencies: NET [=y] && ATM [=m] && INET [=y] && ATM_LANE [=m]!=n
+
+SND_SOC_WM8904: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_ATMEL_SOC_WM8904 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && (ARCH_AT91 || COMPILE_TEST [=y]) && ATMEL_SSC [=y] && I2C [=y]
+
+MEDIA_ANALOG_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
+
+CRYPTO_SEQIV: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+
+USB_XHCI_RCAR: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m] && USB_XHCI_PLATFORM [=m] && (ARCH_RENESAS || COMPILE_TEST [=y])
+      Reverse dependencies: USB_XHCI_PLATFORM [=m] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m] && ARCH_RENESAS
+

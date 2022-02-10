@@ -1,0 +1,17 @@
+SERIO_LIBPS2: m => yes
+      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=m] || SERIO_I8042 [=m]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=n]
+
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+SENSORS_TPS40422: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+FB_VT8623: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+
+INPUT: y => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=n]
+

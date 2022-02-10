@@ -1,0 +1,32 @@
+XEN_FBDEV_FRONTEND: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && XEN [=y]
+
+IIO_CROS_EC_SENSORS: m => yes
+      Direct dependencies: IIO [=y] && IIO_CROS_EC_SENSORS_CORE [=m]
+
+FB_VIRTUAL: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+
+USB_EHCI_HCD_PLATFORM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m]
+      Reverse dependencies: USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=m] && USB_EHCI_HCD [=m] || USB_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && SSB [=n] && USB_EHCI_HCD [=m] || USB_EHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_CNS3XXX_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && CAVIUM_OCTEON_SOC
+
+B53_MDIO_DRIVER: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m]
+
+HID_GOOGLE_HAMMER: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && LEDS_CLASS [=y] && CROS_EC [=y]
+
+VIRTIO_FS: m => yes
+      Direct dependencies: FUSE_FS [=m]
+
+BACKLIGHT_RAVE_SP: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && RAVE_SP_CORE [=m]
+
+RTC_DRV_RC5T619: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_RN5T618 [=m]
+
+NET_MPLS_GSO: y => no
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+

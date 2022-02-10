@@ -1,0 +1,20 @@
+AM2315: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+MMA7455_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
+
+ARM64_MODULE_PLTS: y => no
+      Direct dependencies: MODULES [=y]
+      Reverse dependencies: RANDOMIZE_BASE [=n] && MODULES [=y] || ARM64_ERRATUM_843419 [=y] && MODULES [=y]
+
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=m] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=m] || CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+
+TEST_SORT: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+

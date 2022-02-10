@@ -1,0 +1,28 @@
+ATLAS_PH_SENSOR: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+INPUT_MC13783_PWRBUTTON: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && MFD_MC13XXX [=m]
+
+I2C_ALGOPCA: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
+
+CRYPTO_ECDSA: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_KEY_TYPE_ECDSA [=y] && <choice>
+
+MTD_CFI_INTELEXT: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+
+IPMI_SI: m => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=n] && HWMON [=y] && IPMI_HANDLER [=y]
+
+SND_SOC_MAX98504: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_SAMSUNG_TM2_WM5110 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MFD_ARIZONA [=n] && MFD_WM5110 [=n] && I2C [=y] && SPI_MASTER [=n] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+MIPI_I3C_HCI: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y]
+

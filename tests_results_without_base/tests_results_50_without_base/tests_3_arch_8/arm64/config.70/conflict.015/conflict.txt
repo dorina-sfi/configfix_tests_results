@@ -1,0 +1,28 @@
+DRM_SIMPLE_BRIDGE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+DEBUG_MEMORY_INIT: y => no
+      Direct dependencies: y
+
+DRM_PANEL_EDP: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=y] && PM [=y]
+
+REGULATOR_RTQ2134: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
+
+SPI_MEM: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MTD_SPI_NOR [=n] && MTD [=m] && SPI_MASTER [=y] || MTD_SPI_NAND [=m] && MTD [=m] && SPI_MASTER [=y]
+
+CONNECTOR: m => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: DM_LOG_USERSPACE [=m] && MD [=y] && DM_MIRROR [=m] && NET [=y]
+
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
+
+CRC_T10DIF: m => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=m] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=m] || NVME_FC [=m]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n]
+

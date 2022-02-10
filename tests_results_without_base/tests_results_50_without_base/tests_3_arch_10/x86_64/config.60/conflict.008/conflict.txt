@@ -1,0 +1,34 @@
+B53_MMAP_DRIVER: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m] && HAS_IOMEM [=y]
+
+DVB_DIB3000MC: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB3000MC [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n]
+
+ALTERA_FREEZE_BRIDGE: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
+
+NETFILTER_XT_MATCH_CONNBYTES: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+
+FB_ARC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (X86 [=y] || COMPILE_TEST [=y])
+
+CRYPTO_CAST6: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CAST6_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+IP_NF_NAT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=m]
+
+CRYPTO_ESSIV: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: DM_CRYPT [=m] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n)
+
+CRYPTO_LIB_CHACHA: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=m] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=m])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=n] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=m] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=m]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+
+OPENVSWITCH: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+

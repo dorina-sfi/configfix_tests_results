@@ -1,0 +1,36 @@
+ADIS16203: m => yes
+      Direct dependencies: STAGING [=y] && IIO [=m] && SPI [=y]
+
+SECURITY_NETWORK: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_SMACK [=n] && NET [=y] && INET [=n] && SECURITY [=y] || SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y]
+
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
+
+DVB_NXT6000: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIGITV [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+COMMON_CLK_SCPI: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARM_SCPI_PROTOCOL [=m] || COMPILE_TEST [=n])
+
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => mod
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+
+AD5421: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
+
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
+
+NLS_CODEPAGE_862: m => yes
+      Direct dependencies: NLS [=m]
+
+RELOCATABLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: RANDOMIZE_BASE [=y]
+

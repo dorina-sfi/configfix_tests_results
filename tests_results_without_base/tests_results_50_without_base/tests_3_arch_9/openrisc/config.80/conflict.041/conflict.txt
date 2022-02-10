@@ -1,0 +1,30 @@
+VIDEO_ADP1653: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+
+STM_SOURCE_FTRACE: m => yes
+      Direct dependencies: STM [=m] && TRACING [=y]
+
+USB_XHCI_RCAR: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_XHCI_HCD [=m] && USB_XHCI_PLATFORM [=m] && (ARCH_RENESAS || COMPILE_TEST [=y])
+      Reverse dependencies: USB_XHCI_PLATFORM [=m] && USB_SUPPORT [=y] && USB [=m] && USB_XHCI_HCD [=m] && ARCH_RENESAS
+
+LINEDISP: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=m] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=m]
+
+GREYBUS_FIRMWARE: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m] && SPI [=y]
+
+USB_EHCI_HCD_ORION: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_EHCI_HCD [=m] && (PLAT_ORION || ARCH_MVEBU || COMPILE_TEST [=y])
+
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+CAN_8DEV_USB: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && USB [=m]
+
+SCTP_DEFAULT_COOKIE_HMAC_MD5: y => no
+      Direct dependencies: <choice>
+

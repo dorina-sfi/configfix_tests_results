@@ -1,0 +1,25 @@
+DM_THIN_PROVISIONING: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+IMA_DEFAULT_HASH_SHA256: y => no
+      Direct dependencies: <choice> && CRYPTO_SHA256 [=y]=y && !IMA_TEMPLATE [=n]
+
+LEDS_LP3952: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m] && GPIOLIB [=y]
+
+REGULATOR_SLG51000: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
+
+SENSORS_TMP401: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=m]
+
+CRYPTO_MANAGER: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=m] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=m] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=n]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=m] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=m] && CRYPTO [=y] || CRYPTO_PCBC [=m] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=m] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+
+SENSORS_MAX8688: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
+
+CHARGER_BQ24735: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+

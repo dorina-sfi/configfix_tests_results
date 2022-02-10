@@ -1,0 +1,29 @@
+DM_EBS: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m] && !HIGHMEM
+
+PCI_SW_SWITCHTEC: m => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: NTB_SWITCHTEC [=m] && NTB [=y]
+
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=m] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
+
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
+
+QUOTA: y => no
+      Direct dependencies: y
+      Reverse dependencies: OCFS2_FS [=y] && BLOCK [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y]
+
+UNICODE_NORMALIZATION_SELFTEST: m => yes
+      Direct dependencies: UNICODE_UTF8_DATA [=m]
+
+FB_MX3: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && MX3_IPU [=y]
+
+VITESSE_PHY: m => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_VITESSE_VSC73XX [=m] && NETDEVICES [=y] && NET_DSA [=m]
+

@@ -1,0 +1,31 @@
+POWER_RESET_ATC260X: m => yes
+      Direct dependencies: POWER_RESET [=y] && MFD_ATC260X [=m]
+
+FB_OPENCORES: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
+
+FONT_8x8: y => no
+      Direct dependencies: FONT_SUPPORT [=m] && (FRAMEBUFFER_CONSOLE [=y] || STI_CONSOLE [=n])
+
+HW_RANDOM_VIRTIO: m => yes
+      Direct dependencies: HW_RANDOM [=m] && VIRTIO [=m]
+
+ARM64_64K_PAGES: y => no
+      Direct dependencies: <choice>
+
+FONT_8x8: y => no
+      Direct dependencies: FONT_SUPPORT [=m] && (FRAMEBUFFER_CONSOLE [=y] || STI_CONSOLE [=n])
+
+ARM64_PA_BITS_52: y => no
+      Direct dependencies: <choice> && ARM64_64K_PAGES [=y] && (ARM64_PAN [=n] || !ARM64_SW_TTBR0_PAN [=n])
+
+CRYPTO_DEV_VIRTIO: m => yes
+      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && VIRTIO [=m]
+
+L2TP: m => yes
+      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n) && INET [=y]
+
+NET_DSA_TAG_RTL4_A: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_REALTEK_SMI [=n] && NETDEVICES [=y] && NET_DSA [=m]
+

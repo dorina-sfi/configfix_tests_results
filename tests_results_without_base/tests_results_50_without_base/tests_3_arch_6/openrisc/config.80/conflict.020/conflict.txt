@@ -1,0 +1,20 @@
+SENSORS_ADT7462: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+SENSORS_FSP_3Y: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
+
+SENSORS_LM90: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+IPV6_MULTIPLE_TABLES: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+      Reverse dependencies: IPV6_SEG6_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=m]
+
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+
+CRYPTO_LIB_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+

@@ -1,0 +1,31 @@
+USB_DWC3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
+
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: MFD_MADERA [=y] && HAS_IOMEM [=y]
+
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=n] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+
+MFD_STMFX: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+
+OF_OVERLAY: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
+
+FB_LITTLE_ENDIAN: y => no
+      Direct dependencies: <choice>
+      Reverse dependencies: FB_MB862XX_LIME [=n] && <choice> && OF [=y] && PPC
+
+SND_SOC_SPDIF: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_KIRKWOOD_SOC_ARMADA370_DB [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_KIRKWOOD_SOC [=y] && (ARCH_MVEBU || COMPILE_TEST [=y]) && I2C [=y] || SND_SAMSUNG_SPDIF [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=n] || SND_SOC_STM32_SPDIFRX [=y] && SOUND [=y] && !UML && SND [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) && SND_SOC [=y] || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=y] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM6467_EVM
+
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+

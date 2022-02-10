@@ -1,0 +1,32 @@
+MTD_DATAFLASH: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+
+INFINIBAND_USER_ACCESS: m => yes
+      Direct dependencies: INFINIBAND [=m] && MMU [=y]
+
+RDMA_SIW: m => yes
+      Direct dependencies: (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && INET [=y] && INFINIBAND [=m] && LIBCRC32C [=y] && INFINIBAND_VIRT_DMA [=y]
+
+CAN_ISOTP: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
+
+IR_NEC_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+
+CRYPTO_LIB_CURVE25519: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n])
+      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+
+SENSORS_INSPUR_IPSPS: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+NET_DSA_SMSC_LAN9303_I2C: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && I2C [=y]
+
+NET_DSA_SMSC_LAN9303_I2C: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && I2C [=y]
+

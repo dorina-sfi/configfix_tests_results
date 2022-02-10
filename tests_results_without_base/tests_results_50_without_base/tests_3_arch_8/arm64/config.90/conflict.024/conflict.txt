@@ -1,0 +1,26 @@
+RFKILL_INPUT: y => no
+      Direct dependencies: NET [=y] && RFKILL [=y] && (INPUT [=y]=y || RFKILL [=y]=INPUT [=y])
+
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=m] && GPIOLIB [=y]
+
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=y] && ACPI [=y] || TARGET_CORE [=m] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=m] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=y] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=y] || CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=y])
+
+AHCI_XGENE: m => yes
+      Direct dependencies: ATA [=y] && HAS_DMA [=y] && PHY_XGENE [=m]
+
+SPRD_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y] && (ARCH_SPRD [=y] || COMPILE_TEST [=n])
+
+I2C_MUX_PCA9541: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m]
+
+USB_NET_HUAWEI_CDC_NCM: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
+
+MMC_DW_PCI: m => yes
+      Direct dependencies: MMC [=m] && MMC_DW [=m] && PCI [=y]
+

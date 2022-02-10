@@ -1,0 +1,33 @@
+TI_ADC081C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+SENSORS_EMC2103: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+TIFM_CORE: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: MMC_TIFM_SD [=m] && MMC [=m] && PCI [=y] || MEMSTICK_TIFM_MS [=n] && MEMSTICK [=m] && PCI [=y]
+
+NET_L3_MASTER_DEV: y => no
+      Direct dependencies: NET [=y] && (INET [=y] || IPV6 [=y])
+      Reverse dependencies: IPVLAN_L3S [=y] && NETDEVICES [=y] && NET_CORE [=y] && NETFILTER [=y] && IPVLAN [=m]
+
+MMC_MXC: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_MXC [=y] || PPC_MPC512x)
+
+SENSORS_LM90: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+BRIDGE_EBT_VLAN: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
+
+PC300TOO: m => yes
+      Direct dependencies: NETDEVICES [=y] && WAN [=y] && HDLC [=m] && PCI [=y]
+
+SENSORS_VT8231: m => yes
+      Direct dependencies: HWMON [=m] && PCI [=y]
+
+NETFILTER_XTABLES: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: IP_NF_IPTABLES [=m] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=n] || IP6_NF_IPTABLES [=n] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=y]
+

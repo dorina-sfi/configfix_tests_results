@@ -1,0 +1,33 @@
+FB_HGA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && X86 [=y]
+
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+HPET_TIMER: y => no
+      Direct dependencies: y
+
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+
+MLX5_INFINIBAND: m => yes
+      Direct dependencies: INFINIBAND [=m] && (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && NETDEVICES [=y] && ETHERNET [=y] && PCI [=y] && MLX5_CORE [=m]
+
+GPIO_MOXTET: m => yes
+      Direct dependencies: GPIOLIB [=y] && SPI_MASTER [=y] && MOXTET [=m]
+
+USB_MTU3_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=y]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MTU3 [=y]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=y])
+
+W1_MASTER_SGI: m => yes
+      Direct dependencies: W1 [=m]
+
+CRYPTO_NULL: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=m] && CRYPTO [=y] || CRYPTO_ECHAINIV [=m] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
+
+FB_BROADSHEET: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (ARCH_PXA || COMPILE_TEST [=y])
+

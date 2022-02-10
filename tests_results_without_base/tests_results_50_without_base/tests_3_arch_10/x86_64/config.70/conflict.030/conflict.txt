@@ -1,0 +1,36 @@
+CRYPTO_GHASH: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
+
+PSTORE_LZ4_COMPRESS: m => yes
+      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
+
+CRYPTO_ESSIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: DM_CRYPT [=m] && MD [=y] && BLK_DEV_DM [=m] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n)
+
+ALLOW_DEV_COREDUMP: y => no
+      Direct dependencies: y
+
+CHARGER_PCF50633: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_PCF50633 [=m]
+
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=n] && SIGNED_PE_FILE_VERIFICATION [=n]
+
+ATA_FORCE: y => no
+      Direct dependencies: ATA [=y]
+
+KPROBES: y => no
+      Direct dependencies: MODULES [=y] && HAVE_KPROBES [=y]
+      Reverse dependencies: KGDB_HONOUR_BLOCKLIST [=y] && KGDB [=y] && HAVE_KPROBES [=y] && MODULES [=y]
+
+CRYPTO_NULL: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=y] && CRYPTO [=y] && NET [=y]
+
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=m]
+

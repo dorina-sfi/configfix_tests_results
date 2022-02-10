@@ -1,0 +1,29 @@
+RC_CORE: m => yes
+      Direct dependencies: INPUT [=m]
+
+USB_ULPI_BUS: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y]
+
+INPUT_GPIO_DECODER: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+SND_SOC_ADAU1761_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+W1_SLAVE_DS2805: m => yes
+      Direct dependencies: W1 [=m]
+
+HID_ALPS: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+MOUSE_BCM5974: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
+
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+
+HID_PLAYSTATION: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS_MULTICOLOR [=m]
+

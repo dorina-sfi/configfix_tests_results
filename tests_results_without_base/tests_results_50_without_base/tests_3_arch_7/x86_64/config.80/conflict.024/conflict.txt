@@ -1,0 +1,23 @@
+MMC_TEST: m => yes
+      Direct dependencies: MMC [=m]
+
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+
+MEDIA_PLATFORM_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
+
+VIDEO_XILINX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m] && OF [=y] && HAS_DMA [=y]
+
+VIDEO_IMX214: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+MUX_GPIO: m => yes
+      Direct dependencies: MULTIPLEXER [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+DVB_SP2: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DVBSKY [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+

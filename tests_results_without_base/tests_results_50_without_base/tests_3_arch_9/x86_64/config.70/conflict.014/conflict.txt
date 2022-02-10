@@ -1,0 +1,30 @@
+SENSORS_TPS23861: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+W1_MASTER_DS2490: m => yes
+      Direct dependencies: W1 [=m] && USB [=y]
+
+SENSORS_TPS23861: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+CRYPTO_JITTERENTROPY: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+
+SENSORS_MAX6621: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+IIO_ST_ACCEL_3AXIS: m => no
+      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+
+DVB_DRX39XYJ: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+SENSORS_ADT7470: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+USB_ISP1760_HOST_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
+

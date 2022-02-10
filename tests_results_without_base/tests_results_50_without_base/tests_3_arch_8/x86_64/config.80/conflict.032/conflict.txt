@@ -1,0 +1,27 @@
+SQUASHFS_FILE_DIRECT: y => no
+      Direct dependencies: <choice>
+
+MTD_CFI: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y]
+
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=y] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
+
+SENSORS_ADT7410: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+SENSORS_SBTSI: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+CRYPTO_CMAC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+
+SENSORS_THMC50: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+SND_SOC_IMG_I2S_OUT: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_IMG [=y]
+

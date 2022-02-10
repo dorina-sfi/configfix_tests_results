@@ -1,0 +1,14 @@
+DEBUG_INFO_DWARF5: y => no
+      Direct dependencies: <choice> && (!CC_IS_CLANG [=n] || CC_IS_CLANG [=n] && (AS_IS_LLVM [=n] || AS_IS_GNU [=y] && AS_VERSION [=23400]>=23502)) && !DEBUG_INFO_BTF [=n]
+
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=y] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+
+CRYPTO_LZ4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+

@@ -1,0 +1,25 @@
+6LOWPAN_NHC: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN [=m]
+
+IPMI_WATCHDOG: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+
+BLOCK: y => no
+      Direct dependencies: y
+
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
+
+NFC_S3FWRN5_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=y] && NFC_NCI [=m] && I2C [=y]
+
+I2C_ALGOPCA: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
+
+MTD_PHYSMAP: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (MTD_CFI [=m] || MTD_JEDECPROBE [=n] || MTD_ROM [=m] || MTD_RAM [=m] || MTD_LPDDR [=m])
+
+6LOWPAN_GHC_EXT_HDR_HOP: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
+

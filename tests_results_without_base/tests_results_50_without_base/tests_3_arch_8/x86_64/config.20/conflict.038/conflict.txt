@@ -1,0 +1,27 @@
+FSI_SBEFIFO: m => yes
+      Direct dependencies: FSI [=m] && OF_ADDRESS [=y]
+
+OCFS2_FS_USERSPACE_CLUSTER: m => yes
+      Direct dependencies: BLOCK [=y] && OCFS2_FS [=m] && DLM [=m]
+
+PPS: m => no
+      Direct dependencies: y
+      Reverse dependencies: PTP_1588_CLOCK [=m] && NET [=y] && POSIX_TIMERS [=y]
+
+CRYPTO_GHASH: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
+
+DNS_RESOLVER: m => no
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=m] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=n] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
+
+TEE_BNXT_FW: m => yes
+      Direct dependencies: ARCH_BCM_IPROC && OPTEE [=n] || COMPILE_TEST [=y] && TEE [=m]
+
+L2TP_DEBUGFS: m => yes
+      Direct dependencies: NET [=y] && L2TP [=m] && DEBUG_FS [=y]
+
+HW_RANDOM_NOMADIK: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_NOMADIK || COMPILE_TEST [=y])
+

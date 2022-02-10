@@ -1,0 +1,24 @@
+RELOCATABLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: RANDOMIZE_BASE [=y]
+
+USB_ULPI_BUS: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y]
+
+SND_OXFW: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_FIREWIRE [=y] && FIREWIRE [=m]
+
+MFD_SPMI_PMIC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && SPMI [=m]
+
+SND_SOC_CS42L52: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && INPUT [=y]
+
+SMC: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && INFINIBAND [=m]
+
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+

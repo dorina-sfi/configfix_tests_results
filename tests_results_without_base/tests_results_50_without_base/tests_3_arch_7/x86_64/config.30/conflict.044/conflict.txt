@@ -1,0 +1,23 @@
+MEMSTICK_TIFM_MS: m => yes
+      Direct dependencies: MEMSTICK [=m] && PCI [=y]
+
+LCD_AMS369FG06: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+
+TEST_SORT: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+
+X86_MPPARSE: y => no
+      Direct dependencies: X86_LOCAL_APIC [=y]
+
+COMEDI_KCOMEDILIB: y => no
+      Direct dependencies: COMEDI [=y]
+      Reverse dependencies: COMEDI_BOND [=m] && COMEDI [=y] && COMEDI_MISC_DRIVERS [=y]
+
+SPI_MEM: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MTD_SPI_NOR [=m] && MTD [=y] && SPI_MASTER [=y] || MTD_SPI_NAND [=m] && MTD [=y] && SPI_MASTER [=y]
+
+REGULATOR_HI655X: m => yes
+      Direct dependencies: REGULATOR [=y] && (ARCH_HISI || COMPILE_TEST [=y]) && MFD_HI655X_PMIC [=m] && OF [=y]
+

@@ -1,0 +1,27 @@
+C2PORT_DURAMAR_2150: m => yes
+      Direct dependencies: C2PORT [=m] && X86 [=y]
+
+ARCNET_CAP: m => yes
+      Direct dependencies: NETDEVICES [=y] && ARCNET [=m]
+
+VBOXGUEST: m => yes
+      Direct dependencies: VIRT_DRIVERS [=y] && X86 [=y] && PCI [=y] && INPUT [=m]
+
+JOYSTICK_STINGER: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+
+CRYPTO_LZ4HC: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+VIRT_WIFI: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && CFG80211 [=m]
+
+PCI_PRI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || INTEL_IOMMU_SVM [=n] && IOMMU_SUPPORT [=y] && INTEL_IOMMU [=n] && X86_64 [=y]
+
+KCMP: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+

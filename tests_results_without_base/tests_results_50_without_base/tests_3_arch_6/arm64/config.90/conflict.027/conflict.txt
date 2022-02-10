@@ -1,0 +1,20 @@
+BRIDGE: m => yes
+      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n)
+
+FPGA_REGION: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m]
+      Reverse dependencies: FPGA_DFL [=n] && FPGA [=m] && HAS_IOMEM [=y]
+
+PATA_OF_PLATFORM: m => yes
+      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PATA_PLATFORM [=m] && OF [=y]
+
+FPGA_MGR_VERSAL_FPGA: m => yes
+      Direct dependencies: FPGA [=m] && (ARCH_ZYNQMP [=n] || COMPILE_TEST [=y])
+
+VIDEO_ADV7842: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_COBALT [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_V4L2 [=m] && I2C [=y] && PCI_MSI [=y] && MTD_COMPLEX_MAPPINGS [=n] && (GPIOLIB [=y] && DRM_I2C_ADV7511 [=m]=n || COMPILE_TEST [=y]) && SND [=n] && MTD [=m]
+
+USB_STORAGE_USBAT: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+

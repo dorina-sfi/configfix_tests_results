@@ -1,0 +1,27 @@
+BATTERY_MAX17042: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+
+CAN_CC770_PLATFORM: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_CC770 [=m]
+
+DRM_PANEL_ORISETECH_OTM8009A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+PHY_MTK_MIPI_DSI: m => no
+      Direct dependencies: (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && OF [=y]
+      Reverse dependencies: DRM_MEDIATEK [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_MEDIATEK [=y] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y]
+
+CRYPTO_ECDH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=m] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY [=y] || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=m] && I2C_SLAVE [=y]
+
+APPLE_AIC: y => no
+      Direct dependencies: ARM64 [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_APPLE [=y]
+
+LEDS_TI_LMU_COMMON: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGMAP [=y]
+

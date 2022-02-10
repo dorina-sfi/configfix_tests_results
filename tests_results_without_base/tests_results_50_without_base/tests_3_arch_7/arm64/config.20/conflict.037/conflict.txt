@@ -1,0 +1,23 @@
+CLK_RASPBERRYPI: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (RASPBERRYPI_FIRMWARE [=m] || COMPILE_TEST [=y] && !RASPBERRYPI_FIRMWARE [=m])
+
+SENSORS_TMP513: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+SM_GCC_8150: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_GPUCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+MOUSE_BCM5974: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
+
+USB_R8A66597: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_DMA [=y]
+
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=y] && COMMON_CLK [=y]
+
+MTD_PHYSMAP: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (MTD_CFI [=m] || MTD_JEDECPROBE [=m] || MTD_ROM [=m] || MTD_RAM [=m] || MTD_LPDDR [=n])
+

@@ -1,0 +1,35 @@
+DRM_XEN_FRONTEND: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && XEN [=y] && DRM [=m]
+
+NFC_PN533_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && I2C [=y]
+
+IMX_IRQSTEER: y => no
+      Direct dependencies: ARCH_MXC [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: DRM_IMX_DCSS [=m] && HAS_IOMEM [=y] && DRM [=m] && ARCH_MXC [=y] && ARM64 [=y]
+
+MODULE_SIG_KEY_TYPE_RSA: y => no
+      Direct dependencies: <choice>
+
+CRYPTO_SM3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+
+FAILOVER: m => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=m] && NETDEVICES [=y]
+
+PROC_FS: y => no
+      Direct dependencies: y
+
+PINCTRL_PFC_R8A774B1: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774B1 [=y]
+
+CRYPTO_LIB_CHACHA20POLY1305: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=y] && NET_CORE [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
+
+XZ_DEC_IA64: y => no
+      Direct dependencies: XZ_DEC [=y]
+

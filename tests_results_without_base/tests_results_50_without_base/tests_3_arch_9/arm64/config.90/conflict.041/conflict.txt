@@ -1,0 +1,29 @@
+AD7150: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
+
+IIO_ST_LSM9DS0: m => yes
+      Direct dependencies: IIO [=y] && (I2C [=m] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=m]
+
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_64 && ACPI [=n] && PCI [=y]
+
+I2C_ALTERA: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_INTEL_SOCFPGA [=y] || NIOS2 || COMPILE_TEST [=n]) && OF [=y]
+
+SENSORS_LM78: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
+
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=m]
+
+COMEDI_DT3000: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+TPS65010: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && GPIOLIB [=y]
+
+SC_GPUCC_7280: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+

@@ -1,0 +1,22 @@
+MTD_SPI_NOR_SWP_DISABLE: y => no
+      Direct dependencies: <choice>
+
+BLK_DEV_MD: y => no
+      Direct dependencies: MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
+
+CRYPTO_ESSIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n)
+
+PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
+
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+

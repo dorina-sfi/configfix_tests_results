@@ -1,0 +1,22 @@
+KEYSTONE_USB_PHY: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+
+SENSORS_LM85: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+SENSORS_MAX8688: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
+
+INTERRUPT_CNT: m => yes
+      Direct dependencies: COUNTER [=m] && GPIOLIB [=y]
+
+CRYPTO_DH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI
+
+USB_OHCI_EXYNOS: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_S5PV210 || ARCH_EXYNOS || COMPILE_TEST [=y])
+
+USB_G_DBGP_PRINTK: y => no
+      Direct dependencies: <choice> && USB_G_DBGP [=m]
+

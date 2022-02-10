@@ -1,0 +1,27 @@
+HW_RANDOM_NOMADIK: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_NOMADIK || COMPILE_TEST [=y])
+
+PKCS7_MESSAGE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=y] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+
+IR_SANYO_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+
+DM_LOG_WRITES: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
+
+MSM_GCC_8960: m => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_LCC_8960 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8960 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+MTD_ONENAND_SAMSUNG: m => yes
+      Direct dependencies: MTD [=m] && MTD_ONENAND [=m] && (ARCH_S3C64XX || ARCH_S5PV210 || COMPILE_TEST [=y])
+
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+

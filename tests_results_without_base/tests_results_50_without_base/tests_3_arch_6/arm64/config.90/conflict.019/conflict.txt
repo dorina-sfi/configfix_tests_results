@@ -1,0 +1,20 @@
+NET_NSH: y => mod
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+
+USB_MUSB_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=m]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=m]) && HAS_DMA [=y]
+
+SLUB_DEBUG: y => no
+      Direct dependencies: SLUB [=y] && SYSFS [=y]
+      Reverse dependencies: KASAN_GENERIC [=y] && <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y] || KASAN_SW_TAGS [=n] && <choice> && HAVE_ARCH_KASAN_SW_TAGS [=y] && CC_HAS_KASAN_SW_TAGS [=n] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y]
+
+LCD_AMS369FG06: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+
+AHCI_MVEBU: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && ARCH_MVEBU [=y]
+
+USB_RTL8153_ECM: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_NET_CDCETHER [=m] && (USB_RTL8152 [=y] || USB_RTL8152 [=y]=n)
+

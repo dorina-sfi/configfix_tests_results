@@ -1,0 +1,34 @@
+OPENVSWITCH_VXLAN: m => yes
+      Direct dependencies: NET [=y] && OPENVSWITCH [=m] && VXLAN [=m]
+
+MAX1241: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+
+UIO_SERCOS3: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+
+MTD_RAM: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=m] && HAS_IOMEM [=y]
+
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=n] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_MTK [=n] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
+
+AD7766: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+
+QCOM_FASTRPC: m => yes
+      Direct dependencies: (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && RPMSG [=m]
+
+NETFILTER_XT_MATCH_POLICY: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && XFRM [=y]
+
+RADIO_TEF6862: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+      Reverse dependencies: RADIO_TIMBERDALE [=n] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && MFD_TIMBERDALE [=n] && VIDEO_V4L2 [=m] && I2C [=y]
+

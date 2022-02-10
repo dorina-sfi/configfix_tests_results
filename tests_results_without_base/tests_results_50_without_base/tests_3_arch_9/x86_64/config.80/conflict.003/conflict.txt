@@ -1,0 +1,29 @@
+BT_HCIBT3C: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && PCMCIA [=m]
+
+TOUCHSCREEN_TOUCHWIN: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+
+INFINIBAND_RDMAVT: m => yes
+      Direct dependencies: INFINIBAND [=y] && (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && INFINIBAND_VIRT_DMA [=y] && X86_64 [=y] && PCI [=y]
+
+SUSPEND_FREEZER: y => no
+      Direct dependencies: SUSPEND [=y]
+
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+
+JOYSTICK_AS5011: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && I2C [=y]
+
+SBP_TARGET: m => yes
+      Direct dependencies: TARGET_CORE [=m] && FIREWIRE [=y]
+
+PRIME_NUMBERS: m => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+
+NET_DSA_SMSC_LAN9303_MDIO: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+

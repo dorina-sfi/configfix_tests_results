@@ -1,0 +1,24 @@
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
+
+IEEE802154_HWSIM: m => yes
+      Direct dependencies: NETDEVICES [=y] && IEEE802154_DRIVERS [=y] && MAC802154 [=m]
+
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
+
+SDIO_UART: m => yes
+      Direct dependencies: MMC [=m] && TTY [=y]
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+
+LCD_L4F00242T03: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+
+MSM_GCC_8960: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: MSM_LCC_8960 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || MSM_MMCC_8960 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+

@@ -1,0 +1,30 @@
+W1_MASTER_MXC: m => yes
+      Direct dependencies: W1 [=m] && (ARCH_MXC || COMPILE_TEST [=y])
+
+SENSORS_INA3221: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+USB_EHCI_HCD_NPCM7XX: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (USB_EHCI_HCD [=m] && ARCH_NPCM7XX || COMPILE_TEST [=y])
+
+SENSORS_TMP108: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+DRM_PANEL_WIDECHIPS_WS2401: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && SPI [=y] && GPIOLIB [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+
+USB_EHCI_MV: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=y])
+
+I2C_ALGOPCA: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
+
+MMC_DW_PLTFM: m => yes
+      Direct dependencies: MMC [=y] && MMC_DW [=m]
+      Reverse dependencies: MMC_DW_BLUEFIELD [=n] && MMC [=y] && MMC_DW [=m] || MMC_DW_EXYNOS [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_HI3798CV200 [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_K3 [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_ROCKCHIP [=n] && MMC [=y] && MMC_DW [=m] && ARCH_ROCKCHIP
+
+TMPFS: y => no
+      Direct dependencies: SHMEM [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+

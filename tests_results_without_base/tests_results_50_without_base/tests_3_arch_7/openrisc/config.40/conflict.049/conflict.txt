@@ -1,0 +1,24 @@
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=n] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=y] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+
+SENSORS_MP2888: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+FPGA_BRIDGE: m => yes
+      Direct dependencies: FPGA [=m]
+      Reverse dependencies: FPGA_DFL [=m] && FPGA [=m] && HAS_IOMEM [=y]
+
+LEDS_MC13783: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_MC13XXX [=m]
+
+NFC_PN532_UART: m => yes
+      Direct dependencies: NET [=y] && NFC [=y] && SERIAL_DEV_BUS [=m]
+
+TOUCHSCREEN_USB_NEXIO: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=m]
+
+CRYPTO_BLAKE2B: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+

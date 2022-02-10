@@ -1,0 +1,30 @@
+SENSORS_ADM1266: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m] && GPIOLIB [=y]
+
+SENSORS_PMBUS: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+CRYPTO_TWOFISH_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+HW_RANDOM_TIMERIOMEM: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+
+CHARGER_BQ24190: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && EXTCON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=y] && HAS_IOMEM [=y] && X86 [=y] && ACPI [=y] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=n] || FB [=y]=y)
+
+COMEDI_ADL_PCI9111: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+INT3406_THERMAL: m => yes
+      Direct dependencies: THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && INT340X_THERMAL [=m] && ACPI_VIDEO [=y]
+

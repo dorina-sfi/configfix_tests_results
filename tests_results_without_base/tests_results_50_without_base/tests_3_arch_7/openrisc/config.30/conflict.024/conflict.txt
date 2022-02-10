@@ -1,0 +1,23 @@
+COMEDI_PCMCIA_DRIVERS: m => yes
+      Direct dependencies: COMEDI [=m] && PCMCIA [=m]
+
+CRC32_SLICEBY4: y => no
+      Direct dependencies: <choice>
+
+BATTERY_BQ27XXX_I2C: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
+
+COMEDI_DAS16: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+W1: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
+
+MMC_SDHCI_ESDHC_IMX: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_MXC || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] && OF [=y]
+

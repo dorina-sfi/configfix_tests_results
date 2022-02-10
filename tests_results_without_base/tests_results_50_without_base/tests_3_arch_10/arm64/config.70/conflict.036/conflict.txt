@@ -1,0 +1,34 @@
+YAMAHA_YAS530: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+REGULATOR_RT5033: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_RT5033 [=m]
+
+DVB_ASCOT2E: m => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_NETUP_UNIDVB [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && SPI_MASTER [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+BMP280: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y])
+
+MMC_SDHCI_PCI: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI [=m] && PCI [=y]
+
+IR_XMP_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+
+ADRF6780: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y] && COMMON_CLK [=y]
+
+AUTOFS_FS: m => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=m]
+
+CRYPTO_DH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n]
+
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=m] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=m] && PROC_FS [=y]
+

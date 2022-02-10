@@ -1,0 +1,20 @@
+AHCI_XGENE: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && PHY_XGENE [=y]
+
+CRYPTO_STREEBOG: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+
+DRM_RCAR_CMM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && OF [=y] && DRM_RCAR_DU [=m]
+
+USB_ISP1760_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_ISP1760 [=y])
+
+IOMMU_SUPPORT: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
+
+USB_SIERRA_NET: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=m]
+

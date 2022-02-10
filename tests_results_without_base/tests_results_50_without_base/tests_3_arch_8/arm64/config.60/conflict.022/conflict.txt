@@ -1,0 +1,29 @@
+PCI_SW_SWITCHTEC: m => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: NTB_SWITCHTEC [=m] && NTB [=y]
+
+NET_DSA_QCA8K: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+
+TI_DAVINCI_MDIO: y => mod
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARCH_DAVINCI || ARCH_OMAP2PLUS || ARCH_KEYSTONE || ARCH_K3 [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: TI_DAVINCI_EMAC [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARM && (ARCH_DAVINCI || ARCH_OMAP3) || COMPILE_TEST [=y]) || TI_CPSW [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARCH_DAVINCI || ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && (TI_CPTS [=n] || !TI_CPTS [=n]) || TI_CPSW_SWITCHDEV [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARCH_DAVINCI || ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && NET_SWITCHDEV [=y] && (TI_CPTS [=n] || !TI_CPTS [=n]) || TI_K3_AM65_CPSW_NUSS [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && ARCH_K3 [=n] && OF [=y] && TI_K3_UDMA_GLUE_LAYER [=n] && (TI_K3_AM65_CPTS [=n] || !TI_K3_AM65_CPTS [=n]) || TI_KEYSTONE_NETCP [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && OF [=y] && KEYSTONE_NAVIGATOR_DMA [=n] && KEYSTONE_NAVIGATOR_QMSS [=n] && (TI_CPTS [=n] || !TI_CPTS [=n])
+
+MCB_PCI: m => yes
+      Direct dependencies: MCB [=m] && PCI [=y]
+
+GPIO_MENZ127: m => yes
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MCB [=m]
+
+ISCSI_BOOT_SYSFS: m => no
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=m]
+      Reverse dependencies: ISCSI_IBFT [=n] && ACPI [=n] && SCSI [=m] && SCSI_LOWLEVEL [=y] || BE2ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && NET [=y] || SCSI_QLA_ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && NET [=y] || QEDI [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && UIO [=m] && QED [=m]
+
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+
+TEGRA_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_TEGRA_2x_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_3x_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_114_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_124_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_210_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
+

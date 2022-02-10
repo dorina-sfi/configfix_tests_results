@@ -1,0 +1,34 @@
+PING: m => yes
+      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+
+PMS7003: m => yes
+      Direct dependencies: IIO [=m] && SERIAL_DEV_BUS [=y]
+
+TI_ADS124S08: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y] && OF [=y]
+
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=m] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
+
+NVEC_PAZ00: m => yes
+      Direct dependencies: STAGING [=y] && MFD_NVEC [=m] && LEDS_CLASS [=y]
+
+BOOT_CONFIG: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
+
+MOST_VIDEO: m => yes
+      Direct dependencies: STAGING [=y] && MOST_COMPONENTS [=m] && VIDEO_V4L2 [=y]
+
+CRYPTO_LIB_CHACHA20POLY1305: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=m] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=m]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
+
+ADIS16130: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
+

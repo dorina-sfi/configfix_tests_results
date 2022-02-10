@@ -1,0 +1,35 @@
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+
+MTD_MTDRAM: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+
+RMI4_F55: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: RMI4_F54 [=y] && INPUT [=y] && RMI4_CORE [=m] && (VIDEO_V4L2 [=m]=y || RMI4_CORE [=m]=m && VIDEO_V4L2 [=m]=m)
+
+IMA_TEMPLATE: y => no
+      Direct dependencies: <choice>
+
+MTD_RAW_NAND: m => yes
+      Direct dependencies: MTD [=m]
+
+INFINIBAND_ISER: m => yes
+      Direct dependencies: INFINIBAND [=m] && SCSI [=y] && INET [=y] && INFINIBAND_ADDR_TRANS [=y]
+
+INTEGRITY_TRUSTED_KEYRING: y => no
+      Direct dependencies: INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+      Reverse dependencies: IMA_TRUSTED_KEYRING [=y] && INTEGRITY [=y] && IMA_APPRAISE [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y] || IMA_KEYRINGS_PERMIT_SIGNED_BY_BUILTIN_OR_SECONDARY [=n] && INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && SECONDARY_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+
+NF_FLOW_TABLE_INET: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_FLOW_TABLE [=m]
+
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=m]
+
+SECURITY_TOMOYO_OMIT_USERSPACE_LOADER: y => no
+      Direct dependencies: SECURITY_TOMOYO [=y]
+      Reverse dependencies: SECURITY_TOMOYO_INSECURE_BUILTIN_SETTING [=y] && SECURITY_TOMOYO [=y]
+

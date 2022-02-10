@@ -1,0 +1,20 @@
+MLXREG_HOTPLUG: m => yes
+      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=y] && I2C [=m]
+
+INTEL_MEI: y => no
+      Direct dependencies: X86 [=y] && PCI [=y]
+      Reverse dependencies: INTEL_MEI_ME [=m] && X86 [=y] && PCI [=y] || INTEL_MEI_TXE [=m] && X86 [=y] && PCI [=y]
+
+TOUCHSCREEN_AUO_PIXCIR: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+SENSORS_GL520SM: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
+
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=n] && <choice> && X86_64 [=y]
+
+EDAC_I3200: m => yes
+      Direct dependencies: EDAC [=m] && PCI [=y] && X86 [=y]
+

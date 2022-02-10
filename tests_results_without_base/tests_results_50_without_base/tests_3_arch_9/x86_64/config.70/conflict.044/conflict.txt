@@ -1,0 +1,28 @@
+CUSE: m => yes
+      Direct dependencies: FUSE_FS [=m]
+
+UNWINDER_FRAME_POINTER: y => no
+      Direct dependencies: <choice>
+
+USB_DWC2_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB_DWC2 [=m]=m && USB [=y])
+
+SENSORS_PC87360: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
+
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
+
+DVB_STV6110: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=n] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+SENSORS_RASPBERRYPI_HWMON: m => yes
+      Direct dependencies: HWMON [=m] && (RASPBERRYPI_FIRMWARE [=n] || COMPILE_TEST [=y] && !RASPBERRYPI_FIRMWARE [=n])
+
+SENSORS_MAX16601: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
+
+KASAN_GENERIC: y => no
+      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
+

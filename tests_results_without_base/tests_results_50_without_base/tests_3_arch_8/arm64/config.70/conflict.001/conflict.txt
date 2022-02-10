@@ -1,0 +1,26 @@
+REGULATOR_SY8827N: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
+
+SERIAL_8250_BCM7271: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_BRCMSTB [=n] || COMPILE_TEST [=y])
+
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
+
+SENSORS_SMSC47B397: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
+
+TOUCHSCREEN_BU21013: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+
+DRM_KOMEDA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y] && COMMON_CLK [=y]
+
+MTD_NAND_CADENCE: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+DEVFREQ_GOV_USERSPACE: y => mod
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || ARM_IMX8M_DDRC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
+

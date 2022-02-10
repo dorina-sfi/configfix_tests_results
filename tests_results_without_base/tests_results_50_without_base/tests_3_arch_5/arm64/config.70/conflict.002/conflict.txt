@@ -1,0 +1,19 @@
+AUTOFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
+
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=y] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=m] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=n] && MISC_FILESYSTEMS [=n] && PSTORE [=n]
+
+LEDS_IS31FL319X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && OF [=y]
+
+CRYPTO_BLAKE2B: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=m] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
+

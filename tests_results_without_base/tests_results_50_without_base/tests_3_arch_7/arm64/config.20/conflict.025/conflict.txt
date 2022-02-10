@@ -1,0 +1,23 @@
+LEDS_PCA9532: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && INPUT [=m]
+
+SENSORS_W83773G: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+W1_SLAVE_DS2423: m => yes
+      Direct dependencies: W1 [=m]
+
+MTD_CFI_AMDSTD: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
+
+TOUCHSCREEN_IQS5XX: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+
+MOUSE_APPLETOUCH: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
+
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=m] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
+

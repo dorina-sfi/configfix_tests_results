@@ -1,0 +1,28 @@
+HID_PICOLCD_FB: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=FB [=y] || FB [=y]=y)
+
+CHARGER_MT6360: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MT6360 [=m] && REGULATOR [=y]
+
+MMC_TIFM_SD: m => yes
+      Direct dependencies: MMC [=m] && PCI [=y]
+
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=m] && HAS_IOMEM [=y] || PMC_ATOM [=y] && X86 [=y] && PCI [=y]
+
+DA9062_WATCHDOG: m => yes
+      Direct dependencies: WATCHDOG [=y] && (MFD_DA9062 [=m] || COMPILE_TEST [=n]) && I2C [=y]
+
+IPMI_WATCHDOG: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+
+ROMFS_BACKED_BY_BOTH: y => no
+      Direct dependencies: <choice> && BLOCK [=y] && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
+
+HW_RANDOM_XIPHERA: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+
+UNIX98_PTYS: y => no
+      Direct dependencies: TTY [=y]
+

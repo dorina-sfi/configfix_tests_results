@@ -1,0 +1,33 @@
+TYPEC_TPS6598X: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && I2C [=y]
+
+SMC: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && INFINIBAND [=m]
+
+DEFAULT_SFQ: y => no
+      Direct dependencies: <choice>
+
+NET_DSA_TAG_MTK: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MT7530 [=m] && NETDEVICES [=y] && NET_DSA [=m]
+
+NETFILTER_XT_TARGET_HL: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && (IP_NF_MANGLE [=y] || IP6_NF_MANGLE [=n]) && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: IP_NF_TARGET_TTL [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NETFILTER_ADVANCED [=y] && IP_NF_MANGLE [=y] || IP6_NF_TARGET_HL [=n] && NET [=y] && INET [=y] && IPV6 [=n] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NETFILTER_ADVANCED [=y] && IP6_NF_MANGLE [=n]
+
+FB_SIS_300: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB_SIS [=m]
+      Reverse dependencies: FB_SIS [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && !FB_SIS_315 [=n]
+
+SBP_TARGET: m => yes
+      Direct dependencies: TARGET_CORE [=y] && FIREWIRE [=m]
+
+NFC_NXP_NCI_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && NFC_NXP_NCI [=m] && I2C [=y]
+
+I2C_PARPORT: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && PARPORT [=m]
+
+REGULATOR_QCOM_RPMH: m => yes
+      Direct dependencies: REGULATOR [=y] && (QCOM_RPMH [=m] || QCOM_RPMH [=m]=n && COMPILE_TEST [=y]) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n && COMPILE_TEST [=y])
+

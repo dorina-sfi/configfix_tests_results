@@ -1,0 +1,26 @@
+FPGA_MGR_SOCFPGA_A10: m => yes
+      Direct dependencies: FPGA [=m] && (ARCH_INTEL_SOCFPGA || COMPILE_TEST [=y])
+
+ROMFS_BACKED_BY_BLOCK: y => no
+      Direct dependencies: <choice> && BLOCK [=y]
+
+IPQ_APSS_PLL: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: IPQ_APSS_6018 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] && (QCOM_APCS_IPC [=m] || COMPILE_TEST [=y])
+
+DRM_TI_TPD12S015: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=m] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=m] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
+
+SENSORS_TMP421: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+DRM_EXYNOS: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && DRM [=m] && COMMON_CLK [=y] && (ARCH_S3C64XX || ARCH_S5PV210 || ARCH_EXYNOS || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MMU [=y]
+
+DRM_PANEL_SAMSUNG_S6D16D0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y]
+

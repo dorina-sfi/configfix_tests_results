@@ -1,0 +1,26 @@
+TEST_PARMAN: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && PARMAN [=m]
+
+CAN_FLEXCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && (OF [=y] || COLDFIRE || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+BTRFS_FS: y => no
+      Direct dependencies: BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+      Reverse dependencies: TEST_KMOD [=m] && RUNTIME_TESTING_MENU [=y] && m && MODULES [=y] && NETDEVICES [=y] && NET_CORE [=y] && INET [=y] && BLOCK [=y]
+
+DRM_PANEL_JDI_LT070ME05000: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+DRM_TI_TPD12S015: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+SND_SOC_INTEL_KEEMBAY: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_KEEMBAY [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+
+SND_SOC_WCD9335: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SLIMBUS [=y]
+
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_EXYNOS [=y]
+

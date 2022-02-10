@@ -1,0 +1,37 @@
+NET_ACT_IPT: m => yes
+      Direct dependencies: NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m]
+
+INTEGRITY_TRUSTED_KEYRING: y => no
+      Direct dependencies: INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+      Reverse dependencies: IMA_TRUSTED_KEYRING [=y] && INTEGRITY [=y] && IMA_APPRAISE [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y] || IMA_KEYRINGS_PERMIT_SIGNED_BY_BUILTIN_OR_SECONDARY [=n] && INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && SECONDARY_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+
+SYN_COOKIES: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NFT_SYNPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || IP_NF_TARGET_SYNPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=n] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || IP6_NF_TARGET_SYNPROXY [=n] && NET [=y] && INET [=y] && IPV6 [=n] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+
+PHY_SPARX5_SERDES: y => mod
+      Direct dependencies: (ARCH_SPARX5 || COMPILE_TEST [=y]) && OF [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: SPARX5_SWITCH [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROCHIP [=y] && NET_SWITCHDEV [=y] && HAS_IOMEM [=y] && OF [=y] && (ARCH_SPARX5 || COMPILE_TEST [=y])
+
+VIDEO_TC358743: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
+
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y]
+
+RMI4_F55: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: RMI4_F54 [=y] && INPUT [=y] && RMI4_CORE [=m] && (VIDEO_V4L2 [=m]=y || RMI4_CORE [=m]=m && VIDEO_V4L2 [=m]=m)
+
+VIDEO_DEV: m => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
+
+MEDIA_TUNER_TEA5767: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
+

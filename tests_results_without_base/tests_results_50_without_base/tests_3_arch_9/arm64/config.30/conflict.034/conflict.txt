@@ -1,0 +1,29 @@
+SYSCTL_KUNIT_TEST: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+
+SENSORS_LM87: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=n] && X86_64 && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=y] && (MACH_LOONGSON64 || COMPILE_TEST [=y]) && PCI [=y]
+
+MFD_STMFX: m => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_STMFX [=m] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+
+SND_SOC_TEGRA210_ADX: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m]
+
+SND_SOC_STM32_SAI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && SND_SOC [=m]
+
+DRM_TI_TFP410: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+MMC_SDHCI_ACPI: m => yes
+      Direct dependencies: MMC [=y] && MMC_SDHCI [=m] && ACPI [=y] && PCI [=y]
+
+SND_SOC_SC7180: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_QCOM [=m] && I2C [=y] && GPIOLIB [=y]
+

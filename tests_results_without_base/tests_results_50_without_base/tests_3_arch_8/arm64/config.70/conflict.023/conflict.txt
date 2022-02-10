@@ -1,0 +1,26 @@
+NFTL: m => yes
+      Direct dependencies: MTD [=m] && BLOCK [=y]
+
+MTD_NAND_SHARPSL: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_PXA || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+I2C_DAVINCI: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE || COMPILE_TEST [=y])
+
+MULTIUSER: y => no
+      Direct dependencies: y
+
+I2C_QUP: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && ARCH_QCOM [=y]
+
+FPGA_REGION: y => mod
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
+
+FB_SSD1307: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+

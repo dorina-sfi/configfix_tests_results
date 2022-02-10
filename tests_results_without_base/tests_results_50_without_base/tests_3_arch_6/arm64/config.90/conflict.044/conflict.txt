@@ -1,0 +1,21 @@
+MTD_BLOCK: m => yes
+      Direct dependencies: MTD [=m] && BLOCK [=y]
+
+DAX: y => mod
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
+
+LCD_ILI9320: m => no
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y]
+      Reverse dependencies: LCD_VGG2432A4 [=m] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y]
+
+REGULATOR_BD718XX: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD718XX [=m]
+
+MTD_NAND_TEGRA: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+

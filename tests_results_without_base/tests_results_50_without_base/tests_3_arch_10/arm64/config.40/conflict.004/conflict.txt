@@ -1,0 +1,33 @@
+MTD_DATAFLASH: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+
+SENSORS_BPA_RS600: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+NETFILTER_XTABLES: y => mod
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: IP_NF_IPTABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=y] || IP6_NF_IPTABLES [=m] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=y]
+
+SLUB_DEBUG: y => no
+      Direct dependencies: SLUB [=y] && SYSFS [=y]
+      Reverse dependencies: KASAN_GENERIC [=y] && <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y] || KASAN_SW_TAGS [=n] && <choice> && HAVE_ARCH_KASAN_SW_TAGS [=y] && CC_HAS_KASAN_SW_TAGS [=n] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y]
+
+XZ_DEC_ARM: y => no
+      Direct dependencies: XZ_DEC [=y]
+
+COMEDI_ADQ12B: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+IR_SONY_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+
+MEMBARRIER: y => no
+      Direct dependencies: y
+      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
+
+NVMEM_SPMI_SDAM: m => yes
+      Direct dependencies: NVMEM [=y] && SPMI [=m]
+
+W1_MASTER_SGI: m => yes
+      Direct dependencies: W1 [=m]
+

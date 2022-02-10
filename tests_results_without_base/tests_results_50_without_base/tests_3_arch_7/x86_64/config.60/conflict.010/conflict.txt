@@ -1,0 +1,25 @@
+NET_MPLS_GSO: m => no
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+
+INFINIBAND_RTRS_CLIENT: m => yes
+      Direct dependencies: INFINIBAND [=m] && INFINIBAND_ADDR_TRANS [=y]
+
+VIDEO_TC358743: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+
+KEYSTONE_USB_PHY: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+
+CPU_FREQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_MC_PRIO [=y] && SCHED_MC [=y] && CPU_SUP_INTEL [=y]
+
+CRYPTO_LIB_CURVE25519: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=m] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+
+VIDEO_TDA7432: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=y] && MEDIA_RADIO_SUPPORT [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+

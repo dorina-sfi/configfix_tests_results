@@ -1,0 +1,27 @@
+STUB_CLK_HI3660: y => no
+      Direct dependencies: COMMON_CLK [=y] && (COMMON_CLK_HI3660 [=y] || COMPILE_TEST [=y]) && MAILBOX [=y]
+
+ZONE_DMA: y => no
+      Direct dependencies: y
+
+DRM_INGENIC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (MIPS || COMPILE_TEST [=y]) && DRM [=m] && CMA [=y] && OF [=y] && COMMON_CLK [=y]
+
+SENSORS_SHT15: m => yes
+      Direct dependencies: HWMON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+
+POSIX_TIMERS: y => no
+      Direct dependencies: y
+
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+
+SERIO_LIBPS2: m => no
+      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=n]
+
+CRYPTO_SM3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=n] && CRYPTO [=y] && ARM64_CRYPTO [=n] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+

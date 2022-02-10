@@ -1,0 +1,28 @@
+HID_SAMSUNG: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+HID_TOPSEED: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+SND_SOC_SSM2602_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+SENSORS_LTC2992: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y] && GPIOLIB [=y]
+
+VFIO_MDEV: m => yes
+      Direct dependencies: VFIO [=m]
+
+SENSORS_STPDDC60: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
+
+REGULATOR_FIXED_VOLTAGE: m => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
+
+USB_DWC2_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y && USB_GADGET [=m]=y || USB_DWC2 [=m]=m && USB [=y] && USB_GADGET [=m])
+
+REGULATOR_BD957XMUF: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD957XMUF [=m]
+

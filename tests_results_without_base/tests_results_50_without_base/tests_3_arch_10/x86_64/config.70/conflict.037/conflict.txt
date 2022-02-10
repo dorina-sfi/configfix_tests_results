@@ -1,0 +1,32 @@
+CFG80211_REQUIRE_SIGNED_REGDB: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m]
+
+QRTR_SMD: m => yes
+      Direct dependencies: NET [=y] && QRTR [=m] && (RPMSG [=y] || COMPILE_TEST [=n] && RPMSG [=y]=n)
+
+GAMEPORT_NS558: m => yes
+      Direct dependencies: GAMEPORT [=m]
+
+RTC_DRV_MT6397: m => yes
+      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
+
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=n] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=n] && X86_LOCAL_APIC [=y]
+
+DM_LOG_WRITES: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+OPT3001: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+REGULATOR_TPS65086: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_TPS65086 [=m]
+
+CRYPTO_SM4_AESNI_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SM4_AESNI_AVX2_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+KASAN_GENERIC: y => no
+      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
+

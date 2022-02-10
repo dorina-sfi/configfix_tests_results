@@ -1,0 +1,24 @@
+SENSORS_SHT3x: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+
+CRYPTO_DRBG_MENU: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+
+FXLS8962AF_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+DA9062_WATCHDOG: m => yes
+      Direct dependencies: WATCHDOG [=y] && (MFD_DA9062 [=m] || COMPILE_TEST [=n]) && I2C [=y]
+
+CARDBUS: y => no
+      Direct dependencies: PCCARD [=m] && PCI [=y]
+      Reverse dependencies: YENTA [=m] && PCCARD [=m] && PCI [=y] && !EXPERT [=n]
+
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
+

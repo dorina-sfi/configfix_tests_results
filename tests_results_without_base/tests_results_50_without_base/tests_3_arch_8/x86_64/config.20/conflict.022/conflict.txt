@@ -1,0 +1,27 @@
+COMMON_CLK_HI655X: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (MFD_HI655X_PMIC [=m] || COMPILE_TEST [=y]) && REGMAP [=y]
+
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
+
+MTD_NAND_QCOM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_QCOM || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+DM_MULTIPATH_HST: m => yes
+      Direct dependencies: MD [=y] && DM_MULTIPATH [=m]
+
+DM_MULTIPATH_HST: m => yes
+      Direct dependencies: MD [=y] && DM_MULTIPATH [=m]
+
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
+
+CRYPTO_CRC32: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=y] && PCI [=n] && INFINIBAND [=m] && INFINIBAND_VIRT_DMA [=y] || F2FS_FS [=m] && BLOCK [=y]
+
+CPU_SUP_HYGON: y => no
+      Direct dependencies: y
+

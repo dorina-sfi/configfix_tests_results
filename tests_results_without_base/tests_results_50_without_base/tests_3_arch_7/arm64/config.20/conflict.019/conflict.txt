@@ -1,0 +1,25 @@
+INPUT_JOYDEV: m => yes
+      Direct dependencies: INPUT [=m]
+
+GAMEPORT: m => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=m] && INPUT [=m] && INPUT_JOYSTICK [=y]
+
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
+
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+
+MTD_NAND_MARVELL: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (PXA3xx || ARCH_MMP || PLAT_ORION || ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+MTD_NAND_FSL_IFC: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE [=y] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+

@@ -1,0 +1,23 @@
+LEDS_CLASS_FLASH: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m]
+
+CRYPTO_LZ4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+
+PWRSEQ_EMMC: m => yes
+      Direct dependencies: MMC [=m] && OF [=y]
+
+DRM_I2C_SIL164: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_KMS_HELPER [=m] && I2C [=y]
+
+SENSORS_ADM1177: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+BACKLIGHT_LV5207LP: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
+
+DRM_DEBUG_SELFTEST: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n]
+

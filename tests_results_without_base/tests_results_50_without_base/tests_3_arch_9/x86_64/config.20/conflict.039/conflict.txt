@@ -1,0 +1,28 @@
+SENSORS_MAX8688: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+LEDS_AS3645A: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
+
+COMEDI_NI_PCIDIO: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
+
+VGA_CONSOLE: y => no
+      Direct dependencies: VT [=y] && !4xx && !PPC_8xx && !SPARC && !M68K && !PARISC && !SUPERH && (!ARM || ARCH_FOOTBRIDGE || ARCH_INTEGRATOR || ARCH_NETWINDER) && !ARM64 && !ARC && !MICROBLAZE && !OPENRISC && !NDS32 && !S390 && !UML
+
+PRINTK: y => no
+      Direct dependencies: y
+
+ALLOW_DEV_COREDUMP: y => no
+      Direct dependencies: y
+
+EXT4_FS: y => mod
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
+
+FB_BIG_ENDIAN: y => no
+      Direct dependencies: <choice>
+
+SYSFS_SYSCALL: y => no
+      Direct dependencies: y
+

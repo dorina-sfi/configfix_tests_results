@@ -1,0 +1,32 @@
+MTD_AFS_PARTS: m => yes
+      Direct dependencies: MTD [=m] && (ARM || ARM64 [=y])
+
+SENSORS_PIM4328: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
+
+CRYPTO_LIB_CHACHA20POLY1305: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=m] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=m]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+
+UNMAP_KERNEL_AT_EL0: y => no
+      Direct dependencies: y
+
+BATTERY_MAX1721X: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && W1 [=m]
+
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
+
+NET_DSA_LOOP: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+
+NAMESPACES: y => no
+      Direct dependencies: MULTIUSER [=y]
+
+REGULATOR_MT6397: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+

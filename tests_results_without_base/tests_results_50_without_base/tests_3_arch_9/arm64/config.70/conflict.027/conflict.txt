@@ -1,0 +1,30 @@
+AD525X_DPOT_I2C: m => yes
+      Direct dependencies: AD525X_DPOT [=m] && I2C [=y]
+
+I2C_FSI: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && FSI [=m]
+
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
+
+GPIO_KEMPLD: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_KEMPLD [=m]
+
+COMMON_CLK_MT6779_MMSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK_MT6779 [=m]
+
+PARPORT_AX88796: m => yes
+      Direct dependencies: PARPORT [=m]
+
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
+
+CAN_SJA1000_ISA: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_SJA1000 [=m]
+
+MTD_NAND_ECC_SW_HAMMING: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: SM_FTL [=m] && MTD [=m] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=m] && MTD_RAW_NAND [=n] && 4xx
+

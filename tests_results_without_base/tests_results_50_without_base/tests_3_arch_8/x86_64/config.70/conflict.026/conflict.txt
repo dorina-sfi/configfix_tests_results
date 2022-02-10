@@ -1,0 +1,26 @@
+SENSORS_UCD9000: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+SENSORS_ADM1275: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+MTD_NAND_NANDSIM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m]
+
+INPUT_RAVE_SP_PWRBUTTON: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && RAVE_SP_CORE [=m]
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=m] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
+
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=y] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y]
+
+TMP007: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+USB_ISP1760_HOST_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=m])
+

@@ -1,0 +1,34 @@
+DM_WRITECACHE: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+NF_CONNTRACK_SANE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+
+INTEGRITY_TRUSTED_KEYRING: y => no
+      Direct dependencies: INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+      Reverse dependencies: IMA_TRUSTED_KEYRING [=y] && INTEGRITY [=y] && IMA_APPRAISE [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y] || IMA_KEYRINGS_PERMIT_SIGNED_BY_BUILTIN_OR_SECONDARY [=n] && INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && SECONDARY_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+
+CRC_T10DIF: y => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=m] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ && SCSI_FC_ATTRS [=m] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=m] || NVME_FC [=m]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=m] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y]
+
+DEBUG_FS_DISALLOW_MOUNT: y => no
+      Direct dependencies: <choice>
+
+MHI_WWAN_MBIM: m => yes
+      Direct dependencies: NETDEVICES [=y] && WWAN [=m] && MHI_BUS [=m]
+
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+
+MTD_NAND_ARASAN: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
+
+NETFILTER_XT_MATCH_IPRANGE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
+
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+

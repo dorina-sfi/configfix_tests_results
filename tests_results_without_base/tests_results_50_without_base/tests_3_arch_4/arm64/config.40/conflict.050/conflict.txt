@@ -1,0 +1,14 @@
+USB_EMI62: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+
+MTD_NAND_MESON: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_MESON [=n] || COMPILE_TEST [=y])
+
+W1: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=n] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
+

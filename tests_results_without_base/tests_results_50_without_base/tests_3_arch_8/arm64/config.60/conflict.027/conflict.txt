@@ -1,0 +1,28 @@
+REGULATOR_PCF50633: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_PCF50633 [=m]
+
+TCG_TIS: m => yes
+      Direct dependencies: TCG_TPM [=m] && (X86 || OF [=y])
+      Reverse dependencies: IMA [=n] && INTEGRITY [=n] && TCG_TPM [=m] && X86
+
+SCSI_DH_EMC: m => yes
+      Direct dependencies: SCSI_DH [=y] && SCSI [=m]
+
+W1: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+ARM64_PA_BITS_48: y => no
+      Direct dependencies: <choice>
+
+SCSI_SAS_LIBSAS: m => no
+      Direct dependencies: SCSI [=m]
+      Reverse dependencies: SCSI_AIC94XX [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] || SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && ATA [=n] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && X86 || SCSI_PM8001 [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
+
+SCSI_AIC79XX: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
+
+XFRM_MIGRATE: y => no
+      Direct dependencies: NET [=y] && INET [=y] && XFRM [=y]
+      Reverse dependencies: NET_KEY_MIGRATE [=y] && NET [=y] && INET [=y] && NET_KEY [=y]
+

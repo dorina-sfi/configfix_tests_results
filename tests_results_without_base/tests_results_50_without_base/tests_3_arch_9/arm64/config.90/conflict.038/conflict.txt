@@ -1,0 +1,29 @@
+PPS_CLIENT_GPIO: m => yes
+      Direct dependencies: PPS [=m]
+
+LEDS_AN30259A: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m] && OF [=y]
+
+SPI_XCOMM: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && I2C [=m]
+
+CRYPTO_JITTERENTROPY: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+
+GPIO_PCA953X: m => yes
+      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+
+COMEDI_PCI_DRIVERS: m => yes
+      Direct dependencies: COMEDI [=m] && PCI [=y]
+
+COMEDI_ADDI_APCI_3120: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
+
+MTD_JEDECPROBE: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+
+IMX_INTMUX: y => no
+      Direct dependencies: y
+

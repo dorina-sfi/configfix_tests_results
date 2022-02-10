@@ -1,0 +1,32 @@
+MOUSE_CYAPA: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && I2C [=y]
+
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
+
+FPGA_REGION: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=m]
+      Reverse dependencies: FPGA_DFL [=m] && FPGA [=y] && HAS_IOMEM [=y]
+
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+
+COMEDI_TESTS: m => yes
+      Direct dependencies: COMEDI [=m]
+
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=m] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=n] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
+
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
+
+RTC_DRV_DS17885: y => no
+      Direct dependencies: <choice>
+
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
+

@@ -1,0 +1,29 @@
+UIO_PDRV_GENIRQ: m => yes
+      Direct dependencies: UIO [=m]
+
+SYNCLINK_CS: m => yes
+      Direct dependencies: PCMCIA [=m] && TTY [=y]
+
+COMEDI_ICP_MULTI: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+
+COMEDI_ADV_PCI_DIO: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+
+GPIO_SCH: m => yes
+      Direct dependencies: GPIOLIB [=y] && X86 [=y] && (X86 [=y] || COMPILE_TEST [=y]) && ACPI [=y] && LPC_SCH [=m]
+
+FAULT_INJECTION: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: DRM_I915_SELFTEST [=y] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=m]
+
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=y] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+
+VFIO_PLATFORM: m => yes
+      Direct dependencies: VFIO [=m] && (ARM || ARM64 || COMPILE_TEST [=y])
+
+REGULATOR_QCOM_RPMH: m => yes
+      Direct dependencies: REGULATOR [=y] && (QCOM_RPMH [=m] || QCOM_RPMH [=m]=n && COMPILE_TEST [=y]) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n && COMPILE_TEST [=y])
+

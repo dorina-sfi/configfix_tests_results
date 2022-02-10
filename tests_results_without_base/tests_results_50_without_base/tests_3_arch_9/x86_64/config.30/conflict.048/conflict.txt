@@ -1,0 +1,32 @@
+KERNEL_ZSTD: y => no
+      Direct dependencies: <choice> && HAVE_KERNEL_ZSTD [=y]
+
+NETFILTER_XT_TARGET_MASQUERADE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_NAT [=m]
+      Reverse dependencies: IP_NF_TARGET_MASQUERADE [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && IP_NF_NAT [=n] || IP6_NF_TARGET_MASQUERADE [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && IP6_NF_NAT [=n]
+
+CRYPTO_NULL: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
+
+CRYPTO_PCBC: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=y] && NET [=y] && AF_RXRPC [=m]
+
+NET_DSA_TAG_DSA: m => no
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MV88E6XXX [=m] && NETDEVICES [=y] && NET_DSA [=m] && PTP_1588_CLOCK_OPTIONAL [=y]
+
+SENSORS_INSPUR_IPSPS: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+SERIAL_IPOCTAL: m => yes
+      Direct dependencies: IPACK_BUS [=m] && TTY [=y]
+
+KEYS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=m] && NET [=y] && INET [=y] || CEPH_LIB [=m] && NET [=y] && INET [=y] || FS_ENCRYPTION [=n] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFS_FS [=m] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+
+TCG_TIS_I2C_CR50: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
+

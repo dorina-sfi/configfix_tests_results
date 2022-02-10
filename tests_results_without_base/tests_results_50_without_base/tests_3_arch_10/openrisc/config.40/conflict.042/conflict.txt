@@ -1,0 +1,37 @@
+MEDIA_TUNER_MT20XX: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+MTD_PSTORE: m => yes
+      Direct dependencies: MTD [=m] && PSTORE_BLK [=m]
+
+PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
+
+ENCRYPTED_KEYS: y => no
+      Direct dependencies: KEYS [=y]
+      Reverse dependencies: EVM [=y] && INTEGRITY [=y]
+
+NFT_SYNPROXY: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: TARGET_CORE [=m] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=y] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=y]
+
+CRYPTO_GCM: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=n] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=m] && NET [=y] && INET [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || MACSEC [=y] && NETDEVICES [=y] && NET_CORE [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx
+
+XFS_FS: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: TEST_KMOD [=m] && RUNTIME_TESTING_MENU [=y] && m && MODULES [=y] && NETDEVICES [=y] && NET_CORE [=y] && INET [=y] && BLOCK [=y]
+
+INTEGRITY_TRUSTED_KEYRING: y => no
+      Direct dependencies: INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+      Reverse dependencies: IMA_TRUSTED_KEYRING [=y] && INTEGRITY [=y] && IMA_APPRAISE [=y] && SYSTEM_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y] || IMA_KEYRINGS_PERMIT_SIGNED_BY_BUILTIN_OR_SECONDARY [=n] && INTEGRITY [=y] && SYSTEM_TRUSTED_KEYRING [=y] && SECONDARY_TRUSTED_KEYRING [=y] && INTEGRITY_ASYMMETRIC_KEYS [=y]
+
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
+

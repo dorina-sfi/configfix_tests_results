@@ -1,0 +1,36 @@
+VIDEO_S5K4ECGX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+CEPH_LIB: y => mod
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+
+STE10XP: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+
+I2C_SI4713: m => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI4713 [=m]
+      Reverse dependencies: USB_SI4713 [=n] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && USB [=n] && I2C [=y] && RADIO_SI4713 [=m] || PLATFORM_SI4713 [=m] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI4713 [=m]
+
+SENSORS_UCD9200: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
+
+TSL2772: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+
+SOC_SAMSUNG: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_EXYNOS [=y]
+
+CPU_ISOLATION: y => no
+      Direct dependencies: SMP [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+
+NET_DSA_TAG_KSZ: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MICROCHIP_KSZ_COMMON [=m] && NETDEVICES [=y] && NET_DSA [=m]
+

@@ -1,0 +1,26 @@
+ALLOW_DEV_COREDUMP: y => no
+      Direct dependencies: y
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=m] && I2C [=m] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y]
+
+SENSORS_SPARX5: m => yes
+      Direct dependencies: HWMON [=m] && (ARCH_SPARX5 [=n] || COMPILE_TEST [=y])
+
+TPS65010: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && GPIOLIB [=y]
+
+FILE_LOCKING: y => no
+      Direct dependencies: y
+
+DM_INTEGRITY: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+I2C_SIMTEC: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
+
+AUDIT: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y]
+

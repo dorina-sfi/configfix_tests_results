@@ -1,0 +1,21 @@
+MTD_ONENAND_GENERIC: m => yes
+      Direct dependencies: MTD [=m] && MTD_ONENAND [=m]
+
+SENSORS_MAX16601: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+RDS_RDMA: m => yes
+      Direct dependencies: NET [=y] && RDS [=m] && INFINIBAND [=m] && INFINIBAND_ADDR_TRANS [=y]
+
+IIO_STM32_TIMER_TRIGGER: y => mod
+      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+
+NET_DSA_TAG_AR9331: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_AR9331 [=n] && NETDEVICES [=y] && NET_DSA [=m]
+
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=m] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=m] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y])
+

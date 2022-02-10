@@ -1,0 +1,28 @@
+MOUSE_PS2_ELANTECH_SMBUS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=m] && MOUSE_PS2_ELANTECH [=y] && (I2C [=m]=y || I2C [=m]=MOUSE_PS2 [=m])
+
+CORESIGHT_LINKS_AND_SINKS: m => no
+      Direct dependencies: CORESIGHT [=y]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=y] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=y] && ARM64 [=y] || CORESIGHT_STM [=m] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
+
+MFD_SL28CPLD: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
+
+I2C_MV64XXX: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (PLAT_ORION || ARCH_SUNXI [=y] || ARCH_MVEBU [=y] || COMPILE_TEST [=y])
+
+DRM_DW_HDMI_I2S_AUDIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && SND_SOC [=m] && DRM_DW_HDMI [=m]
+      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=n] && I2C [=m] && GPIOLIB [=y] && HAVE_CLK [=y] && DRM_DW_HDMI [=m]
+
+GPIO_MAX7300: m => yes
+      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+
+MTD_QINFO_PROBE: m => yes
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=m]
+      Reverse dependencies: MTD_LPDDR [=m] && MTD [=y]
+
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=m] && I2C [=m] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
+

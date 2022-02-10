@@ -1,0 +1,32 @@
+COMEDI_CB_PCIDAS64: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+VT: y => no
+      Direct dependencies: TTY [=y]
+
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=m]
+
+DW_APB_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: X86_INTEL_MID [=y] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && PCI [=y] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || DW_APB_TIMER_OF [=n] && GENERIC_CLOCKEVENTS [=y]
+
+DM_LOG_WRITES: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=y] && HAS_IOMEM [=y] && X86 [=y] && ACPI [=y] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=n] || FB [=y]=y)
+
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
+
+PCSPKR_PLATFORM: y => no
+      Direct dependencies: HAVE_PCSPKR_PLATFORM [=y]
+
+LPC_SCH: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=m] && WATCHDOG [=y] && X86 [=y] && PCI [=y]
+

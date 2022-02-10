@@ -1,0 +1,25 @@
+SENSORS_ARM_SCMI: m => yes
+      Direct dependencies: HWMON [=y] && ARM_SCMI_PROTOCOL [=m] && (THERMAL [=y] || !THERMAL_OF [=n])
+
+CRYPTO_NULL: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
+
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=y] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+
+CORESIGHT_LINKS_AND_SINKS: m => no
+      Direct dependencies: CORESIGHT [=m]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=m] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=m] && ARM64 [=y] || CORESIGHT_STM [=m] && CORESIGHT [=m] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
+
+CONSOLE_TRANSLATIONS: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
+
+MS5637: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+MMC_DW_PLTFM: m => yes
+      Direct dependencies: MMC [=y] && MMC_DW [=m]
+      Reverse dependencies: MMC_DW_BLUEFIELD [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_EXYNOS [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_HI3798CV200 [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_K3 [=m] && MMC [=y] && MMC_DW [=m] || MMC_DW_ROCKCHIP [=n] && MMC [=y] && MMC_DW [=m] && ARCH_ROCKCHIP [=n]
+

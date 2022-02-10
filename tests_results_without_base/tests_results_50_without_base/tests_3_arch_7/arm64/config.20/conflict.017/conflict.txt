@@ -1,0 +1,25 @@
+TOUCHSCREEN_ZET6223: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+
+SENSORS_SCH5627: m => yes
+      Direct dependencies: HWMON [=m] && !PPC && WATCHDOG [=y]
+
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_EXYNOS [=y]
+
+NOP_USB_XCEIV: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (USB_GADGET [=m] || !USB_GADGET [=m])
+      Reverse dependencies: USB_DWC2_PCI [=n] && USB_SUPPORT [=y] && USB_DWC2 [=n] && USB_PCI [=n] && (USB_GADGET [=m] || !USB_GADGET [=m])
+
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
+
+MTD_NAND_DENALI_DT: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_DMA [=y] && HAVE_CLK [=y] && OF [=y] && HAS_IOMEM [=y]
+
+EINT_MTK: y => mod
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && OF [=y]
+

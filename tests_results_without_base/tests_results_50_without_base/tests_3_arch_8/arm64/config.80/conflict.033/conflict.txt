@@ -1,0 +1,27 @@
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
+
+HID_SMARTJOYPLUS: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
+
+CAN_FLEXCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && (OF [=y] || COLDFIRE || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+USB_STORAGE_USBAT: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+
+INTERCONNECT: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_TEGRA [=n] && HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=m] && OF [=y] || TEGRA_MC [=y] && MEMORY [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=y] && COMMON_CLK [=y])
+
+HID_PICOLCD_CIR: y => no
+      Direct dependencies: INPUT [=y] && HID [=m] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=RC_CORE [=m] || RC_CORE [=m]=y)
+
+PACKING: y => no
+      Direct dependencies: y
+      Reverse dependencies: NET_DSA_TAG_OCELOT [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_TAG_SJA1105 [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_SJA1105 [=n] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || MSCC_OCELOT_SWITCH_LIB [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROSEMI [=y]
+
+CRYPTO_LIB_CURVE25519: m => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n])
+      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=m] || !IPV6 [=m])
+

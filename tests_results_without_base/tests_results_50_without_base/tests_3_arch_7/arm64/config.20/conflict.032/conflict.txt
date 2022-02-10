@@ -1,0 +1,24 @@
+TOUCHSCREEN_MMS114: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+
+TOUCHSCREEN_TSC_SERIO: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+
+CLK_R8A774E1: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774E1 [=y]
+
+TYPEC_FUSB302: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=y] && TYPEC_TCPM [=m] && I2C [=y] && (EXTCON [=y] || !EXTCON [=y])
+
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=y] && FTRACE [=y]
+
+RMI4_CORE: m => yes
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: HID_RMI [=n] && INPUT [=m] && HID [=m]
+
+SENSORS_ADT7462: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+

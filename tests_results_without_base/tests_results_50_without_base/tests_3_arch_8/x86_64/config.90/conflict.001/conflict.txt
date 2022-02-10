@@ -1,0 +1,26 @@
+LEGACY_VSYSCALL_EMULATE: y => no
+      Direct dependencies: <choice>
+
+NFC: m => yes
+      Direct dependencies: NET [=y] && (RFKILL [=m] || !RFKILL [=m])
+
+MOUSE_SYNAPTICS_I2C: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && I2C [=y]
+
+HID_ACRUX: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+COMEDI_AMPLC_PC263_PCI: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=y] && HAS_IOMEM [=y] && X86 [=y] && ACPI [=y] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=n] || FB [=y]=y)
+
+COMEDI_ADV_PCI1710: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=n] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
+

@@ -1,0 +1,33 @@
+NET_DSA_SJA1105: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+
+DEVFREQ_EVENT_EXYNOS_PPMU: y => mod
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+AF_RXRPC: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: AFS_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+
+MD_MULTIPATH: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
+
+NFC_MRVL_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && NFC_MRVL [=m] && I2C [=y]
+
+FB_ARK: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+
+IP_NF_NAT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=m]
+
+IP_NF_TARGET_NETMAP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && IP_NF_NAT [=m] && NETFILTER_ADVANCED [=y]
+
+MODULE_COMPRESS_NONE: y => no
+      Direct dependencies: <choice>
+

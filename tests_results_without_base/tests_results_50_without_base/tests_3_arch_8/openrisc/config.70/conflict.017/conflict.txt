@@ -1,0 +1,28 @@
+SENSORS_ASPEED: m => yes
+      Direct dependencies: HWMON [=m]
+
+SENSORS_MAX6642: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+HZ_250: y => no
+      Direct dependencies: <choice>
+
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+
+SENSORS_ATXP1: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+MTD_RAM: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_PLATRAM [=n] && MTD [=m] && HAS_IOMEM [=y]
+
+AUXDISPLAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: PANEL [=m] && PARPORT [=m]
+
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+

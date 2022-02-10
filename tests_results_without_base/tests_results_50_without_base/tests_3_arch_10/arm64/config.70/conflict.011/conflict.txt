@@ -1,0 +1,33 @@
+AD2S1210: m => yes
+      Direct dependencies: STAGING [=y] && IIO [=m] && SPI [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+SENSORS_NTC_THERMISTOR: m => yes
+      Direct dependencies: HWMON [=y] && (!OF [=y] || IIO [=m]=n || IIO [=m]) && (THERMAL [=n] || !THERMAL_OF [=n])
+
+MEDIA_TUNER_TDA9887: y => mod
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+
+EXYNOS_PMU: y => no
+      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] || (ARM || ARM64 [=y]) && COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
+
+TCS3414: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+HMC425: m => yes
+      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+
+TSYS02D: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+CRYPTO_SM4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+
+NLS_CODEPAGE_737: m => yes
+      Direct dependencies: NLS [=m]
+
+REGULATOR_S2MPA01: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_SEC_CORE [=m] || COMPILE_TEST [=n])
+

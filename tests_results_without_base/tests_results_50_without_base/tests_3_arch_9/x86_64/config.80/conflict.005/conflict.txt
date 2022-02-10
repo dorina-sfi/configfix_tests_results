@@ -1,0 +1,30 @@
+PATA_MPIIX: m => yes
+      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+
+SKFP: m => yes
+      Direct dependencies: NETDEVICES [=y] && FDDI [=m] && PCI [=y]
+
+DVB_DIB3000MC: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB3000MC [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n]
+
+REGULATOR_ARIZONA_MICSUPP: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=y] || MFD_MADERA [=n]) && SND_SOC [=m]
+
+CRC4: y => mod
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=y] && GPIOLIB [=y]
+
+SND_SOC_ES7241: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+
+SND_SOC_AMD_ACP3x: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && X86 [=y] && PCI [=y]
+
+SND_SOC_WM8978: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SIU_MIGOR [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && SH_MIGOR && I2C [=y]
+
+SND_SOC_AMD_CZ_RT5645_MACH: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP [=m] && I2C [=y]
+

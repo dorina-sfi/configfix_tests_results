@@ -1,0 +1,30 @@
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+HW_RANDOM_TIMERIOMEM: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+
+NETFILTER_XT_MATCH_CONNLABEL: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+
+PPS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
+
+SENSORS_MAX8688: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+NFSD_V3: y => no
+      Direct dependencies: NETWORK_FILESYSTEMS [=y] && NFSD [=y]
+      Reverse dependencies: NFSD_V4 [=y] && NETWORK_FILESYSTEMS [=y] && NFSD [=y] && PROC_FS [=y]
+
+IPWIRELESS: m => yes
+      Direct dependencies: PCMCIA [=m] && NETDEVICES [=y] && TTY [=y]
+
+MFD_STMFX: m => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_STMFX [=m] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+
+PRINTK: y => no
+      Direct dependencies: y
+

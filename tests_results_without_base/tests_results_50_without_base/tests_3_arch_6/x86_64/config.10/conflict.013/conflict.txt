@@ -1,0 +1,20 @@
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
+
+VSOCKETS_DIAG: m => yes
+      Direct dependencies: NET [=y] && VSOCKETS [=m]
+
+COMPACTION: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
+
+SND_SOC_PCM179X_SPI: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+
+DRM_PANEL_TPO_TD043MTEA1: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && REGULATOR [=y] && SPI [=y]
+
+SND_SOC_INTEL_MACH: y => no
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
+      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
+

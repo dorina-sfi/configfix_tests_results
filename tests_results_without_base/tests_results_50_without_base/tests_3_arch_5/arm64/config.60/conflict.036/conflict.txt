@@ -1,0 +1,17 @@
+SERIAL_8250_EM: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && HAVE_CLK [=y] && (ARM && ARCH_RENESAS [=n] || COMPILE_TEST [=y])
+
+MMC_SDHI_SYS_DMAC: m => yes
+      Direct dependencies: MMC [=y] && MMC_SDHI [=m]
+
+SND_SOC_SAMSUNG: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+
+GPIO_SYSCON: m => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
+      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=m] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
+
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=n] || S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=y] && COMMON_CLK [=y]
+

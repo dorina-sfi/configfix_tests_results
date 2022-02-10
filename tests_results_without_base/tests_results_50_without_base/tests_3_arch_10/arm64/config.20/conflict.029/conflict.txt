@@ -1,0 +1,35 @@
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
+
+SOC_TI: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_K3 [=y]
+
+CHARGER_ISP1704: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && USB_PHY [=y] && (USB_GADGET [=m] || !USB_GADGET [=m])
+
+PRIME_NUMBERS: m => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+
+TI_DAC5571: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+COMEDI_ADV_PCI_DIO: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+SND_SOC_TLV320AIC32X4_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && COMMON_CLK [=y]
+
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
+
+COMEDI_NI_6527: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
+

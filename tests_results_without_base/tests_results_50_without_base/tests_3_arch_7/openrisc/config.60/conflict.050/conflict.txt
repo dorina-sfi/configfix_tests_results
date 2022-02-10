@@ -1,0 +1,23 @@
+USB_ASPEED_VHUB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_ASPEED || COMPILE_TEST [=y]) && USB_LIBCOMPOSITE [=m]
+
+HID_PENMOUNT: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+
+SENSORS_PWM_FAN: m => yes
+      Direct dependencies: HWMON [=m] && (PWM [=y] && OF [=y] || COMPILE_TEST [=y])
+
+CRYPTO_STREEBOG: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=y]) && X86_64 && ACPI && PCI [=n]
+
+SENSORS_LM83: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+REGULATOR_DA9062: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+

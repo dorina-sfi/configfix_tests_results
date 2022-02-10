@@ -1,0 +1,31 @@
+UIO_PCI_GENERIC: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
+
+CRYPTO_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+
+CRYPTO_CHACHA20POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+HPET_TIMER: y => no
+      Direct dependencies: y
+
+SERIAL_8250: y => mod
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
+      Reverse dependencies: MWAVE [=y] && X86 [=y] && TTY [=y]
+
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+
+COMEDI_JR3_PCI: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+
+REGULATOR_88PM800: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_88PM800 [=m]
+
+JFFS2_RTIME: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=m]
+

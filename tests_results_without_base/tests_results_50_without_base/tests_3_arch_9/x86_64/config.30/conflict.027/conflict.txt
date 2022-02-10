@@ -1,0 +1,30 @@
+CC_OPTIMIZE_FOR_SIZE: y => no
+      Direct dependencies: <choice>
+
+IPMI_WATCHDOG: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+
+FAT_KUNIT_TEST: m => yes
+      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=m]
+
+NF_CONNTRACK_FTP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
+
+IEEE802154_CA8210: m => yes
+      Direct dependencies: NETDEVICES [=y] && IEEE802154_DRIVERS [=m] && MAC802154 [=m] && COMMON_CLK [=y] && SPI [=y]
+
+6LOWPAN_NHC_UDP: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
+
+INPUT: y => mod
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 [=y] && PCI [=n] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && X86 [=y] && MMU [=y] && ACPI [=y]
+
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=m] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=y] && I2C [=y]
+
+X86_PM_TIMER: y => no
+      Direct dependencies: X86 [=y] && (ACPI [=y] || JAILHOUSE_GUEST [=n])
+      Reverse dependencies: JAILHOUSE_GUEST [=n] && HYPERVISOR_GUEST [=y] && X86_64 [=y] && PCI [=n]
+

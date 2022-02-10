@@ -1,0 +1,29 @@
+RMI4_SPI: m => yes
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m] && SPI [=y]
+
+REGULATOR_PV88060: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
+
+IQS620AT_TEMP: m => yes
+      Direct dependencies: IIO [=y] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
+
+BATTERY_CW2015: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+
+HZ_300: y => no
+      Direct dependencies: <choice>
+
+I2C_I801: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: ITCO_WDT [=n] && WATCHDOG [=y] && (X86 || IA64) && PCI [=y] && (I2C [=m] || I2C [=m]=n) && (MFD_INTEL_PMC_BXT [=n] || !MFD_INTEL_PMC_BXT [=n]) && !EXPERT [=y] && I2C [=m]
+
+DEVFREQ_EVENT_EXYNOS_PPMU: y => mod
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+
+BITS_TEST: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+
+SENSORS_TSL2563: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
+

@@ -1,0 +1,26 @@
+I2C_VIPERBOARD: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_VIPERBOARD [=m] && USB [=y]
+
+GNSS_MTK_SERIAL: m => yes
+      Direct dependencies: GNSS [=m] && SERIAL_DEV_BUS [=m]
+
+SX9310: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+SENSORS_MAX31785: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+CEC_CROS_EC: m => yes
+      Direct dependencies: MEDIA_CEC_SUPPORT [=y] && CROS_EC [=m]
+
+LTO_NONE: y => no
+      Direct dependencies: <choice>
+
+CRYPTO_LIB_CHACHA: m => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=y] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y]
+

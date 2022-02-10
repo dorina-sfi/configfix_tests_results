@@ -1,0 +1,25 @@
+HID_NINTENDO: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y]
+
+HID_SENSOR_MAGNETOMETER_3D: m => yes
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+
+TCP_CONG_CUBIC: y => mod
+      Direct dependencies: NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=n] || NET [=y] && INET [=y] && !TCP_CONG_ADVANCED [=n]
+
+MPSC: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
+
+SDIO_UART: m => yes
+      Direct dependencies: MMC [=m] && TTY [=y]
+
+MEMORY: y => no
+      Direct dependencies: y
+      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=y] && MTD_RAW_NAND [=n] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=n] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+
+FB_S1D13XXX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+
+SND_SOC_CS42L73: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+

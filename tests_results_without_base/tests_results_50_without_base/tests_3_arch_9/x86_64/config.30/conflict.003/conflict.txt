@@ -1,0 +1,31 @@
+ZONE_DMA: y => no
+      Direct dependencies: y
+
+PSTORE: y => mod
+      Direct dependencies: MISC_FILESYSTEMS [=y]
+      Reverse dependencies: ACPI_APEI [=y] && ACPI [=y] && HAVE_ACPI_APEI [=y]
+
+CRYPTO_LIB_BLAKE2S: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=y] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+
+I2C_PARPORT: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && PARPORT [=m]
+
+NET_DSA_VITESSE_VSC73XX_SPI: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && SPI [=y]
+
+IPMI_POWEROFF: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+
+RPMSG_WWAN_CTRL: m => yes
+      Direct dependencies: NETDEVICES [=y] && WWAN [=y] && RPMSG [=m]
+
+NET_DSA_TAG_OCELOT: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MSCC_FELIX [=n] && NETDEVICES [=y] && NET_DSA [=m] && PCI [=n] && NET_VENDOR_MICROSEMI [=n] && NET_VENDOR_FREESCALE [=n] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || NET_DSA_MSCC_SEVILLE [=n] && NETDEVICES [=y] && NET_DSA [=m] && NET_VENDOR_MICROSEMI [=n] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+
+NETFILTER_XT_TARGET_CT: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_CONNTRACK [=m] && (IP_NF_RAW [=m] || IP6_NF_RAW [=n]) && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: NETFILTER_XT_TARGET_NOTRACK [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_CONNTRACK [=m] && (IP_NF_RAW [=m] || IP6_NF_RAW [=n]) && NETFILTER_ADVANCED [=y]
+

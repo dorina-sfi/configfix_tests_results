@@ -1,0 +1,30 @@
+REGULATOR_QCOM_USB_VBUS: m => yes
+      Direct dependencies: REGULATOR [=y] && (SPMI [=m] || COMPILE_TEST [=n])
+
+MTRR: y => no
+      Direct dependencies: y
+
+DM_UNSTRIPED: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_LZO [=y] || PSTORE_LZO_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
+
+MODULE_COMPRESS_XZ: y => no
+      Direct dependencies: <choice>
+
+CRYPTO_BLAKE2B: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+COMEDI_ADV_PCI1710: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+CRYPTO_SM3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y]
+
+REGULATOR_QCOM_SPMI: m => yes
+      Direct dependencies: REGULATOR [=y] && (SPMI [=m] || COMPILE_TEST [=n])
+

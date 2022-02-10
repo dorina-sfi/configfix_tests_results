@@ -1,0 +1,26 @@
+EEPROM_LEGACY: m => yes
+      Direct dependencies: I2C [=m] && SYSFS [=y]
+
+I2C_OMAP: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_OMAP || ARCH_K3 [=y] || COMPILE_TEST [=y])
+
+HBMC_AM654: m => yes
+      Direct dependencies: MTD [=m] && MTD_HYPERBUS [=m] && (ARM64 [=y] || COMPILE_TEST [=y])
+
+CRYPTO_BLAKE2B: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+MODULE_SIG_KEY_TYPE_RSA: y => no
+      Direct dependencies: <choice>
+
+INPUT_PM8941_PWRKEY: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && MFD_SPMI_PMIC [=m]
+
+PRIME_NUMBERS: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=n] && DRM_I915 [=n]
+
+DRM_PARADE_PS8622: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+

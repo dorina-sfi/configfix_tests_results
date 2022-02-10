@@ -1,0 +1,36 @@
+USB_CHIPIDEA: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && ARCH_TEGRA [=n]
+
+GAMEPORT: y => mod
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y]
+
+REGULATOR_DA9062: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+
+HID_SENSOR_PRESS: m => yes
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+
+VIDEO_CS53L32A: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m]
+
+IPV6_TUNNEL: m => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+      Reverse dependencies: IPV6_VTI [=m] && NET [=y] && INET [=y] && IPV6 [=m] || IPV6_GRE [=m] && NET [=y] && INET [=y] && IPV6 [=m] && NET_IPGRE_DEMUX [=m] || IPV6_FOU_TUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=m]
+
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
+
+CRYPTO_GHASH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+
+PPP_BSDCOMP: m => yes
+      Direct dependencies: NETDEVICES [=y] && PPP [=m]
+
+IIO_CROS_EC_SENSORS_CORE: m => yes
+      Direct dependencies: IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=m]
+

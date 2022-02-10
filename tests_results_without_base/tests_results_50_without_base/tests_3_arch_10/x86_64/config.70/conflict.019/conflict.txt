@@ -1,0 +1,32 @@
+MULTIUSER: y => no
+      Direct dependencies: y
+
+IIO_INTERRUPT_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y]
+
+DM_LOG_USERSPACE: m => yes
+      Direct dependencies: MD [=y] && DM_MIRROR [=m] && NET [=y]
+
+CRYPTO_ESSIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: DM_CRYPT [=m] && MD [=y] && BLK_DEV_DM [=m] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n)
+
+NAU7802: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+CRYPTO_CCM: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=m] && NET [=y] && WIRELESS [=y] && CFG80211 [=m] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=n] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
+
+X86_PAT: y => no
+      Direct dependencies: MTRR [=y]
+
+PTP_1588_CLOCK_IDTCM: m => yes
+      Direct dependencies: PTP_1588_CLOCK [=m] && I2C [=y]
+
+MCP3422: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+PSTORE_LZ4HC_COMPRESS: m => yes
+      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
+

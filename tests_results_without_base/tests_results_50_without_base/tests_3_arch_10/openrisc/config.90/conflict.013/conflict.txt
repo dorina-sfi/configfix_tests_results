@@ -1,0 +1,34 @@
+SENSORS_SHT15: m => yes
+      Direct dependencies: HWMON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+EXTCON_ADC_JACK: m => yes
+      Direct dependencies: EXTCON [=m] && IIO [=y]
+
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+
+GPIO_LP3943: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_LP3943 [=m]
+
+SQUASHFS_FILE_CACHE: y => no
+      Direct dependencies: <choice>
+
+EXT4_FS_SECURITY: y => no
+      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
+      Reverse dependencies: EXT3_FS_SECURITY [=y] && BLOCK [=y] && EXT3_FS [=y]
+
+IIO_BUFFER_DMAENGINE: y => mod
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
+
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=y] && IIO [=y] && I2C [=y]
+
+SENSORS_DA9055: m => yes
+      Direct dependencies: HWMON [=m] && MFD_DA9055 [=y]
+
+BACKLIGHT_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+

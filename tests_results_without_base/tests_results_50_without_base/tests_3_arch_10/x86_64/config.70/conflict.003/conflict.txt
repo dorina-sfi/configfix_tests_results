@@ -1,0 +1,35 @@
+ZONE_DMA: y => no
+      Direct dependencies: y
+
+REGULATOR_FIXED_VOLTAGE: y => mod
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=n])
+
+CFG80211_USE_KERNEL_REGDB_KEYS: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m] && CFG80211_REQUIRE_SIGNED_REGDB [=y]
+
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+
+LEDS_MT6323: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_MT6397 [=m]
+
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+BMA400: m => yes
+      Direct dependencies: IIO [=m]
+
+SOFTLOCKUP_DETECTOR: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !S390
+      Reverse dependencies: HARDLOCKUP_DETECTOR_PERF [=y]
+
+KPROBES: y => no
+      Direct dependencies: MODULES [=y] && HAVE_KPROBES [=y]
+      Reverse dependencies: KGDB_HONOUR_BLOCKLIST [=y] && KGDB [=y] && HAVE_KPROBES [=y] && MODULES [=y]
+
+SPS30_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+

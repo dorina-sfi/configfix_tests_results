@@ -1,0 +1,17 @@
+PANEL: m => yes
+      Direct dependencies: PARPORT [=m]
+
+UNIX_DIAG: m => yes
+      Direct dependencies: NET [=y] && UNIX [=m]
+
+CPU_FREQ_GOV_USERSPACE: y => mod
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_USERSPACE [=y] && <choice>
+
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+
+MTD_AR7_PARTS: m => yes
+      Direct dependencies: MTD [=m]
+

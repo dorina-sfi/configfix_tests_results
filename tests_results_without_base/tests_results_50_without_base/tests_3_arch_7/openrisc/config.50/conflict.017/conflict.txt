@@ -1,0 +1,22 @@
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+ROMFS_BACKED_BY_BLOCK: y => no
+      Direct dependencies: <choice> && BLOCK [=y]
+
+MMC_HSQ: m => yes
+      Direct dependencies: MMC [=m]
+      Reverse dependencies: MMC_SDHCI_SPRD [=n] && MMC [=m] && (ARCH_SPRD || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n]
+
+MMC_BLOCK: m => yes
+      Direct dependencies: MMC [=m] && BLOCK [=y]
+
+LEDS_RT8515: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && GPIOLIB [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
+
+NVME_TARGET_FC: m => yes
+      Direct dependencies: NVME_TARGET [=m] && HAS_DMA [=y]
+
+SENSORS_SHTC1: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+

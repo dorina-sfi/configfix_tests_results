@@ -1,0 +1,34 @@
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
+
+USB_HCD_SSB: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && SSB [=y]
+      Reverse dependencies: USB_OHCI_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y])
+
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
+
+CONSOLE_TRANSLATIONS: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
+
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+
+CRYPTO_XXHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=n] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+
+CRYPTO: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || BLK_INLINE_ENCRYPTION_FALLBACK [=n] && BLOCK [=y] && BLK_INLINE_ENCRYPTION [=y] || BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || AF_RXRPC [=y] && NET [=y] && INET [=y] || CEPH_LIB [=n] && NET [=y] && INET [=y] || TLS [=n] && NET [=y] && INET [=y] || XFRM_ALGO [=y] && NET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || TIPC_CRYPTO [=y] && NET [=y] && TIPC [=y] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || XFRM_AH [=y] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || XFRM_IPCOMP [=y] && NET [=y] && INET [=y] || TCP_MD5SIG [=y] && NET [=y] && INET [=y] || MPTCP [=n] && NET [=y] && INET [=y] || IPV6_SEG6_HMAC [=y] && NET [=y] && INET [=y] && IPV6 [=y] || RXKAD [=n] && NET [=y] && AF_RXRPC [=y] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || NFC_S3FWRN5 [=n] && NET [=y] && NFC [=y] || USB4 [=n] && PCI [=y] || TEE [=y] && (HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] || CPU_SUP_AMD) || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=y] || NVME_TCP [=y] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=y] || DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || DM_VERITY [=n] && MD [=y] && BLK_DEV_DM [=y] || DM_INTEGRITY [=y] && MD [=y] && BLK_DEV_DM [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=y] || WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y]) || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || USB_RTL8152 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] || AIRO [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=y] && ISA_DMA_API && (PCI [=y] || BROKEN [=n]) || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=y] && PCMCIA [=y] || LIBIPW [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && PCI [=y] && CFG80211 [=y] || HOSTAP [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] || HERMES [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && (PPC_PMAC || PCI [=y] || PCMCIA [=y]) && CFG80211 [=y] || TCG_TPM [=y] && HAS_IOMEM [=y] || SND_SOC_CROS_EC_CODEC [=n] && SOUND [=y] && !UML && SND [=n] && SND_SOC [=n] && CROS_EC [=n] || RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=y] && PCI [=y] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || RTL8192U [=n] && STAGING [=y] && PCI [=y] && WLAN [=n] && USB [=y] && m && MODULES [=n] || RTL8723BS [=n] && STAGING [=y] && WLAN [=n] && MMC [=y] && CFG80211 [=y] && m && MODULES [=n] || KS7010 [=y] && STAGING [=y] && MMC [=y] && WIRELESS [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || RTLLIB_CRYPTO_TKIP [=n] && STAGING [=y] && RTLLIB [=n] || RTL8192E [=n] && STAGING [=y] && PCI [=y] && WLAN [=n] && RTLLIB [=n] && m && MODULES [=n] || FS_ENCRYPTION [=y] || FS_VERITY [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || F2FS_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ADVANCED_COMPR [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_LZO [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=n] || PSTORE [=y] && MISC_FILESYSTEMS [=y] && PSTORE_COMPRESS [=y] || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || TRUSTED_KEYS [=n] && KEYS [=y] && TCG_TPM [=y] || ENCRYPTED_KEYS [=y] && KEYS [=y] || KEY_DH_OPERATIONS [=n] && KEYS [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=y] && INTEGRITY [=y] || CRC_T10DIF [=y] || LIBCRC32C [=y] || SIGNATURE [=y] && KEYS [=y]
+

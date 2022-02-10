@@ -1,0 +1,21 @@
+FPGA_MGR_ALTERA_PS_SPI: m => yes
+      Direct dependencies: FPGA [=m] && SPI [=y]
+
+MFD_SUN6I_PRCM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=n] && COMMON_CLK [=y] && CLK_SUNXI [=y]
+
+HID_SMARTJOYPLUS: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=m] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=y] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
+
+RMI4_F55: y => no
+      Direct dependencies: INPUT [=m] && RMI4_CORE [=m]
+      Reverse dependencies: RMI4_F54 [=y] && INPUT [=m] && RMI4_CORE [=m] && (VIDEO_V4L2 [=y]=y || RMI4_CORE [=m]=m && VIDEO_V4L2 [=y]=m)
+
+RTC_DRV_CPCAP: m => yes
+      Direct dependencies: RTC_CLASS [=y] && MFD_CPCAP [=m]
+

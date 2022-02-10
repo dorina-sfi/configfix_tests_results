@@ -1,0 +1,31 @@
+VIRTIO_FS: m => yes
+      Direct dependencies: FUSE_FS [=m]
+
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=m] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=m] && IPMI_HANDLER [=m]
+
+DRM_PANEL_DSI_CM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+SENSORS_LTC2945: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+DRM_PANEL_RAYDIUM_RM68200: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+FB_TILEBLITTING: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+      Reverse dependencies: FB_MATROX [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_S3 [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_ARK [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+
+SERIO_LIBPS2: m => no
+      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=n]
+
+PREEMPT: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+MTD_RAM: m => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=m] && HAS_IOMEM [=y]
+

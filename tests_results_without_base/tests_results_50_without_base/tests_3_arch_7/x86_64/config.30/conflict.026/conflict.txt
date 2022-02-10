@@ -1,0 +1,25 @@
+TCG_TIS_I2C_CR50: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
+
+FAILOVER: m => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=m] && NETDEVICES [=y]
+
+SC_GCC_7180: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SC_CAMCC_7180 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_DISPCC_7180 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_GPUCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_LPASS_CORECC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_MSS_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_VIDEOCC_7180 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=y] && IOMMU_SUPPORT [=y] && (ARCH_APPLE || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 || ARM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 || QCOM_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_QCOM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+
+FONT_8x8: y => no
+      Direct dependencies: FONT_SUPPORT [=m] && (FRAMEBUFFER_CONSOLE [=y] || STI_CONSOLE [=n])
+
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+KVM_AMD: m => yes
+      Direct dependencies: VIRTUALIZATION [=y] && KVM [=m]
+

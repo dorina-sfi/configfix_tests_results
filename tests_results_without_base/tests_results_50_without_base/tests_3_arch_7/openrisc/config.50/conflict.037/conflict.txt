@@ -1,0 +1,23 @@
+INTEL_TH_MSU: m => yes
+      Direct dependencies: INTEL_TH [=m]
+
+SENSORS_MAX1619: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+
+DRM_VGEM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n]
+
+LEDS_LP55XX_COMMON: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y]
+
+SENSORS_W83627HF: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
+
+COMMON_CLK_RK808: m => yes
+      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
+

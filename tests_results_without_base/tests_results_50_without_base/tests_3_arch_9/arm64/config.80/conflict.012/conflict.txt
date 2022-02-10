@@ -1,0 +1,29 @@
+LEDS_MAX8997: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_MAX8997 [=y]
+
+RELOCATABLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: RANDOMIZE_BASE [=y]
+
+REGULATOR_BD71828: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD71828 [=m]
+
+SENSORS_ADM1266: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m] && GPIOLIB [=y]
+
+DA9062_WATCHDOG: m => yes
+      Direct dependencies: WATCHDOG [=y] && (MFD_DA9062 [=m] || COMPILE_TEST [=n]) && I2C [=y]
+
+USB_MUSB_GADGET: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=y]) && HAS_DMA [=y]
+
+COMMON_CLK_MT6779_IPESYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK_MT6779 [=m]
+
+TEE_BNXT_FW: m => yes
+      Direct dependencies: ARCH_BCM_IPROC [=y] && OPTEE [=m] || COMPILE_TEST [=n] && TEE [=m]
+
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+

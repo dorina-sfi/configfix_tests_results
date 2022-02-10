@@ -1,0 +1,22 @@
+RC_CORE: m => yes
+      Direct dependencies: INPUT [=m]
+
+REGULATOR_MPQ7920: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
+
+KEYBOARD_MPR121: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && I2C [=m]
+
+VEML6070: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
+
+MTD_NAND_OMAP2: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_OMAP2PLUS || ARCH_KEYSTONE || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+MEDIATEK_MT6360_ADC: m => yes
+      Direct dependencies: IIO [=y] && MFD_MT6360 [=m]
+
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+

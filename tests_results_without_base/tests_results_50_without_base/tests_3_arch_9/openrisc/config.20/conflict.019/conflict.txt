@@ -1,0 +1,30 @@
+STM_DUMMY: m => yes
+      Direct dependencies: STM [=m]
+
+SND_USB_UA101: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_USB [=y] && USB [=m]
+
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+CRYPTO_LIB_CHACHA: y => mod
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+
+OF_FPGA_REGION: m => yes
+      Direct dependencies: FPGA [=m] && OF [=y] && FPGA_REGION [=m]
+
+BACKLIGHT_LM3630A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y] && PWM [=y]
+
+FPGA_MGR_ZYNQ_FPGA: m => yes
+      Direct dependencies: FPGA [=m] && (ARCH_ZYNQ || COMPILE_TEST [=y])
+
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+
+MTD_RAM: y => mod
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
+

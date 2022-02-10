@@ -1,0 +1,34 @@
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: TARGET_CORE [=m] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=y] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=y]
+
+OPENRISC_HAVE_SHADOW_GPRS: y => no
+      Direct dependencies: y
+
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+
+DM_LOG_WRITES: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+REGULATOR_BD957XMUF: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD957XMUF [=m]
+
+VIDEO_UDA1342: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+LIBFC: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_FC_ATTRS [=m]
+
+NETFILTER_XT_TARGET_NFLOG: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m]
+
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
+
+EXT4_FS: m => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: EXT3_FS [=m] && BLOCK [=y]
+

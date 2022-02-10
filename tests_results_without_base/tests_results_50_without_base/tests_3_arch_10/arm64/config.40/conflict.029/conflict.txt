@@ -1,0 +1,34 @@
+HD44780_COMMON: m => yes
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=m] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
+
+GREYBUS_LOOPBACK: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m]
+
+VFIO_AMBA: m => yes
+      Direct dependencies: VFIO [=m] && VFIO_PLATFORM [=m] && (ARM_AMBA [=y] || COMPILE_TEST [=n])
+
+NETFILTER_XT_MARK: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y]
+      Reverse dependencies: NETFILTER_XT_TARGET_MARK [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] || NETFILTER_XT_MATCH_MARK [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
+
+DRM_PANEL_SAMSUNG_S6E63M0_DSI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && DRM_MIPI_DSI [=y] && DRM_PANEL_SAMSUNG_S6E63M0 [=m]
+
+KUNIT_EXAMPLE_TEST: m => yes
+      Direct dependencies: KUNIT [=m]
+
+MTD_AFS_PARTS: m => yes
+      Direct dependencies: MTD [=m] && (ARM || ARM64 [=y])
+
+MTD_NAND_MXIC: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=n])
+
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+
+DNS_RESOLVER: y => mod
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=n] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
+

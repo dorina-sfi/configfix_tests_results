@@ -1,0 +1,28 @@
+IR_JVC_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+
+SENSORS_ISL29018: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+DRM_MALI_DISPLAY: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+
+DRM_PANEL_NOVATEK_NT35510: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+IIO_ST_ACCEL_3AXIS: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
+
+FXLS8962AF_SPI: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y] && (I2C [=y] || !I2C [=y])
+
+BATTERY_BQ27XXX_I2C: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
+
+VIDEO_AD5820: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+LTO_NONE: y => no
+      Direct dependencies: <choice>
+

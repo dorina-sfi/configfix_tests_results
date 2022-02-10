@@ -1,0 +1,23 @@
+SND_USB_POD: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_USB [=y] && USB [=y]
+
+USB_HID: m => yes
+      Direct dependencies: USB [=y] && INPUT [=m]
+
+HID_GT683R: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=y] && USB_HID [=m]
+
+GPIO_RASPBERRYPI_EXP: m => yes
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && OF_GPIO [=y] && (ARCH_BCM2835 [=y] && RASPBERRYPI_FIRMWARE [=m] || COMPILE_TEST [=y] && !RASPBERRYPI_FIRMWARE [=m])
+
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+
+W1_SLAVE_DS2780: m => yes
+      Direct dependencies: W1 [=m]
+      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+HZ_100: y => no
+      Direct dependencies: <choice>
+

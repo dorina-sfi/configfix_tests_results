@@ -1,0 +1,19 @@
+SLUB_KUNIT_TEST: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && SLUB_DEBUG [=y] && KUNIT [=m]
+
+DEBUG_FS_DISALLOW_MOUNT: y => no
+      Direct dependencies: <choice>
+
+NETDEV_ADDR_LIST_TEST: m => yes
+      Direct dependencies: NET [=y] && KUNIT [=m]
+
+CHARLCD: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=n] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
+
+SND_SOC_PCM3060_SPI: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+
+BT_HCIVHCI: m => yes
+      Direct dependencies: NET [=y] && BT [=m]
+

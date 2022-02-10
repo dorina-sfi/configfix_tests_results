@@ -1,0 +1,33 @@
+SENSORS_LM78: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+XILLYBUS_OF: m => yes
+      Direct dependencies: XILLYBUS [=m] && OF [=y] && HAS_DMA [=y]
+
+EINT_MTK: y => mod
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=n] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_MTK [=n] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
+
+NET_DSA_QCA8K: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+
+CEPH_LIB: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+
+NET_DSA_SMSC_LAN9303_I2C: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && I2C [=y]
+
+SPMI_MSM_PMIC_ARB: m => yes
+      Direct dependencies: SPMI [=m] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
+
+MTD_UBI_GLUEBI: m => yes
+      Direct dependencies: MTD [=m] && MTD_UBI [=m]
+
+IP_SET_HASH_NET: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_SET [=m]
+

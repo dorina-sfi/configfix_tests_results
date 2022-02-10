@@ -1,0 +1,20 @@
+LEDS_CPCAP: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_CPCAP [=m] && OF [=y]
+
+HID_MULTITOUCH: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+RTC_DRV_MT6397: m => yes
+      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
+
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
+
+LINEDISP: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=m]
+
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
+

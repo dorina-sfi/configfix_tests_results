@@ -1,0 +1,23 @@
+COMMON_CLK_RK808: m => yes
+      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
+
+SENSORS_LM77: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+DAX: y => mod
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=n] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+
+HID_LCPOWER: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
+
+SND_SEQ_DUMMY: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SEQUENCER [=m]
+
+MOUSE_SYNAPTICS_USB: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
+

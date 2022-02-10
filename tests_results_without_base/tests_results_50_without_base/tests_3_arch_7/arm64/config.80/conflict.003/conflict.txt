@@ -1,0 +1,23 @@
+INET6_AH: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+
+I2C_VERSATILE: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_MPS2 || ARCH_VERSATILE || ARCH_REALVIEW || ARCH_VEXPRESS [=y] || COMPILE_TEST [=y])
+
+IR_FINTEK: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (PNP [=y] || COMPILE_TEST [=y])
+
+GAMEPORT_NS558: m => yes
+      Direct dependencies: GAMEPORT [=m]
+
+ROMFS_BACKED_BY_MTD: y => no
+      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=m]=m && MTD [=y])
+
+BT_HCIUART_3WIRE: y => no
+      Direct dependencies: NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y]
+      Reverse dependencies: BT_HCIUART_RTL [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && (ACPI [=y] || SERIAL_DEV_CTRL_TTYPORT [=n])
+
+W1_SLAVE_DS2781: y => mod
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+

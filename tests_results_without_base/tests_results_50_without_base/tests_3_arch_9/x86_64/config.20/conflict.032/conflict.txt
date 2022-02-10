@@ -1,0 +1,30 @@
+EARLY_PRINTK: y => no
+      Direct dependencies: y
+
+IPMI_POWEROFF: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+
+REGULATOR_DA9062: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+
+UIO_SERCOS3: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
+
+BLK_DEV_DM: m => yes
+      Direct dependencies: MD [=y] && (DAX [=m] || DAX [=m]=n)
+
+CRYPTO_DRBG_MENU: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+
+CRYPTO_SERPENT: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+INT3406_THERMAL: m => yes
+      Direct dependencies: THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && INT340X_THERMAL [=m] && ACPI_VIDEO [=y]
+
+AUTOFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
+

@@ -1,0 +1,18 @@
+DM_UNSTRIPED: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+SERIAL_8250_SHARE_IRQ: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_EXTENDED [=y]
+      Reverse dependencies: SERIAL_8250_IOC3 [=m] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
+
+CRYPTO_SM3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+
+EDAC_DMC520: m => yes
+      Direct dependencies: EDAC [=m] && ARM64 [=y]
+
+REGULATOR_FIXED_VOLTAGE: y => mod
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
+

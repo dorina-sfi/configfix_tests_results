@@ -1,0 +1,22 @@
+REGULATOR_88PM800: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_88PM800 [=m]
+
+BRCM_USB_PINMAP: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=y])
+
+SENSORS_LTC4261: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+KEYSTONE_USB_PHY: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+
+I2C_MUX_PCA954x: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+
+THERMAL_DEFAULT_GOV_USER_SPACE: y => no
+      Direct dependencies: <choice>
+
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=n] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=m] && USB_SUPPORT [=y] && (USB [=m] || USB_GADGET [=m]) && HAS_DMA [=y] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=m] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=m] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=m] || USB_GADGET [=m]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=m] || USB_EHCI_HCD [=n] && !USB_GADGET [=m] || !USB_EHCI_HCD [=n] && USB_GADGET [=m]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=m]=y || USB [=m]=USB_MTU3 [=m]) && (USB_GADGET [=m]=y || USB_GADGET [=m]=USB_MTU3 [=m]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=m]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=n] && OF [=y] && (MIPS || COMPILE_TEST [=y]) && USB_MUSB_GADGET [=n] && (USB [=m]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=n] && OF [=y] && COMMON_CLK [=n] && (ARCH_MESON || COMPILE_TEST [=y]) || USB_RENESAS_USB3 [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_RENESAS || COMPILE_TEST [=y]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=m] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=n] && ACPI && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=n] && USB_SUPPORT [=y] && X86 && ACPI && IOSF_MBI
+

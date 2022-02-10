@@ -1,0 +1,33 @@
+MTD_RAW_NAND: m => yes
+      Direct dependencies: MTD [=m]
+
+MTD_ROM: m => yes
+      Direct dependencies: MTD [=m]
+
+HZ_1000: y => no
+      Direct dependencies: <choice>
+
+CAN_VXCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
+
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
+
+CRYPTO_CRYPTD: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+PM_DEVFREQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=n] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
+
+CAN_ISOTP: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
+
+NET_9P_VIRTIO: m => yes
+      Direct dependencies: NET [=y] && NET_9P [=y] && VIRTIO [=m]
+

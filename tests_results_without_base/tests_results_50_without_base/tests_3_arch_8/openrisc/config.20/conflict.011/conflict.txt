@@ -1,0 +1,26 @@
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
+
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
+
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
+
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
+
+FILE_LOCKING: y => no
+      Direct dependencies: y
+
+SYSCTL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=y] && FTRACE [=y]
+

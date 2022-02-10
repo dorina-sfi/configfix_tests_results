@@ -1,0 +1,26 @@
+FSI_MASTER_ASPEED: m => yes
+      Direct dependencies: FSI [=m] && HAS_IOMEM [=y]
+
+SM_FTL: m => yes
+      Direct dependencies: MTD [=m] && BLOCK [=y]
+
+MTD_NAND_INTEL_LGM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+BASE_FULL: y => no
+      Direct dependencies: y
+
+YAM: m => yes
+      Direct dependencies: NET [=y] && HAMRADIO [=y] && AX25 [=m] && !S390
+
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=m] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
+
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+MTD_ROM: m => yes
+      Direct dependencies: MTD [=m]
+

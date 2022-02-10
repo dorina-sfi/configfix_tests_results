@@ -1,0 +1,17 @@
+IR_GPIO_TX: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && LIRC [=y] && (OF [=y] && GPIOLIB [=y] || COMPILE_TEST [=y])
+
+SPI_ALTERA_CORE: y => mod
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ALTERA [=y] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
+
+MMC_TEST: m => yes
+      Direct dependencies: MMC [=m]
+
+HID_WIIMOTE: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=y]
+
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+

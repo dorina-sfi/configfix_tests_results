@@ -1,0 +1,17 @@
+SENSORS_TC74: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
+
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+REGULATOR_AD5398: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
+
+SENSORS_APDS990X: m => yes
+      Direct dependencies: I2C [=m]
+
+IIO_STM32_TIMER_TRIGGER: m => no
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=m] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=m] && IIO [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+

@@ -1,0 +1,33 @@
+BRANCH_PROFILE_NONE: y => no
+      Direct dependencies: <choice>
+
+NET_DSA_TAG_GSWIP: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_LANTIQ_GSWIP [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y]
+
+VFIO_PLATFORM: m => yes
+      Direct dependencies: VFIO [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=n])
+
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
+
+CPU_FREQ_DEFAULT_GOV_ONDEMAND: y => no
+      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y])
+
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
+
+INPUT_AD714X_SPI: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && INPUT_AD714X [=m] && SPI [=y]
+
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
+
+TI_SCI_PROTOCOL: y => no
+      Direct dependencies: TI_MESSAGE_MANAGER [=y]
+      Reverse dependencies: ARCH_K3 [=y]
+
+IEEE802154_MRF24J40: m => yes
+      Direct dependencies: NETDEVICES [=y] && IEEE802154_DRIVERS [=m] && MAC802154 [=y] && SPI [=y]
+

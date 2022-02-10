@@ -1,0 +1,26 @@
+MTD_DATAFLASH: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+
+HD44780_COMMON: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=m] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=n] && AUXDISPLAY [=y] && PARPORT [=n]
+
+FB_OMAP2_PANEL_DPI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m]
+
+TIPC_DIAG: m => yes
+      Direct dependencies: NET [=y] && TIPC [=m]
+
+BLK_DEV_INTEGRITY: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=y]) && ATA [=y] || DM_INTEGRITY [=n] && MD [=y] && BLK_DEV_DM [=m] || TCM_IBLOCK [=m] && TARGET_CORE [=m]
+
+IR_SANYO_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+
+MTD_NAND_GPIO: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+

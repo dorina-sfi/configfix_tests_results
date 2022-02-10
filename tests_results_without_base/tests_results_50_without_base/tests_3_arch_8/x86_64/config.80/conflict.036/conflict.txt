@@ -1,0 +1,26 @@
+MMC_DAVINCI: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_DAVINCI || COMPILE_TEST [=y])
+
+HID_CMEDIA: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
+
+FPGA_DFL_FME_REGION: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
+
+HID_CMEDIA: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
+
+SND_SOC_ADAU1372_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+SND_SOC_ADAU7118_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+CRYPTO_842: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+

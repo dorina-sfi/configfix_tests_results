@@ -1,0 +1,16 @@
+POSIX_TIMERS: y => no
+      Direct dependencies: y
+
+DAMON_KUNIT_TEST: y => no
+      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
+
+LTO_NONE: y => no
+      Direct dependencies: <choice>
+
+CPU_FREQ_GOV_PERFORMANCE: y => mod
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=y] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=n] && CPU_FREQ [=y] && X86 [=y]
+
+RUST_OPT_LEVEL_1: y => no
+      Direct dependencies: <choice>
+

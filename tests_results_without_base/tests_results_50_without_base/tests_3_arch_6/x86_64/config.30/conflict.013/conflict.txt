@@ -1,0 +1,20 @@
+TOUCHSCREEN_MC13783: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && MFD_MC13XXX [=m]
+
+TOUCHSCREEN_AD7879_I2C: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_AD7879 [=m] && I2C [=m]
+
+GPIO_ADP5588: m => yes
+      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+
+CRYPTO_TWOFISH_X86_64_3WAY: m => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=n] && INET [=n] && (m && MODULES [=y] || IPV6 [=n]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && NET [=n] || CXLFLASH [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] || SCSI_MPT3SAS [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && ATA [=n] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n)
+
+SENSORS_MAX8688: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+

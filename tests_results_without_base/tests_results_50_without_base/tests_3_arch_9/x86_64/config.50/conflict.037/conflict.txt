@@ -1,0 +1,33 @@
+MTD_JEDECPROBE: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_TS5500 [=m] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=y])
+
+CHARGER_PCF50633: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_PCF50633 [=m]
+
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+
+TYPEC_HD3SS3220: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && I2C [=y] && USB_ROLE_SWITCH [=y]
+
+TYPEC_MUX_INTEL_PMC: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && ACPI [=y] && INTEL_SCU_IPC [=y]
+
+CRYPTO_ZSTD: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+
+CRYPTO_CRYPTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+SERIAL_8250: y => mod
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
+      Reverse dependencies: MWAVE [=y] && X86 [=y] && TTY [=y]
+

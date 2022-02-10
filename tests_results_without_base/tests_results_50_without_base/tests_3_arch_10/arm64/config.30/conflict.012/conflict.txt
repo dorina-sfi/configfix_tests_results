@@ -1,0 +1,37 @@
+MHI_WWAN_MBIM: m => yes
+      Direct dependencies: NETDEVICES [=y] && WWAN [=m] && MHI_BUS [=m]
+
+NET_DSA_TAG_MTK: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MT7530 [=m] && NETDEVICES [=y] && NET_DSA [=m]
+
+USB_NET_CDC_NCM: y => no
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
+      Reverse dependencies: USB_NET_HUAWEI_CDC_NCM [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_CDC_MBIM [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
+
+USB_DSBR: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && USB [=y] && VIDEO_V4L2 [=m]
+
+VIDEO_M52790: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m]
+
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
+
+HID_CP2112: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && HIDRAW [=y] && I2C [=y] && GPIOLIB [=y]
+
+MDIO_BCM_UNIMAC: m => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y]
+
+DEBUG_RWSEMS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
+

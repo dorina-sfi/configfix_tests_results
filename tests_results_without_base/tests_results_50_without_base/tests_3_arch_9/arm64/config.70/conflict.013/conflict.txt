@@ -1,0 +1,32 @@
+DRM_PARADE_PS8640: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_ISCSI_ATTRS [=n] && SCSI [=m] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=m] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && SCSI_UFSHCD [=n]
+
+CRYPTO_CRC32C: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+
+CHARLCD_BL_FLASH: y => no
+      Direct dependencies: <choice>
+
+GPIO_MADERA: m => yes
+      Direct dependencies: GPIOLIB [=y] && PINCTRL_MADERA [=m]
+
+FB_PM3: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+
+BCMA_DRIVER_PCI: y => no
+      Direct dependencies: BCMA [=m] && PCI [=y]
+      Reverse dependencies: BCMA_HOST_PCI [=y] && BCMA [=m] && BCMA_HOST_PCI_POSSIBLE [=y]
+
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y]
+

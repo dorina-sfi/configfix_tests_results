@@ -1,0 +1,17 @@
+CDNS_I3C_MASTER: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
+
+MTD_ONENAND_GENERIC: m => yes
+      Direct dependencies: MTD [=m] && MTD_ONENAND [=m]
+
+SPI_MEM: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MTD_SPI_NOR [=n] && MTD [=m] && SPI_MASTER [=y] || MTD_SPI_NAND [=m] && MTD [=m] && SPI_MASTER [=y]
+
+ACPI_DEBUG: y => no
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_DEBUGGER [=y] && ACPI [=y]
+
+SPI_ALTERA_DFL: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=m]
+

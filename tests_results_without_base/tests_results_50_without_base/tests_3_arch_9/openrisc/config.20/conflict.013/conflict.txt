@@ -1,0 +1,29 @@
+BACKLIGHT_TPS65217: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_TPS65217 [=m]
+
+USB_STORAGE_FREECOM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_STORAGE [=m]
+
+OR1K_1200: y => no
+      Direct dependencies: <choice>
+
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+STM_PROTO_SYS_T: m => yes
+      Direct dependencies: STM [=m]
+
+USB_PRINTER: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
+
+USB_MUSB_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=m]=y || USB [=m]=USB_MUSB_HDRC [=m]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=m]) && HAS_DMA [=y]
+
+HD44780_COMMON: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=y]
+

@@ -1,0 +1,26 @@
+FPGA_DFL_FME_MGR: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
+
+SENSORS_LTC2978: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+RMI4_CORE: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+SND_SOC_TAS571X: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+SND_SEQUENCER: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m]
+
+MTD_UBI: m => yes
+      Direct dependencies: MTD [=m]
+
+STRICT_MODULE_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+

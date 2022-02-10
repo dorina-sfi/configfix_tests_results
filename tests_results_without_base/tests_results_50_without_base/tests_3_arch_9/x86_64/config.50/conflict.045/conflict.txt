@@ -1,0 +1,32 @@
+OMAP_CONTROL_PHY: y => mod
+      Direct dependencies: ARCH_OMAP2PLUS || COMPILE_TEST [=y]
+      Reverse dependencies: OMAP_USB2 [=n] && (ARCH_OMAP2PLUS || ARCH_K3) && USB_SUPPORT [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) || TI_PIPE3 [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y])
+
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=y] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+
+MTD_SBC_GXX: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && X86 [=y] && MTD_CFI_INTELEXT [=m] && MTD_COMPLEX_MAPPINGS [=y]
+
+RAPIDIO_CPS_XX: m => yes
+      Direct dependencies: RAPIDIO [=m]
+
+KEYBOARD_GPIO_POLLED: m => no
+      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y]
+      Reverse dependencies: PCENGINES_APU2 [=m] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
+
+ACPI_TOSHIBA: m => yes
+      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_WMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (SERIO_I8042 [=m] || SERIO_I8042 [=m]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && (RFKILL [=n] || RFKILL [=n]=n) && IIO [=y]
+
+USB_CHIPIDEA: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=m] || USB_EHCI_HCD [=y] && !USB_GADGET [=m] || !USB_EHCI_HCD [=y] && USB_GADGET [=m]) && HAS_DMA [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && ARCH_TEGRA
+
+USB_G_DBGP_PRINTK: y => no
+      Direct dependencies: <choice> && USB_G_DBGP [=m]
+
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
+

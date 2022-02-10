@@ -1,0 +1,27 @@
+CHARGER_SBS: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+
+EEPROM_LEGACY: m => yes
+      Direct dependencies: I2C [=m] && SYSFS [=y]
+
+CRYPTO_DH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n]
+
+W1_SLAVE_DS28E17: m => yes
+      Direct dependencies: W1 [=y] && I2C [=m]
+
+FB_SIMPLE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y] && !DRM_SIMPLEDRM [=m]
+
+TEGRA_BPMP: y => no
+      Direct dependencies: ARCH_TEGRA [=y] && TEGRA_HSP_MBOX [=y] && TEGRA_IVC [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
+
+BLOCK: y => no
+      Direct dependencies: y
+
+MXC_CLK: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=m] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8MN [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8MP [=m] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8MQ [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8ULP [=m] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
+

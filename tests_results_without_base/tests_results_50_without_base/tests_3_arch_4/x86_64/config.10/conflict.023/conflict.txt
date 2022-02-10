@@ -1,0 +1,13 @@
+USB_EHCI_HCD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && HAS_DMA [=y] && HAS_IOMEM [=y]
+
+MMC_SDHI_SYS_DMAC: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHI [=m]
+
+HW_RANDOM_NOMADIK: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_NOMADIK || COMPILE_TEST [=y])
+
+USB_FUNCTIONFS_GENERIC: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && USB_FUNCTIONFS [=m]
+      Reverse dependencies: USB_FUNCTIONFS [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] && !USB_FUNCTIONFS_ETH [=n] && !USB_FUNCTIONFS_RNDIS [=n]
+

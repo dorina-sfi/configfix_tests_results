@@ -1,0 +1,27 @@
+MTD_PHYSMAP: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (MTD_CFI [=m] || MTD_JEDECPROBE [=n] || MTD_ROM [=m] || MTD_RAM [=m] || MTD_LPDDR [=m])
+
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: X86_5LEVEL [=y] && X86_64 [=y]
+
+NFC_FDP: m => yes
+      Direct dependencies: NET [=y] && NFC [=y] && NFC_NCI [=m]
+
+DEBUG_MEMORY_INIT: y => no
+      Direct dependencies: y
+
+I2C_FSI: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && FSI [=m]
+
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+
+DM_MULTIPATH_ST: m => yes
+      Direct dependencies: MD [=y] && DM_MULTIPATH [=m]
+

@@ -1,0 +1,26 @@
+MD_FAULTY: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
+
+BASE_FULL: y => no
+      Direct dependencies: y
+
+PSTORE_RAM: m => yes
+      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m] && HAS_IOMEM [=y]
+
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=n] && MAILBOX [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+
+SPRD_SC9860_CLK: m => yes
+      Direct dependencies: COMMON_CLK [=y] && SPRD_COMMON_CLK [=m] && (ARM64 && ARCH_SPRD || COMPILE_TEST [=y])
+
+DM_SWITCH: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+
+CRYPTO_LIB_CHACHA: m => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+
+MTD_NAND_SUNXI: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_SUNXI || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
