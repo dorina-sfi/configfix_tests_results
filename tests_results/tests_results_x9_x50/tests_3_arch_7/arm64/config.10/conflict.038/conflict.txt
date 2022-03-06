@@ -1,27 +1,23 @@
-SND_HDA_RECONFIG: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
-      Reverse dependencies: SND_HDA_PATCH_LOADER [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
+CRYPTO_SHA256: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_SHA224 [=n] && <choice> || MODULE_SIG_SHA256 [=n] && <choice> || BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_AH [=y] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || IPV6_SEG6_HMAC [=y] && NET [=y] && INET [=y] && IPV6 [=m] || CFG80211 [=n] && NET [=y] && WIRELESS [=n] && (RFKILL [=n] || !RFKILL [=n]) && CFG80211_USE_KERNEL_REGDB_KEYS [=n] || USB_RTL8152 [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=m] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n] || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_SHA256_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT [=y] || CRYPTO_SHA256_PPC_SPE [=n] && CRYPTO [=y] && PPC && SPE || CRYPTO_SHA256_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA256_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DRBG_HASH [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=y] || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-DEVFREQ_GOV_PASSIVE: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 
-RMI4_F30: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+MMC_OMAP_HS: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_OMAP2PLUS || ARCH_KEYSTONE || COMPILE_TEST [=y])
 
-TOUCHSCREEN_USB_GOTOP: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
-
-RMI4_F12: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
-
-SPARSEMEM_VMEMMAP: y => no
-      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
-      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
-
-KCMP: y => no
+I2C: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_SJA1000 [=m] && CAN_PEAK_PCI [=m] || I3C [=n] || IGB [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=y] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=m] && HAS_IOMEM [=y] && FB [=m] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=m] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=m] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+
+MISDN_HFCMULTI: m => yes
+      Direct dependencies: ISDN [=y] && (PCI [=y] || CPM1) && MISDN [=m]
+
+USB_DWC2_PCI: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_DWC2 [=m] && USB_PCI [=y] && (USB_GADGET [=m] || !USB_GADGET [=m])
+
+COMEDI_ADDI_APCI_1516: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 

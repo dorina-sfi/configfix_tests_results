@@ -1,12 +1,13 @@
-REGULATOR_RN5T618: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_RN5T618 [=m]
+USB_ZERO: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
 
-CMDLINE_KUNIT_TEST: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+USB_MUSB_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
 
-MFD_MAX77650: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
+VIDEO_MEDIATEK_VPU: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: VIDEO_MEDIATEK_MDP [=m] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && (MTK_IOMMU [=y] || COMPILE_TEST [=n]) && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (MTK_SMI [=y] || COMPILE_TEST [=n] && MTK_SMI [=y]=n)
 
-CHARGER_CROS_USBPD: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && CROS_USBPD_NOTIFY [=m]
+CORESIGHT_LINK_AND_SINK_TMC: m => yes
+      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINKS_AND_SINKS [=m]
 

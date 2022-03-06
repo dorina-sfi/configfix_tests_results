@@ -1,31 +1,32 @@
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=y] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+VIDEO_OV5647: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+VIDEO_BT856: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-DM_MULTIPATH_IOA: m => yes
-      Direct dependencies: MD [=y] && DM_MULTIPATH [=m]
+USB_HUB_USB251XB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && I2C [=y]
 
-LEDS_AS3645A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
+SENSORS_ASB100: m => yes
+      Direct dependencies: HWMON [=m] && X86 [=y] && I2C [=y]
 
-COMEDI_ICP_MULTI: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
-
-SCSI_SAS_LIBSAS: y => mod
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_AIC94XX [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] || SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=n]) && ATA [=n] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && X86 [=y] || SCSI_PM8001 [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y]
-
-MTD_CFI_BE_BYTE_SWAP: y => no
-      Direct dependencies: <choice>
-      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM && CPU_BIG_ENDIAN
-
-HPET_TIMER: y => no
+CRC4: m => no
       Direct dependencies: y
+      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=m] && GPIOLIB [=y]
 
-COMEDI_ADV_PCI_DIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+SENSORS_IBMAEM: m => yes
+      Direct dependencies: HWMON [=m] && IPMI_HANDLER [=y]
+
+BACKLIGHT_CLASS_DEVICE: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 [=y] && MMU [=y] && ACPI [=n] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=y] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=n]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=m] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ILI9163 [=y] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ILI9486 [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_MI0283QT [=y] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ST7735R [=m] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || DRM_GUD [=n] && HAS_IOMEM [=y] && DRM [=y] && USB [=m] && MMU [=y] || DRM_PARADE_PS8622 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || FB_BACKLIGHT [=n] && HAS_IOMEM [=y] && FB [=n] || FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=n] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=n] && MX3_IPU [=n] || USB_APPLEDISPLAY [=m] && USB_SUPPORT [=y] && USB [=m] || FB_OLPC_DCON [=n] && STAGING [=y] && OLPC [=n] && FB [=n] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=n] || SAMSUNG_Q10 [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] || ACPI_CMPC [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n)
+
+CRYPTO_SM3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+
+LIBCRC32C: m => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=n] && NET [=n] || OPENVSWITCH [=n] && NET [=n] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=n] && INET [=n] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=n] && INET [=n] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=n] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=n] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=n] && BLOCK [=y] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=n] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n]
 

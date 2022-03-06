@@ -1,13 +1,16 @@
-LEDS_AW2013: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m] && OF [=y]
+VIDEO_OV7640: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_CAMERA_SUPPORT [=y]
 
-I2C_CBUS_GPIO: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+MDIO_SUN4I: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: SUN4I_EMAC [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_ALLWINNER [=y] && ARCH_SUNXI [=y] && OF [=y]
 
-CFG80211_REQUIRE_SIGNED_REGDB: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m]
+PROC_CHILDREN: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-USB_ULPI: y => no
-      Direct dependencies: USB_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: USB_TEGRA_PHY [=y] && USB_SUPPORT [=y] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y])
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

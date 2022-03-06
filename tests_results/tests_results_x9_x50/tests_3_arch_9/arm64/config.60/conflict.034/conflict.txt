@@ -1,35 +1,31 @@
-CRYPTO_CRCT10DIF: y => no
+SND_SOC_SPRD: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_SPRD [=y] || COMPILE_TEST [=n])
+
+MEDIA_TUNER_MXL5007T: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_AU0828 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && I2C [=y] && INPUT [=m] && DVB_CORE [=n] && USB [=n] && VIDEO_V4L2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_AF9015 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_AF9035 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+SND_SOC_PCM186X_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+LEDS_KTD2692: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && OF [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+PINCTRL_AS3722: m => yes
+      Direct dependencies: PINCTRL [=y] && MFD_AS3722 [=m] && GPIOLIB [=y]
+
+IP_SCTP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n)
+      Reverse dependencies: DLM [=n] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y] && (IPV6 [=m] || IPV6 [=m]=n)
+
+VIDEO_TLV320AIC23B: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+
+HID: m => yes
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=m] || I2C_HID_CORE [=m] && INPUT [=m] || SURFACE_HID_CORE [=n] && INPUT [=m] || USB_HID [=n] && USB [=n] && INPUT [=m] || INTEL_ISH_HID [=n] && INPUT [=m] && (X86_64 || COMPILE_TEST [=n]) && PCI [=y] && X86
+
+CRYPTO_ECDH: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
-
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
-
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
-
-MSM_GCC_8996: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_MMCC_8996 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-CRYPTO_CRC32: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
-
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
-
-PREEMPT: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
-
-DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
-
-CRC_T10DIF: y => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 

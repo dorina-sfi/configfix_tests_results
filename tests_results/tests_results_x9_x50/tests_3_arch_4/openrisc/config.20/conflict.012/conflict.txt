@@ -1,12 +1,15 @@
-LTR501: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+RMI4_F55: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: RMI4_F54 [=y] && INPUT [=y] && RMI4_CORE [=y] && (VIDEO_V4L2 [=y]=y || RMI4_CORE [=y]=m && VIDEO_V4L2 [=y]=m)
 
-SCD30_I2C: m => yes
-      Direct dependencies: IIO [=y] && SCD30_CORE [=m] && I2C [=m]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=n] || SLUB [=n]) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=y] && FAULT_INJECTION_DEBUG_FS [=y] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-REGULATOR_TPS6507X: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+USB_MTU3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=y])
 
-SERIAL_SC16IS7XX: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && (SPI_MASTER [=y] && !I2C [=m] || I2C [=m])
+MEDIA_TUNER_TEA5761: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 

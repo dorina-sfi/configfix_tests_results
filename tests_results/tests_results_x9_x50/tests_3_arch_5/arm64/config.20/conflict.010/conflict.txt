@@ -1,17 +1,20 @@
-DRM_VKMS: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
 
-CMA: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=m] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
+FB_MODE_HELPERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) || FB_UVESA [=y] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=y] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=n] && STAGING [=y] && FB [=y] && PCI [=n]
 
-MMC_SDHCI_PXAV2: m => yes
-      Direct dependencies: MMC [=m] && HAVE_CLK [=y] && MMC_SDHCI_PLTFM [=m] && (ARCH_MMP || COMPILE_TEST [=y])
+NET_NSH: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-AS73211: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=y] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
 
-SYNTH_EVENTS: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
+SOC_BRCMSTB: y => no
+      Direct dependencies: ARM || ARM64 [=y] || BMIPS_GENERIC || COMPILE_TEST [=n]
+      Reverse dependencies: PHY_BRCM_USB [=y] && (ARCH_BCM4908 [=y] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=n]) && OF [=y] && ARCH_BRCMSTB [=y]
 

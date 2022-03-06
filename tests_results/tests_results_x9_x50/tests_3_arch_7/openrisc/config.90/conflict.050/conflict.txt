@@ -1,27 +1,22 @@
-HZ_1000: y => no
-      Direct dependencies: <choice>
+USB_STORAGE_USBAT: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
 
-EXT4_FS: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
+NFC_PORT100: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && USB [=y] && NFC_DIGITAL [=m]
 
-SYNC_FILE: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+REGULATOR_MT6360: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6360 [=m]
 
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y]
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-DEBUG_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=n] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+USB_SNP_UDC_PLAT: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && OF [=y] && HAS_DMA [=y] && (EXTCON [=y] || EXTCON [=y]=n)
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
+USB_SISUSBVGA: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && (USB_MUSB_HDRC [=m] || USB_EHCI_HCD [=m])
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+VL6180: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

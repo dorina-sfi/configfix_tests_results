@@ -1,20 +1,24 @@
-SENSORS_TSL2563: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-MFD_WCD934X: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && SLIMBUS [=m]
+RAID_ATTRS: y => no
+      Direct dependencies: BLOCK [=y] && SCSI_MOD [=y]
+      Reverse dependencies: SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && !S390 || SCSI_MYRB [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] || SCSI_MYRS [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && (!CPU_BIG_ENDIAN || COMPILE_TEST [=n])
 
-AL3320A: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+HID_SENSOR_IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-P54_COMMON: m => yes
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTERSIL [=y] && MAC80211 [=m]
+CPU_IDLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
 
-LINEDISP: m => yes
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=n] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=m] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

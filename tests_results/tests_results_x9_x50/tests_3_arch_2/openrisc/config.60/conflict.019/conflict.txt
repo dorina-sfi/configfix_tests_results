@@ -1,7 +1,7 @@
-SENSORS_MAX1111: m => yes
-      Direct dependencies: HWMON [=m] && SPI_MASTER [=y]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=n] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 

@@ -1,35 +1,35 @@
-CPU_FREQ_GOV_POWERSAVE: y => no
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_POWERSAVE [=y] && <choice>
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=n] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-W1_SLAVE_DS2781: y => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+NET_MPLS_GSO: y => no
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-THERMAL_WRITABLE_TRIPS: y => no
+THERMAL_GOV_STEP_WISE: y => no
       Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=n] && ACPI [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
 
-I2C_SMBUS: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=y] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+CRYPTO_SERPENT: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-NLS: y => no
+CRYPTO_SHA1: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=y] && IPV6 [=y] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=y] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=y] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] || CPU_SUP_AMD [=y]) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=y] && KEYS [=y] && TCG_TPM [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_SHA1_SSSE3 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_SUNXI && PM [=y] && CRYPTO_DEV_ALLWINNER [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=y] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_PADLOCK [=y] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_IMGTEC_HASH [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y] || ASYMMETRIC_TPM_KEY_SUBTYPE [=y] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=y] && TRUSTED_KEYS [=y] || SIGNATURE [=n] && KEYS [=y]
+
+KFENCE_KUNIT_TEST: y => no
+      Direct dependencies: KFENCE [=y] && TRACEPOINTS [=y] && KUNIT [=y]
+
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
+
+PINCONF: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: GENERIC_PINCONF [=y] && PINCTRL [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=y] && ARCH_AT91 || PINCTRL_AMD [=y] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=n] || COMPILE_TEST [=y]) || PINCTRL_DA850_PUPD [=n] && PINCTRL [=y] && OF [=y] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=y]) || PINCTRL_LANTIQ [=n] && PINCTRL [=y] && LANTIQ || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_SX150X [=n] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_ST [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_KEEMBAY [=n] && PINCTRL [=y] && (ARCH_KEEMBAY || ARM64 && COMPILE_TEST [=y]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_ASPEED [=y] && PINCTRL [=y] && (ARCH_ASPEED || COMPILE_TEST [=y]) && OF [=y] && MFD_SYSCON [=y] || PINCTRL_BCM281XX [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM_MOBILE || COMPILE_TEST [=y]) || PINCTRL_BCM2835 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST [=y]) || PINCTRL_BCM63XX [=y] && PINCTRL [=y] || PINCTRL_IPROC_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || PINCTRL_NSP_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_NSP || COMPILE_TEST [=y]) || PINCTRL_IMX1_CORE [=n] && PINCTRL [=y] || PINCTRL_MXS [=n] && PINCTRL [=y] || PINCTRL_MVEBU [=n] && PINCTRL [=y] || PINCTRL_ARMADA_37XX [=n] && PINCTRL [=y] || PINCTRL_NPCM7XX [=y] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_SAMSUNG [=y] && PINCTRL [=y] && OF_GPIO [=y] || PINCTRL_SPRD [=y] && PINCTRL [=y] || PINCTRL_TEGRA [=n] && PINCTRL [=y] || PINCTRL_TEGRA_XUSB [=n] && PINCTRL [=y] || PINCTRL_MESON [=n] && PINCTRL [=y] && ARCH_MESON && OF [=y] || PINCTRL_LOCHNAGAR [=n] && PINCTRL [=y] && MFD_LOCHNAGAR [=n] || PINCTRL_EQUILIBRIUM [=y] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (X86 [=y] || COMPILE_TEST [=y]) || PINCTRL_LYNXPOINT [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=y]) && ACPI [=n] || PINCTRL_MERRIFIELD [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=y]) && X86_INTEL_MID [=n] || PINCTRL_INTEL [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=y]) || PINCTRL_NOMADIK [=n] && PINCTRL [=y] && (ARCH_U8500 || ARCH_NOMADIK) && OF [=y] && GPIOLIB [=y] || PINCTRL_PXA [=y] && PINCTRL [=y] && (ARCH_PXA || COMPILE_TEST [=y]) || PINCTRL_MSM [=y] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && GPIOLIB [=y] || PINCTRL_QCOM_SPMI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] && SPMI [=n] || PINCTRL_QCOM_SSBI_PMIC [=y] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_LPASS_LPI [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && GPIOLIB [=y] || PINCTRL_SH_PFC [=y] && PINCTRL [=y]
+
+CRC8: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=y] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=y] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=y] || JFS_FS [=n] && BLOCK [=n] || F2FS_FS [=n] && BLOCK [=n] || JOLIET [=n] && BLOCK [=n] && ISO9660_FS [=n] || UDF_FS [=n] && BLOCK [=n] || FAT_FS [=n] && BLOCK [=n] || EXFAT_FS [=n] && BLOCK [=n] || NTFS_FS [=n] && BLOCK [=n] || NTFS3_FS [=n] && BLOCK [=n] || HFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || BEFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 [=y] && VBOXGUEST [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
-
-USB_CHIPIDEA_MSM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
-
-SND_HDA_RECONFIG: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
-      Reverse dependencies: SND_HDA_PATCH_LOADER [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
-
-KCMP: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
-
-CPU_FREQ_GOV_POWERSAVE: y => no
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_POWERSAVE [=y] && <choice>
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=y] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=n] && HWMON [=n] && I2C [=y] || SENSORS_SHT4x [=n] && HWMON [=n] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=n] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=n] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=y] && STAGING [=y] && IIO [=y] && SPI [=y] || SCA3300 [=n] && IIO [=y] && SPI [=y] || SCD30_I2C [=n] && IIO [=y] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=n] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=n] && IIO [=y] && I2C [=y] || SPS30_I2C [=y] && IIO [=y] && I2C [=y] || ICP10100 [=y] && IIO [=y] && I2C [=y]
 

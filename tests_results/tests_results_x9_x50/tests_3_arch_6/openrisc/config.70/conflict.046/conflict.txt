@@ -1,22 +1,19 @@
-IPV6_MULTIPLE_TABLES: y => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
-      Reverse dependencies: IPV6_SEG6_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
+DRM_I2C_NXP_TDA998X: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_KMS_HELPER [=m] && I2C [=y]
 
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
-
-TCP_CONG_CUBIC: y => no
-      Direct dependencies: NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=n] || NET [=y] && INET [=y] && !TCP_CONG_ADVANCED [=n]
-
-NETFILTER_XTABLES: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: IP_NF_IPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=n] || IP6_NF_IPTABLES [=y] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=y]
-
-CRYPTO_ECB: y => no
+CRYPTO_NULL: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=m] && CRYPTO [=y] && NET [=y]
 
-AUTOFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+IOMMU_DEFAULT_PASSTHROUGH: y => no
+      Direct dependencies: <choice>
+
+HID_SEMITEK: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+EXTCON_MAX77693: m => yes
+      Direct dependencies: EXTCON [=y] && MFD_MAX77693 [=y] && INPUT [=m]
+
+MTD_NAND_SLC_LPC32XX: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

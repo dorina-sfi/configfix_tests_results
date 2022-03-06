@@ -1,12 +1,14 @@
-SENSORS_NCT6683: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+CPU_IDLE_GOV_MENU: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && (NO_HZ [=y] || NO_HZ_IDLE [=n]) && !CPU_IDLE_GOV_TEO [=n]
 
-NLS_MAC_CENTEURO: m => yes
-      Direct dependencies: NLS [=m]
+REGULATOR_SY8106A: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
 
-SENSORS_ADT7475: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MFD_TPS65218: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && OF [=y]
 
-SENSORS_UCD9200: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+CLK_R8A7795: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=y] || ARCH_R8A77951 [=y])
 

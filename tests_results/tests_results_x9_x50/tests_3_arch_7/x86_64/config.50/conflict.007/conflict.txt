@@ -1,26 +1,24 @@
-CRYPTO_CAST5: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+SCSI_IMM: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=m] && PARPORT_PC [=m]
 
-AUXDISPLAY: y => no
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=y] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=y] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+FPGA_DFL_FME: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_DFL [=m] && HWMON [=m] && PERF_EVENTS [=y]
+
+RAS: y => no
       Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+      Reverse dependencies: MEMORY_FAILURE [=n] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=y] && PCI [=y] && PCIEPORTBUS [=y]
 
-UNWINDER_ORC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+ACPI_BUTTON: m => no
+      Direct dependencies: ACPI [=y] && INPUT [=y]
+      Reverse dependencies: DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=y] && ACPI [=y]
 
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
+SND_SOC_INTEL_CHT_BSW_RT5672_MACH: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SST_ATOM_HIFI2_PLATFORM [=m] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && (X86_INTEL_LPSS [=y] || COMPILE_TEST [=n])
 
-HID_LED: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-
-UNWINDER_ORC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
-
-KEYBOARD_GPIO_POLLED: y => no
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y]
-      Reverse dependencies: PCENGINES_APU2 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
+SND_USB_POD: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_USB [=y] && USB [=y]
 

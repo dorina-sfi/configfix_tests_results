@@ -1,11 +1,12 @@
-DVB_STV0367: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=m] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=n]
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-SND_SOC_RT5640: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_INTEL_HASWELL_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_CATPT [=n] && I2C [=y] && (I2C_DESIGNWARE_PLATFORM [=m] || COMPILE_TEST [=y]) && (X86_INTEL_LPSS || COMPILE_TEST [=y]) || SND_SOC_INTEL_BYTCR_RT5640_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && (X86_INTEL_LPSS || COMPILE_TEST [=y]) || SND_SOC_TEGRA_RT5640 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && I2C [=y] && GPIOLIB [=y]
+CRYPTO_LZ4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-HID_SENSOR_CUSTOM_SENSOR: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_SENSOR_HUB [=m]
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=y] || USB_DWC2 [=y] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=y] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=y] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=y] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI [=n] && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 && ACPI [=n] && IOSF_MBI
 

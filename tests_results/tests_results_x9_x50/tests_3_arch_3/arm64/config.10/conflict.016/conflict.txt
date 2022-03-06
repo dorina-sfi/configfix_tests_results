@@ -1,12 +1,11 @@
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+USB_CHIPIDEA: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=m] || USB_EHCI_HCD [=n] && !USB_GADGET [=m] || !USB_EHCI_HCD [=n] && USB_GADGET [=m]) && HAS_DMA [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=n] && ARCH_TEGRA [=n]
 
-IIO_BUFFER_DMAENGINE: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
+TOUCHSCREEN_USB_COMPOSITE: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && USB_ARCH_HAS_HCD [=y]
 
-CRYPTO_SHA3: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SHA3_ARM64 [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+MTD_QINFO_PROBE: m => yes
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=m]
+      Reverse dependencies: MTD_LPDDR [=m] && MTD [=y]
 

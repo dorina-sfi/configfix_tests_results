@@ -1,19 +1,21 @@
-DEV_APPLETALK: m => yes
-      Direct dependencies: NET [=y] && ATALK [=m]
+DRM_TOSHIBA_TC358768: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-SND_SOC_FSL_MQS: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_FSL_SAI [=m]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: QORIQ_CPUFREQ [=m] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
 
-NFC_MRVL_USB: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m] && USB [=y]
+DRM_DEBUG_SELFTEST: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y]
 
-MEDIA_TUNER_TEA5767: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
+SENSORS_ADM1177: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-FB_TFT_ST7735R: m => yes
-      Direct dependencies: STAGING [=y] && FB_TFT [=m]
+DVB_TS2020: y => mod
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_LME2510 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DVBSKY [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=m] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && I2C_ALGOBIT [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_SMIPCIE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-COMEDI_PCI_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=m] && PCI [=y]
+REGULATOR_BD71828: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD71828 [=m]
 

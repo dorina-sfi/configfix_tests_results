@@ -1,25 +1,27 @@
-CORESIGHT_LINKS_AND_SINKS: m => yes
-      Direct dependencies: CORESIGHT [=m]
-      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=m] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=m] && ARM64 [=y] || CORESIGHT_STM [=m] && CORESIGHT [=m] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-PSTORE_BLK: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m] && BLOCK [=y]
+HW_RANDOM: y => no
+      Direct dependencies: y
+      Reverse dependencies: TURRIS_MOX_RWTM [=n] && (ARCH_MVEBU [=n] || COMPILE_TEST [=n]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && S390 || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM64 [=y] && ACPI [=n] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=n]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-DVB_LGDT3306A: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && I2C_MUX [=m]
-      Reverse dependencies: VIDEO_PVRUSB2_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX231XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CMA: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
 
-KPROBES: y => no
-      Direct dependencies: MODULES [=y] && HAVE_KPROBES [=y]
-      Reverse dependencies: KGDB_HONOUR_BLOCKLIST [=y] && KGDB [=y] && HAVE_KPROBES [=y] && MODULES [=y]
+PINCTRL_PFC_R8A77990: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77990 [=y]
 
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
+PREEMPT: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
 
-USB_DWC3_HAPS: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_DWC3 [=m] && USB_PCI [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 [=y] || COMPILE_TEST [=n]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n]) || I2C_PARPORT [=y] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-NAMESPACES: y => no
-      Direct dependencies: MULTIUSER [=y]
+IOMMU_IO_PGTABLE_ARMV7S: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=n]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 

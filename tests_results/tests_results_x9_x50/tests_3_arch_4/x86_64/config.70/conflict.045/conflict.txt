@@ -1,14 +1,13 @@
-MTD_ABSENT: m => yes
-      Direct dependencies: MTD [=m]
+KEYBOARD_IQS62X: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && MFD_IQS62X [=m]
 
-REGULATOR_SY8827N: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
+HDC2010: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CPU_FREQ_GOV_ONDEMAND: y => mod
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_ONDEMAND [=y] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n])
+IR_WINBOND_CIR: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (X86 [=y] && PNP [=y] || COMPILE_TEST [=y])
 
-I2C_GPIO: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: VIDEO_MMP_CAMERA [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && I2C [=m] && VIDEO_V4L2 [=n] && (ARCH_MMP || COMPILE_TEST [=n]) && COMMON_CLK [=y]
+SND_SOC_WM8753: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
+      Reverse dependencies: SND_SOC_SAMSUNG_NEO1973_WM8753 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && MACH_NEO1973_GTA02 || SND_SOC_TEGRA_WM8753 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
 

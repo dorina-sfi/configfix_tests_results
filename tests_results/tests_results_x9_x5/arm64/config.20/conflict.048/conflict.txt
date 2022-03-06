@@ -1,40 +1,32 @@
-DEVFREQ_GOV_PASSIVE: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+COMEDI_DAS08_CS: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCMCIA_DRIVERS [=m]
 
-CRC16: y => no
-      Direct dependencies: y
-      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ACPI [=n] && EFI [=n] && SPI [=y] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=n] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=n] || W1_SLAVE_DS250X [=y] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
+SI7020: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SYNC_FILE: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+QCOM_WCNSS_CTRL: m => yes
+      Direct dependencies: (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && RPMSG [=m]
 
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
-
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
-
-CRYPTO_CRCT10DIF: y => no
+CRYPTO_GHASH: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-RESET_HISI: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y])
+CRYPTO_CRC32: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=y] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=m] && BLOCK [=y]
 
-DMA_CMA: y => no
-      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
-      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+SND_SOC_CS4341: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=y] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=n] || COMPILE_TEST [=y]) && OF [=y]
+DRM_PANEL_ELIDA_KD35T133: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+QCOM_SMD_RPM: m => yes
+      Direct dependencies: (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && RPMSG [=m]
+
+LEDS_LM3533: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_LM3533 [=m]
+
+PCIEASPM: y => no
+      Direct dependencies: PCI [=y]
 

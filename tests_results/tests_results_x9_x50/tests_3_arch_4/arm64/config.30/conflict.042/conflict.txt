@@ -1,14 +1,13 @@
-CRC4: m => no
+VFIO_PLATFORM: m => yes
+      Direct dependencies: VFIO [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y])
+
+CONFIGFS_FS: y => mod
       Direct dependencies: y
-      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=m] && GPIOLIB [=y]
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=m] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=m] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-SENSORS_W83791D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+STRICT_MODULE_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
 
-MUX_GPIO: m => yes
-      Direct dependencies: MULTIPLEXER [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || ARCH_LAYERSCAPE [=n] || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+HID_TIVO: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 

@@ -1,31 +1,34 @@
-NFC_SIM: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_DIGITAL [=m]
+OF_FPGA_REGION: m => yes
+      Direct dependencies: FPGA [=m] && OF [=y] && FPGA_REGION [=m]
 
-IP_SET_LIST_SET: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_SET [=m]
+NFT_NAT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=n])
 
-BRIDGE_EBT_IP: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
+MFD_HI6421_SPMI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && SPMI [=m]
 
-VIDEO_THS8200: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+MSM_GCC_8994: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_MMCC_8994 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-ADIS16475: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+MOUSE_PS2_SYNAPTICS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 
-BH1750: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
 
-MTD_NAND_ARASAN: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
+DVB_TUNER_ITD1000: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-I2C_MUX: m => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=n] && IIO [=m] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=m] && I2C [=y]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
 
-SENSORS_MAX16601: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MMC_S3C_DMA: y => no
+      Direct dependencies: <choice>
 
-MTD_SLRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+FB_PVR2: m => yes
+      Direct dependencies: FB [=m] && HAS_IOMEM [=y] && (SH_DREAMCAST || COMPILE_TEST [=y])
 

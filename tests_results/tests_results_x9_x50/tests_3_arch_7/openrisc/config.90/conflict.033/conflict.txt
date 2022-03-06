@@ -1,28 +1,21 @@
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+HID_SENSOR_CUSTOM_SENSOR: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_SENSOR_HUB [=m]
 
-CRC_CCITT: y => no
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=n] && NET [=n] || NFC_DIGITAL [=n] && NET [=n] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=n] && NFC_NCI [=n] && SPI [=n] || NFC_SHDLC [=n] && NET [=n] && NFC_HCI [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || NETLABEL [=n] && NET [=n] && INET [=n] && SECURITY [=y] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=y] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=y] && AX25 [=n] && !64BIT || NFC_FDP [=n] && NET [=n] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=n] && NFC [=n] || NFC_MICROREAD [=n] && NET [=n] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=n] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=y] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+DRM_PANEL_DSI_CM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
 
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+BRIDGE: m => yes
+      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 
-IIO_ST_ACCEL_3AXIS: y => no
-      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+COMEDI_USBDUX: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_USB_DRIVERS [=m]
 
-NEW_LEDS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ADB_PMU_LED [=n] && MACINTOSH_DRIVERS [=n] && PPC_PMAC && ADB_PMU [=n] || BRCMSMAC [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && MAC80211 [=n] && BCMA_POSSIBLE [=y] && BCMA_DRIVER_GPIO [=n] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || INPUT_WISTRON_BTNS [=n] && INPUT [=n] && INPUT_MISC [=n] && X86_32 || SENSORS_APPLESMC [=n] && HWMON [=y] && INPUT [=n] && X86 || IR_REDRAT3 [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=y] || IR_WINBOND_CIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && (X86 && PNP [=n] || COMPILE_TEST [=n]) || IR_TTUSBIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=y] || BACKLIGHT_ADP8860 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_ADP8870 [=n] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_LM3639 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || SND_CTL_LED [=n] && SOUND [=n] && !UML && SND [=n] && SND_CTL_LED [=n] || SND_USB_TONEPORT [=n] && SOUND [=n] && !UML && SND [=n] && SND_USB [=n] && USB [=y] || HID_LENOVO [=n] && INPUT [=n] && HID [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=n] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=n] || ACER_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=n] || ASUS_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) || ASUS_WIRELESS [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] || ASUS_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && ACPI_BATTERY && INPUT [=n] && HWMON [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (RFKILL [=n] || RFKILL [=n]=n) && HOTPLUG_PCI [=n] && (ACPI_VIDEO || ACPI_VIDEO=n) || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && HOTPLUG_PCI [=n] && BACKLIGHT_CLASS_DEVICE [=y] || FUJITSU_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) || HP_ACCEL [=n] && X86 && X86_PLATFORM_DEVICES [=n] && INPUT [=n] && ACPI && SERIO_I8042 [=n] || IDEAPAD_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && RFKILL [=n] && INPUT [=n] && SERIO_I8042 [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (ACPI_WMI [=n] || ACPI_WMI [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SAMSUNG_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] || ACPI_TOSHIBA [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_WMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && IIO [=y] || LG_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_WMI [=n] && INPUT [=n] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=y] && INPUT [=n] || TOPSTAR_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+COMEDI_PCL818: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-HD44780_COMMON: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
+USB_SNP_UDC_PLAT: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && OF [=y] && HAS_DMA [=y] && (EXTCON [=y] || EXTCON [=y]=n)
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+HID_ASUS: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n)
 

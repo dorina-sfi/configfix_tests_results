@@ -1,22 +1,21 @@
-ZSWAP_ZPOOL_DEFAULT_ZSMALLOC: y => no
-      Direct dependencies: <choice>
+TOUCHSCREEN_RM_TS: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-B53: y => no
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
+FB_MODE_HELPERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=y]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || FB_UVESA [=m] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=y] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=y] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=y]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y]) || FB_SM750 [=n] && STAGING [=n] && FB [=y] && PCI [=n]
 
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+TEST_SORT: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
 
-NLS_UTF8: y => no
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+MAILBOX: y => no
+      Direct dependencies: y
+      Reverse dependencies: IMX_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=y] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM && ZYNQMP_FIRMWARE [=n]
 
-CRYPTO_DEFLATE: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=y] && NET [=y] && INET [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+NF_TPROXY_IPV6: m => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_TPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && (IPV6 [=y] || IPV6 [=y]=n) && NF_TABLES_IPV6 [=y] || NETFILTER_XT_TARGET_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=n] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP_NF_MANGLE [=n] && IP6_NF_IPTABLES [=n]
 
-NET_DSA_TAG_XRS700X: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_XRS700X [=y] && NETDEVICES [=y] && NET_DSA [=y]
+MTD_NAND_BRCMNAND: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARM || ARM64 || MIPS || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

@@ -1,21 +1,23 @@
-SERIAL_SH_SCI_DMA: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_SH_SCI [=m] && DMA_ENGINE [=y]
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
 
-MODULE_SIG: y => no
-      Direct dependencies: MODULES [=y]
-      Reverse dependencies: SECURITY_LOCKDOWN_LSM [=y] && SECURITY [=y] && MODULES [=y]
+DRM_AMDGPU_USERPTR: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM_AMDGPU [=y] && MMU [=y]
+      Reverse dependencies: HSA_AMD [=y] && HAS_IOMEM [=y] && DRM_AMDGPU [=y] && (X86_64 || ARM64 [=y] || PPC64)
 
-DEVFREQ_EVENT_ROCKCHIP_DFI: y => mod
-      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
-
-NET_DSA_MT7530: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
-
-SLUB: y => no
+DEFAULT_SECURITY_DAC: y => no
       Direct dependencies: <choice>
 
-NET_FOU: m => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NET_FOU_IP_TUNNELS [=y] && NET [=y] && INET [=y] && (NET_IPIP [=n] || NET_IPGRE [=m] || IPV6_SIT [=n])
+DVB_L64781: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_BUDGET [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_AV7110 [=y] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && VIDEO_DEV [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=y] && X86_64 && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=y] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=y]) && PCI [=y]
+
+CRYPTO_SHA512_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA512_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 

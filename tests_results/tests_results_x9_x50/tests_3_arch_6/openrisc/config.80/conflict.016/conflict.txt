@@ -1,19 +1,20 @@
-SENSORS_CORSAIR_CPRO: m => yes
-      Direct dependencies: HWMON [=m] && HID [=y]
+I2C_SI470X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI470X [=m]
 
-SENSORS_TMP102: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+USB_DWC2_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y && USB_GADGET [=y]=y || USB_DWC2 [=y]=m && USB [=y] && USB_GADGET [=y])
 
-SENSORS_TPS53679: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+SDIO_UART: m => yes
+      Direct dependencies: MMC [=m] && TTY [=y]
 
-OSNOISE_TRACER: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+DVB_SP2: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DVBSKY [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SENSORS_HIH6130: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+CRYPTO_MANAGER: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=m] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=m] && CRYPTO [=y] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=m] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=n] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y] || CRYPTO_CMAC [=n] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=n] && CRYPTO [=y]
 
-INET6_AH: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+COMEDI_DAS6402: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 

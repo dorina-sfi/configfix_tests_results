@@ -1,35 +1,37 @@
-IIO_INTERRUPT_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y]
+CRYPTO_CMAC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n]
 
-CRC32_SLICEBY4: y => no
+DVB_STV6111: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_NGENE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
+
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+
+DEFAULT_PFIFO_FAST: y => no
       Direct dependencies: <choice>
 
-VIDEO_CS5345: m => no
+VIDEO_SAA6588: y => no
       Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_CX18 [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && RC_CORE [=m]
+      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && VIDEO_V4L2 [=y] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-I2C_SMBUS: m => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=m] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 [=y] || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=m] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-IPMI_SI: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
-      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=m]
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
 
-EXTCON_USBC_CROS_EC: m => yes
-      Direct dependencies: EXTCON [=y] && CROS_EC [=m]
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-HDC2010: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-CRYPTO_MANAGER: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=y] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=m] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=n] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=n] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=m] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=m] && CRYPTO [=y]
-
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=n] || I2C_EMEV2 [=m] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || ARCH_LAYERSCAPE [=n] || COLDFIRE) || I2C_MLXBF [=m] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n])
-
-CM32181: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+FB_MB862XX_PCI_GDC: y => no
+      Direct dependencies: <choice> && PCI [=y]
 

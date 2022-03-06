@@ -1,22 +1,23 @@
-PROC_CHILDREN: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+SND_SOC_FSL_SAI: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=y] || SND_AC97_CODEC [=y]=n) || SND_SOC_IMX_AUDMIX [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] || SND_SOC_IMX_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] || SND_SOC_IMX_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y]
 
-TEST_SORT: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-PM_QOS_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]=y
+MEDIA_TUNER_XC5000: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_AU0828 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && I2C [=y] && INPUT [=y] && DVB_CORE [=y] && USB [=n] && VIDEO_V4L2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX231XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_TM6000 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && I2C [=y] && INPUT [=y] && RC_CORE [=n] && USB [=n] || DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-IIO_CONFIGFS: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
+SND_SAMSUNG_SPDIF: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y]
+      Reverse dependencies: SND_SOC_SAMSUNG_SMDK_SPDIF [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y]
 
-MFD_VX855: y => no
-      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
-      Reverse dependencies: GPIO_VX855 [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && (X86 || COMPILE_TEST [=y]) && PCI [=y]
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=n])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=n])
 
-VIRT_CPU_ACCOUNTING_GEN: y => no
-      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+RATIONAL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
 

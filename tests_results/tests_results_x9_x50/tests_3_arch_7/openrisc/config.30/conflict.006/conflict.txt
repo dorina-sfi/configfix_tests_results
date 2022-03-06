@@ -1,24 +1,27 @@
-CRYPTO_MANAGER: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=n] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=m] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=m] && CRYPTO [=y] || CRYPTO_XTS [=n] && CRYPTO [=y] || CRYPTO_KEYWRAP [=m] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y] || CRYPTO_CMAC [=m] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=n] && CRYPTO [=y] || CRYPTO_VMAC [=m] && CRYPTO [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-RPMSG_NS: m => yes
-      Direct dependencies: RPMSG [=m]
-      Reverse dependencies: RPMSG_VIRTIO [=n] && HAS_DMA [=y]
-
-AUTOFS_FS: y => no
+REGULATOR: y => no
       Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=m]
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=n] && GPIOLIB [=y] && ACPI || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 
-MMC_USDHI6ROL0: m => yes
-      Direct dependencies: MMC [=m] && HAS_DMA [=y]
+THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
+      Direct dependencies: <choice>
 
-UIO_PRUSS: m => yes
-      Direct dependencies: UIO [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-MMC_SDHCI_CNS3XXX: m => yes
-      Direct dependencies: MMC [=m] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m]
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-CHARGER_MAX14577: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX14577 [=m]
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y]
+
+MQ_IOSCHED_DEADLINE: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
 

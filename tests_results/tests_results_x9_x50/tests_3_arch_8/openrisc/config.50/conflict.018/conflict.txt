@@ -1,31 +1,30 @@
-OSNOISE_TRACER: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-CLK_RCAR_GEN3_CPG: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A774A1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+IOMMU_DEFAULT_DMA_LAZY: y => no
+      Direct dependencies: <choice>
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=y] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=y] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-CRC4: y => no
+CRYPTO_AES: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || TLS [=n] && NET [=n] && INET [=n] || TIPC_CRYPTO [=n] && NET [=n] && TIPC [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || LIB80211_CRYPT_CCMP [=n] && NET [=n] && WIRELESS [=n] || MAC80211 [=n] && NET [=n] && WIRELESS [=n] && CFG80211 [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=n] && BLOCK [=y] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=n] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=n] && m && MODULES [=n] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_AEGIS128 [=y] && CRYPTO [=y] || CRYPTO_ANSI_CPRNG [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI && PM && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_MXC && OF [=y] || CRYPTO_DEV_S5P [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_S5PV210 || ARCH_EXYNOS || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_ATMEL_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_AT91 || COMPILE_TEST [=n]) || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_NITROX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_ZYNQMP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ZYNQMP_FIRMWARE [=n] || COMPILE_TEST [=n]) || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 || COMPILE_TEST [=n]) || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS) || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
+
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y]
+
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
+
+AUTOFS_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
-
-CRC_ITU_T: y => no
-      Direct dependencies: y
-      Reverse dependencies: NFC_DIGITAL [=n] && NET [=n] && NFC [=n] || GENWQE [=n] && PCI [=n] && 64BIT || FIREWIRE [=n] && (PCI [=n] || COMPILE_TEST [=y]) || WILC1000_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=n] && INET [=n] && SPI [=n] || RT61PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT73USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MOUSE_CYAPA [=n] && INPUT [=n] && INPUT_MOUSE [=n] && I2C [=y] || TOUCHSCREEN_SIS_I2C [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || MMC_SPI [=n] && MMC [=y] && SPI_MASTER [=n] || UDF_FS [=y] && BLOCK [=y] || OMFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y]
-
-SDM_GCC_660: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SDM_MMCC_660 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_660 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-PREEMPT_VOLUNTARY: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+      Reverse dependencies: AUTOFS4_FS [=y]
 

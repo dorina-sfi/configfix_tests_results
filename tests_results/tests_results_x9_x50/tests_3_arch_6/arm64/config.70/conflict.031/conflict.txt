@@ -1,21 +1,24 @@
-MSM_GCC_8660: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+MESON_CANVAS: y => no
+      Direct dependencies: ARCH_MESON [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=y] || COMPILE_TEST [=y]) || VIDEO_MESON_VDEC [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && HAS_DMA [=y] && (ARCH_MESON [=y] || COMPILE_TEST [=y])
 
-VIDEO_XILINX_VTC: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=y]
-      Reverse dependencies: VIDEO_XILINX_TPG [=m] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=y]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 
-SERIO_AMBAKMI: m => yes
-      Direct dependencies: SERIO [=m] && ARM_AMBA [=y]
-
-XEN_PRIVCMD: y => mod
-      Direct dependencies: XEN [=y]
-      Reverse dependencies: XENFS [=y] && XEN [=y]
-
-BLK_DEV_INITRD: y => no
+PM_DEVFREQ: y => no
       Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
 
-HID_WIIMOTE: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=y]
+CRYPTO_XXHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=y] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
+
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 

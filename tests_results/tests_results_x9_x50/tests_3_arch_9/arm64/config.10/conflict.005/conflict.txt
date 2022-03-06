@@ -1,33 +1,35 @@
-IIO_CONFIGFS: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=n] && IIO [=y]
+RST_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
 
-VIDEO_CX25840: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_CX231XX [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && I2C [=y] && I2C_MUX [=y] || DVB_USB_CXUSB_ANALOG [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_CXUSB [=n] && VIDEO_V4L2 [=y] && (VIDEO_V4L2 [=y]=y || VIDEO_V4L2 [=y]=DVB_USB_CXUSB [=n]) || VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && DVB_CORE [=n] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y]
+ARMADA_37XX_RWTM_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && OF [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
 
-CPU_LITTLE_ENDIAN: y => no
-      Direct dependencies: <choice>
+PARPORT_PANEL: y => no
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 
-EXTCON: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n])
-
-CRC32_SARWATE: y => no
-      Direct dependencies: <choice>
-
-CARMINE_DRAM_CUSTOM: y => no
-      Direct dependencies: <choice>
-
-EXT4_FS_POSIX_ACL: y => no
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
-      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
-
-DEVFREQ_GOV_USERSPACE: y => no
+DEVFREQ_GOV_PASSIVE: y => no
       Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || ARM_IMX8M_DDRC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
 
-OF: y => no
+VT: y => no
+      Direct dependencies: TTY [=y]
+
+PAGE_EXTENSION: y => no
       Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+
+PM_DEVFREQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+
+TEGRA_HSP_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && ARCH_TEGRA [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
+
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 

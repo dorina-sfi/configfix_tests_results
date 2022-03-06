@@ -1,30 +1,26 @@
-SND_SOC_WM8903: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
-      Reverse dependencies: SND_SOC_TEGRA_WM8903 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=y] && I2C [=y] && GPIOLIB [=y]
+BATTERY_MAX1721X: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && W1 [=m]
 
-SND_SOC_UNIPHIER_AIO: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=y]
-      Reverse dependencies: SND_SOC_UNIPHIER_LD11 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=y] || SND_SOC_UNIPHIER_PXS2 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=y]
+I2C_RCAR: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y])
 
-FILE_LOCKING: y => no
-      Direct dependencies: y
+IIO_ST_MAGN_3AXIS: m => yes
+      Direct dependencies: IIO [=y] && (I2C [=m] || SPI_MASTER [=n]) && SYSFS [=y]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=y] && (I2C [=m] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
 
-PM_DEVFREQ_EVENT: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
+DRM_CROS_EC_ANX7688: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] && (I2C_CROS_EC_TUNNEL [=m] || COMPILE_TEST [=y])
 
-CRYPTO_CRC32: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
+SERIAL_SC16IS7XX: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && (SPI_MASTER [=n] && !I2C [=m] || I2C [=m])
 
-IIO_CONFIGFS: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
+DRM_SUN4I_BACKEND: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_SUN4I [=m]
 
-CRYPTO_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=n] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=m] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-SERIAL_8250_DMA: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && DMADEVICES [=y]
+FXLS8962AF_I2C: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 

@@ -1,30 +1,31 @@
-IIO_BUFFER_HW_CONSUMER: y => mod
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=y] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
 
-CRYPTO_CURVE25519_X86: m => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
+IP_VS_MH: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=m]
 
-INPUT_GPIO_VIBRA: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+PROC_CHILDREN: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-SATA_ACARD_AHCI: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && PCI [=y]
+MTD_QCOMSMEM_PARTS: m => yes
+      Direct dependencies: MTD [=y] && QCOM_SMEM [=m]
 
-SND_SOC_TS3A227E: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_ROCKCHIP_MAX98090 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_INTEL_CHT_BSW_MAX98090_TI_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n])
+DRM_BOCHS: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
 
-IR_SONY_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y]
 
-PATA_CMD640_PCI: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+CROS_EC_ISHTP: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && CROS_EC [=m] && INTEL_ISH_HID [=y]
 
-PATA_ALI: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
+IIO_CROS_EC_SENSORS_CORE: m => yes
+      Direct dependencies: IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=m]
 
-REGULATOR_RN5T618: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_RN5T618 [=m]
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 

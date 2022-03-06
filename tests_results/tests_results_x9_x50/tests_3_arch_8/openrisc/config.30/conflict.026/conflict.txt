@@ -1,29 +1,30 @@
-CRYPTO_XXHASH: y => mod
+IIO_STM32_TIMER_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+
+USB_MTU3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=y])
+
+PARPORT_PANEL: y => no
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+
+IIO_STM32_TIMER_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+
+MEDIA_TUNER_XC5000: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_AU0828 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && I2C [=y] && INPUT [=n] && DVB_CORE [=n] && USB [=y] && VIDEO_V4L2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX231XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_CX231XX [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_TM6000 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && I2C [=y] && INPUT [=n] && RC_CORE [=n] && USB [=y] || DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && DVB_CORE [=n] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+CRYPTO_CTR: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-VIDEO_TDA7432: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=y] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-DVB_NXT200X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-VIDEO_MT9V032: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
-
-MEDIA_TUNER_MAX2165: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-VIDEO_SAA6588: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-TI_AM335X_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_TI_AM335X_TSCADC [=m] && HAS_DMA [=y]
-
-PATA_PCMCIA: m => yes
-      Direct dependencies: ATA [=y] && ATA_SFF [=y] && PCMCIA [=m]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 

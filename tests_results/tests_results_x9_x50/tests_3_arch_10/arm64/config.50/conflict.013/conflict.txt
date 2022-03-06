@@ -1,32 +1,34 @@
-CRYPTO_AES_ARM64_NEON_BLK: y => mod
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
-      Reverse dependencies: CRYPTO_AES_ARM64_BS [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+NET_DSA_TAG_BRCM_PREPEND: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: B53 [=m] && NETDEVICES [=y] && NET_DSA [=m]
 
-DRM_THINE_THC63LVD1024: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+SM_GCC_8150: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SM_GPUCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SM_VIDEOCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-BACKLIGHT_RT4831: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_RT4831 [=m]
+SENSORS_LM95241: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-APPLE_AIC: y => no
-      Direct dependencies: ARM64 [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_APPLE [=y]
+MFD_SUN6I_PRCM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y]
 
-HID_SENSOR_HUB: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && HAS_IOMEM [=y]
+SENSORS_CORSAIR_PSU: m => yes
+      Direct dependencies: HWMON [=m] && HID [=m]
 
-FB_SIMPLE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && !DRM_SIMPLEDRM [=m]
+CHR_DEV_SCH: m => yes
+      Direct dependencies: SCSI [=m]
 
-MTD_CFI_INTELEXT: m => yes
-      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+MEDIA_TUNER_SIMPLE: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_PVRUSB2_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MTD_UBI_GLUEBI: m => yes
-      Direct dependencies: MTD [=m] && MTD_UBI [=m]
+VL6180: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MTD_CFI_STAA: m => yes
-      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+TPL0102: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-HID_ICADE: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+CHARGER_AXP20X: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_AXP20X [=m] && AXP20X_ADC [=m] && IIO [=m]
 

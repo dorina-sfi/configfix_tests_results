@@ -1,39 +1,33 @@
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-MTD_CFI_LE_BYTE_SWAP: y => no
-      Direct dependencies: <choice> && !ARCH_IXP4XX
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=m] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=m] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-DEBUG_FS: y => no
+SND_SOC_PCM179X_SPI: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+
+NEW_LEDS: y => no
       Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=y] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=y] && FAULT_INJECTION [=y] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+      Reverse dependencies: ADB_PMU_LED [=n] && MACINTOSH_DRIVERS [=n] && PPC_PMAC && ADB_PMU [=n] || BRCMSMAC [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && MAC80211 [=n] && BCMA_POSSIBLE [=y] && BCMA_DRIVER_GPIO [=n] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || INPUT_WISTRON_BTNS [=n] && INPUT [=n] && INPUT_MISC [=n] && X86_32 || SENSORS_APPLESMC [=n] && HWMON [=y] && INPUT [=n] && X86 || IR_REDRAT3 [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=m] || IR_WINBOND_CIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && (X86 && PNP [=n] || COMPILE_TEST [=y]) || IR_TTUSBIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=m] || BACKLIGHT_ADP8860 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_ADP8870 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_LM3639 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || SND_CTL_LED [=m] && SOUND [=m] && !UML && SND [=m] && SND_CTL_LED [=m] || SND_USB_TONEPORT [=n] && SOUND [=m] && !UML && SND [=m] && SND_USB [=n] && USB [=m] || HID_LENOVO [=n] && INPUT [=n] && HID [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=m] && I2C [=y] && INPUT [=n] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=n] || ACER_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=n] || ASUS_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) || ASUS_WIRELESS [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=n] || ASUS_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && ACPI_BATTERY [=n] && INPUT [=n] && HWMON [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (RFKILL [=n] || RFKILL [=n]=n) && HOTPLUG_PCI [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || FUJITSU_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) || HP_ACCEL [=n] && X86 && X86_PLATFORM_DEVICES [=n] && INPUT [=n] && ACPI [=n] && SERIO_I8042 [=n] || IDEAPAD_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && RFKILL [=n] && INPUT [=n] && SERIO_I8042 [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (ACPI_WMI [=n] || ACPI_WMI [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SAMSUNG_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] || ACPI_TOSHIBA [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_WMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && IIO [=y] || LG_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_WMI [=n] && INPUT [=n] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && HWMON [=y] && INPUT [=n] || TOPSTAR_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=n] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-CLK_RCAR_GEN3_CPG: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A774A1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+FB_PM2: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (AMIGA && BROKEN [=n] || PCI [=y])
 
-LCD_CLASS_DEVICE: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=y] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
+USB_OHCI_HCD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && HAS_DMA [=y] && HAS_IOMEM [=y]
 
-PINCTRL_EXYNOS_ARM64: y => no
-      Direct dependencies: PINCTRL [=y] && PINCTRL_EXYNOS [=y]
-      Reverse dependencies: PINCTRL_EXYNOS [=y] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n]) && ARM64 [=y] && ARCH_EXYNOS [=y]
+TYPEC_NVIDIA_ALTMODE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && TYPEC_DP_ALTMODE [=m]
 
-CRYPTO_CBC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+FPGA_DFL_AFU: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_DFL [=m]
 
-DNS_RESOLVER: y => no
-      Direct dependencies: NET [=y] && KEYS [=y]
-      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+KPSS_XCC: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-CRYPTO_STREEBOG: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
-
-IP_SCTP: y => no
-      Direct dependencies: NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n)
-      Reverse dependencies: DLM [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y] && (IPV6 [=y] || IPV6 [=y]=n)
+SND_OXYGEN: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
 

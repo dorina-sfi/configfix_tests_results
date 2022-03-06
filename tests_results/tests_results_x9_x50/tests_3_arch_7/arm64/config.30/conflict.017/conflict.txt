@@ -1,21 +1,28 @@
-LMP91000: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
 
-SX9310: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_SOC_SGTL5000: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
+      Reverse dependencies: SND_SOC_IMX_SGTL5000 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] || SND_SOC_MXS_SGTL5000 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_MXS_SOC [=y] && I2C [=y] || SND_SOC_TEGRA_SGTL5000 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
 
-USB_GSPCA_TOUPTEK: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m] && USB_GSPCA [=m]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-VIDEO_SAMSUNG_S5P_JPEG: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-USB_HACKRF: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_SDR_SUPPORT [=y] && VIDEO_V4L2 [=m]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-CM3605: m => yes
-      Direct dependencies: IIO [=m] && OF [=y]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-VIDEO_MESON_GE2D: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_MESON [=y] || COMPILE_TEST [=n])
+SYSC_R8A779A0: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A779A0 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 

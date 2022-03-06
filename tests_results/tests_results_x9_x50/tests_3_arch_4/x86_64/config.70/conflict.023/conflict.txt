@@ -1,13 +1,15 @@
-CHARGER_MP2629: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MP2629 [=m] && MP2629_ADC [=m] && IIO [=y]
+CRYPTO_CHACHA20: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
 
-PCI_SW_SWITCHTEC: y => mod
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: NTB_SWITCHTEC [=y] && NTB [=y]
+MEDIA_TUNER_TDA9887: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_SIMPLE [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
 
-I2C_MUX_GPIO: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m] && GPIOLIB [=y]
+IOMMU_SUPPORT: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
 
-W1_MASTER_DS2482: m => yes
-      Direct dependencies: W1 [=y] && I2C [=m]
+GENERIC_ADC_BATTERY: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && IIO [=m]
 

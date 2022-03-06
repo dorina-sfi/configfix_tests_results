@@ -1,30 +1,34 @@
-EXT4_KUNIT_TESTS: m => yes
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=m] && KUNIT [=y]
+RPMSG_TTY: m => yes
+      Direct dependencies: TTY [=y] && RPMSG [=m]
 
-SENSORS_MP2975: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=m] && GPIOLIB [=y]
 
-HID_SENSOR_PRESS: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+QCOM_Q6V5_ADSP: m => yes
+      Direct dependencies: REMOTEPROC [=y] && OF [=y] && ARCH_QCOM [=y] && QCOM_SMEM [=m] && (RPMSG_QCOM_SMD [=n] || RPMSG_QCOM_SMD [=n]=n) && (RPMSG_QCOM_GLINK_SMEM [=m] || RPMSG_QCOM_GLINK_SMEM [=m]=n) && (QCOM_SYSMON [=m] || QCOM_SYSMON [=m]=n) && (RPMSG_QCOM_GLINK [=m] || RPMSG_QCOM_GLINK [=m]=n)
 
-FB_ARMCLCD: m => yes
-      Direct dependencies: (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=m] && ARM_AMBA [=y] && HAS_IOMEM [=y]
+BLOCK: y => no
+      Direct dependencies: y
 
-RC_LOOPBACK: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y]
+6LOWPAN: m => yes
+      Direct dependencies: NET [=y] && IPV6 [=m]
 
-VIDEO_HI556: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+QUOTA: y => no
+      Direct dependencies: y
+      Reverse dependencies: OCFS2_FS [=m] && BLOCK [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y]
 
-TCP_CONG_CUBIC: y => no
-      Direct dependencies: NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=n] || NET [=y] && INET [=y] && !TCP_CONG_ADVANCED [=n]
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=y] || IPV6 [=m]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && ATA [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=m] || NVME_TARGET_FC [=m]=n) && (NVME_FC [=y] || NVME_FC [=y]=n)
 
-VIDEO_CCS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m] && HAVE_CLK [=y]
+CRC16: y => mod
+      Direct dependencies: y
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=y] && INET [=y] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI [=n] && EFI [=n] && SPI [=n] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=n] && W1 [=y] || W1_SLAVE_DS2423 [=n] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=m] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
 
-TIME_KUNIT_TEST: y => mod
-      Direct dependencies: KUNIT [=y]
+PRINTK: y => no
+      Direct dependencies: y
 
-BATTERY_BQ27XXX_I2C: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
+SM_GCC_6350: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 

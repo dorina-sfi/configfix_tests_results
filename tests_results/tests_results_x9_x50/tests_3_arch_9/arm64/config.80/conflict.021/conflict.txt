@@ -1,31 +1,29 @@
-PINCTRL_MESON_GXBB: m => yes
-      Direct dependencies: PINCTRL [=y] && PINCTRL_MESON [=m] && ARM64 [=y]
+KEYBOARD_LM8323: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && I2C [=y] && LEDS_CLASS [=m]
 
-DEVFREQ_GOV_SIMPLE_ONDEMAND: m => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+SENSORS_LTC2992: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y] && GPIOLIB [=y]
 
-IIO_CONFIGFS: y => mod
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=n] && IIO [=y]
+MMA8452: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-EXTCON: y => no
+SENSORS_IT87: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
+
+SOUNDWIRE_QCOM: m => yes
+      Direct dependencies: SOUNDWIRE [=m] && SND_SOC [=m]
+
+PINCTRL_PFC_R8A774B1: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774B1 [=y]
+
+STK8BA50: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+KCMP: y => no
       Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=m] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=m] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-SENSORS_DPS920AB: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-USB_SISUSBVGA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && (USB_MUSB_HDRC [=y] || USB_EHCI_HCD [=m])
-
-MEMBARRIER: y => no
-      Direct dependencies: y
-      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
-
-COMMON_CLK_RK808: m => yes
-      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
-
-SENSORS_MAX31785: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+KASAN_STACK: y => no
+      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
 

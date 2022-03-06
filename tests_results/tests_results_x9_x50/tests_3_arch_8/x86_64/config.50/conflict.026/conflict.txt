@@ -1,30 +1,26 @@
-EINT_MTK: y => no
-      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 
-IO_DELAY_0X80: y => no
-      Direct dependencies: <choice>
+VIDEO_OV5675: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=m] && VIDEO_V4L2 [=m]
 
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
-      Direct dependencies: <choice>
+DRM_TI_TFP410: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+CRC_CCITT: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=m] && NET [=y] && IEEE802154 [=m] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=y] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_SER_HDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_PAR [=m] && NET [=y] && HAMRADIO [=y] && PARPORT [=m] && AX25 [=y] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=m] && AX25 [=y] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=y] && NFC [=n] || NFC_MICROREAD [=n] && NET [=y] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=y] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=y] && TTY [=y] && PPP [=y] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTERSIL [=y] && MAC80211 [=m] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=y] && RT2X00 [=n] && PCI [=y] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=y] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=y] && MISDN [=y]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=m] || RAVE_SP_CORE [=m] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=m]
 
-PCI_IOV: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: INFINIBAND_USNIC [=n] && INFINIBAND [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && NETDEVICES [=n] && ETHERNET [=n] && INET [=n] && PCI [=y] && INTEL_IOMMU [=y] && INFINIBAND_USER_ACCESS [=n] || CRYPTO_DEV_QAT_DH895xCCVF [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y] || CRYPTO_DEV_QAT_C3XXXVF [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y] || CRYPTO_DEV_QAT_C62XVF [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y]
+SENSORS_IT87: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-DEVFREQ_GOV_PASSIVE: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+COMEDI_ADDI_APCI_1500: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 
-FW_LOADER_USER_HELPER: y => no
-      Direct dependencies: FW_LOADER [=y]
-      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=y] && X86 [=y]
+IIO_ST_LSM6DSX: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=m] || SPI [=y] || I3C [=n])
 
-SND_DYNAMIC_MINORS: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y]
-      Reverse dependencies: SND_HDA_CODEC_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_SOC_TOPOLOGY [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n]
+INV_ICM42600_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 

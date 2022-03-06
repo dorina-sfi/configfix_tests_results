@@ -1,15 +1,18 @@
-PSTORE_LZO_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+HPET_TIMER: y => no
+      Direct dependencies: y
 
-INTEL_BXT_PMIC_THERMAL: m => yes
-      Direct dependencies: THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && INTEL_SOC_PMIC_BXTWC [=m] && REGMAP [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-FB_MATROX: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+FPGA_REGION: y => no
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-FB_CYBER2000: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y] && (BROKEN [=n] || !SPARC64)
+MEDIA_TUNER_TDA9887: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
 
-COMEDI_DYNA_PCI10XX: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+SPARSEMEM_MANUAL: y => no
+      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
 

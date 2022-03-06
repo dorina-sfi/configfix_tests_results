@@ -1,16 +1,17 @@
-TOUCHSCREEN_TSC_SERIO: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+USB_LD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-HID_MICROSOFT: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y]
 
-FPGA_DFL_NIOS_INTEL_PAC_N3000: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_DFL [=m]
+IIO_ST_MAGN_3AXIS: m => no
+      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
 
-HID_LED: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=m] && INPUT [=m] && HID [=m] && LEDS_CLASS [=y]
+DRM_ANALOGIX_ANX7625: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_BRIDGE [=y] && DRM [=m] && OF [=y]
 
-VIDEO_VIVID: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && !SPARC32 && !SPARC64 && FB [=m] && HAS_DMA [=y]
+HID_SENSOR_HUMIDITY: m => yes
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
 

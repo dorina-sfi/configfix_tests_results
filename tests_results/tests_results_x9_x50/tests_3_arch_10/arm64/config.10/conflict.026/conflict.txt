@@ -1,37 +1,33 @@
-PINCTRL_PFC_R8A77961: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77961 [=y]
+LEDS_LM3601X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && LEDS_CLASS [=y] && I2C [=y]
 
-AK8975: y => no
-      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SERIO_SUN4I_PS2: m => yes
+      Direct dependencies: SERIO [=m] && (ARCH_SUNXI [=y] || COMPILE_TEST [=y])
 
-SQUASHFS_DECOMP_SINGLE: y => no
-      Direct dependencies: <choice>
+SND_SOC_WM8903: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_TEGRA_WM8903 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && I2C [=y] && GPIOLIB [=y]
 
-MTD_NAND_ECC_SW_HAMMING: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && 4xx
+FPGA_MGR_ZYNQMP_FPGA: m => yes
+      Direct dependencies: FPGA [=m] && (ZYNQMP_FIRMWARE [=n] || !ZYNQMP_FIRMWARE [=n] && COMPILE_TEST [=y])
 
-CLKSRC_EXYNOS_MCT: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y]
+CLK_RCAR_GEN3_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-TEGRA_BPMP: y => no
-      Direct dependencies: ARCH_TEGRA [=y] && TEGRA_HSP_MBOX [=y] && TEGRA_IVC [=y]
-      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
+FB_VIRTUAL: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
 
-CRYPTO_XXHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+SENSORS_LM25066: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-SYSCTL_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+MMC_SDHCI_AM654: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && REGMAP_MMIO [=y]
 
-JFFS2_ZLIB: y => no
-      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
+MTK_CMDQ_MBOX: m => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
 
-INPUT_FF_MEMLESS: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && PARPORT [=n] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=n] && JOYSTICK_XPAD [=n] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=n] && MFD_ARIZONA [=n] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_PM8XXX [=n] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_MAX77693 [=y] || MFD_MAX77843 [=n]) && PWM [=y] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && PWM [=y] && MFD_MAX8997 [=n] || INPUT_GPIO_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_REGULATOR_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && TWL4030_CORE [=y] || INPUT_TWL6040_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && TWL6040_CORE [=n] || INPUT_PWM_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && PWM [=y] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_DRV2665_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=n]) || HID_ACRUX_FF [=n] && INPUT [=y] && HID [=y] && HID_ACRUX [=y] || HID_BETOP_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=n] || HID_EMS_FF [=y] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=n] || LOGITECH_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || LOGIG940_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || LOGIWHEELS_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || HID_MAYFLASH [=y] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=y] && INPUT [=y] && HID [=y] || NINTENDO_FF [=n] && INPUT [=y] && HID [=y] && HID_NINTENDO [=y] || PANTHERLORD_FF [=n] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=y] || PLAYSTATION_FF [=n] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=y] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=n] && INPUT [=y] && HID [=y] && HID_GREENASIA [=y] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=y] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=n]
+TYPEC_TCPM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && USB [=m]
 

@@ -1,18 +1,19 @@
-W1_SLAVE_DS2780: y => mod
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=n] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=n] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
 
-PROC_CHILDREN: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+DEBUG_RWSEMS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-CHARGER_BQ2515X: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+ZRAM_DEF_COMP_LZ4: y => no
+      Direct dependencies: <choice> && CRYPTO_LZ4 [=y]
 
-IR_SONY_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
 

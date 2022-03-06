@@ -1,26 +1,32 @@
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+SPI_MEM: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MTD_SPI_NOR [=y] && MTD [=y] && SPI_MASTER [=y] || MTD_SPI_NAND [=n] && MTD [=y] && SPI_MASTER [=y]
 
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+SSB: y => no
+      Direct dependencies: SSB_POSSIBLE [=y]
+      Reverse dependencies: B44 [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && SSB_POSSIBLE [=y] && HAS_DMA [=y] || B43 [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && (BCMA_POSSIBLE [=y] || SSB_POSSIBLE [=y]) && MAC80211 [=n] && HAS_DMA [=y] && B43_SSB [=n] || B43LEGACY [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && SSB_POSSIBLE [=y] && MAC80211 [=n] && HAS_DMA [=y]
 
-COMEDI_DAC02: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-COMEDI_AMPLC_DIO200_ISA: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=y] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=n] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=n] && IIO [=y] && I2C [=y] || ISL29501 [=n] && IIO [=y] && I2C [=y]
 
-RC_LOOPBACK: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y]
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=y] && IIO [=y] && I2C [=y]
 
-LEDS_AAT1290: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=m] || !V4L2_FLASH_LED_CLASS [=m]) && (GPIOLIB [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL [=y]
+MTD_CFI_BE_BYTE_SWAP: y => no
+      Direct dependencies: <choice>
+      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM && CPU_BIG_ENDIAN [=y]
 
-W1_MASTER_GPIO: m => yes
-      Direct dependencies: W1 [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+USB_ACM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && TTY [=y]
+      Reverse dependencies: USB_VL600 [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_NET_CDCETHER [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=y]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=n] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 

@@ -1,32 +1,27 @@
-LINEDISP: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
+OR1K_1200: y => no
+      Direct dependencies: <choice>
 
-EXT4_FS: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
+AD5504: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 
-BLK_DEV_INTEGRITY: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=y]) && ATA [=n] || DM_INTEGRITY [=n] && MD [=n] && BLK_DEV_DM [=n] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
+ZPA2326: m => yes
+      Direct dependencies: IIO [=m]
 
-DEBUG_IRQFLAGS: y => no
+MTD_NAND_VF610_NFC: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (SOC_VF610 || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+PRIME_NUMBERS: m => no
       Direct dependencies: y
-      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
+      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
 
-MFD_STMFX: y => no
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+MMC_DAVINCI: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_DAVINCI || COMPILE_TEST [=y])
 
-IIO_STM32_TIMER_TRIGGER: y => no
-      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+AUTOFS_FS: m => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=m]
 
-MFD_STMFX: y => no
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
-
-SHMEM: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

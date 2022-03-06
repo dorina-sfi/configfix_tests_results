@@ -1,23 +1,27 @@
-INPUT_AD714X_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && INPUT_AD714X [=m] && I2C [=y]
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
 
-MMC_SPI: m => yes
-      Direct dependencies: MMC [=m] && SPI_MASTER [=y]
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-KALLSYMS: y => no
+KERNEL_BZIP2: y => no
+      Direct dependencies: <choice> && HAVE_KERNEL_BZIP2 [=y]
+
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=n] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=y] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+CRYPTO_TWOFISH_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+
+EXPERT: y => no
       Direct dependencies: y
-      Reverse dependencies: KPROBES [=y] && MODULES [=y] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
-
-SDM_MMCC_660: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-
-REGULATOR_RT5033: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_RT5033 [=m]
-
-FB_TRIDENT: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
-
-SM_GCC_8150: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: SM_GPUCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SM_VIDEOCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: EMBEDDED [=y]
 

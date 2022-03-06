@@ -1,29 +1,32 @@
-SENSORS_MENF21BMC_HWMON: m => yes
-      Direct dependencies: HWMON [=m] && MFD_MENF21BMC [=m]
+CC10001_ADC: m => yes
+      Direct dependencies: IIO [=m] && HAS_IOMEM [=y] && HAVE_CLK [=y] && REGULATOR [=y]
 
-GPIO_KEMPLD: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_KEMPLD [=m]
+IOMMU_DEFAULT_DMA_STRICT: y => no
+      Direct dependencies: <choice>
 
-MTD_CFI_AMDSTD: m => yes
-      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+USB_OHCI_HCD_PLATFORM: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
+      Reverse dependencies: USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=m] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=m] && USB_SUPPORT [=y] && USB [=y] && BCMA [=y] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=m] && USB_SUPPORT [=y] && USB [=y] && SSB [=m] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=m] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
 
-USB_MV_UDC: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_DMA [=y]
+VIDEO_IMX274: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-SND_SOC_SSM2602_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+AL3320A: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-HID_LED: m => no
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=m]
-      Reverse dependencies: HID_THINGM [=m] && INPUT [=m] && HID [=m] && LEDS_CLASS [=m]
+OMAP_CONTROL_PHY: y => no
+      Direct dependencies: ARCH_OMAP2PLUS || COMPILE_TEST [=y]
+      Reverse dependencies: OMAP_USB2 [=n] && (ARCH_OMAP2PLUS || ARCH_K3) && USB_SUPPORT [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) || TI_PIPE3 [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y])
 
-SENSORS_W83781D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MTD_PARSER_IMAGETAG: m => yes
+      Direct dependencies: MTD [=m] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=m] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
 
-SENSORS_SMM665: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MTD_PARSER_IMAGETAG: m => yes
+      Direct dependencies: MTD [=m] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=m] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
 
-IR_IMON_RAW: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+CRYPTO_CBC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) || ENCRYPTED_KEYS [=m] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=m] && IXP4XX_NPE [=m] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 

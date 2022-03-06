@@ -1,26 +1,29 @@
-SND_USB_AUDIO: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_USB [=y] && USB [=m]
+PCI_PRI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || INTEL_IOMMU_SVM [=n] && IOMMU_SUPPORT [=y] && INTEL_IOMMU [=n] && X86_64 [=y]
 
-MEDIA_TUNER_MXL301RF: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_PT3 [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
 
-SIOX_BUS_GPIO: m => yes
-      Direct dependencies: SIOX [=m]
+PSTORE: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y]
+      Reverse dependencies: ACPI_APEI [=y] && ACPI [=y] && HAVE_ACPI_APEI [=y]
 
-SENSORS_VT1211: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+MTD_CFI_LE_BYTE_SWAP: y => no
+      Direct dependencies: <choice> && !ARCH_IXP4XX
 
-CRYPTO_POLY1305: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+PREEMPT: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
 
-SENSORS_W83L785TS: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MEMORY: y => no
+      Direct dependencies: y
+      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=y] && MTD_RAW_NAND [=n] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-SND_USB_TONEPORT: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_USB [=y] && USB [=m]
+RMI4_F30: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-SND_USB_UA101: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_USB [=y] && USB [=m]
+CPU_SUP_ZHAOXIN: y => no
+      Direct dependencies: y
 

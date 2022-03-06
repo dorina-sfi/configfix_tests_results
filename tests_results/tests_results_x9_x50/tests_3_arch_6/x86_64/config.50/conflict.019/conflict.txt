@@ -1,20 +1,20 @@
-SENSORS_INA238: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-VT: y => no
-      Direct dependencies: TTY [=y]
+KASAN_GENERIC: y => no
+      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
 
-CRYPTO_DH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y]
+BT_HCIUART_3WIRE: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y]
+      Reverse dependencies: BT_HCIUART_RTL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && (ACPI [=y] || SERIAL_DEV_CTRL_TTYPORT [=y])
 
-COMEDI_CB_PCIMDDA: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=n] && <choice> && X86_64 [=y]
+HPET_TIMER: y => no
+      Direct dependencies: y
 
-FSI_MASTER_GPIO: m => yes
-      Direct dependencies: FSI [=m] && GPIOLIB [=y]
+IOMMU_DEFAULT_DMA_STRICT: y => no
+      Direct dependencies: <choice>
 

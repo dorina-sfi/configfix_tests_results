@@ -1,16 +1,17 @@
-USB_STORAGE_ONETOUCH: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m] && (INPUT [=y]=y || INPUT [=y]=USB_STORAGE [=m])
+DRM_PANEL_SAMSUNG_S6D16D0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y]
 
-LEDS_AAT1290: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=y] && (V4L2_FLASH_LED_CLASS [=m] || !V4L2_FLASH_LED_CLASS [=m]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL [=y]
+SND_SOC_AK5386: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-VIDEO_MT9T001: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
 
-KCMP: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-HID_APPLEIR: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && USB_HID [=m]
+LCD_LMS283GF05: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 

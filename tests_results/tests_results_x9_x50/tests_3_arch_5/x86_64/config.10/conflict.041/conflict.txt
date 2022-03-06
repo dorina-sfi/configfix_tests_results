@@ -1,15 +1,18 @@
-CROS_EC_DEBUGFS: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m] && DEBUG_FS [=y]
+XZ_DEC_POWERPC: y => no
+      Direct dependencies: XZ_DEC [=y]
 
-HID_XIAOMI: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-I2C_AT91: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+CRC_T10DIF: y => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=n] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=n] && SCSI_FC_ATTRS [=y] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y]
 
-LEDS_TURRIS_OMNIA: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_MULTICOLOR [=m] && I2C [=m] && (MACH_ARMADA_38X || COMPILE_TEST [=y]) && OF [=y]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=y] && VFIO [=y] || VFIO_FSL_MC [=y] && VFIO [=y] && FSL_MC_BUS [=y] || ACRN_HSM [=n] && VIRT_DRIVERS [=y] && ACRN_GUEST [=n]
 
-SENSORS_LTC4215: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+USB_DWC3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
 

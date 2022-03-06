@@ -1,28 +1,30 @@
-MTD_INTEL_VR_NOR: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && PCI [=y]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y]
 
-TOUCHSCREEN_SILEAD: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+SC27XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y])
 
-TPS65010: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && GPIOLIB [=y]
+SND_SOC_RT1316_SDW: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SOUNDWIRE [=m]
+      Reverse dependencies: SND_SOC_INTEL_SOUNDWIRE_SOF_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_INTEL_SOUNDWIRE [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && (SND_SOC_INTEL_USER_FRIENDLY_LONG_NAMES [=y] || COMPILE_TEST [=y]) && SOUNDWIRE [=m] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n]
 
-KUNIT_ALL_TESTS: m => yes
-      Direct dependencies: KUNIT [=m]
+IIO_STM32_TIMER_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=m] && IIO [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 
-FRAME_POINTER: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
-      Reverse dependencies: ARM64 [=y]
+VIDEO_TLV320AIC23B: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
 
-JSA1212: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+DVB_FIREDTV: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && DVB_CORE [=m] && FIREWIRE [=y]
 
-LEDS_BLINKM: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m]
+SND_VIRMIDI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_DRIVERS [=y] && SND_SEQUENCER [=m]
 
-IPQ_GCC_6018: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+SUN4I_GPADC: m => yes
+      Direct dependencies: IIO [=m] && (MFD_SUN4I_GPADC [=m] || MACH_SUN8I) && (THERMAL [=n] || !THERMAL_OF [=n])
 
-W1_SLAVE_DS2805: m => yes
-      Direct dependencies: W1 [=m]
+MXS_LRADC_ADC: m => yes
+      Direct dependencies: IIO [=m] && MFD_MXS_LRADC [=y]
 

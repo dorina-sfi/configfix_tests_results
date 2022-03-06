@@ -1,32 +1,33 @@
-CFG80211_REQUIRE_SIGNED_REGDB: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m]
+COMEDI_CB_PCIMDDA: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 
-QRTR_SMD: m => yes
-      Direct dependencies: NET [=y] && QRTR [=m] && (RPMSG [=y] || COMPILE_TEST [=n] && RPMSG [=y]=n)
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 
-GAMEPORT_NS558: m => yes
-      Direct dependencies: GAMEPORT [=m]
+I2C_MUX_MLXCPLD: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m]
 
-RTC_DRV_MT6397: m => yes
-      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
+VIDEO_BT819: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=n] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=n] && X86_LOCAL_APIC [=y]
+TIME_KUNIT_TEST: m => yes
+      Direct dependencies: KUNIT [=m]
 
-DM_LOG_WRITES: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
 
-OPT3001: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
 
-REGULATOR_TPS65086: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TPS65086 [=m]
+ACPI_IPMI: m => yes
+      Direct dependencies: ACPI [=y] && IPMI_HANDLER [=m]
 
-CRYPTO_SM4_AESNI_AVX_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_SM4_AESNI_AVX2_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+PINCTRL_SM8350: m => yes
+      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PINCTRL_MSM [=m]
 
-KASAN_GENERIC: y => no
-      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
+VIDEO_RENESAS_VSP1: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_V4L2 [=m] && (ARCH_RENESAS || COMPILE_TEST [=y]) && (!ARM64 && !VIDEO_RENESAS_FCP [=n] || VIDEO_RENESAS_FCP [=n])
 

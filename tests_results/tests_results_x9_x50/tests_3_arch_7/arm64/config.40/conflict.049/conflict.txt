@@ -1,23 +1,27 @@
-STK8BA50: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MTD_NAND_ECC_SW_HAMMING: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && 4xx
 
-CLK_R8A77980: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77980 [=y]
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=n] && MMU [=y]
 
-USB_SERIAL_IR: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=y] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=y]) && PCI [=y] && X86
 
-COREDUMP: y => no
+POSIX_TIMERS: y => no
       Direct dependencies: y
 
-SND_SOC_BT_SCO: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_MT2701_CS42448 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT2701 [=m] && I2C [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_MT8183_DA7219_MAX98357A [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT8183 [=n] && I2C [=y] && GPIOLIB [=y] || SND_SOC_SAMSUNG_NEO1973_WM8753 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MACH_NEO1973_GTA02 || SND_SOC_SAMSUNG_ARIES_WM8994 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MFD_WM8994 [=y] && IIO [=m] && EXTCON [=y]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-PMS7003: m => yes
-      Direct dependencies: IIO [=m] && SERIAL_DEV_BUS [=m]
+GPIO_GENERIC_PLATFORM: y => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MFD_VEXPRESS_SYSREG [=y] && HAS_IOMEM [=y] && VEXPRESS_CONFIG [=y] && GPIOLIB [=y]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+CRC64: y => no
+      Direct dependencies: y
+      Reverse dependencies: BCACHE [=y] && MD [=y]
 

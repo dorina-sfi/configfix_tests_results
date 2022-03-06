@@ -1,26 +1,31 @@
-I2C_DLN2: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_DLN2 [=m]
+VIDEO_SAA717X: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-SENSORS_LM92: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MDIO_BITBANG: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y]
+      Reverse dependencies: NET_DSA_MICROCHIP_KSZ8863_SMI [=n] && NETDEVICES [=y] && NET_DSA [=n] && NET_DSA_MICROCHIP_KSZ8795 [=n] || FS_ENET_MDIO_FCC [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=y] && FS_ENET [=n] && CPM2 || AX88796 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_8390 [=y] && (ARM || MIPS || SUPERH || ZORRO || COMPILE_TEST [=y]) || SH_ETH [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_RENESAS [=y] && (ARCH_RENESAS || SUPERH || COMPILE_TEST [=y]) || RAVB [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_RENESAS [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) && PTP_1588_CLOCK_OPTIONAL [=y]
 
-I2C_ROBOTFUZZ_OSIF: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && USB [=m]
+HID_SENSOR_IIO_COMMON: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y]
+      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=n] && USB_HID [=n] && HID_SENSOR_HUB [=y] && IIO [=y] || HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-DRM_VIA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM_LEGACY [=y] && DRM [=m] && PCI [=y]
+VIDEO_UPD64031A: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-SENSORS_VT1211: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+CRC8: y => no
+      Direct dependencies: y
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=y] && OF [=n] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || QED [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_QLOGIC [=y] && PCI [=y] || GPIO_MAX3191X [=y] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=y] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=y] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=y] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=y] && IIO [=y] && SPI [=y] || SCA3300 [=n] && IIO [=y] && SPI [=y] || SCD30_I2C [=n] && IIO [=y] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=n] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=y] && IIO [=y] && I2C [=y] || SPS30_I2C [=y] && IIO [=y] && I2C [=y] || ICP10100 [=n] && IIO [=y] && I2C [=y]
 
-DVB_STB6100: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_PCTV452E [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_DW2102 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_AZ6027 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=n] && PCI [=y] && I2C [=y] && INPUT [=n] && SND [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n]
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 
-SENSORS_W83773G: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=y] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 
-MEDIA_TUNER_QM1D1B0004: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_PT1 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 

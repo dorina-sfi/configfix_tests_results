@@ -1,31 +1,33 @@
-MCTP_TEST: y => no
-      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
+GAMEPORT: y => mod
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y]
 
-BLK_DEV_MD: y => no
-      Direct dependencies: MD [=y]
-      Reverse dependencies: DM_RAID [=m] && MD [=y] && BLK_DEV_DM [=m]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y])
 
-LPC_SCH: m => no
-      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
-      Reverse dependencies: I2C_ISCH [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=y] && X86 && PCI [=y]
+I2C_ALGOPCA: m => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
 
-FAT_KUNIT_TEST: y => mod
-      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=y]
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => mod
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
 
-DM_ZERO: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+CRYPTO_SM3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-SCSI_SMARTPQI: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && !S390
+AD799X: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-NET_DSA_TAG_BRCM_PREPEND: m => no
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: B53 [=m] && NETDEVICES [=y] && NET_DSA [=m]
+UIO_MF624: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
 
-XZ_DEC: y => mod
+INPUT: y => mod
       Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MELLANOX [=y] || SQUASHFS_XZ [=y] && MISC_FILESYSTEMS [=y] && SQUASHFS [=y] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 && PCI [=y] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && X86 && MMU [=y] && ACPI [=n]
 
-MEDIA_CAMERA_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
+FB_PVR2: m => yes
+      Direct dependencies: FB [=m] && HAS_IOMEM [=y] && (SH_DREAMCAST || COMPILE_TEST [=y])
 

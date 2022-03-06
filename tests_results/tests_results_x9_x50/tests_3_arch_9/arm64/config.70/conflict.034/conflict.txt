@@ -1,30 +1,30 @@
-BACKLIGHT_PWM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && PWM [=y]
+DRM_ETNAVIV: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
 
-KALLSYMS: y => no
+RUST_OPT_LEVEL_0: y => no
+      Direct dependencies: <choice>
+
+DVB_STV090x: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+CONFIGFS_FS: y => mod
       Direct dependencies: y
-      Reverse dependencies: KPROBES [=y] && MODULES [=y] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=y]
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=m] && BLK_DEV [=y] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=n] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-REGULATOR_RT4831: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_RT4831 [=m]
+ROCKCHIP_GRF: y => no
+      Direct dependencies: ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]
 
-TOUCHSCREEN_RASPBERRYPI_FW: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && (RASPBERRYPI_FIRMWARE [=m] || RASPBERRYPI_FIRMWARE [=m]=n && COMPILE_TEST [=n])
+CAN_SJA1000_PLATFORM: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_SJA1000 [=m]
 
-AUTOFS_FS: m => no
-      Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=m]
+BCM7XXX_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || BCMGENET [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && HAS_IOMEM [=y]
 
-SENSORS_G760A: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DRM_PANEL_KINGDISPLAY_KD097D04: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-CLK_RENESAS: y => no
-      Direct dependencies: COMMON_CLK [=y]
-
-SENSORS_ADM1266: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m] && GPIOLIB [=y]
-
-PARAVIRT: y => no
-      Direct dependencies: y
-      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=n] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
+RAPIDIO_CHMAN: m => yes
+      Direct dependencies: RAPIDIO [=m]
 

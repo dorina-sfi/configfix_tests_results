@@ -1,21 +1,22 @@
-MFD_STMFX: y => mod
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+CRYPTO_SM3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
 
-ARM64_PA_BITS_48: y => no
-      Direct dependencies: <choice>
+SENSORS_DME1737: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y] && !PPC
 
-ROMFS_BACKED_BY_MTD: y => no
-      Direct dependencies: <choice> && (MTD [=m]=y || ROMFS_FS [=m]=m && MTD [=m])
+SENSORS_ADT7470: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-RPMSG_MTK_SCP: m => no
-      Direct dependencies: MTK_SCP [=m]
-      Reverse dependencies: MTK_SCP [=m] && REMOTEPROC [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+I2C_ALGOPCA: m => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
 
-POWER_RESET: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
+MSM_GCC_8998: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_GPUCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8998 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SND_SOC_AMD_CZ_RT5645_MACH: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_AMD_ACP [=m] && I2C [=y]
+MEDIA_TUNER_TDA9887: y => mod
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
 

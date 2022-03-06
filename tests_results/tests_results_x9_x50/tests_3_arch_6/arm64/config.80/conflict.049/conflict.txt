@@ -1,21 +1,20 @@
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+SENSORS_ADM1029: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-SM_GCC_6350: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+OMAP2PLUS_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_OMAP2PLUS || ARCH_K3 [=y])
+      Reverse dependencies: OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 [=y] || TI_K3_R5_REMOTEPROC [=m] && REMOTEPROC [=y] && ARCH_K3 [=y]
 
-INFINIBAND_USER_ACCESS: m => yes
-      Direct dependencies: INFINIBAND [=m] && MMU [=y]
+MTD_NAND_NANDSIM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m]
 
-COMEDI_ADDI_APCI_1500: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+HID_MAYFLASH: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-USB_OHCI_HCD_PLATFORM: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=y] && PHY_BRCM_USB [=y] || COMPILE_TEST [=n]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=n] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=n]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=n]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+INPUT_MATRIXKMAP: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || KEYBOARD_EP93XX [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=y]) || KEYBOARD_TCA8418 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_MATRIX [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || KEYBOARD_LM8333 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_IMX [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_TEGRA [=y] && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=m] || KEYBOARD_SAMSUNG [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_STI || COMPILE_TEST [=y]) || KEYBOARD_STMPE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_STMPE [=n] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && PLAT_SPEAR || KEYBOARD_TC3589X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_TC3589X [=y] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && TWL4030_CORE [=y] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && CROS_EC [=n] || KEYBOARD_BCM [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=m] && I2C [=y] && INPUT [=y]
 
-DVB_MT352: m => no
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=m] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=m] || DVB_B2C2_FLEXCOP_USB [=m]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_UMT_010 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIGITV [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=m] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+IP_NF_TARGET_REDIRECT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && IP_NF_NAT [=m] && NETFILTER_ADVANCED [=y]
 

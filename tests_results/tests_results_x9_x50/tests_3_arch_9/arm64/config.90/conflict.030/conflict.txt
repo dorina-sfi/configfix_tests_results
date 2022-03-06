@@ -1,28 +1,30 @@
-QCOM_CLK_APCC_MSM8996: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] && ARM64 [=y]
+SCD30_CORE: m => yes
+      Direct dependencies: IIO [=m]
 
-MTD_AR7_PARTS: m => yes
-      Direct dependencies: MTD [=m]
+LEDS_MENF21BMC: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_MENF21BMC [=m]
 
-IIO_BUFFER_DMAENGINE: y => mod
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
+SND_ATMEL_SOC_CLASSD: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=m] && (ARCH_AT91 || COMPILE_TEST [=y])
 
-REGULATOR_MCP16502: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-REGULATOR_LP872X: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+MTD_MAP_BANK_WIDTH_4: y => no
+      Direct dependencies: MTD [=y]
 
-I2C_VIA: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
+BACKLIGHT_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-STM_SOURCE_HEARTBEAT: m => yes
-      Direct dependencies: STM [=m]
+IIO_STM32_TIMER_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=m] && IIO [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 
-BACKLIGHT_LV5207LP: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=m]
+HID_GFRM: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-I2C_IMX: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || ARCH_LAYERSCAPE [=n] || COLDFIRE)
+BCM2835_VCHIQ: m => no
+      Direct dependencies: STAGING [=y] && BCM_VIDEOCORE [=m]
+      Reverse dependencies: SND_BCM2835 [=m] && STAGING [=y] && BCM_VIDEOCORE [=m] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=y]) && SND [=y] || VIDEO_BCM2835 [=m] && STAGING [=y] && BCM_VIDEOCORE [=m] && MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=y])
 

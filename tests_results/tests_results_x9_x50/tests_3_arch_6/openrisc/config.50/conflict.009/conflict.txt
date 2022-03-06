@@ -1,22 +1,23 @@
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
-      Direct dependencies: <choice>
-
-MAILBOX: y => no
+DEBUG_MEMORY_INIT: y => no
       Direct dependencies: y
-      Reverse dependencies: IMX_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=y] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM && ZYNQMP_FIRMWARE [=n]
 
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=y] && FTRACE [=y]
+FB_MODE_HELPERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=y]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=y] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || FB_UVESA [=y] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=y] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=n] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=y] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=y]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_UDL [=y] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y]) || FB_SM750 [=n] && STAGING [=n] && FB [=y] && PCI [=n]
 
-KCMP: y => no
+SCSI_SAS_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+LIBCRC32C: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
-
-SPARSE_IRQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
-
-TEST_LIST_SORT: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=n] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=n] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=y] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=n] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=y] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=n] && BLOCK [=y] || MD_RAID456 [=y] && MD [=y] && BLK_DEV_MD [=y] || DM_PERSISTENT_DATA [=y] && MD [=y] && BLK_DEV_DM [=y] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=n] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n]
 

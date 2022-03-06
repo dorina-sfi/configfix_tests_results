@@ -1,30 +1,32 @@
-CC_OPTIMIZE_FOR_SIZE: y => no
-      Direct dependencies: <choice>
+VIDEO_CX25840: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_CX231XX [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && I2C [=y] && I2C_MUX [=y] || DVB_USB_CXUSB_ANALOG [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_CXUSB [=n] && VIDEO_V4L2 [=m] && (VIDEO_V4L2 [=m]=y || VIDEO_V4L2 [=m]=DVB_USB_CXUSB [=n]) || VIDEO_IVTV [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m] || VIDEO_CX23885 [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=m] && SND [=m] && RC_CORE [=m]
 
-IPMI_WATCHDOG: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
+SERIO_SERPORT: m => no
+      Direct dependencies: SERIO [=m] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=m] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-FAT_KUNIT_TEST: m => yes
-      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=m]
+XILINX_XADC: m => yes
+      Direct dependencies: IIO [=m] && HAS_IOMEM [=y]
 
-NF_CONNTRACK_FTP: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
+SND_SOC_ES8316: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_BYT_CHT_ES8316_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_SOF_ES8336_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=m] || COMPILE_TEST [=n]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n]
 
-IEEE802154_CA8210: m => yes
-      Direct dependencies: NETDEVICES [=y] && IEEE802154_DRIVERS [=m] && MAC802154 [=m] && COMMON_CLK [=y] && SPI [=y]
+MTD_RAW_NAND: m => yes
+      Direct dependencies: MTD [=m]
 
-6LOWPAN_NHC_UDP: m => yes
-      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
+SND_SOC_FSL_ASRC: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && HAS_DMA [=y]
 
-INPUT: y => mod
-      Direct dependencies: y
-      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 [=y] && PCI [=n] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && X86 [=y] && MMU [=y] && ACPI [=y]
+VIDEO_TDA9840: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-I2C_MUX: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=m] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=y] && I2C [=y]
+USB_EZUSB_FX2: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+      Reverse dependencies: USB_SERIAL_WHITEHEAT [=m] && USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m] || USB_SERIAL_KEYSPAN_PDA [=m] && USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m] || USB_SERIAL_KEYSPAN [=m] && USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-X86_PM_TIMER: y => no
-      Direct dependencies: X86 [=y] && (ACPI [=y] || JAILHOUSE_GUEST [=n])
-      Reverse dependencies: JAILHOUSE_GUEST [=n] && HYPERVISOR_GUEST [=y] && X86_64 [=y] && PCI [=n]
+USB_CATC: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m]
 

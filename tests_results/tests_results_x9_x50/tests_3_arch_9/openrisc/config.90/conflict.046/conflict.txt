@@ -1,29 +1,31 @@
-LEDS_LM3601X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && LEDS_CLASS [=m] && I2C [=y]
+VIDEO_OV5645: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && OF [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+SENSORS_GPIO_FAN: m => yes
+      Direct dependencies: HWMON [=m] && OF_GPIO [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+
+MTD_SPI_NOR_SWP_DISABLE_ON_VOLATILE: y => no
       Direct dependencies: <choice>
 
-SENSORS_IRPS5401: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+ZBUD: m => yes
+      Direct dependencies: ZPOOL [=m]
+      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_ZBUD [=n] && <choice>
 
-INPUT_88PM80X_ONKEY: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && MFD_88PM800 [=y]
+ADXL355_SPI: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 
-MTD_ABSENT: m => yes
-      Direct dependencies: MTD [=m]
+DVB_CXD2099: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SND_SOC_WM8580: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_SAMSUNG_SMDK_WM8580 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && (MACH_SMDK6410 || COMPILE_TEST [=n]) && I2C [=y]
-
-PRIME_NUMBERS: y => no
+NLS: y => mod
       Direct dependencies: y
-      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=y] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+      Reverse dependencies: PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=y] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=n] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI || JFS_FS [=n] && BLOCK [=n] || F2FS_FS [=n] && BLOCK [=n] || JOLIET [=n] && BLOCK [=n] && ISO9660_FS [=n] || UDF_FS [=n] && BLOCK [=n] || FAT_FS [=n] && BLOCK [=n] || EXFAT_FS [=n] && BLOCK [=n] || NTFS_FS [=n] && BLOCK [=n] || NTFS3_FS [=n] && BLOCK [=n] || HFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || BEFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 && VBOXGUEST [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=y]
 
-MTD_ABSENT: m => yes
-      Direct dependencies: MTD [=m]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 
-HID_GREENASIA: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SENSORS_LTC2947_SPI: m => yes
+      Direct dependencies: HWMON [=m] && SPI_MASTER [=y]
 

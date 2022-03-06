@@ -1,22 +1,26 @@
-MMA9551: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SCSI: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
 
-FSI_MASTER_GPIO: m => yes
-      Direct dependencies: FSI [=m] && GPIOLIB [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-CRYPTO_MANAGER: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=m] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=m] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=m] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=m] && CRYPTO [=y] || CRYPTO_CBC [=m] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=m] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=n] && CRYPTO [=y] || CRYPTO_XTS [=m] && CRYPTO [=y] || CRYPTO_KEYWRAP [=m] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=m] && CRYPTO [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-MMA8452: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PINCTRL_RENESAS: y => no
+      Direct dependencies: PINCTRL [=y]
 
-RMI4_I2C: m => yes
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m] && I2C [=y]
+BLK_DEV_INTEGRITY: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=n]) && ATA [=y] || DM_INTEGRITY [=n] && MD [=y] && BLK_DEV_DM [=y] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
 
-REGULATOR_WM8994: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_WM8994 [=m]
+PINCTRL_BCM2835: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_BCM2835 [=y]
 
-DEFAULT_SECURITY_DAC: y => no
+ARM64_PA_BITS_48: y => no
       Direct dependencies: <choice>
 

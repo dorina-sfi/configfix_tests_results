@@ -1,22 +1,20 @@
-NET_DSA_TAG_HELLCREEK: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_HIRSCHMANN_HELLCREEK [=y] && NETDEVICES [=y] && HAS_IOMEM [=y] && NET_DSA [=y] && PTP_1588_CLOCK [=y] && LEDS_CLASS [=y] && NET_SCH_TAPRIO [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-VITESSE_PHY: y => no
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
-      Reverse dependencies: NET_DSA_VITESSE_VSC73XX [=y] && NETDEVICES [=y] && NET_DSA [=y]
+HW_RANDOM_IPROC_RNG200: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_BCM_IPROC || ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST [=y])
 
-KERNEL_GZIP: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_GZIP [=y]
+JFFS2_CMODE_NONE: y => no
+      Direct dependencies: <choice>
 
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+IO_DELAY_NONE: y => no
+      Direct dependencies: <choice>
 
-NET_DSA_TAG_HELLCREEK: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_HIRSCHMANN_HELLCREEK [=y] && NETDEVICES [=y] && HAS_IOMEM [=y] && NET_DSA [=y] && PTP_1588_CLOCK [=y] && LEDS_CLASS [=y] && NET_SCH_TAPRIO [=y]
+MTK_SMI: m => no
+      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=y] || MTK_IOMMU [=m] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-DRIVER_PE_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]=y
+KEYBOARD_MTK_PMIC: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && MFD_MT6397 [=y]
 

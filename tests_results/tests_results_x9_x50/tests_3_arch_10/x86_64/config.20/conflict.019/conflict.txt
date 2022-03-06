@@ -1,37 +1,31 @@
-MMC_DW_PLTFM: y => no
-      Direct dependencies: MMC [=y] && MMC_DW [=y]
-      Reverse dependencies: MMC_DW_BLUEFIELD [=n] && MMC [=y] && MMC_DW [=y] || MMC_DW_EXYNOS [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_HI3798CV200 [=n] && MMC [=y] && MMC_DW [=y] || MMC_DW_K3 [=n] && MMC [=y] && MMC_DW [=y] || MMC_DW_ROCKCHIP [=n] && MMC [=y] && MMC_DW [=y] && ARCH_ROCKCHIP
+CCS811: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+TI_ADS7950: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y] && GPIOLIB [=y]
+
+SENSORS_XDPE122: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+SERIO_ARC_PS2: m => yes
+      Direct dependencies: SERIO [=m] && HAS_IOMEM [=y]
+
+SPEAR_ADC: m => yes
+      Direct dependencies: IIO [=m] && (PLAT_SPEAR || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+EXYNOS_ADC: m => yes
+      Direct dependencies: IIO [=m] && (ARCH_EXYNOS || ARCH_S3C24XX || ARCH_S3C64XX || ARCH_S5PV210 || OF [=y] && COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+AD7091R5: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+MMA8452: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=m] && BLK_DEV [=y] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=y]
+
+CC_OPTIMIZE_FOR_SIZE: y => no
       Direct dependencies: <choice>
-
-SPARSEMEM_VMEMMAP: y => no
-      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
-      Reverse dependencies: X86_5LEVEL [=y] && X86_64 [=y]
-
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
-
-LCD_CLASS_DEVICE: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=y] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=y])
-
-AMIGA_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
-
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
-      Direct dependencies: <choice>
-
-RCU_NOCB_CPU: y => no
-      Direct dependencies: TREE_RCU [=y] && (RCU_EXPERT [=n] || NO_HZ_FULL [=y])
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
-
-FB_TILEBLITTING: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
-
-FPGA_REGION: y => no
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 

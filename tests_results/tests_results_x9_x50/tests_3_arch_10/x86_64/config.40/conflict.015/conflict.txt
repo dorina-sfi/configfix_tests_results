@@ -1,34 +1,39 @@
-DVB_CXD2841ER: y => mod
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && SPI_MASTER [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+NET_SWITCHDEV: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NET_DSA [=y] && NET [=y] && (BRIDGE [=y] || BRIDGE [=y]=n) && (HSR [=n] || HSR [=n]=n) && INET [=y] && NETDEVICES [=y]
 
-PM: y => no
+MEDIA_TUNER_XC2028: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_TM6000 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && I2C [=y] && INPUT [=y] && RC_CORE [=n] && USB [=n] || DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && DVB_CORE [=n] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+WIRELESS: y => no
+      Direct dependencies: NET [=y] && !S390
+      Reverse dependencies: WLAN [=y] && NETDEVICES [=y] && !S390 && NET [=y]
+
+CRYPTO_LIB_CHACHA20POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n])
+
+POWER_SUPPLY: y => no
       Direct dependencies: y
-      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
+      Reverse dependencies: ACPI_AC [=n] && ACPI [=y] || ACPI_BATTERY [=y] && ACPI [=y] || ACPI_SBS [=y] && ACPI [=y] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=n]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=y] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=n] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=y] && DELL_SMBIOS [=n]
 
-SND_SOC_WCD938X_SDW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SOUNDWIRE [=y]
+BPF_SYSCALL: y => no
+      Direct dependencies: y
+      Reverse dependencies: AF_KCM [=y] && NET [=y] && INET [=y]
 
-NETFS_STATS: y => no
-      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
-      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
+NF_TPROXY_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && (IPV6 [=n] || IPV6 [=n]=n) || NETFILTER_XT_TARGET_TPROXY [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=n] || IPV6 [=n]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP_NF_MANGLE [=y]
 
-ICP10100: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+X86_PAT: y => no
+      Direct dependencies: MTRR [=y]
 
-SND_SOC_INTEL_MACH: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
-      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
+CRC7: y => no
+      Direct dependencies: y
+      Reverse dependencies: WILC1000_SPI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=y] && INET [=y] && SPI [=y] || WL1251 [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && MAC80211 [=y] || WLCORE_SPI [=y] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && WLCORE [=y] && SPI_MASTER [=y] && OF [=y] || MMC_SPI [=n] && MMC [=n] && SPI_MASTER [=y]
 
-6LOWPAN_NHC_MOBILITY: m => yes
-      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
-
-SI7020: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-PATA_TRIFLEX: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
-
-PATA_RDC: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

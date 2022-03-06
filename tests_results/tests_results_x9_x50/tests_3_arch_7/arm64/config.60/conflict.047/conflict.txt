@@ -1,23 +1,25 @@
-USB_DWC2_PCI: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_DWC2 [=m] && USB_PCI [=y] && (USB_GADGET [=n] || !USB_GADGET [=n])
+USB_CHIPIDEA_MSM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
 
-NOP_USB_XCEIV: m => no
-      Direct dependencies: USB_SUPPORT [=y] && (USB_GADGET [=n] || !USB_GADGET [=n])
-      Reverse dependencies: USB_DWC2_PCI [=m] && USB_SUPPORT [=y] && USB_DWC2 [=m] && USB_PCI [=y] && (USB_GADGET [=n] || !USB_GADGET [=n])
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-SOC_TI: y => no
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+
+SYNC_FILE: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_K3 [=y]
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-COMEDI_ME4000: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+MXC_CLK: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MN [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MP [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MQ [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
 
-PSTORE_DEFLATE_COMPRESS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
+SLUB: y => no
+      Direct dependencies: <choice>
 
-COMEDI_ADL_PCI7X3X: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
-
-SENSORS_GPIO_FAN: m => yes
-      Direct dependencies: HWMON [=m] && OF_GPIO [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 

@@ -1,10 +1,11 @@
-IIO_ST_LSM6DSX: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI [=y] || I3C [=n])
+CRYPTO_NULL: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-RST_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
+MEDIA_TUNER_QM1D1B0004: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_PT1 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MTD_NAND_FSMC: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && OF [=y] && HAS_IOMEM [=y] && (PLAT_SPEAR || ARCH_NOMADIK || ARCH_U8500 || COMPILE_TEST [=y])
+LCD_OTM3225A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y]
 

@@ -1,16 +1,20 @@
-CHARLCD_BL_ON: y => no
-      Direct dependencies: <choice>
+DEBUG_RWSEMS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-COMEDI_DMM32AT: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+PINCONF: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: GENERIC_PINCONF [=y] && PINCTRL [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=n] && ARCH_AT91 || PINCTRL_AMD [=n] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=y] || COMPILE_TEST [=n]) || PINCTRL_DA850_PUPD [=n] && PINCTRL [=y] && OF [=n] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=n]) || PINCTRL_LANTIQ [=n] && PINCTRL [=y] && LANTIQ || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=n] || PINCTRL_SX150X [=y] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_ST [=n] && PINCTRL [=y] && OF [=n] || PINCTRL_KEEMBAY [=n] && PINCTRL [=y] && (ARCH_KEEMBAY || ARM64 && COMPILE_TEST [=n]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS || COMPILE_TEST [=n]) && OF [=n] || PINCTRL_ASPEED [=n] && PINCTRL [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) && OF [=n] && MFD_SYSCON [=y] || PINCTRL_BCM281XX [=n] && PINCTRL [=y] && OF [=n] && (ARCH_BCM_MOBILE || COMPILE_TEST [=n]) || PINCTRL_BCM2835 [=n] && PINCTRL [=y] && OF [=n] && (ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST [=n]) || PINCTRL_BCM63XX [=n] && PINCTRL [=y] || PINCTRL_IPROC_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || PINCTRL_NSP_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=n] && (ARCH_BCM_NSP || COMPILE_TEST [=n]) || PINCTRL_IMX1_CORE [=n] && PINCTRL [=y] || PINCTRL_MXS [=n] && PINCTRL [=y] || PINCTRL_MVEBU [=n] && PINCTRL [=y] || PINCTRL_ARMADA_37XX [=n] && PINCTRL [=y] || PINCTRL_NPCM7XX [=n] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=n]) && OF [=n] || PINCTRL_SAMSUNG [=n] && PINCTRL [=y] && OF_GPIO [=n] || PINCTRL_SPRD [=n] && PINCTRL [=y] || PINCTRL_TEGRA [=n] && PINCTRL [=y] || PINCTRL_TEGRA_XUSB [=n] && PINCTRL [=y] || PINCTRL_MESON [=n] && PINCTRL [=y] && ARCH_MESON && OF [=n] || PINCTRL_LOCHNAGAR [=n] && PINCTRL [=y] && MFD_LOCHNAGAR [=n] || PINCTRL_EQUILIBRIUM [=n] && PINCTRL [=y] && OF [=n] && HAS_IOMEM [=y] && (X86 [=y] || COMPILE_TEST [=n]) || PINCTRL_LYNXPOINT [=y] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) && ACPI [=y] || PINCTRL_MERRIFIELD [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) && X86_INTEL_MID [=n] || PINCTRL_INTEL [=y] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) || PINCTRL_NOMADIK [=n] && PINCTRL [=y] && (ARCH_U8500 || ARCH_NOMADIK) && OF [=n] && GPIOLIB [=y] || PINCTRL_PXA [=n] && PINCTRL [=y] && (ARCH_PXA || COMPILE_TEST [=n]) || PINCTRL_MSM [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_QCOM_SPMI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && OF [=n] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && OF [=n] || PINCTRL_LPASS_LPI [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_SH_PFC [=n] && PINCTRL [=y]
 
-SERIAL_8250_CS: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && PCMCIA [=m] && SERIAL_8250 [=m]
+MTD_NAND_ECC_SW_HAMMING: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && 4xx
 
-REGULATOR_TPS65217: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TPS65217 [=m]
+I2C_ALGOPCA: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
 
-CRYPTO_CHACHA20: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
 

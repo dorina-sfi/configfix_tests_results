@@ -1,23 +1,26 @@
-INPUT_EVDEV: m => yes
-      Direct dependencies: INPUT [=m]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-CRYPTO_SM3: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
+ARM_TIMER_SP804: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
+      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=n]
 
-INPUT_SC27XX_VIBRA: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y])
-
-SENSORS_EMC1403: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-CRC_T10DIF: y => no
+PM_DEVFREQ: y => no
       Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
 
-HID_MALTRON: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
 
-TYPEC_FUSB302: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=y] && TYPEC_TCPM [=m] && I2C [=y] && (EXTCON [=y] || !EXTCON [=y])
+DVB_AF9013: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && I2C_MUX [=y]
+      Reverse dependencies: DVB_USB_AF9015 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && I2C_MUX [=y]
+
+SH_TIMER_CMT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+
+USB_EHCI_ROOT_HUB_TT: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
+      Reverse dependencies: USB_EHCI_FSL [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_MV [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=n]) || USB_CHIPIDEA_HOST [=n] && USB_SUPPORT [=y] && USB_CHIPIDEA [=n] && USB_EHCI_HCD [=y]
 

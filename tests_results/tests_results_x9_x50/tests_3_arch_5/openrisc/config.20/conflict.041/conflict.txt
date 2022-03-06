@@ -1,17 +1,20 @@
-LCD_ILI9320: y => no
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI [=y]
-      Reverse dependencies: LCD_VGG2432A4 [=m] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI_MASTER [=y]
+CRYPTO_LZ4HC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-RC_ATI_REMOTE: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+FPGA_REGION: y => no
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-SERIO: y => mod
-      Direct dependencies: y
-      Reverse dependencies: KEYBOARD_ATKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_LKKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_STOWAWAY [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_SUNKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_XTKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=y] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_SERIAL [=n] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_VSXXXAA [=y] && INPUT [=y] && INPUT_MOUSE [=y] || JOYSTICK_WARRIOR [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_MAGELLAN [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEORB [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEBALL [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_STINGER [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TWIDJOY [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ZHENHUA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_FSIA6B [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || TABLET_SERIAL_WACOM4 [=y] && INPUT [=y] && INPUT_TABLET [=y] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=m] && INPUT [=y] && RMI4_CORE [=m] && RMI4_F03 [=y] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-BATTERY_BQ27XXX_HDQ: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && W1 [=y]
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=y] && I2C [=y]
 
-XZ_DEC_POWERPC: y => no
-      Direct dependencies: XZ_DEC [=y]
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=n] && NET [=n] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=n] && WIRELESS [=n] && MAC80211 [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=n]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=n] && !UML && SND [=n] && SND_CTL_LED [=n] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || LEDS_COBALT_RAQ [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=y]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=n] && INPUT [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 

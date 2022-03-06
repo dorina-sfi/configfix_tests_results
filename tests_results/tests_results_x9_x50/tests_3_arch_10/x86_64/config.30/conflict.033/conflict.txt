@@ -1,36 +1,34 @@
-IPV6_TUNNEL: y => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
-      Reverse dependencies: IPV6_VTI [=n] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=y] || IPV6_FOU_TUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y]
+I2C_MUX: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=m] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=n] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=y] && I2C [=y]
 
-MEDIA_SDR_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-WATCHDOG_PRETIMEOUT_DEFAULT_GOV_PANIC: y => no
-      Direct dependencies: <choice> && WATCHDOG_PRETIMEOUT_GOV_PANIC [=y]
-
-EXTCON: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=n] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
-
-GPIO_AMD_FCH: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: PCENGINES_APU2 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
-
-IO_DELAY_UDELAY: y => no
+KASAN_OUTLINE: y => no
       Direct dependencies: <choice>
 
-UNWINDER_ORC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+CAN_IFI_CANFD: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && HAS_IOMEM [=y]
 
-IIO_BUFFER_DMA: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
 
-APPLE_PROPERTIES: y => no
-      Direct dependencies: EFI [=y] && EFI_STUB [=y] && X86 [=y]
-      Reverse dependencies: USB4 [=y] && PCI [=y] && EFI_STUB [=y] && X86 [=y]
+IPMI_POWEROFF: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+MUX_ADG792A: m => yes
+      Direct dependencies: MULTIPLEXER [=m] && I2C [=y]
+
+VIDEO_VP27SMPX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=n]
+
+LCD_CLASS_DEVICE: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: FB_CLPS711X [=y] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=y] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+
+CRYPTO_CTR: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=m] && NET [=y] && IEEE802154 [=m] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=m] && PCMCIA [=n] || CRYPTO_CCM [=m] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
 

@@ -1,31 +1,35 @@
-LEDS_SPI_BYTE: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && SPI [=y] && OF [=y]
+IQS620AT_TEMP: m => yes
+      Direct dependencies: IIO [=m] && (MFD_IQS62X [=y] || COMPILE_TEST [=n])
 
-EXTCON_USBC_TUSB320: m => yes
-      Direct dependencies: EXTCON [=m] && I2C [=y]
+MDM_GCC_9615: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: MDM_LCC_9615 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-DRM_PANEL_SITRONIX_ST7789V: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+SENSORS_MAX6621: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-MDIO_BUS_MUX_MULTIPLEXER: m => yes
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=m] && OF_MDIO [=m]
+GPIO_LP873X: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP873X [=m]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+NET_DSA_TAG_OCELOT: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MSCC_FELIX [=n] && NETDEVICES [=y] && NET_DSA [=m] && PCI [=n] && NET_VENDOR_MICROSEMI [=n] && NET_VENDOR_FREESCALE [=n] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || NET_DSA_MSCC_SEVILLE [=n] && NETDEVICES [=y] && NET_DSA [=m] && NET_VENDOR_MICROSEMI [=n] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
 
-XZ_DEC_IA64: y => no
-      Direct dependencies: XZ_DEC [=y]
+SYSC_R8A77995: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77995 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-NFC_MRVL_UART: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m] && NFC_NCI_UART [=m]
+CLK_R9A07G044: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R9A07G044 [=y]
 
-MTD_REDBOOT_PARTS: m => yes
-      Direct dependencies: MTD [=m]
+SENSORS_MAX6621: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+ADI_AXI_ADC: m => yes
+      Direct dependencies: IIO [=m] && HAS_IOMEM [=y] && OF [=y]
 
-DRM_PANEL_DSI_CM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 

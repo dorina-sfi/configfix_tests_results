@@ -1,38 +1,40 @@
-SH_TIMER_CMT: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=n] || S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=y] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=y] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-SYSC_R8A774C0: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A774C0 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
-
-LIBCRC32C: y => no
+BLK_DEV_INITRD: y => no
       Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=n] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=y] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=y] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=n] || GFS2_FS [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-SYNC_FILE: y => no
+SOC_TI: y => no
       Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+      Reverse dependencies: ARCH_K3 [=y]
 
-MTD_CFI_I2: y => no
-      Direct dependencies: MTD [=y]
+MESON_CANVAS: y => no
+      Direct dependencies: ARCH_MESON [=n] || COMPILE_TEST [=y]
+      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=n] || COMPILE_TEST [=y]) || VIDEO_MESON_VDEC [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && HAS_DMA [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=y])
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
-
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-
-KALLSYMS: y => no
+NVMEM: y => no
       Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 
-TI_K3_RINGACC: y => no
-      Direct dependencies: SOC_TI [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=n]) && TI_SCI_INTA_IRQCHIP [=y]
-      Reverse dependencies: TI_K3_UDMA [=y] && DMADEVICES [=y] && ARCH_K3 [=y] && TI_SCI_PROTOCOL [=y] && TI_SCI_INTA_IRQCHIP [=y]
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
+
+RENESAS_IRQC: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_R8A73A4 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
 

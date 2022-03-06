@@ -1,17 +1,16 @@
-TOUCHSCREEN_ILI210X: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+HW_RANDOM_ARM_SMCCC_TRNG: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAVE_ARM_SMCCC_DISCOVERY [=y]
 
-PCF50633_ADC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && MFD_PCF50633 [=m]
+COMEDI_PCMCIA_DRIVERS: m => yes
+      Direct dependencies: COMEDI [=y] && PCMCIA [=m]
 
-XEN_PRIVCMD: y => mod
-      Direct dependencies: XEN [=y]
-      Reverse dependencies: XENFS [=y] && XEN [=y]
+APDS9960: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-RMI4_SMB: m => yes
-      Direct dependencies: INPUT [=m] && RMI4_CORE [=m] && I2C [=y]
+MFD_NTXEC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (OF [=y] || COMPILE_TEST [=y]) && I2C [=m]
 
-SLUB_DEBUG: y => no
-      Direct dependencies: SLUB [=y] && SYSFS [=y]
-      Reverse dependencies: KASAN_GENERIC [=y] && <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y] || KASAN_SW_TAGS [=n] && <choice> && HAVE_ARCH_KASAN_SW_TAGS [=y] && CC_HAS_KASAN_SW_TAGS [=n] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y]
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 

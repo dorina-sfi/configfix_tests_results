@@ -1,35 +1,35 @@
-RMI4_F12: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-MPLS: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n]
 
-BINFMT_ELF: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: IA32_EMULATION [=y] && X86_64 [=y]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=n] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=y] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 [=y] && PCI [=n]
 
-ACPI_FAN: y => no
-      Direct dependencies: ACPI [=y] && THERMAL [=y]
-      Reverse dependencies: INT340X_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_64 [=y] && ACPI [=y] && PCI [=y]
+PNP: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
+      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
 
-CRYPTO_CTR: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=y] || AIRO_CS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=n] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=y] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 [=y] && PCI [=n]
 
-DEBUG_KERNEL: y => no
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=n] && <choice> && SMP [=n] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
+
+CRC_T10DIF: y => no
       Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=y] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
 
-MTD_CFI_I2: y => no
-      Direct dependencies: MTD [=y]
-
-CRYPTO_DRBG_MENU: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
-
-REGULATOR_FIXED_VOLTAGE: y => no
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=n])
+MEDIA_TUNER_TDA827X: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_TDA8290 [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
 

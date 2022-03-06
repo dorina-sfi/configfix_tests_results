@@ -1,15 +1,18 @@
-TEE_BNXT_FW: m => yes
-      Direct dependencies: ARCH_BCM_IPROC && OPTEE [=n] || COMPILE_TEST [=y] && TEE [=m]
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
 
-ST_UVIS25: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=m] || SPI [=n])
+NETWORK_SECMARK: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: SECURITY_SELINUX [=y] && SECURITY_NETWORK [=y] && AUDIT [=y] && NET [=y] && INET [=y]
 
-I2C_MUX_REG: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m] && HAS_IOMEM [=y]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=y])
 
-MODULE_COMPRESS_GZIP: y => no
-      Direct dependencies: <choice>
+BLOCK: y => no
+      Direct dependencies: y
 
-SVC_I3C_MASTER: m => yes
-      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
+MOUSE_PS2_SYNAPTICS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 

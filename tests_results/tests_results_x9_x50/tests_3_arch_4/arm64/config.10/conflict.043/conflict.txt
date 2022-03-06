@@ -1,12 +1,14 @@
-PREEMPT: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+MEDIA_TUNER_XC4000: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-IQS620AT_TEMP: m => yes
-      Direct dependencies: IIO [=y] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
+TIPC: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 
-I2C_SH_MOBILE: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_SHMOBILE || ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+I2C_MUX_LTC4306: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m]
 
-DRM_PANEL_KHADAS_TS050: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=y] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=y] && ACRN_GUEST
 

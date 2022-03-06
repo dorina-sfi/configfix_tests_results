@@ -1,20 +1,19 @@
-CPU_SUP_AMD: y => no
-      Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-AMILO_RFKILL: m => yes
-      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && RFKILL [=m] && SERIO_I8042 [=m]
+NFT_REDIR: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=m] && NF_NAT [=m]
 
-PCMCIA: m => yes
-      Direct dependencies: PCCARD [=m]
+MDIO_BITBANG: m => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y]
+      Reverse dependencies: NET_DSA_MICROCHIP_KSZ8863_SMI [=m] && NETDEVICES [=y] && NET_DSA [=m] && NET_DSA_MICROCHIP_KSZ8795 [=m] || FS_ENET_MDIO_FCC [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=n] && FS_ENET [=n] && CPM2 || AX88796 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_8390 [=n] && (ARM || MIPS || SUPERH || ZORRO || COMPILE_TEST [=n]) || SH_ETH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_RENESAS [=y] && (ARCH_RENESAS || SUPERH || COMPILE_TEST [=n]) || RAVB [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_RENESAS [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) && PTP_1588_CLOCK_OPTIONAL [=y]
 
-TEST_SORT: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+IP_SET_LIST_SET: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_SET [=m]
 
-FPGA_BRIDGE: m => yes
-      Direct dependencies: FPGA [=m]
-      Reverse dependencies: FPGA_DFL [=m] && FPGA [=m] && HAS_IOMEM [=y]
+HZ_1000: y => no
+      Direct dependencies: <choice>
 
-DRM_SII9234: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+AD7150: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

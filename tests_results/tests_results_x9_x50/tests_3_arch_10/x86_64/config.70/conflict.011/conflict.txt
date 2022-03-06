@@ -1,35 +1,34 @@
-IIO_SIMPLE_DUMMY: m => yes
-      Direct dependencies: IIO [=m] && IIO_SW_DEVICE [=m]
+SURFACE_ACPI_NOTIFY: m => yes
+      Direct dependencies: SURFACE_PLATFORMS [=y] && SURFACE_AGGREGATOR [=m]
 
-KXCJK1013: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CHARGER_MP2629: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MP2629 [=y] && MP2629_ADC [=m] && IIO [=y]
 
-CRYPTO_CTR: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=m] && PCMCIA [=n] || CRYPTO_CCM [=m] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+DVB_DIB3000MB: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIBUSB_MB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && (DVB_DIB3000MC [=m] || !DVB_DIB3000MC [=m])
 
-IIO_ST_MAGN_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=n] && IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
+LEDS_CLASS: y => mod
+      Direct dependencies: NEW_LEDS [=y]
+      Reverse dependencies: TS5500 [=n] && X86_32 [=n] && MELAN [=n] || ADB_PMU_LED [=n] && MACINTOSH_DRIVERS [=y] && PPC_PMAC && ADB_PMU [=n] || BRCMSMAC [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && MAC80211 [=n] && BCMA_POSSIBLE [=y] && BCMA_DRIVER_GPIO [=n] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || INPUT_WISTRON_BTNS [=n] && INPUT [=y] && INPUT_MISC [=y] && X86_32 [=n] || SENSORS_APPLESMC [=n] && HWMON [=y] && INPUT [=y] && X86 [=y] || IR_REDRAT3 [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=n] || IR_WINBOND_CIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && (X86 [=y] && PNP [=y] || COMPILE_TEST [=y]) || IR_TTUSBIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=n] || BACKLIGHT_ADP8860 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_ADP8870 [=m] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_LM3639 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || SND_HDA_GENERIC [=n] && SOUND [=n] && !UML && SND [=n] && SND_HDA [=n] && SND_HDA_GENERIC_LEDS [=n] || SND_USB_TONEPORT [=n] && SOUND [=n] && !UML && SND [=n] && SND_USB [=n] && USB [=n] || HID_LENOVO [=m] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y] || HUAWEI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=y] && ACPI_WMI [=n] && INPUT [=y] || ACER_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=n] || ASUS_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) || ASUS_WIRELESS [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && INPUT [=y] || ASUS_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && ACPI_BATTERY [=y] && INPUT [=y] && HWMON [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (RFKILL [=n] || RFKILL [=n]=n) && HOTPLUG_PCI [=y] && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) || EEEPC_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || FUJITSU_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && INPUT [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) || HP_ACCEL [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && INPUT [=y] && ACPI [=y] && SERIO_I8042 [=n] || IDEAPAD_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && RFKILL [=n] && INPUT [=y] && SERIO_I8042 [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && (ACPI_WMI [=n] || ACPI_WMI [=n]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=m] || SAMSUNG_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && BACKLIGHT_CLASS_DEVICE [=y] || ACPI_TOSHIBA [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_WMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n) && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && (RFKILL [=n] || RFKILL [=n]=n) && IIO [=y] || LG_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_WMI [=n] && INPUT [=y] || SYSTEM76_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=y] && HWMON [=y] && INPUT [=y] || TOPSTAR_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && INPUT [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-KASAN_OUTLINE: y => no
-      Direct dependencies: <choice>
+BLK_DEV_SD: m => yes
+      Direct dependencies: SCSI [=m]
 
-VCNL4035: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PVH: y => no
+      Direct dependencies: HYPERVISOR_GUEST [=y]
+      Reverse dependencies: XEN_PVH [=y] && HYPERVISOR_GUEST [=y] && XEN [=y] && XEN_PVHVM [=y] && ACPI [=y]
 
-AD5272: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+DRM_QXL: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y]
+VIDEO_AK7375: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+SERIAL_SH_SCI_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_SH_SCI [=y]=y
 
-SERIO_SERPORT: y => no
-      Direct dependencies: SERIO [=y] && TTY [=y]
-      Reverse dependencies: I2C_TAOS_EVM [=m] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
+DVB_TUNER_DIB0070: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

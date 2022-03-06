@@ -1,30 +1,32 @@
-TEGRA_IVC: y => no
-      Direct dependencies: ARCH_TEGRA [=y]
-      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=n] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
 
-CRYPTO_DEFLATE: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=m] && NET [=y] && INET [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 
-CLK_RCAR_CPG_LIB: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+DW_APB_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+USB_OHCI_HCD_PLATFORM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
+      Reverse dependencies: USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=y] && USB_SUPPORT [=y] && USB [=y] && BCMA [=y] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && SSB [=n] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=n]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=n]=y || SSB [=n]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=n]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
 
-DEVFREQ_GOV_PASSIVE: y => mod
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+PARPORT_PANEL: y => no
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 
-CRYPTO_CRC32C: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=m] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && INET [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=m] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-SERIO_PARKBD: m => yes
-      Direct dependencies: SERIO [=y] && PARPORT [=m]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]) && OF [=y]
 

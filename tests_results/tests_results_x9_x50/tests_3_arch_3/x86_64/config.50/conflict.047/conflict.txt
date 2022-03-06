@@ -1,10 +1,11 @@
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
-
-SPARSEMEM_MANUAL: y => no
-      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
-
-CPU_SUP_CENTAUR: y => no
+PINCTRL: y => no
       Direct dependencies: y
+      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=n] || MFD_MADERA [=m] && HAS_IOMEM [=y]
+
+AGP_SIS: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && AGP [=m] && X86 [=y]
+
+CRYPTO_LIB_BLAKE2S: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
 

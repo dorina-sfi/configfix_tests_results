@@ -1,23 +1,25 @@
-STK8BA50: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+ALLOW_DEV_COREDUMP: y => no
+      Direct dependencies: y
 
-SENSORS_IIO_HWMON: m => yes
-      Direct dependencies: HWMON [=y] && IIO [=m]
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-SND_KORG1212: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
+SC_GCC_7280: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SND_HDA_INTEL: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
+DAX: y => no
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
 
-MANAGER_SBS: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
+USB_EHCI_ROOT_HUB_TT: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
+      Reverse dependencies: USB_EHCI_FSL [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_MV [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=y]) || USB_CHIPIDEA_HOST [=y] && USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && USB_EHCI_HCD [=y]
 
-SND_SOC_ADAU7002: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP [=m] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || SND_SOC_SC7180 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_QCOM [=n] && I2C [=y] && GPIOLIB [=y]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 
-I2C_MUX: m => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=m] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=m] && I2C [=y]
+MOUSE_PS2_LOGIPS2PP: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 

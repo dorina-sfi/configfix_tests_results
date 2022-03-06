@@ -1,23 +1,25 @@
-FPGA_DFL_FME_MGR: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-ATLAS_EZO_SENSOR: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-BACKLIGHT_CLASS_DEVICE: y => mod
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 [=y] && PCI [=y] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=n] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=n] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=n]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ILI9163 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ILI9486 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_MI0283QT [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || DRM_GUD [=n] && HAS_IOMEM [=y] && DRM [=n] && USB [=n] && MMU [=y] || DRM_PARADE_PS8622 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || FB_BACKLIGHT [=y] && HAS_IOMEM [=y] && FB [=y] || FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=y] && MX3_IPU [=n] || USB_APPLEDISPLAY [=n] && USB_SUPPORT [=n] && USB [=n] || FB_OLPC_DCON [=n] && STAGING [=n] && OLPC [=n] && FB [=y] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=n] || SAMSUNG_Q10 [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] || ACPI_CMPC [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n)
+KEYS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=n] && INET [=n] || CEPH_LIB [=n] && NET [=n] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=y] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=y] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || INTEGRITY_SIGNATURE [=y] && INTEGRITY [=y] || EVM [=y] && INTEGRITY [=y]
 
-TCG_NSC: m => yes
-      Direct dependencies: TCG_TPM [=m] && X86 [=y]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+64BIT: y => no
+      Direct dependencies: y
 
-T5403: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-AD5110: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+FHANDLE: y => no
+      Direct dependencies: y
 

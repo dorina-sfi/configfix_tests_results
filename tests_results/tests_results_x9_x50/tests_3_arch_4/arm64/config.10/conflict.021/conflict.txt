@@ -1,13 +1,14 @@
-MLXREG_LC: m => yes
-      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=m] && I2C [=m]
+NFC_PN532_UART: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && SERIAL_DEV_BUS [=y]
 
-DPS310: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MTD_CFI_AMDSTD: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
 
-CRYPTO_LIB_CHACHA: y => mod
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+KEYS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=y] && INET [=y] || CEPH_LIB [=m] && NET [=y] && INET [=y] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
 
-REGULATOR_PF8X00: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
+VIDEO_OV2659: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && GPIOLIB [=y]
 

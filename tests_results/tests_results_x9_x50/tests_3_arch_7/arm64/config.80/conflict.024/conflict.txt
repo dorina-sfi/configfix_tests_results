@@ -1,22 +1,24 @@
-MFD_RT5033: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-IR_RC6_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
 
-TOUCHSCREEN_EKTF2127: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+NAMESPACES: y => no
+      Direct dependencies: MULTIUSER [=y]
 
-ACPI_TINY_POWER_BUTTON: m => yes
-      Direct dependencies: ACPI [=y] && !ACPI_BUTTON [=m]
+SERIAL_8250_SHARE_IRQ: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_EXTENDED [=y]
+      Reverse dependencies: SERIAL_8250_IOC3 [=y] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
 
-FXOS8700_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
 
-MCP4725: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=y] && RTC_CLASS [=y]
 
-W1_SLAVE_DS2781: y => mod
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=y] || USB_DWC2 [=n] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=y]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MTU3 [=y]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=y]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=y] && (MIPS || COMPILE_TEST [=y]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=y]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=y] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=y] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=y]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y]) && EXTCON [=y] || TYPEC_TCPM [=y] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI [=y] && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 && ACPI [=y] && IOSF_MBI
 

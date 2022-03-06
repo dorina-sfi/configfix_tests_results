@@ -1,20 +1,20 @@
-CMA_SIZE_SEL_MBYTES: y => no
-      Direct dependencies: <choice>
+SC_GCC_7180: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7180 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASS_CORECC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_MSS_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-OPENVSWITCH_GRE: m => yes
-      Direct dependencies: NET [=y] && OPENVSWITCH [=m] && NET_IPGRE [=m]
+USB_DWC3_OF_SIMPLE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_DWC3 [=m] && OF [=y] && COMMON_CLK [=y]
 
-FPGA_REGION: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m]
-      Reverse dependencies: FPGA_DFL [=m] && FPGA [=m] && HAS_IOMEM [=y]
+DRM_PANFROST: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
 
-AL3010: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+USB_XHCI_MTK: m => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && (MIPS && SOC_MT7621 || ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: USB_MTU3 [=m] && (USB [=y] || USB_GADGET [=m]) && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && (EXTCON [=y] || !EXTCON [=y]) && USB_SUPPORT [=y] && USB_XHCI_HCD [=y]
 
-M62332: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_CORSAIR: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m] && USB [=y] && LEDS_CLASS [=m]
 
-MEDIA_TUNER_FC0012: m => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_RTL28XXU [=m] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && I2C_MUX [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+DRM_PANEL_SAMSUNG_S6E63M0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 

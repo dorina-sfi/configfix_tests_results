@@ -1,33 +1,35 @@
-MMC_DW_ROCKCHIP: m => yes
-      Direct dependencies: MMC [=m] && MMC_DW [=m] && ARCH_ROCKCHIP [=y]
-
-CRYPTO_DEFLATE: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=y] && NET [=y] && INET [=y] || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-
-SENSORS_VT1211: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
-
-LTC2632: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
-
-VIDEO_MESON_GE2D: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_MESON [=y] || COMPILE_TEST [=n])
-
-SENSORS_MAX16065: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-AD8366: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y] && GPIOLIB [=y]
-
 IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=m] && IIO [=m] && SPI_MASTER [=y] || AD7768_1 [=m] && IIO [=m] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=m] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=y] && IIO [=m] && IIO_SIMPLE_DUMMY [=m]
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
 
-MTD_CFI_I2: y => no
-      Direct dependencies: MTD [=m]
+MFD_STMFX: y => mod
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+
+CRYPTO_AES_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=n] || COMPILE_TEST [=y])
+
+BRIDGE_EBT_LIMIT: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
+
+SCSI: m => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=m] && HAS_IOMEM [=y] && BLOCK [=y]
+
+CMA_SIZE_SEL_PERCENTAGE: y => no
+      Direct dependencies: <choice>
+
+XZ_DEC_SPARC: y => no
+      Direct dependencies: XZ_DEC [=y]
+
+SERIAL_8250_OMAP: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_OMAP2PLUS || ARCH_K3 [=n] || COMPILE_TEST [=y])
+
+QCOM_SPMI_VADC: m => yes
+      Direct dependencies: IIO [=y] && SPMI [=m]
 

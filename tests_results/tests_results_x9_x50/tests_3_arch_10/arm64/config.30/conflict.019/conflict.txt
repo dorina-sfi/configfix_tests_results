@@ -1,32 +1,33 @@
-VIDEO_SAMSUNG_S5P_MFC: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+GREYBUS_ARCHE: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m] && (USB_HSIC_USB3613 || COMPILE_TEST [=y])
 
-TYPEC_RT1711H: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && TYPEC_TCPM [=m] && TYPEC_TCPCI [=m]
+NVME_TARGET_TCP: m => yes
+      Direct dependencies: INET [=y] && NVME_TARGET [=m]
 
-IRQ_POLL: y => no
+RATIONAL_KUNIT_TEST: y => mod
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
+
+BT_QCOMSMD: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && (RPMSG [=m] || COMPILE_TEST [=y] && RPMSG [=m]=n) && (QCOM_WCNSS_CTRL [=n] || COMPILE_TEST [=y] && QCOM_WCNSS_CTRL [=n]=n)
+
+QRTR_TUN: m => yes
+      Direct dependencies: NET [=y] && QRTR [=m]
+
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+
+XZ_DEC_SPARC: y => no
+      Direct dependencies: XZ_DEC [=y]
+
+PRU_REMOTEPROC: m => yes
+      Direct dependencies: REMOTEPROC [=y] && TI_PRUSS [=m]
+
+DEVFREQ_EVENT_EXYNOS_PPMU: y => mod
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+
+PINCTRL: y => no
       Direct dependencies: y
-      Reverse dependencies: INFINIBAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=y] || IPV6 [=m]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && ATA [=m] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n)
-
-JOYSTICK_WALKERA0701: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_JOYSTICK [=y] && HIGH_RES_TIMERS [=y] && PARPORT [=m]
-
-INTERRUPT_CNT: m => yes
-      Direct dependencies: COUNTER [=m] && GPIOLIB [=y]
-
-CHARGER_AXP20X: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_AXP20X [=m] && AXP20X_ADC [=m] && IIO [=y]
-
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=m] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
-
-SERIAL_8250_UNIPHIER: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n])
-
-USB_SISUSBVGA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && (USB_MUSB_HDRC [=m] || USB_EHCI_HCD [=m])
-
-RDS_TCP: m => yes
-      Direct dependencies: NET [=y] && RDS [=y] && (IPV6 [=m] || !IPV6 [=m])
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=y] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=n] || ARCH_HISI [=y] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=n] || ARCH_QCOM [=y] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 

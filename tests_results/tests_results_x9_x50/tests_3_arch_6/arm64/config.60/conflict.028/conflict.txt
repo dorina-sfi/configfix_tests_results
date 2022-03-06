@@ -1,18 +1,22 @@
-MCP4018: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
 
-CXL_MEM: m => yes
-      Direct dependencies: CXL_BUS [=m]
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-MODULE_SIG_KEY_TYPE_ECDSA: y => no
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
+
+NAMESPACES: y => no
+      Direct dependencies: MULTIUSER [=y]
+
+CPU_FREQ_DEFAULT_GOV_USERSPACE: y => no
       Direct dependencies: <choice>
-
-IR_MTK: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
-
-COMEDI_C6XDIGIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
-
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
 

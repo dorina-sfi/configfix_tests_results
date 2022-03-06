@@ -1,31 +1,38 @@
-KHADAS_MCU_FAN_THERMAL: m => yes
-      Direct dependencies: THERMAL [=y] && (OF [=y] || COMPILE_TEST [=y]) && MFD_KHADAS_MCU [=m]
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-MTD_DATAFLASH: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+CRYPTO_SHA3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-MTD_ABSENT: m => yes
-      Direct dependencies: MTD [=m]
+CRC16: y => no
+      Direct dependencies: y
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI && EFI && SPI [=y] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=n] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=y] && W1 [=y] || W1_SLAVE_DS28E04 [=n] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
 
-NETFILTER_XT_TARGET_NFQUEUE: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
+MEDIA_TUNER_TDA827X: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_M920X [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_TTUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_SAA7134 [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_TDA8290 [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
 
-SSB: y => no
-      Direct dependencies: SSB_POSSIBLE [=y]
-      Reverse dependencies: B44 [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && SSB_POSSIBLE [=y] && HAS_DMA [=y] || B43 [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && (BCMA_POSSIBLE [=y] || SSB_POSSIBLE [=y]) && MAC80211 [=n] && HAS_DMA [=y] && B43_SSB [=n] || B43LEGACY [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && SSB_POSSIBLE [=y] && MAC80211 [=n] && HAS_DMA [=y]
+KUNIT_DEBUGFS: y => no
+      Direct dependencies: KUNIT [=y]
 
-NETFILTER_XT_MATCH_IPCOMP: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-MTD_DATAFLASH: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+RATIONAL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
 
-SPI_NXP_SPIFI: m => yes
-      Direct dependencies: MTD [=m] && MTD_SPI_NOR [=m] && OF [=y] && (ARCH_LPC18XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-SPI_ASPEED_SMC: m => yes
-      Direct dependencies: MTD [=m] && MTD_SPI_NOR [=m] && (ARCH_ASPEED || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF [=y]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 
-FB_OMAP2_PANEL_SONY_ACX565AKM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && DRM_PANEL_SONY_ACX565AKM [=n]=n
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 

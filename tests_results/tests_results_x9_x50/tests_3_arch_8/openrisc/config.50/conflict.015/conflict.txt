@@ -1,32 +1,30 @@
-EXPERT: y => no
+EXTCON: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-MXC_CLK: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
-      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MN [=n] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MQ [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=y]
 
-EXT4_FS: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=n] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-SCSI_SAS_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+HID_SENSOR_IIO_COMMON: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y]
+      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=y] && USB_HID [=n] && HID_SENSOR_HUB [=y] && IIO [=y] || HID_SENSOR_ACCEL_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_GYRO_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-I2C_SMBUS: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=n] && POWER_SUPPLY [=n] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-MD_RAID1: y => no
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 

@@ -1,34 +1,36 @@
-SECURITYFS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=n] && INTEGRITY [=n]
+DRM_PANEL_SITRONIX_ST7701: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-MTD_NAND_INTEL_LGM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+CRYPTO_GCM: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=m] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=n] && NET [=y] && INET [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx
 
-LCD_AMS369FG06: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+DRM_PARADE_PS8640: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-NLS_UTF8: y => mod
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+DVB_SP887X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-BMC150_MAGN_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_SEQ_DUMMY: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SEQUENCER [=m]
 
-NFS_V4: m => yes
-      Direct dependencies: NETWORK_FILESYSTEMS [=y] && NFS_FS [=m]
+SCSI_SAS_ATTRS: m => no
+      Direct dependencies: SCSI [=m]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=m] && SCSI [=m] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=m]
 
-VL6180: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IP_NF_MATCH_AH: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && NETFILTER_ADVANCED [=y]
 
-QCOM_SPMI_ADC_TM5: m => yes
-      Direct dependencies: THERMAL [=y] && (ARCH_QCOM [=y] && OF [=y] || COMPILE_TEST [=n]) && OF [=y] && SPMI [=m] && IIO [=m]
+CRYPTO_AES_ARM64_CE: m => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=m] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=m] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+NF_NAT: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=y]
+      Reverse dependencies: NFT_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=n]) || IP_NF_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && NF_CONNTRACK [=y] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=n] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-IIO_TRIGGERED_EVENT: m => no
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: HI8435 [=m] && IIO [=m] && SPI [=y]
+SRAM: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: VIDEO_CODA [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) || TEGRA_VDE [=m] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_MARVELL_CESA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (PLAT_ORION || ARCH_MVEBU [=n])
 

@@ -1,34 +1,39 @@
-PCIE_BUS_DEFAULT: y => no
-      Direct dependencies: <choice> && PCI [=y]
+WATCHDOG_PRETIMEOUT_DEFAULT_GOV_PANIC: y => no
+      Direct dependencies: <choice> && WATCHDOG_PRETIMEOUT_GOV_PANIC [=y]
 
-IPMI_DEVICE_INTERFACE: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
+CRYPTO_AES_ARM64_CE: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
+CRYPTO_SEQIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
 
-IIO_RESCALE: m => yes
-      Direct dependencies: IIO [=m] && (OF [=y] || COMPILE_TEST [=n])
-
-TI_SCI_PROTOCOL: y => mod
-      Direct dependencies: TI_MESSAGE_MANAGER [=y]
-      Reverse dependencies: ARCH_K3 [=y]
-
-INTEL_TH_STH: m => yes
-      Direct dependencies: INTEL_TH [=y] && STM [=m]
-
-VEML6070: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-CORESIGHT_LINKS_AND_SINKS: m => no
-      Direct dependencies: CORESIGHT [=m]
-      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=m] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=m] && ARM64 [=y] || CORESIGHT_STM [=m] && CORESIGHT [=m] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
-
-MMA7660: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-DVB_MT352: m => no
+DVB_PLL: y => no
       Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=m] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=m] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_UMT_010 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIGITV [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=m] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=y] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=y] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_A800 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIBUSB_MB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && (DVB_DIB3000MC [=y] || !DVB_DIB3000MC [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_UMT_010 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIGITV [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_NOVA_T_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_OPERA1 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_AF9015 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_GL861 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=y] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && VIDEO_DEV [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && I2C_ALGOBIT [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_PT1 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_MANTIS [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=y] && PCI [=y] && I2C [=y] || DVB_HOPPER [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=y] && PCI [=y] && I2C [=y]
+
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=n]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) || SPI_LM70_LLP [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=n])
+
+DVB_LGDT3305: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_MXL111SF [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=y] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+FB_TILEBLITTING: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
+
+DVB_TUNER_CX24113: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=y] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=y] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
+
+CPU_IDLE_GOV_LADDER: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
 

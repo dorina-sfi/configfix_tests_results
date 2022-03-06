@@ -1,6 +1,8 @@
-SENSORS_STTS751: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+MEDIA_TUNER_TDA9887: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
 
-SENSORS_LM63: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
 

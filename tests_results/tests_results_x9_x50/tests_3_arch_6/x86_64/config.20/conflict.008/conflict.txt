@@ -1,21 +1,19 @@
-THERMAL_DEFAULT_GOV_USER_SPACE: y => no
-      Direct dependencies: <choice>
+NET_DSA_MICROCHIP_KSZ9477: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
 
-CPU_SUP_HYGON: y => no
-      Direct dependencies: y
+NET_DSA_TAG_BRCM: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: B53 [=m] && NETDEVICES [=y] && NET_DSA [=m] || NET_DSA_BCM_SF2 [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y]
 
-HZ_PERIODIC: y => no
-      Direct dependencies: <choice>
+HERMES: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTERSIL [=y] && (PPC_PMAC || PCI [=n] || PCMCIA [=m]) && CFG80211 [=m]
 
-CRYPTO_SERPENT_AVX_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+UBIFS_FS: m => yes
+      Direct dependencies: MISC_FILESYSTEMS [=y] && MTD_UBI [=m]
 
-MEMBARRIER: y => no
-      Direct dependencies: y
-      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
+SENSORS_W83773G: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-INTEL_MEI: y => no
-      Direct dependencies: X86 [=y] && PCI [=y]
-      Reverse dependencies: INTEL_MEI_ME [=y] && X86 [=y] && PCI [=y] || INTEL_MEI_TXE [=n] && X86 [=y] && PCI [=y]
+BRCMSMAC: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_BROADCOM [=y] && MAC80211 [=m] && BCMA_POSSIBLE [=y]
 

@@ -1,19 +1,20 @@
-UNIX_DIAG: m => yes
-      Direct dependencies: NET [=y] && UNIX [=m]
+VIDEO_SR030PC30: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-SND_SOC_RK817: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && MFD_RK808 [=m]
+FPGA_BRIDGE: m => yes
+      Direct dependencies: FPGA [=m]
+      Reverse dependencies: FPGA_DFL [=n] && FPGA [=m] && HAS_IOMEM [=y]
 
-SENSORS_TMP108: m => yes
+VIDEO_WM8775: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m] || VIDEO_CX88 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+HID_ROCCAT: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m] && USB_HID [=m]
+
+SENSORS_PCF8591: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-QRTR_SMD: m => yes
-      Direct dependencies: NET [=y] && QRTR [=m] && (RPMSG [=m] || COMPILE_TEST [=n] && RPMSG [=m]=n)
-
-SENSORS_CORSAIR_CPRO: m => yes
-      Direct dependencies: HWMON [=m] && HID [=y]
-
-IIO_BUFFER_DMA: y => mod
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
+SENSORS_LM80: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

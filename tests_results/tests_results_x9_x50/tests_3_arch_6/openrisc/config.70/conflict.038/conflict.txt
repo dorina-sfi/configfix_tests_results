@@ -1,22 +1,20 @@
-DNS_RESOLVER: y => no
-      Direct dependencies: NET [=y] && KEYS [=y]
-      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=n] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
+MMC_SDHCI_TEGRA: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_TEGRA || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+MAILBOX: y => no
+      Direct dependencies: y
+      Reverse dependencies: IMX_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=y] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM && ZYNQMP_FIRMWARE [=n]
 
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-CGROUP_NET_CLASSID: y => no
-      Direct dependencies: NET [=y] && CGROUPS [=y]
-      Reverse dependencies: NETFILTER_XT_MATCH_CGROUP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=n] && CGROUPS [=y] || NET_CLS_CGROUP [=y] && NET [=y] && NET_SCHED [=y] && CGROUPS [=y]
+DRM_PANEL_VISIONOX_RM69299: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y]
 
-NLS_UTF8: y => no
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+KUNIT_EXAMPLE_TEST: m => yes
+      Direct dependencies: KUNIT [=m]
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+IOMMU_DEFAULT_PASSTHROUGH: y => no
+      Direct dependencies: <choice>
 

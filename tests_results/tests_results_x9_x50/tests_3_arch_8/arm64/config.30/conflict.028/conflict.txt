@@ -1,27 +1,31 @@
-STM32_DFSDM_ADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+NETFILTER_XTABLES: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: IP_NF_IPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=y] || IP6_NF_IPTABLES [=y] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=y]
 
-IIO_INTERRUPT_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 
-ARMADA_37XX_RWTM_MBOX: y => mod
-      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && OF [=y]
-      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
-
-MMC_ALCOR: m => yes
-      Direct dependencies: MMC [=m] && MISC_ALCOR_PCI [=y]
-
-ITG3200: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
-
-PINCTRL_PFC_R8A774B1: y => no
+PINCTRL_RENESAS: y => no
       Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774B1 [=y]
 
-PINCTRL_SM8350: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && PINCTRL_MSM [=m]
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=y] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=y] || INA2XX_ADC [=y] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=y] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=y] && IIO [=y] && IIO_SSP_SENSORHUB [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=n] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-CRYPTO_DES: m => no
+CRYPTO_CMAC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SUN8I_CE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=n] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=m] && CRYPTO_DEV_FSL_CAAM_JR [=m] && FSL_DPAA [=y] && NET [=n]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=n]
+
+MFD_VX855: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: GPIO_VX855 [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && (X86 || COMPILE_TEST [=y]) && PCI [=y]
+
+NET_NSH: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y] && (!NF_DEFRAG_IPV6 [=y] || NF_DEFRAG_IPV6 [=y]) && (!NF_NAT [=y] || NF_NAT [=y]) && (!NETFILTER_CONNCOUNT [=y] || NETFILTER_CONNCOUNT [=y]))
+
+AUXDISPLAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 

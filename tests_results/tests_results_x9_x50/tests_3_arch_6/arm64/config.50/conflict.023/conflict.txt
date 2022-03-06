@@ -1,20 +1,21 @@
-VIDEO_CS3308: m => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_CX23885 [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=m]
+SCSI_SAS_LIBSAS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_AIC94XX [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] || SCSI_HISI_SAS [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=n]) && ATA [=m] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && X86 || SCSI_PM8001 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y]
 
-IMX_INTMUX: y => no
-      Direct dependencies: y
+SM_GCC_8150: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_GPUCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-MDIO_DEVICE: y => mod
-      Direct dependencies: NETDEVICES [=y]
-      Reverse dependencies: PHYLIB [=y] && NETDEVICES [=y]
+COMMON_CLK_S2MPS11: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (MFD_SEC_CORE [=m] || COMPILE_TEST [=n])
 
-MTD_SST25L: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 
-EXTCON_MAX14577: m => yes
-      Direct dependencies: EXTCON [=m] && MFD_MAX14577 [=m]
+REGULATOR_MC13892: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MC13XXX [=m]
 
-QCOM_WCNSS_CTRL: m => yes
-      Direct dependencies: (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && RPMSG [=m]
+HW_RANDOM_EXYNOS: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
 

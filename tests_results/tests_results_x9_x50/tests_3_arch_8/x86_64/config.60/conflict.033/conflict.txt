@@ -1,27 +1,30 @@
-CRYPTO_CAST6: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CAST6_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+X509_CERTIFICATE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-CM3323: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=y] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
 
-SYSFS: y => no
+MSM_GCC_8974: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_MMCC_8974 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+KASAN_STACK: y => no
+      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
+
+MQ_IOSCHED_DEADLINE: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
+
+SC_GCC_7280: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=n] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
+
+SYSFS_SYSCALL: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
-
-SND_SOC_INTEL_MACH: y => no
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
-      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
-
-SND_SOC_ADAU1701: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-
-HID_ACRUX: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-SND_SOC_TFA989X: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-
-SPARSEMEM_MANUAL: y => no
-      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
 

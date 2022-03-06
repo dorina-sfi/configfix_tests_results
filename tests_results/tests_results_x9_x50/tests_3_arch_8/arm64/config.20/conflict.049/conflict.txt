@@ -1,30 +1,32 @@
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y]
+CPU_ISOLATION: y => no
+      Direct dependencies: SMP [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-CRYPTO_AUTHENC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || CRYPTO_ESSIV [=y] && CRYPTO [=y] || CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=y] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_ATMEL_AES [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && CRYPTO_DEV_ATMEL_AUTHENC [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_AEAD [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] && FSL_DPAA [=y] && NET [=y] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=y] && CRYPTO_DEV_SP_CCP [=n]
+NET_VENDOR_BROADCOM: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && (SSB_POSSIBLE [=y] && HAS_DMA [=y] || PCI [=y] || BCM63XX || SIBYTE_SB1xxx_SOC)
+      Reverse dependencies: SCSI_BNX2_ISCSI [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=y] && (IPV6 [=y] || IPV6 [=y]=n) && MMU [=y] || SCSI_BNX2X_FCOE [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && (IPV6 [=y] || IPV6 [=y]=n) && LIBFC [=n] && LIBFCOE [=n] && MMU [=y]
+
+CRYPTO_LIB_CURVE25519: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n])
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
+
+NETFILTER_XT_TARGET_RATEEST: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: NETFILTER_XT_MATCH_RATEEST [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
 
 NF_NAT: y => no
       Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=y]
-      Reverse dependencies: NFT_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=n] || NF_TABLES_IPV6 [=n]) || IP_NF_NAT [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=y] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=n]
+      Reverse dependencies: NFT_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=y]) || IP_NF_NAT [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=y] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-DEFAULT_CUBIC: y => no
-      Direct dependencies: <choice>
+RESET_CONTROLLER: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_SUNXI [=y] || ARCH_REALTEK [=n] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || SCSI_UFS_QCOM [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y] && SCSI_UFSHCD_PLATFORM [=y] && ARCH_QCOM [=y] || HISI_FEMAC [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_HISILICON [=n] && HAS_IOMEM [=y] || SPARX5_SWITCH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROCHIP [=y] && NET_SWITCHDEV [=y] && HAS_IOMEM [=y] && OF [=y] && (ARCH_SPARX5 [=n] || COMPILE_TEST [=n]) || STMMAC_ETH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) && ARCH_RCAR_GEN3 [=n] || ASM9260_WATCHDOG [=n] && WATCHDOG [=n] && (MACH_ASM9260 || COMPILE_TEST [=n]) && OF [=y] || MEDIATEK_WATCHDOG [=n] && WATCHDOG [=n] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=n]) || VIDEO_RCAR_CSI2 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || VIDEO_RCAR_ISP [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || DRM_STI [=n] && HAS_IOMEM [=y] && OF [=y] && DRM [=y] && (ARCH_STI || ARCH_MULTIPLATFORM) || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || MMC_SDHI [=n] && MMC [=n] && (SUPERH || ARCH_RENESAS [=n] || COMPILE_TEST [=n]) && ARCH_RENESAS [=n] || COMMON_CLK_GEMINI [=n] && COMMON_CLK [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) || COMMON_CLK_ASPEED [=n] && COMMON_CLK [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) || CLK_ACTIONS [=y] && COMMON_CLK [=y] && (ARCH_ACTIONS [=y] || COMPILE_TEST [=n]) || CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || RESET_HISI [=n] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=n]) || COMMON_CLK_QCOM [=y] && COMMON_CLK [=y] && OF [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) || SUNXI_CCU [=n] && COMMON_CLK [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n]) || CLK_BT1_CCU_DIV [=n] && COMMON_CLK [=y] && CLK_BAIKAL_T1 [=n] || COMMON_CLK_MEDIATEK [=n] && COMMON_CLK [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=n]) || COMMON_CLK_MESON_AO_CLKC [=n] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=n]) || COMMON_CLK_MESON8B [=n] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=n]) && ARM || CLK_RCAR_USB2_CLOCK_SEL [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || CLK_RZG2L [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || BCM2835_POWER [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=n] && OF [=y]) || RENESAS_RPCIF [=n] && MEMORY [=n] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || PHY_ATH79_USB [=n] && OF [=y] && (ATH79 || COMPILE_TEST [=n]) || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n])
 
-IMX_IRQSTEER: y => no
-      Direct dependencies: ARCH_MXC [=y] || COMPILE_TEST [=y]
-      Reverse dependencies: DRM_IMX_DCSS [=y] && HAS_IOMEM [=y] && DRM [=y] && ARCH_MXC [=y] && ARM64 [=y]
-
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
-
-RATIONAL_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
-
-NET_DSA_TAG_EDSA: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_MV88E6XXX [=y] && NETDEVICES [=y] && NET_DSA [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+RCU_NOCB_CPU: y => no
+      Direct dependencies: TREE_RCU [=y] && (RCU_EXPERT [=n] || NO_HZ_FULL [=y])
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 

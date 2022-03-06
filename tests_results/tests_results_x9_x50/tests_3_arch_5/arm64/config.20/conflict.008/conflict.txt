@@ -1,17 +1,20 @@
-IIO_ST_LSM9DS0: m => yes
-      Direct dependencies: IIO [=y] && (I2C [=m] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
+NET_DSA_TAG_BRCM_PREPEND: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: B53 [=y] && NETDEVICES [=y] && NET_DSA [=y]
 
-MAX44009: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+KCMP: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-PKCS7_MESSAGE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-SM_GCC_6115: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+CRYPTO_SM4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-MEDIA_TUNER_TDA9887: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=m]
-      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=m]
+STM: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 

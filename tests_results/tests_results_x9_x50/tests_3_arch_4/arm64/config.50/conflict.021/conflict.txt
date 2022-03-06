@@ -1,14 +1,15 @@
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
-
-USB_ISP1760_HOST_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
-
-ARM64_PA_BITS_48: y => no
+DEFAULT_SECURITY_DAC: y => no
       Direct dependencies: <choice>
 
-SM_GCC_8150: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SM_GPUCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=y] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=y]) && X86_64 && ACPI [=n] && PCI [=n]
+
+CPU_FREQ_GOV_PERFORMANCE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=y] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=n] && CPU_FREQ [=y] && X86
 

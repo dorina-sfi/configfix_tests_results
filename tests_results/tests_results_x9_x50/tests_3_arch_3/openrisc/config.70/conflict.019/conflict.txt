@@ -1,10 +1,12 @@
-HID_SENSOR_HUB: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && HAS_IOMEM [=y]
-
-IIO_BUFFER_CB: y => mod
+IIO_KFIFO_BUF: y => no
       Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=m] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=n] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-MTD_DOCG3: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=n] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=y] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+
+WATCHDOG_PRETIMEOUT_GOV_PANIC: y => no
+      Direct dependencies: WATCHDOG [=y] && WATCHDOG_PRETIMEOUT_GOV [=y] && WATCHDOG_CORE [=y]
+      Reverse dependencies: WATCHDOG_PRETIMEOUT_GOV_SEL [=y] && WATCHDOG [=y] && WATCHDOG_PRETIMEOUT_GOV [=y] && WATCHDOG_PRETIMEOUT_GOV_NOOP [=n]=n
 

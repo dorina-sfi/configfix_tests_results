@@ -1,32 +1,38 @@
-SND_SOC_TAS2562: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
 
-VIDEO_MAX9286: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] && I2C_MUX [=m] && OF_GPIO [=y]
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-IPV6_SIT: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+TEGRA_IVC: y => no
+      Direct dependencies: ARCH_TEGRA [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
 
-RETU_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && MFD_RETU [=m]
+BACKLIGHT_CLASS_DEVICE: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 && MMU [=y] && ACPI [=n] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=y] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=y]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=n] || TINYDRM_ILI9163 [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=n] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=n] || TINYDRM_ILI9486 [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=n] || TINYDRM_MI0283QT [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=n] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=n] || DRM_GUD [=y] && HAS_IOMEM [=y] && DRM [=y] && USB [=y] && MMU [=y] || DRM_PARADE_PS8622 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || FB_BACKLIGHT [=y] && HAS_IOMEM [=y] && FB [=y] || FB_ARMCLCD [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=y] && MX3_IPU [=n] || USB_APPLEDISPLAY [=y] && USB_SUPPORT [=y] && USB [=y] || FB_OLPC_DCON [=n] && STAGING [=y] && OLPC && FB [=y] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=n] || SAMSUNG_Q10 [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] || ACPI_CMPC [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n)
 
-SHMEM: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-CRYPTO_JITTERENTROPY: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+CLK_RENESAS_CPG_MSSR: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R7S9210 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SND_SOC_TFA9879: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+SERIAL_SH_SCI_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_SH_SCI [=y]=y
 
-ROCKCHIP_SARADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) && RESET_CONTROLLER [=y]
+RSEQ: y => no
+      Direct dependencies: HAVE_RSEQ [=y]
 
-COMEDI_GSC_HPDI: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+SM_GCC_8150: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_GPUCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-COMEDI_CONTEC_PCI_DIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=y] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=y] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=n] || ARCH_HISI [=y] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=y] || ARCH_QCOM [=n] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 

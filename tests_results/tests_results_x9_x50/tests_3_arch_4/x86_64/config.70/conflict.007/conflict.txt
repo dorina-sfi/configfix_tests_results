@@ -1,12 +1,14 @@
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
+HID_CYPRESS: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-TRANSPARENT_HUGEPAGE_ALWAYS: y => no
-      Direct dependencies: <choice>
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-GPIO_ARIZONA: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_ARIZONA [=m]
+MICROCHIP_TCB_CAPTURE: m => yes
+      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
 
-SENSORS_ADM1021: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+HID: m => yes
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=m] || I2C_HID_CORE [=m] && INPUT [=m] || SURFACE_HID_CORE [=n] && INPUT [=m] || USB_HID [=n] && USB [=n] && INPUT [=m] || INTEL_ISH_HID [=n] && INPUT [=m] && (X86_64 [=y] || COMPILE_TEST [=y]) && PCI [=n] && X86 [=y]
 

@@ -1,36 +1,35 @@
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
 
-DYNAMIC_DEBUG_CORE: y => no
-      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
-      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=n] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=n] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=n] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=n] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=n] && BLOCK [=y] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=y] && BLOCK [=y] || GFS2_FS [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n]
+
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
+
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
+
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+
+FB_TILEBLITTING: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
+
+POWER_RESET: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
+
+KASAN_VMALLOC: y => no
+      Direct dependencies: KASAN [=y] && KASAN_GENERIC [=y] && HAVE_ARCH_KASAN_VMALLOC [=y]
+      Reverse dependencies: ARM64 [=y] && KASAN_GENERIC [=y]
 
 MUX_MMIO: y => no
-      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=y] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=n] && (OF [=y] && ARCH_K3 [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
-
-CRYPTO_LIB_CURVE25519: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=n])
-      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n])
-
-RMI4_F55: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: RMI4_F54 [=y] && INPUT [=y] && RMI4_CORE [=y] && (VIDEO_V4L2 [=y]=y || RMI4_CORE [=y]=m && VIDEO_V4L2 [=y]=m)
-
-PINCTRL_EXYNOS: y => no
-      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_EXYNOS [=y]
-
-SND_SOC_ES8328_SPI: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SPI_MASTER [=y]
-      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=y] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI_MASTER [=y] || SND_SOC_IMX_ES8328 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && (I2C [=y] || SPI [=y]) && SPI_MASTER [=y]
-
-PCI_MSI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=y] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=y]) && PCI [=y]
-
-CRYPTO_CHACHA20_NEON: y => no
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
-      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && (ARM || ARM64 [=y] && KERNEL_MODE_NEON [=y])
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || SPI_DW_BT1 [=n] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 

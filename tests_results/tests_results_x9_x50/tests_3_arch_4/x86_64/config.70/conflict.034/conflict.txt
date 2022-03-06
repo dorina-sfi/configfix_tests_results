@@ -1,13 +1,15 @@
-I2C_PARPORT: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PARPORT [=m]
+REGULATOR_MAX14577: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MAX14577 [=m]
 
-TOUCHSCREEN_RM_TS: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+STM32_DFSDM_CORE: m => yes
+      Direct dependencies: IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_DFSDM_ADC [=m] && IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
-      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=m] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=m] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=n] && FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=m] && CONNECTOR [=n] || FB_ATMEL [=n] && FB [=m] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_I740 [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && X86_32 [=n] && AGP_INTEL [=y] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && X86 [=y] || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && X86 [=y] && AGP_INTEL [=y] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_NEOMAGIC [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_3DFX [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_TRIDENT [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=m]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=m]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=m] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=m] && FSL_SOC || FB_SMSCUFX [=m] && HAS_IOMEM [=y] && FB [=m] && USB [=y] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=m] && USB [=y] || FB_DA8XX [=n] && FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=n] && STAGING [=n] && FB [=m] && PCI [=y]
+IIO_BUFFER_HW_CONSUMER: m => no
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=m] && IIO [=m] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=m] && IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-FB_SSD1307: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SND_SOC_WM8960: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_MT2701_WM8960 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT2701 [=n] && I2C [=y] || SND_SOC_P1022_RDK [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_RDK && I2C [=y]
 

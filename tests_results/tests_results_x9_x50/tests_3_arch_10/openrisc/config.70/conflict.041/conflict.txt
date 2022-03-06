@@ -1,38 +1,33 @@
-XZ_DEC: y => no
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
+VIDEO_SH_VOU: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_DEV [=m] && I2C [=m] && (ARCH_SHMOBILE || COMPILE_TEST [=y])
 
-NETFS_STATS: y => no
-      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
-      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
+DVB_OR51211: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=n] && I2C [=m] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-W1_SLAVE_DS2781: y => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+MOUSE_PS2_SYNAPTICS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 
-PSTORE_LZ4_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+I2C_JZ4780: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (MIPS || COMPILE_TEST [=y])
 
-DAX: y => no
-      Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+VIDEO_VPX3220: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_ZORAN_DC30 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-EVENTFD: y => no
-      Direct dependencies: y
-      Reverse dependencies: MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+DVB_CX24123: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=m] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-DAX: y => no
-      Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+USB_DWC3_OMAP: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_DWC3 [=m] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && (EXTCON [=y] || !EXTCON [=y]) && OF [=y]
 
-I2C_SI4713: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=y] && I2C [=y] && RADIO_SI4713 [=y]
-      Reverse dependencies: USB_SI4713 [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=y] && USB [=y] && I2C [=y] && RADIO_SI4713 [=y] || PLATFORM_SI4713 [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=y] && I2C [=y] && RADIO_SI4713 [=y]
+REGULATOR_MAX1586: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
 
-I2C_SMBUS: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+DRM_PANEL_LEADTEK_LTK500HD1829: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
 
-TIME_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+SVC_I3C_MASTER: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
 

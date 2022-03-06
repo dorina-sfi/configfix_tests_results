@@ -1,27 +1,28 @@
-USB_EHCI_HCD_PLATFORM: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
-      Reverse dependencies: USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=n] && USB_EHCI_HCD [=y] || USB_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_CNS3XXX_EHCI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+CRC32_SLICEBY4: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_TAS2764: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=y] && ACRN_GUEST
 
-DRM_PANEL_SHARP_LS060T1SX01: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
 
-TOUCHSCREEN_SX8654: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+KCMP: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-SOUNDWIRE_QCOM: m => yes
-      Direct dependencies: SOUNDWIRE [=y] && SND_SOC [=m]
+FB_BOTH_ENDIAN: y => no
+      Direct dependencies: <choice>
 
-USB_CHIPIDEA_IMX: m => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=m] && OF [=y]
+VIDEO_DEV: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-NET_DSA_TAG_OCELOT_8021Q: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_MSCC_FELIX [=n] && NETDEVICES [=y] && NET_DSA [=m] && PCI [=n] && NET_VENDOR_MICROSEMI [=y] && NET_VENDOR_FREESCALE [=y] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || NET_DSA_MSCC_SEVILLE [=n] && NETDEVICES [=y] && NET_DSA [=m] && NET_VENDOR_MICROSEMI [=y] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+DVB_STV6110x: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET [=y] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_ARMCLCD [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=y] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) || FB_UVESA [=m] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=y] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=n] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=y] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=y]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=m] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_UDL [=m] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_DA8XX [=m] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y]) || FB_SM750 [=n] && STAGING [=n] && FB [=y] && PCI [=n]
+IRQ_UNIPHIER_AIDET: y => no
+      Direct dependencies: ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]
 

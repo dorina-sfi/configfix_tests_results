@@ -1,25 +1,31 @@
-LEDS_CLASS_FLASH: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m]
+MTD_COMPLEX_MAPPINGS: y => no
+      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=y] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM
 
-COMEDI_DAS16M1: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+MICROCHIP_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: USB_LAN78XX [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y]
 
-PPS_CLIENT_GPIO: m => yes
-      Direct dependencies: PPS [=m]
+MFD_WL1273_CORE: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y]
+      Reverse dependencies: RADIO_WL1273 [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=y]
 
-CRYPTO_CRCT10DIF: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=m]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-COMEDI_FL512: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+VIDEO_DEV: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
-      Direct dependencies: <choice>
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=y] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=n] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=n] && IIO [=y] && I2C [=y] || ISL29501 [=n] && IIO [=y] && I2C [=y]
 
-COMEDI_RTI802: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+CRC16: y => no
+      Direct dependencies: y
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=y] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROCHIP [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI && EFI && SPI [=y] && (X86 || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=y] && W1 [=y] || W1_SLAVE_DS28E04 [=n] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=y] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=y] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
 
-W1_SLAVE_DS28E04: m => yes
-      Direct dependencies: W1 [=m]
+PARPORT_PANEL: y => no
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 

@@ -1,15 +1,14 @@
-HZ_250: y => no
+DEBUG_FS_ALLOW_NONE: y => no
       Direct dependencies: <choice>
 
-PINCTRL_PFC_R8A77995: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77995 [=y]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-ACPI_CONTAINER: y => no
-      Direct dependencies: ACPI [=y]
-      Reverse dependencies: ACPI_HOTPLUG_CPU [=y] && ACPI [=y] && ACPI_PROCESSOR [=y] && HOTPLUG_CPU [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 [=y] || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-FB_TILEBLITTING: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
+ARM64_VA_BITS_42: y => no
+      Direct dependencies: <choice> && ARM64_64K_PAGES [=y]
 

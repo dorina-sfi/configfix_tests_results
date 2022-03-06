@@ -1,25 +1,28 @@
-USB_MTU3_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=y])
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=n]
 
-CRC16: y => no
+DEVFREQ_GOV_PASSIVE: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=n]
+
+MEDIA_TUNER_SIMPLE: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_PVRUSB2_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+MD_RAID1: y => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+
+NEW_LEDS: y => no
       Direct dependencies: y
-      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI && EFI && SPI [=y] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=n] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=n] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
+      Reverse dependencies: ADB_PMU_LED [=n] && MACINTOSH_DRIVERS [=n] && PPC_PMAC && ADB_PMU [=n] || BRCMSMAC [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && MAC80211 [=n] && BCMA_POSSIBLE [=y] && BCMA_DRIVER_GPIO [=n] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || INPUT_WISTRON_BTNS [=n] && INPUT [=n] && INPUT_MISC [=n] && X86_32 || SENSORS_APPLESMC [=n] && HWMON [=y] && INPUT [=n] && X86 || IR_REDRAT3 [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=n] || IR_WINBOND_CIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && (X86 && PNP [=n] || COMPILE_TEST [=y]) || IR_TTUSBIR [=n] && RC_CORE [=n] && RC_DEVICES [=n] && USB [=n] || BACKLIGHT_ADP8860 [=n] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_ADP8870 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_LM3639 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=n] || SND_USB_TONEPORT [=n] && SOUND [=y] && !UML && SND [=y] && SND_USB [=n] && USB [=n] || HID_LENOVO [=n] && INPUT [=n] && HID [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=n] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=n] || ACER_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=n] || ASUS_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) || ASUS_WIRELESS [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] || ASUS_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && ACPI_BATTERY && INPUT [=n] && HWMON [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (RFKILL [=n] || RFKILL [=n]=n) && HOTPLUG_PCI [=n] && (ACPI_VIDEO || ACPI_VIDEO=n) || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && HOTPLUG_PCI [=n] && BACKLIGHT_CLASS_DEVICE [=y] || FUJITSU_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) || HP_ACCEL [=n] && X86 && X86_PLATFORM_DEVICES [=n] && INPUT [=n] && ACPI && SERIO_I8042 [=n] || IDEAPAD_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && RFKILL [=n] && INPUT [=n] && SERIO_I8042 [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (ACPI_WMI [=n] || ACPI_WMI [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SAMSUNG_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] || ACPI_TOSHIBA [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_WMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && IIO [=y] || LG_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_WMI [=n] && INPUT [=n] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=y] && INPUT [=n] || TOPSTAR_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && INPUT [=n] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-CRYPTO_DEFLATE: y => no
+CRYPTO_CRC32: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-MIGRATION: y => no
-      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
-
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
-
-I2C_MUX: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=n] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=n] && I2C [=y]
-
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
 

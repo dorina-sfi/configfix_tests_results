@@ -1,34 +1,37 @@
-CRYPTO_LZ4: m => no
+SPARSEMEM_MANUAL: y => no
+      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
+
+CRYPTO_ECDH: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY || COMPILE_TEST [=n]) && (OF [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-W1_SLAVE_DS28E04: m => yes
-      Direct dependencies: W1 [=m]
+ROMFS_BACKED_BY_MTD: y => no
+      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
 
-DVB_CX24120: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=n]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || SPI_LM70_LLP [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=n])
 
-NFT_REDIR: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && NF_NAT [=m]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-CRYPTO_SERPENT_AVX_X86_64: m => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+CRYPTO_CRCT10DIF: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRC_T10DIF [=y]
 
-NF_CONNTRACK_H323: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m] && (IPV6 [=n] || IPV6 [=n]=n) && NETFILTER_ADVANCED [=y]
+POWER_SUPPLY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=n]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=n] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=n] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=y] && DELL_SMBIOS [=n]
 
-IP_VS_LBLC: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=m]
+CPU_SUP_AMD: y => no
+      Direct dependencies: y
+      Reverse dependencies: CPU_SUP_HYGON [=y]
 
-W1_SLAVE_DS2438: m => yes
-      Direct dependencies: W1 [=m]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=n]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 
-FB_VT8623: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
-
-NET_DSA_TAG_SJA1105: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_SJA1105 [=m] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 

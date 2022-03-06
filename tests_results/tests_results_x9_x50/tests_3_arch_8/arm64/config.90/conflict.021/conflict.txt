@@ -1,27 +1,28 @@
-TIMERFD: y => no
+CRYPTO_DEFLATE: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+
+FB_MODE_HELPERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_ARMCLCD [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=n] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=n] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=n] && STAGING [=y] && FB [=y] && PCI [=n]
+
+MOUSE_PS2_BYD: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
+
+EPOLL: y => no
       Direct dependencies: y
 
-SECURITYFS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=n] && SECURITY [=y] || IMA [=n] && INTEGRITY [=n]
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n]
 
-HW_RANDOM_TIMERIOMEM: m => yes
-      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+XZ_DEC_ARM: y => no
+      Direct dependencies: XZ_DEC [=y]
 
-DS1803: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-EXTCON_ADC_JACK: m => yes
-      Direct dependencies: EXTCON [=y] && IIO [=m]
-
-MXC_CLK: y => mod
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MN [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MP [=m] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MQ [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8ULP [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
-
-CRC8: y => no
-      Direct dependencies: y
-      Reverse dependencies: PCIE_QCOM [=n] && PCI [=y] && OF [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && PCI_MSI_IRQ_DOMAIN [=y] || QED [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_QLOGIC [=y] && PCI [=y] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=n] || SENSORS_SHT3x [=m] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=y] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=m] && HWMON [=y] && PMBUS [=y] && GPIOLIB [=y] || MFD_MT6360 [=n] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=m] && SPI [=n] || SCA3300 [=n] && IIO [=m] && SPI [=n] || SCD30_I2C [=m] && IIO [=m] && SCD30_CORE [=m] && I2C [=y] || SCD4X [=n] && IIO [=m] && I2C [=y] || SENSIRION_SGP30 [=m] && IIO [=m] && I2C [=y] || SENSIRION_SGP40 [=m] && IIO [=m] && I2C [=y] || SPS30_I2C [=m] && IIO [=m] && I2C [=y] || ICP10100 [=m] && IIO [=m] && I2C [=y]
-
-SPRD_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y] && (ARCH_SPRD [=y] || COMPILE_TEST [=n])
+DEBUG_FS_ALLOW_ALL: y => no
+      Direct dependencies: <choice>
 

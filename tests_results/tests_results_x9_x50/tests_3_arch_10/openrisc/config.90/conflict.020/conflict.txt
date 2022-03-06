@@ -1,32 +1,36 @@
-SENSORS_ATXP1: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEBUG_FS_ALLOW_NONE: y => no
+      Direct dependencies: <choice>
 
-GPIO_ARIZONA: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_ARIZONA [=m]
+PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-SENSORS_ADCXX: m => yes
-      Direct dependencies: HWMON [=m] && SPI_MASTER [=y]
-
-PKCS8_PRIVATE_KEY_PARSER: m => yes
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=m]
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
 
 DEBUG_KERNEL: y => no
       Direct dependencies: y
       Reverse dependencies: EXPERT [=y]
 
-SENSORS_EMC6W201: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=n] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=n] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=n]=y || USB_GADGET [=n]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=y] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=n] && OF [=y] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] && (ARCH_RENESAS || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=n] && USB_SUPPORT [=y] && X86 && ACPI && IOSF_MBI
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-SENSORS_W83L786NG: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=n] && FTRACE [=y]
 
-GNSS_MTK_SERIAL: m => yes
-      Direct dependencies: GNSS [=m] && SERIAL_DEV_BUS [=m]
+CRYPTO_CTR: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-RN5T618_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_RN5T618 [=m]
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=n] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 

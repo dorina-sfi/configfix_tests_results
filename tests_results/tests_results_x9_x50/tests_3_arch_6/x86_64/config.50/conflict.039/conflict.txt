@@ -1,18 +1,23 @@
-ELF_CORE: y => no
-      Direct dependencies: COREDUMP [=y]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 
-XILLYBUS_PCIE: m => yes
-      Direct dependencies: XILLYBUS [=m] && PCI_MSI [=y]
+UNWINDER_FRAME_POINTER: y => no
+      Direct dependencies: <choice>
 
-SENSORS_ADS7828: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-ATLAS_PH_SENSOR: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-IR_HIX5HD2: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (OF [=y] && HAS_IOMEM [=y] || COMPILE_TEST [=n])
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-DRM_CHRONTEL_CH7033: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+HID_SENSOR_IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=y]
 

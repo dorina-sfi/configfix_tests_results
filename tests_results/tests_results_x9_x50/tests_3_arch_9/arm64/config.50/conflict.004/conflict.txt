@@ -1,35 +1,34 @@
-DRIVER_PE_KUNIT_TEST: y => no
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=y] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=n] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
+
+MTD_CFI_AMDSTD: y => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+
+X509_CERTIFICATE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+PM_QOS_KUNIT_TEST: y => no
       Direct dependencies: KUNIT [=y]=y
 
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=y] && RTC_CLASS [=y]
+RTC_LIB_KUNIT_TEST: y => no
+      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
 
-FPGA_REGION: y => no
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 
-EXYNOS_PM_DOMAINS: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y]
-
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
-
-RAS: y => no
-      Direct dependencies: y
-      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=n] && PCIEPORTBUS [=n]
-
-MTK_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: ARCH_MEDIATEK [=y]
-
-CRYPTO_ECDH: y => no
+CRYPTO_ZSTD: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY [=n] || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
 
-CLK_R9A07G044: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R9A07G044 [=y]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
+
+CRYPTO_AES_ARM64_CE: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 

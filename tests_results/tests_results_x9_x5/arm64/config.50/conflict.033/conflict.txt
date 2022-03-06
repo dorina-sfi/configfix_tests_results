@@ -1,27 +1,23 @@
-TIMER_IMX_SYS_CTR: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: ARCH_MXC [=y]
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=m] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=y] && NET [=y] && BT_BREDR [=y] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=y]) && PCI [=n] && X86
+SCD30_CORE: m => yes
+      Direct dependencies: IIO [=m]
 
-CRYPTO_CBC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+PINCTRL_SM8250: m => yes
+      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL_MSM [=m]
 
-THERMAL_GOV_FAIR_SHARE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
+BMG160: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n])
 
-TIMERFD: y => no
+PINCTRL_QCS404: m => yes
+      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL_MSM [=m]
+
+DEBUG_FS: y => no
       Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=m] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=n] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 
-CLK_R8A774A1: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774A1 [=y]
-
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
+SENSORS_DME1737: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y] && !PPC
 

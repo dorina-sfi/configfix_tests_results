@@ -1,19 +1,21 @@
-CRYPTO_CAST5: y => mod
+X86_VSYSCALL_EMULATION: y => no
+      Direct dependencies: X86_64 [=y]
+
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST [=n]
+
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
+
+MTD_CFI_STAA: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+
+CRYPTO_CHACHA20: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
 
-REGULATOR_LP87565: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TI_LP87565 [=m] && OF [=y]
-
-CMA_SIZE_SEL_MAX: y => no
-      Direct dependencies: <choice>
-
-OPT3001: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-DA9062_THERMAL: m => yes
-      Direct dependencies: THERMAL [=y] && (MFD_DA9062 [=m] || COMPILE_TEST [=n]) && OF [=y]
-
-IIO_ST_PRESS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
+UIO_PRUSS: m => yes
+      Direct dependencies: UIO [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
 

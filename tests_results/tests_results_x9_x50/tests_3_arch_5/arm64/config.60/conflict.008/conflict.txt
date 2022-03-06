@@ -1,17 +1,18 @@
-VIDEO_SAA6588: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-CRYPTO_SM3: y => no
+CRYPTO_NULL: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=y] && CRYPTO [=y] && NET [=y]
 
-SENSORS_TMP108: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MPLS: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-SND_SOC_TSCS454: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+DAMON_VADDR_KUNIT_TEST: y => no
+      Direct dependencies: DAMON_VADDR [=y] && KUNIT [=y]=y
 
-MMC_SDHCI_S3C: m => yes
-      Direct dependencies: MMC [=y] && MMC_SDHCI [=m] && (PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+TRANSPARENT_HUGEPAGE_MADVISE: y => no
+      Direct dependencies: <choice>
+
+FUNCTION_TRACER: y => no
+      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
+      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
 

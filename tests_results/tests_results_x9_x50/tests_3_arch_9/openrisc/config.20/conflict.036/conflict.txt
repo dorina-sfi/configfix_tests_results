@@ -1,28 +1,30 @@
-REGULATOR_QCOM_SMD_RPM: m => yes
-      Direct dependencies: REGULATOR [=y] && QCOM_SMD_RPM [=m]
+VIDEO_OV7740: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-VIDEO_ADV748X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && OF [=y]
+MEDIA_SDR_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=y]
+DVB_MXL5XX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MODULE_SIG_KEY_TYPE_RSA: y => no
-      Direct dependencies: <choice>
+BATTERY_DA9150: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_DA9150 [=m]
 
-OF_FPGA_REGION: m => yes
-      Direct dependencies: FPGA [=m] && OF [=y] && FPGA_REGION [=m]
+MAC80211: m => yes
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m]
 
-USB_SISUSBVGA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && (USB_MUSB_HDRC [=m] || USB_EHCI_HCD [=n])
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-PKCS7_MESSAGE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+NET_DSA_TAG_TRAILER: m => no
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MV88E6060 [=m] && NETDEVICES [=y] && NET_DSA [=m]
 
-USB_STORAGE_FREECOM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_STORAGE [=m]
+VIDEO_VIM2M: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m]
 
-BACKLIGHT_LV5207LP: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
+HID_PICOLCD: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 

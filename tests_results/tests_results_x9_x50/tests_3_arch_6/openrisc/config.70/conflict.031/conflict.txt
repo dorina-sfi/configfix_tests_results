@@ -1,24 +1,19 @@
-FW_LOADER_USER_HELPER: y => no
-      Direct dependencies: FW_LOADER [=y]
-      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+TOUCHSCREEN_EDT_FT5X06: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-SPI_BITBANG: y => no
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=n]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || SPI_LM70_LLP [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=n])
+IIO_KFIFO_BUF: y => mod
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=m] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=m] || TI_AM335X_ADC [=m] && IIO [=y] && MFD_TI_AM335X_TSCADC [=m] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=n] && IIO [=y] && I2C [=y] || MAX30102 [=m] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=n] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-NETFILTER_XTABLES: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: IP_NF_IPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=n] || IP6_NF_IPTABLES [=y] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=y]
+NFT_FLOW_OFFLOAD: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && NF_FLOW_TABLE [=m]
 
-PACKING: y => no
-      Direct dependencies: y
-      Reverse dependencies: NET_DSA_TAG_OCELOT [=y] && NET [=y] && NET_DSA [=y] || NET_DSA_TAG_SJA1105 [=y] && NET [=y] && NET_DSA [=y] || NET_DSA_SJA1105 [=n] && NETDEVICES [=y] && NET_DSA [=y] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || MSCC_OCELOT_SWITCH_LIB [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICROSEMI [=n]
+MMC_SDHCI_S3C: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI [=m] && (PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS || COMPILE_TEST [=y])
 
-CRYPTO_ECB: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+RESOURCE_KUNIT_TEST: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
 
-CRYPTO_CBC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+DRM_ASPEED_GFX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y]
 

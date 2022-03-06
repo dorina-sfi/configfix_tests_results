@@ -1,10 +1,11 @@
-HW_RANDOM_XIPHERA: m => yes
-      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+USB_CHAOSKEY: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && HW_RANDOM [=m]
 
-MTD_ONENAND_GENERIC: m => yes
-      Direct dependencies: MTD [=y] && MTD_ONENAND [=m]
+IMX_GPCV2_PM_DOMAINS: y => no
+      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=n] && OF [=y]) && PM [=y]
+      Reverse dependencies: ARCH_MXC [=y]
 
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_64 && ACPI [=n] && PCI [=y]
 

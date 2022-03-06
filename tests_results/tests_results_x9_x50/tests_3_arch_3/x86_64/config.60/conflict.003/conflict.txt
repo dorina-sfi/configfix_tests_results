@@ -1,11 +1,10 @@
-GENERIC_CPU: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+VSOCKMON: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_CORE [=y] && VHOST_VSOCK [=m]
 
-DEVFREQ_GOV_PASSIVE: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+BACKLIGHT_LM3630A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=m] && PWM [=y]
 
-XZ_DEC_MICROLZMA: y => no
-      Direct dependencies: XZ_DEC [=y]
-      Reverse dependencies: EROFS_FS_ZIP_LZMA [=y] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=y]
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
 

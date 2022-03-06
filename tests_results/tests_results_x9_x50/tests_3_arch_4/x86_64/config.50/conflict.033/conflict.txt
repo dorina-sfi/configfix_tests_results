@@ -1,12 +1,16 @@
-MTD_CFI_INTELEXT: m => yes
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=m]
+MTD_CFI: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-SND_PROC_FS: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && PROC_FS [=y]
+LPC_SCH: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 [=y] && PCI [=y]
 
-VIDEO_IMX319: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=y] && IIO [=y] && SPI_MASTER [=y] || AD7768_1 [=y] && IIO [=y] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=y] && IIO [=y] && IIO_SIMPLE_DUMMY [=y]
 
-AD7291: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=y] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=y] && HAS_IOMEM [=y] || PMC_ATOM [=y] && X86 [=y] && PCI [=y]
 

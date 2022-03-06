@@ -1,26 +1,31 @@
-MEMORY: y => no
+MEDIA_SDR_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
+
+CRC4: y => no
       Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=y] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE [=n] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK [=n] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
 
-SERIAL_8250_EM: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && HAVE_CLK [=y] && (ARM && ARCH_RENESAS [=y] || COMPILE_TEST [=y])
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+TIMER_IMX_SYS_CTR: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_MXC [=y]
 
-PINCTRL_MSM8953: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=y] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
 
-NLS_ISO8859_2: m => yes
-      Direct dependencies: NLS [=m]
+DVB_LGS8GXX: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_CXUSB [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-NLS_CODEPAGE_855: m => yes
-      Direct dependencies: NLS [=m]
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-MCTP_TEST: y => no
-      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
-
-SND_HDA_INTEL: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=y] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=n] || ARCH_HISI [=y] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=y] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=n] || MFD_MADERA [=n] && HAS_IOMEM [=y]
 

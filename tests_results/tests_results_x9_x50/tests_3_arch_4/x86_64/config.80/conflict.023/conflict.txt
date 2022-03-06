@@ -1,14 +1,15 @@
-USB_STORAGE_DATAFAB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+DVB_STV0367: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_C8SECTPFE [=m] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
+ACPI_FAN: m => no
+      Direct dependencies: ACPI [=y] && THERMAL [=y]
+      Reverse dependencies: INT340X_THERMAL [=m] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_64 [=y] && ACPI [=y] && PCI [=y]
 
-MMC_TEST: m => yes
-      Direct dependencies: MMC [=m]
+MODULE_SIG_KEY_TYPE_RSA: y => no
+      Direct dependencies: <choice>
 
-CRC_CCITT: y => mod
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=m] && SPI [=n] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=y] || MAC802154 [=n] && NET [=y] && IEEE802154 [=y] || NETLABEL [=n] && NET [=y] && INET [=y] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=m] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_SER_HDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=m] && AX25 [=y] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=m] && AX25 [=y] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=y] && NFC_NCI [=m] || NFC_PN544 [=n] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=n] && OF_IRQ [=n]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=y] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+MEDIA_TUNER_TEA5761: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_RADIO_SUPPORT [=y]
 

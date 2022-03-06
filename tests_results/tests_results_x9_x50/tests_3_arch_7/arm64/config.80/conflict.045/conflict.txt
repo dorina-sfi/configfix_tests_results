@@ -1,23 +1,27 @@
-US5182D: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CLK_RCAR_CPG_LIB: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-MFD_ARIZONA_I2C: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+CRYPTO_CBC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_MXS_DCP [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-X509_CERTIFICATE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=y] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=n] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=y] && IIO [=y] && ACPI [=y] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=n] && IIO [=y] && I2C [=y]
 
-HID_LED: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=m]
-      Reverse dependencies: HID_THINGM [=n] && INPUT [=m] && HID [=m] && LEDS_CLASS [=m]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-PINCTRL_RENESAS: y => no
-      Direct dependencies: PINCTRL [=y]
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
 
-I2C_CADENCE: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_ZYNQ || ARM64 [=y] || XTENSA)
+PNP: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ISA || ACPI [=y])
+      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
 
-LEDS_LP8501: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m] && LEDS_LP55XX_COMMON [=m]
+USB_ISP1301: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && I2C [=y]
+      Reverse dependencies: USB_LPC32XX [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && I2C [=y]
 

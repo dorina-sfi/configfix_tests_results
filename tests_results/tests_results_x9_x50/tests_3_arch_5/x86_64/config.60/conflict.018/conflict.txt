@@ -1,17 +1,18 @@
-TCG_TIS_ST33ZP24_SPI: m => yes
-      Direct dependencies: TCG_TPM [=m] && SPI [=y]
+HI6421V600_IRQ: m => yes
+      Direct dependencies: OF [=y] && SPMI [=m] && HAS_IOMEM [=y]
 
-CRYPTO_XXHASH: y => mod
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+
+LEDS_LP5521: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
+
+CRYPTO_CRC32C: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
-
-SERIO: y => no
-      Direct dependencies: y
-      Reverse dependencies: KEYBOARD_ATKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_LKKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GSC || HP300) || KEYBOARD_NEWTON [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_STOWAWAY [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_SUNKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_XTKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=n] || MOUSE_SERIAL [=n] && INPUT [=y] && INPUT_MOUSE [=n] || MOUSE_VSXXXAA [=n] && INPUT [=y] && INPUT_MOUSE [=n] || JOYSTICK_WARRIOR [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_MAGELLAN [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEORB [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEBALL [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_STINGER [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_TWIDJOY [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_ZHENHUA [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_FSIA6B [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || TABLET_SERIAL_WACOM4 [=y] && INPUT [=y] && INPUT_TABLET [=y] || TOUCHSCREEN_DYNAPRO [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_HAMPSHIRE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_EGALAX_SERIAL [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_FUJITSU [=m] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_GUNZE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_ELO [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_MTOUCH [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_INEXIO [=m] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_PENMOUNT [=m] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHRIGHT [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || RMI4_F03_SERIO [=y] && INPUT [=y] && RMI4_CORE [=y] && RMI4_F03 [=y] || I2C_TAOS_EVM [=n] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
-
-EFI_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
-
-COMMON_CLK_RK808: m => yes
-      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
+      Reverse dependencies: NVME_TCP [=n] && INET [=y] && BLOCK [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=y] || EXT4_FS [=n] && BLOCK [=n] || JBD2 [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 

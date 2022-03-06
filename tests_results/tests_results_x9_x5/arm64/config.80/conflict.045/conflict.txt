@@ -1,32 +1,33 @@
-EXPERT: y => no
-      Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+SERIO_LIBPS2: y => no
+      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=y]
 
-MD_RAID1: y => mod
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=n] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-CHARGER_BQ24190: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && EXTCON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=n] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+CLK_INTEL_SOCFPGA: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-FPGA_MGR_ICE40_SPI: m => yes
-      Direct dependencies: FPGA [=m] && OF [=y] && SPI [=y]
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-COMEDI_DAS16M1: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
 
-KASAN_VMALLOC: y => no
-      Direct dependencies: KASAN [=y] && KASAN_GENERIC [=y] && HAVE_ARCH_KASAN_VMALLOC [=y]
-      Reverse dependencies: ARM64 [=y] && KASAN_GENERIC [=y]
+DVB_PLL: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=y] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=y] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_A800 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIBUSB_MB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && (DVB_DIB3000MC [=y] || !DVB_DIB3000MC [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_UMT_010 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIGITV [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_NOVA_T_USB2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_OPERA1 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DW2102 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_AF9015 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_GL861 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_LME2510 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=y] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && VIDEO_DEV [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && I2C_ALGOBIT [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_PT1 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_MANTIS [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=y] && PCI [=y] && I2C [=y] || DVB_HOPPER [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=y] && PCI [=y] && I2C [=y]
 
-PINCTRL_EXYNOS: y => no
-      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y]
+ARM64_VA_BITS_36: y => no
+      Direct dependencies: <choice> && ARM64_16K_PAGES [=y]
 
-RADIO_SI4713: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m]
+HWMON: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: HABANA_AI [=n] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=n] && BACKLIGHT_CLASS_DEVICE [=y] || HP_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=y] && NTB [=y] && PCI [=y]
 

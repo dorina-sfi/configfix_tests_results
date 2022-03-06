@@ -1,31 +1,36 @@
-SND_SOC_WM8776: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-      Reverse dependencies: SND_SOC_P1022_DS [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_DS && I2C [=y]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=n] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
 
-TI_ADC081C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_PICOLCD_CIR: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=RC_CORE [=y] || RC_CORE [=y]=y)
 
-DRM_PANEL_SONY_ACX424AKP: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+ARM64_CRYPTO: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64 [=y]
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n]) && ARM64 [=y] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=y])
 
-DRM_PANEL_SIMPLE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=y] && PM [=y]
+HW_RANDOM: y => no
+      Direct dependencies: y
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=y] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && S390 || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM64 [=y] && ACPI [=n] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=y]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-MAX30100: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_SHA256_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA2_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-COMEDI_AMPLC_PCI224: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+RESET_SUNXI: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
 
-SND_MESON_AIU: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MESON [=y] || COMPILE_TEST [=n] && COMMON_CLK [=y])
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-USB_G_SERIAL: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && TTY [=y]
+DEVFREQ_EVENT_ROCKCHIP_DFI: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 
-BMC150_ACCEL: m => yes
-      Direct dependencies: IIO [=m]
+SIGNALFD: y => no
+      Direct dependencies: y
 
-I2C_ARB_GPIO_CHALLENGE: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n])
+CRYPTO_DEV_QCE_ENABLE_ALL: y => no
+      Direct dependencies: <choice>
 

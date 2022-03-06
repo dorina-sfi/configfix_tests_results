@@ -1,22 +1,23 @@
-SPRD_SC9863A_CLK: m => yes
-      Direct dependencies: COMMON_CLK [=y] && SPRD_COMMON_CLK [=m] && (ARM64 && ARCH_SPRD || COMPILE_TEST [=y])
+JOYSTICK_MAGELLAN: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-CRC_T10DIF: m => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=m] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=m] || NVME_FC [=m]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
+SCSI_SAS_ATTRS: y => mod
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
 
-SERIAL_8250_SHARE_IRQ: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_EXTENDED [=y]
-      Reverse dependencies: SERIAL_8250_IOC3 [=m] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=y] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=n] && SPI_MASTER [=n] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=m] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=m] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 
-CRYPTO_DRBG_MENU: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+SCSI_SAS_ATTRS: y => mod
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
 
-MEDIA_TUNER_TDA9887: m => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+HD44780_COMMON: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=n] && AUXDISPLAY [=y] && PARPORT [=n]
 
-THERMAL_DEFAULT_GOV_USER_SPACE: y => no
-      Direct dependencies: <choice>
+CLK_RENESAS_DIV6: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 

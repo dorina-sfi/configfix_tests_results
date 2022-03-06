@@ -1,27 +1,22 @@
-IIO_TRIGGERED_EVENT: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: HI8435 [=y] && IIO [=y] && SPI [=y]
+THERMAL_DEFAULT_GOV_USER_SPACE: y => no
+      Direct dependencies: <choice>
 
-CRC16: y => no
-      Direct dependencies: y
-      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=y] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && ACPI [=n] && EFI [=n] && SPI [=y] && (X86 || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=y] && IIO [=y] && SCD30_CORE [=y] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
+SENSORS_W83773G: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-CRYPTO_CTR: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=n] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+SENSORS_IBMAEM: m => yes
+      Direct dependencies: HWMON [=m] && IPMI_HANDLER [=m]
 
-RESET_SUNXI: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=y] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=y] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
+FB_VT8623: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-FRAME_POINTER: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
-      Reverse dependencies: ARM64 [=y]
+MTD_REDBOOT_PARTS: m => yes
+      Direct dependencies: MTD [=m]
 
-CRYPTO_DRBG_MENU: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+HW_RANDOM_BA431: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
 

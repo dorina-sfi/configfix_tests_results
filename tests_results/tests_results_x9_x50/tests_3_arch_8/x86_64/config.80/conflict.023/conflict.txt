@@ -1,27 +1,27 @@
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+VIDEO_S5K6A3: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-FB_PVR2: m => yes
-      Direct dependencies: FB [=m] && HAS_IOMEM [=y] && (SH_DREAMCAST || COMPILE_TEST [=y])
+SND_ALOOP: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_DRIVERS [=y]
 
-FB_VIRTUAL: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+NET_NSH: y => mod
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-CRYPTO_ECB: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_XTS [=m] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_MXC && OF [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-SENSORS_POWR1220: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+PRINTER: m => yes
+      Direct dependencies: PARPORT [=m]
 
-XZ_DEC: y => no
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=y] && MISC_FILESYSTEMS [=y] && SQUASHFS [=y] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
+RAPIDIO_ENUM_BASIC: m => yes
+      Direct dependencies: <choice>
 
-UBIFS_FS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && MTD_UBI [=m]
+LIST_KUNIT_TEST: y => mod
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-SCSI_SAS_ATTRS: y => mod
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+DEBUG_RWSEMS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

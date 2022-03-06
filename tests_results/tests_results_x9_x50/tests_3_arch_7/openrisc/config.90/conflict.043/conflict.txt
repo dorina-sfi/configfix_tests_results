@@ -1,26 +1,23 @@
-USB_DWC2_PERIPHERAL: y => no
-      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_DWC2 [=y])
+HID_WACOM: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
 
-CGROUPS: y => no
+COMEDI_QUATECH_DAQP_CS: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCMCIA_DRIVERS [=m]
+
+SCD4X: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+HDC100X: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+BT_HCIUART_H4: y => no
+      Direct dependencies: NET [=y] && BT [=m] && BT_HCIUART [=m]
+      Reverse dependencies: BT_HCIUART_NOKIA [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=n] && GPIOLIB [=y] && PM || BT_HCIUART_ATH3K [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] || BT_HCIUART_LL [=n] && NET [=y] && BT [=m] && BT_HCIUART_SERDEV [=n] || BT_HCIUART_INTEL [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] && GPIOLIB [=y] || BT_HCIUART_BCM [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=n] && (!ACPI || SERIAL_DEV_CTRL_TTYPORT [=n]) && GPIOLIB [=y] || BT_HCIUART_QCA [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=n] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] || BT_HCIUART_MRVL [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=n]
+
+TSL2772: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+SPARSE_IRQ: y => no
       Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
-
-REGULATOR: y => no
-      Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=n] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
-
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=n] || INTEGRITY_ASYMMETRIC_KEYS [=y] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y]
-
-FAIR_GROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
-
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
-
-SCSI_SAS_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 

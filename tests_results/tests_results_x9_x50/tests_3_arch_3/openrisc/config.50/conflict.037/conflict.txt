@@ -1,10 +1,12 @@
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+IIO_TRIGGERED_EVENT: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: HI8435 [=y] && IIO [=y] && SPI [=y]
 
-COMMON_CLK_MT6779_MFGCFG: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=n] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 
-HSI_CHAR: m => yes
-      Direct dependencies: HSI [=m]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 

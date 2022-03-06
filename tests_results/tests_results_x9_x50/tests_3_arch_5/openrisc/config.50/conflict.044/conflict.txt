@@ -1,16 +1,17 @@
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-HID_MACALLY: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+MD_MULTIPATH: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
 
-HID_BELKIN: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+ADIS16480: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=m] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=y] && RTC_CLASS [=y]
+SND_SOC_WM8978: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SIU_MIGOR [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && SH_MIGOR && I2C [=y]
 
-SND_SEQ_DUMMY: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SEQUENCER [=m]
+LEDS_LP5521: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
 

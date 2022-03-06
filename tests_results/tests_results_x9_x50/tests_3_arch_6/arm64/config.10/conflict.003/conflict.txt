@@ -1,22 +1,23 @@
-PINCTRL_PFC_R8A77950: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77950 [=y]
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=n] && HWMON [=y] && IPMI_HANDLER [=y]
 
-PHY_TEGRA194_P2U: y => no
-      Direct dependencies: ARCH_TEGRA_194_SOC [=y] || COMPILE_TEST [=y]
-      Reverse dependencies: PCIE_TEGRA194_HOST [=y] && PCI [=y] && (ARCH_TEGRA_194_SOC [=y] || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || PCIE_TEGRA194_EP [=n] && PCI [=y] && (ARCH_TEGRA_194_SOC [=y] || COMPILE_TEST [=y]) && PCI_ENDPOINT [=n]
+SM_GCC_8250: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_CAMCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+PINCTRL_EXYNOS_ARM64: y => no
+      Direct dependencies: PINCTRL [=y] && PINCTRL_EXYNOS [=y]
+      Reverse dependencies: PINCTRL_EXYNOS [=y] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y]) && ARM64 [=y] && ARCH_EXYNOS [=y]
 
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+SYSCTL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-NO_HZ_FULL: y => no
-      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+SND_SOC_FSL_SPDIF: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_IMX_SPDIF [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+CRC16: y => no
+      Direct dependencies: y
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=y] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI [=n] && EFI [=y] && SPI [=y] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=n] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=n] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=y] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
 

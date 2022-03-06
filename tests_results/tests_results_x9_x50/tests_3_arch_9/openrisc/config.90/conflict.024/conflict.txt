@@ -1,27 +1,33 @@
-IR_IGUANA: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+VIDEO_OV2659: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && GPIOLIB [=y]
 
-MUX_GPIO: m => yes
-      Direct dependencies: MULTIPLEXER [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+VIDEO_CS3308: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n]
 
-LEDS_LP50XX: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGMAP_I2C [=y] && (LEDS_CLASS_MULTICOLOR [=m] || !LEDS_CLASS_MULTICOLOR [=m])
+HID_LED: y => mod
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-SENSORS_SCH5627: m => yes
-      Direct dependencies: HWMON [=m] && !PPC && WATCHDOG [=y]
+DVB_HELENE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && SPI_MASTER [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SND_SOC_WM8985: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
+CRYPTO_SM3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-LEDS_TCA6507: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
-
-LEDS_TLC591XX: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
-
-SENSORS_INA209: m => yes
+SENSORS_LTC4222: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-SND_SOC_TAS2764: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+I2C_SMBUS: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=n] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
+
+SENSORS_W83792D: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+Z3FOLD: m => yes
+      Direct dependencies: ZPOOL [=m]
+      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_Z3FOLD [=n] && <choice>
 

@@ -1,25 +1,26 @@
-RMI4_CORE: y => mod
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 
-REGULATOR_DA9062: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-CLK_RCAR_CPG_LIB: y => no
+ROMFS_BACKED_BY_MTD: y => no
+      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
+
+CLK_RENESAS_CPG_MSSR: y => no
       Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SENSORS_MP2975: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
 
-CRYPTO_STREEBOG: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
 
-COMEDI_DT9812: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_USB_DRIVERS [=m]
-
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 

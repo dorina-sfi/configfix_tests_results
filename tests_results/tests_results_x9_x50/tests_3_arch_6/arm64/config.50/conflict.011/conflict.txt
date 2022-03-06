@@ -1,21 +1,21 @@
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+AHCI_BRCM: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && (ARCH_BRCMSTB [=y] || BMIPS_GENERIC || ARCH_BCM_NSP || ARCH_BCM_63XX)
 
-SND_SOC_SNOW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && I2C [=y]
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
 
-MUX_ADG792A: m => yes
-      Direct dependencies: MULTIPLEXER [=m] && I2C [=y]
+DM_CRYPT: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n)
 
-VIDEO_ADV7604: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: VIDEO_COBALT [=m] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=y] && I2C [=y] && PCI_MSI [=y] && MTD_COMPLEX_MAPPINGS [=y] && (GPIOLIB [=y] && DRM_I2C_ADV7511 [=n]=n || COMPILE_TEST [=n]) && SND [=y] && MTD [=m]
+MTK_CMDQ_MBOX: m => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MTK_CMDQ [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 
-VIDEO_CX88_BLACKBIRD: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=m]
+USB_FUNCTIONFS_GENERIC: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && USB_FUNCTIONFS [=m]
+      Reverse dependencies: USB_FUNCTIONFS [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] && !USB_FUNCTIONFS_ETH [=n] && !USB_FUNCTIONFS_RNDIS [=n]
 
-MTD_CFI_AMDSTD: m => yes
-      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
-      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+CROS_EC_I2C: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && CROS_EC [=m] && I2C [=y]
 

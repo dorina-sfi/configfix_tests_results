@@ -1,14 +1,15 @@
-DVB_SI21XX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && I2C_ALGOBIT [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-STM_SOURCE_CONSOLE: m => yes
-      Direct dependencies: STM [=m]
-
-BATTERY_GAUGE_LTC2941: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
-
-NVMEM: y => no
+POWER_SUPPLY: y => no
       Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=m] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=y] && RTC_CLASS [=y]
+      Reverse dependencies: AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=y] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=y] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=y] && USB_SUPPORT [=y] && USB [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+
+THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
+      Direct dependencies: <choice>
+
+OMAP_CONTROL_PHY: y => no
+      Direct dependencies: ARCH_OMAP2PLUS || COMPILE_TEST [=y]
+      Reverse dependencies: OMAP_USB2 [=n] && (ARCH_OMAP2PLUS || ARCH_K3) && USB_SUPPORT [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) || TI_PIPE3 [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y])
+
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=n]
 

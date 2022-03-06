@@ -1,20 +1,24 @@
-I82092: m => yes
-      Direct dependencies: PCCARD [=m] && PCMCIA [=m] && PCI [=y]
+LEDS_TRIGGER_AUDIO: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_TRIGGERS [=y]
+      Reverse dependencies: SND_CTL_LED [=y] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=y] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-IMX_GPCV2_PM_DOMAINS: y => no
-      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=n] && OF [=y]) && PM [=y]
-      Reverse dependencies: ARCH_MXC [=y]
+BT_HCIUART_3WIRE: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y]
+      Reverse dependencies: BT_HCIUART_RTL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && (ACPI [=n] || SERIAL_DEV_CTRL_TTYPORT [=y])
 
-MTK_CMDQ_MBOX: m => no
-      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: MTK_CMDQ [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
 
-LEDS_SC27XX_BLTC: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_SC27XX_PMIC [=m] && OF [=y]
+INPUT: y => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=y] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 && MMU [=y] && ACPI [=n]
 
-COMEDI_DT2811: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-USB_STORAGE_REALTEK: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 

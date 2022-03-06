@@ -1,14 +1,16 @@
-SND_SOC_AK4458: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_IMX_CARD [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=y] && I2C [=y]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-MMC_SDHCI_OMAP: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y]
+PM_DEVFREQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+LCD_ILI9320: y => no
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI [=y]
+      Reverse dependencies: LCD_VGG2432A4 [=y] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI_MASTER [=y]
 
-SATA_AHCI: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && PCI [=y]
+ARCH_CPUIDLE_HALTPOLL: y => no
+      Direct dependencies: HYPERVISOR_GUEST [=y]
+      Reverse dependencies: KVM_GUEST [=y] && HYPERVISOR_GUEST [=y] && PARAVIRT [=y]
 

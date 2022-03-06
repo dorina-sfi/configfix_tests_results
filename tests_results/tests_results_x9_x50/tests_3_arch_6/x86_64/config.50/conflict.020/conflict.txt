@@ -1,19 +1,24 @@
-X509_CERTIFICATE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
+LCD_ILI9320: y => no
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI [=y]
+      Reverse dependencies: LCD_VGG2432A4 [=y] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI_MASTER [=y]
 
-DRM_PANEL_BOE_TV101WUM_NL6: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
-
-COMEDI_NI_LABPC_PCI: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
-
-ADVISE_SYSCALLS: y => no
+CPU_IDLE: y => no
       Direct dependencies: y
+      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
 
-64BIT: y => no
+PNP: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
+      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
+
+PPS: y => no
       Direct dependencies: y
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
 
-SLIM_QCOM_CTRL: m => yes
-      Direct dependencies: SLIMBUS [=m] && HAS_IOMEM [=y]
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=n] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
+
+SCSI: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
 

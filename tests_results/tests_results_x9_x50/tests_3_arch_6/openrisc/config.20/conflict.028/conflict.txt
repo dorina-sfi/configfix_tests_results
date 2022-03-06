@@ -1,21 +1,22 @@
-AUDIT: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-CROS_EC_CHARDEV: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m]
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
 
-IIO_HRTIMER_TRIGGER: m => yes
-      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=y]
 
-I2C_MUX: y => mod
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=y] && IIO [=y] && I2C [=y]
+CRYPTO_SM3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
 
-AK8975: y => no
-      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-NFC_NCI: m => yes
-      Direct dependencies: NET [=y] && NFC [=m]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=n]
 

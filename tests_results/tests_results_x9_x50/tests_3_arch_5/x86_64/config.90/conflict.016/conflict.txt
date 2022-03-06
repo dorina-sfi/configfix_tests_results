@@ -1,17 +1,19 @@
-HID_LED: m => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=m] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+ACPI_CONTAINER: y => no
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_HOTPLUG_CPU [=y] && ACPI [=y] && ACPI_PROCESSOR [=y] && HOTPLUG_CPU [=y]
 
-ROMFS_BACKED_BY_MTD: y => no
-      Direct dependencies: <choice> && (MTD [=m]=y || ROMFS_FS [=m]=m && MTD [=m])
-
-W1_SLAVE_DS2430: m => yes
-      Direct dependencies: W1 [=m]
-
-BACKLIGHT_LM3533: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_LM3533 [=m]
-
-RELAY: y => no
+IO_URING: y => no
       Direct dependencies: y
-      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n]
+
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
+
+SMSC_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: SMSC9420 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SMSC [=y] && PCI [=n] || USB_NET_SMSC95XX [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
+
+RAS: y => no
+      Direct dependencies: y
+      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=n] && PCIEPORTBUS [=n]
 

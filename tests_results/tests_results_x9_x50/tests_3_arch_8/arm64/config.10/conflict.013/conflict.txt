@@ -1,29 +1,27 @@
-SND_SOC_FSL_AUDMIX: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
-      Reverse dependencies: SND_SOC_IMX_AUDMIX [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y]
+MTD_NAND_MTK: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+REGULATOR_LP873X: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_TI_LP873X [=m] && OF [=y]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+VIDEO_ADV7604: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: VIDEO_COBALT [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=m] && I2C [=m] && PCI_MSI [=n] && MTD_COMPLEX_MAPPINGS [=y] && (GPIOLIB [=y] && DRM_I2C_ADV7511 [=n]=n || COMPILE_TEST [=y]) && SND [=n] && MTD [=m]
 
-DRM_DW_HDMI_I2S_AUDIO: y => no
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && SND_SOC [=y] && DRM_DW_HDMI [=y]
-      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=y] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && DRM_DW_HDMI [=y]
+DRM_PANEL_FEIYANG_FY07024DI26A30D: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-PROC_SYSCTL: y => no
-      Direct dependencies: PROC_FS [=y]
+MFD_ARIZONA_I2C: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-MEMBARRIER: y => no
-      Direct dependencies: y
-      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
+VIDEO_TEA6415C: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-RSEQ: y => no
-      Direct dependencies: HAVE_RSEQ [=y]
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=y] && I2C [=m] && I2C_SLAVE [=y]
 
-PROC_PAGE_MONITOR: y => no
-      Direct dependencies: PROC_FS [=y] && MMU [=y]
-      Reverse dependencies: HWPOISON_INJECT [=y] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+CRYPTO_LIB_CHACHA20POLY1305: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
 

@@ -1,28 +1,29 @@
-DRM_SIMPLE_BRIDGE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-DEBUG_MEMORY_INIT: y => no
+SH_TIMER_CMT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
+
+MEMCPY_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+
+SYNC_FILE: y => no
       Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-DRM_PANEL_EDP: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=y] && PM [=y]
+CPU_IDLE_GOV_MENU: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && (NO_HZ [=y] || NO_HZ_IDLE [=n]) && !CPU_IDLE_GOV_TEO [=n]
 
-REGULATOR_RTQ2134: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+PINCTRL_PFC_R8A774E1: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774E1 [=y]
 
-SPI_MEM: y => no
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: MTD_SPI_NOR [=n] && MTD [=m] && SPI_MASTER [=y] || MTD_SPI_NAND [=m] && MTD [=m] && SPI_MASTER [=y]
-
-CONNECTOR: m => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: DM_LOG_USERSPACE [=m] && MD [=y] && DM_MIRROR [=m] && NET [=y]
-
-F2FS_FS_XATTR: y => no
-      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
-      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
-
-CRC_T10DIF: m => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=m] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=m] || NVME_FC [=m]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n]
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=n] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=n] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 

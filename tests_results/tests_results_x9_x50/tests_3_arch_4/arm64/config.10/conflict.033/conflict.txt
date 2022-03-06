@@ -1,14 +1,14 @@
-USB_NET_KALMIA: m => yes
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=m]
+SX9310: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-TOUCHSCREEN_SILEAD: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+MCP4531: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CRYPTO_LIB_CHACHA: y => mod
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+MTD_QINFO_PROBE: m => yes
+      Direct dependencies: MTD [=m] && MTD_LPDDR [=m]
+      Reverse dependencies: MTD_LPDDR [=m] && MTD [=m]
 
-FW_LOADER_USER_HELPER: y => no
-      Direct dependencies: FW_LOADER [=y]
-      Reverse dependencies: LEDS_LP55XX_COMMON [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=m] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+DNS_RESOLVER: m => no
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=m] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=n] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
 

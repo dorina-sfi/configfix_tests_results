@@ -1,18 +1,19 @@
-MTD_CFI_I1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=y] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=n] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n]
 
-TIME_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+CRYPTO_DH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI
 
-DAMON_KUNIT_TEST: y => no
-      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=y] && <choice> || PSTORE_842_COMPRESS [=n] && MISC_FILESYSTEMS [=n] && PSTORE [=n]
 
-GPIO_SYSCON: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
-      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
+CRYPTO_CRC32: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
 
-DEBUG_KERNEL: y => no
+TTY: y => no
       Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
 

@@ -1,33 +1,32 @@
-REGULATOR_TPS65086: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TPS65086 [=m]
+BMC150_ACCEL: m => yes
+      Direct dependencies: IIO [=m]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+MTD_NAND_INTEL_LGM: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-INTERCONNECT: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM_TEGRA [=n] && HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && DRM [=m] && OF [=y] || TEGRA_MC [=y] && MEMORY [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n] && COMMON_CLK [=y])
+HID_SENSOR_ALS: m => yes
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m]
 
-DRM_PANEL_LG_LB035Q02: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && SPI [=y]
+RPMSG_NS: m => yes
+      Direct dependencies: RPMSG [=m]
+      Reverse dependencies: RPMSG_VIRTIO [=m] && HAS_DMA [=y]
 
-DRM_PANEL_SAMSUNG_SOFEF00: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+PINCTRL_PFC_R8A77951: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77951 [=y]
 
-FB_TFT_PCD8544: m => yes
-      Direct dependencies: STAGING [=y] && FB_TFT [=m]
-
-VIRT_CPU_ACCOUNTING_GEN: y => no
-      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
-
-ZONE_DMA: y => no
-      Direct dependencies: y
-
-HID_SUNPLUS: m => yes
+HID_JABRA: m => yes
       Direct dependencies: INPUT [=y] && HID [=m]
 
-W1_SLAVE_THERM: m => yes
-      Direct dependencies: W1 [=m]
+ADXL355_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+GPIO_MOXTET: m => yes
+      Direct dependencies: GPIOLIB [=y] && SPI_MASTER [=y] && MOXTET [=m]
+
+MSM_MMCC_8998: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+
+IQS620AT_TEMP: m => yes
+      Direct dependencies: IIO [=m] && (MFD_IQS62X [=y] || COMPILE_TEST [=n])
 

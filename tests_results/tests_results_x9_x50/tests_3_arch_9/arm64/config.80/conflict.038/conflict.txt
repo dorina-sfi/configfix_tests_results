@@ -1,28 +1,30 @@
-ROCKCHIP_GRF: y => no
-      Direct dependencies: ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]
+HDC2010: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MOUSE_ELAN_I2C: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && I2C [=y]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-TOUCHSCREEN_GOODIX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SND_SOC_ADI: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-COMEDI_PCMMIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+SENSORS_AS370: m => yes
+      Direct dependencies: HWMON [=m]
 
-W1_MASTER_DS2490: m => yes
-      Direct dependencies: W1 [=y] && USB [=m]
+IIO_BUFFER_HW_CONSUMER: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=m] && IIO [=m] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-DRM_PANEL_SAMSUNG_ATNA33XC20: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m] && PM [=y]
+CRYPTO_NULL: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=m] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=m] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-STM_DUMMY: m => yes
-      Direct dependencies: STM [=m]
+SENSORS_IR38064: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-LEDS_WM8350: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_WM8350 [=y]
+KEYBOARD_LM8323: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && I2C [=y] && LEDS_CLASS [=m]
 
-CLK_R8A7795: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=n] || ARCH_R8A77951 [=y])
+FPGA_DFL_EMIF: m => yes
+      Direct dependencies: MEMORY [=y] && FPGA_DFL [=m] && HAS_IOMEM [=y]
 

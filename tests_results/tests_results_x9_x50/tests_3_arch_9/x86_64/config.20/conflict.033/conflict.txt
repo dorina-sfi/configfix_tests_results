@@ -1,28 +1,31 @@
-INT3406_THERMAL: m => yes
-      Direct dependencies: THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && INT340X_THERMAL [=m] && ACPI_VIDEO [=y]
+RTC_DRV_MT6397: m => yes
+      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
 
-TIFM_7XX1: m => yes
-      Direct dependencies: PCI [=y] && TIFM_CORE [=m]
+REGULATOR_LP873X: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_TI_LP873X [=m] && OF [=y]
 
-EXTCON_MAX3355: m => yes
-      Direct dependencies: EXTCON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+DVB_TDA8261: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && VIDEO_DEV [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SERIAL_8250_LPSS: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && PCI [=y] && (X86 [=y] || COMPILE_TEST [=n])
+DVB_OR51211: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-COMEDI_CB_PCIMDAS: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+GPIO_VIPERBOARD: m => yes
+      Direct dependencies: GPIOLIB [=y] && USB [=m] && MFD_VIPERBOARD [=m]
 
-SERIAL_8250_PNP: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && PNP [=y]
+I2C_DLN2: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_DLN2 [=m]
 
-CRYPTO_TWOFISH_X86_64: y => mod
-      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-FIREWIRE_SBP2: m => yes
-      Direct dependencies: (PCI [=y] || COMPILE_TEST [=n]) && FIREWIRE [=m] && SCSI [=y]
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-MMC_CB710: m => yes
-      Direct dependencies: MMC [=m] && PCI [=y]
+DVB_NXT200X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

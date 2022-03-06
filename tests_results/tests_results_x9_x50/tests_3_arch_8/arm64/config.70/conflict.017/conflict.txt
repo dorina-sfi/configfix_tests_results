@@ -1,25 +1,32 @@
-INFTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=n] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-SENSORS_LTC4245: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
 
-PINCTRL_AXP209: m => yes
-      Direct dependencies: PINCTRL [=y] && MFD_AXP20X [=m] && OF [=y]
+SYSC_R8A774E1: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774E1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-SENSORS_PWM_FAN: m => yes
-      Direct dependencies: HWMON [=m] && (PWM [=y] && OF [=y] || COMPILE_TEST [=y])
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-PINCTRL_MSM8998: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-BACKLIGHT_ADP8860: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=m]
+FPGA_REGION: y => no
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-MMC_TEST: m => yes
-      Direct dependencies: MMC [=m]
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-CRYPTO_ESSIV: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: DM_CRYPT [=m] && MD [=y] && BLK_DEV_DM [=m] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n)
+PINCTRL_RZG2L: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R9A07G044 [=y]
 

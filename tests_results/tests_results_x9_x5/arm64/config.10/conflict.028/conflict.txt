@@ -1,19 +1,21 @@
-YENTA: m => yes
-      Direct dependencies: PCCARD [=m] && PCI [=y]
+CMA_SIZE_SEL_MIN: y => no
+      Direct dependencies: <choice>
 
-INV_ICM42600_SPI: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
-
-LV0104CS: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-IIO_SYSFS_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && SYSFS [=y]
-
-CHARGER_MAX8998: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX8998 [=y] && REGULATOR_MAX8998 [=m]
-
-BOOT_CONFIG: y => no
+PAGE_REPORTING: y => no
       Direct dependencies: y
-      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
+      Reverse dependencies: VIRTIO_BALLOON [=n] && VIRTIO_MENU [=n] && VIRTIO [=y] || HYPERV_BALLOON [=y] && HYPERV [=y]
+
+CORESIGHT_LINKS_AND_SINKS: y => no
+      Direct dependencies: CORESIGHT [=y]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=y] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y] || CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
+
+RESET_SUNXI: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+
+HZ_250: y => no
+      Direct dependencies: <choice>
 

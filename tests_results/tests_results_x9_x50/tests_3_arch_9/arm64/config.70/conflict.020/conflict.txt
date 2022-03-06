@@ -1,29 +1,30 @@
-HW_RANDOM_OPTEE: m => yes
-      Direct dependencies: HW_RANDOM [=y] && OPTEE [=m]
+UNIX_DIAG: m => yes
+      Direct dependencies: NET [=y] && UNIX [=m]
 
-THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
-      Direct dependencies: <choice>
+MDM_GCC_9615: m => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MDM_LCC_9615 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-DRM_NXP_PTN3460: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+HID_SENSOR_IIO_TRIGGER: y => mod
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=m] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=m] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=m] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=m] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-GPIO_BD71828: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_ROHM_BD71828 [=m]
+DRM_PANEL_NEC_NL8048HL11: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && SPI [=y]
 
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+FB_CARMINE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-DRM_VIA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM_LEGACY [=y] && DRM [=m] && PCI [=y]
+TIFM_CORE: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: MMC_TIFM_SD [=n] && MMC [=n] && PCI [=y] || MEMSTICK_TIFM_MS [=m] && MEMSTICK [=y] && PCI [=y]
 
-HID_LOGITECH_HIDPP: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_LOGITECH [=m]
-      Reverse dependencies: HID_LOGITECH_DJ [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && HIDRAW [=n] && HID_LOGITECH [=m]
+SENSORS_LM3533: m => yes
+      Direct dependencies: IIO [=y] && MFD_LM3533 [=m]
 
-SENSORS_TC74: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DVB_LGS8GL5: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
 
-SENSORS_GL520SM: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+W1_MASTER_SGI: m => yes
+      Direct dependencies: W1 [=m]
 

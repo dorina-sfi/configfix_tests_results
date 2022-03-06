@@ -1,29 +1,33 @@
-FILE_LOCKING: y => no
+CRYPTO_SM4: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+
+SPI_DW_MMIO: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=m] && HAS_IOMEM [=y]
+
+USB_HUB_USB251XB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && I2C [=y]
+
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+
+DVB_STV0367: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+CRC4: m => no
       Direct dependencies: y
+      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=m] && GPIOLIB [=y]
 
-CRYPTO_SERPENT_AVX_X86_64: y => mod
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+VIDEO_M52790: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=n]
 
-ISCSI_IBFT_FIND: y => no
-      Direct dependencies: X86 [=y] && ISCSI_IBFT [=y]
-      Reverse dependencies: ISCSI_IBFT [=y] && ACPI [=y] && SCSI [=y] && SCSI_LOWLEVEL [=y] && X86 [=y]
+MMC_HSQ: m => yes
+      Direct dependencies: MMC [=m]
+      Reverse dependencies: MMC_SDHCI_SPRD [=n] && MMC [=m] && (ARCH_SPRD || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=m]
 
-RTC_DRV_DS17885: y => no
-      Direct dependencies: <choice>
-
-COMEDI_ADDI_APCI_1032: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
-
-SENSORS_DPS920AB: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-COMEDI_NI_PCIMIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
-
-COMEDI_ADV_PCI1760: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
-
-UIO_SERCOS3: m => yes
-      Direct dependencies: UIO [=m] && PCI [=y]
+SENSORS_LTC2947_I2C: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

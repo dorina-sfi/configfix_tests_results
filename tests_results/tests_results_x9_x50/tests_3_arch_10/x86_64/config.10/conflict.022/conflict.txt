@@ -1,39 +1,36 @@
-W1_SLAVE_DS2781: y => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
-
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
-
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
-
-THERMAL: y => no
+POWER_SUPPLY: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=y] || MMC_SDHCI_OMAP [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=y]
+      Reverse dependencies: ACPI_AC [=y] && ACPI [=y] || ACPI_BATTERY [=n] && ACPI [=y] || ACPI_SBS [=n] && ACPI [=y] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=n]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=y] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=y] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=m] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && (AGP [=y] || !AGP [=y]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=y] && HID [=n] || HID_ASUS [=n] && INPUT [=y] && HID [=n] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=n] && HID_LOGITECH [=n] || HID_NINTENDO [=n] && INPUT [=y] && HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=n] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=n] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=y] && HID [=n] || HID_WACOM [=n] && INPUT [=y] && HID [=n] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=n] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && (RFKILL [=m] || RFKILL [=m]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+MTK_SMI: y => mod
+      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-LEGACY_VSYSCALL_NONE: y => no
-      Direct dependencies: <choice>
+FPGA_DFL: m => yes
+      Direct dependencies: FPGA [=m] && HAS_IOMEM [=y]
 
-SCHEDSTATS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
-      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
-
-CRYPTO_AUTHENC: y => no
+CRYPTO_XXHASH: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=y] || XFRM_ESP [=n] && NET [=y] && INET [=n] || CRYPTO_ESSIV [=y] && CRYPTO [=y] || CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && FSL_MC_DPIO [=n] && NETDEVICES [=y] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && FSL_SOC || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_ATMEL_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_AT91 || COMPILE_TEST [=n]) && CRYPTO_DEV_ATMEL_AUTHENC [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_AEAD [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 || COMPILE_TEST [=n]) || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=y] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-IOSF_MBI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=y] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=n] && MMC [=y] && MMC_SDHCI [=y] && ACPI [=n] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && X86 [=y] && EFI [=n] && PCI [=y] && ACPI [=n] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=n] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=n] || PUNIT_ATOM_DEBUG [=n] && PCI [=y]
+NO_HZ_FULL: y => no
+      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-MMC_CQHCI: y => no
-      Direct dependencies: MMC [=y] && HAS_DMA [=y]
-      Reverse dependencies: MMC_SDHCI_PCI [=y] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] && OF [=y] || MMC_SDHCI_TEGRA [=n] && MMC [=y] && (ARCH_TEGRA || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_MSM [=n] && MMC [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=y] && REGMAP_MMIO [=y]
+XEN_PRIVCMD: y => mod
+      Direct dependencies: XEN [=y]
+      Reverse dependencies: XENFS [=y] && XEN [=y]
+
+CMA: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=n] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
+
+BACKLIGHT_PCF50633: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_PCF50633 [=m]
+
+THERMAL_WRITABLE_TRIPS: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: X86_PKG_TEMP_THERMAL [=m] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] && ACPI [=y]
+
+CAN_EMS_PCI: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_SJA1000 [=m] && PCI [=y]
 

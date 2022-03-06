@@ -1,16 +1,19 @@
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=n] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
 
-BATTERY_DS2760: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && W1 [=m]
+X86_PM_TIMER: y => no
+      Direct dependencies: X86 [=y] && (ACPI [=y] || JAILHOUSE_GUEST [=n])
+      Reverse dependencies: JAILHOUSE_GUEST [=n] && HYPERVISOR_GUEST [=n] && X86_64 [=y] && PCI [=n]
 
-W1_MASTER_SGI: m => yes
-      Direct dependencies: W1 [=m]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-COMEDI_DYNA_PCI10XX: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+THERMAL_WRITABLE_TRIPS: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=n] && ACPI [=y]
 
-TOUCHSCREEN_CYTTSP4_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_CYTTSP4_CORE [=m] && I2C [=y]
+FUTEX: y => no
+      Direct dependencies: y
 

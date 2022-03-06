@@ -1,25 +1,28 @@
-TOUCHSCREEN_ZET6223: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+MEDIA_TUNER_TDA827X: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_M920X [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_TTUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_TDA8290 [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
 
-SENSORS_SCH5627: m => yes
-      Direct dependencies: HWMON [=m] && !PPC && WATCHDOG [=y]
-
-PINCTRL_EXYNOS: y => no
-      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_EXYNOS [=y]
-
-NOP_USB_XCEIV: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (USB_GADGET [=m] || !USB_GADGET [=m])
-      Reverse dependencies: USB_DWC2_PCI [=n] && USB_SUPPORT [=y] && USB_DWC2 [=n] && USB_PCI [=n] && (USB_GADGET [=m] || !USB_GADGET [=m])
-
-EXPERT: y => no
+XZ_DEC: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
 
-MTD_NAND_DENALI_DT: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_DMA [=y] && HAVE_CLK [=y] && OF [=y] && HAS_IOMEM [=y]
+DVB_MT352: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_UMT_010 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIGITV [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-EINT_MTK: y => mod
-      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && OF [=y]
+CRC_CCITT: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAIF [=n] && NET [=n] || NFC_DIGITAL [=n] && NET [=n] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=n] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=n] && NFC_HCI [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || NETLABEL [=n] && NET [=n] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] && !64BIT [=y] || NFC_FDP [=n] && NET [=n] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=n] && NFC [=n] || NFC_MICROREAD [=n] && NET [=n] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=n] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=y] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+
+CPU_FREQ_GOV_PERFORMANCE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=y] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=n] && CPU_FREQ [=y] && X86
+
+CLK_RENESAS_DIV6: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+
+PINCTRL_BCM2835: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_BCM2835 [=y]
 

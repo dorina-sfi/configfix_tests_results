@@ -1,10 +1,12 @@
-AM335X_PHY_USB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (ARM || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
 
-LPC32XX_ADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+OF_OVERLAY: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 

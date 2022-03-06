@@ -1,34 +1,31 @@
-TOUCHSCREEN_TSC2004: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+RMI4_CORE: m => yes
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: HID_RMI [=m] && INPUT [=m] && HID [=m]
 
-EINT_MTK: y => mod
-      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
+HID_PLAYSTATION: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS_MULTICOLOR [=m]
 
-MTD_RAM: m => no
+MTD_JEDECPROBE: m => yes
       Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=m] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+UIO_DMEM_GENIRQ: m => yes
+      Direct dependencies: UIO [=m] && HAS_DMA [=y]
 
-OVERLAY_FS_REDIRECT_DIR: y => no
-      Direct dependencies: OVERLAY_FS [=m]
-      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=m]
+SND_SOC_FSL_ASRC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && HAS_DMA [=y]
 
-CLK_RCAR_GEN3_CPG: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A774A1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+SND_SOC_MT6351: m => no
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_SOC_MT6797_MT6351 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT6797 [=m] && MTK_PMIC_WRAP [=m]
 
-LEDS_GPIO: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: MERAKI_MX100 [=n] && X86 && X86_PLATFORM_DEVICES [=n] && GPIOLIB [=y] && GPIO_ICH [=n] && LEDS_CLASS [=m] || PCENGINES_APU2 [=n] && X86 && X86_PLATFORM_DEVICES [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && GPIOLIB [=y] && LEDS_CLASS [=m]
+EXYNOS_ARM64_COMMON_CLK: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_SAMSUNG [=y]
+      Reverse dependencies: COMMON_CLK_SAMSUNG [=y] && COMMON_CLK [=y] && ARM64 [=y] && ARCH_EXYNOS [=y]
 
-XZ_DEC: y => mod
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
+FPGA_DFL_FME_MGR: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
 
-DRM_PANEL_OLIMEX_LCD_OLINUXINO: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && I2C [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+DRM_VIA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_LEGACY [=y] && DRM [=m] && PCI [=y]
 

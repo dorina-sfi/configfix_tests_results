@@ -1,36 +1,33 @@
-PSTORE_LZ4_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+USB_OXU210HP_HCD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && HAS_IOMEM [=y]
 
-PINCTRL_PFC_R8A77951: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77951 [=y]
+USB_XHCI_PLATFORM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_XHCI_HCD [=m]
+      Reverse dependencies: USB_CDNS_SUPPORT [=m] && USB_SUPPORT [=y] && (USB [=m] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=m] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_BRCMSTB [=m] && USB_SUPPORT [=y] && USB [=m] && (ARCH_BRCMSTB [=y] && PHY_BRCM_USB [=m] || COMPILE_TEST [=y]) && USB_XHCI_HCD [=m] || USB_XHCI_MVEBU [=m] && USB_SUPPORT [=y] && USB [=m] && USB_XHCI_HCD [=m] && HAS_IOMEM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y])
 
-PINCTRL_PFC_R8A774E1: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774E1 [=y]
+USB_FTDI_ELAN: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-BLK_DEV_INITRD: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+RPMSG_NS: m => no
+      Direct dependencies: RPMSG [=m]
+      Reverse dependencies: RPMSG_VIRTIO [=m] && HAS_DMA [=y]
 
-ROMFS_BACKED_BY_MTD: y => no
-      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
+FPGA_MGR_MACHXO2_SPI: m => yes
+      Direct dependencies: FPGA [=m] && SPI [=y]
 
-PSTORE_LZ4_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+SENSORS_TPS53679: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-ACPI_SPCR_TABLE: y => no
-      Direct dependencies: ACPI [=y]
-      Reverse dependencies: ARM64 [=y] && ACPI [=y]
+FB_OMAP2_CONNECTOR_ANALOG_TV: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m]
 
-MEMCPY_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+SND_SOC_TEGRA20_I2S: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m]
 
-TEGRA_BPMP: y => no
-      Direct dependencies: ARCH_TEGRA [=y] && TEGRA_HSP_MBOX [=y] && TEGRA_IVC [=y]
-      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
+USB_CDNS3_IMX: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_CDNS3 [=m] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+TIMER_IMX_SYS_CTR: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_MXC [=y]
 

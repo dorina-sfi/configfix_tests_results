@@ -1,28 +1,29 @@
-DRM_PANEL_LG_LB035Q02: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && SPI [=y]
+MXC_CLK: y => mod
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=m] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MN [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MQ [=n] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8ULP [=n] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+PCSPKR_PLATFORM: y => no
+      Direct dependencies: HAVE_PCSPKR_PLATFORM [=y]
 
-LEDS_LP5521: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+EXT4_FS: m => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: EXT3_FS [=m] && BLOCK [=y]
 
-LEDS_LM3601X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && LEDS_CLASS [=m] && I2C [=y]
+SERIAL_8250_PNP: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && PNP [=y]
 
-SND_SOC_CS4271_SPI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
-      Reverse dependencies: SND_EP93XX_SOC_EDB93XX [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && (MACH_EDB9301 || MACH_EDB9302 || MACH_EDB9302A || MACH_EDB9307A || MACH_EDB9315A) && SPI_MASTER [=y]
+USB_G_ACM_MS: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && TTY [=y] && BLOCK [=y]
 
-PINCTRL_AXP209: m => yes
-      Direct dependencies: PINCTRL [=y] && MFD_AXP20X [=m] && OF [=y]
+FPGA_DFL_FME_BRIDGE: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
 
-HID_DRAGONRISE: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+USB_LCD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-KEYBOARD_SAMSUNG: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && HAVE_CLK [=y]
+STRICT_MODULE_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
 
-TOUCHSCREEN_PENMOUNT: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+SENSORS_UCD9000: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 

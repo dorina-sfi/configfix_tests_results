@@ -1,14 +1,13 @@
-CHARLCD: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
+CEPH_LIB: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=y] || CEPH_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-CRYPTO_GHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+NFS_V3: m => yes
+      Direct dependencies: NETWORK_FILESYSTEMS [=y] && NFS_FS [=m]
 
-NETDEV_NOTIFIER_ERROR_INJECT: m => yes
-      Direct dependencies: NET [=y] && NOTIFIER_ERROR_INJECTION [=m]
+VIDEO_OV9640: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-VEML6030: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+NFT_SOCKET: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 

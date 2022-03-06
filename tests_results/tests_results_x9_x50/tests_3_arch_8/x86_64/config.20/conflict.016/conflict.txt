@@ -1,26 +1,31 @@
-DM_CACHE: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
-
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
-
-CRYPTO_LZ4: m => no
+CRYPTO_NULL: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
 
-IPMI_KCS_BMC_CDEV_IPMI: m => yes
-      Direct dependencies: IPMI_KCS_BMC [=m]
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-PSTORE_LZO_COMPRESS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_LZO [=y] || PSTORE_LZO_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
 
-PPS_CLIENT_LDISC: m => yes
-      Direct dependencies: PPS [=m] && TTY [=y]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-ELF_CORE: y => no
-      Direct dependencies: COREDUMP [=y]
+AMIGA_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-MTD_NAND_AMS_DELTA: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (MACH_AMS_DELTA || COMPILE_TEST [=y])
+CRYPTO_MD5: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: TCP_MD5SIG [=n] && NET [=y] && INET [=y] || SCTP_COOKIE_HMAC_MD5 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_MD5 [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=y] || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_MD5_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_MD5_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_SUNXI && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y]
+
+CRYPTO_CMAC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y]
 

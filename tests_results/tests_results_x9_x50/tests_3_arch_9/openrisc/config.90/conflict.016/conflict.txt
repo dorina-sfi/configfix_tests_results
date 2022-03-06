@@ -1,30 +1,28 @@
-SND_SOC_PCM179X_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+HID_HOLTEK: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
 
-SND_SOC_INNO_RK3036: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+USB_MUSB_DSPS: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_MUSB_HDRC [=m] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && OF_IRQ [=y]
 
-MMC_SDHCI: m => yes
-      Direct dependencies: MMC [=m] && HAS_DMA [=y]
+TMP117: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-USB_ULPI_BUS: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y]
+VIDEO_VICODEC: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m]
 
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+APDS9300: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-JOYSTICK_TWIDJOY: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+DVB_TC90522: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_GL861 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_PT1 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_PT3 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-LEDS_TCA6507: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_MTK_BTCVSD: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+DRM_PANEL_KINGDISPLAY_KD097D04: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
 
-USB: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
-      Reverse dependencies: MOUSE_APPLETOUCH [=m] && INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=m] && INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=n] && INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=m] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=n] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=n] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=m] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=m] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=n] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=n] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=m] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=n] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=m] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=n] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=n]
+SENSORS_LTC4245: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

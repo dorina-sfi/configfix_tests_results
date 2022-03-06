@@ -1,14 +1,14 @@
-X509_CERTIFICATE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=y] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=y]) && OF [=y]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=m] || SCSI_UFS_BSG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=m] && SCSI_UFSHCD [=m]
+AHCI_SUNXI: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && ARCH_SUNXI [=y]
 
-VIDEO_IMX208: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m] && VIDEO_V4L2_SUBDEV_API [=y] && MEDIA_CAMERA_SUPPORT [=y]
+CRYPTO_CRC32: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
 
-MCP4922: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+SENSORS_ADM1031: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

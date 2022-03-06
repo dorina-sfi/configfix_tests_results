@@ -1,27 +1,31 @@
-DRM_PANEL_TRULY_NT35597_WQXGA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y]
+TEGRA_BPMP: y => no
+      Direct dependencies: ARCH_TEGRA [=y] && TEGRA_HSP_MBOX [=y] && TEGRA_IVC [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
 
-XZ_DEC_SPARC: y => no
-      Direct dependencies: XZ_DEC [=y]
+DVB_STV6111: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-APPLE_AIC: y => no
-      Direct dependencies: ARM64 [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_APPLE [=y]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=n] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n])
 
-QCOM_FASTRPC: m => yes
-      Direct dependencies: (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && RPMSG [=m]
+ARM_TIMER_SP804: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
+      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=n]
 
-NET_FAILOVER: m => no
-      Direct dependencies: NETDEVICES [=y]
-      Reverse dependencies: VIRTIO_NET [=m] && NETDEVICES [=y] && NET_CORE [=y] && VIRTIO [=m]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=y] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=y] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=n] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=y] || ARCH_QCOM [=n] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-SND_SOC_AK4554: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+FB_SIS_300: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB_SIS [=y]
+      Reverse dependencies: FB_SIS [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && !FB_SIS_315 [=n]
 
-INTERCONNECT_QCOM_MSM8939: m => yes
-      Direct dependencies: INTERCONNECT [=y] && INTERCONNECT_QCOM [=y] && QCOM_SMD_RPM [=m]
+CPU_FREQ_GOV_USERSPACE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_USERSPACE [=y] && <choice>
 
-NET_MPLS_GSO: m => no
-      Direct dependencies: NET [=y] && MPLS [=y]
-      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+CHARLCD_BL_ON: y => no
+      Direct dependencies: <choice>
 

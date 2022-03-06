@@ -1,7 +1,8 @@
-SENSORS_LM77: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-NET_MPLS_GSO: y => no
-      Direct dependencies: NET [=y] && MPLS [=y]
-      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
 

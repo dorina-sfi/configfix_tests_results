@@ -1,21 +1,20 @@
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=n] && FTRACE [=y]
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 
-SND_SOC_TAS6424: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+DVB_STV6110x: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=m] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SND_SOC_WM8524: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && GPIOLIB [=y]
+COMEDI_KCOMEDILIB: m => yes
+      Direct dependencies: COMEDI [=m]
+      Reverse dependencies: COMEDI_BOND [=m] && COMEDI [=m] && COMEDI_MISC_DRIVERS [=y]
 
-CHARLCD: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=n] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
+SENSORS_DA9052_ADC: m => yes
+      Direct dependencies: HWMON [=m] && PMIC_DA9052 [=y]
 
-SND_SOC_CS4271_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_EP93XX_SOC_EDB93XX [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && (MACH_EDB9301 || MACH_EDB9302 || MACH_EDB9302A || MACH_EDB9307A || MACH_EDB9315A) && I2C [=y]
+FB_VOODOO1: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-DRM_TOSHIBA_TC358764: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+INTEL_TH_PCI: m => yes
+      Direct dependencies: INTEL_TH [=m] && PCI [=y]
 

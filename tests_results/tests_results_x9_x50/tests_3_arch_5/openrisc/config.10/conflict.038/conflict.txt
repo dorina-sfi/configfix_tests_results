@@ -1,16 +1,18 @@
-I2C_HID_OF_GOODIX: m => yes
-      Direct dependencies: I2C [=y] && INPUT [=m] && OF [=y]
+HID_SENSOR_IIO_TRIGGER: m => yes
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_IIO_COMMON [=m] && IIO [=y] && HID_SENSOR_HUB [=m] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_HUMIDITY [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_ALS [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_PROX [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_MAGNETOMETER_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_INCLINOMETER_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_DEVICE_ROTATION [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_CUSTOM_INTEL_HINGE [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_PRESS [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=m]
 
-SPI_HISI_SFC: m => yes
-      Direct dependencies: MTD [=y] && MTD_SPI_NOR [=m] && (ARCH_HISI || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n]
 
-VIDEO_OV7740: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+MOUSE_SYNAPTICS_USB: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
 
-RMI4_F03: y => no
-      Direct dependencies: INPUT [=m] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=m] && HID [=m]
+RMI4_CORE: m => yes
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: HID_RMI [=n] && INPUT [=m] && HID [=m]
 
-W1_SLAVE_DS2405: m => yes
-      Direct dependencies: W1 [=m]
+FB_SIMPLE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y] && !DRM_SIMPLEDRM [=m]
 

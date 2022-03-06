@@ -1,15 +1,14 @@
-USB_ULPI_BUS: m => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y]
+HW_RANDOM_VIA: m => yes
+      Direct dependencies: HW_RANDOM [=m] && X86 [=y]
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=y] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=n] && X86_LOCAL_APIC [=y]
+SERIO_SERPORT: y => mod
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
 
-DRM_IMX_TVE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM_IMX [=m] && COMMON_CLK [=y]
+DRM_PANEL_JDI_LT070ME05000: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
 
-KALLSYMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: KPROBES [=y] && MODULES [=y] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+BACKLIGHT_CLASS_DEVICE: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: DRM_RADEON [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && (AGP [=m] || !AGP [=m]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=m] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=n]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=m] && HAS_IOMEM [=y] && DRM [=m] && SPI [=y] || TINYDRM_ILI9163 [=m] && HAS_IOMEM [=y] && DRM [=m] && SPI [=y] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=y] || TINYDRM_ILI9486 [=m] && HAS_IOMEM [=y] && DRM [=m] && SPI [=y] || TINYDRM_MI0283QT [=m] && HAS_IOMEM [=y] && DRM [=m] && SPI [=y] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=y] || DRM_GUD [=n] && HAS_IOMEM [=y] && DRM [=m] && USB [=y] && MMU [=y] || DRM_PARADE_PS8622 [=n] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] || FB_BACKLIGHT [=n] && HAS_IOMEM [=y] && FB [=n] || FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=n] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=n] && MX3_IPU [=n] || USB_APPLEDISPLAY [=y] && USB_SUPPORT [=y] && USB [=y] || FB_OLPC_DCON [=n] && STAGING [=n] && OLPC [=n] && FB [=n] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=y] || SAMSUNG_Q10 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] || ACPI_CMPC [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n)
 

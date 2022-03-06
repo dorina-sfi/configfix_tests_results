@@ -1,29 +1,31 @@
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=m]
+MFD_TI_LMU: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-SND_SOC_ROCKCHIP_PDM: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && HAVE_CLK [=y] && SND_SOC_ROCKCHIP [=m]
+MENF21BMC_WATCHDOG: m => yes
+      Direct dependencies: WATCHDOG [=y] && (MFD_MENF21BMC [=m] || COMPILE_TEST [=n]) && I2C [=m]
 
-SND_SOC_TFA9879: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=y] || EEPROM_AT24 [=m] && I2C [=m] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
 
-INV_ICM42600_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_ADV7842: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_COBALT [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=m] && I2C [=m] && PCI_MSI [=y] && MTD_COMPLEX_MAPPINGS [=y] && (GPIOLIB [=y] && DRM_I2C_ADV7511 [=n]=n || COMPILE_TEST [=n]) && SND [=y] && MTD [=y]
 
-FB_METRONOME: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+REGULATOR_FAN53880: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
 
-SND_SOC_WM8523: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+IMA_DEFAULT_HASH_SHA1: y => no
+      Direct dependencies: <choice> && CRYPTO_SHA1 [=y]=y
 
-KXSD9_I2C: m => yes
-      Direct dependencies: IIO [=m] && KXSD9 [=m] && I2C [=y]
+FSL_DPAA_ETH: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=y] && FSL_DPAA [=y] && FSL_FMAN [=m]
 
-EFI_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+BPF_SYSCALL: y => no
+      Direct dependencies: y
+      Reverse dependencies: AF_KCM [=y] && NET [=y] && INET [=y]
 
-CRYPTO_LZ4HC: y => no
+CRYPTO_RSA: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=m] && CRYPTO_DEV_SP_CCP [=n]
 

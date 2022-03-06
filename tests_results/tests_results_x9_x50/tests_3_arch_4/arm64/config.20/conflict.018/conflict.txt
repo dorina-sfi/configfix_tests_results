@@ -1,15 +1,16 @@
-RESET_SUNXI: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
+USB_TEGRA_PHY: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y] && ARCH_TEGRA [=y]
 
-POWER_RESET: y => no
+BLK_DEV_INITRD: y => no
       Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-CRYPTO_SM3: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+MESON_CANVAS: y => no
+      Direct dependencies: ARCH_MESON [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=y] || COMPILE_TEST [=n]) || VIDEO_MESON_VDEC [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] && HAS_DMA [=y] && (ARCH_MESON [=y] || COMPILE_TEST [=n])
 
-USB_FUNCTIONFS_GENERIC: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=y] && USB_FUNCTIONFS [=y]
-      Reverse dependencies: USB_FUNCTIONFS [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && !USB_FUNCTIONFS_ETH [=n] && !USB_FUNCTIONFS_RNDIS [=n]
+PINCTRL_RZG2L: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R9A07G044 [=y]
 

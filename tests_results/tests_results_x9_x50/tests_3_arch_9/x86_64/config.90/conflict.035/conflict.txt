@@ -1,33 +1,35 @@
-MXC_CLK: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
-      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MN [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MQ [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+MTD_MAP_BANK_WIDTH_4: y => no
+      Direct dependencies: MTD [=y]
 
-USB_EHCI_ROOT_HUB_TT: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
-      Reverse dependencies: USB_EHCI_FSL [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_MV [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=y]) || USB_CHIPIDEA_HOST [=n] && USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && USB_EHCI_HCD [=y]
+INPUT: y => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 [=y] && MMU [=y] && ACPI [=n]
 
-CRYPTO_LZ4HC: y => no
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
+
+CRYPTO_DES: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+      Reverse dependencies: CRYPTO_DEV_SUN8I_CE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=n] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=y]
 
-SND_SOC_WM8580: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
-      Reverse dependencies: SND_SOC_SAMSUNG_SMDK_WM8580 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && (MACH_SMDK6410 || COMPILE_TEST [=y]) && I2C [=y]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-SCTP_DEFAULT_COOKIE_HMAC_SHA1: y => no
-      Direct dependencies: <choice>
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=n] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-X86_INTEL_TSX_MODE_ON: y => no
-      Direct dependencies: <choice>
+XFRM_MIGRATE: y => no
+      Direct dependencies: NET [=y] && INET [=y] && XFRM [=y]
+      Reverse dependencies: NET_KEY_MIGRATE [=y] && NET [=y] && INET [=y] && NET_KEY [=y]
 
-CLK_RENESAS_CPG_MSTP: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RZA1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
 
-LTO_NONE: y => no
-      Direct dependencies: <choice>
-
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 

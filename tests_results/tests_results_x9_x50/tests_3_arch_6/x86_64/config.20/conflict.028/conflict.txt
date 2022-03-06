@@ -1,21 +1,20 @@
-DAMON_KUNIT_TEST: y => no
-      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
+INET_ESP_OFFLOAD: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && INET_ESP [=m]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+SENSORS_ISL68137: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+IPMI_DEVICE_INTERFACE: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
 
-REGULATOR: y => no
-      Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=n])
+PKCS7_MESSAGE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+NET_DSA_TAG_BRCM: m => no
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: B53 [=m] && NETDEVICES [=y] && NET_DSA [=m] || NET_DSA_BCM_SF2 [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y]
 
-KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+PCF50633_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_PCF50633 [=m]
 

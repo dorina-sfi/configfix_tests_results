@@ -1,10 +1,12 @@
-OF_RECONFIG_NOTIFIER_ERROR_INJECT: m => yes
-      Direct dependencies: OF_DYNAMIC [=y] && NOTIFIER_ERROR_INJECTION [=m]
+CRYPTO_DEFLATE: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-SCSI_UFS_HISI: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y] && (ARCH_HISI || COMPILE_TEST [=y]) && SCSI_UFSHCD_PLATFORM [=m]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
 

@@ -1,15 +1,20 @@
-VIDEO_OV9282: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && OF_GPIO [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-VIDEO_OV9650: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+OMAP_CONTROL_PHY: y => no
+      Direct dependencies: ARCH_OMAP2PLUS || COMPILE_TEST [=y]
+      Reverse dependencies: OMAP_USB2 [=n] && (ARCH_OMAP2PLUS || ARCH_K3) && USB_SUPPORT [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) || TI_PIPE3 [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y])
 
-SERIAL_8250_MEN_MCB: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && MCB [=m] && SERIAL_8250 [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 
-MDIO_BUS_MUX_MULTIPLEXER: m => yes
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=m] && OF_MDIO [=m]
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-SERIAL_IPOCTAL: m => yes
-      Direct dependencies: IPACK_BUS [=m] && TTY [=y]
+SDM_GCC_660: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SDM_MMCC_660 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_660 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 

@@ -1,13 +1,15 @@
-USB_EZUSB_FX2: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y]
-      Reverse dependencies: USB_SERIAL_WHITEHEAT [=m] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN_PDA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y]
+MEDIA_TUNER_MT20XX: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=m]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-LEDS_RT8515: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && GPIOLIB [=y] && (V4L2_FLASH_LED_CLASS [=m] || !V4L2_FLASH_LED_CLASS [=m])
+VIDEO_ST_MIPID02: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=m] && VIDEO_V4L2 [=m]
 
-DA9150_GPADC: m => yes
-      Direct dependencies: IIO [=m] && MFD_DA9150 [=y]
+DVB_LNBP22: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_PCTV452E [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MAX517: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_TEA6415C: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

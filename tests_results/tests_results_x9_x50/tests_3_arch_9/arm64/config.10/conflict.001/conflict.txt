@@ -1,32 +1,35 @@
-SPARSEMEM_VMEMMAP: y => no
-      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
-      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
+ROCKCHIP_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
+      Reverse dependencies: ARCH_ROCKCHIP [=y]
 
-DEBUG_BUGVERBOSE: y => no
-      Direct dependencies: BUG [=y] && (GENERIC_BUG [=y] || HAVE_DEBUG_BUGVERBOSE [=n])
-
-AUTOFS_FS: y => no
+PM: y => no
       Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+      Reverse dependencies: ARCH_MXC [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_VEXPRESS [=y] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
 
-UNMAP_KERNEL_AT_EL0: y => no
-      Direct dependencies: y
+INPUT_MATRIXKMAP: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || KEYBOARD_EP93XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=y]) || KEYBOARD_TCA8418 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_MATRIX [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || KEYBOARD_LM8333 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_IMX [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_TEGRA [=y] && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=n] || KEYBOARD_SAMSUNG [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_STI || COMPILE_TEST [=y]) || KEYBOARD_STMPE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_STMPE [=n] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && PLAT_SPEAR || KEYBOARD_TC3589X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_TC3589X [=y] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && TWL4030_CORE [=n] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && CROS_EC [=n] || KEYBOARD_BCM [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
 
-DAMON_KUNIT_TEST: y => no
-      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
+PINCTRL_RENESAS: y => no
+      Direct dependencies: PINCTRL [=y]
 
-PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=y]) && OF [=y]
 
-MD_RAID10: y => no
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+CRYPTO_SHA1: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA1_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=y] && (HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] || CPU_SUP_AMD) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=n] && KEYS [=n] && TCG_TPM [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_SHA1_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT [=y] || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI [=y] && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=n] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y] || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=n] && TCG_TPM [=y] && TRUSTED_KEYS [=n] || SIGNATURE [=n] && KEYS [=n]
 
-CPU_IDLE_GOV_LADDER: y => no
-      Direct dependencies: CPU_IDLE [=y]
-      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
+SYSC_R8A77995: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77995 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+
+CRYPTO_SHA1: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA1_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=y] && (HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] || CPU_SUP_AMD) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=n] && KEYS [=n] && TCG_TPM [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_SHA1_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT [=y] || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI [=y] && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=n] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y] || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=n] && TCG_TPM [=y] && TRUSTED_KEYS [=n] || SIGNATURE [=n] && KEYS [=n]
 

@@ -1,25 +1,32 @@
-PCMCIA_WL3501: m => yes
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && CFG80211 [=m] && PCMCIA [=m]
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=y] && I2C [=y]
 
-CRYPTO_CRCT10DIF: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-PWM_NTXEC: m => yes
-      Direct dependencies: PWM [=y] && MFD_NTXEC [=m]
+VIDEO_WM8775: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] || VIDEO_CX88 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-DP83848_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+CONFIGFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=y] && ACPI [=y] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=y] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=y] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
 
-REGULATOR_MT6323: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+PWM: y => no
+      Direct dependencies: y
+      Reverse dependencies: FB_SSD1307 [=y] && HAS_IOMEM [=y] && FB [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-PREEMPT_VOLUNTARY: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+THERMAL_GOV_BANG_BANG: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: ACERHDF [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && THERMAL [=y]
 
-CRC32_SLICEBY4: y => no
-      Direct dependencies: <choice>
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=n] || GFS2_FS [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-ROMFS_BACKED_BY_BLOCK: y => no
-      Direct dependencies: <choice> && BLOCK [=y]
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 

@@ -1,21 +1,21 @@
-IPMI_SI: y => mod
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=y]
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: OPENRISC [=y]
 
-DVB_STB6000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && I2C_ALGOBIT [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CRYPTO_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-GPIO_BD70528: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_ROHM_BD70528 [=m]
+VIDEO_RCAR_DRIF: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && SDR_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m] && (ARCH_RENESAS || COMPILE_TEST [=y])
 
-SM_GCC_8350: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+CRC_CCITT: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAIF [=n] && NET [=n] || NFC_DIGITAL [=n] && NET [=n] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=n] && NFC_NCI [=n] && SPI [=n] || NFC_SHDLC [=n] && NET [=n] && NFC_HCI [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || NETLABEL [=n] && NET [=n] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] && !64BIT || NFC_FDP [=n] && NET [=n] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=n] && NFC [=n] || NFC_MICROREAD [=n] && NET [=n] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=n] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=n] || RAVE_SP_CORE [=m] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=m]
 
-SND_SOC_TEGRA_RT5640: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && I2C [=y] && GPIOLIB [=y]
+FB_DA8XX: m => yes
+      Direct dependencies: FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y])
 
-MTK_SMI: y => no
-      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
-      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
 

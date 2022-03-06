@@ -1,37 +1,38 @@
-IRQ_UNIPHIER_AIDET: y => no
-      Direct dependencies: ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+SYSC_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: SYSC_R8A77995 [=y] && SOC_RENESAS [=y] || SYSC_R8A7794 [=n] && SOC_RENESAS [=y] || SYSC_R8A77990 [=y] && SOC_RENESAS [=y] || SYSC_R8A7779 [=y] && SOC_RENESAS [=y] || SYSC_R8A7790 [=y] && SOC_RENESAS [=y] || SYSC_R8A7795 [=y] && SOC_RENESAS [=y] || SYSC_R8A7791 [=y] && SOC_RENESAS [=y] || SYSC_R8A77965 [=y] && SOC_RENESAS [=y] || SYSC_R8A77960 [=n] && SOC_RENESAS [=y] || SYSC_R8A77961 [=n] && SOC_RENESAS [=y] || SYSC_R8A7792 [=n] && SOC_RENESAS [=y] || SYSC_R8A77980 [=n] && SOC_RENESAS [=y] || SYSC_R8A77970 [=n] && SOC_RENESAS [=y] || SYSC_R8A77470 [=n] && SOC_RENESAS [=y] || SYSC_R8A7745 [=n] && SOC_RENESAS [=y] || SYSC_R8A7742 [=n] && SOC_RENESAS [=y] || SYSC_R8A7743 [=n] && SOC_RENESAS [=y] || SYSC_R8A774C0 [=y] && SOC_RENESAS [=y] || SYSC_R8A774E1 [=y] && SOC_RENESAS [=y] || SYSC_R8A774A1 [=y] && SOC_RENESAS [=y] || SYSC_R8A774B1 [=y] && SOC_RENESAS [=y]
 
-SND_SOC_MAX98357A: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && GPIOLIB [=y]
-      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=n] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=y] || SND_SOC_MT8183_DA7219_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT8183 [=y] && I2C [=y] && GPIOLIB [=y] || SND_SOC_RK3399_GRU_SOUND [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI [=n] || SND_SOC_AMD_MACH_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP_COMMON [=n] && X86 && PCI [=n] && I2C [=y] || SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] || SND_SOC_INTEL_SKL_NAU88L25_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_SKL [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_GLK_RT5682_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_SOF_GEMINILAKE [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) && SND_HDA_CODEC_HDMI [=y] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && SND_HDA_CODEC_HDMI [=y] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_SOF_NAU8825_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && SND_HDA_CODEC_HDMI [=y] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_STORM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=y] && GPIOLIB [=y] || SND_SOC_SC7180 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=y] && I2C [=y] && GPIOLIB [=y]
+TEGRA_HOST1X: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=y])
+      Reverse dependencies: DRM_TEGRA [=y] && HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=y] && OF [=y]
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-EXTCON: y => no
+LIBCRC32C: y => no
       Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || BATMAN_ADV [=n] && NET [=y] || OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=y] || NF_DEFRAG_IPV6 [=y]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=y] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=n] || GFS2_FS [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
 
-MUX_MMIO: y => no
-      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || SPI_DW_BT1 [=n] && SPI [=n] && SPI_MASTER [=n] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=y] && IIO [=y] && SPI_MASTER [=y] || AD7768_1 [=n] && IIO [=y] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=y] && IIO [=y] && IIO_SIMPLE_DUMMY [=y]
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-
-PM_DEVFREQ: y => no
+REGULATOR: y => no
       Direct dependencies: y
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 
-TI_SCI_PROTOCOL: y => no
-      Direct dependencies: TI_MESSAGE_MANAGER [=y]
-      Reverse dependencies: ARCH_K3 [=y]
+KUNIT_DEBUGFS: y => no
+      Direct dependencies: KUNIT [=y]
 
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=n] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+SYSC_R8A774C0: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774C0 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+
+DEFAULT_RENO: y => no
+      Direct dependencies: <choice>
 

@@ -1,17 +1,17 @@
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+INPUT_MAX77693_HAPTIC: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && (MFD_MAX77693 [=m] || MFD_MAX77843 [=n]) && PWM [=y]
 
-X509_CERTIFICATE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+CHARGER_MT6360: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MT6360 [=m] && REGULATOR [=y]
 
-FIREWIRE_OHCI: m => yes
-      Direct dependencies: (PCI [=y] || COMPILE_TEST [=n]) && PCI [=y] && FIREWIRE [=m] && MMU [=y]
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-SENSORS_XDPE122: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+NET_FAILOVER: y => mod
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: VIRTIO_NET [=y] && NETDEVICES [=y] && NET_CORE [=y] && VIRTIO [=y]
 
-SCSI_SAS_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && !S390 || FUSION_SAS [=y] && FUSION [=y] && PCI [=y] && SCSI [=y]
+REGULATOR_AS3722: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_AS3722 [=m]
 

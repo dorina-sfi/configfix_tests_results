@@ -1,24 +1,27 @@
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
+
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=n] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=n] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+
+XZ_DEC_MICROLZMA: y => no
+      Direct dependencies: XZ_DEC [=y]
+      Reverse dependencies: EROFS_FS_ZIP_LZMA [=y] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=y]
+
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=n] && <choice> && X86_64 [=y]
+
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
+
+PROFILE_ALL_BRANCHES: y => no
       Direct dependencies: <choice>
-
-IEEE802154_HWSIM: m => yes
-      Direct dependencies: NETDEVICES [=y] && IEEE802154_DRIVERS [=y] && MAC802154 [=m]
-
-BLK_DEV_INITRD: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
-
-SDIO_UART: m => yes
-      Direct dependencies: MMC [=m] && TTY [=y]
-
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
-
-LCD_L4F00242T03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
-
-MSM_GCC_8960: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: MSM_LCC_8960 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || MSM_MMCC_8960 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 

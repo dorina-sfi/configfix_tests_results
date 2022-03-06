@@ -1,26 +1,30 @@
-JOYSTICK_A3D: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
 
-RELAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y]
+VT: y => no
+      Direct dependencies: TTY [=y]
 
-MP2629_ADC: m => yes
-      Direct dependencies: IIO [=m] && MFD_MP2629 [=y]
+HID_PICOLCD_BACKLIGHT: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
 
-CRYPTO_JITTERENTROPY: y => mod
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=y] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=y] && X86_LOCAL_APIC [=y]
+
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+
+MFD_STM32_TIMERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+
+CRYPTO_CBC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-BH1780: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-TOUCHSCREEN_TOUCHIT213: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
-
-SND_SOC_WM8524: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && GPIOLIB [=y]
-
-SLUB: y => no
-      Direct dependencies: <choice>
+IIO_ST_ACCEL_3AXIS: y => no
+      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
 

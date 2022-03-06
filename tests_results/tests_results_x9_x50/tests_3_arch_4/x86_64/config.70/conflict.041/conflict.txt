@@ -1,13 +1,15 @@
-I2C_MUX: m => yes
-      Direct dependencies: I2C [=m]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=m] && IIO [=y] && I2C [=m] || INV_MPU6050_I2C [=m] && IIO [=y] && I2C [=m]
+KEYBOARD_ADC: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && IIO [=m]
 
-I2C_CP2615: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && USB [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-MTD_NAND_MXIC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=n])
+SND_SOC_NAU8821: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_AMD_VANGOGH_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP5x [=n] && I2C [=y]
 
-MTD_NAND_ARASAN: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
+CRYPTO_CAST6: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CAST6_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 

@@ -1,15 +1,18 @@
-PROC_FS: y => no
+HZ_250: y => no
+      Direct dependencies: <choice>
+
+USB_ISP1760_GADGET_ROLE: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_ISP1760 [=y])
+
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+CRC_T10DIF: y => no
       Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
 
-DM_CLONE: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
-
-RTC_DRV_PCF50633: m => yes
-      Direct dependencies: RTC_CLASS [=y] && MFD_PCF50633 [=m]
-
-USB_SERIAL_EMPEG: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
-
-KUNIT_TEST: m => yes
-      Direct dependencies: KUNIT [=m]
+CRYPTO_CBC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 

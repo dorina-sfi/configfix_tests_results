@@ -1,33 +1,35 @@
-BATTERY_AXP20X: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_AXP20X [=m] && AXP20X_ADC [=m] && IIO [=m]
+HID_ICADE: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-VIDEO_AK881X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+MTD_LPDDR: m => yes
+      Direct dependencies: MTD [=m]
 
-VIDEO_TW9906: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+MEDIA_TUNER_XC5000: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_AU0828 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && I2C [=y] && INPUT [=y] && DVB_CORE [=n] && USB [=n] && VIDEO_V4L2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX231XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_CX231XX [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_TM6000 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && I2C [=y] && INPUT [=y] && RC_CORE [=n] && USB [=n] || DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && DVB_CORE [=n] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-CRYPTO_JITTERENTROPY: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+DRM_ANALOGIX_ANX78XX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y]
 
-VIDEO_IMX214: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+IIO_BUFFER_DMA: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_BUFFER_DMAENGINE [=m] && IIO [=y] && IIO_BUFFER [=y]
 
-REGULATOR_LP87565: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TI_LP87565 [=m] && OF [=y]
+DEV_DAX_KMEM: m => yes
+      Direct dependencies: DAX [=y] && DEV_DAX [=m] && MEMORY_HOTPLUG [=y]
 
-DPS310: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IQS621_ALS: m => yes
+      Direct dependencies: IIO [=y] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
 
-CRC8: y => no
+AK8975: m => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: AK09911 [=m] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+
+HID: m => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=n] && INPUT [=y] || SURFACE_HID_CORE [=m] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=n] && X86 [=y]
+
+INPUT: y => no
       Direct dependencies: y
-      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=n] || SENSORS_SHT3x [=y] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=n] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=y] && PMBUS [=m] && GPIOLIB [=y] || MFD_MT6360 [=n] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=m] && SPI [=n] || SCA3300 [=n] && IIO [=m] && SPI [=n] || SCD30_I2C [=n] && IIO [=m] && SCD30_CORE [=m] && I2C [=y] || SCD4X [=m] && IIO [=m] && I2C [=y] || SENSIRION_SGP30 [=m] && IIO [=m] && I2C [=y] || SENSIRION_SGP40 [=n] && IIO [=m] && I2C [=y] || SPS30_I2C [=m] && IIO [=m] && I2C [=y] || ICP10100 [=m] && IIO [=m] && I2C [=y]
-
-TWL4030_MADC: m => yes
-      Direct dependencies: IIO [=m] && TWL4030_CORE [=y]
-
-VEML6070: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=n] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=n] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=n] && X86 [=y] && MMU [=y] && ACPI [=y]
 

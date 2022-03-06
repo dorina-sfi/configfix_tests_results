@@ -1,27 +1,23 @@
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
+DVB_DIB7000M: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+VIDEO_IMX_MEDIA: m => yes
+      Direct dependencies: STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && (ARCH_MXC || COMPILE_TEST [=y]) && HAS_DMA [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m]
 
-CRC_CCITT: y => no
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=n] && NET [=n] || NFC_DIGITAL [=n] && NET [=n] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=n] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=n] && NFC_HCI [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || NETLABEL [=n] && NET [=n] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=y] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=y] && AX25 [=n] && !64BIT || NFC_FDP [=n] && NET [=n] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=n] && NFC [=n] || NFC_MICROREAD [=n] && NET [=n] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=n] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=n] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=n]
+IR_SERIAL: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y]
 
-AUXDISPLAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+IP6_NF_TARGET_SYNPROXY: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
 
-INPUT_FF_MEMLESS: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && PARPORT [=y] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=y] && JOYSTICK_XPAD [=n] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && JOYSTICK_PSXPAD_SPI [=y] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=y] && MFD_ARIZONA [=y] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_PM8XXX [=n] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_MAX77693 [=y] || MFD_MAX77843 [=y]) && PWM [=n] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=n] && MFD_MAX8997 [=y] || INPUT_GPIO_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_REGULATOR_HAPTIC [=y] && INPUT [=y] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL4030_CORE [=n] || INPUT_TWL6040_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL6040_CORE [=y] || INPUT_PWM_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=n] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_DRV2665_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=n]) || HID_ACRUX_FF [=n] && INPUT [=y] && HID [=y] && HID_ACRUX [=y] || HID_BETOP_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=n] || HID_EMS_FF [=y] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=n] || LOGITECH_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIG940_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIWHEELS_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_MAYFLASH [=y] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=y] && INPUT [=y] && HID [=y] || NINTENDO_FF [=n] && INPUT [=y] && HID [=y] && HID_NINTENDO [=y] || PANTHERLORD_FF [=n] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=n] || PLAYSTATION_FF [=n] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=n] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=n] && INPUT [=y] && HID [=y] && HID_GREENASIA [=n] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=y] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=y]
+TIME_KUNIT_TEST: y => mod
+      Direct dependencies: KUNIT [=y]
 
-CRYPTO_SM3: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+RAVE_SP_EEPROM: m => yes
+      Direct dependencies: NVMEM [=y] && RAVE_SP_CORE [=m]
 
-IIO_KFIFO_BUF: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: AD5933 [=n] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=y] && IIO [=y] && IIO_SSP_SENSORHUB [=y] || IIO_SIMPLE_DUMMY_BUFFER [=y] && IIO [=y] && IIO_SIMPLE_DUMMY [=y] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
+DVB_STV0367: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_C8SECTPFE [=m] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=n]
 

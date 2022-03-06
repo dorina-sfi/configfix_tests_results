@@ -1,14 +1,13 @@
-SLAB: y => no
-      Direct dependencies: <choice> && !PREEMPT_RT [=n]
+PSTORE_ZSTD_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-SPARSEMEM_VMEMMAP: y => no
-      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
-      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
+SENSORS_ADM1026: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-INTERCONNECT_QCOM_MSM8974: m => yes
-      Direct dependencies: INTERCONNECT [=y] && INTERCONNECT_QCOM [=y] && QCOM_SMD_RPM [=m]
+CRYPTO_SHA512: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_SHA384 [=n] && <choice> || MODULE_SIG_SHA512 [=y] && <choice> || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_SHA512_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT [=y] || CRYPTO_SHA512_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA512_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DRBG_HMAC [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
 
-SPI_ALTERA_CORE: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: SPI_ALTERA [=m] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
+SND_SOC_ROCKCHIP_MAX98090: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y]
 

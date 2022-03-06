@@ -1,27 +1,22 @@
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+MMC_SDHCI_OF_DWCMSHC: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && COMMON_CLK [=y]
 
-SLUB: y => no
-      Direct dependencies: <choice>
+XILLYBUS_OF: m => yes
+      Direct dependencies: XILLYBUS [=m] && OF [=y] && HAS_DMA [=y]
 
-MTD_CFI_BE_BYTE_SWAP: y => no
-      Direct dependencies: <choice>
-      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM && CPU_BIG_ENDIAN [=y]
+VDPA_SIM: m => yes
+      Direct dependencies: VDPA [=m] && RUNTIME_TESTING_MENU [=y] && HAS_DMA [=y]
 
-I2C_ALGOPCA: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
+USB_CHIPIDEA_GENERIC: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
 
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y]
-
-PAGE_POISONING: y => no
-      Direct dependencies: y
-      Reverse dependencies: DEBUG_PAGEALLOC [=y] && DEBUG_KERNEL [=y] && (!HIBERNATION || ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n] && !PPC && !SPARC) && !ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n]
+SND_PORTMAN2X4: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_DRIVERS [=y] && PARPORT [=y]
 
 CRYPTO_CHACHA20: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
+
+IR_REDRAT3: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
 

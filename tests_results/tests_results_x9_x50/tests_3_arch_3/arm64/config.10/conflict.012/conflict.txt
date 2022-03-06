@@ -1,12 +1,9 @@
-SERIO_LIBPS2: y => no
-      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
-      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=y] && INPUT [=y] && INPUT_MOUSE [=y]
+RTC_DRV_HID_SENSOR_TIME: m => yes
+      Direct dependencies: RTC_CLASS [=y] && USB_HID [=m] && HID_SENSOR_HUB [=m] && IIO [=y]
 
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+SENSORS_LM85: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+FB_W100: m => yes
+      Direct dependencies: FB [=m] && HAS_IOMEM [=y] && (ARCH_PXA || COMPILE_TEST [=y])
 

@@ -1,24 +1,26 @@
-USB_STORAGE_FREECOM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+MTD_CFI_BE_BYTE_SWAP: y => no
+      Direct dependencies: <choice>
+      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM && CPU_BIG_ENDIAN [=y]
 
-SPARSEMEM_VMEMMAP: y => no
-      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
-      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=y]
 
-SND_SOC_CS42L42: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n])
+TRANSPARENT_HUGEPAGE_ALWAYS: y => no
+      Direct dependencies: <choice>
 
-REGULATOR_DA9063: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9063 [=m] && OF [=y]
-
-USB_SERIAL_DEBUG: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
-
-PTP_1588_CLOCK_OCP: m => yes
-      Direct dependencies: PTP_1588_CLOCK [=m] && HAS_IOMEM [=y] && PCI [=y] && I2C [=y] && MTD [=y] && SERIAL_8250 [=y] && !S390 && COMMON_CLK [=y]
-
-RENESAS_IRQC: y => no
+TIMERFD: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_R8A73A4 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
+
+TI_MESSAGE_MANAGER: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_KEYSTONE || ARCH_K3 [=y])
+      Reverse dependencies: ARCH_K3 [=y]
+
+IPQ_APSS_PLL: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: IPQ_APSS_6018 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] && (QCOM_APCS_IPC [=y] || COMPILE_TEST [=y])
 

@@ -1,30 +1,26 @@
-MTD_SPI_NOR_SWP_KEEP: y => no
-      Direct dependencies: <choice>
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=m] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=n] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
 
-POWER_SUPPLY: y => no
-      Direct dependencies: y
-      Reverse dependencies: AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=y] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+HID_GLORIOUS: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-TMPFS: y => no
-      Direct dependencies: SHMEM [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+HID_ELECOM: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-NETFILTER_XT_MARK: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y]
-      Reverse dependencies: NETFILTER_XT_TARGET_MARK [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] || NETFILTER_XT_MATCH_MARK [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
+GNSS_UBX_SERIAL: m => yes
+      Direct dependencies: GNSS [=y] && SERIAL_DEV_BUS [=m]
 
-EVENTFD: y => no
-      Direct dependencies: y
-      Reverse dependencies: MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+SERIO_ALTERA_PS2: m => yes
+      Direct dependencies: SERIO [=m] && HAS_IOMEM [=y]
 
-LEDS_TRIGGERS: y => no
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: BT_LEDS [=y] && NET [=y] && BT [=y] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=y] && WIRELESS [=y] && MAC80211 [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=n]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=n] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=n] && INPUT [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+BATTERY_BQ27XXX_HDQ: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=y] && W1 [=m]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-SCSI_SAS_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+TOUCHSCREEN_IMX6UL_TSC: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && (OF [=y] && GPIOLIB [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 

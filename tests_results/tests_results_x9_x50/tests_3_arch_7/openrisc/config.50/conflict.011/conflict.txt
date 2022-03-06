@@ -1,21 +1,24 @@
-UIO_DFL: m => yes
-      Direct dependencies: UIO [=y] && FPGA_DFL [=m]
-
-FB_SM501: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && MFD_SM501 [=y]
-
-SLAB: y => no
-      Direct dependencies: <choice> && !PREEMPT_RT [=n]
-
-PSTORE_BLK: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m] && BLOCK [=y]
-
-MODULE_SIG_SHA224: y => no
+RTC_DRV_DS17485: y => no
       Direct dependencies: <choice>
 
-MTD_PHRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+SQUASHFS_DECOMP_MULTI_PERCPU: y => no
+      Direct dependencies: <choice>
 
-MTD_CFI_NOSWAP: y => no
-      Direct dependencies: <choice> && (!ARCH_IXP4XX || CPU_BIG_ENDIAN [=y])
+X509_CERTIFICATE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
+
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
+
+CRYPTO_CBC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+
+MEDIA_TUNER_TDA9887: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+
+USB_DWC2_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y && USB_GADGET [=y]=y || USB_DWC2 [=y]=m && USB [=y] && USB_GADGET [=y])
 

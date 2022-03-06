@@ -1,12 +1,14 @@
-USB_TRANCEVIBRATOR: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
 
-UIO_DMEM_GENIRQ: m => yes
-      Direct dependencies: UIO [=m] && HAS_DMA [=y]
+CRYPTO_DH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI
 
-HP03: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-SENSORS_LTC4245: m => yes
+SENSORS_GL520SM: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
+
+NETFILTER_XT_TARGET_TEE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n]) && (IP6_NF_IPTABLES [=n] || !IP6_NF_IPTABLES [=n])
 

@@ -1,10 +1,11 @@
-SQUASHFS_DECOMP_MULTI: y => no
-      Direct dependencies: <choice>
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-MTD_CFI_LE_BYTE_SWAP: y => no
-      Direct dependencies: <choice> && !ARCH_IXP4XX
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-RMI4_CORE: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+DAMON_KUNIT_TEST: y => no
+      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
 

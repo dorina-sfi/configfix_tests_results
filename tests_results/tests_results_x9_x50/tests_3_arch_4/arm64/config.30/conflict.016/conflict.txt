@@ -1,13 +1,15 @@
-MFD_SUN6I_PRCM: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=n] && COMMON_CLK [=y] && CLK_SUNXI [=y]
+W1_SLAVE_DS2780: m => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-SUN4I_GPADC: m => yes
-      Direct dependencies: IIO [=y] && (MFD_SUN4I_GPADC [=m] || MACH_SUN8I) && (THERMAL [=y] || !THERMAL_OF [=y])
+SENSORS_LM95241: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-SERIAL_OF_PLATFORM: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && OF [=y]
+APPLE_AIC: y => no
+      Direct dependencies: ARM64 [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_APPLE [=y]
 
-SENSORS_ADT7411: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MFD_STMFX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_STMFX [=m] && PINCTRL [=y] && I2C [=m] && OF_GPIO [=y]
 

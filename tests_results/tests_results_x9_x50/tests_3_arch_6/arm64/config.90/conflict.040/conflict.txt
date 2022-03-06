@@ -1,20 +1,23 @@
-W1: y => mod
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+VIDEO_SAA6752HS: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_SAA7134 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-CRYPTO_MANAGER: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=m] || CRYPTO_USER [=y] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=m] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=n]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=m] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=m] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=n] && CRYPTO [=y] || CRYPTO_XTS [=m] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=m] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+VIDEO_SAA6752HS: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_SAA7134 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MMC_MESON_MX_SDHC: m => yes
-      Direct dependencies: MMC [=m] && (ARM && ARCH_MESON [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && OF [=y]
+CARMINE_DRAM_CUSTOM: y => no
+      Direct dependencies: <choice>
 
-AHCI_MVEBU: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && ARCH_MVEBU [=y]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-UNMAP_KERNEL_AT_EL0: y => no
-      Direct dependencies: y
+LEDS_TRIGGER_AUDIO: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_TRIGGERS [=y]
+      Reverse dependencies: SND_CTL_LED [=y] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=y] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=n] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-IPV6_VTI: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
 

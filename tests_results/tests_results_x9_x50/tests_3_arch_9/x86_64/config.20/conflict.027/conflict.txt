@@ -1,30 +1,31 @@
-REGULATOR_QCOM_USB_VBUS: m => yes
-      Direct dependencies: REGULATOR [=y] && (SPMI [=m] || COMPILE_TEST [=n])
+SENSORS_IBMAEM: m => yes
+      Direct dependencies: HWMON [=m] && IPMI_HANDLER [=y]
 
-MTRR: y => no
-      Direct dependencies: y
+SUSPEND_FREEZER: y => no
+      Direct dependencies: SUSPEND [=y]
 
-DM_UNSTRIPED: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+I2C_ALGOPCA: m => yes
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
 
-CRYPTO_LZO: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_LZO [=y] || PSTORE_LZO_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
+SENSORS_LTC2947_I2C: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-MODULE_COMPRESS_XZ: y => no
-      Direct dependencies: <choice>
+DVB_DIB7000M: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CRYPTO_BLAKE2B: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+W1_SLAVE_DS2780: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-COMEDI_ADV_PCI1710: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+USB_SEVSEG: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-CRYPTO_SM3: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y]
+USB_LD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-REGULATOR_QCOM_SPMI: m => yes
-      Direct dependencies: REGULATOR [=y] && (SPMI [=m] || COMPILE_TEST [=n])
+EXT4_FS_POSIX_ACL: y => no
+      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
+      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
 

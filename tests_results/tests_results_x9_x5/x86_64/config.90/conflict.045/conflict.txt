@@ -1,33 +1,31 @@
-MTD_NAND_ECC_SW_HAMMING: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && 4xx
+I2C_DEMUX_PINCTRL: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
 
-CRC32_BIT: y => no
-      Direct dependencies: <choice>
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+I2C_SI4713: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI4713 [=m]
+      Reverse dependencies: USB_SI4713 [=m] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && USB [=y] && I2C [=y] && RADIO_SI4713 [=m] || PLATFORM_SI4713 [=m] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI4713 [=m]
 
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=n]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+MTD_NAND_AMS_DELTA: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (MACH_AMS_DELTA || COMPILE_TEST [=y])
 
-USB_ISP1760_HOST_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
+IR_IMON_RAW: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
 
-TCG_TIS: y => no
-      Direct dependencies: TCG_TPM [=y] && (X86 [=y] || OF [=y])
-      Reverse dependencies: IMA [=y] && INTEGRITY [=y] && TCG_TPM [=y] && X86 [=y]
+SM_GCC_8250: m => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SM_CAMCC_8250 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SM_GPUCC_8250 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SM_VIDEOCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+HID: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=m] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=y]) && PCI [=n] && X86 [=y]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=y] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=y] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+MTD_NAND_MXIC: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=y])
 
-USB_OHCI_HCD_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=y] && USB_SUPPORT [=y] && USB [=y] && BCMA [=y] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=n]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=n]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+UNIX98_PTYS: y => no
+      Direct dependencies: TTY [=y]
 

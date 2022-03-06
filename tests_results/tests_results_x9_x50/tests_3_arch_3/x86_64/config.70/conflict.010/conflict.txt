@@ -1,9 +1,11 @@
-INPUT_JOYDEV: m => yes
-      Direct dependencies: INPUT [=m]
+IPV6_TUNNEL: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
+      Reverse dependencies: IPV6_VTI [=y] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=y] || IPV6_FOU_TUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y]
 
-SENSORS_F71805F: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-AD5761: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+SYSFS_SYSCALL: y => no
+      Direct dependencies: y
 

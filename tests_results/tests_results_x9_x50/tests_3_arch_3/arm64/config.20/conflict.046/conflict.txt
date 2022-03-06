@@ -1,10 +1,11 @@
-NPCM_ADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_NPCM || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+MTD_PCI: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && PCI [=y] && MTD_COMPLEX_MAPPINGS [=y]
 
-HD44780_COMMON: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=y]
+CRYPTO_GHASH: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-ADE7854: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=m] && (SPI [=y] || I2C [=y])
+THERMAL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=y] || MMC_SDHCI_OMAP [=n] && MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y]
 

@@ -1,33 +1,37 @@
-NXP_C45_TJA11XX_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y] && PTP_1588_CLOCK_OPTIONAL [=m]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=n])
 
-COMEDI_AMPLC_PC236_ISA: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-CRYPTO_MANAGER: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=m] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=m] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=n] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=m] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=n]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=m] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=m] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=m] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=m] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
 
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+CLK_RCAR_GEN3_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-AHCI_QORIQ: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
+IIO_BUFFER_DMA: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
 
-CHARGER_MAX77650: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77650 [=m]
+SERIAL_8250_FSL: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_CONSOLE [=y]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=n] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || ARCH_LAYERSCAPE [=y] || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n])
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 
-VFIO_PLATFORM_AMDXGBE_RESET: m => yes
-      Direct dependencies: VFIO [=m] && VFIO_PLATFORM [=m]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3559A [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n])
 
-FTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+CLK_RZG2L: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R9A07G044 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-IR_IMON_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 

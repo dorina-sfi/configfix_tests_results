@@ -1,22 +1,26 @@
-DYNAMIC_DEBUG_CORE: y => no
-      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
-      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+PM_NOTIFIER_ERROR_INJECT: m => yes
+      Direct dependencies: PM [=y] && NOTIFIER_ERROR_INJECTION [=m]
 
-SND_ATMEL_SOC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && HAS_IOMEM [=y]
+LINEDISP: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=m] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
 
-MXC4005: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+BPF_SYSCALL: y => no
+      Direct dependencies: y
+      Reverse dependencies: AF_KCM [=y] && NET [=y] && INET [=y]
 
-STK8312: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 
-BACKLIGHT_AAT2870: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_AAT2870_CORE [=y]
+NF_SOCKET_IPV4: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && (IPV6 [=n] || IPV6 [=n]=n) || NETFILTER_XT_MATCH_SOCKET [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=n] || IPV6 [=n]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n)
 
-SND_SOC_ADAU7118_HW: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+SPI_ALTERA_CORE: m => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ALTERA [=m] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
 
-INA2XX_ADC: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y] && !SENSORS_INA2XX [=n]
+HID_MACALLY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 

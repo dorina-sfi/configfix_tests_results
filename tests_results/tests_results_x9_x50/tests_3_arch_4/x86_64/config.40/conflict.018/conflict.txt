@@ -1,13 +1,15 @@
-SENSORS_IBM_CFFPS: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m] && LEDS_CLASS [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
 
-IPMI_SI: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
-      Reverse dependencies: SENSORS_IBMAEM [=n] && HWMON [=m] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=m] && IPMI_HANDLER [=m]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=y] && RTC_CLASS [=y]
 
-SND_SOC_IMG_PARALLEL_OUT: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_IMG [=y]
+USB_CHIPIDEA_IMX: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
 
-HID_SENSOR_HUB: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && HAS_IOMEM [=y]
+CRYPTO_DH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y]
 

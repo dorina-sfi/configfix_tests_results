@@ -1,35 +1,35 @@
-MEDIA_RADIO_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-NET_DSA_TAG_BRCM_LEGACY: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: B53 [=y] && NETDEVICES [=y] && NET_DSA [=y]
-
-CRYPTO_CHACHA20POLY1305: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
-
-USB_ROLE_SWITCH: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=y] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=n] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=y] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI [=y] && INTEL_SCU_IPC [=y] || EXTCON_AXP288 [=y] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 [=y] && ACPI [=y] && IOSF_MBI [=y]
-
-ACPI_BUTTON: y => no
-      Direct dependencies: ACPI [=y] && INPUT [=y]
-      Reverse dependencies: DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y]
-
-SCSI_SAS_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=y] && SCSI [=y]
-
-CRYPTO_CHACHA20_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
-
-X86_PLATFORM_DEVICES: y => no
-      Direct dependencies: X86 [=y]
-      Reverse dependencies: DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y]
-
-MTD_CFI: y => no
+MTD_NAND_ECC_SW_HAMMING: y => no
       Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=n] && 4xx
+
+RMI4_F30: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+UNWINDER_ORC: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
+
+DAX: y => no
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+
+CRC_T10DIF: y => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=y] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
+
+CRC_CCITT: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=y] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=y] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] && !64BIT [=y] || NFC_FDP [=y] && NET [=y] && NFC [=y] && NFC_NCI [=y] || NFC_PN544 [=n] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=y] && TTY [=n] && PPP [=y] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=n] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=n]
+
+MFD_WL1273_CORE: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y]
+      Reverse dependencies: RADIO_WL1273 [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=y]
+
+HID_SENSOR_IIO_COMMON: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y]
+      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=y] && USB_HID [=n] && HID_SENSOR_HUB [=y] && IIO [=y] || HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
 

@@ -1,20 +1,20 @@
-MEDIA_SDR_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
+RTC_LIB_KUNIT_TEST: y => mod
+      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
 
-KPSS_XCC: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+DVB_DRX39XYJ: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_DVB [=m] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+USB_SERIAL_SSU100: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
 
-SND_SOC_WM8904: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_ATMEL_SOC_WM8904 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && (ARCH_AT91 || COMPILE_TEST [=n]) && ATMEL_SSC [=n] && I2C [=y]
+CPU_FREQ_GOV_CONSERVATIVE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=y] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y])
 
-MSM_GPUCC_8998: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+BT_MRVL: m => yes
+      Direct dependencies: NET [=y] && BT [=m]
 
-MEDIA_TUNER_QM1D1C0042: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_PT3 [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+MTD_DOCG3: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
 

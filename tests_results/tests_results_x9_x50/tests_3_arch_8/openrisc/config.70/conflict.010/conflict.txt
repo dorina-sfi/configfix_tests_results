@@ -1,26 +1,32 @@
-SENSORS_F75375S: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-DRM_RCAR_DW_HDMI: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y]
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-SENSORS_GSC: m => yes
-      Direct dependencies: HWMON [=m] && MFD_GATEWORKS_GSC [=y]
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=n] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=n] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=m] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=m] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
+POWER_SUPPLY: y => no
+      Direct dependencies: y
+      Reverse dependencies: AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=y] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=y] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-DRM_SIMPLE_BRIDGE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+CONNECTOR: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: DM_LOG_USERSPACE [=y] && MD [=y] && DM_MIRROR [=y] && NET [=y]
 
-SC_GCC_8180X: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+MTD_JEDECPROBE: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
 
-CHARGER_MAX8997: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX8997 [=y] && REGULATOR_MAX8997 [=m] && (EXTCON [=m] || !EXTCON [=m])
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 

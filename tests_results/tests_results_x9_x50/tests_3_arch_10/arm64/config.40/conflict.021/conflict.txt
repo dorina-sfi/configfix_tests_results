@@ -1,33 +1,40 @@
-NET_DSA_TAG_OCELOT_8021Q: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_MSCC_FELIX [=n] && NETDEVICES [=y] && NET_DSA [=m] && PCI [=n] && NET_VENDOR_MICROSEMI [=n] && NET_VENDOR_FREESCALE [=n] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=m] || NET_DSA_MSCC_SEVILLE [=n] && NETDEVICES [=y] && NET_DSA [=m] && NET_VENDOR_MICROSEMI [=n] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=m]
+RST_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
 
-SENSORS_UCD9200: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SM_GCC_8150: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_GPUCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-KEMPLD_WDT: m => yes
-      Direct dependencies: WATCHDOG [=y] && MFD_KEMPLD [=m]
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_LZO [=y] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-XILINX_PR_DECOUPLER: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
-
-NET_DSA_MICROCHIP_KSZ9477_SPI: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && NET_DSA_MICROCHIP_KSZ9477 [=m] && SPI [=y]
-
-GREYBUS_PWM: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m] && GREYBUS_BRIDGED_PHY [=m] && PWM [=y]
-
-KEYS: y => no
+SERIO: y => no
       Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=y] && INET [=y] || CEPH_LIB [=y] && NET [=y] && INET [=y] || FS_ENCRYPTION [=n] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=n] && INPUT_MOUSE [=n] || MOUSE_SERIAL [=n] && INPUT [=n] && INPUT_MOUSE [=n] || MOUSE_VSXXXAA [=n] && INPUT [=n] && INPUT_MOUSE [=n] || JOYSTICK_WARRIOR [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_MAGELLAN [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEORB [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEBALL [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_STINGER [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_TWIDJOY [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_ZHENHUA [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_FSIA6B [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || TABLET_SERIAL_WACOM4 [=n] && INPUT [=n] && INPUT_TABLET [=n] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=n] && INPUT [=n] && RMI4_CORE [=n] && RMI4_F03 [=n] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y]
 
-GREYBUS_RAW: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m]
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=y] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-PTP_1588_CLOCK_IDTCM: m => yes
-      Direct dependencies: PTP_1588_CLOCK [=m] && I2C [=y]
+SYSC_R8A774E1: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774E1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-NET_SWITCHDEV: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NET_DSA [=m] && NET [=y] && (BRIDGE [=n] || BRIDGE [=n]=n) && (HSR [=m] || HSR [=m]=n) && INET [=y] && NETDEVICES [=y]
+CLK_R8A77995: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77995 [=y]
+
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
+
+CLK_R8A77960: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77960 [=y]
+
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
 

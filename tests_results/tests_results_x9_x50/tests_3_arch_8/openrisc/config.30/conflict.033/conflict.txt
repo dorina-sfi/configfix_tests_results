@@ -1,30 +1,31 @@
-DVB_IX2505V: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+SC_GCC_7280: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-OR1K_1200: y => no
-      Direct dependencies: <choice>
+VIDEO_OV7670: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=y]
+      Reverse dependencies: VIDEO_CAFE_CCIC [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=y] && COMMON_CLK [=y] || VIDEO_MMP_CAMERA [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && I2C [=y] && VIDEO_V4L2 [=y] && (ARCH_MMP || COMPILE_TEST [=y]) && COMMON_CLK [=y] || VIDEO_VIA_CAMERA [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && FB_VIA [=n] && VIDEO_V4L2 [=y]
 
-CRYPTO_LZ4: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-VIDEO_TDA7432: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-KEYS: y => no
+SYNC_FILE: y => no
       Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=n] && INET [=n] || CEPH_LIB [=n] && NET [=n] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=y] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=m] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-CRYPTO_ZSTD: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=y] && <choice> || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+AUXDISPLAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 
-VIDEO_ADP1653: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+OPENRISC_HAVE_SHADOW_GPRS: y => no
+      Direct dependencies: y
 
-MEDIA_TUNER_FC0012: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
+
+RESET_CONTROLLER: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFS_QCOM [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_UFSHCD [=n] && SCSI_UFSHCD_PLATFORM [=n] && ARCH_QCOM || HISI_FEMAC [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_HISILICON [=n] && HAS_IOMEM [=y] || SPARX5_SWITCH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && NET_SWITCHDEV [=n] && HAS_IOMEM [=y] && OF [=y] && (ARCH_SPARX5 || COMPILE_TEST [=y]) || STMMAC_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) && ARCH_RCAR_GEN3 [=n] || ASM9260_WATCHDOG [=y] && WATCHDOG [=y] && (MACH_ASM9260 || COMPILE_TEST [=y]) && OF [=y] || MEDIATEK_WATCHDOG [=y] && WATCHDOG [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || VIDEO_RCAR_CSI2 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=y] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || VIDEO_RCAR_ISP [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=y] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || DRM_STI [=n] && HAS_IOMEM [=y] && OF [=y] && DRM [=y] && (ARCH_STI || ARCH_MULTIPLATFORM) || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=n] || USB_EHCI_HCD [=y] && !USB_GADGET [=n] || !USB_EHCI_HCD [=y] && USB_GADGET [=n]) && HAS_DMA [=y] || MMC_SDHI [=n] && MMC [=n] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=y]) && ARCH_RENESAS || COMMON_CLK_GEMINI [=n] && COMMON_CLK [=y] && (ARCH_GEMINI || COMPILE_TEST [=y]) || COMMON_CLK_ASPEED [=y] && COMMON_CLK [=y] && (ARCH_ASPEED || COMPILE_TEST [=y]) || CLK_ACTIONS [=y] && COMMON_CLK [=y] && (ARCH_ACTIONS || COMPILE_TEST [=y]) || CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || RESET_HISI [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_QCOM [=y] && COMMON_CLK [=y] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) || SUNXI_CCU [=y] && COMMON_CLK [=y] && (ARCH_SUNXI || COMPILE_TEST [=y]) || CLK_BT1_CCU_DIV [=y] && COMMON_CLK [=y] && CLK_BAIKAL_T1 [=y] || COMMON_CLK_MEDIATEK [=y] && COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || COMMON_CLK_MESON_AO_CLKC [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=y]) || COMMON_CLK_MESON8B [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=y]) && ARM || CLK_RCAR_USB2_CLOCK_SEL [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] && (ARCH_RENESAS || COMPILE_TEST [=y]) || CLK_RZG2L [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || BCM2835_POWER [=n] && (ARCH_BCM2835 || COMPILE_TEST [=y] && OF [=y]) || RENESAS_RPCIF [=y] && MEMORY [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || PHY_ATH79_USB [=n] && OF [=y] && (ATH79 || COMPILE_TEST [=y]) || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y])
+
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=y] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=n] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 

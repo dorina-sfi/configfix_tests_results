@@ -1,25 +1,24 @@
-FB_TILEBLITTING: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
+TEGRA_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_TEGRA_2x_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_3x_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_114_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_124_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_210_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
 
-RTC_DRV_DS17485: y => no
-      Direct dependencies: <choice>
+UIO_PCI_GENERIC: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
 
-CHARLCD_BL_FLASH: y => no
-      Direct dependencies: <choice>
+SENSORS_SMSC47M1: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+MMC_CAVIUM_THUNDERX: m => yes
+      Direct dependencies: MMC [=y] && PCI [=y] && 64BIT [=y] && (ARM64 [=y] || COMPILE_TEST [=n]) && GPIO_THUNDERX [=m] && OF_ADDRESS [=y]
 
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+FB_S1D13XXX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
 
-KALLSYMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=y] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+CLK_R8A7795: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=n] || ARCH_R8A77951 [=y])
 

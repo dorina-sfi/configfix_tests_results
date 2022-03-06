@@ -1,33 +1,39 @@
-TEST_LKM: m => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && m && MODULES [=y]
-      Reverse dependencies: TEST_KMOD [=m] && RUNTIME_TESTING_MENU [=y] && m && MODULES [=y] && NETDEVICES [=y] && NET_CORE [=y] && INET [=y] && BLOCK [=y]
+PAGE_POISONING: y => no
+      Direct dependencies: y
+      Reverse dependencies: DEBUG_PAGEALLOC [=y] && DEBUG_KERNEL [=y] && (!HIBERNATION || ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n] && !PPC && !SPARC) && !ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n]
 
-LAPBETHER: m => yes
-      Direct dependencies: NETDEVICES [=y] && WAN [=y] && LAPB [=y] && X25 [=m]
+USB_ISP1760_HOST_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
 
-FAILOVER: m => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: NET_FAILOVER [=m] && NETDEVICES [=y]
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-REGULATOR_BD957XMUF: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD957XMUF [=m]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-NETFILTER_XT_MATCH_CLUSTER: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-PROFILE_ANNOTATED_BRANCHES: y => no
-      Direct dependencies: <choice>
+CRYPTO_XTS: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=n] || CRYPTO_DEV_QCE_SKCIPHER [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=n]
 
-MTD_SPI_NOR: m => yes
-      Direct dependencies: MTD [=m] && SPI_MASTER [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=n] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=n] && GPIOLIB [=y]
 
-MTD_NAND_ATMEL: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_AT91 || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=y] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=y]) && PCI [=n] && X86
 
-NF_NAT: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
-      Reverse dependencies: NFT_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=n]) || IP_NF_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=n] && NF_CONNTRACK [=m] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=n] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+IOMMU_IO_PGTABLE_ARMV7S: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y])
+      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=y]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-LEDS_CPCAP: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_CPCAP [=m] && OF [=y]
+CRYPTO_ECDH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

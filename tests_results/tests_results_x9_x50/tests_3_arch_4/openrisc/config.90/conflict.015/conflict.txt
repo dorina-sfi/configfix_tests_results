@@ -1,16 +1,14 @@
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=y] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=n] && FTRACE [=y]
+SND_AMD_ACP_CONFIG: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_SOC_AMD_ACP_COMMON [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && X86 && PCI [=n] || SND_SOC_SOF_AMD_COMMON [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=y] && SND_SOC_SOF_AMD_TOPLEVEL [=n]
 
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+SND_SOC_CS35L41_SPI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+      Reverse dependencies: SND_SOC_AMD_VANGOGH_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP5x [=n] && I2C [=y]
 
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+MTD_DOCG3: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
 
-PARPORT_PANEL: y => no
-      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+MTD_NAND_JZ4780: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (MIPS || COMPILE_TEST [=y]) && JZ4780_NEMC [=y]
 

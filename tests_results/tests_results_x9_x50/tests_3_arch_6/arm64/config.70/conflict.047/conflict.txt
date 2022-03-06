@@ -1,21 +1,24 @@
-RMI4_CORE: m => yes
-      Direct dependencies: INPUT [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=m] && HID [=m]
-
 CRC8: y => no
       Direct dependencies: y
-      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=m] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=y] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=n] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=m] && HWMON [=y] && PMBUS [=m] && GPIOLIB [=y] || MFD_MT6360 [=m] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=n] && SPI [=y] || SCA3300 [=n] && IIO [=n] && SPI [=y] || SCD30_I2C [=n] && IIO [=n] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP30 [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP40 [=n] && IIO [=n] && I2C [=y] || SPS30_I2C [=n] && IIO [=n] && I2C [=y] || ICP10100 [=n] && IIO [=n] && I2C [=y]
+      Reverse dependencies: PCIE_QCOM [=y] && PCI [=y] && OF [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=y] || GPIO_MAX3191X [=y] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=n] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=y] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=y] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=y] && STAGING [=y] && IIO [=y] && SPI [=y] || SCA3300 [=y] && IIO [=y] && SPI [=y] || SCD30_I2C [=y] && IIO [=y] && SCD30_CORE [=y] && I2C [=y] || SCD4X [=n] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=y] && IIO [=y] && I2C [=y] || SPS30_I2C [=n] && IIO [=y] && I2C [=y] || ICP10100 [=y] && IIO [=y] && I2C [=y]
 
-PSTORE_BLK: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m] && BLOCK [=y]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-MSM_GCC_8660: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-
-BOOT_CONFIG: y => no
+RENESAS_IRQC: y => no
       Direct dependencies: y
-      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
+      Reverse dependencies: ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_R8A73A4 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n]
 
-BACKLIGHT_WM831X: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_WM831X [=y]
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=y] && I2C [=y]
+
+CPU_IDLE_GOV_MENU: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && (NO_HZ [=y] || NO_HZ_IDLE [=y]) && !CPU_IDLE_GOV_TEO [=n]
+
+USB_XHCI_MTK: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && (MIPS && SOC_MT7621 || ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: USB_MTU3 [=y] && (USB [=y] || USB_GADGET [=y]) && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && (EXTCON [=y] || !EXTCON [=y]) && USB_SUPPORT [=y] && USB_XHCI_HCD [=y]
 

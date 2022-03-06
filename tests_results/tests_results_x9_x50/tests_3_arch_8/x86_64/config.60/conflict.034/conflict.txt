@@ -1,27 +1,29 @@
-SERIO_PCIPS2: m => yes
-      Direct dependencies: SERIO [=m] && PCI [=y]
-
-EEPROM_93CX6: m => no
+COREDUMP: y => no
       Direct dependencies: y
-      Reverse dependencies: SCSI_WD719X [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] || KS8851 [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICREL [=n] && SPI [=n] || KS8851_MLL [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICREL [=n] && HAS_IOMEM [=y] || AX88796_93CX6 [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_8390 [=n] && AX88796 [=n] || ADM8211 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ADMTEK [=n] && MAC80211 [=n] && PCI [=y] || RT2400PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2500PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT61PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RTL8180 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_REALTEK [=n] && MAC80211 [=n] && PCI [=y] || RTL8187 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_REALTEK [=n] && MAC80211 [=n] && USB [=n]
 
-DM_CLONE: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
-
-SCSI_WD719X: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
-
-CRYPTO_DRBG_MENU: y => mod
+CRYPTO_SM3: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-MEDIA_TUNER_QM1D1B0004: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_PT1 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+NO_HZ_FULL: y => no
+      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-MS_BLOCK: m => yes
-      Direct dependencies: MEMSTICK [=m] && BLOCK [=y]
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=n] && SIGNED_PE_FILE_VERIFICATION [=y]
 
-VCNL4035: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SDM_GCC_845: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SDM_CAMCC_845 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_845 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_VIDEOCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_DISPCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_LPASSCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+SM_GCC_8250: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_CAMCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+
+DEBUG_MEMORY_INIT: y => no
+      Direct dependencies: y
 

@@ -1,32 +1,35 @@
-BCM2835_VCHIQ: y => no
-      Direct dependencies: STAGING [=y] && BCM_VIDEOCORE [=y]
-      Reverse dependencies: SND_BCM2835 [=n] && STAGING [=y] && BCM_VIDEOCORE [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && SND [=n] || VIDEO_BCM2835 [=y] && STAGING [=y] && BCM_VIDEOCORE [=y] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y])
-
-CHARLCD_BL_FLASH: y => no
-      Direct dependencies: <choice>
-
-UBIFS_FS_ZLIB: y => no
-      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
-
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=y]
-
-VIDEO_MSP3400: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_EM28XX_V4L2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] || VIDEO_BT848 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=y] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
-
-BRANCH_PROFILE_NONE: y => no
-      Direct dependencies: <choice>
-
-MTD_MAP_BANK_WIDTH_2: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
-
-LTO_NONE: y => no
-      Direct dependencies: <choice>
-
-CRYPTO_GHASH: y => no
+CRYPTO_CMAC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n]
+
+USB_NET_CDCETHER: y => no
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
+      Reverse dependencies: USB_NET_CDC_NCM [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_RNDIS_HOST [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_ZAURUS [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_RNDIS_WLAN [=n] && NETDEVICES [=y] && WLAN [=y] && USB [=y] && CFG80211 [=n]
+
+BCM7XXX_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y]
+
+CRYPTO_MD5: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: TCP_MD5SIG [=n] && NET [=y] && INET [=y] || SCTP_COOKIE_HMAC_MD5 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_MD5 [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=y] || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n] || CRYPTO_MD5_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_MD5_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_SUNXI && PM && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=n] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
+
+CRYPTO_ECB: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=y] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=n] || IPV6 [=n]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && ATA [=n] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n)
+
+LIST_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
+
+CRYPTO_SM3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 

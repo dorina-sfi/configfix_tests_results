@@ -1,27 +1,31 @@
-VIDEO_OV9640: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+INTERCONNECT: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_TEGRA [=n] && HAS_IOMEM [=y] && (ARCH_TEGRA || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=y] && OF [=y] || TEGRA_MC [=y] && MEMORY [=y] && (ARCH_TEGRA || COMPILE_TEST [=y] && COMMON_CLK [=y])
 
-DVB_DRXK: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_AZ6007 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CRC16: y => no
+      Direct dependencies: y
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && ACPI && EFI && SPI [=n] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
 
-REGULATOR_HI6421: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
+MTD_MAP_BANK_WIDTH_4: y => no
+      Direct dependencies: MTD [=y]
 
-PMS7003: m => yes
-      Direct dependencies: IIO [=y] && SERIAL_DEV_BUS [=m]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-MTD_SLRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-DVB_OR51211: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-IIO_BUFFER_DMAENGINE: m => no
+IIO_KFIFO_BUF: y => no
       Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=m] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=y] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=n] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-MTD_PHYSMAP: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (MTD_CFI [=m] || MTD_JEDECPROBE [=m] || MTD_ROM [=m] || MTD_RAM [=m] || MTD_LPDDR [=n])
+AUXDISPLAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=n] || USB_EHCI_HCD [=y] && !USB_GADGET [=n] || !USB_EHCI_HCD [=y] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
 

@@ -1,40 +1,36 @@
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+HZ_1000: y => no
+      Direct dependencies: <choice>
 
-KALLSYMS: y => no
+KCMP: y => no
       Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=n]
+      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-CRYPTO_CTR: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || AIRO_CS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=y] && PCMCIA [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-NET_MPLS_GSO: y => no
-      Direct dependencies: NET [=y] && MPLS [=y]
-      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-DNS_RESOLVER: y => no
-      Direct dependencies: NET [=y] && KEYS [=y]
-      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=n] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+USB_MUSB_GADGET: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=y]) && HAS_DMA [=y]
 
-CRC7: y => no
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=n] && NET [=y] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=y] && CAN [=y] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=y] && WIRELESS [=y] && MAC80211 [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=n]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=n] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=n] && INPUT [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+
+SERIO: y => no
       Direct dependencies: y
-      Reverse dependencies: WILC1000_SPI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=y] && INET [=y] && SPI [=y] || WL1251 [=y] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && MAC80211 [=y] || WLCORE_SPI [=y] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && WLCORE [=y] && SPI_MASTER [=y] && OF [=y] || MMC_SPI [=n] && MMC [=n] && SPI_MASTER [=y]
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=y] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_SERIAL [=y] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_VSXXXAA [=y] && INPUT [=y] && INPUT_MOUSE [=y] || JOYSTICK_WARRIOR [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_MAGELLAN [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEORB [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEBALL [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_STINGER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TWIDJOY [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ZHENHUA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_FSIA6B [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || TABLET_SERIAL_WACOM4 [=y] && INPUT [=y] && INPUT_TABLET [=y] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=y] && INPUT [=y] && RMI4_CORE [=y] && RMI4_F03 [=y] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
 
-I2C_MUX: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=n] && IIO [=n] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=n] && I2C [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-SYSFS: y => no
-      Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
-
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
-
-RMI4_F55: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: RMI4_F54 [=y] && INPUT [=y] && RMI4_CORE [=y] && (VIDEO_V4L2 [=y]=y || RMI4_CORE [=y]=m && VIDEO_V4L2 [=y]=m)
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 

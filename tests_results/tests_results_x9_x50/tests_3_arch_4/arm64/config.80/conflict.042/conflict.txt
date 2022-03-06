@@ -1,14 +1,15 @@
-CRYPTO_SM4: y => no
+CRYPTO_RSA: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=m] && CRYPTO_DEV_FSL_CAAM_JR [=m] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-OMAP2PLUS_MBOX: y => no
-      Direct dependencies: MAILBOX [=y] && (ARCH_OMAP2PLUS || ARCH_K3 [=y])
-      Reverse dependencies: OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || TI_K3_DSP_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y] || TI_K3_R5_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y]
+USB_HCD_SSB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && SSB [=m]
+      Reverse dependencies: USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=m])
 
-TEST_SORT: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+USB_OHCI_HCD_PLATFORM: m => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m]
+      Reverse dependencies: USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=m] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=m] || USB_HCD_BCMA [=m] && USB_SUPPORT [=y] && USB [=y] && BCMA [=m] && USB_OHCI_HCD [=m] || USB_HCD_SSB [=m] && USB_SUPPORT [=y] && USB [=y] && SSB [=m] && USB_OHCI_HCD [=m] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=m] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=m]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && CAVIUM_OCTEON_SOC
 
-CPU_LITTLE_ENDIAN: y => no
-      Direct dependencies: <choice>
+REGULATOR_RK808: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_RK808 [=m]
 

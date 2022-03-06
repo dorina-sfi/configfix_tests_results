@@ -1,34 +1,34 @@
-NET_DSA_MV88E6060: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+DEVFREQ_EVENT_ROCKCHIP_DFI: y => mod
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 
-EXPERT: y => no
+QCS_GCC_404: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: QCS_Q6SSTOP_404 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+
+BACKLIGHT_LM3639: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
+
+ALLOW_DEV_COREDUMP: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
 
-IPMI_SI: y => mod
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=n] && HWMON [=y] && IPMI_HANDLER [=y]
+CRYPTO_CCM: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=n] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN [=n]
 
-IIO_CROS_EC_ACCEL_LEGACY: m => yes
-      Direct dependencies: IIO [=y] && IIO_CROS_EC_SENSORS_CORE [=m]
+COMMON_CLK_BD718XX: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (MFD_ROHM_BD718XX [=n] || MFD_ROHM_BD71828 [=m])
 
-VIDEO_IMX214: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+REGULATOR_HI655X: m => yes
+      Direct dependencies: REGULATOR [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) && MFD_HI655X_PMIC [=m] && OF [=y]
 
-IIO_CROS_EC_ACCEL_LEGACY: m => yes
-      Direct dependencies: IIO [=y] && IIO_CROS_EC_SENSORS_CORE [=m]
+BACKLIGHT_RAVE_SP: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && RAVE_SP_CORE [=m]
 
-VIDEO_HI556: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-SERIAL_8250_MEN_MCB: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && MCB [=y] && SERIAL_8250 [=m]
-
-NET_SWITCHDEV: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NET_DSA [=m] && NET [=y] && (BRIDGE [=m] || BRIDGE [=m]=n) && (HSR [=n] || HSR [=n]=n) && INET [=y] && NETDEVICES [=y]
-
-IIO_BUFFER_CB: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=m] && IIO [=y] && I2C [=y]
+REGULATOR_RN5T618: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_RN5T618 [=m]
 

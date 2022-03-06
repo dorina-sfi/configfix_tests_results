@@ -1,30 +1,35 @@
-DRM_SII9234: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+FAT_KUNIT_TEST: y => no
+      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=y]
 
-CRYPTO_CTR: y => no
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
+
+DW_APB_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
+
+NET_FOU: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NET_FOU_IP_TUNNELS [=y] && NET [=y] && INET [=y] && (NET_IPIP [=y] || NET_IPGRE [=y] || IPV6_SIT [=n])
+
+BNX2: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y]
+      Reverse dependencies: CNIC [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y]
+
+IIO_TRIGGERED_BUFFER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_CROS_EC_SENSORS_CORE [=n] && IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=n] || IIO_ADIS_LIB_BUFFER [=y] && IIO [=y] || ADXL355_I2C [=n] && IIO [=y] && I2C [=y] || ADXL355_SPI [=n] && IIO [=y] && SPI [=y] || ADXL372 [=y] && IIO [=y] || BMA180 [=y] && IIO [=y] && I2C [=y] && INPUT_BMA150 [=n]=n || BMA220 [=n] && IIO [=y] && SPI [=y] || BMC150_ACCEL [=y] && IIO [=y] || BMI088_ACCEL [=n] && IIO [=y] && SPI [=y] || IIO_ST_ACCEL_3AXIS [=n] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=y] && !SENSORS_LIS3_SPI [=n] && IIO_BUFFER [=y] || KXSD9 [=y] && IIO [=y] || KXCJK1013 [=n] && IIO [=y] && I2C [=y] || MMA7455 [=y] && IIO [=y] || MMA8452 [=y] && IIO [=y] && I2C [=y] || MXC4005 [=y] && IIO [=y] && I2C [=y] || SCA3300 [=n] && IIO [=y] && SPI [=y] || STK8312 [=y] && IIO [=y] && I2C [=y] || STK8BA50 [=y] && IIO [=y] && I2C [=y] || AD_SIGMA_DELTA [=y] && IIO [=y] || AD7266 [=y] && IIO [=y] && SPI_MASTER [=y] || AD7298 [=y] && IIO [=y] && SPI [=y] || AD7476 [=y] && IIO [=y] && SPI [=y] || AD7606 [=y] && IIO [=y] || AD7766 [=y] && IIO [=y] && SPI_MASTER [=y] || AD7768_1 [=y] && IIO [=y] && SPI [=y] || AD7887 [=y] && IIO [=y] && SPI [=y] || AD7923 [=n] && IIO [=y] && SPI [=y] || AD799X [=y] && IIO [=y] && I2C [=y] || AT91_ADC [=n] && IIO [=y] && (ARCH_AT91 || COMPILE_TEST [=n]) && INPUT [=y] && SYSFS [=y] && OF [=y] || AT91_SAMA5D2_ADC [=n] && IIO [=y] && (ARCH_AT91 || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CC10001_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] && REGULATOR [=y] || CPCAP_ADC [=y] && IIO [=y] && MFD_CPCAP [=y] || DLN2_ADC [=n] && IIO [=y] && MFD_DLN2 [=n] || MXS_LRADC_ADC [=n] && IIO [=y] && MFD_MXS_LRADC [=n] || HX711 [=y] && IIO [=y] && GPIOLIB [=y] || MAX1027 [=y] && IIO [=y] && SPI [=y] || MAX1118 [=y] && IIO [=y] && SPI [=y] || MAX1363 [=y] && IIO [=y] && I2C [=y] || MEDIATEK_MT6360_ADC [=n] && IIO [=y] && MFD_MT6360 [=n] || ROCKCHIP_SARADC [=y] && IIO [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) && RESET_CONTROLLER [=y] || SD_ADC_MODULATOR [=y] && IIO [=y] && OF [=y] || STM32_ADC_CORE [=n] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n]) || TI_ADC081C [=y] && IIO [=y] && I2C [=y] || TI_ADC0832 [=n] && IIO [=y] && SPI [=y] || TI_ADC084S021 [=y] && IIO [=y] && SPI [=y] || TI_ADC12138 [=n] && IIO [=y] && SPI [=y] || TI_ADC108S102 [=y] && IIO [=y] && SPI [=y] || TI_ADC161S626 [=y] && IIO [=y] && SPI [=y] || TI_ADS1015 [=y] && IIO [=y] && I2C [=y] || TI_ADS7950 [=n] && IIO [=y] && SPI [=y] && GPIOLIB [=y] || TI_ADS131E08 [=n] && IIO [=y] && SPI [=y] || TI_TLC4541 [=y] && IIO [=y] && SPI [=y] || TI_TSC2046 [=n] && IIO [=y] && SPI [=y] || VF610_ADC [=y] && IIO [=y] && OF [=y] && HAS_IOMEM [=y] || XILINX_XADC [=n] && IIO [=y] && HAS_IOMEM [=y] || ATLAS_PH_SENSOR [=y] && IIO [=y] && I2C [=y] || CCS811 [=n] && IIO [=y] && I2C [=y] || PMS7003 [=n] && IIO [=y] && SERIAL_DEV_BUS [=n] || SCD30_CORE [=y] && IIO [=y] || SCD4X [=y] && IIO [=y] && I2C [=y] || SPS30 [=n] && IIO [=y] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || ADXRS290 [=y] && IIO [=y] && SPI [=y] || BMG160 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) || FXAS21002C [=n] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) || MPU3050 [=y] && IIO [=y] || IIO_ST_GYRO_3AXIS [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && IIO_BUFFER [=y] || ITG3200 [=n] && IIO [=y] && I2C [=y] && IIO_BUFFER [=y] || AFE4403 [=y] && IIO [=y] && SPI_MASTER [=y] || AFE4404 [=y] && IIO [=y] && I2C [=y] || AM2315 [=y] && IIO [=y] && I2C [=y] || HDC100X [=y] && IIO [=y] && I2C [=y] || HTS221 [=y] && IIO [=y] && (I2C [=y] || SPI [=y]) || BMI160 [=y] && IIO [=y] || KMX61 [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_IIO [=n] && IIO [=y] || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || ADJD_S311 [=n] && IIO [=y] && I2C [=y] || AS73211 [=y] && IIO [=y] && I2C [=y] || GP2AP020A00F [=y] && IIO [=y] && I2C [=y] || ISL29125 [=n] && IIO [=y] && I2C [=y] || LTR501 [=n] && IIO [=y] && I2C [=y] || MAX44000 [=y] && IIO [=y] && I2C [=y] || SI1145 [=y] && IIO [=y] && I2C [=y] || ST_UVIS25 [=n] && IIO [=y] && (I2C [=y] || SPI [=y]) || TCS3414 [=y] && IIO [=y] && I2C [=y] || TCS3472 [=n] && IIO [=y] && I2C [=y] || VCNL4000 [=n] && IIO [=y] && I2C [=y] || VCNL4035 [=n] && IIO [=y] && I2C [=y] || AK8974 [=n] && IIO [=y] && I2C [=y] && OF [=y] || AK8975 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || BMC150_MAGN [=y] && IIO [=y] || MAG3110 [=y] && IIO [=y] && I2C [=y] || IIO_ST_MAGN_3AXIS [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && IIO_BUFFER [=y] || SENSORS_HMC5843 [=y] && IIO [=y] || SENSORS_RM3100 [=y] && IIO [=y] || YAMAHA_YAS530 [=y] && IIO [=y] && I2C [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=n] && IIO [=y] && HID_SENSOR_HUB [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y] || DLHL60D [=y] && IIO [=y] && I2C [=y] || MPL3115 [=y] && IIO [=y] && I2C [=y] || MS5611 [=y] && IIO [=y] || IIO_ST_PRESS [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && IIO_BUFFER [=y] || ZPA2326 [=y] && IIO [=y] || AS3935 [=n] && IIO [=y] && SPI [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y] || LIDAR_LITE_V2 [=n] && IIO [=y] && I2C [=y] || SX9310 [=y] && IIO [=y] && I2C [=y] || SX9500 [=n] && IIO [=y] && I2C [=y] || SRF08 [=n] && IIO [=y] && I2C [=y] || MAXIM_THERMOCOUPLE [=n] && IIO [=y] && SPI [=y]
+
+CRYPTO_RSA: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=m] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=m] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=y] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-SND_SOC_WM8978: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SIU_MIGOR [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS [=n] || COMPILE_TEST [=y]) && SH_MIGOR && I2C [=y]
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-SENSORS_SHT15: m => yes
-      Direct dependencies: HWMON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
-
-DEBUG_FS_ALLOW_ALL: y => no
-      Direct dependencies: <choice>
-
-DRM_DW_HDMI_I2S_AUDIO: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && SND_SOC [=m] && DRM_DW_HDMI [=m]
-      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && DRM_DW_HDMI [=m]
-
-MTD_NAND_FSMC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && OF [=y] && HAS_IOMEM [=y] && (PLAT_SPEAR || ARCH_NOMADIK || ARCH_U8500 || COMPILE_TEST [=y])
-
-VIDEO_PVRUSB2: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-
-KASAN_GENERIC: y => no
-      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
+BCM7XXX_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y] || BCMGENET [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && HAS_IOMEM [=y]
 

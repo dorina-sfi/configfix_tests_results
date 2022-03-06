@@ -1,21 +1,27 @@
-USB_SERIAL_SYMBOL: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+VIDEO_MSP3400: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] || VIDEO_BT848 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=y] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-USB_SERIAL_KOBIL_SCT: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
 
-MTD_PLATRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+PINCTRL_PFC_R8A77960: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77960 [=y]
 
-HID_KENSINGTON: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SOC_BRCMSTB: y => no
+      Direct dependencies: ARM || ARM64 [=y] || BMIPS_GENERIC || COMPILE_TEST [=n]
+      Reverse dependencies: PHY_BRCM_USB [=y] && (ARCH_BCM4908 [=n] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=n]) && OF [=y] && ARCH_BRCMSTB [=y]
 
-W1_SLAVE_DS2423: m => yes
-      Direct dependencies: W1 [=m]
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-TOUCHSCREEN_CYTTSP4_CORE: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
 
-HID_SAMSUNG: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+OMAP2PLUS_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_OMAP2PLUS || ARCH_K3 [=y])
+      Reverse dependencies: OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 [=y] || TI_K3_R5_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y]
 

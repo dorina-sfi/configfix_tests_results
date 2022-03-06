@@ -1,38 +1,40 @@
-CC_OPTIMIZE_FOR_SIZE: y => no
-      Direct dependencies: <choice>
+CRYPTO_AES_ARM64_NEON_BLK: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: CRYPTO_AES_ARM64_BS [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+MMC_DW_PLTFM: y => no
+      Direct dependencies: MMC [=y] && MMC_DW [=y]
+      Reverse dependencies: MMC_DW_BLUEFIELD [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_EXYNOS [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_HI3798CV200 [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_K3 [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_ROCKCHIP [=n] && MMC [=y] && MMC_DW [=y] && ARCH_ROCKCHIP [=n]
 
-IOMMU_SUPPORT: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
-
-ROCKCHIP_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
-      Reverse dependencies: ARCH_ROCKCHIP [=y]
-
-PREEMPT_VOLUNTARY: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
-
-IOMMU_IO_PGTABLE_LPAE: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
-      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=y] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=y] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
-
-CRYPTO_CRCT10DIF: y => no
+CRYPTO_DRBG_MENU: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-NF_SOCKET_IPV4: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: NFT_SOCKET [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=y] || IPV6 [=y]=n) || NETFILTER_XT_MATCH_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=n] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=y] || IP6_NF_IPTABLES [=y]=n)
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 
-CRYPTO_ECB: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC [=y] && OF [=y] || CRYPTO_DEV_MXS_DCP [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+MEDIA_TUNER_FC0013: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_RTL28XXU [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-NET_DSA_TAG_XRS700X: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_XRS700X [=y] && NETDEVICES [=y] && NET_DSA [=y]
+PAGE_REPORTING: y => no
+      Direct dependencies: y
+      Reverse dependencies: VIRTIO_BALLOON [=y] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
+
+PAGE_REPORTING: y => no
+      Direct dependencies: y
+      Reverse dependencies: VIRTIO_BALLOON [=y] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
+
+MEDIA_TUNER_R820T: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_RTL28XXU [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+MEDIA_TUNER_SI2157: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_AF9035 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_RTL28XXU [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DVBSKY [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=n] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_SMIPCIE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=n] && (OF [=y] && ARCH_K3 [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 

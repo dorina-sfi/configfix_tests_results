@@ -1,28 +1,29 @@
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+VIDEO_IMX208: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m] && VIDEO_V4L2_SUBDEV_API [=y] && MEDIA_CAMERA_SUPPORT [=y]
 
-COMEDI_DAS16M1: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+SDR_MAX2175: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && MEDIA_SDR_SUPPORT [=y] && I2C [=y]
 
-RTC_DRV_AS3722: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_AS3722 [=m]
+INPUT_DA9063_ONKEY: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (MFD_DA9063 [=m] || MFD_DA9062 [=y])
 
-LCD_L4F00242T03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-
-PCMCIA_RAYCS: m => yes
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && PCMCIA [=m]
-
-ADVISE_SYSCALLS: y => no
+CPUMASK_OFFSTACK: y => no
       Direct dependencies: y
+      Reverse dependencies: MAXSMP [=y] && X86_64 [=y] && SMP [=y] && DEBUG_KERNEL [=y]
 
-SENSORS_DPS920AB: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+HID_PLANTRONICS: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-GPIO_TPS65086: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TPS65086 [=m]
+SND_SOC_MAX9759: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
 
-CRYPTO_NULL: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
+GNSS_SIRF_SERIAL: m => yes
+      Direct dependencies: GNSS [=y] && SERIAL_DEV_BUS [=m]
+
+MODULE_COMPRESS_ZSTD: y => no
+      Direct dependencies: <choice>
+
+RELAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && ATH10K_DEBUGFS [=n] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n]
 

@@ -1,31 +1,29 @@
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y]
+VIDEO_TI_CAL: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (SOC_DRA7XX || ARCH_K3 || COMPILE_TEST [=y])
 
-NETDEV_ADDR_LIST_TEST: m => yes
-      Direct dependencies: NET [=y] && KUNIT [=m]
+USB_MUSB_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=m])
 
-AUTOFS_FS: y => mod
-      Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+MMC_USHC: m => yes
+      Direct dependencies: MMC [=m] && USB [=y]
 
-CRYPTO_DRBG_MENU: y => no
+VIDEO_IMX214: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+CHARGER_MAX14577: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX14577 [=m]
+
+AD5592R: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+
+MTD_MTDRAM: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+
+RMI4_F55: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: RMI4_F54 [=y] && INPUT [=y] && RMI4_CORE [=m] && (VIDEO_V4L2 [=m]=y || RMI4_CORE [=m]=m && VIDEO_V4L2 [=m]=m)
+
+CRYPTO_SHA3: m => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
-
-SND_SOC_SIMPLE_AMPLIFIER: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-
-MOST_COMPONENTS: m => yes
-      Direct dependencies: STAGING [=y] && HAS_DMA [=y] && CONFIGFS_FS [=y] && MOST [=m]
-
-INPUT_TPS65218_PWRBUTTON: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (MFD_TPS65217 [=y] || MFD_TPS65218 [=n])
-
-HID_JABRA: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-USB_CHIPIDEA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y]
-      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && ARCH_TEGRA
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

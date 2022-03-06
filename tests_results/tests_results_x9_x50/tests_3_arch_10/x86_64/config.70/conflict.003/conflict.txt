@@ -1,35 +1,33 @@
-ZONE_DMA: y => no
+COMEDI_ADDI_APCI_2200: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+PWM_LP3943: m => yes
+      Direct dependencies: PWM [=y] && MFD_LP3943 [=m]
+
+CRYPTO_CAMELLIA_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+COMEDI_ADQ12B: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+HW_RANDOM_EXYNOS: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+
+IMX_IPUV3_CORE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (SOC_IMX5 || SOC_IMX6Q || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && (DRM [=m] || !DRM [=m])
+
+FRAMEBUFFER_CONSOLE: y => no
+      Direct dependencies: VT [=y] && FB [=y] && !UML
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=m] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=m]) && !EXPERT [=n]
+
+CPU_SUP_CENTAUR: y => no
       Direct dependencies: y
 
-REGULATOR_FIXED_VOLTAGE: y => mod
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=n])
+DVB_ZD1301_DEMOD: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_ZD1301 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CFG80211_USE_KERNEL_REGDB_KEYS: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m] && CFG80211_REQUIRE_SIGNED_REGDB [=y]
-
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
-
-LEDS_MT6323: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_MT6397 [=m]
-
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
-
-BMA400: m => yes
-      Direct dependencies: IIO [=m]
-
-SOFTLOCKUP_DETECTOR: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !S390
-      Reverse dependencies: HARDLOCKUP_DETECTOR_PERF [=y]
-
-KPROBES: y => no
-      Direct dependencies: MODULES [=y] && HAVE_KPROBES [=y]
-      Reverse dependencies: KGDB_HONOUR_BLOCKLIST [=y] && KGDB [=y] && HAVE_KPROBES [=y] && MODULES [=y]
-
-SPS30_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+REGULATOR_PCF50633: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_PCF50633 [=m]
 

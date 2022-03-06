@@ -1,27 +1,30 @@
-IPV6_TUNNEL: m => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
-      Reverse dependencies: IPV6_VTI [=n] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=m] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=m] || IPV6_FOU_TUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y]
+USB_EZUSB_FX2: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y]
+      Reverse dependencies: USB_SERIAL_WHITEHEAT [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN_PDA [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y]
 
-REGULATOR_BD71815: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD71828 [=m]
+CORESIGHT_LINKS_AND_SINKS: y => no
+      Direct dependencies: CORESIGHT [=y]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=y] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y] || CORESIGHT_STM [=n] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-FB_RIVA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-CLK_RCAR_CPG_LIB: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+USB_DWC2_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y && USB_GADGET [=y]=y || USB_DWC2 [=y]=m && USB [=y] && USB_GADGET [=y])
 
-SCSI_ARCMSR: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
+DEBUG_INFO_DWARF4: y => no
+      Direct dependencies: <choice>
 
-PRINTER: m => yes
-      Direct dependencies: PARPORT [=m]
-
-PAGE_REPORTING: y => no
+PID_IN_CONTEXTIDR: y => no
       Direct dependencies: y
-      Reverse dependencies: VIRTIO_BALLOON [=y] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
 
-DM_EBS: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m] && !HIGHMEM
+CRYPTO_CBC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=n]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+
+MTD_COMPLEX_MAPPINGS: y => no
+      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM
 

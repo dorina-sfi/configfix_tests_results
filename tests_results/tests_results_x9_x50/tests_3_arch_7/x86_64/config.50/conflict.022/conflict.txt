@@ -1,26 +1,22 @@
-KEYBOARD_GPIO_POLLED: y => no
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y]
-      Reverse dependencies: PCENGINES_APU2 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
+PEAQ_WMI: m => yes
+      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=m] && INPUT [=y]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+SND_SOC_WCD938X_SDW: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SOUNDWIRE [=y]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+TEST_LIST_SORT: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+SENSORS_GPIO_FAN: m => yes
+      Direct dependencies: HWMON [=m] && OF_GPIO [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-CRYPTO_CAMELLIA_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+IIO_KFIFO_BUF: y => mod
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=m] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=y] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=y] && IIO [=y] && IIO_SSP_SENSORHUB [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=n] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=y]) || ACPI_ALS [=y] && IIO [=y] && ACPI [=y] || APDS9960 [=n] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=n] && X86 [=y]
+MLXREG_IO: m => yes
+      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=m]
 
-LEGACY_VSYSCALL_EMULATE: y => no
-      Direct dependencies: <choice>
+SENSORS_ADT7310: m => yes
+      Direct dependencies: HWMON [=m] && SPI_MASTER [=y]
 

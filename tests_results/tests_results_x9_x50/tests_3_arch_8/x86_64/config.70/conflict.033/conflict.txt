@@ -1,25 +1,29 @@
-TCG_TIS_I2C_CR50: m => yes
-      Direct dependencies: TCG_TPM [=m] && I2C [=y]
+X86_16BIT: y => no
+      Direct dependencies: MODIFY_LDT_SYSCALL [=y]
 
-DMARD09: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+FAILOVER: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=y] && NETDEVICES [=y]
 
-HID_ELO: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-AK8975: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: AK09911 [=m] && IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+PCIEASPM_DEFAULT: y => no
+      Direct dependencies: <choice> && PCIEASPM [=y]
 
-BH1750: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SECURITYFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=y] && INTEGRITY [=y]
 
-AD5593R: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_SENSOR_IIO_COMMON: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y]
+      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=n] && USB_HID [=n] && HID_SENSOR_HUB [=y] && IIO [=y] || HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-TCG_NSC: m => yes
-      Direct dependencies: TCG_TPM [=m] && X86 [=y]
+MOUSE_PS2_LIFEBOOK: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y] && X86 [=y] && DMI [=y]
 
-IR_SANYO_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=n] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 

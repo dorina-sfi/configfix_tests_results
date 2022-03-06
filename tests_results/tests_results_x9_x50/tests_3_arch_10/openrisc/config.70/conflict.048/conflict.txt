@@ -1,33 +1,30 @@
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=n] && !64BIT || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+FB_OMAP2_CONNECTOR_HDMI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m]
 
-SERIO_LIBPS2: y => no
-      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
-      Reverse dependencies: KEYBOARD_ATKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=y] && INPUT [=y] && INPUT_MOUSE [=y]
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 
-CHARLCD_BL_FLASH: y => no
-      Direct dependencies: <choice>
+NFC_MRVL_USB: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m] && USB [=y]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+MFD_88PM800: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-RTC_LIB_KUNIT_TEST: y => no
-      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
+I2C_TEGRA_BPMP: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (TEGRA_BPMP [=n] || COMPILE_TEST [=y])
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
+INPUT_MMA8450: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && I2C [=m]
 
-RMI4_F03: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+TCM_IBLOCK: m => yes
+      Direct dependencies: TARGET_CORE [=m]
 
-DRIVER_PE_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]=y
+FSI_MASTER_AST_CF: m => yes
+      Direct dependencies: FSI [=m] && GPIOLIB [=y] && GPIO_ASPEED [=m]
 
-USB_ISP1760_HOST_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
+BT_QCOMSMD: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && (RPMSG [=y] || COMPILE_TEST [=y] && RPMSG [=y]=n) && (QCOM_WCNSS_CTRL [=n] || COMPILE_TEST [=y] && QCOM_WCNSS_CTRL [=n]=n)
 
-LTO_NONE: y => no
-      Direct dependencies: <choice>
+REGULATOR_RT4801: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
 

@@ -1,12 +1,14 @@
-VCNL4035: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+NET_NSH: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-LEDS_PCA963X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m]
+TYPEC_HD3SS3220: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && I2C [=y] && USB_ROLE_SWITCH [=y]
 
-BT_HCIVHCI: m => yes
-      Direct dependencies: NET [=y] && BT [=m]
+HD44780_COMMON: m => yes
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
 
-HDLC_RAW: m => yes
-      Direct dependencies: NETDEVICES [=y] && WAN [=y] && HDLC [=m]
+HW_RANDOM_TIMERIOMEM: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
 

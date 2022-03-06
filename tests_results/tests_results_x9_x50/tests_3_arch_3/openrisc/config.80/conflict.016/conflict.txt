@@ -1,12 +1,10 @@
-IIO_ST_ACCEL_3AXIS: y => no
-      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=m] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 
-EXPERT: y => no
-      Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+RTC_DRV_HID_SENSOR_TIME: m => yes
+      Direct dependencies: RTC_CLASS [=y] && USB_HID [=m] && HID_SENSOR_HUB [=m] && IIO [=m]
 
-HID_SENSOR_IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
+MMA8452: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

@@ -1,25 +1,27 @@
-HID_LOGITECH_HIDPP: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && HID_LOGITECH [=m]
-      Reverse dependencies: HID_LOGITECH_DJ [=n] && INPUT [=y] && HID [=m] && USB_HID [=n] && HIDRAW [=n] && HID_LOGITECH [=m]
+EXTCON_PTN5150: m => yes
+      Direct dependencies: EXTCON [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-MAC802154: m => yes
-      Direct dependencies: NET [=y] && IEEE802154 [=m]
+EXTCON_PTN5150: m => yes
+      Direct dependencies: EXTCON [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-HW_RANDOM_TIMERIOMEM: m => yes
-      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+SENSORS_SMM665: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=m]
 
-HTU21: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_DH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n]
 
-IR_TOY: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+I2C_SIMTEC: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
 
-SND_SOC_WCD9335: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SLIMBUS [=m]
+I2C_I801: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: ITCO_WDT [=n] && WATCHDOG [=y] && (X86 || IA64) && PCI [=y] && (I2C [=m] || I2C [=m]=n) && (MFD_INTEL_PMC_BXT [=n] || !MFD_INTEL_PMC_BXT [=n]) && !EXPERT [=y] && I2C [=m]
 
-SND_SOC_TAS2764: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+PINCTRL_PFC_R8A77961: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77961 [=y]
 
-SND_SOC_TFA9879: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+IOMMU_DEFAULT_DMA_LAZY: y => no
+      Direct dependencies: <choice>
 

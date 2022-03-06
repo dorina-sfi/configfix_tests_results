@@ -1,22 +1,27 @@
-REGULATOR_MAX77826: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=n] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
 
-MCP4531: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-I2C_VERSATILE: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_MPS2 || ARCH_VERSATILE || ARCH_REALVIEW || ARCH_VEXPRESS [=y] || COMPILE_TEST [=y])
+INPUT_MATRIXKMAP: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || KEYBOARD_EP93XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=y]) || KEYBOARD_TCA8418 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_MATRIX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || KEYBOARD_LM8333 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_IMX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_TEGRA [=n] && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=n] || KEYBOARD_SAMSUNG [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_STI || COMPILE_TEST [=y]) || KEYBOARD_STMPE [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_STMPE [=y] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && PLAT_SPEAR || KEYBOARD_TC3589X [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_TC3589X [=y] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && TWL4030_CORE [=n] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && CROS_EC [=n] || KEYBOARD_BCM [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
 
-PAGE_EXTENSION: y => no
+CLK_R8A77961: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77961 [=y]
+
+PINCTRL_PFC_R8A774B1: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774B1 [=y]
+
+DEBUG_BUGVERBOSE: y => no
+      Direct dependencies: BUG [=y] && (GENERIC_BUG [=y] || HAVE_DEBUG_BUGVERBOSE [=n])
+
+CRC16: y => no
       Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
-
-LEDS_LM355x: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m]
-
-HID_GFRM: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-LEDS_AN30259A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m] && OF [=y]
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI [=y] && EFI [=y] && SPI [=n] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=n] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=n] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
 

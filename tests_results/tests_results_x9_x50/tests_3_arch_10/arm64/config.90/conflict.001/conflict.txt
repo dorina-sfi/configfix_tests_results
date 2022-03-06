@@ -1,35 +1,37 @@
-PID_IN_CONTEXTIDR: y => no
-      Direct dependencies: y
-      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
 
-SND_DYNAMIC_MINORS: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y]
-      Reverse dependencies: SND_HDA_CODEC_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_SOC_TOPOLOGY [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+SM_GCC_8250: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_CAMCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-CB710_CORE: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: MMC_CB710 [=y] && MMC [=y] && PCI [=y]
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=n] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
 
-POWER_RESET: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
+CPU_FREQ_DEFAULT_GOV_CONSERVATIVE: y => no
+      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y])
 
-SYSCTL_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
 
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
 
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-EINT_MTK: y => no
-      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && OF [=y]
+HID_SENSOR_IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-FHANDLE: y => no
-      Direct dependencies: y
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 
-FUTEX: y => no
-      Direct dependencies: y
+CLK_RENESAS_CPG_MSSR: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 

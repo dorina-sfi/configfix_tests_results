@@ -1,9 +1,11 @@
-ENVELOPE_DETECTOR: m => yes
-      Direct dependencies: IIO [=m] && OF [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 
-SND_HDA_CODEC_SIGMATEL: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_HDA [=m]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_PCM179X_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+MEDIA_TUNER_TEA5761: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 

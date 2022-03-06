@@ -1,21 +1,23 @@
-VIDEO_M5MOLS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
-
-MSM_GCC_8953: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-
-CMA_SIZE_SEL_MBYTES: y => no
+ARM64_PA_BITS_48: y => no
       Direct dependencies: <choice>
 
-CMA: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
+MEDIA_TUNER_MT20XX: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-BACKLIGHT_CLASS_DEVICE: y => mod
+W1: y => no
       Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 && MMU [=y] && ACPI [=n] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=y] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=n]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=m] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ILI9163 [=m] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ILI9486 [=y] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_MI0283QT [=y] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=y] && SPI [=y] || DRM_GUD [=n] && HAS_IOMEM [=y] && DRM [=y] && USB [=n] && MMU [=y] || DRM_PARADE_PS8622 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || FB_BACKLIGHT [=y] && HAS_IOMEM [=y] && FB [=y] || FB_ARMCLCD [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=y] && MX3_IPU [=n] || USB_APPLEDISPLAY [=n] && USB_SUPPORT [=n] && USB [=n] || FB_OLPC_DCON [=n] && STAGING [=y] && OLPC && FB [=y] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=n] || SAMSUNG_Q10 [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] || ACPI_CMPC [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n)
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+
+DVB_CXD2841ER: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && SPI_MASTER [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+DEVFREQ_EVENT_ROCKCHIP_DFI: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 

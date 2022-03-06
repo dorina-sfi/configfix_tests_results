@@ -1,14 +1,16 @@
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-USB_MUSB_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y])
 
-CRYPTO_DRBG_MENU: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+TEGRA_HOST1X: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=n])
+      Reverse dependencies: DRM_TEGRA [=y] && HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && DRM [=y] && OF [=y]
 
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
+CRC_T10DIF: y => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=n] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=n] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y]
 

@@ -1,25 +1,24 @@
-SND_AMD_ACP_CONFIG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_AMD_ACP_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && X86 [=y] && PCI [=n] || SND_SOC_SOF_AMD_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=y] && SND_SOC_SOF_AMD_TOPLEVEL [=m]
+HID_MONTEREY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-SENSORS_LM3533: m => yes
-      Direct dependencies: IIO [=m] && MFD_LM3533 [=m]
+CC_OPTIMIZE_FOR_SIZE: y => no
+      Direct dependencies: <choice>
 
-I2C_SMBUS: m => yes
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=m] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+SCSI_PPA: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=y] && PARPORT_PC [=m]
 
-IIO_ST_MAGN_3AXIS: m => no
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+CRYPTO_JITTERENTROPY: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-TCG_XEN: m => yes
-      Direct dependencies: TCG_TPM [=m] && XEN [=y]
+RCU_NOCB_CPU: y => no
+      Direct dependencies: TREE_RCU [=y] && (RCU_EXPERT [=n] || NO_HZ_FULL [=y])
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-VCNL4000: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_CHICONY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-TMPFS: y => no
-      Direct dependencies: SHMEM [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=m] || NETFILTER_CONNCOUNT [=m])) || NF_TABLES [=m] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=m] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=m] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || MD_RAID456 [=m] && MD [=y] && BLK_DEV_MD [=y] || DM_PERSISTENT_DATA [=y] && MD [=y] && BLK_DEV_DM [=y] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || XFS_FS [=m] && BLOCK [=y] || GFS2_FS [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 

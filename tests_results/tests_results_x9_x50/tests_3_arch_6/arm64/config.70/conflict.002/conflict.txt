@@ -1,21 +1,23 @@
-INPUT_FF_MEMLESS: m => yes
-      Direct dependencies: INPUT [=m]
-      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=m] && INPUT_JOYSTICK [=n] && PARPORT [=n] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=n] && JOYSTICK_XPAD [=n] && INPUT [=m] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=m] && INPUT_JOYSTICK [=n] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=m] && INPUT_MISC [=y] && MFD_ARIZONA [=y] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=m] && INPUT_MISC [=y] && (MFD_PM8XXX [=n] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=m] && INPUT [=m] && INPUT_MISC [=y] && (MFD_MAX77693 [=y] || MFD_MAX77843 [=n]) && PWM [=y] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=m] && INPUT_MISC [=y] && PWM [=y] && MFD_MAX8997 [=n] || INPUT_GPIO_VIBRA [=m] && INPUT [=m] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_REGULATOR_HAPTIC [=n] && INPUT [=m] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=m] && INPUT_MISC [=y] && TWL4030_CORE [=n] || INPUT_TWL6040_VIBRA [=m] && INPUT [=m] && INPUT_MISC [=y] && TWL6040_CORE [=y] || INPUT_PWM_VIBRA [=m] && INPUT [=m] && INPUT_MISC [=y] && PWM [=y] || INPUT_DRV260X_HAPTICS [=m] && INPUT_MISC [=y] && INPUT [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_DRV2665_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=m] && I2C [=y] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=m] && I2C [=y] || INPUT_SC27XX_VIBRA [=m] && INPUT [=m] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=m] || COMPILE_TEST [=n]) || HID_ACRUX_FF [=n] && INPUT [=m] && HID [=m] && HID_ACRUX [=m] || HID_BETOP_FF [=n] && INPUT [=m] && HID [=m] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=m] && HID [=m] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=m] && HID [=m] && HID_DRAGONRISE [=n] || HID_EMS_FF [=m] && INPUT [=m] && HID [=m] || HOLTEK_FF [=n] && INPUT [=m] && HID [=m] && HID_HOLTEK [=n] || LOGITECH_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || LOGIG940_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || LOGIWHEELS_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || HID_MAYFLASH [=n] && INPUT [=m] && HID [=m] || HID_MICROSOFT [=m] && INPUT [=m] && HID [=m] || NINTENDO_FF [=y] && INPUT [=m] && HID [=m] && HID_NINTENDO [=m] || PANTHERLORD_FF [=n] && INPUT [=m] && HID [=m] && HID_PANTHERLORD [=n] || PLAYSTATION_FF [=y] && INPUT [=m] && HID [=m] && HID_PLAYSTATION [=m] || SONY_FF [=n] && INPUT [=m] && HID [=m] && HID_SONY [=n] || GREENASIA_FF [=n] && INPUT [=m] && HID [=m] && HID_GREENASIA [=n] || SMARTJOYPLUS_FF [=n] && INPUT [=m] && HID [=m] && HID_SMARTJOYPLUS [=m] || THRUSTMASTER_FF [=n] && INPUT [=m] && HID [=m] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=m] && INPUT [=m] && HID [=m] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=m] && HID [=m] && HID_ZEROPLUS [=n]
+PINCTRL_PFC_R8A77961: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77961 [=y]
 
-BACKLIGHT_ADP8860: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
+ARM64_VA_BITS_48: y => no
+      Direct dependencies: <choice>
 
-SENSORS_MP2975: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+DRM_DISPLAY_CONNECTOR: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
+      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=y] || COMPILE_TEST [=y])
 
-GPIO_SYSCON: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
-      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=m] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
+HWMON: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: HABANA_AI [=y] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || HP_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=y] && PCI [=y]
 
-MD_FAULTY: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: QORIQ_CPUFREQ [=y] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
 

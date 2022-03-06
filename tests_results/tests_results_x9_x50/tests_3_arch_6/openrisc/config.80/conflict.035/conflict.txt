@@ -1,21 +1,23 @@
-SENSORS_AD7414: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-SND_SOC_WCD938X_SDW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SOUNDWIRE [=m]
+MODULE_SIG: y => no
+      Direct dependencies: MODULES [=y]
+      Reverse dependencies: SECURITY_LOCKDOWN_LSM [=y] && SECURITY [=y] && MODULES [=y]
 
-OVERLAY_FS_REDIRECT_DIR: y => no
-      Direct dependencies: OVERLAY_FS [=m]
-      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=m]
+VIDEO_LM3560: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-PROFILE_ALL_BRANCHES: y => no
-      Direct dependencies: <choice>
+VIDEO_KS0127: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SCSI_SAS_ATTRS: m => yes
-      Direct dependencies: SCSI [=m]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=m] && SCSI [=m] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=m]
+DVB_CXD2099: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SND_SIMPLE_CARD: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_SH4_FSI [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && (SUPERH || COMMON_CLK [=n])
+USB: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
+      Reverse dependencies: MOUSE_APPLETOUCH [=n] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=y] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=m] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 

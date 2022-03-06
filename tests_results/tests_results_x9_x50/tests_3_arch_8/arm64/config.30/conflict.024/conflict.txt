@@ -1,25 +1,30 @@
-LEDS_AW2013: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m] && OF [=y]
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-SENSORS_GL518SM: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-FB_PXA168: m => yes
-      Direct dependencies: FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (CPU_PXA168 || CPU_PXA910 || COMPILE_TEST [=y])
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 
-INPUT_DRV260X_HAPTICS: m => yes
-      Direct dependencies: INPUT_MISC [=y] && INPUT [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=y] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=y] || INA2XX_ADC [=y] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=y] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=y] && IIO [=y] && IIO_SSP_SENSORHUB [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=n] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-FB_VT8623: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+NETFILTER_XT_NAT: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_NAT [=y]
+      Reverse dependencies: IP_NF_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=n] && NF_CONNTRACK [=y] || IP6_NF_NAT [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-ZPA2326: m => yes
-      Direct dependencies: IIO [=m]
+RTC_DRV_DS17885: y => no
+      Direct dependencies: <choice>
 
-I2C_NFORCE2: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
+SM_GCC_8250: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_CAMCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-CRYPTO_DRBG_MENU: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+DW_EDMA: y => no
+      Direct dependencies: DMADEVICES [=y] && PCI [=y] && PCI_MSI [=y]
+      Reverse dependencies: DW_EDMA_PCIE [=y] && DMADEVICES [=y] && PCI [=y] && PCI_MSI [=y]
 

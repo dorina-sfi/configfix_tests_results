@@ -1,16 +1,17 @@
-TOUCHSCREEN_AD7879_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_AD7879 [=m] && I2C [=y]
+LEDS_LP5523: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
 
-XILINX_PR_DECOUPLER: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+PWM_NTXEC: m => yes
+      Direct dependencies: PWM [=y] && MFD_NTXEC [=m]
 
-LCD_HX8357: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
 
-VGA_CONSOLE: y => no
-      Direct dependencies: VT [=y] && !4xx && !PPC_8xx && !SPARC && !M68K && !PARISC && !SUPERH && (!ARM || ARCH_FOOTBRIDGE || ARCH_INTEGRATOR || ARCH_NETWINDER) && !ARM64 && !ARC && !MICROBLAZE && !OPENRISC && !NDS32 && !S390 && !UML
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=y] && FTRACE [=y] && PREEMPTION [=y]
 

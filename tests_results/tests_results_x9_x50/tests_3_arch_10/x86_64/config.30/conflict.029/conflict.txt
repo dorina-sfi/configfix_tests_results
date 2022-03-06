@@ -1,35 +1,36 @@
-TRANSPARENT_HUGEPAGE_MADVISE: y => no
-      Direct dependencies: <choice>
-
-IIO_BUFFER_CB: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=n] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
-
-LTO_NONE: y => no
-      Direct dependencies: <choice>
-
-RUST_OPT_LEVEL_1: y => no
-      Direct dependencies: <choice>
-
-CPU_SUP_AMD: y => no
+CGROUPS: y => no
       Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-MK8: y => no
-      Direct dependencies: <choice>
+BATTERY_DS2760: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && W1 [=m]
 
-HZ_100: y => no
-      Direct dependencies: <choice>
+MTD_CFI_AMDSTD: y => mod
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=y])
 
-SYNC_FILE: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=y] || AGP [=y]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
 
-AK8975: y => no
-      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SND_AZT2320: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_ISA [=y] && PNP [=y]
 
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
+W1_SLAVE_DS28E17: m => yes
+      Direct dependencies: W1 [=m] && I2C [=y]
+
+X509_CERTIFICATE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
+
+VIDEO_SAA7185: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_BUZ [=n] && STAGING [=y] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=m]
 

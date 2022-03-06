@@ -1,19 +1,23 @@
-GPIO_JANZ_TTL: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_JANZ_CMODIO [=m]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-INA2XX_ADC: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y] && !SENSORS_INA2XX [=m]
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 
-RSEQ: y => no
-      Direct dependencies: HAVE_RSEQ [=y]
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-MEDIA_PLATFORM_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-TCG_TIS_ST33ZP24_I2C: m => yes
-      Direct dependencies: TCG_TPM [=m] && I2C [=y]
-
-EXTCON: y => mod
+DEBUG_IRQFLAGS: y => no
       Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=m] || !RC_CORE [=m]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
+      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
+
+SOFTLOCKUP_DETECTOR: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !S390
+      Reverse dependencies: HARDLOCKUP_DETECTOR_PERF [=y]
+
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
 

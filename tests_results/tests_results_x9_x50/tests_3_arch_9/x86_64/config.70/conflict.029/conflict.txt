@@ -1,32 +1,29 @@
-DVB_USB_AF9035: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m]
+INA2XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m] && !SENSORS_INA2XX [=m]
+
+DVB_TDA10086: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=m] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=m] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y]
+
+RTC_DRV_X1205: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
+
+SENSORS_TMP103: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
 SENSORS_HIH6130: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-PKCS7_MESSAGE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+INTEL_TH_PCI: m => yes
+      Direct dependencies: INTEL_TH [=m] && PCI [=y]
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+COMEDI_AMPLC_DIO200_PCI: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 
-SERIO_LIBPS2: m => yes
-      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=m] || SERIO_I8042 [=m]=n)
-      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=n] && INPUT_MOUSE [=n]
-
-CRYPTO_CTR: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=m] || CRYPTO_CCM [=m] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
-
-MOST_CDEV: m => yes
-      Direct dependencies: MOST [=m]
-
-IIO_BUFFER_HW_CONSUMER: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=n] && IIO [=y] && HAS_IOMEM [=y] && OF [=n] || STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=n] || COMPILE_TEST [=y])
-
-W1_MASTER_DS1WM: m => yes
-      Direct dependencies: W1 [=m]
+COMEDI_ADDI_APCI_3XXX: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 

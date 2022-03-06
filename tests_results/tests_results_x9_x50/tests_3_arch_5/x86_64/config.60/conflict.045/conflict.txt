@@ -1,16 +1,18 @@
-SATA_SX4: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=m] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-DEBUG_BUGVERBOSE: y => no
-      Direct dependencies: BUG [=y] && (GENERIC_BUG [=y] || HAVE_DEBUG_BUGVERBOSE [=n])
+KASAN_STACK: y => no
+      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
 
-MTD_OOPS: m => yes
-      Direct dependencies: MTD [=m]
+W1_SLAVE_DS2805: m => yes
+      Direct dependencies: W1 [=m]
 
-TCM_FILEIO: m => yes
-      Direct dependencies: TARGET_CORE [=m]
+CRYPTO_SEQIV: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=m] && NET [=y] && INET [=y]
 

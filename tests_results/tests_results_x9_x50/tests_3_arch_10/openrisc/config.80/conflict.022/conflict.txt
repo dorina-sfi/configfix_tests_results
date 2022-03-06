@@ -1,32 +1,31 @@
-AD7091R5: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+I2C_MUX_PCA954x: m => yes
+      Direct dependencies: I2C [=m] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-CRYPTO_MD5: y => mod
+BATTERY_AXP20X: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_AXP20X [=m] && AXP20X_ADC [=m] && IIO [=m]
+
+VFIO_PLATFORM_BCMFLEXRM_RESET: m => yes
+      Direct dependencies: VFIO [=m] && VFIO_PLATFORM [=m] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
+
+MTD_NETSC520: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (MELAN || COMPILE_TEST [=y]) && MTD_CFI [=m]
+
+W1_SLAVE_DS2405: m => yes
+      Direct dependencies: W1 [=m]
+
+CRYPTO_NULL: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: TCP_MD5SIG [=n] && NET [=n] && INET [=n] || SCTP_COOKIE_HMAC_MD5 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_MD5 [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=n] || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_MD5_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_MD5_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_SUNXI && PM && CRYPTO_DEV_ALLWINNER [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=y] && CRYPTO_DEV_EXYNOS_RNG [=y]!=m || CRYPTO_DEV_IMGTEC_HASH [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=m] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=y] && CRYPTO [=y] && NET [=y]
 
-LEDS_BCM6358: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && HAS_IOMEM [=y] && OF [=y]
+SERIAL_SC16IS7XX: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && (SPI_MASTER [=n] && !I2C [=m] || I2C [=m])
 
-VIDEO_M5MOLS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=m] && VIDEO_V4L2 [=m]
+LEDS_LP8860: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m] && OF [=y]
 
-SND_MCHP_SOC_SPDIFRX: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+BMG160: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=m] || SPI_MASTER [=n])
 
-DRM_PANEL_SAMSUNG_S6D16D0: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y]
-
-I2C_MUX_GPMUX: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m] && (OF [=y] || COMPILE_TEST [=y])
-
-EEPROM_MAX6875: m => yes
-      Direct dependencies: I2C [=m]
-
-DVB_L64781: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_BUDGET [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_AV7110 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && VIDEO_DEV [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-VIDEO_STM32_DMA2D: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_STM32 || COMPILE_TEST [=y])
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 

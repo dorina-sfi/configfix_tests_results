@@ -1,22 +1,21 @@
-RAID_ATTRS: m => yes
-      Direct dependencies: BLOCK [=y] && SCSI_MOD [=m]
-      Reverse dependencies: SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] && !S390 || SCSI_MYRB [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=n] || SCSI_MYRS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=n] && (!CPU_BIG_ENDIAN [=y] || COMPILE_TEST [=n])
+FPGA_REGION: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m]
+      Reverse dependencies: FPGA_DFL [=n] && FPGA [=m] && HAS_IOMEM [=y]
 
-SENSORS_AD7418: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+USB_ACM: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && TTY [=y]
+      Reverse dependencies: USB_VL600 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_NET_CDCETHER [=n] && TTY [=y] || USB_PULSE8_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-DEBUG_IRQFLAGS: y => no
-      Direct dependencies: y
-      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
+HID_SPEEDLINK: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-IPV6_MULTIPLE_TABLES: y => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
-      Reverse dependencies: IPV6_SEG6_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=m]
+COMEDI_AMPLC_DIO200_ISA: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-BLK_DEV_INITRD: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+DVB_TDA10048: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_TTUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7164 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-QCOM_SPMI_ADC5: m => yes
-      Direct dependencies: IIO [=y] && SPMI [=m]
+VIDEO_ADV748X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && OF [=y]
 

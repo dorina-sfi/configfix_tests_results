@@ -1,16 +1,17 @@
-COMEDI_NI_AT_AO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+CARDMAN_4000: m => yes
+      Direct dependencies: PCMCIA [=m]
 
-VCNL4000: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+HD44780_COMMON: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
 
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: MFD_MADERA [=m] && HAS_IOMEM [=y]
+W1: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-MAX1363: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+TYPEC_TCPM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && USB [=y]
 
-QCOM_SPMI_VADC: m => yes
-      Direct dependencies: IIO [=y] && SPMI [=m]
+INPUT_STPMIC1_ONKEY: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && MFD_STPMIC1 [=m]
 

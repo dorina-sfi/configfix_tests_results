@@ -1,19 +1,16 @@
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+SERIO_PCIPS2: m => yes
+      Direct dependencies: SERIO [=m] && PCI [=y]
 
-IIO_BUFFER_HW_CONSUMER: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=n] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+TOUCHSCREEN_MMS114: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-MSDOS_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+PREEMPT_NONE: y => no
+      Direct dependencies: <choice>
 
-MSM_GCC_8998: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_GPUCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+USB_MUSB_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=m]=y || USB [=m]=USB_MUSB_HDRC [=m]) && (USB_GADGET [=m]=y || USB_GADGET [=m]=USB_MUSB_HDRC [=m]) && HAS_DMA [=y]
 
-CLK_RENESAS_DIV6: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+FSL_ENETC_MDIO: y => mod
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=y] && PCI [=y] && MDIO_DEVRES [=y] && MDIO_BUS [=y]
+      Reverse dependencies: NET_DSA_MSCC_FELIX [=m] && NETDEVICES [=y] && NET_DSA [=m] && PCI [=y] && NET_VENDOR_MICROSEMI [=y] && NET_VENDOR_FREESCALE [=y] && HAS_IOMEM [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || FSL_ENETC [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=y] && PCI [=y] && PCI_MSI [=y] || FSL_ENETC_VF [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=y] && PCI [=y] && PCI_MSI [=y]
 

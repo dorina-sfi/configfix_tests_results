@@ -1,23 +1,20 @@
-CRYPTO_GHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
+MDIO_XGENE: m => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (ARCH_XGENE || COMPILE_TEST [=y])
+      Reverse dependencies: NET_XGENE [=m] && NETDEVICES [=y] && ETHERNET [=y] && (ARCH_XGENE || COMPILE_TEST [=y])
 
-HYPERVISOR_GUEST: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86_VSMP [=y] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=y]
+VIDEO_BT866: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-RCU_NOCB_CPU: y => no
-      Direct dependencies: TREE_RCU [=y] && (RCU_EXPERT [=y] || NO_HZ_FULL [=y])
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+SND_SOC_ADAU1761_I2C: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
 
-PPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
+MTD_NAND_DISKONCHIP: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y]
 
-KALLSYMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+SND_SOC_MT6660: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
+MFD_WCD934X: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && SLIMBUS [=m]
 

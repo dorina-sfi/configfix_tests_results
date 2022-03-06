@@ -1,16 +1,17 @@
-POWER_RESET_ATC260X: m => yes
-      Direct dependencies: POWER_RESET [=y] && MFD_ATC260X [=m]
+PINCTRL_RK805: m => yes
+      Direct dependencies: PINCTRL [=y] && MFD_RK808 [=m]
 
-USB_GSPCA_FINEPIX: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m] && USB_GSPCA [=m]
+SND_SOC_AK5386: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-HZ_100: y => no
-      Direct dependencies: <choice>
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-HID_SENSOR_CUSTOM_SENSOR: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && HID_SENSOR_HUB [=m]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=y] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=n]
 
-VIDEO_VP27SMPX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m]
+LEDS_BCM6328: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && HAS_IOMEM [=y] && OF [=y]
 

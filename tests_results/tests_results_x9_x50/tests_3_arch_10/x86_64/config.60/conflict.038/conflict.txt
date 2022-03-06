@@ -1,34 +1,39 @@
-SQUASHFS_FILE_DIRECT: y => no
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=y] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+PROC_CHILDREN: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: X86_5LEVEL [=y] && X86_64 [=y]
+
+THERMAL_GOV_STEP_WISE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+
+CRYPTO_TWOFISH_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+RMI4_CORE: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+CRC32_SARWATE: y => no
       Direct dependencies: <choice>
 
-W1: m => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=y]
 
-MEDIA_TUNER_MXL301RF: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_PT3 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-HZ_1000: y => no
-      Direct dependencies: <choice>
-
-NO_HZ_FULL: y => no
-      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
-
-NETFILTER_XT_TARGET_REDIRECT: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_NAT [=m]
-      Reverse dependencies: IP_NF_TARGET_REDIRECT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && IP_NF_NAT [=m] && NETFILTER_ADVANCED [=y]
-
-NFT_REDIR: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && NF_NAT [=m]
-
-DVB_DIB3000MB: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIBUSB_MB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && (DVB_DIB3000MC [=m] || !DVB_DIB3000MC [=m])
-
-FB_OMAP2_ENCODER_OPA362: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m]
-
-W1_MASTER_GPIO: m => yes
-      Direct dependencies: W1 [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+XEN_PRIVCMD: y => no
+      Direct dependencies: XEN [=y]
+      Reverse dependencies: XENFS [=y] && XEN [=y]
 

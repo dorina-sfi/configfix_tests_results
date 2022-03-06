@@ -1,9 +1,11 @@
-NF_CONNTRACK_SIP: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-KFENCE_KUNIT_TEST: m => yes
-      Direct dependencies: KFENCE [=y] && TRACEPOINTS [=y] && KUNIT [=m]
+USB_OHCI_HCD_PLATFORM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
+      Reverse dependencies: USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=y] && USB_SUPPORT [=y] && USB [=y] && BCMA [=y] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=n]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=n]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
 
-SENSORS_PXE1610: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 

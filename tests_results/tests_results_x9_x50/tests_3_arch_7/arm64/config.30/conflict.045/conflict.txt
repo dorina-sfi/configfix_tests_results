@@ -1,23 +1,27 @@
-RASPBERRYPI_FIRMWARE: m => yes
-      Direct dependencies: BCM2835_MBOX [=m]
+IOMMU_DEFAULT_PASSTHROUGH: y => no
+      Direct dependencies: <choice>
 
-SENSORS_UCD9200: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-MUX_GPIO: m => yes
-      Direct dependencies: MULTIPLEXER [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+DW_APB_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
 
-DVB_DIB3000MC: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB3000MC [=m] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=m]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=n] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=n] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 
-IIO_INTERRUPT_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y]
+OMAP2PLUS_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_OMAP2PLUS || ARCH_K3 [=y])
+      Reverse dependencies: OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=y] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 [=y] || TI_K3_R5_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y]
 
-MEDIA_TUNER_SIMPLE: m => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_PVRUSB2_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=m] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-ADXL313_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+AUXDISPLAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 

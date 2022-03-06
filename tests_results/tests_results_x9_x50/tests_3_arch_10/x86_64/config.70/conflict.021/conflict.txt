@@ -1,34 +1,33 @@
-SERIAL_8250: m => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
-      Reverse dependencies: MWAVE [=m] && X86 [=y] && TTY [=y]
+VIDEO_UPD64083: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=n]
 
-REGULATOR_PCF50633: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_PCF50633 [=m]
+COMEDI_PCMUIO: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-CRYPTO_LZ4: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+X86_16BIT: y => no
+      Direct dependencies: MODIFY_LDT_SYSCALL [=y]
 
-RFKILL_INPUT: y => no
-      Direct dependencies: NET [=y] && RFKILL [=m] && (INPUT [=y]=y || RFKILL [=m]=INPUT [=y])
+UIO_PCI_GENERIC: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
 
-BH1780: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_OV2740: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && (ACPI [=y] || COMPILE_TEST [=y])
 
-PINCTRL: y => no
+MANAGER_SBS: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
+
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=y] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=y] && HAS_IOMEM [=y] || PMC_ATOM [=y] && X86 [=y] && PCI [=y]
+
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+
+COMEDI_ADL_PCI7X3X: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+
+TIMERFD: y => no
       Direct dependencies: y
-      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=n] || MFD_MADERA [=m] && HAS_IOMEM [=y]
-
-NO_HZ_FULL: y => no
-      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
-
-EVENTFD: y => no
-      Direct dependencies: y
-      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=y] && ACRN_GUEST [=n]
-
-GPIO_LP3943: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_LP3943 [=m]
-
-TCS3472: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
 

@@ -1,36 +1,37 @@
-CRYPTO_LZ4: y => no
+CRYPTO_LZ4HC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+LIST_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-MAILBOX: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_CPPC_LIB [=n] && ACPI [=y] && ACPI_PROCESSOR [=n] || IMX_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=n] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM [=y] && ZYNQMP_FIRMWARE [=n]
-
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
-
-CRYPTO_DRBG_MENU: y => no
+CRYPTO_JITTERENTROPY: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-THERMAL_WRITABLE_TRIPS: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=n] && ACPI [=y]
+DVB_STV6110: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=n] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-VM_EVENT_COUNTERS: y => no
-      Direct dependencies: y
+SLUB: y => no
+      Direct dependencies: <choice>
 
-DEBUG_MEMORY_INIT: y => no
-      Direct dependencies: y
+RMI4_F30: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=n]
+CRYPTO_CAMELLIA_AESNI_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-UNWINDER_ORC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=n] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=y] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=n] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=n] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+
+LEGACY_VSYSCALL_EMULATE: y => no
+      Direct dependencies: <choice>
 

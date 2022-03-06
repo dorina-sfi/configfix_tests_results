@@ -1,21 +1,21 @@
-SLUB_DEBUG: y => no
-      Direct dependencies: SLUB [=y] && SYSFS [=y]
-      Reverse dependencies: KASAN_GENERIC [=n] && <choice> && HAVE_ARCH_KASAN [=n] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y] || KASAN_SW_TAGS [=n] && <choice> && HAVE_ARCH_KASAN_SW_TAGS [=n] && CC_HAS_KASAN_SW_TAGS [=n] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y]
+DVB_OR51132: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=n]
+I2C_SMBUS: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=m] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=m] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-CRC_T10DIF: y => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y]
+LEDS_LM36274: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_TI_LMU_COMMON [=m] && MFD_TI_LMU [=m]
 
-ADVISE_SYSCALLS: y => no
-      Direct dependencies: y
+ALTERA_FREEZE_BRIDGE: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
 
-MEDIA_TEST_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
 
-PSTORE_LZO_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+MFD_AT91_USART: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+      Reverse dependencies: SERIAL_ATMEL [=y] && TTY [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
 

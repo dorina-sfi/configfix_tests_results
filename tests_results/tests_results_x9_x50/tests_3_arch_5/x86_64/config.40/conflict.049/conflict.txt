@@ -1,19 +1,20 @@
-W1_SLAVE_DS2780: m => yes
-      Direct dependencies: W1 [=m]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-MODULE_COMPRESS_XZ: y => no
-      Direct dependencies: <choice>
+USB_EZUSB_FX2: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y]
+      Reverse dependencies: USB_SERIAL_WHITEHEAT [=n] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN_PDA [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y]
 
-PM: y => no
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+SERIO: y => no
       Direct dependencies: y
-      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=n] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=n] || MOUSE_SERIAL [=n] && INPUT [=y] && INPUT_MOUSE [=n] || MOUSE_VSXXXAA [=n] && INPUT [=y] && INPUT_MOUSE [=n] || JOYSTICK_WARRIOR [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_MAGELLAN [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEORB [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEBALL [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_STINGER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TWIDJOY [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ZHENHUA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_FSIA6B [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || TABLET_SERIAL_WACOM4 [=n] && INPUT [=y] && INPUT_TABLET [=n] || TOUCHSCREEN_DYNAPRO [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_HAMPSHIRE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_EGALAX_SERIAL [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_GUNZE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_ELO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_WACOM_W8001 [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_MTOUCH [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_INEXIO [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_PENMOUNT [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHWIN [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHIT213 [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] || RMI4_F03_SERIO [=n] && INPUT [=y] && RMI4_CORE [=y] && RMI4_F03 [=n] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
 
-CRYPTO_DEFLATE: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=y] && INET [=n] || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-RMI4_F03: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y]
 

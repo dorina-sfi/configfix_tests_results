@@ -1,17 +1,18 @@
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+NETFILTER_NETLINK_QUEUE: y => mod
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: NETFILTER_XT_TARGET_NFQUEUE [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
 
-FB_S1D13XXX: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
-
-TCG_TIS_I2C_INFINEON: m => yes
-      Direct dependencies: TCG_TPM [=m] && I2C [=y]
-
-CRYPTO_STREEBOG: y => mod
+CRYPTO_STREEBOG: y => no
       Direct dependencies: CRYPTO [=y]
       Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-XZ_DEC_IA64: y => no
-      Direct dependencies: XZ_DEC [=y]
+64BIT: y => no
+      Direct dependencies: y
+
+PCMCIA_AXNET: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_8390 [=y] && PCMCIA [=m]
+
+RELAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n]
 

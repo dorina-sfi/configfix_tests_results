@@ -1,23 +1,25 @@
-SENSORS_ISL68137: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
-
-MLX90614: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-CRC32_SLICEBY4: y => no
+MTD_SPI_NOR_SWP_KEEP: y => no
       Direct dependencies: <choice>
 
-PROC_CHILDREN: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 
-DEBUG_BUGVERBOSE: y => no
-      Direct dependencies: BUG [=y] && (GENERIC_BUG [=y] || HAVE_DEBUG_BUGVERBOSE [=n])
+USB_DWC3_GADGET: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_DWC3 [=y])
 
-NVME_TARGET_FC: m => yes
-      Direct dependencies: NVME_TARGET [=m] && HAS_DMA [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=y] && PCI [=y] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+CRYPTO_ECB: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=n] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC [=y] && OF [=y] || CRYPTO_DEV_MXS_DCP [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+
+INDIRECT_PIO: y => no
+      Direct dependencies: ARM64 [=y]
+      Reverse dependencies: HISILICON_LPC [=y] && (ARM64 [=y] && ARCH_HISI [=y] || COMPILE_TEST [=n] && !ALPHA && !HEXAGON && !PARISC) && HAS_IOMEM [=y] && ARM64 [=y]
+
+CMA: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
 

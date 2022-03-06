@@ -1,27 +1,25 @@
-PID_IN_CONTEXTIDR: y => no
-      Direct dependencies: y
-      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
+REGULATOR_DA9063: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_DA9063 [=m] && OF [=y]
 
-EXTCON: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n])
+SENSORS_EMC1403: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-HZ_300: y => no
-      Direct dependencies: <choice>
+SENSORS_POWR1220: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=y] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=m] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
 
-EXYNOS_PM_DOMAINS: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y]
+CLK_RCAR_GEN3_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SPI_ALTERA_CORE: y => no
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: SPI_ALTERA [=y] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
 
-CRYPTO_STREEBOG: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+MTD_QINFO_PROBE: m => yes
+      Direct dependencies: MTD [=m] && MTD_LPDDR [=m]
+      Reverse dependencies: MTD_LPDDR [=m] && MTD [=m]
 

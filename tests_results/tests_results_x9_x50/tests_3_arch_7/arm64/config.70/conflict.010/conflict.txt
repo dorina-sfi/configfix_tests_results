@@ -1,26 +1,22 @@
-USB_DWC3_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
+VIDEO_OV02A10: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
 
-KUNIT_DEBUGFS: y => no
-      Direct dependencies: KUNIT [=y]
+CLK_RASPBERRYPI: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (RASPBERRYPI_FIRMWARE [=m] || COMPILE_TEST [=n] && !RASPBERRYPI_FIRMWARE [=m])
 
-LEDS_TRIGGERS: y => no
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: BT_LEDS [=n] && NET [=n] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=n] && WIRELESS [=n] && MAC80211 [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=n]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=n] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || LEDS_COBALT_RAQ [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=y]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=n] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && HWMON [=y] && INPUT [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+AD5110: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CLK_RENESAS_CPG_MSSR: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R7S9210 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+DVB_MT352: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=m] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=m] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_UMT_010 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DIGITV [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=m] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=m] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-USB_OHCI_HCD_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=y] && PHY_BRCM_USB [=y] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=n] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+VIDEO_SAMSUNG_S5P_G2D: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
 
-SC_GCC_7180: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SC_CAMCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASS_CORECC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_MSS_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+DVB_S5H1432: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
 
-SND_SOC_WM8750: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_I2C_AND_SPI [=y]
-      Reverse dependencies: SND_PXA2XX_SOC_SPITZ [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=y] && PXA_SHARP_Cxx00 && I2C [=y] || SND_PXA2XX_SOC_Z2 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=y] && MACH_ZIPIT2 && I2C [=y] || SND_SOC_SAMSUNG_JIVE_WM8750 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && MACH_JIVE && I2C [=y] || SND_SOC_SMARTQ [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && (MACH_SMARTQ || COMPILE_TEST [=y]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && I2C [=y]
+VIDEO_GS1662: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && SPI [=y] && VIDEO_V4L2 [=m]
 

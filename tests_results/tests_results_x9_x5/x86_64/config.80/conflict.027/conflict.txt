@@ -1,24 +1,20 @@
-FUNCTION_TRACER: y => no
-      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
-      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
-
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
-
-USB_ROLE_SWITCH: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=y] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=n] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=n] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=n] && OF [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=y] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=y] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI [=y] && INTEL_SCU_IPC [=y] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 [=y] && ACPI [=y] && IOSF_MBI [=n]
-
-KCMP: y => no
+IRQ_POLL: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+      Reverse dependencies: INFINIBAND [=y] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=n] || IPV6 [=y]!=m) && !ALPHA || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_IPR [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && ATA [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n)
 
-BLK_DEV_INTEGRITY: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=n]) && ATA [=n] || DM_INTEGRITY [=y] && MD [=y] && BLK_DEV_DM [=y] || TCM_IBLOCK [=n] && TARGET_CORE [=n]
+DAX: y => no
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=n] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
 
-CRYPTO_CRC32: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
+PCSPKR_PLATFORM: y => no
+      Direct dependencies: HAVE_PCSPKR_PLATFORM [=y]
+
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
+
+PCIEASPM_POWER_SUPERSAVE: y => no
+      Direct dependencies: <choice> && PCIEASPM [=y]
+
+TIMERFD: y => no
+      Direct dependencies: y
 

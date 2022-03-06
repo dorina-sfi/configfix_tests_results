@@ -1,23 +1,19 @@
-NF_LOG_SYSLOG: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: NETFILTER_XT_TARGET_LOG [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] || NF_LOG_ARP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_LOG_IPV4 [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_LOG_IPV6 [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+HW_RANDOM_CCTRNG: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y] && OF [=y]
 
-MTD_NAND_ECC_SW_HAMMING: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && 4xx
+IP_NF_TARGET_MASQUERADE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && IP_NF_NAT [=m]
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
+DRM_PANEL_SHARP_LS043T1LE01: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+CRYPTO_CRC32C: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=y] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=n] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+
+OR1K_1200: y => no
       Direct dependencies: <choice>
 
-CRYPTO_NULL: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
-
-IP_VS_NFCT: y => no
-      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=y] && NF_CONNTRACK [=y]
-      Reverse dependencies: IP_VS_FTP [=y] && NET [=y] && NETFILTER [=y] && IP_VS [=y] && IP_VS_PROTO_TCP [=y] && NF_CONNTRACK [=y] && NF_NAT [=y] && NF_CONNTRACK_FTP [=y]
-
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+TOUCHSCREEN_TOUCHWIN: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
 

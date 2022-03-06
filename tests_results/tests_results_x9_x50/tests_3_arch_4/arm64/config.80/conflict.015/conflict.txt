@@ -1,13 +1,15 @@
-UNMAP_KERNEL_AT_EL0: y => no
-      Direct dependencies: y
+CRYPTO_SM4: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-AUDIT: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y]
+VF610_DAC: m => yes
+      Direct dependencies: IIO [=m] && OF [=y] && HAS_IOMEM [=y]
 
-TIME_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+USB_EHCI_ROOT_HUB_TT: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
+      Reverse dependencies: USB_EHCI_FSL [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_MV [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=y]) || USB_CHIPIDEA_HOST [=y] && USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && USB_EHCI_HCD [=y]
 
-RFKILL_INPUT: y => no
-      Direct dependencies: NET [=y] && RFKILL [=y] && (INPUT [=y]=y || RFKILL [=y]=INPUT [=y])
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 

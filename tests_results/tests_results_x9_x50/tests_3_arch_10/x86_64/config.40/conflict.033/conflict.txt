@@ -1,33 +1,38 @@
-AGP_AMD64: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && AGP [=m] && X86 [=y] && AMD_NB [=y]
+PCS_XPCS: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y]
+      Reverse dependencies: NET_DSA_SJA1105 [=y] && NETDEVICES [=y] && NET_DSA [=y] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || STMMAC_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
 
-LEGACY_VSYSCALL_XONLY: y => no
-      Direct dependencies: <choice>
+CRYPTO_CRCT10DIF: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRC_T10DIF [=y]
 
-POWER_SUPPLY: y => no
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
+
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
+
+NET_DSA_TAG_LAN9303: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_SMSC_LAN9303 [=y] && NETDEVICES [=y] && NET_DSA [=y]
+
+EPOLL: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=n]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=n] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=m] || !AGP [=m]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || HID_NINTENDO [=n] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=m] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=n] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=y] && DELL_SMBIOS [=n]
 
-PATA_TRIFLEX: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-SI1145: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_XILINX_VTC: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=y]
+      Reverse dependencies: VIDEO_XILINX_TPG [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=y]
 
-X86_MPPARSE: y => no
-      Direct dependencies: X86_LOCAL_APIC [=y]
+CRYPTO_SHA3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-UNWINDER_ORC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
-
-DVB_STV090x: y => mod
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET [=m] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
-
-IIO_BUFFER_DMA: m => no
-      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
-      Reverse dependencies: IIO_BUFFER_DMAENGINE [=m] && IIO [=m] && IIO_BUFFER [=y]
-
-SND_SOC_WM8974: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=n] && X86 [=y]
 

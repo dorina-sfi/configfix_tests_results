@@ -1,27 +1,24 @@
-CRYPTO_NULL: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
+NF_REJECT_IPV6: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_REJECT_IPV6 [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && NF_TABLES [=n] && NF_TABLES_IPV6 [=n] || IP6_NF_TARGET_REJECT [=m] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && IP6_NF_FILTER [=m]
 
-MTD_CFI_I2: y => no
-      Direct dependencies: MTD [=y]
+NET_DSA_MICROCHIP_KSZ9477_I2C: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && NET_DSA_MICROCHIP_KSZ9477 [=m] && I2C [=y]
 
-MTD_QINFO_PROBE: y => no
-      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
-      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
+MEDIA_TUNER_MT2131: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-HD44780_COMMON: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
+INTERRUPT_CNT: m => yes
+      Direct dependencies: COUNTER [=m] && GPIOLIB [=y]
 
-AUXDISPLAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+QCOM_CLK_APCS_MSM8916: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] && (QCOM_APCS_IPC [=y] || COMPILE_TEST [=y])
 
-KCMP: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+NET_SCH_FQ_PIE: m => yes
+      Direct dependencies: NET [=y] && NET_SCHED [=y] && NET_SCH_PIE [=m]
 
-THERMAL_GOV_USER_SPACE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_64 && ACPI && PCI [=n]
+MEDIA_TUNER_MC44S803: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_AF9015 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

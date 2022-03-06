@@ -1,20 +1,21 @@
-HID_CYPRESS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+MEDIA_TUNER_MAX2165: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-ATM_MPOA: m => yes
-      Direct dependencies: NET [=y] && ATM [=m] && INET [=y] && ATM_LANE [=m]!=n
+CRYPTO_LIB_CHACHA: m => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-SERIO_LIBPS2: m => yes
-      Direct dependencies: SERIO [=m] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
-      Reverse dependencies: KEYBOARD_ATKBD [=m] && INPUT [=m] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=m] && INPUT_MOUSE [=n]
+MXC6255: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-HID_AUREAL: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+DVB_SP2: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DVBSKY [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-DEBUG_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=n] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+VIDEO_OV5647: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-CHARGER_MP2629: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MP2629 [=m] && MP2629_ADC [=m] && IIO [=y]
+ADI_AXI_ADC: m => yes
+      Direct dependencies: IIO [=m] && HAS_IOMEM [=y] && OF [=y]
 

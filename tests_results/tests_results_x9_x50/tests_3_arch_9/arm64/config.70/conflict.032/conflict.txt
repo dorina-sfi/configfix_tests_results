@@ -1,31 +1,30 @@
-REGULATOR_HI6421V530: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
-
-BACKLIGHT_QCOM_WLED: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m]
-
-FB_ARK: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+VIDEO_IR_I2C: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && RC_CORE [=m]
 
 EVENTFD: y => no
       Direct dependencies: y
-      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=m] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=m] && VFIO [=m] || VFIO_FSL_MC [=m] && VFIO [=m] && FSL_MC_BUS [=y] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-ARM_TIMER_SP804: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
-      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=y]
+DRM_TI_TFP410: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-PHY_MTK_MIPI_DSI: m => no
-      Direct dependencies: (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] && OF [=y]
-      Reverse dependencies: DRM_MEDIATEK [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_MEDIATEK [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
 
-SENSORS_MAX31785: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+NETDEV_ADDR_LIST_TEST: m => yes
+      Direct dependencies: NET [=y] && KUNIT [=m]
 
-NET_9P_XEN: m => yes
-      Direct dependencies: NET [=y] && NET_9P [=m] && XEN [=y]
+DVB_TDA10086: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-LPC_SCH: m => no
-      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
-      Reverse dependencies: I2C_ISCH [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 && PCI [=y]
+NTB_IDT: m => yes
+      Direct dependencies: NTB [=m] && PCI [=y]
+
+CAN_SJA1000_PLATFORM: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_SJA1000 [=m]
+
+TINYDRM_ST7735R: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 

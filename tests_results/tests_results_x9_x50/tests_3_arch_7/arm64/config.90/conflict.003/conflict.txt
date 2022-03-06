@@ -1,25 +1,23 @@
-PCIE_BUS_DEFAULT: y => no
-      Direct dependencies: <choice> && PCI [=y]
+VIDEO_S5K6A3: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-F2FS_FS_XATTR: y => no
-      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
-      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
+SND_SOC_PCM179X_SPI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SPI_MASTER [=y]
 
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+GREYBUS_RAW: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m]
 
-ARM64_64K_PAGES: y => no
-      Direct dependencies: <choice>
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
 
-THERMAL_DEFAULT_GOV_USER_SPACE: y => no
-      Direct dependencies: <choice>
+VIDEO_M52790: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m]
 
-IIO_BUFFER_DMA: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
+HID_ALPS: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+FB_TFT_HX8353D: m => yes
+      Direct dependencies: STAGING [=y] && FB_TFT [=m]
 

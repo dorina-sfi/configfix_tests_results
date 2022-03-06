@@ -1,33 +1,32 @@
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+CHARGER_MT6360: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MT6360 [=m] && REGULATOR [=y]
 
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+BRIDGE_EBT_LIMIT: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
 
-SENSORS_INSPUR_IPSPS: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+RC_MAP: m => yes
+      Direct dependencies: RC_CORE [=m]
 
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=m] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
+DRM_LONTIUM_LT9611UXC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-MMC_DW_PCI: m => yes
-      Direct dependencies: MMC [=m] && MMC_DW [=m] && PCI [=y]
+RAID_ATTRS: m => yes
+      Direct dependencies: BLOCK [=y] && SCSI_MOD [=m]
+      Reverse dependencies: SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] && !S390 || SCSI_MYRB [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && PCI [=n] || SCSI_MYRS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && PCI [=n] && (!CPU_BIG_ENDIAN [=y] || COMPILE_TEST [=y])
 
-DNS_RESOLVER: y => mod
-      Direct dependencies: NET [=y] && KEYS [=y]
-      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=n] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=y] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=m] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+SERIAL_8250_EXTENDED: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m]
+      Reverse dependencies: SERIAL_8250_IOC3 [=m] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
 
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
-      Direct dependencies: <choice>
+NETFILTER_XT_MATCH_CONNBYTES: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-REGULATOR_ARM_SCMI: m => yes
-      Direct dependencies: REGULATOR [=y] && ARM_SCMI_PROTOCOL [=m] && OF [=y]
+DRM_V3D: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_BCM || ARCH_BRCMSTB [=n] || COMPILE_TEST [=y]) && DRM [=m] && COMMON_CLK [=y] && MMU [=y]
 
-SD_ADC_MODULATOR: m => yes
-      Direct dependencies: IIO [=m] && OF [=y]
+REGULATOR_TPS65086: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_TPS65086 [=m]
 
-SENSORS_W83627HF: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
 

@@ -1,25 +1,26 @@
-DEBUG_INFO_DWARF4: y => no
-      Direct dependencies: <choice>
+USB_MUSB_DUAL_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=m]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=m]) && HAS_DMA [=y]
 
-MTD_QINFO_PROBE: y => no
-      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
-      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
+USB_XHCI_PLATFORM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m]
+      Reverse dependencies: USB_CDNS_SUPPORT [=m] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_XHCI_HCD [=m] || USB_XHCI_MVEBU [=n] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m] && HAS_IOMEM [=y] && (ARCH_MVEBU || COMPILE_TEST [=n])
 
-IIO_KFIFO_BUF: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
+VT_HW_CONSOLE_BINDING: y => no
+      Direct dependencies: TTY [=y] && HW_CONSOLE [=y]
+      Reverse dependencies: DRM_INGENIC [=n] && HAS_IOMEM [=y] && (MIPS || COMPILE_TEST [=n]) && DRM [=y] && CMA [=n] && OF [=n] && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_PL111 [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=n]) && (VEXPRESS_CONFIG [=n] || VEXPRESS_CONFIG [=n]=n) && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_TVE200 [=n] && HAS_IOMEM [=y] && DRM [=y] && CMA [=n] && (ARM || COMPILE_TEST [=n]) && OF [=n] && FRAMEBUFFER_CONSOLE [=y] || DRM_MCDE [=n] && HAS_IOMEM [=y] && DRM [=y] && CMA [=n] && (ARM || COMPILE_TEST [=n]) && OF [=n] && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || FRAMEBUFFER_CONSOLE [=y] && VT [=y] && FB [=y] && !UML
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=n] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=y] && X86_LOCAL_APIC [=y]
 
-BOOT_CONFIG: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
+MTD_NAND_GPIO: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=y] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=n] && <choice> && SMP [=n] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 

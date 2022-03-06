@@ -1,22 +1,20 @@
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+VIDEO_EM28XX_V4L2: m => yes
+      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m]
 
-SC_GCC_7280: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SC_CAMCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+6LOWPAN_GHC_ICMPV6: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
 
-BUG: y => no
+VIDEO_MT9V032: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+
+EVENTFD: y => no
       Direct dependencies: y
+      Reverse dependencies: MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=m] && VFIO [=m] || VFIO_FSL_MC [=n] && VFIO [=m] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-DVB_M88DS3103: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && I2C_MUX [=y]
-      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DVBSKY [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=n] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_SMIPCIE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+DVB_TDA8261: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && VIDEO_DEV [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-EINT_MTK: y => no
-      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y]
-
-SM_GCC_8150: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SM_GPUCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+INPUT_CPCAP_PWRBUTTON: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && MFD_CPCAP [=m]
 

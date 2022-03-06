@@ -1,7 +1,8 @@
-FAILOVER: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: NET_FAILOVER [=m] && NETDEVICES [=y]
+MEDIA_TUNER_MXL301RF: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_PT3 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-LEDS_BLINKM: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+STM32_DFSDM_CORE: y => mod
+      Direct dependencies: IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 

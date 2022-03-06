@@ -1,33 +1,29 @@
-HID_SENSOR_IIO_COMMON: y => no
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y]
-      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=n] && USB_HID [=y] && HID_SENSOR_HUB [=y] && IIO [=y] || HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
+RTC_DRV_MT6397: m => yes
+      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
 
-MEDIA_PLATFORM_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+LEDS_PCA963X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m]
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
+MFD_TPS65086: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=y]
+REGULATOR_BD9571MWV: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_BD9571MWV [=m]
 
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=y] && FTRACE [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+MENF21BMC_WATCHDOG: m => yes
+      Direct dependencies: WATCHDOG [=y] && (MFD_MENF21BMC [=m] || COMPILE_TEST [=n]) && I2C [=m]
 
-OVERLAY_FS_REDIRECT_DIR: y => no
-      Direct dependencies: OVERLAY_FS [=y]
-      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
+LEDS_TI_LMU_COMMON: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGMAP [=y]
 
-TMPFS: y => no
-      Direct dependencies: SHMEM [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+LEDS_LM3697: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_TI_LMU_COMMON [=m] && I2C [=m] && OF [=y]
 
-LEDS_TRIGGERS: y => no
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: BT_LEDS [=n] && NET [=n] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=n] && WIRELESS [=n] && MAC80211 [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=n]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=n] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=y] && INPUT [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=m] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=m] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=n] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 

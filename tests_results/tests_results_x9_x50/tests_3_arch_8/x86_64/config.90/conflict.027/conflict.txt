@@ -1,27 +1,30 @@
-C2PORT_DURAMAR_2150: m => yes
-      Direct dependencies: C2PORT [=m] && X86 [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 
-ARCNET_CAP: m => yes
-      Direct dependencies: NETDEVICES [=y] && ARCNET [=m]
+VIDEO_WM8739: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-VBOXGUEST: m => yes
-      Direct dependencies: VIRT_DRIVERS [=y] && X86 [=y] && PCI [=y] && INPUT [=m]
+CRC32_SLICEBY4: y => no
+      Direct dependencies: <choice>
 
-JOYSTICK_STINGER: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
-
-CRYPTO_LZ4HC: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-VIRT_WIFI: m => yes
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && CFG80211 [=m]
-
-PCI_PRI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || INTEL_IOMMU_SVM [=n] && IOMMU_SUPPORT [=y] && INTEL_IOMMU [=n] && X86_64 [=y]
-
-KCMP: y => no
+DEBUG_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=n] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y] || EDAC_DEBUG [=y] && EDAC [=y] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=y] && SYSCTL [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || PUNIT_ATOM_DEBUG [=y] && PCI [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=y] && FUTEX [=n] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+
+DNS_RESOLVER: y => no
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=n] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=y] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=y] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+
+CHARLCD_BL_FLASH: y => no
+      Direct dependencies: <choice>
+
+CRYPTO_CRC32: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=y] && (INFINIBAND_USER_ACCESS [=y] || !INFINIBAND_USER_ACCESS [=y]) && INET [=y] && PCI [=y] && INFINIBAND [=y] && INFINIBAND_VIRT_DMA [=y] || F2FS_FS [=n] && BLOCK [=n]
+
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=y]
 

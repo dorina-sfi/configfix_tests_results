@@ -1,23 +1,22 @@
+DEVFREQ_GOV_USERSPACE: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || ARM_IMX8M_DDRC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_MXC && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
+
 INPUT: y => no
       Direct dependencies: y
-      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] && ACPI && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 && PCI [=n] && ACPI || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && X86 && MMU [=y] && ACPI
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] && ACPI || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 && MMU [=y] && ACPI
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-
-SCSI_SRP_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_IBMVSCSI [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && PPC_PSERIES || INFINIBAND_SRP [=y] && INFINIBAND [=y] && SCSI [=y] && INFINIBAND_ADDR_TRANS [=y]
-
-NLS_UTF8: y => no
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n]
-
-BRANCH_PROFILE_NONE: y => no
+HZ_250: y => no
       Direct dependencies: <choice>
 
-SND_HDA_RECONFIG: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
-      Reverse dependencies: SND_HDA_PATCH_LOADER [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
+USB_ISP1760_HOST_ROLE: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
+
+CRYPTO_DH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI
+
+CRYPTO_ECB: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_MXC && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 

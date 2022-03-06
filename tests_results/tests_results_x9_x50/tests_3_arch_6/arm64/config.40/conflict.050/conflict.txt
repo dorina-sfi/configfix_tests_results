@@ -1,23 +1,21 @@
-MEDIA_RADIO_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+DRM_PANEL_ORISETECH_OTM8009A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+GOOGLE_VPD: m => yes
+      Direct dependencies: GOOGLE_FIRMWARE [=y] && GOOGLE_COREBOOT_TABLE [=m]
 
-USB_ULPI_BUS: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y]
+HID_AUREAL: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-DVB_DIB3000MC: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB3000MC [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y]
+AUTOFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+CLK_RENESAS_CPG_MSSR: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+FB_MODE_HELPERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=y] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=y] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=n] || FB_ATMEL [=m] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_RIVA [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_I740 [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_SAVAGE [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_3DFX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_TRIDENT [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=y]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_UDL [=y] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y]) || FB_SM750 [=n] && STAGING [=n] && FB [=y] && PCI [=y]
 

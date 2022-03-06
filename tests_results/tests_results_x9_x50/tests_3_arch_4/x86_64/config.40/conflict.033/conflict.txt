@@ -1,13 +1,14 @@
-MEMORY_NOTIFIER_ERROR_INJECT: m => yes
-      Direct dependencies: MEMORY_HOTPLUG [=y] && NOTIFIER_ERROR_INJECTION [=m]
+PROC_SYSCTL: y => no
+      Direct dependencies: PROC_FS [=y]
 
-MSDOS_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-USB_GADGETFS: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
+SGETMASK_SYSCALL: y => no
+      Direct dependencies: y
 
-SCSI_SAS_LIBSAS: m => yes
-      Direct dependencies: SCSI [=m]
-      Reverse dependencies: SCSI_AIC94XX [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=n] || SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=n]) && ATA [=m] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=n] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] && X86 [=y] || SCSI_PM8001 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m]
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

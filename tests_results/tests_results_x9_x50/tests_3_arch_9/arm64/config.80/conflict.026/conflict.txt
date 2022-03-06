@@ -1,28 +1,29 @@
-MTD_CFI_I1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+IIO_ST_LSM9DS0: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
 
-STM_SOURCE_CONSOLE: m => yes
-      Direct dependencies: STM [=m]
-
-TOUCHSCREEN_ELAN: m => yes
+TOUCHSCREEN_ST1232: m => yes
       Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-COMEDI_AIO_AIO12_8: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+SENSORS_LTC2978: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-LEDS_AN30259A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && OF [=y]
+DEBUG_FS_ALLOW_NONE: y => no
+      Direct dependencies: <choice>
 
-TOUCHSCREEN_MK712: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+SRF04: m => yes
+      Direct dependencies: IIO [=m] && GPIOLIB [=y]
 
-W1_MASTER_DS2490: m => yes
-      Direct dependencies: W1 [=y] && USB [=m]
+CRYPTO_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-TOUCHSCREEN_GOODIX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SND_SOC_CS42L42: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n])
 
-CHARGER_MAX8997: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX8997 [=y] && REGULATOR_MAX8997 [=m] && (EXTCON [=y] || !EXTCON [=y])
+HID_PLAYSTATION: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS_MULTICOLOR [=m]
+
+TOUCHSCREEN_EXC3000: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 

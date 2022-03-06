@@ -1,30 +1,32 @@
-CLK_RENESAS_DIV6: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+VIDEO_BT856: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-MTD_CFI_BE_BYTE_SWAP: y => no
-      Direct dependencies: <choice>
-      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM && CPU_BIG_ENDIAN [=y]
+COMMON_CLK_BD718XX: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (MFD_ROHM_BD718XX [=m] || MFD_ROHM_BD71828 [=m])
 
-SENSORS_LTC4215: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-BACKLIGHT_ADP8860: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
-
-OF: y => no
+LIBCRC32C: y => mod
       Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=m] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=n] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=n] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=y] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=n] && BLOCK [=y] || MD_RAID456 [=m] && MD [=y] && BLK_DEV_MD [=y] || DM_PERSISTENT_DATA [=m] && MD [=y] && BLK_DEV_DM [=y] || BNX2X [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=m] && BLOCK [=y] || GFS2_FS [=n] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n]
 
-VIDEO_ZORAN_LML33: m => yes
-      Direct dependencies: STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=m]
+KXSD9_SPI: m => yes
+      Direct dependencies: IIO [=y] && KXSD9 [=m] && SPI [=y]
 
-CAN_PLX_PCI: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_SJA1000 [=m] && PCI [=y]
+DVB_LNBH29: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
 
-SENSORS_IR38064: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MSM_GCC_8996: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_MMCC_8996 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SENSORS_LTC4260: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SCSI: y => mod
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
+
+REGULATOR_AS3722: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_AS3722 [=m]
+
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_VEXPRESS [=n] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
 

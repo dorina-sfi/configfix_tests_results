@@ -1,34 +1,36 @@
-PALMAS_GPADC: m => yes
-      Direct dependencies: IIO [=m] && MFD_PALMAS [=y]
+CMA_SIZE_SEL_MBYTES: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_DA7213: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_INTEL_BYT_CHT_DA7213_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n])
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-PING: m => yes
-      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+CPU_SUP_HYGON: y => no
+      Direct dependencies: y
 
-HP206C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 
-SND_SOC_GTM601: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-CRYPTO_CRC32C: y => mod
+CRYPTO_CMAC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=y] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && INET [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=m]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-CRYPTO_SM3: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM2 [=m] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
+MEDIA_TUNER_MC44S803: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_AF9015 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-INFINIBAND_USER_ACCESS: m => yes
-      Direct dependencies: INFINIBAND [=m] && MMU [=y]
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-EXTCON_FSA9480: m => yes
-      Direct dependencies: EXTCON [=m] && INPUT [=y] && I2C [=y]
+RMI4_CORE: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=m] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && SCSI_UFSHCD [=n]
+MEDIA_TUNER_TDA9887: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
 

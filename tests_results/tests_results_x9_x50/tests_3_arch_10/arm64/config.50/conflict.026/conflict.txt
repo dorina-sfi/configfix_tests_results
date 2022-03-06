@@ -1,32 +1,35 @@
-GAMEPORT_L4: m => yes
-      Direct dependencies: GAMEPORT [=m]
-
-ARM64_PA_BITS_48: y => no
-      Direct dependencies: <choice>
-
-CPU_BIG_ENDIAN: y => no
-      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
-
-BT_HCIUART_H4: y => no
-      Direct dependencies: NET [=y] && BT [=m] && BT_HCIUART [=m]
-      Reverse dependencies: BT_HCIUART_NOKIA [=m] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && PM [=y] || BT_HCIUART_ATH3K [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] || BT_HCIUART_LL [=y] && NET [=y] && BT [=m] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_INTEL [=n] && NET [=y] && BT [=m] && BT_HCIUART [=m] && GPIOLIB [=y] || BT_HCIUART_BCM [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && (!ACPI [=n] || SERIAL_DEV_CTRL_TTYPORT [=n]) && GPIOLIB [=y] || BT_HCIUART_QCA [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] || BT_HCIUART_MRVL [=y] && NET [=y] && BT [=m] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y]
-
-MTD_CMDLINE_PARTS: m => yes
-      Direct dependencies: MTD [=m]
-
-PROC_FS: y => no
+STM: y => mod
       Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-PLIP: m => yes
-      Direct dependencies: NETDEVICES [=y] && PARPORT [=m]
+MCP4018: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-DRM_SII9234: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+SENSORS_LTC2945: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-RTC_DRV_NTXEC: m => yes
-      Direct dependencies: RTC_CLASS [=y] && MFD_NTXEC [=m]
-
-PPS: y => mod
+POWER_RESET: y => no
       Direct dependencies: y
-      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
+      Reverse dependencies: ARM64 [=y]
+
+SYSC_R8A7795: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77950 [=n] && SOC_RENESAS [=y] && ARM64 [=y] || ARCH_R8A77951 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+
+HID_APPLE: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
+
+SCD30_CORE: m => yes
+      Direct dependencies: IIO [=m]
+
+COMEDI_AIO_AIO12_8: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=y] || AD7768_1 [=m] && IIO [=m] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=m] && IIO [=m] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n]
+
+CRYPTO_CTR: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_CISCO [=y] && CFG80211 [=n] && PCMCIA [=n] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 

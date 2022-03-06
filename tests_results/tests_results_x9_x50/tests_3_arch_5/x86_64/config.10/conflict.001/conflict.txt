@@ -1,15 +1,18 @@
-ND_BLK: m => yes
-      Direct dependencies: LIBNVDIMM [=m]
+TOUCHSCREEN_USB_ZYTRONIC: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 
-CDNS_I3C_MASTER: m => yes
-      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
+IPV6_TUNNEL: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
+      Reverse dependencies: IPV6_VTI [=y] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=n] || IPV6_FOU_TUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
 
-MFD_LM3533: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-LEDS_COBALT_QUBE: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (MIPS_COBALT || COMPILE_TEST [=y])
+MTD_CFI_AMDSTD: y => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=y])
 
-DRM_TI_TFP410: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+CPU_SUP_HYGON: y => no
+      Direct dependencies: y
 

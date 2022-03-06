@@ -1,10 +1,12 @@
-DRM_PANEL_NOVATEK_NT36672A: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+FRAMEBUFFER_CONSOLE_DETECT_PRIMARY: y => no
+      Direct dependencies: VT [=y] && FRAMEBUFFER_CONSOLE [=y]
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && FRAMEBUFFER_CONSOLE [=y]
 
-I2C_ALGOPCA: m => yes
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=n])
 
-I2C_DEMUX_PINCTRL: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 

@@ -1,21 +1,22 @@
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+USB: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
+      Reverse dependencies: MOUSE_APPLETOUCH [=n] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=y] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=m] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=n] && INPUT [=y] && INPUT_TABLET [=n] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-QCOM_SPMI_IADC: m => yes
-      Direct dependencies: IIO [=y] && SPMI [=m]
-
-GOOGLE_MEMCONSOLE_COREBOOT: m => yes
-      Direct dependencies: GOOGLE_FIRMWARE [=y] && GOOGLE_COREBOOT_TABLE [=m]
-
-NFC_SIM: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_DIGITAL [=m]
-
-CRYPTO_GHASH: y => mod
+CRYPTO_CTR: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
+      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=y] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-CRYPTO_CRC32: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=y] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
+SENSORS_LM85: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+USB_CHIPIDEA_TEGRA: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && ARCH_TEGRA
+
+VIDEO_VP27SMPX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m]
+
+SENSORS_GL520SM: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

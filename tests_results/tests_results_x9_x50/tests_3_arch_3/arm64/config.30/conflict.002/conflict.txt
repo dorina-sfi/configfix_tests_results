@@ -1,12 +1,11 @@
-DEBUG_KERNEL: y => no
+SECURITYFS: y => no
       Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=n] && SECURITY [=y] || IMA [=n] && INTEGRITY [=y]
 
-PCI_MSI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=y] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
+DEFAULT_SECURITY_TOMOYO: y => no
+      Direct dependencies: <choice>
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]) && OF [=y]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=y] && MD [=y] && BCACHE [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=n] && !COMPILE_TEST [=n] || EDAC_DEBUG [=y] && EDAC [=y] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=n] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 

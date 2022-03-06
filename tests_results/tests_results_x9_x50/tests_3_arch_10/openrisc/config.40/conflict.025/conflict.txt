@@ -1,34 +1,37 @@
-OF_DYNAMIC: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-MICROCHIP_TCB_CAPTURE: m => yes
-      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
+KUNIT_EXAMPLE_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-PRIME_NUMBERS: y => no
+SND_SOC_FSL_ESAI: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=n] || SND_AC97_CODEC [=n]=n)
+
+CRYPTO_DEV_QCE_ENABLE_SKCIPHER: y => no
+      Direct dependencies: <choice>
+
+MFD_STMFX: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+
+CRYPTO_DEFLATE: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+
+NVMEM: y => no
       Direct dependencies: y
-      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=y] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 
-I2C_AT91_SLAVE_EXPERIMENTAL: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=m]
+MFD_WM8994: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y]
+      Reverse dependencies: SND_MMP_SOC_BROWNSTONE [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_MMP_SOC_SSPA [=n] && MACH_BROWNSTONE && I2C [=y] || SND_SOC_FSL_ASOC_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=n] || SND_AC97_CODEC [=n]=n) || SND_SOC_SAMSUNG_SMDK_WM8994 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=n] && I2C [=y]=y || SND_SOC_SMDK_WM8994_PCM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=n] && I2C [=y]=y || SND_SOC_LITTLEMILL [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=n] && I2C [=y] && (MACH_WLF_CRAGG_6410 || COMPILE_TEST [=y]) || SND_SOC_ARNDALE [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=n] && I2C [=y]
 
-MEDIA_TUNER_TEA5767: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
-
-NF_FLOW_TABLE_IPV4: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_FLOW_TABLE [=m]
-
-REGULATOR_CPCAP: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_CPCAP [=m]
-
-FB_BIG_ENDIAN: y => no
+JFFS2_CMODE_FAVOURLZO: y => no
       Direct dependencies: <choice>
-
-OR1K_1200: y => no
-      Direct dependencies: <choice>
-
-NETFILTER_XT_CONNMARK: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
-      Reverse dependencies: NETFILTER_XT_TARGET_CONNMARK [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || NETFILTER_XT_MATCH_CONNMARK [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
 

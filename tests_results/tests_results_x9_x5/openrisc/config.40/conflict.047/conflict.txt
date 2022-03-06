@@ -1,38 +1,32 @@
-PPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
+VIDEO_XILINX_TPG: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=m]
 
-ROMFS_BACKED_BY_BOTH: y => no
-      Direct dependencies: <choice> && BLOCK [=y] && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
+FB_TFT_SH1106: m => yes
+      Direct dependencies: STAGING [=y] && FB_TFT [=m]
 
-I2C_ALGOPCA: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
+MTD_NAND_NANDSIM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m]
 
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=y] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=y]
+MTD_SST25L: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
 
-NF_NAT: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=y]
-      Reverse dependencies: NFT_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=n] || NF_TABLES_IPV6 [=n]) || IP_NF_NAT [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=y] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=n]
+USB_MASS_STORAGE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && BLOCK [=y]
 
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+USB_CDNS3_IMX: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_CDNS3 [=m] && (ARCH_MXC || COMPILE_TEST [=y])
 
-AUXDISPLAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+SCSI_SAS_ATTRS: y => mod
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
 
-CRYPTO_CRCT10DIF: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
+USB_SERIAL_IPAQ: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
 
-OR1K_1200: y => no
-      Direct dependencies: <choice>
+FB_TFT_SSD1331: m => yes
+      Direct dependencies: STAGING [=y] && FB_TFT [=m]
 

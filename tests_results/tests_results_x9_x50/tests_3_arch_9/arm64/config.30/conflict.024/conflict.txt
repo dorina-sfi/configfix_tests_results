@@ -1,32 +1,33 @@
-REGULATOR: y => no
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
+
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+
+BUG: y => no
       Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP [=m] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 
-SND_SOC_ARNDALE: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && I2C [=y]
+TOUCHSCREEN_USB_GENERAL_TOUCH: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 
-HD44780_COMMON: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-SND_SOC_MT6660: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+PINCONF: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: GENERIC_PINCONF [=y] && PINCTRL [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=y] && ARCH_AT91 || PINCTRL_AMD [=n] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=n] || COMPILE_TEST [=n]) || PINCTRL_DA850_PUPD [=n] && PINCTRL [=y] && OF [=y] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=n]) || PINCTRL_LANTIQ [=n] && PINCTRL [=y] && LANTIQ || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_SX150X [=y] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_ST [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_KEEMBAY [=y] && PINCTRL [=y] && (ARCH_KEEMBAY [=y] || ARM64 [=y] && COMPILE_TEST [=n]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS [=n] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_ASPEED [=n] && PINCTRL [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) && OF [=y] && MFD_SYSCON [=y] || PINCTRL_BCM281XX [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM_MOBILE || COMPILE_TEST [=n]) || PINCTRL_BCM2835 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=n] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=n]) || PINCTRL_BCM63XX [=n] && PINCTRL [=y] || PINCTRL_IPROC_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n]) || PINCTRL_NSP_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_NSP || COMPILE_TEST [=n]) || PINCTRL_IMX1_CORE [=n] && PINCTRL [=y] || PINCTRL_MXS [=n] && PINCTRL [=y] || PINCTRL_MVEBU [=n] && PINCTRL [=y] || PINCTRL_ARMADA_37XX [=n] && PINCTRL [=y] || PINCTRL_NPCM7XX [=n] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_SAMSUNG [=y] && PINCTRL [=y] && OF_GPIO [=y] || PINCTRL_SPRD [=y] && PINCTRL [=y] || PINCTRL_TEGRA [=n] && PINCTRL [=y] || PINCTRL_TEGRA_XUSB [=n] && PINCTRL [=y] || PINCTRL_MESON [=y] && PINCTRL [=y] && ARCH_MESON [=y] && OF [=y] || PINCTRL_LOCHNAGAR [=n] && PINCTRL [=y] && MFD_LOCHNAGAR [=y] || PINCTRL_EQUILIBRIUM [=n] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (X86 || COMPILE_TEST [=n]) || PINCTRL_LYNXPOINT [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=n]) && ACPI [=n] || PINCTRL_MERRIFIELD [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=n]) && X86_INTEL_MID || PINCTRL_INTEL [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=n]) || PINCTRL_NOMADIK [=n] && PINCTRL [=y] && (ARCH_U8500 || ARCH_NOMADIK) && OF [=y] && GPIOLIB [=y] || PINCTRL_PXA [=n] && PINCTRL [=y] && (ARCH_PXA || COMPILE_TEST [=n]) || PINCTRL_MSM [=n] && PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_QCOM_SPMI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && OF [=y] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_LPASS_LPI [=n] && PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_SH_PFC [=y] && PINCTRL [=y]
 
-SND_SOC_UNIPHIER_AIO: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_UNIPHIER [=m]
-      Reverse dependencies: SND_SOC_UNIPHIER_LD11 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_UNIPHIER [=m] || SND_SOC_UNIPHIER_PXS2 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_UNIPHIER [=m]
+SLUB_DEBUG: y => no
+      Direct dependencies: SLUB [=y] && SYSFS [=y]
+      Reverse dependencies: KASAN_GENERIC [=n] && <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y] || KASAN_SW_TAGS [=n] && <choice> && HAVE_ARCH_KASAN_SW_TAGS [=y] && CC_HAS_KASAN_SW_TAGS [=n] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y]
 
-SND_SOC_SAMSUNG_MIDAS_WM1811: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m]
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-
-MTD_RAM: m => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=m] && HAS_IOMEM [=y]
-
-DVB_BT8XX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=m]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 

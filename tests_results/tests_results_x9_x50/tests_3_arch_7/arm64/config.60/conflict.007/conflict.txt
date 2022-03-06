@@ -1,22 +1,27 @@
-GPIO_MENZ127: m => yes
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MCB [=m]
+IOMMU_IO_PGTABLE_ARMV7S: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=n]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 
-SENSORS_TPS53679: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MSM_GCC_8998: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_GPUCC_8998 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SENSORS_SHT15: m => yes
-      Direct dependencies: HWMON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+MSM_GCC_8996: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_MMCC_8996 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SENSORS_W83L785TS: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+INDIRECT_PIO: y => no
+      Direct dependencies: ARM64 [=y]
+      Reverse dependencies: HISILICON_LPC [=y] && (ARM64 [=y] && ARCH_HISI [=y] || COMPILE_TEST [=n] && !ALPHA && !HEXAGON && !PARISC) && HAS_IOMEM [=y] && ARM64 [=y]
 
-HWMON: m => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: HABANA_AI [=m] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=m] || HP_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y] && DRM [=n] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=n] && PCI [=y]
+DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-HID_THRUSTMASTER: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+MEMBARRIER: y => no
+      Direct dependencies: y
+      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
 
-SX9310: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
 

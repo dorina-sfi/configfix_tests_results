@@ -1,31 +1,35 @@
-MEDIA_CONTROLLER_DVB: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_CONTROLLER [=y] && DVB_CORE [=y]
-      Reverse dependencies: VIDEO_AU0828 [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && I2C [=y] && INPUT [=y] && DVB_CORE [=y] && USB [=y] && VIDEO_V4L2 [=m]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 
-PCMCIA: m => yes
-      Direct dependencies: PCCARD [=m]
+SECURITY_NETWORK: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_SMACK [=n] && NET [=y] && INET [=y] && SECURITY [=y] || SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y]
 
-SND_SOC_WM8974: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+NET_DSA_TAG_GSWIP: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_LANTIQ_GSWIP [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
 
-SLUB: y => no
-      Direct dependencies: <choice>
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
 
-VIDEO_TW68: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_DEV [=m] && PCI [=y] && VIDEO_V4L2 [=m]
+STM: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-MTD_NAND_MXIC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=y])
+TOUCHSCREEN_USB_IDEALTEK: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 
-MEDIA_TUNER_TDA9887: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=n] && HAS_IOMEM [=y] && X86 && ACPI [=n] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=n] || FB [=n]=y)
 
-VIDEO_ADV7180: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && GPIOLIB [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: STA2X11_VIP [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=m] && VIRT_TO_BUS [=n] && I2C [=y] && (STA2X11 || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=n]
+CRYPTO_CBC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC [=n]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-MEDIA_TUNER_FC2580: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
-      Reverse dependencies: DVB_USB_AF9035 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] && VIDEO_V4L2 [=m] || DVB_USB_RTL28XXU [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && I2C_MUX [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] && VIDEO_V4L2 [=m]
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=n] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=y] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
 

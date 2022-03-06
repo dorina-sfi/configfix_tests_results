@@ -1,32 +1,26 @@
-MFD_STMFX: y => no
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+DNS_RESOLVER: y => mod
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-MFD_SUN6I_PRCM: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI || COMPILE_TEST [=y])
-      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=n] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y]
+B53_SERDES: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m]
 
-DAX: y => no
+AUTOFS_FS: m => no
       Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+      Reverse dependencies: AUTOFS4_FS [=m]
 
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+LEDS_TCA6507: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
 
-LCD_ILI9320: y => no
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI [=y]
-      Reverse dependencies: LCD_VGG2432A4 [=y] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI_MASTER [=y]
+GNSS_SIRF_SERIAL: m => yes
+      Direct dependencies: GNSS [=y] && SERIAL_DEV_BUS [=m]
 
-RMI4_CORE: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+JOYSTICK_TWIDJOY: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-PAGE_POISONING: y => no
-      Direct dependencies: y
-      Reverse dependencies: DEBUG_PAGEALLOC [=y] && DEBUG_KERNEL [=y] && (!HIBERNATION || ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n] && !PPC && !SPARC) && !ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n]
+COMMON_CLK_MT6779_MMSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
 
-USB_XHCI_MTK: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && (MIPS && SOC_MT7621 || ARCH_MEDIATEK || COMPILE_TEST [=y])
-      Reverse dependencies: USB_MTU3 [=y] && (USB [=y] || USB_GADGET [=n]) && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (EXTCON [=y] || !EXTCON [=y]) && USB_SUPPORT [=y] && USB_XHCI_HCD [=y]
+RAVE_SP_CORE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m]
 

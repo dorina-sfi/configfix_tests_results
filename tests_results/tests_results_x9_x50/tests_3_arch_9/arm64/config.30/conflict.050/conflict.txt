@@ -1,27 +1,31 @@
-MTD_AR7_PARTS: m => yes
-      Direct dependencies: MTD [=m]
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 
-SND_SOC_TFA9879: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+USB_CHIPIDEA_TEGRA: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && ARCH_TEGRA [=n]
 
-SENSORS_AS370: m => yes
-      Direct dependencies: HWMON [=m]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=n] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-VIDEO_STI_BDISP: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_STI || COMPILE_TEST [=y])
+DEFAULT_SECURITY_TOMOYO: y => no
+      Direct dependencies: <choice>
 
-VFIO_PLATFORM_CALXEDAXGMAC_RESET: m => yes
-      Direct dependencies: VFIO [=m] && VFIO_PLATFORM [=m]
+FHANDLE: y => no
+      Direct dependencies: y
 
-MMC_SDHCI_OMAP: m => yes
-      Direct dependencies: MMC [=y] && MMC_SDHCI_PLTFM [=m] && OF [=y]
+CFG80211_USE_KERNEL_REGDB_KEYS: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=y] && CFG80211_REQUIRE_SIGNED_REGDB [=y]
 
-SND_SOC_TEGRA_AUDIO_GRAPH_CARD: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && SND_AUDIO_GRAPH_CARD [=m]
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-SND_ATMEL_SOC_I2S: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+XZ_DEC_IA64: y => no
+      Direct dependencies: XZ_DEC [=y]
 
-MTD_NAND_MARVELL: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (PXA3xx || ARCH_MMP || PLAT_ORION || ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
 

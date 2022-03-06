@@ -1,15 +1,17 @@
-IR_WINBOND_CIR: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (X86 && PNP [=n] || COMPILE_TEST [=y])
+DVB_STB6000: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && I2C_ALGOBIT [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-ALTERA_PR_IP_CORE: m => yes
-      Direct dependencies: FPGA [=m]
+I2C_APPLE: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=y])
 
-TOUCHSCREEN_SX8654: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+SENSORS_NCT6775: m => yes
+      Direct dependencies: HWMON [=m] && !PPC && (ACPI_WMI [=n] || ACPI_WMI [=n]=n)
 
-DRM_PANEL_TDO_TL070WSH30: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+RST_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
 
-NLS_CODEPAGE_437: m => yes
-      Direct dependencies: NLS [=m]
+VIDEO_TVP514X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
 

@@ -1,10 +1,12 @@
-MOUSE_GPIO: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+PAGE_REPORTING: y => no
+      Direct dependencies: y
+      Reverse dependencies: VIRTIO_BALLOON [=y] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
 
-DMARD06: m => yes
-      Direct dependencies: IIO [=m] && (OF [=y] || COMPILE_TEST [=n]) && I2C [=y]
+FRAMEBUFFER_CONSOLE_DETECT_PRIMARY: y => no
+      Direct dependencies: VT [=y] && FRAMEBUFFER_CONSOLE [=y]
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && FRAMEBUFFER_CONSOLE [=y]
 
-NF_NAT: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
-      Reverse dependencies: NFT_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && (NF_TABLES_IPV4 [=n] || NF_TABLES_IPV6 [=y]) || IP_NF_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && NF_CONNTRACK [=m] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=n]
+USB_XHCI_PLATFORM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y]
+      Reverse dependencies: USB_CDNS_SUPPORT [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_XHCI_HCD [=y] || USB_XHCI_MVEBU [=n] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && HAS_IOMEM [=y] && (ARCH_MVEBU || COMPILE_TEST [=n])
 

@@ -1,14 +1,16 @@
-AHCI_BRCM: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && (ARCH_BRCMSTB [=y] || BMIPS_GENERIC || ARCH_BCM_NSP || ARCH_BCM_63XX)
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
 
-SYSFS: y => no
+PAGE_EXTENSION: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+      Reverse dependencies: PAGE_IDLE_FLAG [=n] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-VEML6070: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
 
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=y] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=y]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=n] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || SPI_LM70_LLP [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=n] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=y])
 

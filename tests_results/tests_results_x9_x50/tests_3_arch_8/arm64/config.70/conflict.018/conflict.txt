@@ -1,26 +1,31 @@
-DEVFREQ_GOV_SIMPLE_ONDEMAND: y => mod
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=y] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+PINCTRL_PFC_R8A774B1: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774B1 [=y]
 
-BACKLIGHT_LM3630A: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=m] && PWM [=y]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-BATTERY_BQ27XXX_I2C: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=m]
+DEBUG_FS_ALLOW_ALL: y => no
+      Direct dependencies: <choice>
 
-REGULATOR_PF8X00: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 
-CGROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+SND_SOC_MT6351: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_MT6797_MT6351 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT6797 [=y] && MTK_PMIC_WRAP [=y]
 
-MTD_SLRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+STM: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-MTD_AFS_PARTS: m => yes
-      Direct dependencies: MTD [=m] && (ARM || ARM64 [=y])
+STM: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-POWER_RESET_ATC260X: m => yes
-      Direct dependencies: POWER_RESET [=y] && MFD_ATC260X [=m]
+MEDIA_TUNER_XC5000: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_AU0828 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && I2C [=y] && INPUT [=y] && DVB_CORE [=n] && USB [=y] && VIDEO_V4L2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX231XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_CX231XX [=y] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_TM6000 [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && I2C [=y] && INPUT [=y] && RC_CORE [=y] && USB [=y] || DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=y] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && DVB_CORE [=n] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

@@ -1,20 +1,24 @@
-IOMMU_IO_PGTABLE_ARMV7S: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y])
-      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=y]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+MICROCHIP_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: USB_LAN78XX [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y]
 
-PROC_CHILDREN: y => no
+FIXED_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || NET_DSA_LOOP [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_REALTEK_SMI [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_VITESSE_VSC73XX [=n] && NETDEVICES [=y] && NET_DSA [=n] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] || BGMAC_BCMA [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && BCMA [=y] && BCMA_HOST_SOC [=y] && (BCM47XX || ARCH_BCM_5301X || COMPILE_TEST [=n]) || BGMAC_PLATFORM [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || SYSTEMPORT [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] && (NET_DSA [=n] || !NET_DSA [=n]) || UCC_GETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && QUICC_ENGINE [=n] && PPC32 || GIANFAR [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && HAS_DMA [=y] || FSL_DPAA_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && FSL_DPAA [=n] && FSL_FMAN [=n] || FWNODE_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && (ACPI || OF [=y] || COMPILE_TEST [=n]) || OF_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && OF [=y] && PHYLIB [=y] || USB_LAN78XX [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y]
+
+PWM: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+      Reverse dependencies: FB_SSD1307 [=y] && HAS_IOMEM [=y] && FB [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-SERIO_RAW: m => yes
-      Direct dependencies: SERIO [=m]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=y] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-INTERRUPT_CNT: m => yes
-      Direct dependencies: COUNTER [=m] && GPIOLIB [=y]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-REGULATOR_DA9062: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
-
-LEDS_ACER_A500: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_ACER_A500_EC [=m]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=y] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 

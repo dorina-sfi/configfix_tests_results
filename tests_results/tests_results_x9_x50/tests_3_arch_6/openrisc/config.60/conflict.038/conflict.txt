@@ -1,23 +1,20 @@
-MD_RAID0: y => no
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+NAU7802: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-JFFS2_RTIME: y => no
-      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
+CAN_CC770_PLATFORM: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_CC770 [=m]
 
-SYSFS: y => no
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
+
+AD7124: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+
+CRC_CCITT: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+      Reverse dependencies: CAIF [=m] && NET [=y] || NFC_DIGITAL [=m] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=m] && NET [=y] && NFC_NCI [=m] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=y] || MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=m] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=m] && AX25 [=n] && !64BIT || NFC_FDP [=m] && NET [=y] && NFC [=y] && NFC_NCI [=m] || NFC_PN544 [=n] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=m] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=m] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=m]
 
-SCSI_SAS_ATTRS: y => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
-
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-
-SND_SOC_SPDIF: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
-      Reverse dependencies: SND_KIRKWOOD_SOC_ARMADA370_DB [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_KIRKWOOD_SOC [=y] && (ARCH_MVEBU || COMPILE_TEST [=y]) && I2C [=y] || SND_SAMSUNG_SPDIF [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=n] || SND_SOC_STM32_SPDIFRX [=y] && SOUND [=y] && !UML && SND [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) && SND_SOC [=y] || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM6467_EVM
+GPIO_TPS65218: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_TPS65218 [=m]
 

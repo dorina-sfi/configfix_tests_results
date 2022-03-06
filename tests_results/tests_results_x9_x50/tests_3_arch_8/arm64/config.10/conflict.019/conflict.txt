@@ -1,32 +1,29 @@
-SND_SIMPLE_CARD: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
-      Reverse dependencies: SND_SOC_SH4_FSI [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (SUPERH || ARCH_RENESAS [=n] || COMPILE_TEST [=y]) && (SUPERH || COMMON_CLK [=y])
+MEDIA_TUNER_TDA9887: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=m]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=m]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+OWL_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_ACTIONS [=y]
 
-USB_OHCI_HCD_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=n] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=n] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+FSI_MASTER_AST_CF: m => yes
+      Direct dependencies: FSI [=m] && GPIOLIB [=y] && GPIO_ASPEED [=y]
 
-CRC16: y => no
+KCMP: y => no
       Direct dependencies: y
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=y] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ACPI [=n] && EFI [=n] && SPI [=n] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=y] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=y] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=y] && IIO [=y] && SCD30_CORE [=y] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=y] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=m] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-PINCTRL_EXYNOS_ARM64: y => no
-      Direct dependencies: PINCTRL [=y] && PINCTRL_EXYNOS [=y]
-      Reverse dependencies: PINCTRL_EXYNOS [=y] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y]) && ARM64 [=y] && ARCH_EXYNOS [=y]
-
-CRYPTO_CRCT10DIF: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
-
-SND_SOC_IMX_AUDMUX: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
-      Reverse dependencies: SND_SOC_EUKREA_TLV320 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && ARCH_MXC [=n] && !ARM64 [=y] && I2C [=y] || SND_SOC_IMX_ES8328 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && (I2C [=y] || SPI [=n]) || SND_SOC_IMX_SGTL5000 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] || SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=y] || SND_AC97_CODEC [=y]=n)
-
-SOC_SAMSUNG: y => no
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_EXYNOS [=y]
+      Reverse dependencies: CONFIGFS_FS [=y]
+
+MTD_OF_PARTS: m => yes
+      Direct dependencies: MTD [=m] && OF [=y]
+
+VIDEO_SONY_BTF_MPX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=m] && SND [=n] && USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+RTC_DRV_PCF85363: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
 

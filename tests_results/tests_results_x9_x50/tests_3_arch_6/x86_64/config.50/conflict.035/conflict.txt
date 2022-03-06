@@ -1,18 +1,24 @@
-GIGABYTE_WMI: m => yes
-      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=m] && HWMON [=m]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-EXT4_KUNIT_TESTS: m => yes
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=m] && KUNIT [=y]
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n]
 
-IR_ITE_CIR: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (PNP [=y] || COMPILE_TEST [=n])
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-RMI4_I2C: m => yes
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m] && I2C [=y]
+SND_SOC_CS35L41_SPI: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SND_SOC_AMD_VANGOGH_MACH [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP5x [=y] && I2C [=y]
 
-IIO_INTERRUPT_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y]
+CRYPTO_XXHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-PD6729: m => yes
-      Direct dependencies: PCCARD [=m] && PCMCIA [=m] && PCI [=y]
+CRYPTO_SERPENT_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 

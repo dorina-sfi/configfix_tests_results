@@ -1,30 +1,27 @@
-KCMP: y => no
+DVB_ASCOT2E: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=m] && SPI_MASTER [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+VIDEO_VS6624: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=m]
+
+CM3323: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
+
+STM: m => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+      Reverse dependencies: CORESIGHT_STM [=m] && CORESIGHT [=m] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-LINEDISP: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
+SX9310: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-CC_OPTIMIZE_FOR_SIZE: y => no
-      Direct dependencies: <choice>
+SI1145: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-HID_PICOLCD_FB: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=FB [=y] || FB [=y]=y)
+VIDEO_TEA6420: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
-
-SCSI: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
-
-XZ_DEC: y => no
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
-
-SND_SOC_IMX_AUDMUX: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
-      Reverse dependencies: SND_SOC_EUKREA_TLV320 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && ARCH_MXC [=n] && !ARM64 [=y] && I2C [=y] || SND_SOC_IMX_ES8328 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && (I2C [=y] || SPI [=n]) || SND_SOC_IMX_SGTL5000 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] || SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=y] || SND_AC97_CODEC [=y]=n)
+LEDS_S3C24XX: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (ARCH_S3C24XX || COMPILE_TEST [=y])
 

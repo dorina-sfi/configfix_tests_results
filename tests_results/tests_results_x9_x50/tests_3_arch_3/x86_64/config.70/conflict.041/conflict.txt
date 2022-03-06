@@ -1,9 +1,11 @@
-NAU7802: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+TOUCHSCREEN_USB_GENERAL_TOUCH: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 
-IP_NF_NAT: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && NF_CONNTRACK [=m]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
 
-FB_CARILLO_RANCH: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB_LE80578 [=m] && FB [=y] && PCI [=y] && X86 [=y]
+NF_TPROXY_IPV6: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_TPROXY [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=y] || IPV6 [=y]=n) && NF_TABLES_IPV6 [=y] || NETFILTER_XT_TARGET_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=n] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP_NF_MANGLE [=y] && IP6_NF_IPTABLES [=n]
 

@@ -1,19 +1,24 @@
-MAX1363: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-BUG: y => no
-      Direct dependencies: y
-
-SENSORS_IIO_HWMON: m => yes
-      Direct dependencies: HWMON [=m] && IIO [=m]
-
-IIO_ST_PRESS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
-
-BMP280: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n])
-
-CB710_CORE: y => no
+IOSF_MBI: y => no
       Direct dependencies: PCI [=y]
-      Reverse dependencies: MMC_CB710 [=m] && MMC [=y] && PCI [=y]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SOF_TOPLEVEL [=y] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=y] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=y] && MMC [=y] && MMC_SDHCI [=y] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && X86 [=y] && EFI [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=y] || PUNIT_ATOM_DEBUG [=y] && PCI [=y]
+
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=y] && PPC_POWERNV && EEH || OF_OVERLAY [=n] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
+
+CRYPTO_SHA1: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=y] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=y] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=n] || CPU_SUP_AMD [=y]) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=y] && KEYS [=y] && TCG_TPM [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_SHA1_SSSE3 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_SUNXI && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_PADLOCK [=y] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 || COMPILE_TEST [=n]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=y] && DMADEVICES [=y] || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=y] && TRUSTED_KEYS [=y] || SIGNATURE [=n] && KEYS [=y]
+
+SND_SOC_INTEL_CFL: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
+      Reverse dependencies: SND_SOC_INTEL_SKYLAKE [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
+
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+SPI_ALTERA_CORE: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ALTERA [=y] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
 

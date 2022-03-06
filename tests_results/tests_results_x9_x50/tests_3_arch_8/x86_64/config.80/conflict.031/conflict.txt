@@ -1,25 +1,27 @@
-HID_NINTENDO: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y]
+SND_HDA_CODEC_VIA: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_HDA [=m]
 
-HID_SENSOR_MAGNETOMETER_3D: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+INTEL_TH_PCI: m => yes
+      Direct dependencies: INTEL_TH [=m] && PCI [=y]
 
-TCP_CONG_CUBIC: y => mod
-      Direct dependencies: NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=n] || NET [=y] && INET [=y] && !TCP_CONG_ADVANCED [=n]
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=y] && HAS_IOMEM [=y] && X86 [=y] && ACPI [=y] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=n] || FB [=n]=y)
 
-MPSC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+CRYPTO_MANAGER: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=m] || CRYPTO_USER [=m] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=m] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=n] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=m] && CRYPTO [=y] || CRYPTO_OFB [=m] && CRYPTO [=y] || CRYPTO_PCBC [=m] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-SDIO_UART: m => yes
-      Direct dependencies: MMC [=m] && TTY [=y]
+VIDEO_TDA7432: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=m] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MEMORY: y => no
-      Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=y] && MTD_RAW_NAND [=n] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=n] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+RTC_LIB_KUNIT_TEST: y => no
+      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
 
-FB_S1D13XXX: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+SND_LOLA: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-SND_SOC_CS42L73: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+SND_HDA_INTEL: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 

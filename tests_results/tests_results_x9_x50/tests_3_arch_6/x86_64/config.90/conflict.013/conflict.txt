@@ -1,23 +1,21 @@
-RMI4_CORE: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+HZ_1000: y => no
+      Direct dependencies: <choice>
 
-EFI_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+PCMCIA_XIRC2PS: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_XIRCOM [=y] && PCMCIA [=m]
 
-MICREL_PHY: y => no
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
-      Reverse dependencies: KS8851 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=y] && SPI [=n] || KS8851_MLL [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=y] && HAS_IOMEM [=y]
+CRYPTO_SERPENT: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-IIO_CONFIGFS: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=n] && IIO [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-MDIO_BCM_UNIMAC: y => no
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || BCMGENET [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && HAS_IOMEM [=y]
+CARDMAN_4040: m => yes
+      Direct dependencies: PCMCIA [=m]
 
-PARAVIRT: y => no
-      Direct dependencies: HYPERVISOR_GUEST [=y] && HAVE_STATIC_CALL [=y]
-      Reverse dependencies: X86_VSMP [=y] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=y] || HYPERV [=n] && ACPI [=n] && (X86 [=y] && X86_LOCAL_APIC [=y] && HYPERVISOR_GUEST [=y] || ARM64 && !CPU_BIG_ENDIAN)
+USB_HCD_SSB: m => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && SSB [=m]
+      Reverse dependencies: USB_OHCI_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=m])
 

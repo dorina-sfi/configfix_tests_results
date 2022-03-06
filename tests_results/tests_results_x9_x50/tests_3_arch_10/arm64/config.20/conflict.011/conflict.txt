@@ -1,32 +1,37 @@
-EXYNOS_PM_DOMAINS: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y]
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-DRM_BOCHS: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-CFG80211_USE_KERNEL_REGDB_KEYS: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m] && CFG80211_REQUIRE_SIGNED_REGDB [=y]
+CRC64: y => no
+      Direct dependencies: y
+      Reverse dependencies: BCACHE [=y] && MD [=y]
 
-COMEDI_NI_LABPC_PCI: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-DRM_TI_TFP410: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
 
-RTC_LIB_KUNIT_TEST: m => yes
-      Direct dependencies: RTC_CLASS [=y] && KUNIT [=m]
+SM_GCC_8250: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_CAMCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SND_SAMSUNG_SPDIF: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m]
-      Reverse dependencies: SND_SOC_SAMSUNG_SMDK_SPDIF [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m]
+PHY_MTK_UFS: y => no
+      Direct dependencies: (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && OF [=y]
+      Reverse dependencies: SCSI_UFS_MEDIATEK [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y] && SCSI_UFSHCD_PLATFORM [=y] && ARCH_MEDIATEK [=y]
 
-I2C_DEMUX_PINCTRL: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
+CRYPTO_CRC32: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
 
-VIPERBOARD_ADC: m => yes
-      Direct dependencies: IIO [=m] && MFD_VIPERBOARD [=y] && USB [=y]
+ARM64_PA_BITS_48: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_MT2701: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && ARCH_MEDIATEK [=y]
+CHARLCD_BL_OFF: y => no
+      Direct dependencies: <choice>
 

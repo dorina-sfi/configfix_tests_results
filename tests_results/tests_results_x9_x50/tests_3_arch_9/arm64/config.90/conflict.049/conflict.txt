@@ -1,29 +1,32 @@
-MFD_BD9571MWV: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-SENSORS_IR38064: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SND_SOC_FSL_SPDIF: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_IMX_SPDIF [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=m]
 
-REGULATOR_DA9210: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 
-NLS_MAC_INUIT: m => yes
-      Direct dependencies: NLS [=m]
+PPP_SYNC_TTY: m => yes
+      Direct dependencies: NETDEVICES [=y] && TTY [=y] && PPP [=m]
 
-BACKLIGHT_QCOM_WLED: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+FB_UVESA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && CONNECTOR [=y]
 
-MSM_GCC_8996: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: MSM_MMCC_8996 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+FXAS21002C: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n])
 
-PINCTRL_RZG2L: y => no
-      Direct dependencies: PINCTRL [=y] && OF [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R9A07G044 [=y]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-REGULATOR_88PM800: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_88PM800 [=m]
+HW_RANDOM: y => mod
+      Direct dependencies: y
+      Reverse dependencies: TURRIS_MOX_RWTM [=n] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && S390 || CRYPTO_DEV_SL3516 [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM64 [=y] && ACPI [=n] || CRYPTO_DEV_SA2UL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=y]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=m] && CRYPTO_DEV_FSL_CAAM_JR [=m] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=n]
 
-MCP4725: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+APPLE_AIC: y => no
+      Direct dependencies: ARM64 [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_APPLE [=y]
 

@@ -1,28 +1,30 @@
-MTD_MAP_BANK_WIDTH_2: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-DAX: y => mod
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-SENSORS_STPDDC60: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+CRYPTO_CRYPTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-TOUCHSCREEN_TI_AM335X_TSC: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && MFD_TI_AM335X_TSCADC [=m]
+CRYPTO_ECB: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-UNWINDER_ORC: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+CPU_FREQ_GOV_PERFORMANCE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=y] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=n] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y]
 
-IPV6_VTI: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 
-CRC64: y => no
+CRC4: y => no
       Direct dependencies: y
-      Reverse dependencies: BCACHE [=y] && MD [=y]
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=y] && GPIOLIB [=y]
 
-SDM_GCC_660: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SDM_MMCC_660 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_660 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+UBIFS_FS_ZSTD: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
 

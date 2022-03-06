@@ -1,32 +1,34 @@
-MAC80211_RC_MINSTREL: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && MAC80211 [=m]!=n
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-UIO_DFL: m => yes
-      Direct dependencies: UIO [=m] && FPGA_DFL [=y]
+COMEDI_ADV_PCI1720: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 
-OPT3001: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MMC_TIFM_SD: m => yes
+      Direct dependencies: MMC [=m] && PCI [=y]
 
-DM_FLAKEY: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+COMEDI_DT2801: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-RTC_DRV_MT6397: m => yes
-      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
+VIDEO_MT9V111: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-MMA7455_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+DVB_DRXK: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_AZ6007 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-FILE_LOCKING: y => no
-      Direct dependencies: y
+MEDIA_TUNER_FC0012: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-RAS: y => no
-      Direct dependencies: y
-      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=n] && PCIEPORTBUS [=n]
+EXTCON_MAX8997: m => yes
+      Direct dependencies: EXTCON [=m] && MFD_MAX8997 [=y] && IRQ_DOMAIN [=y]
 
-IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=m] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=m] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=m]
+COMEDI_NI_ATMIO: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-ABP060MG: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PKCS7_MESSAGE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
 

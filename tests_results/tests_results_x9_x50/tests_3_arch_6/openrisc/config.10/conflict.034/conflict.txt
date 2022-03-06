@@ -1,23 +1,20 @@
-IPQ_APSS_PLL: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: IPQ_APSS_6018 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] && (QCOM_APCS_IPC [=n] || COMPILE_TEST [=y])
+FRAMEBUFFER_CONSOLE_DETECT_PRIMARY: y => no
+      Direct dependencies: VT [=y] && FRAMEBUFFER_CONSOLE [=y]
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && FRAMEBUFFER_CONSOLE [=y]
 
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
-      Reverse dependencies: MTK_CMDQ_MBOX [=n] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+VIDEO_MX2_EMMAPRP: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (SOC_IMX27 || COMPILE_TEST [=y])
 
-HID_PICOLCD_LCD: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=LCD_CLASS_DEVICE [=y] || LCD_CLASS_DEVICE [=y]=y)
+MEDIA_TUNER_IT913X: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_AF9035 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CRYPTO_NULL: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
+DEBUG_FS_ALLOW_NONE: y => no
+      Direct dependencies: <choice>
 
-HID_LED: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+TOUCHSCREEN_SUR40: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && USB [=y] && MEDIA_USB_SUPPORT [=y] && HAS_DMA [=y] && VIDEO_V4L2 [=m]
 
-CLK_RCAR_CPG_LIB: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
 

@@ -1,31 +1,31 @@
-LTO_NONE: y => no
-      Direct dependencies: <choice>
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=y] || USB_DWC2 [=y] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=y]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=y]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MTU3 [=y]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=y]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=n] && OF [=y] && (MIPS || COMPILE_TEST [=y]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=n] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=y] && COMMON_CLK [=n] && (ARCH_MESON || COMPILE_TEST [=y]) || USB_RENESAS_USB3 [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=n] && USB_SUPPORT [=y] && X86 && ACPI && IOSF_MBI
 
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
-
-CRYPTO_SM4: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
-
-USB_OHCI_HCD_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=y] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=y] && USB_SUPPORT [=y] && USB [=y] && BCMA [=y] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
-
-I2C: y => no
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=y] && CAN_DEV [=y] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-DVB_MN88472: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_RTL28XXU [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=n] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-CRYPTO_CRC32C: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=n] && BLOCK [=n] || JBD2 [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+SECURITYFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_SAFESETID [=n] && SECURITY [=y] || IMA [=y] && INTEGRITY [=y]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+
+XZ_DEC_SPARC: y => no
+      Direct dependencies: XZ_DEC [=y]
+
+PHY_DA8XX_USB: y => no
+      Direct dependencies: ARCH_DAVINCI_DA8XX || COMPILE_TEST [=y]
+      Reverse dependencies: USB_OHCI_HCD_DAVINCI [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_DAVINCI_DA8XX || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_MUSB_DA8XX [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=n] && ARCH_DAVINCI_DA8XX && NOP_USB_XCEIV [=n]
 

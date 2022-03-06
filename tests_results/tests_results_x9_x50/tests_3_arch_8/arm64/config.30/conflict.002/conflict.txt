@@ -1,25 +1,31 @@
-HTS221: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=m] || SPI [=y])
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
 
-SENSORS_MAX31790: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+NF_SOCKET_IPV6: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && (IPV6 [=y] || IPV6 [=y]=n) && NF_TABLES_IPV6 [=n] || NETFILTER_XT_MATCH_SOCKET [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=y] || IP6_NF_IPTABLES [=y]=n) && IP6_NF_IPTABLES [=y]
 
-MSM_GCC_8996: y => mod
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_MMCC_8996 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+CRC7: y => no
+      Direct dependencies: y
+      Reverse dependencies: WILC1000_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=y] && INET [=y] && SPI [=y] || WL1251 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && MAC80211 [=n] || WLCORE_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && WLCORE [=n] && SPI_MASTER [=y] && OF [=y] || MMC_SPI [=y] && MMC [=y] && SPI_MASTER [=y]
 
-PCIEASPM_PERFORMANCE: y => no
-      Direct dependencies: <choice> && PCIEASPM [=y]
+NF_SOCKET_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && (IPV6 [=y] || IPV6 [=y]=n) || NETFILTER_XT_MATCH_SOCKET [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=y] || IP6_NF_IPTABLES [=y]=n)
 
-I2C_MUX_PCA954x: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-STM_SOURCE_HEARTBEAT: m => yes
-      Direct dependencies: STM [=m]
+SOC_BRCMSTB: y => no
+      Direct dependencies: ARM || ARM64 [=y] || BMIPS_GENERIC || COMPILE_TEST [=y]
+      Reverse dependencies: PHY_BRCM_USB [=y] && (ARCH_BCM4908 [=n] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=y]) && OF [=y] && ARCH_BRCMSTB [=y]
 
-FB_W100: m => yes
-      Direct dependencies: FB [=m] && HAS_IOMEM [=y] && (ARCH_PXA || COMPILE_TEST [=y])
+CLKSRC_EXYNOS_MCT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_EXYNOS [=y]
 
-FB_IMX: m => yes
-      Direct dependencies: FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y])
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 

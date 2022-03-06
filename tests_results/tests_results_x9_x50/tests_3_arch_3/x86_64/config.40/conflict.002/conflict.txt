@@ -1,11 +1,10 @@
-USB_DWC3_GADGET: y => no
-      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_DWC3 [=y])
+PROC_CHILDREN: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-CRYPTO_CRCT10DIF: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
+TYPEC_DP_ALTMODE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=y] && DRM [=m]
 
-PM_DEVFREQ_EVENT: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
+USB_HUB_USB251XB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && I2C [=m]
 

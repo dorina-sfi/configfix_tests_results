@@ -1,22 +1,28 @@
-FB_OMAP2_ENCODER_OPA362: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=n] && I2C [=n] && I2C_MUX [=n] && PINCTRL [=y] && OF [=y]
 
-COMEDI_DT2815: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y]
 
-QCOM_SMD_RPM: m => yes
-      Direct dependencies: (ARCH_QCOM || COMPILE_TEST [=y]) && RPMSG [=m]
+MTD_JEDECPROBE: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
 
-BATTERY_BQ27XXX_I2C: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=y] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=y]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=n] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_IMX [=y] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || SPI_LM70_LLP [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=y] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=y])
 
-LINEDISP: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=n]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
 
-CHARGER_MAX77650: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77650 [=m]
+MSM_GCC_8998: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_GPUCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 

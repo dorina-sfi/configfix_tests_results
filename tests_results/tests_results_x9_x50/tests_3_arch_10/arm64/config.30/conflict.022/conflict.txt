@@ -1,34 +1,34 @@
-HID_BIGBEN_FF: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y]
+BT_HCIUART: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && (SERIAL_DEV_BUS [=y] || !SERIAL_DEV_BUS [=y]) && TTY [=y]
 
-TYPEC_TCPM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && USB [=y]
+INPUT_FF_MEMLESS: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && PARPORT [=m] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=n] && JOYSTICK_XPAD [=n] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=n] && MFD_ARIZONA [=m] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_PM8XXX [=m] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_MAX77693 [=m] || MFD_MAX77843 [=y]) && PWM [=y] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && PWM [=y] && MFD_MAX8997 [=y] || INPUT_GPIO_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_REGULATOR_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && TWL4030_CORE [=n] || INPUT_TWL6040_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && TWL6040_CORE [=n] || INPUT_PWM_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && PWM [=y] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_DRV2665_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y]) || HID_ACRUX_FF [=n] && INPUT [=y] && HID [=y] && HID_ACRUX [=y] || HID_BETOP_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=n] || HID_EMS_FF [=y] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=n] || LOGITECH_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIRUMBLEPAD2_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIG940_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIWHEELS_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_MAYFLASH [=m] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=n] && INPUT [=y] && HID [=y] || NINTENDO_FF [=n] && INPUT [=y] && HID [=y] && HID_NINTENDO [=n] || PANTHERLORD_FF [=n] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=n] || PLAYSTATION_FF [=n] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=n] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=n] && INPUT [=y] && HID [=y] && HID_GREENASIA [=y] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=m] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=n]
 
-REGULATOR_DA9062: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+DRM_PANEL_JDI_LT070ME05000: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-CAN_FLEXCAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && (OF [=y] || COLDFIRE || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+NF_SOCKET_IPV6: m => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && (IPV6 [=m] || IPV6 [=m]=n) && NF_TABLES_IPV6 [=y] || NETFILTER_XT_MATCH_SOCKET [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (IP6_NF_IPTABLES [=m] || IP6_NF_IPTABLES [=m]=n) && IP6_NF_IPTABLES [=m]
 
-CRYPTO_ECDH: m => no
+RATIONAL_KUNIT_TEST: y => mod
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
+
+COMMON_CLK_RK808: m => yes
+      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
+
+FB_SIMPLE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && !DRM_SIMPLEDRM [=n]
+
+RST_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
+
+CRYPTO_DH: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n]
 
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=m] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
-
-PATA_OF_PLATFORM: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PATA_PLATFORM [=m] && OF [=y]
-
-FW_LOADER_USER_HELPER: y => no
-      Direct dependencies: FW_LOADER [=y]
-      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
-
-CRYPTO_ECDH: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
-
-TYPEC_UCSI: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && !CPU_BIG_ENDIAN [=n] && (USB_ROLE_SWITCH [=y] || !USB_ROLE_SWITCH [=y])
+XZ_DEC_SPARC: y => no
+      Direct dependencies: XZ_DEC [=y]
 

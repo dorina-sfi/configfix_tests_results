@@ -1,23 +1,28 @@
-TOUCHSCREEN_ATMEL_MXT: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
-
-RPMSG_NS: y => mod
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
-
-HZ_100: y => no
-      Direct dependencies: <choice>
-
-MAILBOX: y => no
+PAGE_EXTENSION: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_K3 [=n] || ACPI_CPPC_LIB [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || IMX_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC [=n] && HAVE_ARM_SMCCC [=y] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC [=n] && HAVE_ARM_SMCCC [=y] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=n] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 [=n] || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 [=n] || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA [=n] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=n] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=n] && ARM64 [=y] || ZYNQMP_POWER [=n] && PM [=y] && ZYNQMP_FIRMWARE [=n]
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-PINCTRL_RENESAS: y => no
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+PINCTRL_PFC_R8A77960: y => no
       Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77960 [=y]
 
-SENSORS_LM95234: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 [=y] || COMPILE_TEST [=n]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-SENSORS_BEL_PFE: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+VIDEO_MSP3400: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] || VIDEO_BT848 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=y] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+XEN_PRIVCMD: y => no
+      Direct dependencies: XEN [=y]
+      Reverse dependencies: XENFS [=y] && XEN [=y]
+
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 

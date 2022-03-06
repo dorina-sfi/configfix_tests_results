@@ -1,20 +1,22 @@
-SCSI_PPA: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=m] && PARPORT_PC [=y]
-
-I2C_TAOS_EVM: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && TTY [=y]
-
-I2C: m => no
+EVENTFD: y => no
       Direct dependencies: y
-      Reverse dependencies: X86_INTEL_MID [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && PCI [=y] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=m] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=y] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=m] || AGP [=m]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=m] && HAS_IOMEM [=y] && FB [=m] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7793 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7791 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=y] && VIRT_DRIVERS [=y] && ACRN_GUEST [=y]
 
-I2C_VIRTIO: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
+CHARLCD_BL_OFF: y => no
+      Direct dependencies: <choice>
 
-I2C_SMBUS: m => yes
-      Direct dependencies: I2C [=m]
-      Reverse dependencies: I2C_I801 [=m] && I2C [=m] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=n] && I2C [=m] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=m] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=m] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=m] && I2C [=m] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=m] && POWER_SUPPLY [=y] && I2C [=m] && I2C_MUX [=m] && GPIOLIB [=y]
+UNWINDER_ORC: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-SCSI_DC395x: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
+EEPROM_93CX6: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_WD719X [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] || KS8851 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=n] && SPI [=n] || KS8851_MLL [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=n] && HAS_IOMEM [=y] || AX88796_93CX6 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_8390 [=n] && AX88796 [=n] || ADM8211 [=y] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ADMTEK [=y] && MAC80211 [=y] && PCI [=y] || RT2400PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2500PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT61PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RTL8180 [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_REALTEK [=y] && MAC80211 [=y] && PCI [=y] || RTL8187 [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_REALTEK [=y] && MAC80211 [=y] && USB [=n]
+
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
+
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=y] && NET [=y] && BT [=y] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=y] && NET [=y] && WIRELESS [=y] && MAC80211 [=y] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=y]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=y] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=y] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=y] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=y] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=n] && SND_CTL_LED [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=y]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=n] || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=n] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=n] || SYSTEM76_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] && ACPI_BATTERY [=n] && HWMON [=y] && INPUT [=n] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=y] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 

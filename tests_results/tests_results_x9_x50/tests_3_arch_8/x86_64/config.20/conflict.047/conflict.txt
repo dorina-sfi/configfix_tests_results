@@ -1,26 +1,29 @@
-IR_XMP_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+X86_MPPARSE: y => no
+      Direct dependencies: X86_LOCAL_APIC [=y]
 
-CRYPTO_DRBG_MENU: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && X86 [=y]
 
-HZ_100: y => no
-      Direct dependencies: <choice>
+IPV6_MULTIPLE_TABLES: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
+      Reverse dependencies: IPV6_SEG6_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
 
-SENSORS_FSP_3Y: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SUSPEND_FREEZER: y => no
+      Direct dependencies: SUSPEND [=y]
 
-COMMON_CLK_MT6779_IPESYS: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
+USB: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
+      Reverse dependencies: MOUSE_APPLETOUCH [=n] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=y] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=y] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=n] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=n] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-COMMON_CLK_SAMSUNG: y => no
-      Direct dependencies: COMMON_CLK [=y]
-      Reverse dependencies: S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-LEDS_LP8501: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+USB_MUSB_GADGET: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=y]) && HAS_DMA [=y]
 
-X86_SMAP: y => no
-      Direct dependencies: y
+SCTP_COOKIE_HMAC_SHA1: y => no
+      Direct dependencies: NET [=y] && IP_SCTP [=y]
+      Reverse dependencies: SCTP_DEFAULT_COOKIE_HMAC_SHA1 [=y] && <choice>
 

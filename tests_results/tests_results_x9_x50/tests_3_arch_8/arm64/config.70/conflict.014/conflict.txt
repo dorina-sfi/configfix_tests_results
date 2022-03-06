@@ -1,25 +1,32 @@
-TOUCHSCREEN_EETI: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+HW_RANDOM: y => no
+      Direct dependencies: y
+      Reverse dependencies: TURRIS_MOX_RWTM [=n] && (ARCH_MVEBU [=n] || COMPILE_TEST [=n]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && S390 || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM64 [=y] && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=n] || COMPILE_TEST [=n]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=y] && DMADEVICES [=n]
 
-MMC_SDHI: m => yes
-      Direct dependencies: MMC [=m] && (SUPERH || ARCH_RENESAS [=n] || COMPILE_TEST [=y])
+USB_ACM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && TTY [=y]
+      Reverse dependencies: USB_VL600 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_NET_CDCETHER [=n] && TTY [=y] || USB_PULSE8_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-XZ_DEC_IA64: y => no
-      Direct dependencies: XZ_DEC [=y]
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-RFD_FTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+INTERCONNECT: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_TEGRA [=y] && HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && DRM [=y] && OF [=y] || TEGRA_MC [=n] && MEMORY [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n] && COMMON_CLK [=y])
 
-SENSORS_TC74: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+SND_SAMSUNG_PCM: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y]
+      Reverse dependencies: SND_SOC_SMDK_WM8994_PCM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && I2C [=y]=y
 
-INPUT_AD714X_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && INPUT_AD714X [=m] && I2C [=m]
+SND_SAMSUNG_PCM: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y]
+      Reverse dependencies: SND_SOC_SMDK_WM8994_PCM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && I2C [=y]=y
 
-CHARGER_MAX77976: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=y] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
 

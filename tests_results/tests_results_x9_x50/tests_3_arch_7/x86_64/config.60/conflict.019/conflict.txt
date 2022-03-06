@@ -1,24 +1,23 @@
-FIRMWARE_MEMMAP: y => no
-      Direct dependencies: y
+BCM84881_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
 
-INPUT_FF_MEMLESS: y => mod
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && PARPORT [=y] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=y] && JOYSTICK_XPAD [=m] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && JOYSTICK_PSXPAD_SPI [=y] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=y] && MFD_ARIZONA [=m] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_PM8XXX [=m] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_MAX77693 [=n] || MFD_MAX77843 [=y]) && PWM [=n] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=n] && MFD_MAX8997 [=y] || INPUT_GPIO_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_REGULATOR_HAPTIC [=y] && INPUT [=y] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL4030_CORE [=n] || INPUT_TWL6040_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL6040_CORE [=n] || INPUT_PWM_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=n] || INPUT_DRV260X_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_DRV2665_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=y] || COMPILE_TEST [=y]) || HID_ACRUX_FF [=y] && INPUT [=y] && HID [=y] && HID_ACRUX [=y] || HID_BETOP_FF [=m] && INPUT [=y] && HID [=y] && USB_HID [=y] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=n] || HID_EMS_FF [=n] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=y] || LOGITECH_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIG940_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIWHEELS_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_MAYFLASH [=y] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=y] && INPUT [=y] && HID [=y] || NINTENDO_FF [=n] && INPUT [=y] && HID [=y] && HID_NINTENDO [=n] || PANTHERLORD_FF [=y] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=m] || PLAYSTATION_FF [=n] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=m] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=n] && INPUT [=y] && HID [=y] && HID_GREENASIA [=n] || SMARTJOYPLUS_FF [=y] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=m] || THRUSTMASTER_FF [=y] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=m] || HID_WIIMOTE [=m] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=n]
+SND_SOC_RT5616: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
+TERANETICS_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
 
-DM_CACHE: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+MTD_RAM: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=m] && HAS_IOMEM [=y]
 
-MEDIA_TUNER_MT2063: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_AZ6007 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && DVB_CORE [=n] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+MDIO_GPIO: m => yes
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=m] && MDIO_BUS [=m] && MDIO_BITBANG [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-X86_SMAP: y => no
-      Direct dependencies: y
+FPGA_REGION: y => no
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-ATM_MPOA: m => yes
-      Direct dependencies: NET [=y] && ATM [=m] && INET [=y] && ATM_LANE [=m]!=n
+SND_SOC_CS35L32: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 

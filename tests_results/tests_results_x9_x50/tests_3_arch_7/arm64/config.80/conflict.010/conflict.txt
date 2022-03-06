@@ -1,22 +1,25 @@
-MFD_ATC260X_I2C: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+MFD_SUN6I_PRCM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y]
 
-REGULATOR_FAN53555: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+USB_FUNCTIONFS_GENERIC: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=y] && USB_FUNCTIONFS [=y]
+      Reverse dependencies: USB_FUNCTIONFS [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && !USB_FUNCTIONFS_ETH [=n] && !USB_FUNCTIONFS_RNDIS [=n]
 
-CLK_RENESAS_DIV6: y => no
+MOUSE_PS2_SYNAPTICS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
+
+CLK_RCAR_GEN3_CPG: y => no
       Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-PATA_ISAPNP: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ISAPNP [=y]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-NAU7802: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+PROC_SYSCTL: y => no
+      Direct dependencies: PROC_FS [=y]
 
-REGULATOR_DA9121: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
-
-CLK_GFM_LPASS_SM8250: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+RPMSG_MTK_SCP: y => no
+      Direct dependencies: MTK_SCP [=y]
+      Reverse dependencies: MTK_SCP [=y] && REMOTEPROC [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
 

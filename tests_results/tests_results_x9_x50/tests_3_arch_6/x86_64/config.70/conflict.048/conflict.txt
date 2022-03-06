@@ -1,24 +1,20 @@
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+CROS_EC_DEBUGFS: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m] && DEBUG_FS [=y]
 
-GAMEPORT: y => no
-      Direct dependencies: !UML
-      Reverse dependencies: JOYSTICK_ANALOG [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=n] || !UNWINDER_ORC [=n] && !UNWINDER_GUESS [=n]
+      Reverse dependencies: UNWINDER_FRAME_POINTER [=y] && <choice>
 
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-NET_DSA_TAG_HELLCREEK: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_HIRSCHMANN_HELLCREEK [=y] && NETDEVICES [=y] && HAS_IOMEM [=y] && NET_DSA [=y] && PTP_1588_CLOCK [=y] && LEDS_CLASS [=y] && NET_SCH_TAPRIO [=y]
+MAILBOX: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CPPC_LIB [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || IMX_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=y] || ST_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=y] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || MTK_CMDQ [=m] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM [=n] && ZYNQMP_FIRMWARE [=n]
 
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+CPU_FREQ_DEFAULT_GOV_CONSERVATIVE: y => no
+      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=n])
 
-CEPH_LIB: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+HID_KYE: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 

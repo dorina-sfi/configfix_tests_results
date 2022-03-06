@@ -1,24 +1,26 @@
-SND_AMD_ACP_CONFIG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_AMD_ACP_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && X86 && PCI [=y] || SND_SOC_SOF_AMD_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_AMD_TOPLEVEL [=n]
+MTK_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: ARCH_MEDIATEK [=y]
 
-FB_SIS_300: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB_SIS [=m]
-      Reverse dependencies: FB_SIS [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && !FB_SIS_315 [=n]
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
 
-SPEAKUP_SYNTH_AUDPTR: m => yes
-      Direct dependencies: ACCESSIBILITY [=y] && SPEAKUP [=m]
+IMX_GPCV2_PM_DOMAINS: y => no
+      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=y] && OF [=y]) && PM [=y]
+      Reverse dependencies: ARCH_MXC [=y]
 
-BCMA_DRIVER_PCI: y => no
-      Direct dependencies: BCMA [=m] && PCI [=y]
-      Reverse dependencies: BCMA_HOST_PCI [=y] && BCMA [=m] && BCMA_HOST_PCI_POSSIBLE [=y]
+HID_PICOLCD_BACKLIGHT: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
 
-SND_AUDIO_GRAPH_CARD: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && OF [=y]
+UIO: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: CNIC [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+MDIO_DEVICE: y => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: PHYLIB [=y] && NETDEVICES [=y]
 
-KMX61: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32
 

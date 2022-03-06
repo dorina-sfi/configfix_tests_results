@@ -1,29 +1,32 @@
-USB_ULPI_BUS: m => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y]
+INTEL_MEI: y => no
+      Direct dependencies: X86 [=y] && PCI [=y]
+      Reverse dependencies: INTEL_MEI_ME [=y] && X86 [=y] && PCI [=y] || INTEL_MEI_TXE [=n] && X86 [=y] && PCI [=y]
 
-DVB_OR51132: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+DMI: y => no
+      Direct dependencies: y
+      Reverse dependencies: EDAC_SKX [=y] && EDAC [=y] && PCI [=y] && X86_64 [=y] && X86_MCE_INTEL [=y] && PCI_MMCONFIG [=y] && ACPI [=y] && (ACPI_NFIT [=n] || !ACPI_NFIT [=n]) || EDAC_I10NM [=n] && EDAC [=y] && PCI [=y] && X86_64 [=y] && X86_MCE_INTEL [=y] && PCI_MMCONFIG [=y] && ACPI [=y] && (ACPI_NFIT [=n] || !ACPI_NFIT [=n])
 
-MEMORY_NOTIFIER_ERROR_INJECT: m => yes
-      Direct dependencies: MEMORY_HOTPLUG [=y] && NOTIFIER_ERROR_INJECTION [=m]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=n] && IIO [=y] && HAS_IOMEM [=y] && OF [=n] || STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=n] || COMPILE_TEST [=y])
 
-DVB_MN88443X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: X86_5LEVEL [=y] && X86_64 [=y]
 
-COMEDI_ADL_PCI9111: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+MDIO_THUNDER: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && 64BIT [=y] && PCI [=y]
+      Reverse dependencies: THUNDER_NIC_BGX [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y] || THUNDER_NIC_RGX [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y]
 
-DVB_SI21XX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && I2C_ALGOBIT [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CPU_FREQ_GOV_PERFORMANCE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=y] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=n] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+SERIAL_8250_EXTENDED: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y]
+      Reverse dependencies: SERIAL_8250_IOC3 [=y] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
 
-THERMAL_WRITABLE_TRIPS: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] && ACPI [=n]
+ACPI_WMI: y => no
+      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y]
+      Reverse dependencies: DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y]
 

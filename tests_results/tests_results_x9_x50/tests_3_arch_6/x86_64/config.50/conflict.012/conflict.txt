@@ -1,20 +1,24 @@
-TSYS01: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_SOC_INTEL_CFL: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
+      Reverse dependencies: SND_SOC_INTEL_SKYLAKE [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
 
-XILINX_XADC: m => yes
-      Direct dependencies: IIO [=m] && HAS_IOMEM [=y]
+W1_SLAVE_DS2780: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-CONFIGFS_FS: y => mod
+PM_DEVFREQ: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=y] && ACPI [=y] || TARGET_CORE [=y] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=m] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=n]
+      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
 
-KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+SND_SOC_INTEL_APL: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
+      Reverse dependencies: SND_SOC_INTEL_SKYLAKE [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
 
-IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=m] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=m] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-MAX5821: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y] && OF [=y]
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=n] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
 

@@ -1,16 +1,18 @@
-CRYPTO_SM3: y => mod
+MSM_GCC_8960: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_LCC_8960 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8960 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+THERMAL_GOV_STEP_WISE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+
+CRYPTO_CHACHA20: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=m] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
 
-DRM_PANEL_JDI_LT070ME05000: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+HW_RANDOM_STM32: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-DRM_PARADE_PS8622: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
-
-LTO_NONE: y => no
-      Direct dependencies: <choice>
-
-COMEDI_TESTS_EXAMPLE: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_TESTS [=m]
+MEDIA_PLATFORM_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
 

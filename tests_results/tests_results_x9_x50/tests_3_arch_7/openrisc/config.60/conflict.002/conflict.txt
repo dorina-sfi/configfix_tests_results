@@ -1,23 +1,25 @@
-TRUSTED_KEYS: m => yes
-      Direct dependencies: KEYS [=y] && TCG_TPM [=m]
+LEDS_RT4505: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && OF [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 
-I2C_MUX_LTC4306: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=n] && OF [=y] || I2C_DEMUX_PINCTRL [=m] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 
-USB_OHCI_HCD_S3C2410: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_S3C24XX || ARCH_S3C64XX || COMPILE_TEST [=y])
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-INTERRUPT_CNT: m => yes
-      Direct dependencies: COUNTER [=m] && GPIOLIB [=y]
+LEDS_AS3645A: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 
-I2C_MUX_PCA9541: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-MFD_AT91_USART: y => mod
-      Direct dependencies: HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
-      Reverse dependencies: SERIAL_ATMEL [=y] && TTY [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=m] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=n] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y])
+REGULATOR_MT6358: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
 

@@ -1,19 +1,22 @@
-COMEDI_AMPLC_PCI224: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+BASE_FULL: y => no
+      Direct dependencies: y
 
-LEDS_LP50XX: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && REGMAP_I2C [=y] && (LEDS_CLASS_MULTICOLOR [=m] || !LEDS_CLASS_MULTICOLOR [=m])
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=y] || ACRN_HSM [=n] && VIRT_DRIVERS [=y] && ACRN_GUEST
 
-SDIO_UART: m => yes
-      Direct dependencies: MMC [=m] && TTY [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-DW_APB_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
+MEMBARRIER: y => no
+      Direct dependencies: y
+      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
 
-COMEDI_NI_ATMIO16D: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+XZ_DEC_ARM: y => no
+      Direct dependencies: XZ_DEC [=y]
 
-IR_SPI: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && SPI [=y] && LIRC [=y] && (OF [=y] || COMPILE_TEST [=n])
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 

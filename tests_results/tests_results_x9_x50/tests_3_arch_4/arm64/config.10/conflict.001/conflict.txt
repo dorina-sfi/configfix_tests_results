@@ -1,13 +1,14 @@
-CHARGER_BQ24257: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+MODULE_SIG_SHA512: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_CS42L52: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=m] && INPUT [=y]
+HD44780_COMMON: m => yes
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
 
-TOUCHSCREEN_CY8CTMA140: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+AK8975: m => no
+      Direct dependencies: IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: AK09911 [=m] && IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-MSM_GCC_8996: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: MSM_MMCC_8996 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+VIDEO_IMX412: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && OF_GPIO [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 

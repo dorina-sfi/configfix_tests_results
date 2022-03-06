@@ -1,30 +1,30 @@
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-MEDIA_TUNER_TEA5761: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
-
-IIO_ST_ACCEL_3AXIS: y => no
-      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
-
-HZ_250: y => no
-      Direct dependencies: <choice>
-
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-DVB_DIB3000MC: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB3000MC [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y]
-
-EXPERT: y => no
+NLS: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+      Reverse dependencies: PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=y] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=y] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI || JFS_FS [=y] && BLOCK [=y] || F2FS_FS [=n] && BLOCK [=y] || JOLIET [=y] && BLOCK [=y] && ISO9660_FS [=y] || UDF_FS [=y] && BLOCK [=y] || FAT_FS [=y] && BLOCK [=y] || EXFAT_FS [=y] && BLOCK [=y] || NTFS_FS [=n] && BLOCK [=y] || NTFS3_FS [=y] && BLOCK [=y] || HFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || BEFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=n] && X86 && VBOXGUEST [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-SYSC_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: SYSC_R8A77995 [=n] && SOC_RENESAS [=y] || SYSC_R8A7794 [=y] && SOC_RENESAS [=y] || SYSC_R8A77990 [=n] && SOC_RENESAS [=y] || SYSC_R8A7779 [=n] && SOC_RENESAS [=y] || SYSC_R8A7790 [=n] && SOC_RENESAS [=y] || SYSC_R8A7795 [=n] && SOC_RENESAS [=y] || SYSC_R8A7791 [=y] && SOC_RENESAS [=y] || SYSC_R8A77965 [=n] && SOC_RENESAS [=y] || SYSC_R8A77960 [=y] && SOC_RENESAS [=y] || SYSC_R8A77961 [=n] && SOC_RENESAS [=y] || SYSC_R8A7792 [=y] && SOC_RENESAS [=y] || SYSC_R8A77980 [=n] && SOC_RENESAS [=y] || SYSC_R8A77970 [=y] && SOC_RENESAS [=y] || SYSC_R8A77470 [=n] && SOC_RENESAS [=y] || SYSC_R8A7745 [=y] && SOC_RENESAS [=y] || SYSC_R8A7742 [=n] && SOC_RENESAS [=y] || SYSC_R8A7743 [=y] && SOC_RENESAS [=y] || SYSC_R8A774C0 [=y] && SOC_RENESAS [=y] || SYSC_R8A774E1 [=n] && SOC_RENESAS [=y] || SYSC_R8A774A1 [=n] && SOC_RENESAS [=y] || SYSC_R8A774B1 [=n] && SOC_RENESAS [=y]
+SND_SOC_AK5558: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
+      Reverse dependencies: SND_SOC_IMX_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y]
+
+IIO_BUFFER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_CROS_EC_SENSORS_CORE [=n] && IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=n] || ADXL355_I2C [=n] && IIO [=y] && I2C [=y] || ADXL355_SPI [=n] && IIO [=y] && SPI [=n] || ADXL372 [=y] && IIO [=y] || BMA180 [=y] && IIO [=y] && I2C [=y] && INPUT_BMA150 [=n]=n || BMA220 [=n] && IIO [=y] && SPI [=n] || BMC150_ACCEL [=n] && IIO [=y] || BMI088_ACCEL [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || KXSD9 [=n] && IIO [=y] || KXCJK1013 [=y] && IIO [=y] && I2C [=y] || MMA7455 [=y] && IIO [=y] || MMA8452 [=y] && IIO [=y] && I2C [=y] || MXC4005 [=y] && IIO [=y] && I2C [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || SCA3300 [=n] && IIO [=y] && SPI [=n] || STK8312 [=n] && IIO [=y] && I2C [=y] || STK8BA50 [=n] && IIO [=y] && I2C [=y] || AD_SIGMA_DELTA [=n] && IIO [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7298 [=n] && IIO [=y] && SPI [=n] || AD7476 [=n] && IIO [=y] && SPI [=n] || AD7606 [=y] && IIO [=y] || AD7766 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || AD7887 [=n] && IIO [=y] && SPI [=n] || AD7923 [=n] && IIO [=y] && SPI [=n] || AD799X [=n] && IIO [=y] && I2C [=y] || ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || AT91_ADC [=y] && IIO [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && INPUT [=y] && SYSFS [=y] && OF [=y] || AT91_SAMA5D2_ADC [=y] && IIO [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CC10001_ADC [=n] && IIO [=y] && HAS_IOMEM [=y] && HAVE_CLK [=n] && REGULATOR [=n] || CPCAP_ADC [=n] && IIO [=y] && MFD_CPCAP [=n] || DLN2_ADC [=n] && IIO [=y] && MFD_DLN2 [=y] || MXS_LRADC_ADC [=y] && IIO [=y] && MFD_MXS_LRADC [=y] || HX711 [=n] && IIO [=y] && GPIOLIB [=y] || INA2XX_ADC [=y] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || INGENIC_ADC [=y] && IIO [=y] && (MIPS || COMPILE_TEST [=y]) || MAX1027 [=n] && IIO [=y] && SPI [=n] || MAX1118 [=n] && IIO [=y] && SPI [=n] || MAX1363 [=y] && IIO [=y] && I2C [=y] || MEDIATEK_MT6360_ADC [=n] && IIO [=y] && MFD_MT6360 [=n] || ROCKCHIP_SARADC [=y] && IIO [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) && RESET_CONTROLLER [=y] || SD_ADC_MODULATOR [=n] && IIO [=y] && OF [=y] || STM32_ADC_CORE [=n] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=n] && HAS_IOMEM [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) || TI_ADC081C [=y] && IIO [=y] && I2C [=y] || TI_ADC0832 [=n] && IIO [=y] && SPI [=n] || TI_ADC084S021 [=n] && IIO [=y] && SPI [=n] || TI_ADC12138 [=n] && IIO [=y] && SPI [=n] || TI_ADC108S102 [=n] && IIO [=y] && SPI [=n] || TI_ADC161S626 [=n] && IIO [=y] && SPI [=n] || TI_ADS1015 [=y] && IIO [=y] && I2C [=y] || TI_ADS7950 [=n] && IIO [=y] && SPI [=n] && GPIOLIB [=y] || TI_ADS131E08 [=n] && IIO [=y] && SPI [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || TI_TLC4541 [=n] && IIO [=y] && SPI [=n] || TI_TSC2046 [=n] && IIO [=y] && SPI [=n] || VF610_ADC [=n] && IIO [=y] && OF [=y] && HAS_IOMEM [=y] || XILINX_XADC [=y] && IIO [=y] && HAS_IOMEM [=y] || ATLAS_PH_SENSOR [=n] && IIO [=y] && I2C [=y] || CCS811 [=n] && IIO [=y] && I2C [=y] || PMS7003 [=n] && IIO [=y] && SERIAL_DEV_BUS [=n] || SCD30_CORE [=y] && IIO [=y] || SCD4X [=y] && IIO [=y] && I2C [=y] || SPS30 [=y] && IIO [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y] || ADXRS290 [=n] && IIO [=y] && SPI [=n] || BMG160 [=n] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) || FXAS21002C [=n] && IIO [=y] && (I2C [=y] || SPI_MASTER [=n]) || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || MPU3050 [=y] && IIO [=y] || AFE4403 [=n] && IIO [=y] && SPI_MASTER [=n] || AFE4404 [=y] && IIO [=y] && I2C [=y] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || AM2315 [=n] && IIO [=y] && I2C [=y] || HDC100X [=y] && IIO [=y] && I2C [=y] || HID_SENSOR_HUMIDITY [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HTS221 [=y] && IIO [=y] && (I2C [=y] || SPI [=n]) || BMI160 [=y] && IIO [=y] || KMX61 [=y] && IIO [=y] && I2C [=y] || INV_ICM42600 [=y] && IIO [=y] || INV_MPU6050_IIO [=n] && IIO [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI || ADJD_S311 [=n] && IIO [=y] && I2C [=y] || APDS9960 [=n] && IIO [=y] && I2C [=y] || AS73211 [=y] && IIO [=y] && I2C [=y] || GP2AP020A00F [=y] && IIO [=y] && I2C [=y] || ISL29125 [=y] && IIO [=y] && I2C [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || LTR501 [=n] && IIO [=y] && I2C [=y] || MAX44000 [=y] && IIO [=y] && I2C [=y] || SI1145 [=n] && IIO [=y] && I2C [=y] || ST_UVIS25 [=y] && IIO [=y] && (I2C [=y] || SPI [=n]) || TCS3414 [=y] && IIO [=y] && I2C [=y] || TCS3472 [=y] && IIO [=y] && I2C [=y] || VCNL4000 [=y] && IIO [=y] && I2C [=y] || VCNL4035 [=n] && IIO [=y] && I2C [=y] || AK8974 [=y] && IIO [=y] && I2C [=y] && OF [=y] || AK8975 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || BMC150_MAGN [=y] && IIO [=y] || MAG3110 [=y] && IIO [=y] && I2C [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || SENSORS_HMC5843 [=y] && IIO [=y] || SENSORS_RM3100 [=y] && IIO [=y] || YAMAHA_YAS530 [=y] && IIO [=y] && I2C [=y] || HID_SENSOR_INCLINOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || LMP91000 [=y] && IIO [=y] && I2C [=y] || DLHL60D [=n] && IIO [=y] && I2C [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || MPL3115 [=y] && IIO [=y] && I2C [=y] || MS5611 [=n] && IIO [=y] || ZPA2326 [=y] && IIO [=y] || AS3935 [=n] && IIO [=y] && SPI [=n] || ISL29501 [=n] && IIO [=y] && I2C [=y] || LIDAR_LITE_V2 [=n] && IIO [=y] && I2C [=y] || SX9310 [=y] && IIO [=y] && I2C [=y] || SX9500 [=y] && IIO [=y] && I2C [=y] || SRF08 [=y] && IIO [=y] && I2C [=y] || MAXIM_THERMOCOUPLE [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
+
+KCMP: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+
+OF_OVERLAY: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
+
+CRYPTO_DH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI
+
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 

@@ -1,23 +1,25 @@
-LCD_TDO24M: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
 
-RTC_DRV_S5M: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=m] && (MFD_SEC_CORE [=n] || COMPILE_TEST [=y])
+IOMMU_DEFAULT_PASSTHROUGH: y => no
+      Direct dependencies: <choice>
 
-RTC_DRV_DA9063: m => yes
-      Direct dependencies: RTC_CLASS [=y] && (MFD_DA9063 [=n] || MFD_DA9062 [=m])
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
 
-HID_LED: m => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=m] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+HZ_300: y => no
+      Direct dependencies: <choice>
 
-MD_RAID1: y => mod
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 
-AD5272: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CRYPTO_ECDH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-DRM_TOSHIBA_TC358764: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+USB_EZUSB_FX2: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y]
+      Reverse dependencies: USB_SERIAL_WHITEHEAT [=n] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN_PDA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y]
 

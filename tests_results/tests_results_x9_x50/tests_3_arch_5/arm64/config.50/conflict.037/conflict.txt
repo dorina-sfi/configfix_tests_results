@@ -1,18 +1,18 @@
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
-
-ARM64_VA_BITS_48: y => no
+CRC32_BIT: y => no
       Direct dependencies: <choice>
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+ROMFS_BACKED_BY_MTD: y => no
+      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
 
-SYSFS_SYSCALL: y => no
-      Direct dependencies: y
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-SECURITY_NETWORK: y => no
-      Direct dependencies: SECURITY [=y]
-      Reverse dependencies: SECURITY_SMACK [=n] && NET [=y] && INET [=n] && SECURITY [=y] || SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y]
+PINCTRL_PFC_R8A77951: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77951 [=y]
+
+TEGRA_IVC: y => no
+      Direct dependencies: ARCH_TEGRA [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
 

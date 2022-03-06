@@ -1,12 +1,14 @@
-MCP4725: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IP_SET_BITMAP_IP: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_SET [=m]
 
-USB_STORAGE: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && SCSI [=m]
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=m] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=n] && HWMON [=m] && IPMI_HANDLER [=m]
 
-MODULE_SIG_SHA224: y => no
-      Direct dependencies: <choice>
+PROC_FS: y => no
+      Direct dependencies: y
 
-SENSORS_LTC2978: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+NF_SOCKET_IPV6: m => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=m] || IPV6 [=m]=n) && NF_TABLES_IPV6 [=y] || NETFILTER_XT_MATCH_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP6_NF_IPTABLES [=n]
 

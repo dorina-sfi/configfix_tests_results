@@ -1,28 +1,25 @@
-CRYPTO_TWOFISH_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-
-CRYPTO_LZO: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-DEBUG_IRQFLAGS: y => no
+PROC_CHILDREN: y => no
       Direct dependencies: y
-      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-MTD_CFI: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
-
-RAS: y => no
+HPET_TIMER: y => no
       Direct dependencies: y
-      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=y] && PCIEPORTBUS [=y]
 
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+X86_MPPARSE: y => no
+      Direct dependencies: X86_LOCAL_APIC [=y]
 
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=n] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_RIVA [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_I740 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86_32 [=n] && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86 [=y] || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86 [=y] && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_NEOMAGIC [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=y] && STAGING [=y] && FB [=y] && PCI [=y]
+SND_HDA_GENERIC: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
+      Reverse dependencies: SND_HDA_CODEC_REALTEK [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_ANALOG [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_SIGMATEL [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_VIA [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CIRRUS [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CS8409 [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CONEXANT [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CA0110 [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CMEDIA [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
+
+POWER_SUPPLY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=y]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=n] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=n] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=y] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=y]
+
+SND_SOC_BT_SCO: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_MT2701_CS42448 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT2701 [=n] && I2C [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_MT8183_DA7219_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT8183 [=n] && I2C [=y] && GPIOLIB [=y] || SND_SOC_SAMSUNG_NEO1973_WM8753 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && MACH_NEO1973_GTA02 || SND_SOC_SAMSUNG_ARIES_WM8994 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && MFD_WM8994 [=y] && IIO [=y] && EXTCON [=y]
+
+LEGACY_VSYSCALL_XONLY: y => no
+      Direct dependencies: <choice>
 

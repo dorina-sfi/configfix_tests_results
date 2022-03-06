@@ -1,29 +1,27 @@
-SENSORS_NCT7802: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+VIDEO_AK881X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
 
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=m] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+TIPC_DIAG: m => yes
+      Direct dependencies: NET [=y] && TIPC [=m]
 
-ATM_MPOA: m => yes
-      Direct dependencies: NET [=y] && ATM [=m] && INET [=y] && ATM_LANE [=m]!=n
+VIDEO_UPD64083: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m]
 
-SND_SOC_WM8753: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-      Reverse dependencies: SND_SOC_SAMSUNG_NEO1973_WM8753 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MACH_NEO1973_GTA02 || SND_SOC_TEGRA_WM8753 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
+VIDEO_ADV7393: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
 
-SND_SOC_DAVINCI_ASP: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=m] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_DAVINCI || COMPILE_TEST [=y])
-      Reverse dependencies: SND_SOC_DAVINCI_EVM [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=m] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM355_EVM || SND_SOC_DAVINCI_EVM [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=m] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && SND_SOC_DM365_AIC3X_CODEC [=n] || SND_SOC_DAVINCI_EVM [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=m] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_EVM
+SND_NM256: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-SERIAL_8250_SHARE_IRQ: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_EXTENDED [=y]
-      Reverse dependencies: SERIAL_8250_IOC3 [=m] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=n] && IIO [=y] || IIO_SW_TRIGGER [=m] && IIO [=y]
 
-X86_INTEL_PSTATE: y => no
-      Direct dependencies: CPU_FREQ [=y] && X86 [=y]
-      Reverse dependencies: SCHED_MC_PRIO [=y] && SCHED_MC [=y] && CPU_SUP_INTEL [=y]
+NET_MPLS_GSO: y => mod
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-SND_SOC_CS35L35: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+FPGA_DFL_FME_MGR: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
 

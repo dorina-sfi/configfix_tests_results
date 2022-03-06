@@ -1,13 +1,15 @@
-HW_RANDOM_CCTRNG: m => yes
-      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y] && OF [=y]
+CAIF_TTY: m => yes
+      Direct dependencies: NETDEVICES [=y] && CAIF_DRIVERS [=y] && CAIF [=m] && TTY [=y]
 
-HID_SENSOR_IIO_COMMON: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
-      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=y] && USB_HID [=m] && HID_SENSOR_HUB [=m] && IIO [=y] || HID_SENSOR_ACCEL_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_GYRO_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_HUMIDITY [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_ALS [=n] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_PROX [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_MAGNETOMETER_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_INCLINOMETER_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_DEVICE_ROTATION [=n] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_CUSTOM_INTEL_HINGE [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_PRESS [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_TEMP [=m] && IIO [=y] && HID_SENSOR_HUB [=m]
+HID: m => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=m] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=m] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=y] && X86 [=y]
 
-USB_KBD: m => yes
-      Direct dependencies: USB_HID [=m]!=y && EXPERT [=y] && USB [=m] && INPUT [=y]
+QRTR_MHI: m => yes
+      Direct dependencies: NET [=y] && QRTR [=m] && MHI_BUS [=y]
+      Reverse dependencies: ATH11K_PCI [=m] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && ATH11K [=m] && PCI [=y]
 
-MMC_DW_HI3798CV200: m => yes
-      Direct dependencies: MMC [=m] && MMC_DW [=m]
+ACPI_HED: y => no
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_APEI_GHES [=y] && ACPI [=y] && ACPI_APEI [=y]
 

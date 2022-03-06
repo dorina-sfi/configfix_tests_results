@@ -1,29 +1,28 @@
-BT_HCIBT3C: m => yes
-      Direct dependencies: NET [=y] && BT [=m] && PCMCIA [=m]
+6LOWPAN_NHC_UDP: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
 
-TOUCHSCREEN_TOUCHWIN: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+6LOWPAN_NHC_IPV6: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
 
-INFINIBAND_RDMAVT: m => yes
-      Direct dependencies: INFINIBAND [=y] && (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && INFINIBAND_VIRT_DMA [=y] && X86_64 [=y] && PCI [=y]
+IR_XMP_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
 
-SUSPEND_FREEZER: y => no
-      Direct dependencies: SUSPEND [=y]
+USB_SERIAL_SPCP8X5: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+WILCO_EC_EVENTS: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && WILCO_EC [=m]
 
-JOYSTICK_AS5011: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && I2C [=y]
+IR_RC6_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
 
-SBP_TARGET: m => yes
-      Direct dependencies: TARGET_CORE [=m] && FIREWIRE [=y]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-PRIME_NUMBERS: m => no
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
+
+AIO: y => no
       Direct dependencies: y
-      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
-
-NET_DSA_SMSC_LAN9303_MDIO: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
 

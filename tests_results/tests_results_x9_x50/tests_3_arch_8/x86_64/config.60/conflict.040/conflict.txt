@@ -1,26 +1,31 @@
-INPUT_BMA150: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && I2C [=y]
+MEDIA_TUNER_TDA9887: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-
-SATA_NV: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
-
-HID_ITE: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-LEDS_SGM3140: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
-
-DEBUG_FS: y => no
+I2C: y => no
       Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=m] || BCACHE_CLOSURES_DEBUG [=n] && MD [=y] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=y] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=y] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || PUNIT_ATOM_DEBUG [=m] && PCI [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=y] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+      Reverse dependencies: X86_INTEL_MID [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && PCI [=n] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-ALTERA_FREEZE_BRIDGE: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
+X86_PM_TIMER: y => no
+      Direct dependencies: X86 [=y] && (ACPI [=y] || JAILHOUSE_GUEST [=n])
+      Reverse dependencies: JAILHOUSE_GUEST [=n] && HYPERVISOR_GUEST [=n] && X86_64 [=y] && PCI [=n]
 
-SND_SOC_AMD_RENOIR: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && X86 [=y] && PCI [=y]
+MEMORY: y => no
+      Direct dependencies: y
+      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=n] && MTD_RAW_NAND [=n] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=y] && MTK_MMSYS [=n] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
+
+VM_EVENT_COUNTERS: y => no
+      Direct dependencies: y
+
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 

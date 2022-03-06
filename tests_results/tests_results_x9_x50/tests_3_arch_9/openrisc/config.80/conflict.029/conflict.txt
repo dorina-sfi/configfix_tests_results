@@ -1,28 +1,29 @@
-USB_SL811_CS: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SL811_HCD [=m] && PCMCIA [=m]
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-GREYBUS_VIBRATOR: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m]
+CRAMFS_BLOCKDEV: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && CRAMFS [=y] && BLOCK [=y]
 
-BT_MTKUART: m => yes
-      Direct dependencies: NET [=y] && BT [=m] && SERIAL_DEV_BUS [=m]
+MEDIA_TUNER_TDA8290: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX18 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-JOYSTICK_IFORCE_USB: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && JOYSTICK_IFORCE [=m] && USB [=m]
+EFI_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-I2C_DIOLAN_U2C: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && USB [=m]
+MEDIA_TEST_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-KEYBOARD_PMIC8XXX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=m]
+CFG80211_CRDA_SUPPORT: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=y]
 
-VIDEO_MT9V011: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
-      Reverse dependencies: VIDEO_EM28XX_V4L2 [=m] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_CAMERA_SUPPORT [=y]
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
 
-USB_VIDEO_CLASS: m => yes
-      Direct dependencies: USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m]
+PROC_FS: y => no
+      Direct dependencies: y
 
-QCOM_RPMPD: m => yes
-      Direct dependencies: QCOM_SMD_RPM [=m]
+BLOCK: y => no
+      Direct dependencies: y
 

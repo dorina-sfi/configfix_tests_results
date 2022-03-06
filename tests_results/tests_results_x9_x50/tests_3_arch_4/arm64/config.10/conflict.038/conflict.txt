@@ -1,12 +1,14 @@
-CORESIGHT_SINK_TPIU: m => yes
-      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINKS_AND_SINKS [=m]
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=m] && ARM64 [=y]
 
-SENSORS_MCP3021: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=y] || IPV6 [=m]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && ATA [=n] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n)
 
-DRM_LVDS_CODEC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+COMMON_CLK_MT6779_MMSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK_MT6779 [=m]
 
-VHOST_VDPA: m => yes
-      Direct dependencies: VHOST_MENU [=y] && EVENTFD [=y] && VDPA [=m]
+MLX90614: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

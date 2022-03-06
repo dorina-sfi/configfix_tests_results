@@ -1,21 +1,22 @@
-USB_EHSET_TEST_FIXTURE: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+LEDS_NETXBIG: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (MACH_KIRKWOOD || COMPILE_TEST [=y]) && OF_GPIO [=y]
 
-COMEDI_NI_LABPC_ISA: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+MFD_MADERA_I2C: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_MADERA [=m] && I2C [=y]
 
-SVC_I3C_MASTER: m => yes
-      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
+MTD_NAND_FSL_IFC: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-HID_ROCCAT: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+LEDS_REGULATOR: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGULATOR [=y]
 
-SENSORS_ATXP1: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MTD_RAM: m => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=y] && HAS_IOMEM [=y]
 
-MMC_SDHCI_SPEAR: m => yes
-      Direct dependencies: MMC [=y] && MMC_SDHCI [=m] && (PLAT_SPEAR || COMPILE_TEST [=y]) && OF [=y]
+USERIO: m => yes
+      Direct dependencies: SERIO [=m]
 
-DRM_MSM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n)
+BACKLIGHT_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 

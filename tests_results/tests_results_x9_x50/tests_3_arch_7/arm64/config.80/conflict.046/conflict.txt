@@ -1,22 +1,26 @@
-HID_ELECOM: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && OF [=y]
 
-RMI4_SMB: m => yes
-      Direct dependencies: INPUT [=m] && RMI4_CORE [=m] && I2C [=m]
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
 
-TOUCHSCREEN_ELAN: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-ISL29020: m => yes
-      Direct dependencies: I2C [=m]
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-TOUCHSCREEN_EGALAX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=m] && OF [=y]
+FHANDLE: y => no
+      Direct dependencies: y
 
-SM_GCC_8150: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: SM_GPUCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SM_VIDEOCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+CRC_T10DIF: y => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
 
-TOUCHSCREEN_FUJITSU: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+VM_EVENT_COUNTERS: y => no
+      Direct dependencies: y
 

@@ -1,10 +1,12 @@
-SND_SOC_MT6359_ACCDET: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && MTK_PMIC_WRAP [=m]
-
-CGROUPS: y => no
+KCMP: y => no
       Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-MTD_NAND_SHARPSL: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_PXA || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 

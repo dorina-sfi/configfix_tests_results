@@ -1,16 +1,18 @@
-USB_GSPCA_STV0680: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m] && USB_GSPCA [=m]
+BLK_DEV_INTEGRITY: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=n]) && ATA [=m] || DM_INTEGRITY [=m] && MD [=y] && BLK_DEV_DM [=m] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
 
-ROMFS_BACKED_BY_BLOCK: y => no
-      Direct dependencies: <choice> && BLOCK [=y]
+CRYPTO_DH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI
 
-PINCTRL_MSM8994: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+REGULATOR_MC13783: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MC13XXX [=m]
 
-USB_RENESAS_USBHS_HCD: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_RENESAS_USBHS [=m]
+MIPI_I3C_HCI: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y]
 
-RADIO_TEF6862: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
-      Reverse dependencies: RADIO_TIMBERDALE [=n] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && MFD_TIMBERDALE [=n] && VIDEO_V4L2 [=m] && I2C [=y]
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 

@@ -1,38 +1,32 @@
-LIBCRC32C: y => no
+REGULATOR_ARIZONA_MICSUPP: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=y] || MFD_MADERA [=m]) && SND_SOC [=m]
+
+ALTERA_PR_IP_CORE: m => yes
+      Direct dependencies: FPGA [=m]
+
+CORESIGHT_CPU_DEBUG: m => yes
+      Direct dependencies: CORESIGHT [=m] && (ARM || ARM64 [=y]) && DEBUG_FS [=y]
+
+W1_SLAVE_DS2406: m => yes
+      Direct dependencies: W1 [=m]
+
+SND_SOC_CS35L32: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+QCOM_SMD_RPM: m => yes
+      Direct dependencies: (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && RPMSG [=m]
+
+DAMON_VADDR_KUNIT_TEST: y => no
+      Direct dependencies: DAMON_VADDR [=y] && KUNIT [=y]=y
+
+MMC_CAVIUM_THUNDERX: m => yes
+      Direct dependencies: MMC [=m] && PCI [=y] && 64BIT [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && GPIO_THUNDERX [=m] && OF_ADDRESS [=y]
+
+SOC_SAMSUNG: y => no
       Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || BATMAN_ADV [=n] && NET [=y] || OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=y] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || MD_RAID456 [=y] && MD [=y] && BLK_DEV_MD [=y] || DM_PERSISTENT_DATA [=y] && MD [=y] && BLK_DEV_DM [=y] || BNX2X [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y]
 
-OF: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y]
-
-CRC32_SARWATE: y => no
-      Direct dependencies: <choice>
-
-RATIONAL_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
-
-SM_GCC_8250: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SM_CAMCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=n] || ARCH_BRCMSTB [=y] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=n] || ARCH_HISI [=n] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=y] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
-
-RST_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
-
-CRC_CCITT: y => no
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=y] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=y] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=y] || MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || NETLABEL [=n] && NET [=y] && INET [=y] && SECURITY [=n] && IPV6 [=y] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=n] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=n] && AX25 [=n] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=y] && NFC_NCI [=y] || NFC_PN544 [=n] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_VIA [=y] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=y] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=y] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=y] && MISDN [=y]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=n] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=n]
-
-CRYPTO_CMAC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=n]
-
-TEGRA_HSP_MBOX: y => no
-      Direct dependencies: MAILBOX [=y] && ARCH_TEGRA [=y]
-      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
+EXYNOS_PMU: y => no
+      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] || (ARM || ARM64 [=y]) && COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_EXYNOS [=y]
 

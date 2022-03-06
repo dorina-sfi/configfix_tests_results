@@ -1,24 +1,26 @@
-POSIX_TIMERS: y => no
-      Direct dependencies: y
+REGULATOR_RTQ2134: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
 
-XZ_DEC_ARMTHUMB: y => no
-      Direct dependencies: XZ_DEC [=y]
+DVB_DIB3000MC: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_DIB3000MC [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n]
 
-ADVISE_SYSCALLS: y => no
-      Direct dependencies: y
+DVB_ASCOT2E: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=m] && SPI_MASTER [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-IOSF_MBI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=y] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=y] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=y] && MMC [=y] && MMC_SDHCI [=y] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && X86 [=y] && EFI [=n] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=n] || PUNIT_ATOM_DEBUG [=y] && PCI [=y]
+CRYPTO_RSA: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=n] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=y] && CRYPTO_DEV_SP_CCP [=n]
 
-CRYPTO_CAMELLIA_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+DVB_DIB7000M: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MOUSE_PS2_TRACKPOINT: y => no
-      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
+MXM_WMI: m => no
+      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=m]
+      Reverse dependencies: DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y]
 
-CGROUPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+HID_UCLOGIC: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && USB_HID [=m]
 

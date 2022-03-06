@@ -1,22 +1,24 @@
-ARM64_4K_PAGES: y => no
-      Direct dependencies: <choice>
+CRYPTO_GHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-MTK_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: ARCH_MEDIATEK [=y]
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-VITESSE_PHY: y => no
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
-      Reverse dependencies: NET_DSA_VITESSE_VSC73XX [=y] && NETDEVICES [=y] && NET_DSA [=y]
+MEDIA_TUNER_TEA5761: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 
-COMPACTION: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-MMC_S3C_PIO: y => no
-      Direct dependencies: <choice>
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-SYNC_FILE: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: QORIQ_CPUFREQ [=y] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=n])
 

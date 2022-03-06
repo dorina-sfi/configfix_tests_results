@@ -1,17 +1,19 @@
-REGULATOR_MT6359: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+MEDIA_TUNER_TEA5767: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 
-RTC_DRV_MT6397: m => yes
-      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
+TEST_LIST_SORT: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-SCSI_SAS_ATTRS: m => yes
-      Direct dependencies: SCSI [=m]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=m] && SCSI [=m] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=m]
+SC_GCC_7180: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASS_CORECC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_MSS_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-NET_DSA_TAG_XRS700X: m => no
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_XRS700X [=m] && NETDEVICES [=y] && NET_DSA [=m]
+SM_GCC_8150: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_GPUCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-CAN_RAW: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 

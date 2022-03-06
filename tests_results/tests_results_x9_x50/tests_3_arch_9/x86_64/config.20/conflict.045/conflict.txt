@@ -1,30 +1,30 @@
-PCIEASPM: y => no
-      Direct dependencies: PCI [=y]
+USB_ISP116X_HCD: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && HAS_IOMEM [=y]
 
-DW_APB_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: X86_INTEL_MID [=y] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && PCI [=y] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || DW_APB_TIMER_OF [=n] && GENERIC_CLOCKEVENTS [=y]
+SENSORS_W83793: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-COMEDI_PCI_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=m] && PCI [=y]
+BACKLIGHT_LM3533: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_LM3533 [=m]
 
-DM_THIN_PROVISIONING: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+DVB_OR51132: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-THERMAL_WRITABLE_TRIPS: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=m] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] && ACPI [=y]
+REGULATOR_MT6358: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
 
-CRYPTO_LIB_CHACHA20POLY1305: m => yes
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
-      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
+THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
+      Direct dependencies: <choice>
 
-COMEDI_NI_65XX: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+PINCONF: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: GENERIC_PINCONF [=y] && PINCTRL [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=y] && ARCH_AT91 || PINCTRL_AMD [=n] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=n] || COMPILE_TEST [=n]) || PINCTRL_DA850_PUPD [=n] && PINCTRL [=y] && OF [=y] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=n]) || PINCTRL_LANTIQ [=n] && PINCTRL [=y] && LANTIQ || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_SX150X [=n] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_ST [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_KEEMBAY [=n] && PINCTRL [=y] && (ARCH_KEEMBAY || ARM64 && COMPILE_TEST [=n]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_ASPEED [=n] && PINCTRL [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) && OF [=y] && MFD_SYSCON [=y] || PINCTRL_BCM281XX [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM_MOBILE || COMPILE_TEST [=n]) || PINCTRL_BCM2835 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST [=n]) || PINCTRL_BCM63XX [=n] && PINCTRL [=y] || PINCTRL_IPROC_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || PINCTRL_NSP_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_NSP || COMPILE_TEST [=n]) || PINCTRL_IMX1_CORE [=n] && PINCTRL [=y] || PINCTRL_MXS [=n] && PINCTRL [=y] || PINCTRL_MVEBU [=n] && PINCTRL [=y] || PINCTRL_ARMADA_37XX [=n] && PINCTRL [=y] || PINCTRL_NPCM7XX [=n] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_SAMSUNG [=n] && PINCTRL [=y] && OF_GPIO [=y] || PINCTRL_SPRD [=n] && PINCTRL [=y] || PINCTRL_TEGRA [=n] && PINCTRL [=y] || PINCTRL_TEGRA_XUSB [=n] && PINCTRL [=y] || PINCTRL_MESON [=n] && PINCTRL [=y] && ARCH_MESON && OF [=y] || PINCTRL_LOCHNAGAR [=n] && PINCTRL [=y] && MFD_LOCHNAGAR [=n] || PINCTRL_EQUILIBRIUM [=y] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (X86 [=y] || COMPILE_TEST [=n]) || PINCTRL_LYNXPOINT [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) && ACPI [=n] || PINCTRL_MERRIFIELD [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) && X86_INTEL_MID [=n] || PINCTRL_INTEL [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) || PINCTRL_NOMADIK [=n] && PINCTRL [=y] && (ARCH_U8500 || ARCH_NOMADIK) && OF [=y] && GPIOLIB [=y] || PINCTRL_PXA [=n] && PINCTRL [=y] && (ARCH_PXA || COMPILE_TEST [=n]) || PINCTRL_MSM [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_QCOM_SPMI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && OF [=y] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_LPASS_LPI [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_SH_PFC [=n] && PINCTRL [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+DVB_NXT200X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-VGA_CONSOLE: y => no
-      Direct dependencies: VT [=y] && !4xx && !PPC_8xx && !SPARC && !M68K && !PARISC && !SUPERH && (!ARM || ARCH_FOOTBRIDGE || ARCH_INTEGRATOR || ARCH_NETWINDER) && !ARM64 && !ARC && !MICROBLAZE && !OPENRISC && !NDS32 && !S390 && !UML
+TYPEC_TCPCI: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=y] && TYPEC_TCPM [=m] && I2C [=y]
 

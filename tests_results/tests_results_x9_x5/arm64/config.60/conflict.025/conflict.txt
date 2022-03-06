@@ -1,17 +1,18 @@
-IIO_BUFFER_DMA: y => mod
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
+FAILOVER: m => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=m] && NETDEVICES [=y]
 
-DM_DUST: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+NET_VENDOR_BROADCOM: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && (SSB_POSSIBLE [=y] && HAS_DMA [=y] || PCI [=y] || BCM63XX || SIBYTE_SB1xxx_SOC)
+      Reverse dependencies: SCSI_BNX2_ISCSI [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && NET [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y] || SCSI_BNX2X_FCOE [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && LIBFC [=n] && LIBFCOE [=n] && MMU [=y]
 
-UIO_PDRV_GENIRQ: m => yes
-      Direct dependencies: UIO [=m]
+SCSI_SYM53C8XX_2: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
 
-SMSC_PHY: y => no
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
-      Reverse dependencies: SMSC9420 [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SMSC [=y] && PCI [=y] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
+PINCTRL_AS3722: m => yes
+      Direct dependencies: PINCTRL [=y] && MFD_AS3722 [=m] && GPIOLIB [=y]
 
-FPGA_MGR_STRATIX10_SOC: m => yes
-      Direct dependencies: FPGA [=y] && ARCH_INTEL_SOCFPGA [=y] && INTEL_STRATIX10_SERVICE [=m]
+SCSI_ISCSI_ATTRS: m => yes
+      Direct dependencies: SCSI [=m] && NET [=y]
+      Reverse dependencies: ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && INET [=n] || SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || SCSI_CXGB4_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) && PTP_1588_CLOCK_OPTIONAL [=m] && ETHERNET [=y] && (TLS [=n] || TLS [=n]=n) || SCSI_BNX2_ISCSI [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && NET [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y] || BE2ISCSI [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && NET [=y] || SCSI_QLA_ISCSI [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && NET [=y] || QEDI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && UIO [=m] && QED [=y] || INFINIBAND_ISER [=n] && INFINIBAND [=n] && SCSI [=m] && INET [=n] && INFINIBAND_ADDR_TRANS [=n]
 

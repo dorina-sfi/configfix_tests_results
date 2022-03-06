@@ -1,23 +1,27 @@
-DPOT_DAC: m => yes
-      Direct dependencies: IIO [=m] && OF [=y]
+POWER_SUPPLY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=y] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=y] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-USB_CDNS3_IMX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_CDNS3 [=m] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y]
 
-VIDEO_OV2640: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_CAMERA_SUPPORT [=y]
+SND_SOC_FSL_ESAI: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=y] || SND_AC97_CODEC [=y]=n)
 
-ROCKCHIP_SARADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) && RESET_CONTROLLER [=y]
+PINCTRL_RENESAS: y => no
+      Direct dependencies: PINCTRL [=y]
 
-DVB_ASCOT2E: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && SPI_MASTER [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-TSL2583: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
 
-SPS30_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+TI_SCI_PROTOCOL: y => no
+      Direct dependencies: TI_MESSAGE_MANAGER [=y]
+      Reverse dependencies: ARCH_K3 [=y]
 

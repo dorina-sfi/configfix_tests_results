@@ -1,28 +1,26 @@
-USB_NET_INT51X1: m => yes
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
+PPS_CLIENT_GPIO: m => yes
+      Direct dependencies: PPS [=m]
 
-DVB_NXT6000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIGITV [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+MTD_COMPLEX_MAPPINGS: y => no
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=m] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
 
-DM_ZERO: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=n] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
 
-DVB_SI2165: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=m] || SCSI_UFS_BSG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=m] && SCSI_UFSHCD [=m]
-
-VIDEO_OV8865: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && PM [=y] && VIDEO_V4L2 [=m]
-
-VIDEO_TDA7432: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-SCSI_ESAS2R: m => yes
+SCSI_SYM53C8XX_2: m => yes
       Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
+
+SERIAL_8250_EXAR: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_PCI [=m]
+
+SENSORS_INSPUR_IPSPS: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
+
+DWMAC_IMX8: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=y] && STMMAC_ETH [=m] && STMMAC_PLATFORM [=m] && OF [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
+
+QCOM_PM8XXX_XOADC: m => yes
+      Direct dependencies: IIO [=m] && MFD_PM8XXX [=m]
 

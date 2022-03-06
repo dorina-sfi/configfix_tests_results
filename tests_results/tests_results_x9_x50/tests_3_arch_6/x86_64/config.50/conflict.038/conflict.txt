@@ -1,19 +1,22 @@
-MS5637: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-DEBUG_MEMORY_INIT: y => no
+64BIT: y => no
       Direct dependencies: y
 
-SENSORS_NPCM7XX: m => yes
-      Direct dependencies: HWMON [=m]
-
-DRM_PANEL_BOE_BF060Y8M_AJ0: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
-
-YENTA_TI: y => no
-      Direct dependencies: PCCARD [=m] && YENTA [=m]
-
-CONFIGFS_FS: y => mod
+EEPROM_93CX6: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=y] && ACPI [=y] || TARGET_CORE [=y] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=m] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=n]
+      Reverse dependencies: SCSI_WD719X [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || KS8851 [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICREL [=n] && SPI [=y] || KS8851_MLL [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICREL [=n] && HAS_IOMEM [=y] || AX88796_93CX6 [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_8390 [=n] && AX88796 [=n] || ADM8211 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ADMTEK [=n] && MAC80211 [=y] && PCI [=y] || RT2400PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2500PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT61PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RTL8180 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_REALTEK [=n] && MAC80211 [=y] && PCI [=y] || RTL8187 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_REALTEK [=n] && MAC80211 [=y] && USB [=n]
+
+HID_SENSOR_IIO_COMMON: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y]
+      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=n] && USB_HID [=n] && HID_SENSOR_HUB [=y] && IIO [=y] || HID_SENSOR_ACCEL_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_GYRO_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=y]
+
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
+
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 

@@ -1,28 +1,23 @@
-LIBCRC32C: y => no
+PCF50633_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_PCF50633 [=m]
+
+CRYPTO_CRCT10DIF: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRC_T10DIF [=y]
+
+COMEDI_NI_LABPC_ISA: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+STRICT_MODULE_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+
+CPU_SUP_INTEL: y => no
       Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=n] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=n] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=y] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=n] && BLOCK [=n] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=n] || GFS2_FS [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n]
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+CHARLCD_BL_OFF: y => no
+      Direct dependencies: <choice>
 
-FAIR_GROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
-
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
-
-CRYPTO_RSA: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
-
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
-
-CRYPTO_CRYPTD: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=m] || BCACHE_CLOSURES_DEBUG [=y] && MD [=y] && BCACHE [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=m] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || PUNIT_ATOM_DEBUG [=n] && PCI [=n] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 

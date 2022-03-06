@@ -1,32 +1,31 @@
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-BLK_DEV_BSGLIB: y => no
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+INPUT_FF_MEMLESS: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && PARPORT [=y] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=y] && JOYSTICK_XPAD [=n] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=y] && MFD_ARIZONA [=y] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_PM8XXX [=n] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=y] && INPUT [=y] && INPUT_MISC [=y] && (MFD_MAX77693 [=y] || MFD_MAX77843 [=y]) && PWM [=y] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=y] && MFD_MAX8997 [=n] || INPUT_GPIO_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_REGULATOR_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && TWL4030_CORE [=y] || INPUT_TWL6040_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && TWL6040_CORE [=y] || INPUT_PWM_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && PWM [=y] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_DRV2665_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=n]) || HID_ACRUX_FF [=n] && INPUT [=y] && HID [=y] && HID_ACRUX [=n] || HID_BETOP_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=n] || HID_EMS_FF [=y] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=n] || LOGITECH_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || LOGIG940_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || LOGIWHEELS_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || HID_MAYFLASH [=n] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=y] && INPUT [=y] && HID [=y] || NINTENDO_FF [=n] && INPUT [=y] && HID [=y] && HID_NINTENDO [=n] || PANTHERLORD_FF [=y] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=y] || PLAYSTATION_FF [=n] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=y] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=y] && INPUT [=y] && HID [=y] && HID_GREENASIA [=y] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=y] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=y] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=y]
+
+BLK_DEV_INTEGRITY: y => no
       Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y]
+      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=n]) && ATA [=n] || DM_INTEGRITY [=n] && MD [=n] && BLK_DEV_DM [=n] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
 
-MSM_GCC_8994: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_MMCC_8994 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+HID_SENSOR_IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=y] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-CRYPTO_CRC32C: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=n] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
-
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
-
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
-
-I2C: y => no
+EXTCON: y => no
       Direct dependencies: y
-      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7793 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7791 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
 
-MD_RAID10: y => no
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
+THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
+      Direct dependencies: <choice>
+
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

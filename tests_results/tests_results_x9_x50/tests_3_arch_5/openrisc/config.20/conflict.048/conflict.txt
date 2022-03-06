@@ -1,17 +1,20 @@
-I2C_DLN2: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_DLN2 [=m]
-
-VFIO_MDEV: m => yes
-      Direct dependencies: VFIO [=m]
-
-SHMEM: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
-
-VIDEO_DEV: y => mod
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-AUTOFS_FS: y => no
+AUXDISPLAY: y => no
       Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+
+USB_ULPI_BUS: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y]
+
+BOOT_CONFIG: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
+
+LCD_ILI9320: y => no
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI [=y]
+      Reverse dependencies: LCD_VGG2432A4 [=y] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI_MASTER [=y]
+
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=n] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=n] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 

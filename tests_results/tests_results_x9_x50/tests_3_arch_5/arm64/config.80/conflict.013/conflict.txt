@@ -1,19 +1,16 @@
-DEVFREQ_EVENT_EXYNOS_PPMU: y => no
-      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y])
+USB_PXA27X: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_IOMEM [=y]
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+TCM_PSCSI: m => yes
+      Direct dependencies: TARGET_CORE [=m] && SCSI [=y]
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=y]) && OF [=y]
+GPIO_GENERIC_PLATFORM: m => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MFD_VEXPRESS_SYSREG [=m] && HAS_IOMEM [=y] && VEXPRESS_CONFIG [=y] && GPIOLIB [=y]
 
-PHY_MTK_HDMI: y => no
-      Direct dependencies: (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && OF [=y]
-      Reverse dependencies: DRM_MEDIATEK_HDMI [=y] && HAS_IOMEM [=y] && DRM_MEDIATEK [=y]
+DPOT_DAC: m => yes
+      Direct dependencies: IIO [=m] && OF [=y]
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+MMC_SDHCI_OF_ESDHC: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && (PPC || ARCH_MXC [=n] || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=n])
 

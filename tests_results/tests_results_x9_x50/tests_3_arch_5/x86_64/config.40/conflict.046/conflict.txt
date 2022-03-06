@@ -1,17 +1,17 @@
-PROFILE_ANNOTATED_BRANCHES: y => no
+KERNEL_GZIP: y => no
+      Direct dependencies: <choice> && HAVE_KERNEL_GZIP [=y]
+
+CPU_FREQ_DEFAULT_GOV_ONDEMAND: y => no
+      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n])
+
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+
+CMA_SIZE_SEL_MIN: y => no
       Direct dependencies: <choice>
 
-CC_OPTIMIZE_FOR_SIZE: y => no
-      Direct dependencies: <choice>
-
-W1_SLAVE_DS28E04: m => yes
-      Direct dependencies: W1 [=m]
-
-CRYPTO_RSA: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
-
-CRYPTO_SHA256: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MODULE_SIG_SHA224 [=y] && <choice> || MODULE_SIG_SHA256 [=n] && <choice> || BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_AH [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=n] && IPV6 [=n] || CFG80211 [=y] && NET [=y] && WIRELESS [=y] && (RFKILL [=y] || !RFKILL [=y]) && CFG80211_USE_KERNEL_REGDB_KEYS [=y] || USB_RTL8152 [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n] || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_SHA256_SSSE3 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SHA256_PPC_SPE [=n] && CRYPTO [=y] && PPC && SPE || CRYPTO_SHA256_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA256_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DRBG_HASH [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 || COMPILE_TEST [=n]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=n]
+FONT_8x16: y => no
+      Direct dependencies: FONT_SUPPORT [=y]
+      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=n] && VIDEO_DEV [=n] && SND [=n] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=n] && VIDEO_DEV [=n] && SND [=n] && I2C [=y] || VIDEO_VIMC [=n] && MEDIA_SUPPORT [=n] && MEDIA_TEST_SUPPORT [=n] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] || VIDEO_VIVID [=n] && MEDIA_SUPPORT [=n] && MEDIA_TEST_SUPPORT [=n] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && !SPARC32 && !SPARC64 && FB [=n] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=n] && (X86 [=y] || PPC) && FRAMEBUFFER_CONSOLE [=n] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=n] && PCI [=n] && FRAMEBUFFER_CONSOLE [=n] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=n] && PCI [=n] && FRAMEBUFFER_CONSOLE [=n] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=n] && PCI [=n] && FRAMEBUFFER_CONSOLE [=n] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=y] && USB [=y] && VT [=y] && BROKEN [=n] || FONT_AUTOSELECT [=y] && FONT_SUPPORT [=y] && !FONT_8x8 [=n] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
 

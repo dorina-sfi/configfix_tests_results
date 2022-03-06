@@ -1,29 +1,29 @@
-UNIX98_PTYS: y => no
-      Direct dependencies: TTY [=y]
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-HZ_250: y => no
+CRYPTO_LZ4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+CPU_SUP_CENTAUR: y => no
+      Direct dependencies: y
+
+CRC7: y => no
+      Direct dependencies: y
+      Reverse dependencies: WILC1000_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=n] && INET [=n] && SPI [=y] || WL1251 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && MAC80211 [=n] || WLCORE_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && WLCORE [=n] && SPI_MASTER [=y] && OF [=y] || MMC_SPI [=y] && MMC [=y] && SPI_MASTER [=y]
+
+USB_ULPI_BUS: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y]
+
+RUST_BUILD_ASSERT_WARN: y => no
       Direct dependencies: <choice>
 
-REGULATOR: y => no
-      Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=y] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=n])
+SLUB: y => no
+      Direct dependencies: <choice>
 
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=y] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=y]
-
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=n] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
-
-SND_SOC_INTEL_MACH: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
-      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
-
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
-
-HID_PICOLCD_BACKLIGHT: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
 

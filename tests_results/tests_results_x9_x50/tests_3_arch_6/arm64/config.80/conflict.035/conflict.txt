@@ -1,18 +1,20 @@
-ADE7854: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=m] && (SPI [=y] || I2C [=y])
+MEDIA_TUNER_TEA5767: y => mod
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 
-FB_TFT_SSD1306: m => yes
-      Direct dependencies: STAGING [=y] && FB_TFT [=m]
+SENSORS_IR35221: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-SENSORS_BPA_RS600: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+NFT_SOCKET: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 
-GREYBUS_LIGHT: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m] && LEDS_CLASS [=y]
+NFT_SOCKET: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 
-COMEDI_DAS6402: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=y] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=m] || I2C_EMEV2 [=m] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || ARCH_LAYERSCAPE [=y] || COLDFIRE) || I2C_MLXBF [=m] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=m] && !X86_32 || I2C_STM32F7 [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y])
 
-SND_SOC_IMX_ES8328: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && (I2C [=y] || SPI [=y])
+DRM_PANEL_SITRONIX_ST7703: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 

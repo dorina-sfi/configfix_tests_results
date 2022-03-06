@@ -1,13 +1,16 @@
-REGULATOR_BD71828: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD71828 [=m]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=y] || AD7768_1 [=y] && IIO [=y] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
+
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=y] && GPIOLIB [=y]
 
 SPARSE_IRQ: y => no
       Direct dependencies: y
       Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
-
-STK8312: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PINCTRL_BCM2835: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_BCM2835 [=y]
 

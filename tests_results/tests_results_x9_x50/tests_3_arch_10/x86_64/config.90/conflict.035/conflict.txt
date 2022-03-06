@@ -1,37 +1,38 @@
-EXTCON: y => no
+CPU_IDLE: y => no
       Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=n] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=n] && OF [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
+      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
 
-POSIX_TIMERS: y => no
+DEBUG_KERNEL: y => no
       Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-PAGE_REPORTING: y => no
-      Direct dependencies: y
-      Reverse dependencies: VIRTIO_BALLOON [=n] && VIRTIO_MENU [=n] && VIRTIO [=y] || HYPERV_BALLOON [=y] && HYPERV [=y]
+COMPACTION: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
 
-TOUCHSCREEN_USB_ZYTRONIC: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
-
-MXC_CLK: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
-      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=n] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MN [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MQ [=n] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
-
-REGULATOR: y => no
-      Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=n] && GPIOLIB [=y] && ACPI [=y] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=y])
-
-SPI_ALTERA_CORE: y => no
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: SPI_ALTERA [=y] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
-
-CGROUPS: y => no
-      Direct dependencies: y
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
       Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-USB_OHCI_HCD_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=n] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=n] || USB_OHCI_HCD_OMAP3 [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+CRYPTO_LZ4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-KASAN_OUTLINE: y => no
-      Direct dependencies: <choice>
+RATIONAL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
+
+THERMAL_WRITABLE_TRIPS: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=n] && ACPI [=y]
+
+CRYPTO_SM4_AESNI_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SM4_AESNI_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+MEDIA_TUNER_SIMPLE: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_PVRUSB2_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && PCI [=n] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 

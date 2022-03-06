@@ -1,36 +1,32 @@
-SCSI_ISCSI_ATTRS: y => mod
-      Direct dependencies: SCSI [=y] && NET [=y]
-      Reverse dependencies: ISCSI_TCP [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n) || SCSI_CXGB4_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n) && PTP_1588_CLOCK_OPTIONAL [=y] && ETHERNET [=n] && (TLS [=m] || TLS [=m]=n) || SCSI_BNX2_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=n] && (IPV6 [=m] || IPV6 [=m]=n) && MMU [=y] || BE2ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || QEDI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && UIO [=n] && QED [=n] || INFINIBAND_ISER [=n] && INFINIBAND [=m] && SCSI [=y] && INET [=y] && INFINIBAND_ADDR_TRANS [=n]
+NETFILTER_XT_TARGET_MASQUERADE: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_NAT [=y]
+      Reverse dependencies: IP_NF_TARGET_MASQUERADE [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && IP_NF_NAT [=m] || IP6_NF_TARGET_MASQUERADE [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && IP6_NF_NAT [=n]
 
-VIDEO_ADV7343: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_DAVINCI_VPIF_DISPLAY [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m] && (ARCH_DAVINCI || COMPILE_TEST [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=m] && ARM64 [=y]
 
-BT_MRVL: m => yes
-      Direct dependencies: NET [=y] && BT [=m]
+RPCSEC_GSS_KRB5: m => yes
+      Direct dependencies: NETWORK_FILESYSTEMS [=y] && SUNRPC [=y] && CRYPTO [=y] && CRYPTO_MD5 [=y] && CRYPTO_DES [=y] && CRYPTO_CBC [=y] && CRYPTO_CTS [=m] && CRYPTO_ECB [=m] && CRYPTO_HMAC [=y] && CRYPTO_SHA1 [=y] && CRYPTO_AES [=y]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+BACKLIGHT_LM3639: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
 
-INET_UDP_DIAG: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && INET_DIAG [=y] && (IPV6 [=m] || IPV6 [=m]=n)
+I2C_KEMPLD: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_KEMPLD [=m]
 
-SMSC_PHY: m => no
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
-      Reverse dependencies: SMSC9420 [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SMSC [=n] && PCI [=n] || USB_NET_SMSC95XX [=m] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
+DRM_PANEL_SAMSUNG_SOFEF00: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-IR_IGUANA: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-AK8975: m => no
-      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: AK09911 [=m] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+QCOM_RPMPD: m => yes
+      Direct dependencies: QCOM_SMD_RPM [=m]
 
-CHARGER_MAX77693: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77693 [=m]
+BT_HCIUART: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && (SERIAL_DEV_BUS [=y] || !SERIAL_DEV_BUS [=y]) && TTY [=y]
 
-NET_DSA_TAG_DSA: m => no
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_MV88E6XXX [=m] && NETDEVICES [=y] && NET_DSA [=m] && PTP_1588_CLOCK_OPTIONAL [=y]
+FUTEX: y => no
+      Direct dependencies: y
 

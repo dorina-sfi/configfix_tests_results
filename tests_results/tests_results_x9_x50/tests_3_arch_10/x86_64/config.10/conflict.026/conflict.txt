@@ -1,39 +1,35 @@
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=n] && SIGNED_PE_FILE_VERIFICATION [=n]
 
-PM: y => no
+JFFS2_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=m]
+
+MTD_AMD76XROM: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && X86 [=y] && MTD_JEDECPROBE [=m]
+
+XILLYBUS_PCIE: m => yes
+      Direct dependencies: XILLYBUS [=m] && PCI_MSI [=y]
+
+CPUMASK_OFFSTACK: y => no
       Direct dependencies: y
-      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
+      Reverse dependencies: MAXSMP [=y] && X86_64 [=y] && SMP [=y] && DEBUG_KERNEL [=y]
 
-MEDIA_TEST_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+MTD_NAND_DENALI_PCI: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && PCI [=y]
 
-SOFTLOCKUP_DETECTOR: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !S390
-      Reverse dependencies: HARDLOCKUP_DETECTOR_PERF [=y]
+SQUASHFS_DECOMP_MULTI_PERCPU: y => no
+      Direct dependencies: <choice>
 
-HWMON: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: HABANA_AI [=n] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && (AGP [=y] || !AGP [=y]) || DRM_AMDGPU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=n] && BACKLIGHT_CLASS_DEVICE [=y] || HP_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=y] && PCI [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-KEYS: y => no
+KCMP: y => no
       Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=y] && INET [=n] || CEPH_LIB [=n] && NET [=y] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=y] || AGP [=y]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-CRYPTO_TWOFISH_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-
-SYSFS: y => no
+DEBUG_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
-
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
-
-HYPERVISOR_GUEST: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86_VSMP [=y] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=y]
+      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=y] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=y] && EXPERT [=y] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=m] && SYSCTL [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || PUNIT_ATOM_DEBUG [=n] && PCI [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 

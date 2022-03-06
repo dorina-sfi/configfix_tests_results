@@ -1,11 +1,11 @@
-ROCKCHIP_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
-      Reverse dependencies: ARCH_ROCKCHIP [=y]
-
-EPOLL: y => no
+PM: y => no
       Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_VEXPRESS [=y] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS [=n] || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS [=n]
 
-SHMEM: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=m] || QCOM_COMMAND_DB [=m]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=n] && MMU [=y]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+
+TMPFS: y => no
+      Direct dependencies: SHMEM [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 

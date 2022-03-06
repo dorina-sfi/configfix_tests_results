@@ -1,26 +1,28 @@
-CROS_EC_I2C: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && CROS_EC [=m] && I2C [=y]
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 
-JOYSTICK_ADC: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=m]
+CMA_SIZE_SEL_PERCENTAGE: y => no
+      Direct dependencies: <choice>
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: X86 [=y] || KVM [=m] && VIRTUALIZATION [=y] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=y] && X86_LOCAL_APIC [=y]
+LOCK_DOWN_KERNEL_FORCE_INTEGRITY: y => no
+      Direct dependencies: <choice>
 
-HDC2010: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+THERMAL_WRITABLE_TRIPS: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] && ACPI [=y]
 
-XILINX_XADC: m => yes
-      Direct dependencies: IIO [=m] && HAS_IOMEM [=y]
+RMI4_F30: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-SND_SOC_TAS2562: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+INPUT_SPARSEKMAP: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: INPUT_WISTRON_BTNS [=n] && INPUT [=y] && INPUT_MISC [=n] && X86_32 [=n] || INPUT_DM355EVM [=n] && INPUT [=y] && INPUT_MISC [=n] && MFD_DM355EVM_MSP [=n] || HUAWEI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_BATTERY [=y] && ACPI_WMI [=n] && INPUT [=y] || ACER_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && ACPI_WMI [=n] || ASUS_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) || ASUS_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && ACPI_BATTERY [=y] && INPUT [=y] && HWMON [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (RFKILL [=y] || RFKILL [=y]=n) && HOTPLUG_PCI [=n] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) || EEEPC_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && HOTPLUG_PCI [=n] && BACKLIGHT_CLASS_DEVICE [=y] || FUJITSU_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) || HP_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) || IDEAPAD_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && RFKILL [=y] && INPUT [=y] && SERIO_I8042 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && (ACPI_WMI [=n] || ACPI_WMI [=n]=n) || MSI_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && RFKILL [=y] && INPUT [=y] && SERIO_I8042 [=y] || MSI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && INPUT [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) || ACPI_TOSHIBA [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_WMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (SERIO_I8042 [=y] || SERIO_I8042 [=y]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && (RFKILL [=y] || RFKILL [=y]=n) && IIO [=y] || TOSHIBA_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && INPUT [=y] || LG_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_WMI [=n] && INPUT [=y] || PANASONIC_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || TOPSTAR_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] || DELL_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=y] && INPUT [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && DELL_SMBIOS [=n] || DELL_WMI_AIO [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && INPUT [=y] || INTEL_HID_EVENT [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_INTEL [=n] && ACPI [=y] && INPUT [=y] && I2C [=y] || INTEL_VBTN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_INTEL [=n] && ACPI [=y] && INPUT [=y] && I2C [=y]
 
-USB_XHCI_PLATFORM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m]
-      Reverse dependencies: USB_CDNS_SUPPORT [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_DWC3 [=m] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_XHCI_HCD [=m] || USB_XHCI_MVEBU [=n] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m] && HAS_IOMEM [=y] && (ARCH_MVEBU || COMPILE_TEST [=n])
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: X86_INTEL_LPSS [=y] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_MADERA [=n] && HAS_IOMEM [=y]
 
-MTD_L440GX: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && X86 [=y] && MTD_JEDECPROBE [=m]
+ARCH_RANDOM: y => no
+      Direct dependencies: y
 

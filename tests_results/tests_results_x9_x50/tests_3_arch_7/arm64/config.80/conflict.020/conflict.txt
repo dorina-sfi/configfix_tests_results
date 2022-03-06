@@ -1,24 +1,25 @@
-VIRTIO_INPUT: m => yes
-      Direct dependencies: VIRTIO_MENU [=y] && VIRTIO [=y] && INPUT [=m]
+POSIX_TIMERS: y => no
+      Direct dependencies: y
 
-SENSIRION_SGP40: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
-
-REGULATOR_SY8106A: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
-
-ARM64_MODULE_PLTS: y => no
-      Direct dependencies: MODULES [=y]
-      Reverse dependencies: RANDOMIZE_BASE [=y] && MODULES [=y] || ARM64_ERRATUM_843419 [=y] && MODULES [=y]
-
-CRYPTO_ECB: y => mod
+CRYPTO_SM3: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SL3516 [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=m] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_MXC [=n] && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=n]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-HID_MULTITOUCH: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-CRYPTO_CCM: y => no
+CRYPTO_MANAGER: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=n] || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=n] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=n]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=n] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=n] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+
+ADVISE_SYSCALLS: y => no
+      Direct dependencies: y
+
+CRYPTO_SHA512_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA512_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 

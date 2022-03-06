@@ -1,14 +1,15 @@
-CAN_BCM: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+PROC_FS: y => no
+      Direct dependencies: y
 
-ZSWAP_ZPOOL_DEFAULT_ZSMALLOC: y => no
-      Direct dependencies: <choice>
+USB_ACM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && TTY [=y]
+      Reverse dependencies: USB_VL600 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_NET_CDCETHER [=n] && TTY [=y] || USB_PULSE8_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-FONT_8x16: y => no
-      Direct dependencies: FONT_SUPPORT [=y]
-      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=n] && VIDEO_DEV [=m] && SND [=n] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=n] && VIDEO_DEV [=m] && SND [=n] && I2C [=y] || VIDEO_VIMC [=n] && MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] || VIDEO_VIVID [=n] && MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && !SPARC32 && !SPARC64 && FB [=y] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=y] && (X86 || PPC) && FRAMEBUFFER_CONSOLE [=y] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=n] && USB [=n] && VT [=y] && BROKEN [=n] || FONT_AUTOSELECT [=n] && FONT_SUPPORT [=y] && !FONT_8x8 [=y] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
+USB_CHIPIDEA_TEGRA: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && ARCH_TEGRA
 
-AUDIT: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y]
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=n] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=n] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=y] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=n] && BLOCK [=y] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n]
 

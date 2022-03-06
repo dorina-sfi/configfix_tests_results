@@ -1,28 +1,30 @@
-FPGA_REGION: y => no
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
-
-HD44780_COMMON: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
-
-RTC_DRV_DS17885: y => no
-      Direct dependencies: <choice>
-
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
-      Direct dependencies: <choice>
-
-CRC7: y => no
+EVENTFD: y => no
       Direct dependencies: y
-      Reverse dependencies: WILC1000_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=n] && INET [=n] && SPI [=y] || WL1251 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && MAC80211 [=n] || WLCORE_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && WLCORE [=n] && SPI_MASTER [=y] && OF [=y] || MMC_SPI [=y] && MMC [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+DEBUG_FS_ALLOW_ALL: y => no
+      Direct dependencies: <choice>
 
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 
-EXT4_KUNIT_TESTS: y => no
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y] && KUNIT [=y]
+SND_SOC_MAX98357A: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && GPIOLIB [=y]
+      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=y] && I2C [=y] && GPIOLIB [=y] && ACPI || SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=n] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_MT8183_DA7219_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT8183 [=n] && I2C [=y] && GPIOLIB [=y] || SND_SOC_RK3399_GRU_SOUND [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=y] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=n] && SPI [=n] || SND_SOC_AMD_MACH_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP_COMMON [=n] && X86 && PCI [=n] && I2C [=y] || SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] || SND_SOC_INTEL_SKL_NAU88L25_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_SKL [=n] && I2C [=y] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_GLK_RT5682_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_GEMINILAKE [=n] && I2C [=y] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_SOF_NAU8825_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI && GPIOLIB [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_STORM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=y] && GPIOLIB [=y] || SND_SOC_SC7180 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=y] && I2C [=y] && GPIOLIB [=y]
+
+DAX: y => no
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+
+PRIME_NUMBERS: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_DEBUG_SELFTEST [=y] && HAS_IOMEM [=y] && DRM [=y] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=n] && DRM_I915 [=n]
+
+LTO_NONE: y => no
+      Direct dependencies: <choice>
+
+NET_DSA_TAG_LAN9303: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_SMSC_LAN9303 [=y] && NETDEVICES [=y] && NET_DSA [=y]
 

@@ -1,29 +1,29 @@
-SLUB: y => no
-      Direct dependencies: <choice>
+CLK_INTEL_SOCFPGA: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
-
-KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
-
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
-
-CPU_FREQ_GOV_SCHEDUTIL: y => no
-      Direct dependencies: CPU_FREQ [=y] && SMP [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=y] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=n] && CPU_FREQ [=y] && X86 && SMP [=y]
-
-MDIO_DEVICE: y => no
-      Direct dependencies: NETDEVICES [=y]
-      Reverse dependencies: PHYLIB [=y] && NETDEVICES [=y]
-
-HID_LED: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-
-POWER_SUPPLY: y => no
+NLS: y => no
       Direct dependencies: y
-      Reverse dependencies: ARM64 [=y] || ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=y] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=y] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=y] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=y] && USB [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=n] || PCI_LABEL [=n] && PCI [=y] || SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || USB [=n] && USB_SUPPORT [=n] && USB_ARCH_HAS_HCD [=n] || USB_GADGET [=n] && USB_SUPPORT [=n] || DELL_WMI_SYSMAN [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=y] && BLOCK [=y] || F2FS_FS [=y] && BLOCK [=y] || JOLIET [=n] && BLOCK [=y] && ISO9660_FS [=n] || UDF_FS [=y] && BLOCK [=y] || FAT_FS [=y] && BLOCK [=y] || EXFAT_FS [=y] && BLOCK [=y] || NTFS_FS [=y] && BLOCK [=y] || NTFS3_FS [=n] && BLOCK [=y] || HFS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || BEFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 && VBOXGUEST [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
+
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+
+NET_DSA_TAG_MTK: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_MT7530 [=y] && NETDEVICES [=y] && NET_DSA [=y]
+
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32
+
+XZ_DEC_SPARC: y => no
+      Direct dependencies: XZ_DEC [=y]
+
+NF_TABLES_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y]
+      Reverse dependencies: NF_TABLES_INET [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && IPV6 [=y]
 

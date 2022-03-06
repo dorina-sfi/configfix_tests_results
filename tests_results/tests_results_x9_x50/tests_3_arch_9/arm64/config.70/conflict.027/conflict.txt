@@ -1,30 +1,33 @@
-AD525X_DPOT_I2C: m => yes
-      Direct dependencies: AD525X_DPOT [=m] && I2C [=y]
+W1_SLAVE_DS28E17: m => yes
+      Direct dependencies: W1 [=m] && I2C [=y]
 
-I2C_FSI: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && FSI [=m]
+PINCTRL_MSM8998: m => yes
+      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL_MSM [=m]
 
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3519 [=m] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3559A [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3798CV200 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n])
 
-GPIO_KEMPLD: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_KEMPLD [=m]
+EXTCON: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=m] || !RC_CORE [=m]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=n])
 
-COMMON_CLK_MT6779_MMSYS: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK_MT6779 [=m]
+DVB_ZL10353: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_TM6000_DVB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_TM6000 [=n] && DVB_CORE [=m] && USB [=n] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_DTV5100 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_AU6610 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_CE6230 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] || DVB_USB_GL861 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_HOPPER [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-PARPORT_AX88796: m => yes
-      Direct dependencies: PARPORT [=m]
+VIDEO_TW2804: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-FRAME_POINTER: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
-      Reverse dependencies: ARM64 [=y]
+DRM_PANEL_RAYDIUM_RM68200: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-CAN_SJA1000_ISA: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_SJA1000 [=m]
+DVB_ZD1301_DEMOD: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_ZD1301 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-MTD_NAND_ECC_SW_HAMMING: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: SM_FTL [=m] && MTD [=m] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=m] && MTD_RAW_NAND [=n] && 4xx
+CLK_R8A774E1: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774E1 [=y]
 

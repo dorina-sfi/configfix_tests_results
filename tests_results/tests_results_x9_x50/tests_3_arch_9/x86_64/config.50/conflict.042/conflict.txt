@@ -1,31 +1,35 @@
-UIO_PCI_GENERIC: m => yes
-      Direct dependencies: UIO [=m] && PCI [=y]
+CRYPTO_SEQIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
 
-CRYPTO_POLY1305: y => mod
+NET_MPLS_GSO: y => no
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=y] || NF_NAT [=y]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+
+TIME_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
+
+CRYPTO_CAMELLIA_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+CRYPTO_POLY1305: y => no
       Direct dependencies: CRYPTO [=y]
       Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-CRYPTO_CHACHA20POLY1305: y => no
+DVB_SP2: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_DVBSKY [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+CRYPTO_LZO: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-HPET_TIMER: y => no
-      Direct dependencies: y
+SND_SOC_WM8731: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_I2C_AND_SPI [=y]
+      Reverse dependencies: SND_SOC_DB1200 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AU1XPSC [=n] || SND_PXA2XX_SOC_CORGI [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=n] && PXA_SHARP_C7xx && I2C [=y] || SND_PXA2XX_SOC_POODLE [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=n] && MACH_POODLE && I2C [=y] || SND_AT91_SOC_SAM9G20_WM8731 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && (ARCH_AT91 || COMPILE_TEST [=n]) && ATMEL_SSC [=n] && SND_SOC_I2C_AND_SPI [=y] || SND_AT91_SOC_SAM9X5_WM8731 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && (ARCH_AT91 || COMPILE_TEST [=n]) && ATMEL_SSC [=n] && SND_SOC_I2C_AND_SPI [=y] || SND_SOC_MIKROE_PROTO [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && OF [=y] && SND_SOC_I2C_AND_SPI [=y]
 
-SERIAL_8250: y => mod
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
-      Reverse dependencies: MWAVE [=y] && X86 [=y] && TTY [=y]
-
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
-
-COMEDI_JR3_PCI: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
-
-REGULATOR_88PM800: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_88PM800 [=m]
-
-JFFS2_RTIME: y => no
-      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=m]
+I2C_SI4713: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=y] && I2C [=y] && RADIO_SI4713 [=y]
+      Reverse dependencies: USB_SI4713 [=n] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=y] && USB [=y] && I2C [=y] && RADIO_SI4713 [=y] || PLATFORM_SI4713 [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=y] && I2C [=y] && RADIO_SI4713 [=y]
 

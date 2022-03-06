@@ -1,27 +1,30 @@
-USB_GPIO_VBUS: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (USB_GADGET [=m] || !USB_GADGET [=m])
+ADXL355_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-QRTR_TUN: m => yes
-      Direct dependencies: NET [=y] && QRTR [=m]
+VIDEO_MEDIATEK_JPEG: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && (MTK_IOMMU_V1 [=n] || MTK_IOMMU [=y] || COMPILE_TEST [=y]) && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (MTK_SMI [=y] || COMPILE_TEST [=y] && MTK_SMI [=y]=n)
 
-W1_SLAVE_DS2805: m => yes
-      Direct dependencies: W1 [=m]
+THERMAL_GOV_STEP_WISE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
 
-LEDS_PCA9532: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && INPUT [=m]
+DRM_MEGACHIPS_STDPXXXX_GE_B850V3_FW: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-USB_DWC3_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
-
-SENSORS_LTC2947_I2C: m => yes
+SENSORS_LTC2945: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-HID_CYPRESS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+TINYDRM_REPAPER: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-SENSORS_MAX34440: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+DVB_MB86A16: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-JOYSTICK_WARRIOR: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+HID_ELAN: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y] && USB_HID [=m]
+
+VIDEO_ADV7180: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && GPIOLIB [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: STA2X11_VIP [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && VIRT_TO_BUS [=n] && I2C [=y] && (STA2X11 || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y]
 

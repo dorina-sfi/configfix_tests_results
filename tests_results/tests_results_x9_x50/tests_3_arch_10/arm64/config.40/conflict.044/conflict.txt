@@ -1,33 +1,38 @@
-BRANCH_PROFILE_NONE: y => no
-      Direct dependencies: <choice>
-
-NET_DSA_TAG_GSWIP: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_LANTIQ_GSWIP [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y]
-
-VFIO_PLATFORM: m => yes
-      Direct dependencies: VFIO [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=n])
-
-SYSFS: y => no
+HW_RANDOM: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && S390 || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM64 [=y] && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=y] || COMPILE_TEST [=n]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-CPU_FREQ_DEFAULT_GOV_ONDEMAND: y => no
-      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y])
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-CPU_BIG_ENDIAN: y => no
-      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-INPUT_AD714X_SPI: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && INPUT_AD714X [=m] && SPI [=y]
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-DEFAULT_SECURITY_DAC: y => no
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
+
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+
+SQUASHFS_FILE_DIRECT: y => no
       Direct dependencies: <choice>
 
-TI_SCI_PROTOCOL: y => no
-      Direct dependencies: TI_MESSAGE_MANAGER [=y]
-      Reverse dependencies: ARCH_K3 [=y]
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
 
-IEEE802154_MRF24J40: m => yes
-      Direct dependencies: NETDEVICES [=y] && IEEE802154_DRIVERS [=m] && MAC802154 [=y] && SPI [=y]
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+
+SYSC_R8A774B1: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774B1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 

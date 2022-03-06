@@ -1,16 +1,18 @@
-RESET_HISI: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
-      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=m] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
+I2C_SMBUS: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=y] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=m] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
 
-V4L2_FLASH_LED_CLASS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && VIDEO_V4L2_SUBDEV_API [=y] && LEDS_CLASS_FLASH [=m]
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
 
-PHY_QCOM_USB_SS: m => yes
-      Direct dependencies: OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && (EXTCON [=m] || !EXTCON [=m])
+IIO_BUFFER_DMA: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
 
-HW_RANDOM_KEYSTONE: m => yes
-      Direct dependencies: HW_RANDOM [=m] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF [=y]
+TOUCHSCREEN_HIDEEP: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-TOUCHSCREEN_STMFTS: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && LEDS_CLASS [=y]
+TOUCHSCREEN_PENMOUNT: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
 

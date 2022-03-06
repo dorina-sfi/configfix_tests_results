@@ -1,20 +1,19 @@
-IOMMU_IO_PGTABLE_LPAE: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
-      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=y] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+MC3230: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MFD_STM32_TIMERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-MSM_GCC_8960: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_LCC_8960 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8960 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-CGROUPS: y => no
+KCMP: y => no
       Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-CONFIGFS_FS: y => no
+HOTPLUG_CPU: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=y] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=n] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
+
+STM: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=m] && CORESIGHT [=m] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 

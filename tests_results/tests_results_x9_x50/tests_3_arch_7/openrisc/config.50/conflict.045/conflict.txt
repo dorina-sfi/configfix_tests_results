@@ -1,21 +1,26 @@
-SENSORS_LM77: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+USB_EHCI_ROOT_HUB_TT: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
+      Reverse dependencies: USB_EHCI_FSL [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_MV [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=n]) || USB_CHIPIDEA_HOST [=y] && USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && USB_EHCI_HCD [=y]
 
-REGULATOR_WM8994: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_WM8994 [=m]
+ENCRYPTED_KEYS: y => no
+      Direct dependencies: KEYS [=y]
+      Reverse dependencies: EVM [=y] && INTEGRITY [=y]
 
-SENSORS_ADM1031: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-DRM_PANEL_NOVATEK_NT35510: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+RATIONAL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y] && RATIONAL [=y]
 
-FB_GOLDFISH: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (GOLDFISH [=y] || COMPILE_TEST [=n])
+ZSWAP_ZPOOL_DEFAULT_ZBUD: y => no
+      Direct dependencies: <choice>
 
-REGULATOR_PCF50633: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_PCF50633 [=m]
+CRYPTO_SHA1: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=n] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=n] || CPU_SUP_AMD) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=y] && KEYS [=y] && TCG_TPM [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=y] && INTEGRITY [=y] || EVM [=y] && INTEGRITY [=y] || CRYPTO_SHA1_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI && PM && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC && MAILBOX [=n] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 || COMPILE_TEST [=n]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=n] || ASYMMETRIC_TPM_KEY_SUBTYPE [=y] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=y] && TRUSTED_KEYS [=y] || SIGNATURE [=n] && KEYS [=y]
 
-FPGA_MGR_ALTERA_PS_SPI: m => yes
-      Direct dependencies: FPGA [=m] && SPI [=y]
+USB_EHCI_HCD_PLATFORM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
+      Reverse dependencies: USB_HCD_BCMA [=y] && USB_SUPPORT [=y] && USB [=y] && BCMA [=y] && USB_EHCI_HCD [=y] || USB_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && SSB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_CNS3XXX_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && CAVIUM_OCTEON_SOC
 

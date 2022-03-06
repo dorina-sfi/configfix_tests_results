@@ -1,32 +1,40 @@
-DYNAMIC_DEBUG_CORE: y => no
-      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
-      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=y] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-IR_SHARP_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=n] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-MTD_NAND_MXIC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=n])
+CLK_R8A77990: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77990 [=y]
 
-COMEDI_FL512: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
 
-HBMC_AM654: m => yes
-      Direct dependencies: MTD [=m] && MTD_HYPERBUS [=m] && (ARM64 [=y] || COMPILE_TEST [=n])
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 
-HID_LOGITECH_HIDPP: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_LOGITECH [=m]
-      Reverse dependencies: HID_LOGITECH_DJ [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && HIDRAW [=y] && HID_LOGITECH [=m]
+MTK_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: ARCH_MEDIATEK [=y]
 
-RSEQ: y => no
-      Direct dependencies: HAVE_RSEQ [=y]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
+FB_MODE_HELPERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_ARMCLCD [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=n] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=y] && USB [=n] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=n] && STAGING [=n] && FB [=y] && PCI [=n]
 
-MTD_NAND_MXIC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=n])
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-CAN_ISOTP: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+THERMAL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=n] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=y] || MMC_SDHCI_OMAP [=n] && MMC [=n] && MMC_SDHCI_PLTFM [=n] && OF [=y]
 

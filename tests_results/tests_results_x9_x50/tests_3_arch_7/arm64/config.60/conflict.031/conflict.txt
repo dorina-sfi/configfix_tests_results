@@ -1,22 +1,27 @@
-QCOM_SPMI_ADC5: m => yes
-      Direct dependencies: IIO [=m] && SPMI [=y]
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-SENSORS_NCT7802: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+QCS_GCC_404: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: QCS_Q6SSTOP_404 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-RSEQ: y => no
-      Direct dependencies: HAVE_RSEQ [=y]
-
-RAVE_SP_EEPROM: m => yes
-      Direct dependencies: NVMEM [=y] && RAVE_SP_CORE [=m]
-
-SENSORS_LM87: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-PM: y => no
+POWER_SUPPLY: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_MXC [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=n] || ARCH_VEXPRESS [=n] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+      Reverse dependencies: ARM64 [=y] || ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=n] && HID [=n] || HID_ASUS [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=n] && HID [=n] && HID_LOGITECH [=n] || HID_NINTENDO [=n] && INPUT [=n] && HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=n] && HID [=n] && LEDS_CLASS_MULTICOLOR [=y] || HID_SONY [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=n] && HID [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=n] && HID [=n] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=y] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=y] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=n] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-SENSORS_PCF8591: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
+
+USB_DWC2_PERIPHERAL: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_DWC2 [=y])
+
+MSM_GCC_8998: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MSM_GPUCC_8998 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8998 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+CLK_RCAR_GEN3_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 

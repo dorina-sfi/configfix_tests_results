@@ -1,13 +1,14 @@
-SND_SOC_MSM8916_WCD_ANALOG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SPMI [=y] || COMPILE_TEST [=n])
+COMEDI_PCMAD: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-VIDEO_S5K5BAF: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+VIDEO_KS0127: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-USB_GADGETFS: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
+I2C_FSI: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && FSI [=y]
 
-MTD_NAND_ECC_SW_HAMMING: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=n] && 4xx
+CRYPTO_CRC32C: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=n] && BLOCK [=n] || JBD2 [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=m]
 

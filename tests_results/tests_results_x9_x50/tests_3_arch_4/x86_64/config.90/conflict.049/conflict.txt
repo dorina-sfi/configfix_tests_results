@@ -1,15 +1,14 @@
-DEBUG_KMAP_LOCAL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KMAP_LOCAL [=y]
-      Reverse dependencies: DEBUG_KMAP_LOCAL_FORCE_MAP [=y] && DEBUG_KERNEL [=y] && ARCH_SUPPORTS_KMAP_LOCAL_FORCE_MAP [=y] || DEBUG_HIGHMEM [=n] && DEBUG_KERNEL [=y] && HIGHMEM [=n]
+CFG80211_REQUIRE_SIGNED_REGDB: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m]
 
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
+CRYPTO_CAMELLIA_AESNI_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX2_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=n] && X86 [=y]
+BINFMT_ELF: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: IA32_EMULATION [=y] && X86_64 [=y]
 
-HID_LED: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+FAT_KUNIT_TEST: m => yes
+      Direct dependencies: BLOCK [=y] && KUNIT [=m] && FAT_FS [=y]
 

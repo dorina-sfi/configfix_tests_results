@@ -1,28 +1,33 @@
-HID_PICOLCD_FB: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=FB [=y] || FB [=y]=y)
+RTC_DRV_AS3722: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_AS3722 [=m]
 
-CHARGER_MT6360: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MT6360 [=m] && REGULATOR [=y]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 
-MMC_TIFM_SD: m => yes
-      Direct dependencies: MMC [=m] && PCI [=y]
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=m] && HAS_IOMEM [=y] || PMC_ATOM [=y] && X86 [=y] && PCI [=y]
+ZRAM_DEF_COMP_LZ4: y => no
+      Direct dependencies: <choice> && CRYPTO_LZ4 [=y]
 
-DA9062_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && (MFD_DA9062 [=m] || COMPILE_TEST [=n]) && I2C [=y]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
 
-IPMI_WATCHDOG: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
+VIDEO_MT9M111: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-ROMFS_BACKED_BY_BOTH: y => no
-      Direct dependencies: <choice> && BLOCK [=y] && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
+VIDEO_TEA6415C: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-HW_RANDOM_XIPHERA: m => yes
-      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+CRYPTO_SM4: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-UNIX98_PTYS: y => no
-      Direct dependencies: TTY [=y]
+DVB_TDA8261: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && VIDEO_DEV [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

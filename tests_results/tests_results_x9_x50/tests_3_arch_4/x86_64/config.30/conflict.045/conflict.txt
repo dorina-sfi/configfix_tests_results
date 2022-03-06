@@ -1,14 +1,14 @@
-CPUMASK_OFFSTACK: y => no
-      Direct dependencies: y
-      Reverse dependencies: MAXSMP [=y] && X86_64 [=y] && SMP [=y] && DEBUG_KERNEL [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=m] && I2C [=m] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+TPS6105X: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-KERNEL_GZIP: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_GZIP [=y]
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=y]
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+CRYPTO_SM3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y]
 

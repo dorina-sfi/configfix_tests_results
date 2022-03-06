@@ -1,33 +1,33 @@
-ADUX1020: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+ARCH_CPUIDLE_HALTPOLL: y => no
+      Direct dependencies: HYPERVISOR_GUEST [=y]
+      Reverse dependencies: KVM_GUEST [=y] && HYPERVISOR_GUEST [=y] && PARAVIRT [=y]
 
-STM_SOURCE_HEARTBEAT: m => yes
-      Direct dependencies: STM [=m]
+I2C_MUX_PCA954x: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-MTD_MAP_BANK_WIDTH_2: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y]
-
-PROC_SYSCTL: y => no
-      Direct dependencies: PROC_FS [=y]
-
-PROC_CHILDREN: y => no
+THERMAL: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+      Reverse dependencies: ACPI_VIDEO [=m] && ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=y] && ACPI [=y] || ACPI_THERMAL [=n] && ACPI [=y] && ACPI_PROCESSOR [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y] && DRM_ETNAVIV_THERMAL [=y] || MMC_SDHCI_OMAP [=n] && MMC [=m] && MMC_SDHCI_PLTFM [=n] && OF [=n]
 
-AD5933: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=m] && I2C [=y]
-
-CPU_SUP_HYGON: y => no
+BUG: y => no
       Direct dependencies: y
 
-AD5933: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=m] && I2C [=y]
-
-MODIFY_LDT_SYSCALL: y => no
+CPU_SUP_ZHAOXIN: y => no
       Direct dependencies: y
 
-CRYPTO_LZ4HC: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+NVME_TARGET_FC: m => yes
+      Direct dependencies: NVME_TARGET [=m] && HAS_DMA [=y]
+
+MMC_SH_MMCIF: m => yes
+      Direct dependencies: MMC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=y])
+
+COMEDI_PCMUIO: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+IIO_TRIGGERED_EVENT: m => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: HI8435 [=m] && IIO [=y] && SPI [=y]
+
+FPGA_DFL_FME_REGION: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
 

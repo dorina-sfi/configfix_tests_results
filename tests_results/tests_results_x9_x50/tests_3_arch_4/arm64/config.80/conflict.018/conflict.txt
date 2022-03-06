@@ -1,16 +1,13 @@
-RAS: y => no
-      Direct dependencies: y
-      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=y] && PCIEPORTBUS [=n]
+USB_MV_OTG: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_EHCI_MV [=y] && USB_MV_UDC [=m] && PM [=y] && USB_OTG [=y] && (USB_GADGET [=y] || !USB_GADGET [=y])
 
-USB_EZUSB_FX2: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y]
-      Reverse dependencies: USB_SERIAL_WHITEHEAT [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN_PDA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y] || USB_SERIAL_KEYSPAN [=y] && USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=y]
+IQS624_POS: m => yes
+      Direct dependencies: IIO [=m] && (MFD_IQS62X [=y] || COMPILE_TEST [=y])
 
-MTD_CFI_AMDSTD: y => no
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+EXYNOS_PM_DOMAINS: y => no
+      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y]
 
-SHMEM: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+AD5110: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

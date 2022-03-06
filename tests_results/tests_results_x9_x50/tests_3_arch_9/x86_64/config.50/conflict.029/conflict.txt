@@ -1,31 +1,33 @@
-STM32_DFSDM_CORE: y => no
-      Direct dependencies: IIO [=y] && (ARCH_STM32 && OF [=n] || COMPILE_TEST [=y])
-      Reverse dependencies: STM32_DFSDM_ADC [=m] && IIO [=y] && (ARCH_STM32 && OF [=n] || COMPILE_TEST [=y])
+MFD_VX855: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: GPIO_VX855 [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && (X86 [=y] || COMPILE_TEST [=n]) && PCI [=y]
 
-MTD_ONENAND_GENERIC: m => yes
-      Direct dependencies: MTD [=m] && MTD_ONENAND [=m]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 
-OMAP_CONTROL_PHY: y => mod
-      Direct dependencies: ARCH_OMAP2PLUS || COMPILE_TEST [=y]
-      Reverse dependencies: OMAP_USB2 [=n] && (ARCH_OMAP2PLUS || ARCH_K3) && USB_SUPPORT [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) || TI_PIPE3 [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y])
+LIST_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-MTD_ONENAND_SAMSUNG: m => yes
-      Direct dependencies: MTD [=m] && MTD_ONENAND [=m] && (ARCH_S3C64XX || ARCH_S5PV210 || COMPILE_TEST [=y])
+CMA: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
 
-ACPI_VIDEO: y => no
-      Direct dependencies: ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y]
-      Reverse dependencies: DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y] || ACER_WMI [=m] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=m] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=y] && ACPI [=y]
+DVB_CX24123: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=y] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-COMEDI_CB_PCIDDA: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+TIME_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-UBIFS_FS_XATTR: y => no
-      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=m]
-      Reverse dependencies: UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && FS_ENCRYPTION [=y]
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
+DAMON_VADDR_KUNIT_TEST: y => no
+      Direct dependencies: DAMON_VADDR [=y] && KUNIT [=y]=y
 
-COMEDI_ME_DAQ: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+MEDIA_TUNER_TEA5761: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 

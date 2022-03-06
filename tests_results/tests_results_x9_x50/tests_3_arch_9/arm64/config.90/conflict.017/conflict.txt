@@ -1,29 +1,30 @@
-T5403: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
-
-BACKLIGHT_ADP8860: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=m]
-
-AD7746: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=y] && I2C [=m]
-
-SOC_RENESAS: y => no
+SERIO: y => mod
       Direct dependencies: y
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_LKKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_STOWAWAY [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_SUNKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || KEYBOARD_XTKBD [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_SERIAL [=n] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_VSXXXAA [=n] && INPUT [=y] && INPUT_MOUSE [=y] || JOYSTICK_WARRIOR [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_MAGELLAN [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEORB [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEBALL [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_STINGER [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_TWIDJOY [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_ZHENHUA [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_FSIA6B [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || TABLET_SERIAL_WACOM4 [=y] && INPUT [=y] && INPUT_TABLET [=y] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=m] && INPUT [=y] && RMI4_CORE [=m] && RMI4_F03 [=y] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y]
 
-STK3310: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+AK8975: m => no
+      Direct dependencies: IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: AK09911 [=m] && IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-INPUT_PCF50633_PMU: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && MFD_PCF50633 [=m]
+I2C_ARB_GPIO_CHALLENGE: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y])
 
-SOC_TI: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_K3 [=y]
+LEDS_PCA955X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
 
-REGULATOR_TPS62360: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+BT_MRVL: m => yes
+      Direct dependencies: NET [=y] && BT [=m]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
+TSYS02D: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+CAN_IFI_CANFD: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && HAS_IOMEM [=y]
+
+SND_SOC_TEGRA20_I2S: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=m]
+
+DVB_SP8870: m => yes
+      Direct dependencies: STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && DVB_AV7110 [=m] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_AV7110 [=m] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_DEV [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

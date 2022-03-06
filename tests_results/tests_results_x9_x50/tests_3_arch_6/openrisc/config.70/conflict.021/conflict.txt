@@ -1,20 +1,22 @@
-BASE_FULL: y => no
-      Direct dependencies: y
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-MULTIUSER: y => no
-      Direct dependencies: y
+NF_TPROXY_IPV6: m => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_TPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && (IPV6 [=y] || IPV6 [=y]=n) && NF_TABLES_IPV6 [=y] || NETFILTER_XT_TARGET_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=n] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP_NF_MANGLE [=n] && IP6_NF_IPTABLES [=n]
 
-CRYPTO_LZO: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=y] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+MICROCHIP_TCB_CAPTURE: m => yes
+      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
 
-VM_EVENT_COUNTERS: y => no
-      Direct dependencies: y
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 && PCI [=n] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=m] || QCOM_COMMAND_DB [=m]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
 
-LTO_NONE: y => no
-      Direct dependencies: <choice>
+INPUT_EVDEV: m => yes
+      Direct dependencies: INPUT [=m]
 
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+MEDIA_TUNER_XC4000: y => mod
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

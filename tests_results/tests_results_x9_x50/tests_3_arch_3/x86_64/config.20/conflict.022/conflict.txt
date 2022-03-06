@@ -1,9 +1,10 @@
-GPIO_LP87565: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP87565 [=m]
+MTD_PCMCIA: m => yes
+      Direct dependencies: MTD [=y] && HAS_IOMEM [=y] && PCMCIA [=m] && MTD_COMPLEX_MAPPINGS [=y]
 
-KUNIT_TEST: m => yes
-      Direct dependencies: KUNIT [=m]
+MTRR: y => no
+      Direct dependencies: y
 
-DRM_RCAR_LVDS: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+CRYPTO_LIB_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 

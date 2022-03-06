@@ -1,15 +1,17 @@
-PREEMPT_NONE: y => no
+CRAMFS_BLOCKDEV: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && CRAMFS [=m] && BLOCK [=y]
+
+HZ_300: y => no
       Direct dependencies: <choice>
 
-LEDS_LP8501: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=y] || AD7768_1 [=m] && IIO [=m] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=m] && IIO [=m] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n]
 
-LEDS_LP5523: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+MTD_NAND_INTEL_LGM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-MMC_SPI: m => yes
-      Direct dependencies: MMC [=m] && SPI_MASTER [=y]
-
-EXTCON_MAX14577: m => yes
-      Direct dependencies: EXTCON [=y] && MFD_MAX14577 [=m]
+IIO_BUFFER_DMA: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_BUFFER_DMAENGINE [=m] && IIO [=m] && IIO_BUFFER [=y]
 

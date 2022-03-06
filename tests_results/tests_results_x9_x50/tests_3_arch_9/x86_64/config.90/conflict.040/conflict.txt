@@ -1,35 +1,35 @@
-CPU_FREQ_GOV_PERFORMANCE: y => no
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y]
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
 
-BINFMT_ELF: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: IA32_EMULATION [=y] && X86_64 [=y]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 
-VIRT_CPU_ACCOUNTING_GEN: y => no
-      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: NO_HZ_FULL [=n] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+DVB_STV090x: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-NET_IFE: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: NET_ACT_IFE [=y] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
 
-CRYPTO_POLY1305_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y]) && X86 [=y] && 64BIT [=y]
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-KERNEL_GZIP: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_GZIP [=y]
-
-THERMAL_WRITABLE_TRIPS: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=n] && ACPI [=y]
-
-CRYPTO_NULL: y => no
+CRYPTO_MANAGER: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=y] || CRYPTO_USER [=y] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=n] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=n] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-COMPACTION: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
+ARMADA_37XX_RWTM_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU || COMPILE_TEST [=y]) && OF [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
+
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=y] && IIO [=y] && I2C [=y]
+
+NET_FOU: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NET_FOU_IP_TUNNELS [=y] && NET [=y] && INET [=y] && (NET_IPIP [=y] || NET_IPGRE [=y] || IPV6_SIT [=y])
 

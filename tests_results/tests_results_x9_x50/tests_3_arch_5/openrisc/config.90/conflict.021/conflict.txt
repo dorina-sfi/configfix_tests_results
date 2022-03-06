@@ -1,16 +1,18 @@
-SND_SOC_WM8960: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m]
-      Reverse dependencies: SND_SOC_MT2701_WM8960 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT2701 [=n] && I2C [=m] || SND_SOC_P1022_RDK [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_RDK && I2C [=m]
+COMEDI_TESTS: m => yes
+      Direct dependencies: COMEDI [=m]
 
-SENSORS_MAX197: m => yes
-      Direct dependencies: HWMON [=m]
+MODULE_SIG: y => no
+      Direct dependencies: MODULES [=y]
+      Reverse dependencies: SECURITY_LOCKDOWN_LSM [=y] && SECURITY [=y] && MODULES [=y]
 
-SND_SOC_FSL_XCVR: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=n]
 
-FSI_OCC: m => yes
-      Direct dependencies: FSI [=m] && FSI_SBEFIFO [=m]
+REGULATOR_TPS6105X: m => yes
+      Direct dependencies: REGULATOR [=y] && TPS6105X [=m]
 
-MAX5432: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MTD_CFI_AMDSTD: m => no
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
 

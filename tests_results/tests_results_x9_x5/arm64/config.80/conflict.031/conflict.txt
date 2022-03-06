@@ -1,21 +1,28 @@
-TCG_FTPM_TEE: m => yes
-      Direct dependencies: TCG_TPM [=y] && TEE [=m] && OPTEE [=m]
+DVB_TDA10071: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_DVB [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-TPM_KEY_PARSER: m => yes
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_TPM_KEY_SUBTYPE [=m]
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
 
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || ARCH_LAYERSCAPE [=n] || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=y] && !X86_32 || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y])
 
-COMEDI_PCM3724: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_VEXPRESS [=n] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
 
-PINCTRL_IPQ4019: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL_MSM [=m]
+USB_CONN_GPIO: y => no
+      Direct dependencies: USB_SUPPORT [=y] && GPIOLIB [=y]
+      Reverse dependencies: PHY_TEGRA_XUSB [=y] && ARCH_TEGRA [=y] && USB_SUPPORT [=y]
 
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
+VIDEO_TVP5150: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_V4L2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-AXP288_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_AXP20X [=m]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 

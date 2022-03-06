@@ -1,23 +1,24 @@
-SENSORS_NTC_THERMISTOR: m => yes
-      Direct dependencies: HWMON [=m] && (!OF [=y] || IIO [=n]=n || IIO [=n]) && (THERMAL [=y] || !THERMAL_OF [=n])
+USB_MUSB_GADGET: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=y]) && HAS_DMA [=y]
 
-DRM_CDNS_DSI: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+DRIVER_PE_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 
-DRM_PANEL_XINPENG_XPP055C272: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-I2C_ARB_GPIO_CHALLENGE: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n])
+CRC_T10DIF: y => no
+      Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n]
 
-NLS_UTF8: y => mod
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-DRM_PANEL_NOVATEK_NT35510: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-MQ_IOSCHED_DEADLINE: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
+PSTORE_842_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 

@@ -1,21 +1,24 @@
-X86_UMIP: y => no
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=n] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
+
+CRC_CCITT: y => no
       Direct dependencies: y
+      Reverse dependencies: CAIF [=n] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_PAR [=y] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=y] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=y] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=y] && NFC [=n] || NFC_MICROREAD [=n] && NET [=y] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=y] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=y] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=y] && SURFACE_PLATFORMS [=y] && SERIAL_DEV_BUS [=y]
 
-CPU_IDLE: y => no
+SND_DYNAMIC_MINORS: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y]
+      Reverse dependencies: SND_HDA_CODEC_HDMI [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=n] || SND_SOC_TOPOLOGY [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+
+SERIAL_8250: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
+      Reverse dependencies: MWAVE [=y] && X86 [=y] && TTY [=y]
+
+CRC_T10DIF: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
-
-XZ_DEC_IA64: y => no
-      Direct dependencies: XZ_DEC [=y]
-
-HDC100X: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-CRYPTO_DH: y => mod
+CRYPTO_ZSTD: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 

@@ -1,29 +1,31 @@
-PPS_CLIENT_GPIO: m => yes
-      Direct dependencies: PPS [=m]
+BACKLIGHT_LM3639: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
 
-LEDS_AN30259A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m] && OF [=y]
+KEYBOARD_LM8323: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] && LEDS_CLASS [=m]
 
-SPI_XCOMM: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && I2C [=m]
+EXTCON_USBC_TUSB320: m => yes
+      Direct dependencies: EXTCON [=m] && I2C [=y]
 
-CRYPTO_JITTERENTROPY: y => mod
+VEML6070: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+CRYPTO_NULL: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=y] && CRYPTO [=y] && NET [=y]
 
-GPIO_PCA953X: m => yes
-      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+I2C_MUX_PCA954x: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-COMEDI_PCI_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=m] && PCI [=y]
+IIO_STM32_TIMER_TRIGGER: m => no
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=m] && IIO [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 
-COMEDI_ADDI_APCI_3120: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
+DVB_STV0288: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && I2C_ALGOBIT [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-MTD_JEDECPROBE: m => yes
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
-
-IMX_INTMUX: y => no
-      Direct dependencies: y
+CRYPTO_ZSTD: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 

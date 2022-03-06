@@ -1,16 +1,19 @@
-REGULATOR_MC13892: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MC13XXX [=m]
+SCSI_ISCSI_ATTRS: y => no
+      Direct dependencies: SCSI [=y] && NET [=y]
+      Reverse dependencies: ISCSI_TCP [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || SCSI_CXGB4_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) && PTP_1588_CLOCK_OPTIONAL [=y] && ETHERNET [=n] && (TLS [=y] || TLS [=y]=n) || SCSI_BNX2_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=n] && (IPV6 [=y] || IPV6 [=y]=n) && MMU [=y] || BE2ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || QEDI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && UIO [=y] && QED [=n] || INFINIBAND_ISER [=n] && INFINIBAND [=n] && SCSI [=y] && INET [=y] && INFINIBAND_ADDR_TRANS [=n]
 
-VIRTIO_FS: m => yes
-      Direct dependencies: FUSE_FS [=m]
+CPU_SUP_AMD: y => no
+      Direct dependencies: y
+      Reverse dependencies: CPU_SUP_HYGON [=y]
 
-I2C_STM32F4: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y])
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-DM_EBS: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m] && !HIGHMEM [=n]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE || COMPILE_TEST [=y])
+      Reverse dependencies: QORIQ_CPUFREQ [=y] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE || COMPILE_TEST [=y])
 
-IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=m] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=m] && IIO [=m] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=m]
+USB_CHIPIDEA_GENERIC: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
 

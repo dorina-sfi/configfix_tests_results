@@ -1,17 +1,18 @@
-REGULATOR_MC13892: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MC13XXX [=m]
+CPU_IDLE_GOV_LADDER: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
 
-FIREWIRE_OHCI: m => yes
-      Direct dependencies: (PCI [=y] || COMPILE_TEST [=n]) && PCI [=y] && FIREWIRE [=m] && MMU [=y]
+MEDIA_PLATFORM_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-SPI_BITBANG: y => mod
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=n]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=m] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || SPI_LM70_LLP [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=m] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=n])
+CRYPTO_CAST5: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-VIDEO_UDA1342: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=y] && SND [=m] && USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CRYPTO_CMAC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-L2TP: m => yes
-      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n) && INET [=y]
+HPET_TIMER: y => no
+      Direct dependencies: y
 

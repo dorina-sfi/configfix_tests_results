@@ -1,27 +1,32 @@
-DEFXX: m => yes
-      Direct dependencies: NETDEVICES [=y] && FDDI [=m] && (PCI [=y] || EISA [=n] || TC)
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
 
-COMEDI_ADL_PCI6208: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+VIDEO_VP27SMPX: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-PINCONF: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: GENERIC_PINCONF [=y] && PINCTRL [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=y] && ARCH_AT91 || PINCTRL_AMD [=n] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=y] || COMPILE_TEST [=n]) || PINCTRL_DA850_PUPD [=n] && PINCTRL [=y] && OF [=y] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=n]) || PINCTRL_LANTIQ [=n] && PINCTRL [=y] && LANTIQ || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_SX150X [=n] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_ST [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_KEEMBAY [=n] && PINCTRL [=y] && (ARCH_KEEMBAY || ARM64 && COMPILE_TEST [=n]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_ASPEED [=n] && PINCTRL [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) && OF [=y] && MFD_SYSCON [=y] || PINCTRL_BCM281XX [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM_MOBILE || COMPILE_TEST [=n]) || PINCTRL_BCM2835 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST [=n]) || PINCTRL_BCM63XX [=n] && PINCTRL [=y] || PINCTRL_IPROC_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || PINCTRL_NSP_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_NSP || COMPILE_TEST [=n]) || PINCTRL_IMX1_CORE [=n] && PINCTRL [=y] || PINCTRL_MXS [=n] && PINCTRL [=y] || PINCTRL_MVEBU [=n] && PINCTRL [=y] || PINCTRL_ARMADA_37XX [=n] && PINCTRL [=y] || PINCTRL_NPCM7XX [=n] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_SAMSUNG [=n] && PINCTRL [=y] && OF_GPIO [=y] || PINCTRL_SPRD [=n] && PINCTRL [=y] || PINCTRL_TEGRA [=n] && PINCTRL [=y] || PINCTRL_TEGRA_XUSB [=n] && PINCTRL [=y] || PINCTRL_MESON [=n] && PINCTRL [=y] && ARCH_MESON && OF [=y] || PINCTRL_LOCHNAGAR [=n] && PINCTRL [=y] && MFD_LOCHNAGAR [=n] || PINCTRL_EQUILIBRIUM [=n] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (X86 [=y] || COMPILE_TEST [=n]) || PINCTRL_LYNXPOINT [=y] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) && ACPI [=y] || PINCTRL_MERRIFIELD [=n] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) && X86_INTEL_MID [=n] || PINCTRL_INTEL [=y] && PINCTRL [=y] && (X86 [=y] || COMPILE_TEST [=n]) || PINCTRL_NOMADIK [=n] && PINCTRL [=y] && (ARCH_U8500 || ARCH_NOMADIK) && OF [=y] && GPIOLIB [=y] || PINCTRL_PXA [=n] && PINCTRL [=y] && (ARCH_PXA || COMPILE_TEST [=n]) || PINCTRL_MSM [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_QCOM_SPMI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && OF [=y] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_LPASS_LPI [=n] && PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && GPIOLIB [=y] || PINCTRL_SH_PFC [=n] && PINCTRL [=y]
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-FPGA_BRIDGE: y => mod
-      Direct dependencies: FPGA [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+CRC8: y => no
+      Direct dependencies: y
+      Reverse dependencies: PCIE_QCOM [=y] && PCI [=y] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || QED [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=y] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=n] || SENSORS_SHT3x [=n] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=y] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=y] && HWMON [=y] && PMBUS [=y] && GPIOLIB [=y] || MFD_MT6360 [=n] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=y] && SPI [=n] || SCA3300 [=n] && IIO [=y] && SPI [=n] || SCD30_I2C [=n] && IIO [=y] && SCD30_CORE [=y] && I2C [=y] || SCD4X [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=y] && IIO [=y] && I2C [=y] || SPS30_I2C [=y] && IIO [=y] && I2C [=y] || ICP10100 [=n] && IIO [=y] && I2C [=y]
 
-INTEL_TH_GTH: m => yes
-      Direct dependencies: INTEL_TH [=m]
+MFD_AT91_USART: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+      Reverse dependencies: SERIAL_ATMEL [=y] && TTY [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
 
-IQS621_ALS: m => yes
-      Direct dependencies: IIO [=y] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
+LEDS_CLASS: y => no
+      Direct dependencies: NEW_LEDS [=y]
+      Reverse dependencies: TS5500 [=n] && X86_32 [=n] && MELAN [=n] || ADB_PMU_LED [=n] && MACINTOSH_DRIVERS [=n] && PPC_PMAC && ADB_PMU [=n] || BRCMSMAC [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && MAC80211 [=n] && BCMA_POSSIBLE [=y] && BCMA_DRIVER_GPIO [=n] || IWLEGACY [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || INPUT_WISTRON_BTNS [=n] && INPUT [=y] && INPUT_MISC [=n] && X86_32 [=n] || SENSORS_APPLESMC [=y] && HWMON [=y] && INPUT [=y] && X86 [=y] || IR_REDRAT3 [=n] && RC_CORE [=y] && RC_DEVICES [=n] && USB [=n] || IR_WINBOND_CIR [=n] && RC_CORE [=y] && RC_DEVICES [=n] && (X86 [=y] && PNP [=y] || COMPILE_TEST [=y]) || IR_TTUSBIR [=n] && RC_CORE [=y] && RC_DEVICES [=n] && USB [=n] || BACKLIGHT_ADP8860 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_ADP8870 [=n] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || BACKLIGHT_LM3639 [=y] && HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] || SND_HDA_GENERIC [=n] && SOUND [=n] && !UML && SND [=n] && SND_HDA [=n] && SND_HDA_GENERIC_LEDS [=n] || SND_USB_TONEPORT [=n] && SOUND [=n] && !UML && SND [=n] && SND_USB [=n] && USB [=n] || HID_LENOVO [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y] || HUAWEI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_BATTERY [=y] && ACPI_WMI [=n] && INPUT [=y] || ACER_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=n] || ASUS_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) || ASUS_WIRELESS [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] || ASUS_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && ACPI_BATTERY [=y] && INPUT [=y] && HWMON [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (RFKILL [=n] || RFKILL [=n]=n) && HOTPLUG_PCI [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) || EEEPC_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || FUJITSU_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) || HP_ACCEL [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && ACPI [=y] && SERIO_I8042 [=y] || IDEAPAD_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && RFKILL [=n] && INPUT [=y] && SERIO_I8042 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (ACPI_WMI [=n] || ACPI_WMI [=n]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_BATTERY [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=n] || SAMSUNG_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] || ACPI_TOSHIBA [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_WMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] && (SERIO_I8042 [=y] || SERIO_I8042 [=y]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && IIO [=y] || LG_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_WMI [=n] && INPUT [=y] || SYSTEM76_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_BATTERY [=y] && HWMON [=y] && INPUT [=y] || TOPSTAR_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=y] && DELL_SMBIOS [=n]
 
-SENSORS_DELL_SMM: y => no
-      Direct dependencies: HWMON [=y] && X86 [=y]
-      Reverse dependencies: I8K [=y] && HWMON [=y] && PROC_FS [=y]
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-INA2XX_ADC: m => yes
-      Direct dependencies: IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=m]
+VIDEO_SAA7127: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 

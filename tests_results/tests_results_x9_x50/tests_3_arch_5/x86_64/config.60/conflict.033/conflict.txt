@@ -1,16 +1,17 @@
-CARDMAN_4040: m => yes
-      Direct dependencies: PCMCIA [=m]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=n] || MFD_INTEL_LPSS [=m] && HAS_IOMEM [=y] || PMC_ATOM [=y] && X86 [=y] && PCI [=y]
 
-PATA_OPTI: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+IPMI_IPMB: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
 
-SENSORS_DRIVETEMP: m => yes
-      Direct dependencies: HWMON [=y] && SCSI [=y] && ATA [=m]
+SERIAL_8250_DW: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=m] || I2C_EMEV2 [=m] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
+SENSORS_MENF21BMC_HWMON: m => yes
+      Direct dependencies: HWMON [=y] && MFD_MENF21BMC [=m]
 
-MTD_PMC551: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && PCI [=y]
+CRYPTO_CAMELLIA_AESNI_AVX_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 

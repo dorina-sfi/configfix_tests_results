@@ -1,23 +1,21 @@
-NET_DSA_TAG_QCA: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_QCA8K [=y] && NETDEVICES [=y] && NET_DSA [=y]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-PAGE_REPORTING: y => no
-      Direct dependencies: y
-      Reverse dependencies: VIRTIO_BALLOON [=y] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=y]
 
-INTERCONNECT: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM_TEGRA [=y] && HAS_IOMEM [=y] && (ARCH_TEGRA [=y] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=y] && OF [=y] || TEGRA_MC [=n] && MEMORY [=n] && (ARCH_TEGRA [=y] || COMPILE_TEST [=y] && COMMON_CLK [=y])
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-OWL_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: ARCH_ACTIONS [=y]
+RUST_BUILD_ASSERT_DENY: y => no
+      Direct dependencies: <choice> && !RUST_OPT_LEVEL_0 [=n]
 
-CFG80211_REQUIRE_SIGNED_REGDB: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=y]
+CRYPTO_CRC32C: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 
-THERMAL: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=n] || MMC_SDHCI_OMAP [=y] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y]
+IOMMU_SUPPORT: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
 

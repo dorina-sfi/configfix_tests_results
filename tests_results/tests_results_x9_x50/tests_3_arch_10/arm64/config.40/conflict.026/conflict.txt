@@ -1,33 +1,37 @@
-GREYBUS_GPIO: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m] && GREYBUS_BRIDGED_PHY [=m] && GPIOLIB [=y]
+AMIGA_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-W1_SLAVE_DS2780: m => yes
-      Direct dependencies: W1 [=m]
-      Reverse dependencies: BATTERY_DS2780 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 
-NET_DSA_LANTIQ_GSWIP: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y]
+CRYPTO_NULL: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-NETFS_STATS: y => no
-      Direct dependencies: NETFS_SUPPORT [=m] && PROC_FS [=y]
-      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=m] && PROC_FS [=y]
+SYSC_R8A77995: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77995 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-FB_BOTH_ENDIAN: y => no
+CRYPTO_AES_ARM64_CE: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+
+DEFAULT_SECURITY_DAC: y => no
       Direct dependencies: <choice>
 
-SENSORS_MAX15301: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=n] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=y] || ARCH_HISI [=y] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=y] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-SYN_COOKIES: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NFT_SYNPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || IP_NF_TARGET_SYNPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || IP6_NF_TARGET_SYNPROXY [=m] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-FPGA_MGR_XILINX_SPI: m => yes
-      Direct dependencies: FPGA [=m] && SPI [=y]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-NET_DSA_VITESSE_VSC73XX_SPI: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && SPI [=y]
-
-MTD_NAND_DISKONCHIP: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y]
 

@@ -1,34 +1,34 @@
-HID_GOOGLE_HAMMER: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && LEDS_CLASS [=y] && CROS_EC [=y]
+RTC_LIB_KUNIT_TEST: y => mod
+      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
 
-CRC4: m => no
-      Direct dependencies: y
-      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=m] && GPIOLIB [=y]
+INPUT_MATRIXKMAP: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: KEYBOARD_CLPS711X [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || KEYBOARD_EP93XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=y]) || KEYBOARD_TCA8418 [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_MATRIX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || KEYBOARD_LM8333 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_IMX [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_TEGRA [=n] && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=m] || KEYBOARD_SAMSUNG [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_STI || COMPILE_TEST [=y]) || KEYBOARD_STMPE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_STMPE [=n] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && PLAT_SPEAR || KEYBOARD_TC3589X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_TC3589X [=y] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && TWL4030_CORE [=n] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && CROS_EC [=n] || KEYBOARD_BCM [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=n] && FB [=m] && I2C [=y] && INPUT [=y]
 
-VIDEO_SONY_BTF_MPX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+NFT_NAT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=y])
 
-CRYPTO_SHA3: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SHA3_ARM64 [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+MANAGER_SBS: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
 
-MEDIA_CAMERA_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-VIDEO_M5MOLS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+PKCS7_MESSAGE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
 
-SENSORS_ZL6100: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=n] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=n] || ARCH_QCOM [=n] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
+MFD_SUN4I_GPADC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=n] || COMPILE_TEST [=y]) && !TOUCHSCREEN_SUN4I [=m]
 
-INET6_ESP: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
+CRYPTO_LIB_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 
-VIDEO_HI846: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+HID_PICOLCD_LCD: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=LCD_CLASS_DEVICE [=m] || LCD_CLASS_DEVICE [=m]=y)
 

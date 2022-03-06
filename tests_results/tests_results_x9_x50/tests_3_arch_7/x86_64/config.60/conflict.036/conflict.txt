@@ -1,24 +1,24 @@
-SUNRPC_XPRT_RDMA: m => yes
-      Direct dependencies: NETWORK_FILESYSTEMS [=y] && SUNRPC [=y] && INFINIBAND [=m] && INFINIBAND_ADDR_TRANS [=y]
+SENSORS_ASPEED: m => yes
+      Direct dependencies: HWMON [=m]
 
-PM_DEVFREQ: y => no
+QRTR_MHI: m => yes
+      Direct dependencies: NET [=y] && QRTR [=m] && MHI_BUS [=m]
+      Reverse dependencies: ATH11K_PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH11K [=n] && PCI [=n]
+
+SENSORS_ADM1025: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+NET_FAILOVER: m => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: VIRTIO_NET [=m] && NETDEVICES [=y] && NET_CORE [=y] && VIRTIO [=y]
+
+TINYDRM_ST7735R: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
+
+DEBUG_IRQFLAGS: y => no
       Direct dependencies: y
-      Reverse dependencies: SCSI_UFSHCD [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=n] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
 
-VIDEO_ADV7842: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_COBALT [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_V4L2 [=m] && I2C [=y] && PCI_MSI [=n] && MTD_COMPLEX_MAPPINGS [=n] && (GPIOLIB [=y] && DRM_I2C_ADV7511 [=n]=n || COMPILE_TEST [=y]) && SND [=n] && MTD [=m]
-
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
-
-CDNS_I3C_MASTER: m => yes
-      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
-
-NFT_DUP_IPV6: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_TABLES_IPV6 [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m])
-
-SERIAL_8250_MEN_MCB: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && MCB [=m] && SERIAL_8250 [=y]
+SENSORS_SMM665: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

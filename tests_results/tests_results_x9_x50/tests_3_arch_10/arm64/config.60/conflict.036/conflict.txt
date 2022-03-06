@@ -1,34 +1,34 @@
-VIDEO_OV8865: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && PM [=y] && VIDEO_V4L2 [=m]
+DRM_KMB_DISPLAY: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && (ARCH_KEEMBAY [=n] || COMPILE_TEST [=y])
 
-VIDEO_S5K6A3: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+DRM_IMX_TVE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_IMX [=m] && COMMON_CLK [=y]
 
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
+NETFILTER_NETLINK_ACCT: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: NETFILTER_XT_MATCH_NFACCT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
 
-CRYPTO_POLY1305: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+DRM_PANEL_SAMSUNG_S6E63M0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-SENSORS_ARM_SCMI: m => yes
-      Direct dependencies: HWMON [=m] && ARM_SCMI_PROTOCOL [=m] && (THERMAL [=y] || !THERMAL_OF [=y])
+FAT_KUNIT_TEST: m => yes
+      Direct dependencies: BLOCK [=y] && KUNIT [=m] && FAT_FS [=y]
 
-SUSPEND_FREEZER: y => no
-      Direct dependencies: SUSPEND [=y]
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 
-MFD_HI6421_SPMI: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && SPMI [=m]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+NF_LOG_SYSLOG: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NETFILTER_XT_TARGET_LOG [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] || NF_LOG_ARP [=m] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_LOG_IPV4 [=m] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_LOG_IPV6 [=n] && NET [=y] && INET [=y] && IPV6 [=n] && NETFILTER [=y]
 
-MTD_PCMCIA: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && PCMCIA [=y] && MTD_COMPLEX_MAPPINGS [=y]
+PROC_SYSCTL: y => no
+      Direct dependencies: PROC_FS [=y]
 
-VIDEO_ADV7170: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_LML33R10 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+DEVFREQ_GOV_USERSPACE: y => mod
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) || ARM_IMX8M_DDRC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_MXC [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 

@@ -1,26 +1,28 @@
-SENSORS_NTC_THERMISTOR: m => yes
-      Direct dependencies: HWMON [=m] && (!OF [=n] || IIO [=y]=n || IIO [=y]) && (THERMAL [=n] || !THERMAL_OF [=n])
+NETFILTER_XT_TARGET_NFLOG: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m]
 
-SENSORS_INA3221: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+VIDEO_SAA6752HS: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_SAA7134 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-HID_ACRUX: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=n] && HWMON [=y] && IPMI_HANDLER [=m]
 
-SND_IMX_SOC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MXC || COMPILE_TEST [=y])
+EFI_GENERIC_STUB_INITRD_CMDLINE_LOADER: y => no
+      Direct dependencies: EFI [=y] && EFI_STUB [=y] && (EFI_GENERIC_STUB [=n] || X86 [=y]) && !RISCV
 
-USB_OHCI_HCD_DAVINCI: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && (ARCH_DAVINCI_DA8XX || COMPILE_TEST [=y]) && USB_OHCI_HCD [=m]
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-I2C_ALGOPCA: y => mod
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
+IIO_HRTIMER_TRIGGER: m => yes
+      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
 
-CRYPTO_CAST5: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+REGULATOR_BCM590XX: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_BCM590XX [=m]
 
-HID_DRAGONRISE: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=m] && AUXDISPLAY [=y] && I2C [=y]
 

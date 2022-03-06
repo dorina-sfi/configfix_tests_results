@@ -1,20 +1,23 @@
-CRYPTO_CAMELLIA_X86_64: y => mod
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+HWMON: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: HABANA_AI [=y] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=y] || !AGP [=y]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=n] || HP_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=n] && I2C [=y] && DRM [=n] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=y] && PCI [=y]
 
-PMS7003: m => yes
-      Direct dependencies: IIO [=m] && SERIAL_DEV_BUS [=m]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=n] || !UNWINDER_ORC [=n] && !UNWINDER_GUESS [=n]
+      Reverse dependencies: UNWINDER_FRAME_POINTER [=y] && <choice>
 
-CRYPTO_XTS: y => no
+CRYPTO_842: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=y] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-DRM_NXP_PTN3460: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+SLUB: y => no
+      Direct dependencies: <choice>
 
-MEN_Z188_ADC: m => yes
-      Direct dependencies: IIO [=m] && MCB [=m]
+IIO_ST_ACCEL_3AXIS: y => no
+      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
 
-DRM_R128: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM_LEGACY [=y] && DRM [=m] && PCI [=y]
+SND_SOC_INTEL_MACH: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
+      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SOF_TOPLEVEL [=y] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
 

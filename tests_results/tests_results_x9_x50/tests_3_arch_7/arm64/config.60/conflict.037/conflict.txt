@@ -1,22 +1,27 @@
-SENSORS_LINEAGE: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SOC_BRCMSTB: y => no
+      Direct dependencies: ARM || ARM64 [=y] || BMIPS_GENERIC || COMPILE_TEST [=n]
+      Reverse dependencies: PHY_BRCM_USB [=y] && (ARCH_BCM4908 [=n] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=n]) && OF [=y] && ARCH_BRCMSTB [=y]
 
-SENSORS_EMC2103: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
 
-LEDS_MENF21BMC: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_MENF21BMC [=m]
+PM_DEVFREQ_EVENT: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y])
 
-IMX_INTMUX: y => no
-      Direct dependencies: y
+OWL_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_ACTIONS [=y]
 
-CLK_R8A7795: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=n] || ARCH_R8A77951 [=y])
+SYSC_R8A774A1: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774A1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-SENSORS_NCT6775: m => yes
-      Direct dependencies: HWMON [=m] && !PPC && (ACPI_WMI [=n] || ACPI_WMI [=n]=n)
+XEN_PRIVCMD: y => no
+      Direct dependencies: XEN [=y]
+      Reverse dependencies: XENFS [=y] && XEN [=y]
 
-SENSORS_LINEAGE: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SH_TIMER_TMU: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
 

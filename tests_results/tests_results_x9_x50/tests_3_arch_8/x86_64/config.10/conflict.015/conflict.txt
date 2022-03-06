@@ -1,24 +1,31 @@
-COMEDI_CB_PCIDDA: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+MXC_CLK: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MN [=n] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8MQ [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC || COMPILE_TEST [=y])
 
-SENSORS_K10TEMP: m => yes
-      Direct dependencies: HWMON [=m] && X86 [=y] && PCI [=y] && AMD_NB [=y]
+VT_HW_CONSOLE_BINDING: y => no
+      Direct dependencies: TTY [=y] && HW_CONSOLE [=y]
+      Reverse dependencies: DRM_INGENIC [=n] && HAS_IOMEM [=y] && (MIPS || COMPILE_TEST [=y]) && DRM [=y] && CMA [=y] && OF [=n] && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_PL111 [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && (VEXPRESS_CONFIG [=n] || VEXPRESS_CONFIG [=n]=n) && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_TVE200 [=n] && HAS_IOMEM [=y] && DRM [=y] && CMA [=y] && (ARM || COMPILE_TEST [=y]) && OF [=n] && FRAMEBUFFER_CONSOLE [=y] || DRM_MCDE [=n] && HAS_IOMEM [=y] && DRM [=y] && CMA [=y] && (ARM || COMPILE_TEST [=y]) && OF [=n] && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || FRAMEBUFFER_CONSOLE [=y] && VT [=y] && FB [=y] && !UML
 
-SENSORS_FSP_3Y: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+RELOCATABLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: EFI_STUB [=y] && EFI [=y] && !X86_USE_3DNOW [=n] && (y || X86_32 [=n])
 
-SPI_LM70_LLP: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && PARPORT [=m]
+RMI4_CORE: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-DRM_AMDGPU: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
+KUNIT_EXAMPLE_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-GREYBUS_USB: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=y] && GREYBUS_BRIDGED_PHY [=y] && USB [=m]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 
-MODULE_COMPRESS_XZ: y => no
-      Direct dependencies: <choice>
+VIDEO_SAA7127: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-SENSORS_MC13783_ADC: m => yes
-      Direct dependencies: HWMON [=m] && MFD_MC13XXX [=y]
+DMI: y => no
+      Direct dependencies: y
+      Reverse dependencies: EDAC_SKX [=y] && EDAC [=y] && PCI [=y] && X86_64 [=y] && X86_MCE_INTEL [=y] && PCI_MMCONFIG [=y] && ACPI [=y] && (ACPI_NFIT [=n] || !ACPI_NFIT [=n]) || EDAC_I10NM [=n] && EDAC [=y] && PCI [=y] && X86_64 [=y] && X86_MCE_INTEL [=y] && PCI_MMCONFIG [=y] && ACPI [=y] && (ACPI_NFIT [=n] || !ACPI_NFIT [=n])
 

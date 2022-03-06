@@ -1,26 +1,27 @@
-SCSI_UFSHCD: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=m] && SCSI_DMA [=y]
+UBIFS_FS_LZO: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
 
-CLK_R8A77965: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77965 [=y]
+USB_G_DBGP_PRINTK: y => no
+      Direct dependencies: <choice> && USB_G_DBGP [=y]
 
-DWMAC_SUN8I: m => yes
-      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=y] && STMMAC_ETH [=y] && STMMAC_PLATFORM [=m] && OF [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=y])
+UBIFS_FS_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
 
-PACKING: y => no
+UBIFS_FS_LZO: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
+
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y]
+
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
+
+SPARSE_IRQ: y => no
       Direct dependencies: y
-      Reverse dependencies: NET_DSA_TAG_OCELOT [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_TAG_SJA1105 [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_SJA1105 [=n] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || MSCC_OCELOT_SWITCH_LIB [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROSEMI [=y]
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-ARM64_VA_BITS_39: y => no
-      Direct dependencies: <choice> && ARM64_4K_PAGES [=y]
-
-DM_MULTIPATH: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m] && (!SCSI_DH [=y] || SCSI [=m])
-
-FB_VIA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y] && GPIOLIB [=y] && I2C [=y] && (X86 || COMPILE_TEST [=y])
-
-DWMAC_STI: m => yes
-      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=y] && STMMAC_ETH [=y] && STMMAC_PLATFORM [=m] && OF [=y] && (ARCH_STI || COMPILE_TEST [=y])
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
 

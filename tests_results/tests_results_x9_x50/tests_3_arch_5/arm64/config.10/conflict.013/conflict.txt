@@ -1,18 +1,18 @@
-ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
-
-CRYPTO_SM4: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
-
-EXTCON: y => no
+PARAVIRT: y => no
       Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=y] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
 
-KASAN_GENERIC: y => no
-      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
+MXC_CLK: y => mod
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8MN [=m] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8MQ [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+JOYSTICK_TURBOGRAFX: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && PARPORT [=m]
+
+SND_SOC_MAX98357A: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && GPIOLIB [=y]
+      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=y] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_MT8183_DA7219_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT8183 [=n] && I2C [=y] && GPIOLIB [=y] || SND_SOC_RK3399_GRU_SOUND [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=y] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI [=n] || SND_SOC_AMD_MACH_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP_COMMON [=n] && X86 && PCI [=n] && I2C [=y] || SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] || SND_SOC_INTEL_SKL_NAU88L25_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_SKL [=n] && I2C [=y] && ACPI [=y] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_GLK_RT5682_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_SOF_GEMINILAKE [=n] && I2C [=y] && ACPI [=y] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_SOF_NAU8825_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && GPIOLIB [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_STORM [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=m] && GPIOLIB [=y] || SND_SOC_SC7180 [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=m] && I2C [=y] && GPIOLIB [=y]
+
+HID_CYPRESS: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 

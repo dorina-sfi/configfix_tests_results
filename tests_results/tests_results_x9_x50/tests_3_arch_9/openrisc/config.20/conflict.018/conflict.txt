@@ -1,30 +1,30 @@
-BACKLIGHT_LM3639: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
+VIDEO_SR030PC30: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-DEBUG_FS_ALLOW_NONE: y => no
-      Direct dependencies: <choice>
+SERIO_ALTERA_PS2: m => yes
+      Direct dependencies: SERIO [=m] && HAS_IOMEM [=y]
 
-FSI_OCC: m => yes
-      Direct dependencies: FSI [=y] && FSI_SBEFIFO [=m]
+VIDEO_DW9807_VCM: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-FPGA_DFL_EMIF: m => yes
-      Direct dependencies: MEMORY [=y] && FPGA_DFL [=m] && HAS_IOMEM [=y]
-
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=m] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=n] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=n] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y])
-
-GPIO_DLN2: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_DLN2 [=m]
-
-REGULATOR: y => no
+PAGE_EXTENSION: y => no
       Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=n] || USB_LGM_PHY [=m] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
+      Reverse dependencies: PAGE_IDLE_FLAG [=n] && !64BIT || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-SND_USB_CAIAQ: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_USB [=y] && USB [=m]
+INPUT_PWM_BEEPER: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && PWM [=y]
 
-MD_RAID1: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
-      Reverse dependencies: DM_RAID [=n] && MD [=y] && BLK_DEV_DM [=n]
+VIDEO_BT819: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=n] && NET [=y] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=y] && CAN [=y] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=y] && NET [=y] && WIRELESS [=y] && MAC80211 [=m] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=m]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=n] && !UML && SND [=n] && SND_CTL_LED [=n] || HID_WACOM [=n] && INPUT [=m] && HID [=m] && USB_HID [=n] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=m] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=m] && (RFKILL [=m] || RFKILL [=m]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=m] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && HWMON [=y] && INPUT [=m] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=m] || RFKILL [=m]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+
+NET_DSA: m => yes
+      Direct dependencies: NET [=y] && (BRIDGE [=m] || BRIDGE [=m]=n) && (HSR [=m] || HSR [=m]=n) && INET [=y] && NETDEVICES [=y]
+
+RSI_SDIO: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RSI [=y] && MMC [=m] && RSI_91X [=m]
 

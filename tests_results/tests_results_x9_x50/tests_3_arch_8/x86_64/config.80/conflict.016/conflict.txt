@@ -1,28 +1,26 @@
-MMC_DW_EXYNOS: m => yes
-      Direct dependencies: MMC [=m] && MMC_DW [=m]
+CPU_FREQ_GOV_PERFORMANCE: y => mod
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=y] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y]
 
-BPF_SYSCALL: y => no
+GPIO_TQMX86: m => yes
+      Direct dependencies: GPIOLIB [=y] && (MFD_TQMX86 [=m] || COMPILE_TEST [=n]) && HAS_IOPORT_MAP [=y]
+
+EXTCON: y => no
       Direct dependencies: y
-      Reverse dependencies: AF_KCM [=y] && NET [=y] && INET [=y]
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=n] && (RC_CORE [=m] || !RC_CORE [=m]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
 
-HID_SENSOR_PROX: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+SENSORS_PIM4328: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-PWM: y => no
-      Direct dependencies: y
-      Reverse dependencies: FB_SSD1307 [=m] && HAS_IOMEM [=y] && FB [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+SND_GINA20: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-CRYPTO_TWOFISH_X86_64_3WAY: y => mod
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+SND_MIA: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-SND_SOC_PCM512x_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_ATMEL_SOC_TSE850_PCM5142 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && ARCH_AT91 && OF [=n] && ATMEL_SSC [=y] && I2C [=y] || SND_SOC_INTEL_SOF_PCM512x_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_SOF_BAYTRAIL [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=y])) && SND_HDA_CODEC_HDMI [=n]
+NTB_TRANSPORT: m => yes
+      Direct dependencies: NTB [=m]
 
-HID_TWINHAN: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
-
-HID_MONTEREY: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+SND_ES1968: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y] && ZONE_DMA [=y]
 

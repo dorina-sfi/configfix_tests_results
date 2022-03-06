@@ -1,35 +1,38 @@
-DAMON_KUNIT_TEST: y => no
-      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
-
-IOMMU_SUPPORT: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
-
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
-
-SECURITYFS: y => no
+EVENTFD: y => no
       Direct dependencies: y
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=y] && INTEGRITY [=y]
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=y] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-OF_DYNAMIC: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=y] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=n] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
+MXC_CLK: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: CLK_IMX1 [=n] && COMMON_CLK [=y] || CLK_IMX25 [=n] && COMMON_CLK [=y] || CLK_IMX27 [=n] && COMMON_CLK [=y] || CLK_IMX31 [=n] && COMMON_CLK [=y] || CLK_IMX35 [=n] && COMMON_CLK [=y] || CLK_IMX5 [=n] && COMMON_CLK [=y] || CLK_IMX6Q [=n] && COMMON_CLK [=y] || CLK_IMX6SL [=n] && COMMON_CLK [=y] || CLK_IMX6SLL [=n] && COMMON_CLK [=y] || CLK_IMX6SX [=n] && COMMON_CLK [=y] || CLK_IMX6UL [=n] && COMMON_CLK [=y] || CLK_IMX7D [=n] && COMMON_CLK [=y] || CLK_IMX7ULP [=n] && COMMON_CLK [=y] || CLK_VF610 [=n] && COMMON_CLK [=y] || CLK_IMX8MM [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MN [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MP [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8MQ [=n] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || CLK_IMX8ULP [=y] && COMMON_CLK [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-
-PRINTK: y => no
+CONFIGFS_FS: y => no
       Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=n] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-ARM64_PA_BITS_48: y => no
-      Direct dependencies: <choice>
+SC_GCC_7280: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-IO_URING: y => no
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
+
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+
+ROCKCHIP_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
+      Reverse dependencies: ARCH_ROCKCHIP [=y]
+
+CRC7: y => no
       Direct dependencies: y
+      Reverse dependencies: WILC1000_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=n] && INET [=n] && SPI [=y] || WL1251 [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && MAC80211 [=n] || WLCORE_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_TI [=n] && WLCORE [=n] && SPI_MASTER [=y] && OF [=y] || MMC_SPI [=y] && MMC [=y] && SPI_MASTER [=y]
 
-SLUB_DEBUG: y => no
-      Direct dependencies: SLUB [=y] && SYSFS [=y]
-      Reverse dependencies: KASAN_GENERIC [=y] && <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y] || KASAN_SW_TAGS [=n] && <choice> && HAVE_ARCH_KASAN_SW_TAGS [=y] && CC_HAS_KASAN_SW_TAGS [=n] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y] && SLUB [=y]
+ARM64_ERRATUM_843419: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=y]
+
+ARM64_VA_BITS_42: y => no
+      Direct dependencies: <choice> && ARM64_64K_PAGES [=y]
 

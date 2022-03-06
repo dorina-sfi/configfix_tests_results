@@ -1,17 +1,16 @@
-HID_ORTEK: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SND_SOC_MTK_BTCVSD: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-IR_SPI: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && SPI [=y] && LIRC [=y] && (OF [=y] || COMPILE_TEST [=y])
+SND_SOC_CS42L42: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n])
 
-MMC_TMIO: m => yes
-      Direct dependencies: MMC [=m] && (MFD_TMIO [=n] || MFD_ASIC3 [=y] || COMPILE_TEST [=y])
-
-CRYPTO_SHA3: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
-
-DEBUG_FS: y => no
+IO_URING: y => no
       Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=m] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || NOTIFIER_ERROR_INJECTION [=m] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=y] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=n] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+
+AD5686_SPI: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
+
+SX9500: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

@@ -1,19 +1,20 @@
-ARM64_ERRATUM_843419: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_MXC [=y]
+IOMMU_IO_PGTABLE_ARMV7S: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=y]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
 
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+ARM64_CRYPTO: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64 [=y]
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n]) && ARM64 [=y] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=y])
 
-PRIME_NUMBERS: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM_DEBUG_SELFTEST [=y] && HAS_IOMEM [=y] && DRM [=y] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=n] && DRM_I915 [=n]
-
-CLK_R8A77965: y => no
+CLK_R8A774A1: y => no
       Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77965 [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774A1 [=y]
 
-DVB_CX24120: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=y] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=y]) && MEDIA_SUBDRV_AUTOSELECT [=y]
+PKCS7_MESSAGE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=y] && IMA_APPRAISE [=y] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+
+CRYPTO_SHA256_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA2_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 

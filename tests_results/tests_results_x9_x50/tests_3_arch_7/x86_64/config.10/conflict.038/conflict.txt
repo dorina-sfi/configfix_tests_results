@@ -1,27 +1,26 @@
-COMPACTION: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
 
-MEMBARRIER: y => no
+MISC_FILESYSTEMS: y => no
       Direct dependencies: y
-      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
+      Reverse dependencies: ACPI_APEI [=y] && ACPI [=y] && HAVE_ACPI_APEI [=y]
 
-DEBUG_FS_ALLOW_ALL: y => no
-      Direct dependencies: <choice>
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-SND_ATMEL_SOC_SSC_DMA: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && ATMEL_SSC [=y]
-      Reverse dependencies: SND_ATMEL_SOC_WM8904 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && ATMEL_SSC [=y] && I2C [=y] || SND_AT91_SOC_SAM9X5_WM8731 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && ATMEL_SSC [=y] && SND_SOC_I2C_AND_SPI [=y] || SND_ATMEL_SOC_TSE850_PCM5142 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && ARCH_AT91 && OF [=n] && ATMEL_SSC [=y] && I2C [=y]
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-CONFIGFS_FS: y => no
+INPUT: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=y] && ACPI [=y] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=y] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=y] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=y]
+      Reverse dependencies: VT [=n] && TTY [=y] || DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y]
 
-IOSF_MBI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=n] && MMC [=y] && MMC_SDHCI [=y] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && X86 [=y] && EFI [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=n] || PUNIT_ATOM_DEBUG [=y] && PCI [=y]
+DRM_I915_DEBUG_GEM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM_I915 [=y] && EXPERT [=y] && DRM_I915_WERROR [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=y] && HAS_IOMEM [=y] && DRM_I915 [=y] && EXPERT [=y] && !COMPILE_TEST [=n]
 
-CLK_RENESAS_CPG_MSSR: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R7S9210 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+MSDOS_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 

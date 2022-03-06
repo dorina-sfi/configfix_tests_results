@@ -1,32 +1,30 @@
-MEMORY: y => no
-      Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=y] && MTD [=y] && MTD_RAW_NAND [=y] && (FSL_SOC || ARCH_LAYERSCAPE [=y] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK [=n] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-TEGRA_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_TEGRA_2x_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_3x_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_114_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_124_SOC [=n] && ARCH_TEGRA [=y] && ARM || ARCH_TEGRA_210_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
+NF_TABLES_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y]
+      Reverse dependencies: NF_TABLES_INET [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && IPV6 [=y]
 
-NET_DSA_TAG_EDSA: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_MV88E6XXX [=y] && NETDEVICES [=y] && NET_DSA [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+WIRELESS: y => no
+      Direct dependencies: NET [=y] && !S390
+      Reverse dependencies: WLAN [=y] && NETDEVICES [=y] && !S390 && NET [=y]
 
-SYSC_R8A779A0: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A779A0 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
-
-IP_SCTP: y => no
-      Direct dependencies: NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n)
-      Reverse dependencies: DLM [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y] && (IPV6 [=y] || IPV6 [=y]=n)
-
-NET_DSA_TAG_RTL8_4: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_REALTEK_SMI [=y] && NETDEVICES [=y] && NET_DSA [=y]
-
-NET_DSA_TAG_BRCM: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: B53 [=y] && NETDEVICES [=y] && NET_DSA [=y] || NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
-
-CRYPTO_JITTERENTROPY: y => no
+CRYPTO_POLY1305: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+
+POSIX_TIMERS: y => no
+      Direct dependencies: y
+
+FPGA_REGION: y => no
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+
+CONSOLE_TRANSLATIONS: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 

@@ -1,21 +1,20 @@
-INPUT_FF_MEMLESS: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: JOYSTICK_GAMECON [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && PARPORT [=y] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=y] && JOYSTICK_XPAD [=y] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=y] && MFD_ARIZONA [=y] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=y] && INPUT [=y] && INPUT_MISC [=y] && (MFD_PM8XXX [=y] || MFD_SPMI_PMIC [=y]) || INPUT_MAX77693_HAPTIC [=y] && INPUT [=y] && INPUT_MISC [=y] && (MFD_MAX77693 [=y] || MFD_MAX77843 [=y]) && PWM [=y] || INPUT_MAX8997_HAPTIC [=y] && INPUT [=y] && INPUT_MISC [=y] && PWM [=y] && MFD_MAX8997 [=y] || INPUT_GPIO_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_REGULATOR_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && TWL4030_CORE [=y] || INPUT_TWL6040_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && TWL6040_CORE [=y] || INPUT_PWM_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && PWM [=y] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_DRV2665_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=y] && INPUT_MISC [=y] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=y] && INPUT [=y] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y]) || HID_ACRUX_FF [=y] && INPUT [=y] && HID [=y] && HID_ACRUX [=y] || HID_BETOP_FF [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=y] || HID_EMS_FF [=y] && INPUT [=y] && HID [=y] || HOLTEK_FF [=y] && INPUT [=y] && HID [=y] && HID_HOLTEK [=y] || LOGITECH_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIRUMBLEPAD2_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIG940_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIWHEELS_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_MAYFLASH [=n] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=n] && INPUT [=y] && HID [=y] || NINTENDO_FF [=n] && INPUT [=y] && HID [=y] && HID_NINTENDO [=n] || PANTHERLORD_FF [=n] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=y] || PLAYSTATION_FF [=n] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=n] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=y] || GREENASIA_FF [=y] && INPUT [=y] && HID [=y] && HID_GREENASIA [=y] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=n] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=n]
+USB_MASS_STORAGE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && BLOCK [=y]
 
-PROC_FS: y => no
+EXTCON: y => mod
       Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=m] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=m] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=m] || !RC_CORE [=m]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=m] || USB_EHCI_HCD [=y] && !USB_GADGET [=m] || !USB_EHCI_HCD [=y] && USB_GADGET [=m]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=m] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
 
-UNIX98_PTYS: y => no
-      Direct dependencies: TTY [=y]
+USB_STKWEBCAM: m => yes
+      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m]
 
-MTK_SMI: y => no
-      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
-      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+EFI_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+DVB_OR51132: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+MS5611_I2C: m => yes
+      Direct dependencies: IIO [=y] && I2C [=y] && MS5611 [=m]
 

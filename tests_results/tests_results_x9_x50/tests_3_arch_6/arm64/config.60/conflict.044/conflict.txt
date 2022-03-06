@@ -1,21 +1,23 @@
-CLK_R8A77980: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77980 [=y]
+CRYPTO_RSA: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=y] && HAVE_ARCH_KFENCE [=y] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
+MEDIA_PLATFORM_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-CLKSRC_EXYNOS_MCT: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y]
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-IOMMU_DEFAULT_DMA_LAZY: y => no
-      Direct dependencies: <choice>
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
 
-BITFIELD_KUNIT: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+THERMAL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=y] || MMC_SDHCI_OMAP [=n] && MMC [=n] && MMC_SDHCI_PLTFM [=n] && OF [=y]
 
-SPRD_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y] && (ARCH_SPRD [=y] || COMPILE_TEST [=n])
+SND_DYNAMIC_MINORS: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y]
+      Reverse dependencies: SND_HDA_CODEC_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_SOC_TOPOLOGY [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
 

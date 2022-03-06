@@ -1,22 +1,21 @@
-CRYPTO_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+CPU_ISOLATION: y => no
+      Direct dependencies: SMP [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-CRYPTO_HMAC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || XFRM_AH [=n] && NET [=y] && INET [=y] || XFRM_ESP [=n] && NET [=y] && INET [=y] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=y] && IPV6 [=n] || SCTP_COOKIE_HMAC_MD5 [=n] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_MD5 [=n] || SCTP_COOKIE_HMAC_SHA1 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_SHA1 [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=n] || TRUSTED_KEYS [=n] && KEYS [=y] && TCG_TPM [=y] || ENCRYPTED_KEYS [=y] && KEYS [=y] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_DRBG_HMAC [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=n] && TCG_TPM [=y] && TRUSTED_KEYS [=n]
+DRM_IMX_LDB: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_IMX [=m] && MFD_SYSCON [=y] && COMMON_CLK [=y]
 
-SUN4I_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: ARCH_SUNXI [=y]
+MTK_SMI: y => mod
+      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_MEDIATEK [=n] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
 
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+PM_DEVFREQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
 
-MEDIA_TUNER_XC2028: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_TM6000 [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && I2C [=y] && INPUT [=y] && RC_CORE [=y] && USB [=y] || DVB_USB_DIB0700 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_CXUSB [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+INPUT_TWL4030_VIBRA: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && TWL4030_CORE [=y]
 
-HZ_250: y => no
-      Direct dependencies: <choice>
+INTERCONNECT_QCOM_MSM8974: m => yes
+      Direct dependencies: INTERCONNECT [=y] && INTERCONNECT_QCOM [=y] && QCOM_SMD_RPM [=m]
 

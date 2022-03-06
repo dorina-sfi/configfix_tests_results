@@ -1,24 +1,25 @@
-CPU_SUP_AMD: y => no
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=n] || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=n] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=n] && I2C [=y] || DELL_RBU [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=y] && X86 [=y]
+
+RELAY: y => no
       Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y]
 
-MC3230: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MFD_MADERA_I2C: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_MADERA [=m] && I2C [=y]
 
-IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=n] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=m] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=m] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n]
+HID_GENERIC: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-ISL29125: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=y] && MODULES [=y] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=y] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=y]
 
-VIDEO_UPD64083: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=n]
-
-JSA1212: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-W1_MASTER_DS1WM: m => yes
-      Direct dependencies: W1 [=m]
+MTD_SBC_GXX: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && X86 [=y] && MTD_CFI_INTELEXT [=m] && MTD_COMPLEX_MAPPINGS [=y]
 

@@ -1,27 +1,31 @@
-BMC150_ACCEL: m => yes
-      Direct dependencies: IIO [=m]
+GPIO_GENERIC_PLATFORM: y => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MFD_VEXPRESS_SYSREG [=y] && HAS_IOMEM [=y] && VEXPRESS_CONFIG [=y] && GPIOLIB [=y]
 
-XEN_PRIVCMD: y => mod
-      Direct dependencies: XEN [=y]
-      Reverse dependencies: XENFS [=y] && XEN [=y]
+SYSCTL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-SENSORS_MENF21BMC_HWMON: m => yes
-      Direct dependencies: HWMON [=y] && MFD_MENF21BMC [=m]
+CLK_RENESAS_CPG_MSSR: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-I2C_EMEV2: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && HAVE_CLK [=y]
+SM_GCC_8250: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SM_CAMCC_8250 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_GPUCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8250 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-IIO_KFIFO_BUF: m => no
-      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
-      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=m] && I2C [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=m] && SPI [=y] || INA2XX_ADC [=n] && IIO [=m] && I2C [=m] && !SENSORS_INA2XX [=m] || TI_AM335X_ADC [=n] && IIO [=m] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=m] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=m] && IIO [=m] && IIO_SSP_SENSORHUB [=m] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=m] && IIO [=m] && I2C [=m] || MAX30102 [=m] && IIO [=m] && I2C [=m] || IIO_ST_LSM6DSX [=m] && IIO [=m] && (I2C [=m] || SPI [=y] || I3C [=n]) || ACPI_ALS [=n] && IIO [=m] && ACPI [=n] || APDS9960 [=m] && IIO [=m] && I2C [=m] || ISL29501 [=m] && IIO [=m] && I2C [=m]
+NF_CONNTRACK_MARK: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: NETFILTER_XT_CONNMARK [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y] || IP_NF_TARGET_CLUSTERIP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=n] && IP_NF_MANGLE [=n] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-MOUSE_CYAPA: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && I2C [=m]
+NF_REJECT_IPV6: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_REJECT_IPV6 [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && NF_TABLES [=n] && NF_TABLES_IPV6 [=n] || IP6_NF_TARGET_REJECT [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && IP6_NF_FILTER [=y]
 
-HOTPLUG_CPU: y => no
-      Direct dependencies: y
-      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-TMP006: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
+PARPORT_PANEL: y => no
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 

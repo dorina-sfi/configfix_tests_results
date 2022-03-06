@@ -1,18 +1,21 @@
-COMEDI_DAC02: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 
-GREYBUS_LOOPBACK: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m]
+DEBUG_IRQFLAGS: y => no
+      Direct dependencies: y
+      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
 
-DVB_USB_DVBSKY: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=n] || ARCH_HISI [=y] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=n] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=n] || MFD_MADERA [=n] && HAS_IOMEM [=y]
 
-INTEL_TH_STH: m => yes
-      Direct dependencies: INTEL_TH [=m] && STM [=y]
+SENSORS_SHT4x: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-SND_SOC_MIKROE_PROTO: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && SND_SOC_I2C_AND_SPI [=m]
+CLK_RASPBERRYPI: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (RASPBERRYPI_FIRMWARE [=m] || COMPILE_TEST [=y] && !RASPBERRYPI_FIRMWARE [=m])
 
-PSTORE_LZO_COMPRESS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
+IP6_NF_TARGET_SYNPROXY: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
 

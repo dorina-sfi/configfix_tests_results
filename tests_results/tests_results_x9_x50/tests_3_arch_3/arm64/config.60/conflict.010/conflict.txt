@@ -1,12 +1,12 @@
-XEN_PRIVCMD: y => no
-      Direct dependencies: XEN [=y]
-      Reverse dependencies: XENFS [=y] && XEN [=y]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
 
-SYSC_R8A77995: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A77995 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+XFRM_MIGRATE: y => no
+      Direct dependencies: NET [=y] && INET [=y] && XFRM [=y]
+      Reverse dependencies: NET_KEY_MIGRATE [=y] && NET [=y] && INET [=y] && NET_KEY [=m]
 
-PINCTRL_PFC_R8A77960: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77960 [=y]
+MFD_STMFX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_STMFX [=m] && PINCTRL [=y] && I2C [=m] && OF_GPIO [=y]
 

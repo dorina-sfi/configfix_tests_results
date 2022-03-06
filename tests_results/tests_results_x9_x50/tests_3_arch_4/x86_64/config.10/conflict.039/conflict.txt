@@ -1,12 +1,14 @@
-USB_RAW_GADGET: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
+SSB_PCIHOST: y => no
+      Direct dependencies: SSB [=m] && SSB_PCIHOST_POSSIBLE [=y]
+      Reverse dependencies: B44_PCI_AUTOSELECT [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && B44 [=m] && SSB_PCIHOST_POSSIBLE [=y] || B43_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_BROADCOM [=n] && B43 [=n] && SSB_PCIHOST_POSSIBLE [=y] || B43LEGACY_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_BROADCOM [=n] && B43LEGACY [=n] && SSB_PCIHOST_POSSIBLE [=y]
 
-MTD_NAND_GPMI_NAND: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && MXS_DMA [=y]
+USB_GSPCA_T613: m => yes
+      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m] && USB_GSPCA [=m]
 
-MFD_MADERA_I2C: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && MFD_MADERA [=m] && I2C [=y]
+MEDIA_TUNER_TDA9887: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
 
-MCB_PCI: m => yes
-      Direct dependencies: MCB [=m] && PCI [=y]
+EDAC_I7300: m => yes
+      Direct dependencies: EDAC [=m] && X86 [=y] && PCI [=y]
 

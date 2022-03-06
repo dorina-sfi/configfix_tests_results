@@ -1,11 +1,12 @@
-HW_RANDOM_IXP4XX: m => yes
-      Direct dependencies: HW_RANDOM [=m] && (ARCH_IXP4XX || COMPILE_TEST [=y])
+FRAMEBUFFER_CONSOLE: y => no
+      Direct dependencies: VT [=y] && FB [=y] && !UML
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && !EXPERT [=n]
 
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: MFD_MADERA [=y] && HAS_IOMEM [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-VITESSE_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
-      Reverse dependencies: NET_DSA_VITESSE_VSC73XX [=m] && NETDEVICES [=y] && NET_DSA [=m]
+MTD_CFI_AMDSTD: y => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
 

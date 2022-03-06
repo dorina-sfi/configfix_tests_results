@@ -1,25 +1,31 @@
-MTD_ABSENT: m => yes
-      Direct dependencies: MTD [=m]
-
-DRM_PANEL_DSI_CM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
-
-SENSORS_LM80: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-SENSORS_SL28CPLD: m => yes
-      Direct dependencies: HWMON [=m] && (MFD_SL28CPLD [=y] || COMPILE_TEST [=y])
-
-REGULATOR: y => no
+DEBUG_KERNEL: y => no
       Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI || MMC_MTK [=m] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
+      Reverse dependencies: EXPERT [=y]
 
-SENSORS_GPIO_FAN: m => yes
-      Direct dependencies: HWMON [=m] && OF_GPIO [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=n]
 
-SDM_GPUCC_660: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 
-LEDS_KTD2692: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && OF [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
+
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
+
+RMI4_CORE: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 

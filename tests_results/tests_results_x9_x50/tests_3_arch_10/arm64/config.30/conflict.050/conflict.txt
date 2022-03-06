@@ -1,34 +1,33 @@
-CRYPTO_ECDH: m => no
+RTC_DRV_88PM80X: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_88PM800 [=m]
+
+RESET_RASPBERRYPI: m => yes
+      Direct dependencies: RESET_CONTROLLER [=y] && (RASPBERRYPI_FIRMWARE [=m] || RASPBERRYPI_FIRMWARE [=m]=n && COMPILE_TEST [=y])
+
+PINCTRL_AXP209: m => yes
+      Direct dependencies: PINCTRL [=y] && MFD_AXP20X [=m] && OF [=y]
+
+SYSC_R8A774B1: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774B1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+
+I2C_MUX_MLXCPLD: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m]
+
+RTC_DRV_BD70528: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_ROHM_BD71828 [=m]
+
+MSM_LCC_8960: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+
+CRYPTO_RSA: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-VIDEO_TDA9840: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=n] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
 
-NET_DSA_MV88E6060: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
-
-CRYPTO_NULL: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
-
-USB_GADGET_TARGET: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=y] && TARGET_CORE [=m]
-
-RFKILL_GPIO: m => yes
-      Direct dependencies: NET [=y] && RFKILL [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-
-CAN_M_CAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m]
-
-VIDEO_IR_I2C: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RC_CORE [=m]
-
-CHARGER_MAX77693: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77693 [=m]
-
-MTD_CFI_I1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+LIST_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 

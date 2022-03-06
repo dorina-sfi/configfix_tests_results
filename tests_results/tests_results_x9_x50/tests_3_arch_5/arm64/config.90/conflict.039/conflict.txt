@@ -1,16 +1,18 @@
-COMEDI_USBDUXSIGMA: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_USB_DRIVERS [=m]
+VIDEO_XILINX_VTC: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=m]
+      Reverse dependencies: VIDEO_XILINX_TPG [=m] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=m]
 
-USB_GSPCA_CPIA1: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=y] && USB_GSPCA [=m]
+BLK_DEV_INTEGRITY: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && ATA [=m] || DM_INTEGRITY [=n] && MD [=n] && BLK_DEV_DM [=n] || TCM_IBLOCK [=m] && TARGET_CORE [=y]
 
-CRYPTO_AES_ARM64: y => mod
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=n])
+CMA: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+MMC_SDHCI_OF_SPARX5: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && (ARCH_SPARX5 [=y] || COMPILE_TEST [=y])
 
-CORESIGHT_TRBE: m => yes
-      Direct dependencies: CORESIGHT [=m] && ARM64 [=y] && CORESIGHT_SOURCE_ETM4X [=m]
+SND_SOC_WM8523: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 

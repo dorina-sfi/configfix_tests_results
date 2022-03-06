@@ -1,22 +1,25 @@
-MTD_NAND_MXIC: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=y])
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32
 
-MTD_NAND_INTEL_LGM: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
-
-CRYPTO_FCRYPT: m => no
+CRYPTO_NULL: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=y] && NET [=y] && AF_RXRPC [=m]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-AD525X_DPOT: m => yes
-      Direct dependencies: (I2C [=m] || SPI [=n]) && SYSFS [=y]
+MISC_FILESYSTEMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_APEI [=y] && ACPI [=y] && HAVE_ACPI_APEI [=y]
 
-NET_9P_XEN: m => yes
-      Direct dependencies: NET [=y] && NET_9P [=m] && XEN [=y]
+UNMAP_KERNEL_AT_EL0: y => no
+      Direct dependencies: y
 
-SI7020: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CRYPTO_NULL: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-MDM_GCC_9607: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+SC_GCC_7180: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASS_CORECC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_MSS_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7180 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+HID_PICOLCD_BACKLIGHT: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
 

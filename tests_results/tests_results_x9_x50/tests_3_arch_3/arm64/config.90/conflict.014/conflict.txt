@@ -1,9 +1,10 @@
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 
-CORESIGHT_CATU: m => yes
-      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINK_AND_SINK_TMC [=m]
+USB_XHCI_PLATFORM: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y]
+      Reverse dependencies: USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_XHCI_HCD [=y] || USB_XHCI_MVEBU [=m] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && HAS_IOMEM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n])
 
-PROC_FS: y => no
-      Direct dependencies: y
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 

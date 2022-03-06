@@ -1,18 +1,21 @@
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+NF_DUP_IPV6: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m])
+      Reverse dependencies: NETFILTER_XT_TARGET_TEE [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m]) && (IP6_NF_IPTABLES [=m] || !IP6_NF_IPTABLES [=m]) && IP6_NF_IPTABLES [=m] || NFT_DUP_IPV6 [=m] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && NF_TABLES [=y] && NF_TABLES_IPV6 [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m])
 
-SND_SOC_CS35L41_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+NET_IFE_SKBPRIO: m => yes
+      Direct dependencies: NET [=y] && NET_SCHED [=y] && NET_ACT_IFE [=m]
 
-FXOS8700_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_ECHAINIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
 
-SND_SOC_WM8974: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=y]) && OF [=y]
 
-BMC150_ACCEL: m => yes
-      Direct dependencies: IIO [=m]
+NETFILTER_XT_TARGET_HMARK: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && (IP6_NF_IPTABLES [=m] || IP6_NF_IPTABLES [=m]=n) && NETFILTER_ADVANCED [=y]
 
-NFC_VIRTUAL_NCI: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m]
+SENSORS_SPARX5: m => yes
+      Direct dependencies: HWMON [=m] && (ARCH_SPARX5 [=n] || COMPILE_TEST [=y])
 

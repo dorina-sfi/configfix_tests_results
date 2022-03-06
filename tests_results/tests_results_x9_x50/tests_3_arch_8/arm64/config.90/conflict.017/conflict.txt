@@ -1,26 +1,30 @@
-THERMAL_GOV_FAIR_SHARE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-DM_MULTIPATH_QL: m => yes
-      Direct dependencies: MD [=y] && DM_MULTIPATH [=m]
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-GPIO_DLN2: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_DLN2 [=m]
-
-FSI_MASTER_GPIO: m => yes
-      Direct dependencies: FSI [=m] && GPIOLIB [=y]
-
-MODULE_SIG_KEY_TYPE_ECDSA: y => no
+LTO_NONE: y => no
       Direct dependencies: <choice>
 
-I2C_MUX_PINCTRL: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && PINCTRL [=y] && (OF [=y] || COMPILE_TEST [=n])
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-COMEDI_ADV_PCI1720: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
-
-CRYPTO_ESSIV: y => no
+CRYPTO_JITTERENTROPY: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: DM_CRYPT [=m] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n)
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+
+RELAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 && PCI [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y]
+
+SND_SOC_MAX98357A: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && GPIOLIB [=y]
+      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=n] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=y] || SND_SOC_MT8183_DA7219_MAX98357A [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT8183 [=y] && I2C [=y] && GPIOLIB [=y] || SND_SOC_RK3399_GRU_SOUND [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI [=y] || SND_SOC_AMD_MACH_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP_COMMON [=n] && X86 && PCI [=n] && I2C [=y] || SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] || SND_SOC_INTEL_SKL_NAU88L25_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_SKL [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_GLK_RT5682_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_SOF_GEMINILAKE [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_SOF_NAU8825_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_STORM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=n] && GPIOLIB [=y] || SND_SOC_SC7180 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=n] && I2C [=y] && GPIOLIB [=y]
+
+OWL_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_ACTIONS [=y]
 

@@ -1,31 +1,29 @@
-PREEMPT_NONE: y => no
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
+
+SCSI_SAS_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
+
+OR1K_1200: y => no
       Direct dependencies: <choice>
 
-SYSFS: y => no
-      Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+CRYPTO_MANAGER: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=y] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=n]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=n] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
 
-MEMBARRIER: y => no
-      Direct dependencies: y
-      Reverse dependencies: RSEQ [=n] && HAVE_RSEQ [=n]
+MOUSE_PS2_CYPRESS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 
-SND_SOC_TEGRA20_AC97: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=y]
-      Reverse dependencies: SND_SOC_TEGRA_WM9712 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=y] && GPIOLIB [=y]
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
 
-SND_SOC_FSL_SSI: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
-      Reverse dependencies: SND_SOC_MPC8610_HPCD [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_POWERPC_SOC [=n] && MPC8610_HPCD && I2C [=y] || SND_SOC_P1022_DS [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_POWERPC_SOC [=n] && P1022_DS && I2C [=y] || SND_SOC_P1022_RDK [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_POWERPC_SOC [=n] && P1022_RDK && I2C [=y] || SND_SOC_EUKREA_TLV320 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && ARCH_MXC && !ARM64 && I2C [=y] || SND_SOC_IMX_ES8328 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && (I2C [=y] || SPI [=y]) || SND_SOC_IMX_SGTL5000 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] || SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=n] || SND_AC97_CODEC [=n]=n)
-
-SYNC_FILE: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
-
-SND_SOC_TS3A227E: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
-      Reverse dependencies: SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_ROCKCHIP_MAX98090 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=y] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_INTEL_CHT_BSW_MAX98090_TI_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI && (X86_INTEL_LPSS || COMPILE_TEST [=y])
-
-RESET_HISI: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
-      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
+CRYPTO_CBC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=n] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=n] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 

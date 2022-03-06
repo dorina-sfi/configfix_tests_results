@@ -1,29 +1,31 @@
-SND_SOC_ADAU7118_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+ATM_LANE: m => yes
+      Direct dependencies: NET [=y] && ATM [=m]
 
-MEDIA_TUNER_FC0012: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+VIDEO_SAA711X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_STK1160 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_STK1160_COMMON [=n] || VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_V4L2 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m] || VIDEO_MXB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && PCI [=y] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_ZORAN_BUZ [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_ZORAN_LML33R10 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MTD_NAND_DENALI_DT: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_DMA [=y] && HAVE_CLK [=y] && OF [=y] && HAS_IOMEM [=y]
+SENSORS_IR35221: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-NET_L3_MASTER_DEV: y => no
-      Direct dependencies: NET [=y] && (INET [=y] || IPV6 [=n])
-      Reverse dependencies: IPVLAN_L3S [=y] && NETDEVICES [=y] && NET_CORE [=y] && NETFILTER [=y] && IPVLAN [=y]
+CRYPTO_CTR: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=m] && PCMCIA [=n] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=m] && IXP4XX_NPE [=m] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
+SENSORS_PMBUS: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-SND_SOC_CS42L51_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-MTD_NAND_NANDSIM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m]
+BRIDGE_EBT_AMONG: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+USB_SERIAL_CP210X: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-TOUCHSCREEN_HYCON_HY46XX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+CRYPTO_ECDH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY || COMPILE_TEST [=y]) && (OF [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

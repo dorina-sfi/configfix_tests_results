@@ -1,22 +1,27 @@
-IOMMU_DEFAULT_PASSTHROUGH: y => no
+IIO_BUFFER_DMAENGINE: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
+
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+
+CRC16: y => no
+      Direct dependencies: y
+      Reverse dependencies: BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=n] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && ACPI [=n] && EFI [=n] && SPI [=y] && (X86 || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=n] || W1_SLAVE_DS250X [=y] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=y] && SERIAL_DEV_BUS [=n] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
+
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+
+SC_GCC_7280: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+DEFAULT_SECURITY_DAC: y => no
       Direct dependencies: <choice>
 
-PROC_PAGE_MONITOR: y => no
-      Direct dependencies: PROC_FS [=y] && MMU [=y]
-      Reverse dependencies: HWPOISON_INJECT [=y] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=y] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
-
-VEML6070: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-SENSORS_HMC5843_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-HID_SENSOR_INCLINOMETER_3D: m => yes
-      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=y]
-
-SENSORS_TPS53679: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
-
-SENSORS_ZL6100: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+CONFIGFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y] || CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 

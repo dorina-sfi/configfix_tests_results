@@ -1,27 +1,28 @@
-UHID: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+HW_RANDOM_NPCM: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_NPCM || COMPILE_TEST [=y])
 
-W1_MASTER_SGI: m => yes
-      Direct dependencies: W1 [=m]
+MUX_ADGS1408: m => yes
+      Direct dependencies: MULTIPLEXER [=m] && SPI [=y]
 
-MMC_MTK: m => yes
-      Direct dependencies: MMC [=m] && HAS_DMA [=y] && COMMON_CLK [=y]
+SENSORS_SMM665: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-JOYSTICK_GF2K: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+SMS_SDIO_DRV: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_CORE [=m] && HAS_DMA [=y] && MMC [=m] && (!RC_CORE [=n] || RC_CORE [=n])
 
-SND_AUDIO_GRAPH_CARD: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && OF [=y]
+MMA7455_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SND_SOC_CS35L35: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+VIDEO_SAMSUNG_S5P_G2D: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_S5PV210 || ARCH_EXYNOS || COMPILE_TEST [=y])
 
-MMC_USHC: m => yes
-      Direct dependencies: MMC [=m] && USB [=y]
+STM32_DAC: m => yes
+      Direct dependencies: IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) && REGULATOR [=y]
 
-UIO_DMEM_GENIRQ: m => yes
-      Direct dependencies: UIO [=m] && HAS_DMA [=y]
+HID_SENSOR_IIO_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_IIO_COMMON [=m] && IIO [=m] && HID_SENSOR_HUB [=m] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_HUMIDITY [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_ALS [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_PROX [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_MAGNETOMETER_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_INCLINOMETER_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_DEVICE_ROTATION [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_CUSTOM_INTEL_HINGE [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_PRESS [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_TEMP [=m] && IIO [=m] && HID_SENSOR_HUB [=m]
 
-SENSORS_STPDDC60: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+DRM_TI_SN65DSI86: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 

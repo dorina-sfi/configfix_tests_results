@@ -1,30 +1,31 @@
-MMC_SDHCI_PCI: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI [=m] && PCI [=y]
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
 
-SSB: m => no
-      Direct dependencies: SSB_POSSIBLE [=y]
-      Reverse dependencies: B44 [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && SSB_POSSIBLE [=y] && HAS_DMA [=y] || B43 [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && (BCMA_POSSIBLE [=y] || SSB_POSSIBLE [=y]) && MAC80211 [=n] && HAS_DMA [=y] && B43_SSB [=n] || B43LEGACY [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && SSB_POSSIBLE [=y] && MAC80211 [=n] && HAS_DMA [=y]
+PKCS7_MESSAGE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
 
-MD_RAID10: y => no
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=m] && MD [=y] && BLK_DEV_DM [=m]
+AUXDISPLAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 
-THUNDER_NIC_BGX: y => no
-      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y]
-      Reverse dependencies: THUNDER_NIC_PF [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && 64BIT [=y] && PCI [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=m] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=m] || I2C_AXXIA [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=m] || I2C_EMEV2 [=m] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || ARCH_LAYERSCAPE [=y] || COLDFIRE) || I2C_MLXBF [=y] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=m] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y])
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-FB_ATMEL: m => yes
-      Direct dependencies: FB [=m] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y])
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=n] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
 
-COMPACTION: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
+UBIFS_FS_LZO: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
 

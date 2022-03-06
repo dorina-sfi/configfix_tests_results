@@ -1,17 +1,17 @@
-FPGA_DFL_NIOS_INTEL_PAC_N3000: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_DFL [=m]
+CAN_RAW: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
 
-CRYPTO_CRC32C: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=m] && INET [=n] || EXT4_FS [=m] && BLOCK [=y] || JBD2 [=m] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+TRANSPARENT_HUGEPAGE_ALWAYS: y => no
+      Direct dependencies: <choice>
 
-FB_S3: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y]
 
-BLOCK: y => no
-      Direct dependencies: y
+ARCNET_COM20020_PCI: m => yes
+      Direct dependencies: NETDEVICES [=y] && ARCNET [=y] && ARCNET_COM20020 [=m] && PCI [=y]
 
-CPUMASK_OFFSTACK: y => no
-      Direct dependencies: y
-      Reverse dependencies: MAXSMP [=y] && X86_64 [=y] && SMP [=y] && DEBUG_KERNEL [=y]
+FAILOVER: y => mod
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=y] && NETDEVICES [=y]
 

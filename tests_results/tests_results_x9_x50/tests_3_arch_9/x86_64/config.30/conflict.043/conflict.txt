@@ -1,31 +1,29 @@
-BLOCK: y => no
-      Direct dependencies: y
+FSI_SCOM: m => yes
+      Direct dependencies: FSI [=m]
 
-MEDIA_TUNER_TDA9887: y => mod
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+VIDEO_IMX334: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && OF_GPIO [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-GPIO_LP873X: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP873X [=m]
+USB_SERIAL_OMNINET: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-IP_SCTP: y => no
-      Direct dependencies: NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n)
-      Reverse dependencies: DLM [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y] && (IPV6 [=y] || IPV6 [=y]=n)
+SND_SOC_MT6660: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-KERNEL_ZSTD: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_ZSTD [=y]
+FB_LITTLE_ENDIAN: y => no
+      Direct dependencies: <choice>
+      Reverse dependencies: FB_MB862XX_LIME [=n] && <choice> && OF [=y] && PPC
 
-CPU_SUP_INTEL: y => no
-      Direct dependencies: y
+PREEMPT_NONE: y => no
+      Direct dependencies: <choice>
 
-KERNEL_ZSTD: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_ZSTD [=y]
+LEDS_AS3645A: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && (V4L2_FLASH_LED_CLASS [=m] || !V4L2_FLASH_LED_CLASS [=m])
 
-HID: y => mod
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=y] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=n] && X86 [=y]
+USB_IPHETH: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+I2C_MUX: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=m] && IIO [=m] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=m] && I2C [=y]
 

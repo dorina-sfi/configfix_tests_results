@@ -1,20 +1,21 @@
-CRYPTO_JITTERENTROPY: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+VIDEO_OV2659: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && GPIOLIB [=y]
 
-SENSORS_DS1621: m => yes
+VIDEO_DEV: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m]
+
+DVB_MB86A16: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=m] && HAS_IOMEM [=y] || DRM_SII902X [=m] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=n] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=n] && I2C [=y]
+
+SENSORS_SMM665: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-ALTERA_PR_IP_CORE: m => yes
-      Direct dependencies: FPGA [=m]
-
-SND_SOC_TLV320ADCX140: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
-
-SND_SOC_TLV320AIC31XX: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
-
-PM_DEVFREQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCSI_UFSHCD [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=n] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=y]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+CRYPTO_ECDSA: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_KEY_TYPE_ECDSA [=y] && <choice>
 

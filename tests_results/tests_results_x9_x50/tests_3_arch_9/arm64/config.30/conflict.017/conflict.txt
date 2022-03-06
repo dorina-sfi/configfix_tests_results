@@ -1,29 +1,31 @@
-VIDEO_TVP514X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-
-CRC8: y => mod
+VM_EVENT_COUNTERS: y => no
       Direct dependencies: y
-      Reverse dependencies: PCIE_QCOM [=y] && PCI [=y] && OF [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=y] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=n] || SENSORS_SHT3x [=m] && HWMON [=m] && I2C [=y] || SENSORS_SHT4x [=m] && HWMON [=m] && I2C [=y] || SENSORS_ADM1266 [=m] && HWMON [=m] && PMBUS [=m] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=n] && SPI [=n] || SCA3300 [=n] && IIO [=n] && SPI [=n] || SCD30_I2C [=n] && IIO [=n] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP30 [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP40 [=n] && IIO [=n] && I2C [=y] || SPS30_I2C [=n] && IIO [=n] && I2C [=y] || ICP10100 [=n] && IIO [=n] && I2C [=y]
 
-DRM_DW_HDMI_CEC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && DRM_DW_HDMI [=m]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
 
-SND_SOC_TEGRA186_DSPK: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m]
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
 
-SND_SOC_MT8173_MAX98090: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT8173 [=m] && I2C [=y]
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-SND_SOC_SAMSUNG: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+POWER_RESET: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
 
-VFIO_FSL_MC: m => yes
-      Direct dependencies: VFIO [=m] && FSL_MC_BUS [=y]
+CFG80211_REQUIRE_SIGNED_REGDB: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=y]
 
-USB_OHCI_HCD_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y]
-      Reverse dependencies: USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=y] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=n] && USB_OHCI_HCD [=y] || USB_HCD_SSB [=m] && USB_SUPPORT [=y] && USB [=y] && SSB [=m] && USB_OHCI_HCD [=y] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=m] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=y]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && CAVIUM_OCTEON_SOC
+JFFS2_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
 
-SENSORS_LM87: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+
+CRYPTO_CHACHA20_NEON: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && (ARM || ARM64 [=y] && KERNEL_MODE_NEON [=y])
 

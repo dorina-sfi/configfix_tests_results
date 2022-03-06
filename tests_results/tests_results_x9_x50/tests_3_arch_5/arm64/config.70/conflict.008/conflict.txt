@@ -1,18 +1,20 @@
-VIDEO_AD9389B: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: QORIQ_CPUFREQ [=y] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
 
-SYSC_R8A7795: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A77950 [=y] && SOC_RENESAS [=y] && ARM64 [=y] || ARCH_R8A77951 [=n] && SOC_RENESAS [=y] && ARM64 [=y]
-
-DM_DUST: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
-
-PINCTRL: y => no
+HW_RANDOM: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_ACTIONS [=n] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=y] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=n] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=y] || MFD_MADERA [=m] && HAS_IOMEM [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && S390 || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM64 [=y] && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=y] || COMPILE_TEST [=y]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-MTD_CFI_AMDSTD: m => yes
-      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
+
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=y] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 

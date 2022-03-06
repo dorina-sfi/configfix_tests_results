@@ -1,20 +1,21 @@
-NO_HZ_IDLE: y => no
+SENSORS_MAX127: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+INIT_STACK_NONE: y => no
       Direct dependencies: <choice>
 
-VSOCKETS_DIAG: m => yes
-      Direct dependencies: NET [=y] && VSOCKETS [=m]
+LINEDISP: m => yes
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=m] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=m] && I2C [=y] && INPUT [=n]
 
-COMPACTION: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=n] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-SND_SOC_PCM179X_SPI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+CRYPTO_LIB_BLAKE2S: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=y] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
 
-DRM_PANEL_TPO_TD043MTEA1: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && REGULATOR [=y] && SPI [=y]
-
-SND_SOC_INTEL_MACH: y => no
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
-      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
+SENSORS_FSCHMD: m => yes
+      Direct dependencies: HWMON [=m] && X86 [=y] && I2C [=y]
 

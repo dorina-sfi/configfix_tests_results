@@ -1,29 +1,34 @@
-SENSORS_INSPUR_IPSPS: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MQ_IOSCHED_DEADLINE: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
 
-RPMSG_NS: m => yes
-      Direct dependencies: RPMSG [=m]
-      Reverse dependencies: RPMSG_VIRTIO [=m] && HAS_DMA [=y]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-JOYSTICK_GF2K: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
 
-VIDEO_ADV7175: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_DC30 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_ZORAN_DC10 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-TINYDRM_MI0283QT: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
+CRC16: y => no
+      Direct dependencies: y
+      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=y] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=y] && CAN_DEV [=y] && USB [=n] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && ACPI && EFI && SPI [=n] && (X86 || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=y] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=n] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
 
-AD7303: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+CRYPTO_XXHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-SLUB_KUNIT_TEST: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && SLUB_DEBUG [=y] && KUNIT [=y]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-QCOM_CLK_APCS_SDX55: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] && (QCOM_APCS_IPC [=n] || COMPILE_TEST [=y])
+MEDIA_TEST_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-HID_XIAOMI: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 

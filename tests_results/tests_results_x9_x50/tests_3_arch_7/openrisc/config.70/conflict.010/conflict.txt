@@ -1,26 +1,23 @@
-KCMP: y => no
+USB_CHIPIDEA_GENERIC: y => mod
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
+
+SENSORS_HIH6130: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+SENSORS_INA2XX: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+VHOST_VSOCK: m => yes
+      Direct dependencies: VHOST_MENU [=y] && VSOCKETS [=m] && EVENTFD [=y]
+
+CRYPTO_CCM: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=m] && NET [=y] && IEEE802154 [=m] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=m] && NET [=y] && WIRELESS [=y] && CFG80211 [=m] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=y] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
+
+IR_MCEUSB: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+
+PPS: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
-
-TMPFS_XATTR: y => no
-      Direct dependencies: TMPFS [=y]
-      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
-
-PARPORT_PANEL: y => no
-      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
-
-MTD_CFI_BE_BYTE_SWAP: y => no
-      Direct dependencies: <choice>
-      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM && CPU_BIG_ENDIAN [=y]
-
-MEDIA_ANALOG_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-MEDIA_ANALOG_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-FPGA_BRIDGE: y => no
-      Direct dependencies: FPGA [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
 

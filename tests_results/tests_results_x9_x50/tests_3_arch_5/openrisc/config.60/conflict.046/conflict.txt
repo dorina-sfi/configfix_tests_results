@@ -1,19 +1,20 @@
-OR1K_1200: y => no
-      Direct dependencies: <choice>
+NETWORK_SECMARK: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: SECURITY_SELINUX [=y] && SECURITY_NETWORK [=y] && AUDIT [=y] && NET [=y] && INET [=y]
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-CRYPTO_GHASH: y => mod
+CRYPTO_CRC32C: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+      Reverse dependencies: NVME_TCP [=n] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 
-CRYPTO_GHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=y] && GPIOLIB [=y]
 
-PCS_XPCS: m => yes
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=m]
-      Reverse dependencies: NET_DSA_SJA1105 [=n] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || STMMAC_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=m]
+SND_SOC_IMX_RPMSG: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && RPMSG [=y]
+      Reverse dependencies: SND_SOC_FSL_RPMSG [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && COMMON_CLK [=y] && RPMSG [=y] && (SND_IMX_SOC [=y] || SND_IMX_SOC [=y]=n) && SND_IMX_SOC [=y]!=n
 

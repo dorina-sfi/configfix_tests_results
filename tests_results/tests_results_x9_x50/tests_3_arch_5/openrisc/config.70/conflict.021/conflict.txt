@@ -1,16 +1,17 @@
-SENSORS_APDS990X: m => yes
-      Direct dependencies: I2C [=m]
+PPS_CLIENT_GPIO: m => yes
+      Direct dependencies: PPS [=m]
 
-COMEDI_BOND: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_MISC_DRIVERS [=y]
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-CONFIGFS_FS: y => mod
-      Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
+EXTCON_USBC_CROS_EC: m => yes
+      Direct dependencies: EXTCON [=y] && CROS_EC [=m]
 
-LEDS_SGM3140: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
+HID: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=n] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=y] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=y]) && PCI [=n] && X86
 
-COMMON_CLK_RK808: m => yes
-      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
+SENSORS_MC13783_ADC: m => yes
+      Direct dependencies: HWMON [=y] && MFD_MC13XXX [=m]
 

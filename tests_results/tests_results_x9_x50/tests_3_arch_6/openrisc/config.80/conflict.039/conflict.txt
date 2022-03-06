@@ -1,22 +1,21 @@
-SND_SOC_XILINX_AUDIO_FORMATTER: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
+HID_U2FZERO: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m] && USB_HID [=m] && LEDS_CLASS [=y] && HW_RANDOM [=y]
 
-SND_SOC_NAU8810: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
+SENSORS_AXI_FAN_CONTROL: m => yes
+      Direct dependencies: HWMON [=m]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+MEDIA_TUNER_QM1D1B0004: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_PT1 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SPARSE_IRQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+MFD_MADERA_I2C: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_MADERA [=m] && I2C [=y]
 
-EXT4_FS_SECURITY: y => no
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
-      Reverse dependencies: EXT3_FS_SECURITY [=y] && BLOCK [=y] && EXT3_FS [=y]
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-CRC_T10DIF: y => mod
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m]
+VIDEO_OV2640: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_CAMERA_SUPPORT [=y]
 

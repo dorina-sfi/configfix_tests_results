@@ -1,23 +1,26 @@
-HID_MULTITOUCH: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-GAMEPORT_L4: m => yes
-      Direct dependencies: GAMEPORT [=m]
-
-MAX9611: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
-
-CAN_DEV: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
-
-CRC64: y => mod
+DEBUG_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: BCACHE [=y] && MD [=y]
+      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=y] && BCACHE [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=n] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=n] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 
-MTD_JEDECPROBE: m => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_TS5500 [=m] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
+HW_RANDOM: y => no
+      Direct dependencies: y
+      Reverse dependencies: TURRIS_MOX_RWTM [=n] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && S390 || CRYPTO_DEV_SL3516 [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM64 [=y] && ACPI [=y] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-TOUCHSCREEN_IQS5XX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
+
+CLK_R8A779A0: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A779A0 [=y]
+
+SYSC_R8A774A1: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A774A1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+
+BLK_DEV_INTEGRITY: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && ATA [=y] || DM_INTEGRITY [=y] && MD [=y] && BLK_DEV_DM [=y] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
+
+FAT_KUNIT_TEST: y => no
+      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=y]
 

@@ -1,13 +1,15 @@
-BUG: y => no
-      Direct dependencies: y
+SND_FIREWORKS: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_FIREWIRE [=y] && FIREWIRE [=m]
 
-CRYPTO_DRBG_MENU: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+MTD_CFI: m => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y]
 
-FHANDLE: y => no
+CPU_SUP_AMD: y => no
       Direct dependencies: y
+      Reverse dependencies: CPU_SUP_HYGON [=y]
 
-CPU_SUP_INTEL: y => no
-      Direct dependencies: y
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=m] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_64 [=y] && ACPI [=n] && PCI [=y]
 

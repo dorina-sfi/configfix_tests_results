@@ -1,16 +1,18 @@
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 
-IP_SET_HASH_IPMAC: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_SET [=m]
+RAPIDIO_ENUM_BASIC: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_CS4341: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
+SPARSEMEM_MANUAL: y => no
+      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
 
-SENSORS_LOCHNAGAR: m => yes
-      Direct dependencies: HWMON [=m] && MFD_LOCHNAGAR [=y]
+FB_TILEBLITTING: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
 
-SLUB_KUNIT_TEST: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && SLUB_DEBUG [=y] && KUNIT [=m]
+CRYPTO_TWOFISH_X86_64_3WAY: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 

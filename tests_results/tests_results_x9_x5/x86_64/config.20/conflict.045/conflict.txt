@@ -1,29 +1,30 @@
-XZ_DEC: y => mod
+X86_VSYSCALL_EMULATION: y => no
+      Direct dependencies: X86_64 [=y]
+
+CRYPTO_BLAKE2B: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+DMI: y => no
       Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=y] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=y] || DECOMPRESS_XZ [=n]
+      Reverse dependencies: EDAC_SKX [=n] && EDAC [=n] && PCI [=n] && X86_64 [=y] && X86_MCE_INTEL [=y] && PCI_MMCONFIG [=n] && ACPI [=y] && (ACPI_NFIT [=n] || !ACPI_NFIT [=n]) || EDAC_I10NM [=n] && EDAC [=n] && PCI [=n] && X86_64 [=y] && X86_MCE_INTEL [=y] && PCI_MMCONFIG [=n] && ACPI [=y] && (ACPI_NFIT [=n] || !ACPI_NFIT [=n])
 
-VIDEO_OV02A10: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+MEDIA_TUNER_MT20XX: m => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-KXSD9: m => yes
-      Direct dependencies: IIO [=m]
+IQS624_POS: m => yes
+      Direct dependencies: IIO [=y] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
 
-BMC150_ACCEL: m => yes
-      Direct dependencies: IIO [=m]
+MTD_UBI: m => yes
+      Direct dependencies: MTD [=m]
 
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-VIDEO_AK881X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-
-MEDIA_CAMERA_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-REGULATOR_TPS65912: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TPS65912 [=m]
-
-CPU_IDLE: y => no
+VM_EVENT_COUNTERS: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
+
+HID_STEAM: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
+
+SIOX_BUS_GPIO: m => yes
+      Direct dependencies: SIOX [=m]
 

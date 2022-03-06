@@ -1,23 +1,22 @@
-INIT_STACK_NONE: y => no
+MTD_HYPERBUS: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+
+LTO_NONE: y => no
       Direct dependencies: <choice>
 
-IO_DELAY_0X80: y => no
-      Direct dependencies: <choice>
+COMEDI_USBDUXSIGMA: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_USB_DRIVERS [=m]
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=y]
+USB_SISUSBVGA: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && (USB_MUSB_HDRC [=m] || USB_EHCI_HCD [=m])
 
-PREEMPT: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+USB_CHIPIDEA: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && ARCH_TEGRA
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
-
-LINEDISP: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=y]
-
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+MTD_CFI_INTELEXT: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
 

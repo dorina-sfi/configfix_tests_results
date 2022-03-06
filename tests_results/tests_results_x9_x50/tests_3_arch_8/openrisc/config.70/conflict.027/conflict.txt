@@ -1,28 +1,27 @@
-PHY_QCOM_USB_HS_28NM: m => yes
-      Direct dependencies: OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && (EXTCON [=m] || !EXTCON [=m])
+TEST_SORT: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-SENSORS_W83L785TS: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEBUG_FS_ALLOW_NONE: y => no
+      Direct dependencies: <choice>
 
-MD_RAID1: y => no
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
-      Reverse dependencies: DM_RAID [=m] && MD [=y] && BLK_DEV_DM [=m]
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-CRC_T10DIF: y => mod
+TEST_LIST_SORT: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+
+CONFIGFS_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && CPU_FREQ && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
+      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
 
-MTD_JEDECPROBE: m => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_TS5500 [=m] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=y] && IIO [=y] && I2C [=y]
 
-CRYPTO_NULL: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=m] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 
-SENSORS_ADM9240: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-SENSORS_IBMAEM: m => yes
-      Direct dependencies: HWMON [=m] && IPMI_HANDLER [=m]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=n] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 

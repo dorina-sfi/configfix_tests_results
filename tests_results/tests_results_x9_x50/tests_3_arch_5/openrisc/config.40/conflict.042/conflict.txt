@@ -1,16 +1,19 @@
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+SYSFS_SYSCALL: y => no
+      Direct dependencies: y
 
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
-      Direct dependencies: <choice>
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-EFI_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+CRYPTO_LZ4HC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY: y => no
-      Direct dependencies: <choice>
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
 

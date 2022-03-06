@@ -1,15 +1,16 @@
-GPIO_AMD_FCH: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: PCENGINES_APU2 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
 
-GENERIC_CPU: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+FRAMEBUFFER_CONSOLE_DETECT_PRIMARY: y => no
+      Direct dependencies: VT [=y] && FRAMEBUFFER_CONSOLE [=y]
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && FRAMEBUFFER_CONSOLE [=y]
 
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
-
-THERMAL: y => no
+CRC_CCITT: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=n] || MMC_SDHCI_OMAP [=y] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y]
+      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=y] && SPI [=y] || NFC_SHDLC [=y] && NET [=y] && NFC_HCI [=y] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_SER_HDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=n] && AX25 [=y] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=n] && AX25 [=y] && !64BIT [=y] || NFC_FDP [=y] && NET [=y] && NFC [=y] && NFC_NCI [=y] || NFC_PN544 [=n] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=y] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=n] && OF_IRQ [=n]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=y] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTERSIL [=y] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=y] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=y] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=y] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
 

@@ -1,33 +1,35 @@
-PINCTRL_PFC_R8A77970: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77970 [=y]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 
-PAGE_EXTENSION: y => no
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+
+EXPERT: y => no
       Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: EMBEDDED [=y]
 
-ARM64_4K_PAGES: y => no
-      Direct dependencies: <choice>
-
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
-      Direct dependencies: <choice>
-
-CRC_CCITT: y => no
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=y] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=y] && SPI [=n] || NFC_SHDLC [=y] && NET [=y] && NFC_HCI [=y] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=y] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=y] && AX25 [=n] && !64BIT [=y] || NFC_FDP [=y] && NET [=y] && NFC [=y] && NFC_NCI [=y] || NFC_PN544 [=y] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=y] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=y] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-CLKSRC_EXYNOS_MCT: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_EXYNOS [=y]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
 
-CRYPTO_POLY1305: y => no
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
+
+CRYPTO_ZSTD: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
 
-MEMORY: y => no
+MTD_MAP_BANK_WIDTH_4: y => no
+      Direct dependencies: MTD [=y]
+
+REGULATOR: y => no
       Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && (FSL_SOC || ARCH_LAYERSCAPE [=n] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK [=y] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=n] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
-
-CHARLCD_BL_OFF: y => no
-      Direct dependencies: <choice>
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=y] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
 

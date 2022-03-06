@@ -1,32 +1,33 @@
-LEDS_RT4505: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && OF [=y] && (V4L2_FLASH_LED_CLASS [=m] || !V4L2_FLASH_LED_CLASS [=m])
-
-X86_FEATURE_NAMES: y => no
+EPOLL: y => no
       Direct dependencies: y
-      Reverse dependencies: X86 [=y] && PROC_FS [=y]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=m] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=m] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && SCSI_UFSHCD [=n]
+CPU_FREQ_DEFAULT_GOV_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-SENSORS_ISL29028: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_TWOFISH_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-SND_SOC_WM8523: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+HPET_TIMER: y => no
+      Direct dependencies: y
 
-IIO_TIGHTLOOP_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
+RSEQ: y => no
+      Direct dependencies: HAVE_RSEQ [=y]
 
-MTD_BLOCK: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=y] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=y] && PROC_FS [=y]
 
-PATA_HPT366: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
+NF_TPROXY_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && (IPV6 [=n] || IPV6 [=n]=n) || NETFILTER_XT_TARGET_TPROXY [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=n] || IPV6 [=n]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP_NF_MANGLE [=y]
 
-IIO_TIGHTLOOP_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
+JFFS2_RTIME: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
 
-FPGA_DFL_AFU: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_DFL [=m]
+CMA_SIZE_SEL_MBYTES: y => no
+      Direct dependencies: <choice>
+
+VM_EVENT_COUNTERS: y => no
+      Direct dependencies: y
 

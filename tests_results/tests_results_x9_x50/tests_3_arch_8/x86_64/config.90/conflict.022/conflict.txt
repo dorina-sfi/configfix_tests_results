@@ -1,24 +1,29 @@
-COMEDI_ADDI_APCI_1500: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+PNP: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
+      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
 
-GREYBUS_LOOPBACK: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-HID_XIAOMI: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=n] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=n] && SPI_MASTER [=n] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 
-MTD_NAND_ARASAN: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
+CHARLCD_BL_FLASH: y => no
+      Direct dependencies: <choice>
 
-MOUSE_GPIO: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SCTP_DEFAULT_COOKIE_HMAC_MD5: y => no
+      Direct dependencies: <choice>
 
-JOYSTICK_JOYDUMP: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
+BACKLIGHT_CLASS_DEVICE: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=y] || !AGP [=y]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=n] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=y]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ILI9163 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ILI9486 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_MI0283QT [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=n] || DRM_GUD [=n] && HAS_IOMEM [=y] && DRM [=n] && USB [=n] && MMU [=y] || DRM_PARADE_PS8622 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || FB_BACKLIGHT [=y] && HAS_IOMEM [=y] && FB [=y] || FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=y]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=y] && MX3_IPU [=n] || USB_APPLEDISPLAY [=n] && USB_SUPPORT [=n] && USB [=n] || FB_OLPC_DCON [=n] && STAGING [=n] && OLPC [=n] && FB [=y] && I2C [=y] && GPIO_CS5535 [=y] && ACPI [=y] || SAMSUNG_Q10 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] || ACPI_CMPC [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n)
 
-HID_NINTENDO: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y]
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=y] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=n] || IPV6 [=n]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] && ATA [=n] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=n] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n)
 
-COMEDI_CB_PCIDDA: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+NO_HZ_FULL: y => no
+      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 

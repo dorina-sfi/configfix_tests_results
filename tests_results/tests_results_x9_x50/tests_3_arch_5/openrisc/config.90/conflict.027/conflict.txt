@@ -1,17 +1,17 @@
-HP03: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CDNS_I3C_MASTER: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
 
-SND_USB_HIFACE: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_USB [=y] && USB [=y]
+RMI4_SMB: m => yes
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y] && I2C [=m]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+MFD_LP3943: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-REGULATOR_SY8827N: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
+VIDEO_CS53L32A: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=m] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=m] && RC_CORE [=n]
 
-MODULE_SIG: y => no
-      Direct dependencies: MODULES [=y]
-      Reverse dependencies: SECURITY_LOCKDOWN_LSM [=y] && SECURITY [=y] && MODULES [=y]
+CRYPTO_CTR: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=n] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=m] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 

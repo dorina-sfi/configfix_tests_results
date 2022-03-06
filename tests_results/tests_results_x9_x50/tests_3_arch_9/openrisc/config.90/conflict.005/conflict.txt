@@ -1,27 +1,31 @@
-MOUSE_BCM5974: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
-
-INPUT_EVDEV: m => yes
-      Direct dependencies: INPUT [=m]
-
-SENSORS_W83781D: m => yes
+SENSORS_ADC128D818: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-SENSORS_NCT6775: m => yes
-      Direct dependencies: HWMON [=m] && !PPC && (ACPI_WMI [=n] || ACPI_WMI [=n]=n)
+ST_UVIS25: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI [=y])
 
-SND_SOC_CS4234: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+KEYBOARD_MTK_PMIC: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_MT6397 [=m]
 
-EXTCON_FSA9480: m => yes
-      Direct dependencies: EXTCON [=y] && INPUT [=m] && I2C [=y]
+DVB_ZL10036: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-REGULATOR_TPS6105X: m => yes
-      Direct dependencies: REGULATOR [=y] && TPS6105X [=m]
+INA2XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y] && !SENSORS_INA2XX [=m]
 
-SENSORS_ZL6100: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+SPI_BITBANG: y => mod
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=m] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=y]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_IMX [=m] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || SPI_LM70_LLP [=m] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=m] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=y])
 
-SENSORS_JC42: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+USB_SI4713: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && USB [=y] && I2C [=y] && RADIO_SI4713 [=m]
+
+VIDEO_TVAUDIO: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+VIDEO_WM8739: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=n]
 

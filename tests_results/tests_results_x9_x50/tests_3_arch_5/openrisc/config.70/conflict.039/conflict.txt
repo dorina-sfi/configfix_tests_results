@@ -1,18 +1,15 @@
-CONFIGFS_FS: y => mod
-      Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
+INPUT_ADXL34X_I2C: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && INPUT_ADXL34X [=m] && I2C [=y]
 
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+NFC_PN533_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && I2C [=y]
 
-SPS30_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-NLS_CODEPAGE_874: m => yes
-      Direct dependencies: NLS [=m]
+LEDS_AAT1290: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL [=y]
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=m] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
+SENSORS_PMBUS: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 

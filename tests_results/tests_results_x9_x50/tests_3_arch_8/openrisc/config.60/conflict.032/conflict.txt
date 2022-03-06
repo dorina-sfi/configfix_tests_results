@@ -1,32 +1,26 @@
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
+KEYBOARD_EP93XX: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=y])
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+TIME_KUNIT_TEST: m => yes
+      Direct dependencies: KUNIT [=m]
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+IIO_SW_TRIGGER: m => yes
+      Direct dependencies: IIO [=m]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+I2C_MUX: m => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM_SII902X [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=m] && IIO [=m] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=m] && I2C [=y]
 
-MTD_CFI_AMDSTD: y => no
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
+NET_DSA_TAG_GSWIP: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_LANTIQ_GSWIP [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y]
 
-FPGA_BRIDGE: y => no
-      Direct dependencies: FPGA [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+ADXL313_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CRYPTO_CRCT10DIF: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
+NET_DSA_XRS700X_MDIO: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
 
-USB_XHCI_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y]
-      Reverse dependencies: USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=y]) && USB_XHCI_HCD [=y] || USB_XHCI_MVEBU [=y] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && HAS_IOMEM [=y] && (ARCH_MVEBU || COMPILE_TEST [=y])
+MTD_NAND_PLATFORM: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y]
 

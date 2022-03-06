@@ -1,16 +1,20 @@
-SPS30_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CRYPTO_SHA512_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA512_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-BACKLIGHT_ADP8870: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=m]
+CRYPTO_RSA: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=y] && CRYPTO_DEV_SP_CCP [=y]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=n] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
 
-UHID: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-USB_FUNCTIONFS_GENERIC: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && USB_FUNCTIONFS [=m]
-      Reverse dependencies: USB_FUNCTIONFS [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] && !USB_FUNCTIONFS_ETH [=n] && !USB_FUNCTIONFS_RNDIS [=n]
+CRYPTO_LIB_BLAKE2S: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=n] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=n])
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n])
 

@@ -1,24 +1,27 @@
-FRAME_POINTER: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
-      Reverse dependencies: ARM64 [=y]
+SND_SOC_OMAP_MCPDM: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=y] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y])
+      Reverse dependencies: SND_SOC_OMAP_ABE_TWL6040 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=y] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && TWL6040_CORE [=y] && COMMON_CLK [=y] && (ARCH_OMAP4 || SOC_OMAP5 && MFD_PALMAS [=y] || COMPILE_TEST [=y])
 
-USB_EHCI_ROOT_HUB_TT: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m]
-      Reverse dependencies: USB_EHCI_FSL [=m] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] || USB_EHCI_MV [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=n]) || USB_CHIPIDEA_HOST [=y] && USB_SUPPORT [=y] && USB_CHIPIDEA [=m] && USB_EHCI_HCD [=m]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=y]) && PCI [=n] && X86
 
-DVB_MB86A16: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+MTD_PARSER_IMAGETAG: y => no
+      Direct dependencies: MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
 
-IOMMU_DEFAULT_DMA_STRICT: y => no
+IMX_GPCV2_PM_DOMAINS: y => no
+      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=y] && OF [=y]) && PM [=y]
+      Reverse dependencies: ARCH_MXC [=y]
+
+XEN_PRIVCMD: y => no
+      Direct dependencies: XEN [=y]
+      Reverse dependencies: XENFS [=y] && XEN [=y]
+
+IOMMU_IO_PGTABLE_ARMV7S: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=y]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+
+CRC32_BIT: y => no
       Direct dependencies: <choice>
-
-VIDEO_OV2680: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-
-CUSE: m => yes
-      Direct dependencies: FUSE_FS [=m]
-
-IPMI_POWEROFF: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
 

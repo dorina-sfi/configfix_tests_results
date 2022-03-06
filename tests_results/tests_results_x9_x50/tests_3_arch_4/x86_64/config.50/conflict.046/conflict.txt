@@ -1,12 +1,15 @@
-AHCI_QORIQ: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-MTD_CFI_STAA: m => yes
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=m]
+BACKLIGHT_CLASS_DEVICE: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=y] || !AGP [=y]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=n] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=n]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=y] || TINYDRM_ILI9163 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=y] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=y] || TINYDRM_ILI9486 [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=y] || TINYDRM_MI0283QT [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=y] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=n] && SPI [=y] || DRM_GUD [=n] && HAS_IOMEM [=y] && DRM [=n] && USB [=y] && MMU [=y] || DRM_PARADE_PS8622 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || FB_BACKLIGHT [=y] && HAS_IOMEM [=y] && FB [=y] || FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=y] && MX3_IPU [=n] || USB_APPLEDISPLAY [=y] && USB_SUPPORT [=y] && USB [=y] || FB_OLPC_DCON [=n] && STAGING [=y] && OLPC [=n] && FB [=y] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=y] || SAMSUNG_Q10 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] || ACPI_CMPC [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n)
 
-GENERIC_ADC_BATTERY: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && IIO [=m]
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=n]) || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
 
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || PUNIT_ATOM_DEBUG [=y] && PCI [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=n] || KCOV [=y] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 

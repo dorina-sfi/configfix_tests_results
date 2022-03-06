@@ -1,26 +1,27 @@
-MMC_DW_PLTFM: m => yes
-      Direct dependencies: MMC [=m] && MMC_DW [=m]
-      Reverse dependencies: MMC_DW_BLUEFIELD [=m] && MMC [=m] && MMC_DW [=m] || MMC_DW_EXYNOS [=n] && MMC [=m] && MMC_DW [=m] || MMC_DW_HI3798CV200 [=m] && MMC [=m] && MMC_DW [=m] || MMC_DW_K3 [=m] && MMC [=m] && MMC_DW [=m] || MMC_DW_ROCKCHIP [=n] && MMC [=m] && MMC_DW [=m] && ARCH_ROCKCHIP
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=y]) && SND_SOC [=n] && STM32_DFSDM_ADC [=y] || LMP91000 [=n] && IIO [=y] && I2C [=n]
 
-BCM2835_VCHIQ_MMAL: m => yes
-      Direct dependencies: STAGING [=y] && BCM_VIDEOCORE [=y] && BCM2835_VCHIQ [=m]
-      Reverse dependencies: VIDEO_BCM2835 [=n] && STAGING [=y] && BCM_VIDEOCORE [=y] && MEDIA_SUPPORT [=n] && VIDEO_V4L2 [=n] && (ARCH_BCM2835 || COMPILE_TEST [=y])
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-SYNCLINK_CS: m => yes
-      Direct dependencies: PCMCIA [=m] && TTY [=y]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-SCSI: m => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=m] && HAS_IOMEM [=y] && BLOCK [=y]
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-CRYPTO_POLY1305: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y]
+MAILBOX: y => no
+      Direct dependencies: y
+      Reverse dependencies: IMX_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=y] || ST_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=y] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM && ZYNQMP_FIRMWARE [=n]
 
-MMC_SDHCI_ESDHC_IMX: m => yes
-      Direct dependencies: MMC [=m] && (ARCH_MXC || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] && OF [=y]
+IIO_STM32_TIMER_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 

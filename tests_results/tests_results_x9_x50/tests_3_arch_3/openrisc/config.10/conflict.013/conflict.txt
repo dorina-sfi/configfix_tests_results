@@ -1,10 +1,12 @@
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y]
+USB_FUNCTIONFS_GENERIC: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=y] && USB_FUNCTIONFS [=m]
+      Reverse dependencies: USB_FUNCTIONFS [=m] && USB_SUPPORT [=y] && USB_GADGET [=y] && !USB_FUNCTIONFS_ETH [=n] && !USB_FUNCTIONFS_RNDIS [=n]
 
-DMARD10: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-TWL4030_MADC: m => yes
-      Direct dependencies: IIO [=m] && TWL4030_CORE [=y]
+SND_SOC_WM8580: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=m]
+      Reverse dependencies: SND_SOC_SAMSUNG_SMDK_WM8580 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && (MACH_SMDK6410 || COMPILE_TEST [=y]) && I2C [=m]
 

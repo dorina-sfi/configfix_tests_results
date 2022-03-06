@@ -1,16 +1,20 @@
-MTD_NAND_RICOH: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && PCI [=y]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-FB_VGA16: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (X86 [=y] || PPC)
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-COMMON_CLK: y => no
-      Direct dependencies: !HAVE_LEGACY_CLK [=n]
-      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=y] && HAS_IOMEM [=y] || PMC_ATOM [=y] && X86 [=y] && PCI [=y]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=n]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 
-FB_TFT_HX8353D: m => yes
-      Direct dependencies: STAGING [=y] && FB_TFT [=m]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=y]
 
-GPIO_WHISKEY_COVE: m => yes
-      Direct dependencies: GPIOLIB [=y] && (X86 [=y] || COMPILE_TEST [=n]) && INTEL_SOC_PMIC_BXTWC [=m]
+MTD_CFI_AMDSTD: y => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=n])
 

@@ -1,13 +1,14 @@
-MTD_MTDRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 
-COMEDI_ADDI_APCI_2032: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+MFD_RDC321X: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: GPIO_RDC321X [=m] && GPIOLIB [=y] && PCI [=y]
 
-LEDS_MT6360: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=y] && LEDS_CLASS [=y] && OF [=y] && (LEDS_CLASS_FLASH [=y] || !LEDS_CLASS_FLASH [=y]) && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n]) && MFD_MT6360 [=m]
+EDAC_I82975X: m => yes
+      Direct dependencies: EDAC [=m] && PCI [=y] && X86 [=y]
 
-CRYPTO_ECDH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+DRM_VBOXVIDEO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=y]
 

@@ -1,9 +1,11 @@
-CORESIGHT_CATU: m => yes
-      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINK_AND_SINK_TMC [=m]
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
 
-CARDMAN_4000: m => yes
-      Direct dependencies: PCMCIA [=m]
+CRYPTO_JITTERENTROPY: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-HID_RETRODE: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=n] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 

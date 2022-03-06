@@ -1,29 +1,31 @@
-VIDEO_TEA6420: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+DRM_PANEL_RASPBERRYPI_TOUCHSCREEN: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && DRM_MIPI_DSI [=y]
 
-MEDIA_TUNER_R820T: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_CX231XX [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_RTL28XXU [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_V2 [=n] && I2C_MUX [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+DRM_PANEL_RASPBERRYPI_TOUCHSCREEN: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && DRM_MIPI_DSI [=y]
 
-RTC_DRV_DS1685: y => no
-      Direct dependencies: <choice>
+PCMCIA_RAYCS: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && PCMCIA [=m]
 
-CHARGER_MAX77693: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77693 [=m]
+DVB_DIB7000P: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=m] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-CHARGER_MAX77693: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77693 [=m]
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-OR1K_1200: y => no
-      Direct dependencies: <choice>
+RSI_SDIO: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RSI [=y] && MMC [=m] && RSI_91X [=m]
 
-USB_BRCMSTB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && (ARCH_BRCMSTB && PHY_BRCM_USB [=m] || COMPILE_TEST [=y])
+VIDEO_HI556: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-VIDEO_I2C: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+CRYPTO_CBC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_ESP [=m] && NET [=y] && INET [=y] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) || ENCRYPTED_KEYS [=m] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-MODULE_SIG_KEY_TYPE_RSA: y => no
-      Direct dependencies: <choice>
+DVB_TUNER_CX24113: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
 

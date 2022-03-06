@@ -1,18 +1,20 @@
-FPGA_MGR_XILINX_SPI: m => yes
-      Direct dependencies: FPGA [=m] && SPI [=y]
+MTD_NAND_DISKONCHIP: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y]
 
-SENSORS_TPS40422: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+MLXREG_LC: m => yes
+      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=m] && I2C [=y]
 
-RTC_DRV_DA9063: m => yes
-      Direct dependencies: RTC_CLASS [=y] && (MFD_DA9063 [=n] || MFD_DA9062 [=m])
+NF_TPROXY_IPV4: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_TPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=m] || IPV6 [=m]=n) || NETFILTER_XT_TARGET_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (IP6_NF_IPTABLES [=m] || IP6_NF_IPTABLES [=m]=n) && IP_NF_MANGLE [=n]
 
-SND_AU8810: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
+FB_SMSCUFX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && USB [=y]
 
-AD5770R: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+DW_APB_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
 
-SERIO_GPIO_PS2: m => yes
-      Direct dependencies: SERIO [=m] && GPIOLIB [=y]
+SENSORS_GPIO_FAN: m => yes
+      Direct dependencies: HWMON [=m] && OF_GPIO [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 

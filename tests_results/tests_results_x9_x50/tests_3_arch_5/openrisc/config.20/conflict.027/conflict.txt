@@ -1,17 +1,19 @@
-GPIO_BD9571MWV: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_BD9571MWV [=m]
+MFD_AT91_USART: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+      Reverse dependencies: SERIAL_ATMEL [=y] && TTY [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
 
-RMI4_F30: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+PREEMPT_NONE: y => no
+      Direct dependencies: <choice>
 
-BASE_FULL: y => no
-      Direct dependencies: y
+EXT4_FS_POSIX_ACL: y => no
+      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
+      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
+MFD_AT91_USART: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+      Reverse dependencies: SERIAL_ATMEL [=y] && TTY [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
 
-IR_MCEUSB: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=n] && FTRACE [=y]
 

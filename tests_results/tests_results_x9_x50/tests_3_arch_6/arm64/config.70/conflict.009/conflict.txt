@@ -1,22 +1,24 @@
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
-
-SCSI: y => mod
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
-
-MEDIA_TUNER_TEA5761: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
-
-MEDIA_TEST_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
 PERF_EVENTS: y => no
       Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=m] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-HID_STEELSERIES: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
+
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=y] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
+
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
+
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
 

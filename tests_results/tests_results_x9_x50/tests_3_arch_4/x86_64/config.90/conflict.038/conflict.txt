@@ -1,14 +1,13 @@
-DEBUG_FS_ALLOW_NONE: y => no
+COMEDI_RTI802: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+
+IO_DELAY_UDELAY: y => no
       Direct dependencies: <choice>
 
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
-      Direct dependencies: <choice>
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
 
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
-
-NET_NSH: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+BMC150_MAGN_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 

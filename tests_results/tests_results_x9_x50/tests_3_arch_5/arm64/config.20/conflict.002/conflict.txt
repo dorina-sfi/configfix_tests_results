@@ -1,17 +1,19 @@
-MCP4725: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
 
-RTC_DRV_PCF50633: m => yes
-      Direct dependencies: RTC_CLASS [=y] && MFD_PCF50633 [=m]
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
 
-LCD_CLASS_DEVICE: y => mod
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=y] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
+NETFILTER_XTABLES: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: IP_NF_IPTABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=n] || IP6_NF_IPTABLES [=n] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=n]
 
-OF_DYNAMIC: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=m] && I2C [=m] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-MPL3115: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+REALTEK_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_REALTEK_SMI [=y] && NETDEVICES [=y] && NET_DSA [=y] || R8169 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_REALTEK [=n] && PCI [=n]
 

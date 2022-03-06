@@ -1,18 +1,20 @@
-SND_SOC_ADAU7118_I2C: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
+GPIO_SYSCON: m => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
+      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=m] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
 
-SND_SOC_XILINX_I2S: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
+CROS_EC_SENSORHUB: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m]
 
-SND_SOC_SAMSUNG_MIDAS_WM1811: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m]
+SENSORS_LTC4215: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-SND_SOC_CS4341: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
+MODULE_SIG_SHA1: y => no
+      Direct dependencies: <choice>
 
-VIDEO_CX18: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && RC_CORE [=m]
+MTD_NAND_GPIO: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-RTC_DRV_MAX8907: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && (MFD_MAX8907 [=m] || COMPILE_TEST [=n])
+MD_RAID0: y => mod
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
 

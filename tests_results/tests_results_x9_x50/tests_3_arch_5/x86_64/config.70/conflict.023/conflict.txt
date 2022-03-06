@@ -1,18 +1,17 @@
-X86_FEATURE_NAMES: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86 [=y] && PROC_FS [=y]
+DEBUG_KMAP_LOCAL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KMAP_LOCAL [=y]
+      Reverse dependencies: DEBUG_KMAP_LOCAL_FORCE_MAP [=y] && DEBUG_KERNEL [=y] && ARCH_SUPPORTS_KMAP_LOCAL_FORCE_MAP [=y] || DEBUG_HIGHMEM [=n] && DEBUG_KERNEL [=y] && HIGHMEM [=n]
 
-CRYPTO_CRC32: y => no
+SENSORS_SL28CPLD: m => yes
+      Direct dependencies: HWMON [=m] && (MFD_SL28CPLD [=n] || COMPILE_TEST [=y])
+
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+
+W1_SLAVE_DS2413: m => yes
+      Direct dependencies: W1 [=m]
+
+CRYPTO_SHA1: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
-
-RMI4_F30: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
-
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
-
-XZ_DEC_POWERPC: y => no
-      Direct dependencies: XZ_DEC [=y]
+      Reverse dependencies: MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=y] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] || CPU_SUP_AMD [=n]) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=n] && KEYS [=y] && TCG_TPM [=m] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_SHA1_SSSE3 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y] || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=m] && TRUSTED_KEYS [=n] || SIGNATURE [=n] && KEYS [=y]
 

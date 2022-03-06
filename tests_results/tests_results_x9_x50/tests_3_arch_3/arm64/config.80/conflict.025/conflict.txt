@@ -1,11 +1,12 @@
-SND_SOC_SPRD_MCDT: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SPRD [=m]
+PHY_SUN6I_MIPI_DPHY: y => no
+      Direct dependencies: (ARCH_SUNXI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && COMMON_CLK [=y] && RESET_CONTROLLER [=y]
+      Reverse dependencies: DRM_SUN6I_DSI [=y] && HAS_IOMEM [=y] && DRM_SUN4I [=y]
 
-CLK_R8A7795: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=n] || ARCH_R8A77951 [=y])
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=n] && FTRACE [=y]
 
-IIO_ST_MAGN_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
 

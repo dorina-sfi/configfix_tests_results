@@ -1,25 +1,28 @@
-REGULATOR_BD9571MWV: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_BD9571MWV [=m]
+FPGA_DFL_NIOS_INTEL_PAC_N3000: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_DFL [=m]
 
-MTD_JEDECPROBE: y => mod
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=y])
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
 
-SENSORS_ADC128D818: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SENSORS_DPS920AB: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-SENSORS_MAX6620: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+NTB_PINGPONG: m => yes
+      Direct dependencies: NTB [=m]
 
-SENSORS_DS620: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=y] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || PUNIT_ATOM_DEBUG [=n] && PCI [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=y] && FUTEX [=n] || KCOV [=y] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 
-GPIO_LP873X: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP873X [=m]
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=n] && NET [=y] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=y] && CAN [=m] && CAN_DEV [=m] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=y] && NET [=y] && WIRELESS [=y] && MAC80211 [=m] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=m]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=m] && SOUND [=y] && !UML && SND [=m] && SND_CTL_LED [=m] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=y] && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=y] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=y] && HWMON [=y] && INPUT [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=y] && DELL_SMBIOS [=n]
 
-SENSORS_LTC4261: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-I2C_AT91_SLAVE_EXPERIMENTAL: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=m]
+RMI4_F11: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 

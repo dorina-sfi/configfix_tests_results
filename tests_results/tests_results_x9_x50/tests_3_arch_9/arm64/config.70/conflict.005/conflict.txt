@@ -1,30 +1,31 @@
-XEN_FBDEV_FRONTEND: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && XEN [=y]
+DVB_MN88443X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+VIDEO_RJ54N1: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-CAN_SJA1000: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && HAS_IOMEM [=y]
+VFIO_AMBA: m => yes
+      Direct dependencies: VFIO [=m] && VFIO_PLATFORM [=m] && (ARM_AMBA [=y] || COMPILE_TEST [=n])
 
-CAN_C_CAN_PCI: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_C_CAN [=m] && PCI [=y]
+REGULATOR_FIXED_VOLTAGE: y => mod
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=n])
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
+BATTERY_BQ27XXX_I2C: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
 
-MMC_DW_BLUEFIELD: m => yes
-      Direct dependencies: MMC [=y] && MMC_DW [=m]
+CAN_PEAK_PCI: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_SJA1000 [=m] && PCI [=y]
 
-W1: m => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+CRYPTO_ECDH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY [=n] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-COMEDI_AIO_IIRO_16: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+MVMDIO: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MARVELL [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MV643XX_ETH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MARVELL [=y] && (PPC32 || PLAT_ORION || COMPILE_TEST [=n]) && INET [=n] || MVNETA [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MARVELL [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n]) || MVPP2 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MARVELL [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n])
 
-SENSORS_THMC50: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+INPUT_MATRIXKMAP: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || KEYBOARD_EP93XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=n]) || KEYBOARD_TCA8418 [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_MATRIX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || KEYBOARD_LM8333 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] || KEYBOARD_IMX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_TEGRA [=y] && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=n] || KEYBOARD_SAMSUNG [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (ARCH_STI || COMPILE_TEST [=n]) || KEYBOARD_STMPE [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_STMPE [=n] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && PLAT_SPEAR || KEYBOARD_TC3589X [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_TC3589X [=y] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && TWL4030_CORE [=n] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && CROS_EC [=n] || KEYBOARD_BCM [=m] && INPUT [=y] && INPUT_KEYBOARD [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=m] && AUXDISPLAY [=y] && FB [=m] && I2C [=y] && INPUT [=y]
 

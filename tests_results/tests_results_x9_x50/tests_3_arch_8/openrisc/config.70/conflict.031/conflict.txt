@@ -1,25 +1,27 @@
-SENSORS_TPS53679: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+DRIVER_PE_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 
-DRM_PARADE_PS8622: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+CHARLCD_BL_OFF: y => no
+      Direct dependencies: <choice>
 
-DRM_PANEL_SAMSUNG_LD9040: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && SPI [=y]
+MEMCPY_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-MTD_NAND_QCOM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_QCOM || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=y] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=y] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=y] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-INTERCONNECT: y => no
+DEBUG_KERNEL: y => no
       Direct dependencies: y
-      Reverse dependencies: DRM_TEGRA [=n] && HAS_IOMEM [=y] && (ARCH_TEGRA || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=m] && OF [=y] || TEGRA_MC [=y] && MEMORY [=y] && (ARCH_TEGRA || COMPILE_TEST [=y] && COMMON_CLK [=y])
+      Reverse dependencies: EXPERT [=y]
 
-DM_WRITECACHE: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-LCD_ILI922X: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y]
+AMIGA_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-LCD_TDO24M: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y]
+PSTORE_LZO_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 

@@ -1,35 +1,28 @@
-SM_GCC_8150: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SM_GPUCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+DM_FLAKEY: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
 
-MQ_IOSCHED_DEADLINE: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
+VEML6070: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-EXT4_FS_POSIX_ACL: y => no
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
-      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
+VIDEO_UPD64031A: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=y]
 
-SDM_GCC_660: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SDM_MMCC_660 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_660 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+LEDS_SGM3140: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 
-CRC_T10DIF: y => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=y] || NVME_TARGET_FC [=y]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y]
+DM_CACHE: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
 
-LTO_NONE: y => no
-      Direct dependencies: <choice>
+TOUCHSCREEN_STMFTS: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && LEDS_CLASS [=m]
 
-PM: y => no
-      Direct dependencies: y
-      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS
+DRM_PANEL_BOE_BF060Y8M_AJ0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-BLK_DEV_INTEGRITY: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=y]) && ATA [=y] || DM_INTEGRITY [=n] && MD [=n] && BLK_DEV_DM [=n] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
+GENERIC_ADC_THERMAL: m => yes
+      Direct dependencies: THERMAL [=y] && IIO [=m]
 
-HWMON: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: HABANA_AI [=n] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || HP_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_BATTERY [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=n] && PCI [=y]
+GNSS_MTK_SERIAL: m => yes
+      Direct dependencies: GNSS [=y] && SERIAL_DEV_BUS [=m]
 

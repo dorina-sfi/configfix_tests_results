@@ -1,27 +1,30 @@
-LEDS_TI_LMU_COMMON: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGMAP [=y]
+NETFILTER_XT_NAT: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_NAT [=y]
+      Reverse dependencies: IP_NF_NAT [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=n] && NF_CONNTRACK [=y] || IP6_NF_NAT [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-NETFS_STATS: y => no
-      Direct dependencies: NETFS_SUPPORT [=m] && PROC_FS [=y]
-      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=m] && PROC_FS [=y]
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=n] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=y]) && PCI [=y]
 
-HID_CHICONY: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=y]
 
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-UIO_MF624: m => yes
-      Direct dependencies: UIO [=m] && PCI [=y]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=n] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 
-I2C_PCA_PLATFORM: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 
-HWMON: y => mod
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: HABANA_AI [=y] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=m] || HP_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=m] && DRM [=n] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=n] && PCI [=y]
+CRC32_SARWATE: y => no
+      Direct dependencies: <choice>
 
-AD7791: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 

@@ -1,9 +1,11 @@
-USB_STORAGE_ISD200: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-GENERIC_ADC_BATTERY: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && IIO [=m]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-COMMON_CLK_MT6779_AUDSYS: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
+PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 

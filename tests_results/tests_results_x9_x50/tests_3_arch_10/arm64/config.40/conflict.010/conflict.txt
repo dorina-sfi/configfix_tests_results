@@ -1,33 +1,36 @@
-COMEDI_AMPLC_DIO200_ISA: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+CRYPTO_DEFLATE: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-ROCKCHIP_GRF: y => no
-      Direct dependencies: ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-PPS_CLIENT_LDISC: m => yes
-      Direct dependencies: PPS [=m] && TTY [=y]
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-NET_DSA_AR9331: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-PPS: m => no
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=y] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=n] && IIO [=y] && I2C [=y]
+
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
+
+CLK_R8A7795: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=y] || ARCH_R8A77951 [=y])
+
+PINCTRL: y => no
       Direct dependencies: y
-      Reverse dependencies: PTP_1588_CLOCK [=m] && NET [=y] && POSIX_TIMERS [=y]
+      Reverse dependencies: ARCH_ACTIONS [=n] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=y] || ARCH_HISI [=y] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=y] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-W1_SLAVE_DS2405: m => yes
-      Direct dependencies: W1 [=m]
-
-NF_CONNTRACK_SANE: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
-
-GREYBUS_SPI: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m] && GREYBUS_BRIDGED_PHY [=m] && SPI [=y]
-
-MTK_SMI: y => mod
-      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=n] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
-
-RESET_CONTROLLER: y => no
+SYNC_FILE: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_SUNXI [=n] || ARCH_REALTEK [=n] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || SCSI_UFS_QCOM [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n] && SCSI_UFSHCD_PLATFORM [=n] && ARCH_QCOM [=n] || HISI_FEMAC [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_HISILICON [=y] && HAS_IOMEM [=y] || SPARX5_SWITCH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROCHIP [=n] && NET_SWITCHDEV [=y] && HAS_IOMEM [=y] && OF [=y] && (ARCH_SPARX5 [=y] || COMPILE_TEST [=n]) || STMMAC_ETH [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=y] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=m] || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) && ARCH_RCAR_GEN3 [=n] || ASM9260_WATCHDOG [=n] && WATCHDOG [=y] && (MACH_ASM9260 || COMPILE_TEST [=n]) && OF [=y] || MEDIATEK_WATCHDOG [=y] && WATCHDOG [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || VIDEO_RCAR_CSI2 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || VIDEO_RCAR_ISP [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || DRM_STI [=n] && HAS_IOMEM [=y] && OF [=y] && DRM [=y] && (ARCH_STI || ARCH_MULTIPLATFORM) || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || MMC_SDHI [=n] && MMC [=n] && (SUPERH || ARCH_RENESAS [=n] || COMPILE_TEST [=n]) && ARCH_RENESAS [=n] || COMMON_CLK_GEMINI [=n] && COMMON_CLK [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) || COMMON_CLK_ASPEED [=n] && COMMON_CLK [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) || CLK_ACTIONS [=n] && COMMON_CLK [=y] && (ARCH_ACTIONS [=n] || COMPILE_TEST [=n]) || CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || RESET_HISI [=n] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=n]) || COMMON_CLK_QCOM [=n] && COMMON_CLK [=y] && OF [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) || SUNXI_CCU [=n] && COMMON_CLK [=y] && (ARCH_SUNXI [=n] || COMPILE_TEST [=n]) || CLK_BT1_CCU_DIV [=n] && COMMON_CLK [=y] && CLK_BAIKAL_T1 [=n] || COMMON_CLK_MEDIATEK [=y] && COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || COMMON_CLK_MESON_AO_CLKC [=n] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=n]) || COMMON_CLK_MESON8B [=n] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=n]) && ARM || CLK_RCAR_USB2_CLOCK_SEL [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || CLK_RZG2L [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || BCM2835_POWER [=n] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=n] && OF [=y]) || RENESAS_RPCIF [=n] && MEMORY [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) || PHY_ATH79_USB [=n] && OF [=y] && (ATH79 || COMPILE_TEST [=n]) || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+
+SOC_RENESAS: y => no
+      Direct dependencies: y
 

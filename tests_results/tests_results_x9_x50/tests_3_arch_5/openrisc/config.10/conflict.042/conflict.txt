@@ -1,17 +1,16 @@
-RMI4_I2C: m => yes
-      Direct dependencies: INPUT [=m] && RMI4_CORE [=m] && I2C [=y]
+DRM_I2C_SIL164: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_KMS_HELPER [=m] && I2C [=y]
 
-W1_SLAVE_DS2780: m => yes
-      Direct dependencies: W1 [=m]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+REGULATOR_MAX77650: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_MAX77650 [=m] || COMPILE_TEST [=n])
 
-NVMEM_SPMI_SDAM: m => yes
-      Direct dependencies: NVMEM [=y] && SPMI [=m]
+TOUCHSCREEN_HIDEEP: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-RESET_HISI: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
-      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=m] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
+W1_MASTER_GPIO: m => yes
+      Direct dependencies: W1 [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-W1_SLAVE_THERM: m => yes
-      Direct dependencies: W1 [=m]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 

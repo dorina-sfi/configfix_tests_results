@@ -1,23 +1,25 @@
-I2C_DLN2: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_DLN2 [=m]
+MDIO_OCTEON: m => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (64BIT && OF_MDIO [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+      Reverse dependencies: OCTEON_MGMT_ETHERNET [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=y] && CAVIUM_OCTEON_SOC || OCTEON_ETHERNET [=m] && STAGING [=y] && (CAVIUM_OCTEON_SOC || COMPILE_TEST [=y]) && NETDEVICES [=y]
 
-SENSORS_LTC4222: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SERIO_PS2MULT: m => yes
+      Direct dependencies: SERIO [=m]
 
-VIRTIO_FS: m => yes
-      Direct dependencies: FUSE_FS [=m]
+CRC8: y => mod
+      Direct dependencies: y
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=n] && HWMON [=n] && I2C [=y] || SENSORS_SHT4x [=n] && HWMON [=n] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=n] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=n] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=y] && STAGING [=y] && IIO [=y] && SPI [=y] || SCA3300 [=m] && IIO [=y] && SPI [=y] || SCD30_I2C [=n] && IIO [=y] && SCD30_CORE [=y] && I2C [=y] || SCD4X [=m] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=m] && IIO [=y] && I2C [=y] || SPS30_I2C [=n] && IIO [=y] && I2C [=y] || ICP10100 [=m] && IIO [=y] && I2C [=y]
 
-USB_XHCI_MTK: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_XHCI_HCD [=m] && (MIPS && SOC_MT7621 || ARCH_MEDIATEK || COMPILE_TEST [=y])
-      Reverse dependencies: USB_MTU3 [=m] && (USB [=m] || USB_GADGET [=m]) && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (EXTCON [=y] || !EXTCON [=y]) && USB_SUPPORT [=y] && USB_XHCI_HCD [=m]
+BACKLIGHT_MAX8925: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_MAX8925 [=y]
 
-I2C_ARB_GPIO_CHALLENGE: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y])
+MEDIA_TUNER_TDA8290: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX18 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=n] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=n] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-USB_OHCI_HCD_PLATFORM: m => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m]
-      Reverse dependencies: USB_BRCMSTB [=m] && USB_SUPPORT [=y] && USB [=m] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=m] || USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=m] && BCMA [=n] && USB_OHCI_HCD [=m] || USB_HCD_SSB [=m] && USB_SUPPORT [=y] && USB [=m] && SSB [=m] && USB_OHCI_HCD [=m] || USB_OHCI_HCD_STI [=m] && USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=m] && USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=m]) || USB_OHCI_SH [=y] && USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=n] && USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && CAVIUM_OCTEON_SOC
+MFD_MADERA_I2C: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_MADERA [=m] && I2C [=y]
 
-SND_SOC_ADAU7118_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+IIO_KFIFO_BUF: y => mod
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=y] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=m] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=n] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=m]) || ACPI_ALS [=n] && IIO [=y] && ACPI || APDS9960 [=n] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 

@@ -1,14 +1,14 @@
-RFKILL_INPUT: y => no
-      Direct dependencies: NET [=y] && RFKILL [=y] && (INPUT [=y]=y || RFKILL [=y]=INPUT [=y])
+SENSORS_TC654: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-VIRT_CPU_ACCOUNTING_GEN: y => no
-      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+MMC_CQHCI: y => mod
+      Direct dependencies: MMC [=y] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=n] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] && OF [=y] || MMC_SDHCI_TEGRA [=n] && MMC [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_MSM [=y] && MMC [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB [=n] || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y] && REGMAP_MMIO [=y]
 
-RST_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
+CONFIGFS_FS: m => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=m] && ACPI [=y] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=m] && BLK_DEV [=y] || GPIO_SIM [=m] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=m] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=y])
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
+BACKLIGHT_PCF50633: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_PCF50633 [=m]
 

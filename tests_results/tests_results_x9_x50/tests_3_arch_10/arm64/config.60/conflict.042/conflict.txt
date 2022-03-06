@@ -1,36 +1,35 @@
-VIDEO_S5K4ECGX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+AHCI_CEVA: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
 
-CEPH_LIB: y => mod
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+CRYPTO_CRC32C: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && INET [=y] || ISCSI_TARGET [=m] && TARGET_CORE [=m] && INET [=y] || EXT4_FS [=m] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 
-STE10XP: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=m] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y])
 
-I2C_SI4713: m => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI4713 [=m]
-      Reverse dependencies: USB_SI4713 [=n] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && USB [=n] && I2C [=y] && RADIO_SI4713 [=m] || PLATFORM_SI4713 [=m] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m] && I2C [=y] && RADIO_SI4713 [=m]
+GREYBUS_BRIDGED_PHY: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m]
 
-SENSORS_UCD9200: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+BRIDGE_EBT_IP: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
 
-TSL2772: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+TEST_LIST_SORT: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+PHY_SUN6I_MIPI_DPHY: y => no
+      Direct dependencies: (ARCH_SUNXI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && COMMON_CLK [=y] && RESET_CONTROLLER [=y]
+      Reverse dependencies: DRM_SUN6I_DSI [=m] && HAS_IOMEM [=y] && DRM_SUN4I [=m]
 
-SOC_SAMSUNG: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_EXYNOS [=y]
+CRYPTO_RSA: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-CPU_ISOLATION: y => no
-      Direct dependencies: SMP [=y] || COMPILE_TEST [=n]
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+BT_MTKUART: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && SERIAL_DEV_BUS [=m]
 
-NET_DSA_TAG_KSZ: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_MICROCHIP_KSZ_COMMON [=m] && NETDEVICES [=y] && NET_DSA [=m]
+MEDIA_TUNER_TDA18218: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_AF9015 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_AF9035 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

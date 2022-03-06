@@ -1,26 +1,31 @@
-XZ_DEC_IA64: y => no
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=n] && HWMON [=y] && IPMI_HANDLER [=y]
+
+XZ_DEC_X86: y => no
       Direct dependencies: XZ_DEC [=y]
 
-SCD30_I2C: m => yes
-      Direct dependencies: IIO [=m] && SCD30_CORE [=m] && I2C [=y]
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=n]) && X86_64 && ACPI [=n] && PCI [=n]
 
-SENSORS_ISL29018: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-IIO_BUFFER_HW_CONSUMER: m => yes
-      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=n] && IIO [=m] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-AD7291: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-USB_NET_QMI_WWAN: m => yes
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-SENSORS_ISL29028: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-IIO_ST_MAGN_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=n]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) || SPI_LM70_LLP [=y] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=n])
 

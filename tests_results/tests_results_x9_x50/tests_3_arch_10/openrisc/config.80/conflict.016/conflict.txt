@@ -1,34 +1,31 @@
-LEDS_LP55XX_COMMON: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (LEDS_CLASS_MULTICOLOR [=m] || !LEDS_CLASS_MULTICOLOR [=m]) && OF [=y] && I2C [=m]
+DRM_SIMPLEDRM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
 
-BATTERY_SBS: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+DRM_PANEL_SEIKO_43WVF1G: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-FPGA_MGR_SOCFPGA: m => yes
-      Direct dependencies: FPGA [=m] && (ARCH_INTEL_SOCFPGA || COMPILE_TEST [=y])
+SENSORS_SMSC47B397: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-LEDS_AN30259A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m] && OF [=y]
+ISL29003: m => yes
+      Direct dependencies: I2C [=m] && SYSFS [=y]
 
-TMPFS: y => no
-      Direct dependencies: SHMEM [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 && PCI [=n] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+RTC_DRV_PCF8523: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
 
-BACKLIGHT_LED: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && LEDS_CLASS [=m] && OF [=y]
+W1_SLAVE_DS2405: m => yes
+      Direct dependencies: W1 [=m]
 
-VIDEO_SONY_BTF_MPX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
-      Reverse dependencies: VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=m] && SND [=m] && USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+DRM_PANEL_SAMSUNG_S6E8AA0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y]
 
-SND_SOC_DMIC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && GPIOLIB [=y]
-      Reverse dependencies: SND_SOC_AMD_RENOIR_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_RENOIR [=n] && GPIOLIB [=y] || SND_SOC_AMD_YC_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP6x [=n] || SND_SOC_MT8192_MT6359_RT1015_RT5682 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m] && GPIOLIB [=y] && SND_SOC_MT8192 [=n] && MTK_PMIC_WRAP [=m] || SND_SOC_MT8195_MT6359_RT1019_RT5682 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m] && GPIOLIB [=y] && SND_SOC_MT8195 [=m] && MTK_PMIC_WRAP [=m] || SND_SOC_MT8195_MT6359_RT1011_RT5682 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m] && SND_SOC_MT8195 [=m] && MTK_PMIC_WRAP [=m] || SND_SOC_RK3399_GRU_SOUND [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=m] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI [=y] || SND_SOC_AMD_MACH_COMMON [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP_COMMON [=n] && X86 && PCI [=n] && I2C [=m] || SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] || SND_SOC_INTEL_SKL_RT286_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_SKL [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_SKL_NAU88L25_SSM4567_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_SKL [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_SKL_NAU88L25_MAX98357A_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_SKL [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_BXT_RT298_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_APL [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_KBL_RT5663_MAX98927_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_KBL [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_KBL_DA7219_MAX98927_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_INTEL_KBL [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_GLK_RT5682_MAX98357A_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_GEMINILAKE [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SKL_HDA_DSP_GENERIC_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC [=n] || SND_SOC_SOF_HDA_AUDIO_CODEC [=n]) && SND_HDA_CODEC_HDMI [=n] && GPIOLIB [=y] || SND_SOC_INTEL_SOF_RT5682_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=m] && ACPI && GPIOLIB [=y] && (SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_SOF_BAYTRAIL [=n] && (X86_INTEL_LPSS || COMPILE_TEST [=y])) || SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=m] && ACPI && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_SOF_ES8336_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_NAU8825_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=m] && ACPI && GPIOLIB [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) || SND_SOC_INTEL_SOF_CML_RT1011_RT5682_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_COMETLAKE [=n] && SND_SOC_SOF_HDA_LINK [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_DA7219_MAX98373_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_JASPERLAKE [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_EHL_RT5660_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_ELKHARTLAKE [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOUNDWIRE_SOF_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_INTEL_SOUNDWIRE [=n] && I2C [=m] && ACPI && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=y]) && (SND_SOC_INTEL_USER_FRIENDLY_LONG_NAMES [=y] || COMPILE_TEST [=y]) && SOUNDWIRE [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_STM32_DFSDM [=m] && SOUND [=m] && !UML && SND [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && SND_SOC [=m] && STM32_DFSDM_ADC [=y]
+COMEDI_TEST: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_MISC_DRIVERS [=y]
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+DRM_DISPLAY_CONNECTOR: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+      Reverse dependencies: DRM_MESON [=n] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (ARM || ARM64) && (ARCH_MESON || COMPILE_TEST [=y])
 
-GPIO_PCA953X: m => yes
-      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+SENSORS_F71805F: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 

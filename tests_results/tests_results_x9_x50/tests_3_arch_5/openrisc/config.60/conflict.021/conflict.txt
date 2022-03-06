@@ -1,18 +1,19 @@
-NET_DSA_TAG_HELLCREEK: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_HIRSCHMANN_HELLCREEK [=m] && NETDEVICES [=y] && HAS_IOMEM [=y] && NET_DSA [=m] && PTP_1588_CLOCK [=m] && LEDS_CLASS [=y] && NET_SCH_TAPRIO [=m]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 
-CRYPTO_DRBG_MENU: y => no
+CRYPTO_BLAKE2B: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-HW_RANDOM_XIPHERA: m => yes
-      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+MCTP_TEST: y => no
+      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
 
-NET_DSA_TAG_TRAILER: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_MV88E6060 [=n] && NETDEVICES [=y] && NET_DSA [=m]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
 
-I2C_ARB_GPIO_CHALLENGE: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n])
+SCSI_SAS_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
 

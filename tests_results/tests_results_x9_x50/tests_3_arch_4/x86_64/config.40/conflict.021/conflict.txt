@@ -1,13 +1,15 @@
-SENSORS_MP2888: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+SUSPEND_FREEZER: y => no
+      Direct dependencies: SUSPEND [=y]
 
-USB_ZERO: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
 
-SENSORS_F71882FG: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+SND_SOC_FSL_AUD2HTX: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+      Reverse dependencies: SND_SOC_IMX_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y]
 
-SND_SOC_AC97_CODEC: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_DB1000 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_AU1XAUDIO [=n] || SND_SOC_DB1200 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_AU1XPSC [=n] || SND_EP93XX_SOC_SIMONE [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && MACH_SIM_ONE || SND_SH7760_AC97 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && CPU_SUBTYPE_SH7760 && SND_SOC_PCM_SH7760 [=n]
+CRC8: y => no
+      Direct dependencies: y
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=y] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=y] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=y] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=y] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=y] && SPI [=y] || SCA3300 [=y] && IIO [=y] && SPI [=y] || SCD30_I2C [=n] && IIO [=y] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=y] && IIO [=y] && I2C [=y] || SPS30_I2C [=y] && IIO [=y] && I2C [=y] || ICP10100 [=n] && IIO [=y] && I2C [=y]
 

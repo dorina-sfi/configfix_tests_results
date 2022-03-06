@@ -1,12 +1,14 @@
-I2C_DEMUX_PINCTRL: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
+REGULATOR_MAX77693: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_MAX77693 [=m] || MFD_MAX77843 [=n] || COMPILE_TEST [=n])
 
-MMC_VIA_SDMMC: m => yes
-      Direct dependencies: MMC [=m] && PCI [=y]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-OF_FPGA_REGION: m => yes
-      Direct dependencies: FPGA [=y] && OF [=y] && FPGA_REGION [=m]
+MMC_CQHCI: m => yes
+      Direct dependencies: MMC [=m] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=m] && MMC [=m] && MMC_SDHCI [=m] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=m] && MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=m] && (ARCH_MXC || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=m] && OF [=y] || MMC_SDHCI_TEGRA [=n] && MMC [=m] && (ARCH_TEGRA || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=m] || MMC_SDHCI_MSM [=n] && MMC [=m] && (ARCH_QCOM || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=m] || MMC_MTK [=m] && MMC [=m] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=m] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=m] || MMC_SDHCI_AM654 [=m] && MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && REGMAP_MMIO [=y]
 
-PHY_CPCAP_USB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && IIO [=y] && (USB_MUSB_HDRC [=m] || USB_MUSB_HDRC [=m]=n)
+RTC_DRV_MT6397: m => yes
+      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
 

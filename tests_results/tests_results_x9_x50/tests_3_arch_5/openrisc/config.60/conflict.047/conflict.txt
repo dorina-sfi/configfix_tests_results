@@ -1,18 +1,20 @@
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
 
-NET_DSA_TAG_XRS700X: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_XRS700X [=m] && NETDEVICES [=y] && NET_DSA [=m]
+BT_HCIUART_H4: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y]
+      Reverse dependencies: BT_HCIUART_NOKIA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && PM || BT_HCIUART_ATH3K [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_LL [=y] && NET [=y] && BT [=y] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_INTEL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && GPIOLIB [=y] || BT_HCIUART_BCM [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && (!ACPI || SERIAL_DEV_CTRL_TTYPORT [=n]) && GPIOLIB [=y] || BT_HCIUART_QCA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_AG6XX [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_MRVL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
 
-VIDEO_DEV: m => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y]
 
-NFT_XFRM: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && XFRM [=y]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=y] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=y]) && PCI [=n] && X86
 

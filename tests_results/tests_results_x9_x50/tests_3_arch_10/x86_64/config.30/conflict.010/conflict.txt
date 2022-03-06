@@ -1,39 +1,33 @@
-FONT_8x16: y => no
-      Direct dependencies: FONT_SUPPORT [=y]
-      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_DEV [=y] && SND [=n] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_DEV [=y] && SND [=n] && I2C [=y] || VIDEO_VIMC [=y] && MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] || VIDEO_VIVID [=n] && MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] && !SPARC32 && !SPARC64 && FB [=n] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=n] && (X86 [=y] || PPC) && FRAMEBUFFER_CONSOLE [=n] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=n] && PCI [=y] && FRAMEBUFFER_CONSOLE [=n] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=n] && PCI [=y] && FRAMEBUFFER_CONSOLE [=n] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=n] && PCI [=y] && FRAMEBUFFER_CONSOLE [=n] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=y] && USB [=y] && VT [=n] && BROKEN [=n] || FONT_AUTOSELECT [=y] && FONT_SUPPORT [=y] && !FONT_8x8 [=n] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
+MOST_VIDEO: m => yes
+      Direct dependencies: STAGING [=y] && MOST_COMPONENTS [=y] && VIDEO_V4L2 [=m]
 
-KEYS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=y] && NET [=y] && INET [=y] || CEPH_LIB [=y] && NET [=y] && INET [=y] || FS_ENCRYPTION [=n] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFS_FS [=y] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
-
-IIO_BUFFER_CB: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=n] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
-
-RTC_DRV_DS17485: y => no
+DEBUG_FS_ALLOW_ALL: y => no
       Direct dependencies: <choice>
 
-DVB_AF9033: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_AF9035 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y]
+VIDEO_VP27SMPX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=n]
 
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-VIDEO_WM8775: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] || VIDEO_CX88 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+MTD_ONENAND_GENERIC: m => yes
+      Direct dependencies: MTD [=y] && MTD_ONENAND [=m]
 
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+CRYPTO_CAMELLIA_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-VIDEO_CS53L32A: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
+EXTCON_PTN5150: m => yes
+      Direct dependencies: EXTCON [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-CRYPTO_CCM: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || RTL8192U [=n] && STAGING [=n] && PCI [=y] && WLAN [=n] && USB [=y] && m && MODULES [=n] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=n] && RTLLIB [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
+COMMON_CLK_MT6779_AUDSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
+
+NFC_NXP_NCI_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && NFC_NXP_NCI [=m] && I2C [=y]
+
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 

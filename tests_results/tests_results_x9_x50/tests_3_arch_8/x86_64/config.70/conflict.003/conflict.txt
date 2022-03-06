@@ -1,26 +1,28 @@
-CRYPTO_CAST5: m => no
+UNIX98_PTYS: y => no
+      Direct dependencies: TTY [=y]
+
+FONT_8x16: y => no
+      Direct dependencies: FONT_SUPPORT [=y]
+      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=y] && VIDEO_DEV [=n] && SND [=y] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=y] && VIDEO_DEV [=n] && SND [=y] && I2C [=y] || VIDEO_VIMC [=n] && MEDIA_SUPPORT [=n] && MEDIA_TEST_SUPPORT [=n] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] || VIDEO_VIVID [=n] && MEDIA_SUPPORT [=n] && MEDIA_TEST_SUPPORT [=n] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && !SPARC32 && !SPARC64 && FB [=y] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=y] && (X86 [=y] || PPC) && FRAMEBUFFER_CONSOLE [=y] || FB_S3 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && FRAMEBUFFER_CONSOLE [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && FRAMEBUFFER_CONSOLE [=y] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && FRAMEBUFFER_CONSOLE [=y] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=n] && USB [=n] && VT [=y] && BROKEN [=n] || FONT_AUTOSELECT [=n] && FONT_SUPPORT [=y] && !FONT_8x8 [=y] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
+
+CRYPTO_CRYPTD: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-HID_MCP2221: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && I2C [=y] && GPIOLIB [=y]
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y]
 
-MTD_SLRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-SENSORS_TPS53679: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+HID_PICOLCD_FB: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=FB [=y] || FB [=y]=y)
 
-INPUT_DA9063_ONKEY: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && (MFD_DA9063 [=m] || MFD_DA9062 [=n])
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=y] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 
-SND_SOC_AK4458: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_IMX_CARD [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=n] && I2C [=y]
-
-GREYBUS_ES2: m => yes
-      Direct dependencies: GREYBUS [=m] && USB [=y]
-
-SCD30_SERIAL: m => yes
-      Direct dependencies: IIO [=m] && SCD30_CORE [=m] && SERIAL_DEV_BUS [=m]
+HPET_TIMER: y => no
+      Direct dependencies: y
 

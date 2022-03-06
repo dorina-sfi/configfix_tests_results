@@ -1,26 +1,28 @@
-PWM: y => no
+CRYPTO_CAMELLIA_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_CAMELLIA_AESNI_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+CONFIGFS_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: FB_SSD1307 [=y] && HAS_IOMEM [=y] && FB [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=n]
 
-DW_APB_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: X86_INTEL_MID [=y] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && PCI [=y] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || DW_APB_TIMER_OF [=n] && GENERIC_CLOCKEVENTS [=y]
-
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
-
-PWM: y => no
-      Direct dependencies: y
-      Reverse dependencies: FB_SSD1307 [=y] && HAS_IOMEM [=y] && FB [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-
-CRYPTO_STREEBOG: y => no
+CRYPTO_NULL: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-DAX: y => no
+CLK_RCAR_GEN2_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A7742 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7743 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7745 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77470 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7790 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7791 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7792 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7794 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+
+PROC_CHILDREN: y => no
       Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=n] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-PSTORE_842_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+MMC_CQHCI: y => no
+      Direct dependencies: MMC [=y] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=y] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=n] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=n] && OF [=n] || MMC_SDHCI_TEGRA [=n] && MMC [=y] && (ARCH_TEGRA || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_MSM [=n] && MMC [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=n] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=n] && REGMAP_MMIO [=y]
+
+CLK_RCAR_CPG_LIB: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 

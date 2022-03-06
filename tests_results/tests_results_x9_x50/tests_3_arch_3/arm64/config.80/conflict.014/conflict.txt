@@ -1,9 +1,12 @@
-SND_MESON_AXG_TDMOUT: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MESON [=n] || COMPILE_TEST [=y] && COMMON_CLK [=y])
+VIDEO_SAA717X: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-GENERIC_ADC_BATTERY: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && IIO [=m]
+CRYPTO_GHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-MMA8452: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+USB_TEGRA_PHY: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] && ARCH_TEGRA [=y]
 

@@ -1,32 +1,29 @@
-SOC_SAMSUNG: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_EXYNOS [=y]
+MEDIA_TUNER_IT913X: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=m]
+      Reverse dependencies: DVB_USB_AF9035 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-DMA_CMA: y => no
-      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
-      Reverse dependencies: DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+IIO_BUFFER_DMA: y => mod
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_BUFFER_DMAENGINE [=y] && IIO [=y] && IIO_BUFFER [=y]
 
-FSL_IFC: y => no
-      Direct dependencies: MEMORY [=y] && (FSL_SOC || ARCH_LAYERSCAPE [=n] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_NAND_FSL_IFC [=y] && MTD [=y] && MTD_RAW_NAND [=y] && (FSL_SOC || ARCH_LAYERSCAPE [=n] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+PINCTRL_PFC_R8A774C0: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774C0 [=y]
 
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+DVB_ISL6423: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_PCTV452E [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SND_SOC_IMX_RPMSG: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && RPMSG [=y]
-      Reverse dependencies: SND_SOC_FSL_RPMSG [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && COMMON_CLK [=y] && RPMSG [=y] && (SND_IMX_SOC [=y] || SND_IMX_SOC [=y]=n) && SND_IMX_SOC [=y]!=n
+DRM_MCDE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && CMA [=y] && (ARM || COMPILE_TEST [=y]) && OF [=y] && COMMON_CLK [=y]
 
-I2C_MUX: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=y] && IIO [=y] && I2C [=y]
+INA2XX_ADC: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m] && !SENSORS_INA2XX [=n]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+DVB_STV6110x: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_NGENE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-MTD_MAP_BANK_WIDTH_2: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
+FB_SIMPLE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && !DRM_SIMPLEDRM [=n]
 

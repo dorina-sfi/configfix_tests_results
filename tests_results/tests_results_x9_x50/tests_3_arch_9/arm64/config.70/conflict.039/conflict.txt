@@ -1,28 +1,32 @@
-SENSORS_IRPS5401: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+W1: m => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-PATA_SCH: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
-
-GAMEPORT_FM801: m => yes
-      Direct dependencies: GAMEPORT [=m] && PCI [=y]
-
-THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
+THERMAL_DEFAULT_GOV_USER_SPACE: y => no
       Direct dependencies: <choice>
 
-DRM_DW_HDMI_CEC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && DRM_DW_HDMI [=m]
+FB_TILEBLITTING: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+      Reverse dependencies: FB_MATROX [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_VT8623 [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_ARK [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-SATA_AHCI_PLATFORM: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y]
+EXTCON: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=m] || !RC_CORE [=m]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=n])
 
-CLK_RENESAS: y => no
-      Direct dependencies: COMMON_CLK [=y]
+DRM_PARADE_PS8622: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-SCSI: m => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=m] && HAS_IOMEM [=y] && BLOCK [=y]
+COMPACTION: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
 
-LEDS_LP5523: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+SDM_GCC_845: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SDM_CAMCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_845 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_VIDEOCC_845 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_DISPCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_LPASSCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+INTEL_QEP: m => yes
+      Direct dependencies: COUNTER [=m] && PCI [=y]
+
+MOST_CDEV: m => yes
+      Direct dependencies: MOST [=m]
 

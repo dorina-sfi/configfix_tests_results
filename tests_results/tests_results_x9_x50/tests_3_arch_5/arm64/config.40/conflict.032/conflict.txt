@@ -1,18 +1,16 @@
-USB_DWC2_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB_DWC2 [=y]=m && USB [=y])
+SND_SOC_WCD9335: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SLIMBUS [=m]
 
-PROC_CHILDREN: y => no
-      Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-I2C_ALGOPCA: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
+SND_SOC_WM8978: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SIU_MIGOR [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS [=y] || COMPILE_TEST [=n]) && SH_MIGOR && I2C [=y]
 
-ARM64_PA_BITS_48: y => no
-      Direct dependencies: <choice>
+HID_SENSOR_PRESS: m => yes
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m]
 
-CRYPTO_CRC32C: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+HID_TOPSEED: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 

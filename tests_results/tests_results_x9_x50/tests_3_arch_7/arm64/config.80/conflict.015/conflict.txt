@@ -1,22 +1,27 @@
-BATTERY_GAUGE_LTC2941: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+RCU_NOCB_CPU: y => no
+      Direct dependencies: TREE_RCU [=y] && (RCU_EXPERT [=y] || NO_HZ_FULL [=y])
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-RTC_DRV_RV8803: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
+CLK_RCAR_GEN2_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A7742 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7743 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7745 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77470 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7790 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7791 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7792 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7794 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-I2C_MT7621: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (RALINK && (SOC_MT7620 || SOC_MT7621) || COMPILE_TEST [=y])
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+FONT_8x16: y => no
+      Direct dependencies: FONT_SUPPORT [=y]
+      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=n] && VIDEO_DEV [=n] && SND [=n] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=n] && VIDEO_DEV [=n] && SND [=n] && I2C [=y] || VIDEO_VIMC [=n] && MEDIA_SUPPORT [=n] && MEDIA_TEST_SUPPORT [=n] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] || VIDEO_VIVID [=n] && MEDIA_SUPPORT [=n] && MEDIA_TEST_SUPPORT [=n] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && !SPARC32 && !SPARC64 && FB [=y] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=y] && (X86 || PPC) && FRAMEBUFFER_CONSOLE [=y] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=y] && USB [=y] && VT [=y] && BROKEN [=n] || FONT_AUTOSELECT [=n] && FONT_SUPPORT [=y] && !FONT_8x8 [=y] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
 
-LIBCRC32C: y => mod
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=n] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
+
+F2FS_FS_XATTR: y => no
+      Direct dependencies: BLOCK [=y] && F2FS_FS [=y]
+      Reverse dependencies: F2FS_FS [=y] && BLOCK [=y] && FS_ENCRYPTION [=y]
+
+POSIX_TIMERS: y => no
       Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=m] && NET [=y] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=m] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || MD_RAID456 [=n] && MD [=y] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=y] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=m] && BLOCK [=y] || GFS2_FS [=n] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
-
-KEYBOARD_GOLDFISH_EVENTS: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && (GOLDFISH [=n] || COMPILE_TEST [=y])
-
-HTU21: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
 

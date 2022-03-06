@@ -1,22 +1,22 @@
-USB_STORAGE_CYPRESS_ATACB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+GREYBUS_AUDIO: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m] && SOUND [=m] && SND_SOC [=m]
 
-CRYPTO_FCRYPT: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=y] && NET [=y] && AF_RXRPC [=m]
+SENSORS_LM70: m => yes
+      Direct dependencies: HWMON [=m] && SPI_MASTER [=y]
 
-BLOCK: y => no
-      Direct dependencies: y
+SND_SOC_WM8782: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-OPENVSWITCH: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+SND_SOC_TDA7419: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-AXP20X_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_AXP20X [=m]
+NFC_PN532_UART: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && SERIAL_DEV_BUS [=m]
 
-CRC32_SLICEBY8: y => no
-      Direct dependencies: <choice>
+IR_RC6_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
 
-CONSOLE_TRANSLATIONS: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+CRYPTO_TWOFISH_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 

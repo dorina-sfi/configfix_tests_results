@@ -1,27 +1,30 @@
-MAX1363: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+GOOGLE_MEMCONSOLE_COREBOOT: m => yes
+      Direct dependencies: GOOGLE_FIRMWARE [=y] && GOOGLE_COREBOOT_TABLE [=m]
 
-SENSORS_ADT7410: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+GP2AP002: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-RN5T618_POWER: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_RN5T618 [=m] && RN5T618_ADC [=m] && IIO [=y]
+SND_SOC_TEGRA_MAX98090: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=m] && I2C [=y] && GPIOLIB [=y]
 
-SENSORS_DS1621: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+I2C_ARB_GPIO_CHALLENGE: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y])
 
-LEDS_BLINKM: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m]
+MMA9551: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MOST_I2C: m => yes
-      Direct dependencies: STAGING [=y] && MOST_COMPONENTS [=m] && I2C [=m]
-
-SENSORS_IRPS5401: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-COMMON_CLK_SI514: m => yes
-      Direct dependencies: COMMON_CLK [=y] && I2C [=m] && OF [=y]
-
-SOC_RENESAS: y => no
+DEBUG_KERNEL: y => no
       Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
+
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+
+TEGRA_IVC: y => no
+      Direct dependencies: ARCH_TEGRA [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
+
+CAN_PEAK_PCI: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_SJA1000 [=m] && PCI [=y]
 

@@ -1,27 +1,27 @@
-REGULATOR_BD9571MWV: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_BD9571MWV [=m]
+SND_ICE1712: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y] && ZONE_DMA [=y]
 
-SND_SOC_CS4271_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_EP93XX_SOC_EDB93XX [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && (MACH_EDB9301 || MACH_EDB9302 || MACH_EDB9302A || MACH_EDB9307A || MACH_EDB9315A) && I2C [=y]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-REGULATOR_RT5033: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_RT5033 [=m]
+MTD_CFI_AMDSTD: m => yes
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=m]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=n])
 
-HID_MAYFLASH: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+VIDEO_M52790: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m]
 
-FB_GOLDFISH: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (GOLDFISH [=n] || COMPILE_TEST [=y])
+CROS_EC_LIGHTBAR: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m]
 
-BLK_DEV_INTEGRITY: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=y]) && ATA [=y] || DM_INTEGRITY [=n] && MD [=n] && BLK_DEV_DM [=n] || TCM_IBLOCK [=m] && TARGET_CORE [=y]
+BRIDGE: m => yes
+      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 
-POWER_SUPPLY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=n]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=n] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=y] && HID [=m] || HID_ASUS [=n] && INPUT [=y] && HID [=m] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=m] && HID_LOGITECH [=m] || HID_NINTENDO [=m] && INPUT [=y] && HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=y] && HID [=m] && LEDS_CLASS_MULTICOLOR [=m] || HID_SONY [=n] && INPUT [=y] && HID [=m] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=m] && INPUT [=y] && HID [=m] || HID_WACOM [=n] && INPUT [=y] && HID [=m] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=m] && LEDS_CLASS [=y] || USB_CONN_GPIO [=m] && USB_SUPPORT [=y] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=y] && USB [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=m] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+CROS_EC_I2C: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && CROS_EC [=m] && I2C [=y]
 
-HID_ALPS: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+JFFS2_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=m]
 

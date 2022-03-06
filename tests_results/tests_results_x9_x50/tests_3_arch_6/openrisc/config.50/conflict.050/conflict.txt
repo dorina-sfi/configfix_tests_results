@@ -1,23 +1,22 @@
-CRYPTO_POLY1305: y => no
+TOUCHSCREEN_USB_DMC_TSC10: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
+
+MCTP_TEST: y => no
+      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
+
+CRYPTO_CBC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-CRYPTO_LZO: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-CRYPTO_DEV_QCE_ENABLE_AEAD: y => no
-      Direct dependencies: <choice>
-
-CRYPTO_DRBG_MENU: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
-
-SCSI_ISCSI_ATTRS: y => no
-      Direct dependencies: SCSI [=y] && NET [=y]
-      Reverse dependencies: ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=y] || SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || SCSI_CXGB4_ISCSI [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) && PTP_1588_CLOCK_OPTIONAL [=y] && ETHERNET [=n] && (TLS [=n] || TLS [=n]=n) || SCSI_BNX2_ISCSI [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && NET [=y] && PCI [=n] && (IPV6 [=y] || IPV6 [=y]=n) && MMU [=y] || BE2ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && NET [=y] || QEDI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && UIO [=y] && QED [=n] || INFINIBAND_ISER [=y] && INFINIBAND [=y] && SCSI [=y] && INET [=y] && INFINIBAND_ADDR_TRANS [=y]
-
-LEDS_TRIGGER_AUDIO: y => no
-      Direct dependencies: NEW_LEDS [=y] && LEDS_TRIGGERS [=y]
-      Reverse dependencies: SND_CTL_LED [=y] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=y] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI && ACPI_BATTERY && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO || ACPI_VIDEO=n) && BACKLIGHT_CLASS_DEVICE [=n] && I2C [=n] && DRM [=n] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI && BACKLIGHT_CLASS_DEVICE [=n] && (ACPI_VIDEO || ACPI_VIDEO=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 

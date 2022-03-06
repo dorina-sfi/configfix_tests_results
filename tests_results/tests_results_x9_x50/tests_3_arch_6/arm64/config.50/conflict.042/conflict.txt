@@ -1,20 +1,20 @@
-SPI_QCOM_GENI: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && QCOM_GENI_SE [=m]
+MTD_ONENAND: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
 
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=m] && PCI [=y] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
+CRYPTO_NULL: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=m] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=m] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
 
-SND_SOC_SNOW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && I2C [=y]
+MD_RAID0: y => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
 
-MTD_CMDLINE_PARTS: m => yes
-      Direct dependencies: MTD [=m]
+SCSI_UFS_CDNS_PLATFORM: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=m] && SCSI_UFSHCD_PLATFORM [=m]
 
-RC_MAP: m => yes
-      Direct dependencies: RC_CORE [=m]
+SYSCTL_KUNIT_TEST: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
 
-SND_SOC_FSL_SAI: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=n] || SND_AC97_CODEC [=n]=n) || SND_SOC_IMX_AUDMIX [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_IMX_SOC [=m] || SND_SOC_IMX_HDMI [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_IMX_SOC [=m] || SND_SOC_IMX_CARD [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y]
+AHCI_QORIQ: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
 

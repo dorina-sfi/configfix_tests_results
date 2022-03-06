@@ -1,33 +1,35 @@
-TI_ADC081C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SYN_COOKIES: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NFT_SYNPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y] || IP_NF_TARGET_SYNPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y] || IP6_NF_TARGET_SYNPROXY [=n] && NET [=y] && INET [=y] && IPV6 [=n] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-SENSORS_EMC2103: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+FPGA_DFL_FME_MGR: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
 
-TIFM_CORE: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: MMC_TIFM_SD [=m] && MMC [=m] && PCI [=y] || MEMSTICK_TIFM_MS [=n] && MEMSTICK [=m] && PCI [=y]
+SERIAL_8250_TEGRA: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y])
 
-NET_L3_MASTER_DEV: y => no
-      Direct dependencies: NET [=y] && (INET [=y] || IPV6 [=y])
-      Reverse dependencies: IPVLAN_L3S [=y] && NETDEVICES [=y] && NET_CORE [=y] && NETFILTER [=y] && IPVLAN [=m]
+DVB_MB86A16: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MMC_MXC: m => yes
-      Direct dependencies: MMC [=m] && (ARCH_MXC [=y] || PPC_MPC512x)
+AF_RXRPC: m => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: AFS_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-SENSORS_LM90: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DRM_PANEL_LEADTEK_LTK050H3146W: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-BRIDGE_EBT_VLAN: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
+STM32_DFSDM_CORE: y => no
+      Direct dependencies: IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_DFSDM_ADC [=m] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-PC300TOO: m => yes
-      Direct dependencies: NETDEVICES [=y] && WAN [=y] && HDLC [=m] && PCI [=y]
+NETFILTER_XT_MATCH_CONNLABEL: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 
-SENSORS_VT8231: m => yes
-      Direct dependencies: HWMON [=m] && PCI [=y]
+CRYPTO_SHA3: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA3_ARM64 [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-NETFILTER_XTABLES: m => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: IP_NF_IPTABLES [=m] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=n] || IP6_NF_IPTABLES [=n] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=y]
+SERIAL_8250_LPC18XX: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && OF [=y] && (ARCH_LPC18XX || COMPILE_TEST [=y])
 

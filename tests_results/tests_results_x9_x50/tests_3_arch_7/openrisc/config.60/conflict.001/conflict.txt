@@ -1,21 +1,24 @@
-W1_SLAVE_DS2430: m => yes
-      Direct dependencies: W1 [=m]
+I2C_AT91_SLAVE_EXPERIMENTAL: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=m]
 
-SND_BCM2835_SOC_I2S: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_BCM2835 || COMPILE_TEST [=y])
+MTD_NAND_ECC_SW_HAMMING: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: SM_FTL [=m] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=m] && 4xx
 
-SND_SOC_ADAU7118_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+GPIO_LP87565: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP87565 [=m]
 
-SENSORS_AS370: m => yes
-      Direct dependencies: HWMON [=m]
+STM_DUMMY: m => yes
+      Direct dependencies: STM [=m]
 
-USB_FOTG210_HCD: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && HAS_DMA [=y] && HAS_IOMEM [=y]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-MICROCHIP_TCB_CAPTURE: m => yes
-      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
+LEDS_RT8515: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && GPIOLIB [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 
-SENSORS_MLXREG_FAN: m => yes
-      Direct dependencies: HWMON [=m] && MELLANOX_PLATFORM [=y]
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=m] || QCOM_COMMAND_DB [=m]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=n] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 

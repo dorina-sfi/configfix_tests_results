@@ -1,20 +1,22 @@
-BRIDGE_EBT_DNAT: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
+MEDIA_TUNER_QM1D1C0042: m => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_DVB [=m] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_PT3 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_ARMCLCD [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=m] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=m] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_RIVA [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_SAVAGE [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_NEOMAGIC [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_3DFX [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_TRIDENT [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=y] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_UDL [=m] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=n] && STAGING [=y] && FB [=y] && PCI [=y]
+DVB_SI2165: y => mod
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SND_SOC_WSA881X: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SOUNDWIRE [=y]
+NF_SOCKET_IPV6: m => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && (IPV6 [=m] || IPV6 [=m]=n) && NF_TABLES_IPV6 [=y] || NETFILTER_XT_MATCH_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (IP6_NF_IPTABLES [=m] || IP6_NF_IPTABLES [=m]=n) && IP6_NF_IPTABLES [=m]
 
-REGULATOR_ARIZONA_LDO1: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=n] || MFD_MADERA [=m]) && SND_SOC [=m]
+SENSORS_F75375S: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-SENSORS_ISL29028: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IP_VS_LBLC: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=m]
 
-SND_SOC_WM8753: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-      Reverse dependencies: SND_SOC_SAMSUNG_NEO1973_WM8753 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MACH_NEO1973_GTA02 || SND_SOC_TEGRA_WM8753 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
+I2C: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=m] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=m] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=m] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=m] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 

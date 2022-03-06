@@ -1,39 +1,34 @@
-IMX_INTMUX: y => no
+AUXDISPLAY: y => no
       Direct dependencies: y
+      Reverse dependencies: PANEL [=y] && PARPORT [=y]
 
-CONNECTOR: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: DM_LOG_USERSPACE [=y] && MD [=y] && DM_MIRROR [=y] && NET [=y]
+CLK_RENESAS_DIV6: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-I2C: y => no
-      Direct dependencies: y
-      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_INTEL [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=y] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
-
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || ARCH_LAYERSCAPE [=n] || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=y] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n])
-
-RMI4_F03: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
-
-CRYPTO_SEQIV: y => no
+CRYPTO_AUTHENC: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || CRYPTO_ESSIV [=m] && CRYPTO [=y] || CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=y] && NETDEVICES [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_SOC || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=n] || CRYPTO_DEV_ATMEL_AES [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && CRYPTO_DEV_ATMEL_AUTHENC [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_AEAD [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=n] || COMPILE_TEST [=y]) || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=y] && NET [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-EXYNOS_PMU: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] || (ARM || ARM64 [=y]) && COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y]
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=n] && NET [=n] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=n] && WIRELESS [=n] && MAC80211 [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=n]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=m] && SOUND [=m] && !UML && SND [=m] && SND_CTL_LED [=m] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || LEDS_COBALT_RAQ [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=y]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=n] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && HWMON [=y] && INPUT [=n] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-BT_HCIUART_H4: y => no
-      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y]
-      Reverse dependencies: BT_HCIUART_NOKIA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n] && GPIOLIB [=y] && PM [=y] || BT_HCIUART_ATH3K [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_LL [=n] && NET [=y] && BT [=y] && BT_HCIUART_SERDEV [=n] || BT_HCIUART_INTEL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && GPIOLIB [=y] || BT_HCIUART_BCM [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n] && (!ACPI [=y] || SERIAL_DEV_CTRL_TTYPORT [=n]) && GPIOLIB [=y] || BT_HCIUART_QCA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_MRVL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n]
+SND_SOC_CS4265: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-EVENTFD: y => no
-      Direct dependencies: y
-      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=y] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+MMC_SDHCI_AM654: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && REGMAP_MMIO [=y]
 
-CLKSRC_EXYNOS_MCT: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y]
+SND_SOC_MAX98520: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+SOCFPGA_FPGA_BRIDGE: m => yes
+      Direct dependencies: FPGA [=m] && ARCH_INTEL_SOCFPGA [=y] && FPGA_BRIDGE [=m]
+
+SND_MCHP_SOC_I2S_MCC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+
+NLS_CODEPAGE_866: m => yes
+      Direct dependencies: NLS [=m]
 

@@ -1,19 +1,20 @@
-VIDEO_S5P_MIPI_CSIS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_SAMSUNG_EXYNOS4_IS [=m] && REGULATOR [=y]
+SPI_XCOMM: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && I2C [=m]
 
-APDS9300: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MEDIA_TUNER_TDA18250: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-SND_LAYLA24: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
+DM_WRITECACHE: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
 
-DEVFREQ_GOV_SIMPLE_ONDEMAND: y => mod
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+X86_16BIT: y => no
+      Direct dependencies: MODIFY_LDT_SYSCALL [=y]
 
-NTB_INTEL: m => yes
-      Direct dependencies: NTB [=m] && X86_64 [=y]
+MFD_WL1273_CORE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+      Reverse dependencies: RADIO_WL1273 [=n] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=n] && I2C [=m] && VIDEO_V4L2 [=n]
 
-AD5696_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_SENSOR_CUSTOM_INTEL_HINGE: m => yes
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
 

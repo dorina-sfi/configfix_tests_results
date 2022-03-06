@@ -1,31 +1,28 @@
-MEMBARRIER: y => no
+FPGA_BRIDGE: m => yes
+      Direct dependencies: FPGA [=m]
+      Reverse dependencies: FPGA_DFL [=m] && FPGA [=m] && HAS_IOMEM [=y]
+
+SPARSE_IRQ: y => no
       Direct dependencies: y
-      Reverse dependencies: RSEQ [=n] && HAVE_RSEQ [=n]
+      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-CRYPTO_ECHAINIV: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+HID_MULTITOUCH: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-RMI4_CORE: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=m] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=m]
 
-CRYPTO_ECDH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+FPGA_DFL_NIOS_INTEL_PAC_N3000: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_DFL [=m]
 
-EVENTFD: y => no
+CRC_CCITT: m => no
       Direct dependencies: y
-      Reverse dependencies: MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+      Reverse dependencies: CAIF [=n] && NET [=n] || NFC_DIGITAL [=n] && NET [=n] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=n] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=n] && NFC_HCI [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || NETLABEL [=n] && NET [=n] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=n] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=n] && HAMRADIO [=n] && PARPORT [=n] && AX25 [=n] && !64BIT || NFC_FDP [=n] && NET [=n] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=n] && NFC [=n] || NFC_MICROREAD [=n] && NET [=n] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=n] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=m] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=m]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
+REGULATOR_88PM800: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_88PM800 [=m]
 
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
-
-XZ_DEC_SPARC: y => no
-      Direct dependencies: XZ_DEC [=y]
+RTC_DRV_DS17285: y => no
+      Direct dependencies: <choice>
 

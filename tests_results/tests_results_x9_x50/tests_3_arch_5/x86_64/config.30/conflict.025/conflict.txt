@@ -1,19 +1,19 @@
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=n] && (m && MODULES [=n] || IPV6 [=n]!=m) && !ALPHA || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_IPR [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && ATA [=y] || SCSI_LPFC [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n)
 
-CRYPTO_CRC32C: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=y] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || ISCSI_TARGET [=y] && TARGET_CORE [=y] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+SND_HDA_GENERIC: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
+      Reverse dependencies: SND_HDA_CODEC_REALTEK [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_ANALOG [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_SIGMATEL [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_VIA [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CIRRUS [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CS8409 [=n] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CONEXANT [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CA0110 [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_HDA_CODEC_CMEDIA [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y]
 
-NF_REJECT_IPV6: y => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
-      Reverse dependencies: NFT_REJECT_IPV6 [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_TABLES_IPV6 [=n] || IP6_NF_TARGET_REJECT [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && IP6_NF_FILTER [=y]
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 

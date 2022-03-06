@@ -1,25 +1,25 @@
-SND_PCM_TIMER: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y]
+CAN_PEAK_PCIEFD: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && PCI [=y]
 
-RMI4_F03: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+MFD_STMFX: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_STMFX [=m] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
 
-CRYPTO_NULL: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
+EXTCON: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=y] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=y])
 
-ZRAM_DEF_COMP_842: y => no
-      Direct dependencies: <choice> && CRYPTO_842 [=y]
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-TOUCHSCREEN_USB_3M: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+NET_MPLS_GSO: m => no
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-I2C_SMBUS: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 [=y] || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+IPQ_LCC_806X: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-CRYPTO_DEV_ATMEL_SHA: y => no
-      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
-      Reverse dependencies: CRYPTO_DEV_ATMEL_AES [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && CRYPTO_DEV_ATMEL_AUTHENC [=y]
+MMC_SDHCI_SPEAR: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI [=m] && (PLAT_SPEAR || COMPILE_TEST [=y]) && OF [=y]
 

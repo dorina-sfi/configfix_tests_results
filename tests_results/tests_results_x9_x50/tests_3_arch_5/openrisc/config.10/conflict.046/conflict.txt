@@ -1,16 +1,18 @@
-W1_SLAVE_DS2408: m => yes
+W1_SLAVE_SMEM: m => yes
       Direct dependencies: W1 [=m]
 
-HID_SENSOR_IIO_TRIGGER: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y]
-      Reverse dependencies: HID_SENSOR_ACCEL_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_IIO_COMMON [=m] && IIO [=y] && HID_SENSOR_HUB [=m] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_HUMIDITY [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_ALS [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_PROX [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_INCLINOMETER_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_DEVICE_ROTATION [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_CUSTOM_INTEL_HINGE [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_PRESS [=m] && IIO [=y] && HID_SENSOR_HUB [=m] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=m]
+I2C_ALGOPCA: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
 
-MICROCHIP_TCB_CAPTURE: m => yes
-      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
+INPUT_DA9063_ONKEY: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (MFD_DA9063 [=n] || MFD_DA9062 [=y])
 
-VIDEO_OV2680: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+CRYPTO_CTR: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=n] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-HID_SENSOR_HUMIDITY: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 

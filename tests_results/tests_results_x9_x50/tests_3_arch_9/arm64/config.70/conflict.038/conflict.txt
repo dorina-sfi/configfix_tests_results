@@ -1,30 +1,28 @@
-SENSORS_LTC2990: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+VIDEO_OV5640: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && OF [=y] && GPIOLIB [=y] && VIDEO_V4L2 [=m] && I2C [=y]
 
-SENSORS_GPIO_FAN: m => yes
-      Direct dependencies: HWMON [=m] && OF_GPIO [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+REGULATOR_SC2731: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_SC27XX_PMIC [=m] || COMPILE_TEST [=n])
 
-TOUCHSCREEN_AD7879_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_AD7879 [=m] && I2C [=y]
+REGULATOR_HI6421: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+VIDEO_IMX319: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-FB_SM712: m => yes
+MLX5_CORE: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MELLANOX [=y] && PCI [=y] && (VXLAN [=n] || !VXLAN [=n]) && (MLXFW [=m] || !MLXFW [=m]) && PTP_1588_CLOCK_OPTIONAL [=y] && (PCI_HYPERV_INTERFACE [=n] || !PCI_HYPERV_INTERFACE [=n])
+
+FB_I740: m => yes
       Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
-      Direct dependencies: <choice>
+XZ_DEC: y => mod
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MELLANOX [=y] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
 
-RPMSG_NS: y => mod
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+VIDEO_MT9M032: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-PINCTRL_PFC_R8A774B1: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774B1 [=y]
-
-CAN_BCM: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+DRM_PANEL_INNOLUX_EJ030NA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && SPI [=y]
 

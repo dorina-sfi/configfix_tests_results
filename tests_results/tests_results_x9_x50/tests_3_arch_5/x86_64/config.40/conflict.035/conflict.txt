@@ -1,16 +1,18 @@
-HD44780_COMMON: m => yes
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=m] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
+PROFILE_ANNOTATED_BRANCHES: y => no
+      Direct dependencies: <choice>
 
-DEV_APPLETALK: m => yes
-      Direct dependencies: NET [=y] && ATALK [=m]
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
 
-REGULATOR_S5M8767: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_SEC_CORE [=m] || COMPILE_TEST [=n])
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-REGULATOR_MC13892: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MC13XXX [=m]
+LIST_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-REGULATOR_LP873X: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TI_LP873X [=m] && OF [=y]
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=n] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=n] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=n]=y || USB_GADGET [=n]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=n] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] && (ARCH_RENESAS || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=n] && ACPI [=y] && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 [=y] && ACPI [=y] && IOSF_MBI [=n]
 

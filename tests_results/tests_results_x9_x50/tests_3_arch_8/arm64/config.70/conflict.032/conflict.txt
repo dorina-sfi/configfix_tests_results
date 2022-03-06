@@ -1,28 +1,30 @@
-FRAMEBUFFER_CONSOLE: y => no
-      Direct dependencies: VT [=y] && FB [=y] && !UML
-      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=m] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=m]) && !EXPERT [=n]
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-INFTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+CRYPTO_XTS: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=n] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=y] && FSL_DPAA [=n] && NET [=n]
 
-MUX_MMIO: y => mod
-      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=n] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
 
-TEGRA_HSP_MBOX: y => no
-      Direct dependencies: MAILBOX [=y] && ARCH_TEGRA [=y]
-      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-DRM_CHRONTEL_CH7033: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+GPIOLIB: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_BCM2835 [=n] || ARCH_BCM4908 [=n] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_MVEBU [=n] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_TEGRA [=y] || ARCH_THUNDER2 [=y] || ARCH_VEXPRESS [=y] || NET_DSA_VITESSE_VSC73XX [=n] && NETDEVICES [=n] && NET_DSA [=n] || NET_XGENE [=n] && NETDEVICES [=n] && ETHERNET [=n] && (ARCH_XGENE [=n] || COMPILE_TEST [=n]) || I2C_MUX_LTC4306 [=y] && I2C [=y] && I2C_MUX [=y] || PINCTRL_APPLE_GPIO [=y] && PINCTRL [=y] && ARCH_APPLE [=y] || PINCTRL_AXP209 [=y] && PINCTRL [=y] && MFD_AXP20X [=y] && OF [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=y] && ARCH_AT91 || PINCTRL_AT91PIO4 [=n] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=n]) || PINCTRL_AMD [=n] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=n] || COMPILE_TEST [=n]) || PINCTRL_DA9062 [=y] && PINCTRL [=y] && MFD_DA9062 [=y] || PINCTRL_MCP23S08 [=n] && PINCTRL [=y] && (SPI_MASTER [=y] || I2C [=y]) || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_ROCKCHIP [=n] && PINCTRL [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_SX150X [=n] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_INGENIC [=n] && PINCTRL [=y] && OF [=y] && (MIPS || COMPILE_TEST [=n]) || PINCTRL_RK805 [=y] && PINCTRL [=y] && MFD_RK808 [=y] || PINCTRL_OCELOT [=y] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] || PINCTRL_MICROCHIP_SGPIO [=n] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] || PINCTRL_K210 [=n] && PINCTRL [=y] && RISCV && SOC_CANAAN && OF [=y] || PINCTRL_KEEMBAY [=y] && PINCTRL [=y] && (ARCH_KEEMBAY [=y] || ARM64 [=y] && COMPILE_TEST [=n]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS [=n] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_BCM2835 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=n] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=n]) || PINCTRL_BCM63XX [=n] && PINCTRL [=y] || PINCTRL_NPCM7XX [=n] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MESON [=y] && PINCTRL [=y] && ARCH_MESON [=y] && OF [=y] || PINCTRL_LOCHNAGAR [=y] && PINCTRL [=y] && MFD_LOCHNAGAR [=y] || PINCTRL_TB10X [=n] && PINCTRL [=y] && OF [=y] && ARC_PLAT_TB10X || PINCTRL_EQUILIBRIUM [=n] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (X86 || COMPILE_TEST [=n]) || PINCTRL_LYNXPOINT [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=n]) && ACPI [=n] || PINCTRL_INTEL [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=n]) || PINCTRL_QCOM_SPMI_PMIC [=y] && PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=n] && PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_SH_PFC_GPIO [=n] && PINCTRL [=y] || PINCTRL_RZA1 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_R7S72100 [=n] || COMPILE_TEST [=n]) || PINCTRL_RZA2 [=n] && PINCTRL [=y] && OF [=y] && (ARCH_R7S9210 [=n] || COMPILE_TEST [=n]) || PINCTRL_RZG2L [=y] && PINCTRL [=y] && OF [=y] || PINCTRL_STM32 [=n] && PINCTRL [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_SUNXI [=y] && PINCTRL [=y] && ARCH_SUNXI [=y] || EINT_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=n] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n]) || PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_MOORE [=n] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || MFD_TC6393XB [=n] && HAS_IOMEM [=y] && ARM && HAVE_CLK [=y] || CEC_GPIO [=n] && MEDIA_CEC_SUPPORT [=y] && (PREEMPTION [=n] || COMPILE_TEST [=n]) || STA2X11_VIP [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=y] && VIRT_TO_BUS [=n] && I2C [=y] && (STA2X11 || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || SND_SOC_RT9120 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] || SND_SOC_SIMPLE_AMPLIFIER [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] || SND_SOC_SIMPLE_MUX [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] || SND_SOC_ZL38060 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SPI_MASTER [=y] || SND_SOC_MAX9759 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] || OMAP_GPMC [=n] && MEMORY [=y] && OF_ADDRESS [=y] || STX104 [=n] && IIO [=y] && PC104 [=y] && X86 || AD5592R [=n] && IIO [=y] && SPI_MASTER [=y] || AD5593R [=y] && IIO [=y] && I2C [=y]
 
-MTD_PARSER_TRX: m => yes
-      Direct dependencies: MTD [=m] && (BCM47XX || ARCH_BCM_5301X || ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=n] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-IPMI_SI: m => no
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=m] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=m] && HWMON [=m] && IPMI_HANDLER [=y]
+CLK_INTEL_SOCFPGA64: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_INTEL_SOCFPGA [=y]
 
-MTD_NAND_NANDSIM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 

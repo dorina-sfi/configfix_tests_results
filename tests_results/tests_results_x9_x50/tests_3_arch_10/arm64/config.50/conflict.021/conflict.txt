@@ -1,31 +1,34 @@
-MDIO_GPIO: m => yes
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=m] && MDIO_BITBANG [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+SENSORS_LTC2992: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y] && GPIOLIB [=y]
 
-HID_SENSOR_HUB: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && HAS_IOMEM [=y]
+SDM_GCC_845: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SDM_CAMCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_GPUCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_VIDEOCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_DISPCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_LPASSCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-SOC_RENESAS: y => no
-      Direct dependencies: y
+LTC1660: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 
-W1_SLAVE_DS2431: m => yes
-      Direct dependencies: W1 [=m]
+SDM_MMCC_660: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-REGULATOR_MT6359: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+NET_DSA_XRS700X_I2C: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && I2C [=y]
 
-PLIP: m => yes
-      Direct dependencies: NETDEVICES [=y] && PARPORT [=m]
+TSL2583: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-INTEL_TH_GTH: m => yes
-      Direct dependencies: INTEL_TH [=m]
+SCSI_SPI_ATTRS: m => yes
+      Direct dependencies: SCSI [=m]
+      Reverse dependencies: SCSI_AHA152X [=n] && SCSI_LOWLEVEL [=y] && ISA && SCSI [=m] || SCSI_AIC7XXX [=n] && SCSI_LOWLEVEL [=y] && (PCI [=n] || EISA [=n]) && SCSI [=m] || SCSI_AIC79XX [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_DMX3191D [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_GENERIC_NCR5380 [=n] && SCSI_LOWLEVEL [=y] && ISA && SCSI [=m] && HAS_IOPORT_MAP [=n] || SCSI_LASI700 [=n] && SCSI_LOWLEVEL [=y] && GSC && SCSI [=m] || SCSI_SNI_53C710 [=n] && SCSI_LOWLEVEL [=y] && SNI_RM && SCSI [=m] || SCSI_SYM53C8XX_2 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_ZALON [=n] && SCSI_LOWLEVEL [=y] && GSC && SCSI [=m] || SCSI_SIM710 [=n] && SCSI_LOWLEVEL [=y] && EISA [=n] && SCSI [=m] || SCSI_DC395x [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_AM53C974 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=m] || SCSI_ACORNSCSI_3 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=m] || SCSI_CUMANA_1 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=m] || SCSI_OAK1 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=m] || JAZZ_ESP [=n] && SCSI_LOWLEVEL [=y] && MACH_JAZZ && SCSI [=m] || SCSI_A4000T [=n] && SCSI_LOWLEVEL [=y] && AMIGA && SCSI [=m] || SCSI_ZORRO7XX [=n] && SCSI_LOWLEVEL [=y] && ZORRO && SCSI [=m] || SCSI_ZORRO_ESP [=n] && SCSI_LOWLEVEL [=y] && ZORRO && SCSI [=m] || ATARI_SCSI [=n] && SCSI_LOWLEVEL [=y] && ATARI && SCSI [=m] || MAC_SCSI [=n] && SCSI_LOWLEVEL [=y] && MAC && SCSI [=m] || SCSI_MAC_ESP [=n] && SCSI_LOWLEVEL [=y] && MAC && SCSI [=m] || MVME147_SCSI [=n] && SCSI_LOWLEVEL [=y] && MVME147 && SCSI [=m]=y || MVME16x_SCSI [=n] && SCSI_LOWLEVEL [=y] && MVME16x && SCSI [=m] || BVME6000_SCSI [=n] && SCSI_LOWLEVEL [=y] && BVME6000 && SCSI [=m] || SUN3_SCSI [=n] && SCSI_LOWLEVEL [=y] && SUN3 && SCSI [=m] || SUN3X_ESP [=n] && SCSI_LOWLEVEL [=y] && SUN3X && SCSI [=m]=y || SCSI_SUNESP [=n] && SCSI_LOWLEVEL [=y] && SBUS && SCSI [=m] || PCMCIA_AHA152X [=n] && SCSI_LOWLEVEL [=y] && SCSI_LOWLEVEL_PCMCIA [=n] && SCSI [=m] && PCMCIA [=n] && m && MODULES [=y] || FUSION_SPI [=n] && FUSION [=n] && PCI [=n] && SCSI [=m]
 
-BOOT_CONFIG: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
+OWL_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_ACTIONS [=y]
 
-DRM_TI_SN65DSI83: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+SENSORS_AD7418: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-UNMAP_KERNEL_AT_EL0: y => no
-      Direct dependencies: y
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=m] && IIO [=m] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=m] && SPI_MASTER [=y] || AD7768_1 [=m] && IIO [=m] && SPI [=y] || HID_SENSOR_IIO_TRIGGER [=m] && IIO [=m] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n]
 

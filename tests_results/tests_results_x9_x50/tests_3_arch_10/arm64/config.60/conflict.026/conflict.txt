@@ -1,34 +1,35 @@
-VIDEO_SAMSUNG_S5P_MFC: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+MXS_LRADC_ADC: m => yes
+      Direct dependencies: IIO [=y] && MFD_MXS_LRADC [=m]
 
-CLK_R8A77961: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77961 [=y]
+DRM_VIRTIO_GPU: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && VIRTIO_MENU [=y] && MMU [=y]
 
-SENSORS_W83792D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+CRC32_SLICEBY8: y => no
+      Direct dependencies: <choice>
 
-AD9523: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+DVB_STV0297: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_TTUSB_BUDGET [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && USB [=n] && I2C [=y] && PCI [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_AV7110 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && PCI [=n] && I2C [=y] && VIDEO_DEV [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-RADIO_SAA7706H: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
-      Reverse dependencies: RADIO_TIMBERDALE [=n] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && MFD_TIMBERDALE [=n] && VIDEO_V4L2 [=m] && I2C [=y]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=y] && MODULES [=y] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=n] && DEBUG_KERNEL [=n] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
 
-PCI_MSI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=n] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
+CRYPTO_CRC32C: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && INET [=y] || ISCSI_TARGET [=m] && TARGET_CORE [=m] && INET [=y] || EXT4_FS [=m] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 
-AF_RXRPC: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: AFS_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+SENSORS_ARM_SCMI: m => yes
+      Direct dependencies: HWMON [=y] && ARM_SCMI_PROTOCOL [=m] && (THERMAL [=y] || !THERMAL_OF [=n])
 
-NO_HZ_FULL: y => no
-      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+DRM_NXP_PTN3460: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-NFC_TRF7970A: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && SPI [=y] && NFC_DIGITAL [=m] && GPIOLIB [=y]
+I2C_ALGOPCA: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
 
-SLAB: y => no
-      Direct dependencies: <choice> && !PREEMPT_RT [=n]
+MEDIA_TUNER_MT20XX: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

@@ -1,13 +1,15 @@
-COMEDI_DT3000: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+LEGACY_VSYSCALL_NONE: y => no
+      Direct dependencies: <choice>
 
-IIO_ST_MAGN_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
+IIO_ST_ACCEL_3AXIS: y => no
+      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
 
-SND_SOC_PCM5102A: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
+NETFS_STATS: y => no
+      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
+      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
 
-SX9310: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 

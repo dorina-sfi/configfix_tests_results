@@ -1,27 +1,32 @@
-BACKLIGHT_LED: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && LEDS_CLASS [=m] && OF [=y]
+MEMORY: y => no
+      Direct dependencies: y
+      Reverse dependencies: MTD_NAND_FSL_IFC [=m] && MTD [=y] && MTD_RAW_NAND [=y] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=n] || MTK_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-XFRM_USER_COMPAT: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && XFRM_USER [=m] && COMPAT_FOR_U64_ALIGNMENT [=y] && HAVE_EFFICIENT_UNALIGNED_ACCESS [=y]
+SECURITYFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=n] && SECURITY [=y] || IMA [=y] && INTEGRITY [=y]
 
-SND_SOC_TLV320ADCX140: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+CRYPTO_SHA3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-DRM_PANEL_JDI_R63452: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+W1_SLAVE_DS2433: m => yes
+      Direct dependencies: W1 [=m]
 
-IR_XMP_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+IR_GPIO_CIR: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (OF [=n] && GPIOLIB [=y] || COMPILE_TEST [=y])
 
-DRM_PANEL_SAMSUNG_S6D16D0: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y]
+HWMON: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: HABANA_AI [=y] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && HOTPLUG_PCI [=n] && BACKLIGHT_CLASS_DEVICE [=y] || HP_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && ACPI [=y] && ACPI_BATTERY [=m] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=y] || ACPI_VIDEO [=y]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=m] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=n] && NTB [=n] && PCI [=y]
 
-HID_SAMSUNG: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SUSPEND_FREEZER: y => no
+      Direct dependencies: SUSPEND [=y]
 
-MTD_NAND_DENALI_DT: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_DMA [=y] && HAVE_CLK [=y] && OF [=y] && HAS_IOMEM [=y]
+PPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
 
-DRM_PANEL_FEIYANG_FY07024DI26A30D: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+IR_RX51: m => yes
+      Direct dependencies: RC_DEVICES [=y] && (OMAP_DM_TIMER [=n] && PWM_OMAP_DMTIMER [=n] && ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && RC_CORE [=m]
 

@@ -1,12 +1,10 @@
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+THERMAL_WRITABLE_TRIPS: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=m] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] && ACPI [=y]
 
-MTD_PARSER_IMAGETAG: y => no
-      Direct dependencies: MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
-      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+SENSORS_ADT7475: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-DEBUG_LOCK_ALLOC: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+EDAC_I5400: m => yes
+      Direct dependencies: EDAC [=m] && PCI [=y] && X86 [=y]
 

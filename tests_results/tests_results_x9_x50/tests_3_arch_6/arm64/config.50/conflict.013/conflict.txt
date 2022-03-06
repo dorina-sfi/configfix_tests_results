@@ -1,21 +1,21 @@
-MTD_RAW_NAND: m => yes
-      Direct dependencies: MTD [=m]
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n]
 
-TI_SCI_PROTOCOL: y => mod
-      Direct dependencies: TI_MESSAGE_MANAGER [=y]
-      Reverse dependencies: ARCH_K3 [=y]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-SND_SOC_ROCKCHIP_SPDIF: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && HAVE_CLK [=y] && SND_SOC_ROCKCHIP [=m]
+SENSORS_W83627EHF: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+SENSORS_MAX16065: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-MTK_SMI: m => no
-      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=m] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
 
-SPI_RPCIF: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && RENESAS_RPCIF [=m]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 

@@ -1,26 +1,23 @@
-CHARLCD_BL_OFF: y => no
-      Direct dependencies: <choice>
+HW_RANDOM_XIPHERA: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+SENSORS_MAX6642: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-PARPORT_PANEL: y => no
-      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+LCD_PLATFORM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m]
 
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+SENSORS_LM78: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+LOOPBACK_TARGET: m => yes
+      Direct dependencies: TARGET_CORE [=m] && SCSI [=y]
 
-HID_LED: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-PSTORE_LZO_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
 

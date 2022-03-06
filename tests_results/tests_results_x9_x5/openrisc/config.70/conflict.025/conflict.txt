@@ -1,16 +1,19 @@
-IIO_RESCALE: m => yes
-      Direct dependencies: IIO [=m] && (OF [=y] || COMPILE_TEST [=n])
-
-MOST_DIM2: m => yes
-      Direct dependencies: STAGING [=y] && MOST_COMPONENTS [=m] && HAS_IOMEM [=y] && OF [=y]
-
-DMARD06: m => yes
-      Direct dependencies: IIO [=m] && (OF [=y] || COMPILE_TEST [=n]) && I2C [=y]
-
-USB_CHIPIDEA_MSM: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
-
 RMI4_F12: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+CRC_CCITT: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAIF [=n] && NET [=y] || NFC_DIGITAL [=y] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=y] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_PAR [=y] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=y] || BAYCOM_EPP [=y] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=y] && !64BIT || NFC_FDP [=n] && NET [=y] && NFC [=y] && NFC_NCI [=y] || NFC_PN544 [=n] && NET [=y] && NFC [=y] || NFC_MICROREAD [=n] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+
+TOUCHSCREEN_USB_GOTOP: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
 

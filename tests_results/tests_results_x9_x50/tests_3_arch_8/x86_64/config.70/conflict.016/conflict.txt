@@ -1,26 +1,29 @@
-I2C_VIPERBOARD: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_VIPERBOARD [=m] && USB [=y]
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=y] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
 
-GNSS_MTK_SERIAL: m => yes
-      Direct dependencies: GNSS [=m] && SERIAL_DEV_BUS [=m]
+KEYS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=y] && INET [=n] || CEPH_LIB [=n] && NET [=y] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=y] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || INTEGRITY_SIGNATURE [=y] && INTEGRITY [=y] || EVM [=y] && INTEGRITY [=y]
 
-SX9310: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-SENSORS_MAX31785: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-CEC_CROS_EC: m => yes
-      Direct dependencies: MEDIA_CEC_SUPPORT [=y] && CROS_EC [=m]
-
-LTO_NONE: y => no
+SQUASHFS_FILE_DIRECT: y => no
       Direct dependencies: <choice>
 
-CRYPTO_LIB_CHACHA: m => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-X509_CERTIFICATE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=y] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y]
+KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
+
+ETHERNET: y => no
+      Direct dependencies: NETDEVICES [=y] && NET [=y]
+      Reverse dependencies: SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || SCSI_BNX2_ISCSI [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y] || SCSI_BNX2X_FCOE [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && LIBFC [=n] && LIBFCOE [=n] && MMU [=y]
+
+IO_URING: y => no
+      Direct dependencies: y
 

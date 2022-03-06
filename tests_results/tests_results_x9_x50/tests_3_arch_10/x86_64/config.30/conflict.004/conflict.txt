@@ -1,38 +1,38 @@
-RUST_OPT_LEVEL_1: y => no
-      Direct dependencies: <choice>
+W1_SLAVE_DS250X: m => yes
+      Direct dependencies: W1 [=m]
 
-PROC_CHILDREN: y => no
+EXPERT: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+      Reverse dependencies: EMBEDDED [=y]
 
-DRM_LEGACY: y => no
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
-      Reverse dependencies: NOUVEAU_LEGACY_CTX_SUPPORT [=y] && HAS_IOMEM [=y] && DRM_NOUVEAU [=y]
+PCI_SW_SWITCHTEC: m => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: NTB_SWITCHTEC [=m] && NTB [=m]
 
-AF_RXRPC: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: AFS_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
-
-SYSFS: y => no
+EXPERT: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+      Reverse dependencies: EMBEDDED [=y]
 
-IO_DELAY_UDELAY: y => no
-      Direct dependencies: <choice>
+CRYPTO_TWOFISH_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-THERMAL: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_VIDEO [=y] && ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=y] && ACPI [=y] || ACPI_THERMAL [=n] && ACPI [=y] && ACPI_PROCESSOR [=y] || DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=n] || MMC_SDHCI_OMAP [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=n]
+NTB_IDT: m => yes
+      Direct dependencies: NTB [=m] && PCI [=y]
 
-CPU_SUP_AMD: y => no
-      Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+VIDEO_TVP5150: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CRYPTO_GCM: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=y] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=y] && NET [=y] && INET [=y] || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
 
-MMC_CQHCI: y => no
-      Direct dependencies: MMC [=y] && HAS_DMA [=y]
-      Reverse dependencies: MMC_SDHCI_PCI [=y] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=n] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] && OF [=n] || MMC_SDHCI_TEGRA [=n] && MMC [=y] && (ARCH_TEGRA || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_MSM [=n] && MMC [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=n] && REGMAP_MMIO [=y]
+IIO_ST_ACCEL_3AXIS: y => mod
+      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=y] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

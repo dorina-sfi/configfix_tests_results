@@ -1,9 +1,12 @@
-KHADAS_MCU_FAN_THERMAL: m => yes
-      Direct dependencies: THERMAL [=y] && (OF [=y] || COMPILE_TEST [=y]) && MFD_KHADAS_MCU [=m]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y]
 
-DRM_PANEL_SONY_TULIP_TRULY_NT35521: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-EXTCON_USB_GPIO: m => yes
-      Direct dependencies: EXTCON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
 

@@ -1,32 +1,35 @@
-RAPIDIO_TSI568: m => yes
-      Direct dependencies: RAPIDIO [=m]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-VL6180: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CPU_FREQ_GOV_POWERSAVE: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_POWERSAVE [=y] && <choice>
 
-MXC6255: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SND_SOC_RT5616: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=n] && SPI_MASTER [=n] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=n] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 
-BACKLIGHT_CLASS_DEVICE: y => mod
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && DRM_NOUVEAU_BACKLIGHT [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 && PCI [=y] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && X86 && MMU [=y] && ACPI [=n] || DRM_SHMOBILE [=n] && HAS_IOMEM [=y] && DRM [=m] && ARM && (ARCH_SHMOBILE || COMPILE_TEST [=n]) || DRM_TILCDC [=n] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && ARM || DRM_FSL_DCU [=n] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && ARM && COMMON_CLK [=y] || TINYDRM_HX8357D [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=n] || TINYDRM_ILI9163 [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=n] || TINYDRM_ILI9341 [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=n] || TINYDRM_ILI9486 [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=n] || TINYDRM_MI0283QT [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=n] || TINYDRM_ST7735R [=n] && HAS_IOMEM [=y] && DRM [=m] && SPI [=n] || DRM_GUD [=m] && HAS_IOMEM [=y] && DRM [=m] && USB [=y] && MMU [=y] || DRM_PARADE_PS8622 [=m] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] || FB_BACKLIGHT [=y] && HAS_IOMEM [=y] && FB [=y] || FB_ARMCLCD [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_MX3 [=n] && HAS_IOMEM [=y] && FB [=y] && MX3_IPU [=n] || USB_APPLEDISPLAY [=y] && USB_SUPPORT [=y] && USB [=y] || FB_OLPC_DCON [=n] && STAGING [=n] && OLPC && FB [=y] && I2C [=y] && GPIO_CS5535 [=n] && ACPI [=n] || SAMSUNG_Q10 [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] || ACPI_CMPC [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && INPUT [=n] && (RFKILL [=n] || RFKILL [=n]=n)
+ATA_FORCE: y => no
+      Direct dependencies: ATA [=y]
 
-COMEDI_RTD520: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+CPU_ISOLATION: y => no
+      Direct dependencies: SMP [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-DRM_NXP_PTN3460: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+WATCHDOG_PRETIMEOUT_DEFAULT_GOV_PANIC: y => no
+      Direct dependencies: <choice> && WATCHDOG_PRETIMEOUT_GOV_PANIC [=y]
 
-ROCKCHIP_SARADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n]) && RESET_CONTROLLER [=y]
+RESET_SUNXI: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
 
-IEEE802154_6LOWPAN: m => yes
-      Direct dependencies: NET [=y] && IEEE802154 [=m] && 6LOWPAN [=m]
+CHARLCD_BL_OFF: y => no
+      Direct dependencies: <choice>
 
-POWER_SUPPLY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y] || ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=n] && HID [=n] || HID_ASUS [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=n] && HID [=n] && HID_LOGITECH [=n] || HID_NINTENDO [=n] && INPUT [=n] && HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=n] && HID [=n] && LEDS_CLASS_MULTICOLOR [=n] || HID_SONY [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=n] && HID [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=n] && HID [=n] && LEDS_CLASS [=y] || USB_CONN_GPIO [=m] && USB_SUPPORT [=y] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=y] && USB [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=y]
 

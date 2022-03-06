@@ -1,37 +1,36 @@
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+CMA: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: VMCP [=n] && S390 || DRM_ETNAVIV [=m] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=m] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y]
 
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+CLKSRC_EXYNOS_MCT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_EXYNOS [=y]
 
-TIME_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+IMX_IRQSTEER: y => no
+      Direct dependencies: ARCH_MXC [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: DRM_IMX_DCSS [=m] && HAS_IOMEM [=y] && DRM [=y] && ARCH_MXC [=y] && ARM64 [=y]
 
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+MSM_GCC_8994: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: MSM_MMCC_8994 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-ROMFS_BACKED_BY_MTD: y => no
-      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=y]=m && MTD [=y])
+W1_SLAVE_DS2438: m => yes
+      Direct dependencies: W1 [=m]
 
-MEDIA_TUNER_TEA5767: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
+SND_SOC_AMD_CZ_RT5645_MACH: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP [=m] && I2C [=y]
 
-CLK_RENESAS_CPG_MSSR: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+MMC_CQHCI: m => no
+      Direct dependencies: MMC [=m] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=m] && MMC [=m] && MMC_SDHCI [=m] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=m] && MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=m] && MMC [=m] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] && OF [=y] || MMC_SDHCI_TEGRA [=m] && MMC [=m] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] || MMC_SDHCI_MSM [=m] && MMC [=m] && (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] || MMC_MTK [=m] && MMC [=m] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=m] && MMC [=m] && (ARCH_BRCMSTB [=y] || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=m] || MMC_SDHCI_AM654 [=m] && MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && REGMAP_MMIO [=y]
 
-BT_HCIUART_H4: y => no
-      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y]
-      Reverse dependencies: BT_HCIUART_NOKIA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n] && GPIOLIB [=y] && PM [=y] || BT_HCIUART_ATH3K [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_LL [=n] && NET [=y] && BT [=y] && BT_HCIUART_SERDEV [=n] || BT_HCIUART_INTEL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && GPIOLIB [=y] || BT_HCIUART_BCM [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n] && (!ACPI [=y] || SERIAL_DEV_CTRL_TTYPORT [=n]) && GPIOLIB [=y] || BT_HCIUART_QCA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_MRVL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=n]
+SND_SOC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m]
 
-SM_GCC_8150: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SM_GPUCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+SC_VIDEOCC_7180: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-CLK_R8A77995: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77995 [=y]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=m] && PCI [=y] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 

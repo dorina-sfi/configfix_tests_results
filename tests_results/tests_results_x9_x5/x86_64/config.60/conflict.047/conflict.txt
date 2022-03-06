@@ -1,36 +1,33 @@
-PCIE_BUS_PERFORMANCE: y => no
-      Direct dependencies: <choice> && PCI [=y]
+DRM_CHRONTEL_CH7033: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+DRM_PANEL_SHARP_LS043T1LE01: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=y] && SIGNED_PE_FILE_VERIFICATION [=n]
+SND_AMD_ASOC_RENOIR: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_AMD_ACP_COMMON [=m] && X86 [=y] && PCI [=y]
 
-CLK_RCAR_CPG_LIB: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+EFI_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-PNP: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
-      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+SND_SOC_TDA7419: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
+ACPI_CONTAINER: y => no
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_HOTPLUG_CPU [=y] && ACPI [=y] && ACPI_PROCESSOR [=y] && HOTPLUG_CPU [=y]
 
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+DRM_PANEL_SAMSUNG_S6E8AA0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y]
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
+SENSORS_ATK0110: m => yes
+      Direct dependencies: HWMON [=m] && ACPI [=y] && X86 [=y]
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 

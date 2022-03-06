@@ -1,17 +1,17 @@
-MMC_TEST: m => yes
-      Direct dependencies: MMC [=m]
+PREEMPT_NONE: y => no
+      Direct dependencies: <choice>
 
-MTD_NAND_DISKONCHIP: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-MISC_FILESYSTEMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_APEI [=y] && ACPI [=y] && HAVE_ACPI_APEI [=y]
+CRC32_SLICEBY8: y => no
+      Direct dependencies: <choice>
 
-MEDIATEK_MT6360_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_MT6360 [=m]
+CRYPTO_ZSTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+JFFS2_CMODE_SIZE: y => no
+      Direct dependencies: <choice>
 

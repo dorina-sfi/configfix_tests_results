@@ -1,18 +1,22 @@
-CFG80211_REQUIRE_SIGNED_REGDB: y => no
-      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m]
+IPQ_GCC_806X: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: IPQ_LCC_806X [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SND_SOC_CS42L52: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y] && INPUT [=y]
+USB_ISP1301: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (USB [=n] || USB_GADGET [=m]) && I2C [=y]
+      Reverse dependencies: USB_LPC32XX [=n] && USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_LPC32XX || COMPILE_TEST [=n]) && I2C [=y]
 
-MODULE_SIG_SHA512: y => no
-      Direct dependencies: <choice>
+CARDMAN_4040: m => yes
+      Direct dependencies: PCMCIA [=m]
 
-VIDEO_CX88: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && RC_CORE [=m]
+TCM_IBLOCK: m => yes
+      Direct dependencies: TARGET_CORE [=m]
 
-LEDS_LP5523: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+PROC_CHILDREN: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-SND_AUDIO_GRAPH_CARD2_CUSTOM_SAMPLE: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_AUDIO_GRAPH_CARD2 [=m]
+IPMI_SI: m => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=m] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=m] && HWMON [=m] && IPMI_HANDLER [=y]
 

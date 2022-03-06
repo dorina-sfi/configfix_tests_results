@@ -1,39 +1,32 @@
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+SND_SOC_SIMPLE_MUX: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-SPARSE_IRQ: y => no
+FB_SMSCUFX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && USB [=m]
+
+EDAC_LAYERSCAPE: m => yes
+      Direct dependencies: EDAC [=m] && (ARCH_LAYERSCAPE [=y] || SOC_LS1021A)
+
+MTD_NAND_SLC_LPC32XX: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+
+RAS: y => no
       Direct dependencies: y
-      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=y] && PCIEPORTBUS [=y]
 
-CRC_T10DIF: y => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=y] || SCSI_DEBUG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y]
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
 
-IIO_CONFIGFS: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
+BRCM_USB_PINMAP: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && (ARCH_BRCMSTB [=y] && PHY_BRCM_USB [=m] || COMPILE_TEST [=y])
 
-ARM64_VA_BITS_42: y => no
-      Direct dependencies: <choice> && ARM64_64K_PAGES [=y]
+USB_OHCI_HCD_OMAP3: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y])
 
-POWER_SUPPLY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y] || ACPI_AC [=y] && ACPI [=y] || ACPI_BATTERY [=y] && ACPI [=y] || ACPI_SBS [=n] && ACPI [=y] && X86 || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=n] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=y] && INPUT [=y] && HID [=y] || HID_ASUS [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=n] || HID_NINTENDO [=y] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=y] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=y] && HID [=y] || HID_WACOM [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+DEVFREQ_GOV_SIMPLE_ONDEMAND: y => mod
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || DRM_LIMA [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y]) || TEGRA20_EMC [=y] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
 
-MAILBOX: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_K3 [=n] || ACPI_CPPC_LIB [=n] && ACPI [=y] && ACPI_PROCESSOR [=y] || IMX_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC [=y] && HAVE_ARM_SMCCC [=y] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC [=y] && HAVE_ARM_SMCCC [=y] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=n] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 [=n] || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 [=n] || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ZYNQMP_POWER [=n] && PM [=y] && ZYNQMP_FIRMWARE [=n]
-
-PINCTRL_PFC_R8A774C0: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774C0 [=y]
-
-CLK_R8A774C0: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774C0 [=y]
-
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+MMC_CAVIUM_THUNDERX: m => yes
+      Direct dependencies: MMC [=m] && PCI [=y] && 64BIT [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && GPIO_THUNDERX [=m] && OF_ADDRESS [=y]
 

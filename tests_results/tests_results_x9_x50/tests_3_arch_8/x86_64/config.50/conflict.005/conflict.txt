@@ -1,30 +1,26 @@
-CRYPTO_ESSIV: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n)
+DRM_AST: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
 
-PCIE_BUS_DEFAULT: y => no
-      Direct dependencies: <choice> && PCI [=y]
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=m] && HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (COMPILE_TEST [=y] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=n] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-PARAVIRT: y => no
-      Direct dependencies: HYPERVISOR_GUEST [=y] && HAVE_STATIC_CALL [=y]
-      Reverse dependencies: X86_VSMP [=n] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=n] || HYPERV [=y] && ACPI [=y] && (X86 [=y] && X86_LOCAL_APIC [=y] && HYPERVISOR_GUEST [=y] || ARM64 && !CPU_BIG_ENDIAN)
+MMC_CAVIUM_THUNDERX: m => yes
+      Direct dependencies: MMC [=y] && PCI [=y] && 64BIT [=y] && (ARM64 || COMPILE_TEST [=y]) && GPIO_THUNDERX [=m] && OF_ADDRESS [=y]
 
-CRYPTO_GHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+AGP_VIA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && AGP [=m] && X86 [=y]
 
-COMMON_CLK_SAMSUNG: y => no
-      Direct dependencies: COMMON_CLK [=y]
-      Reverse dependencies: S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=y] && COMMON_CLK [=y]
+VIDEO_ML86V7667: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
 
-UNWINDER_FRAME_POINTER: y => no
-      Direct dependencies: <choice>
+BT_MTKSDIO: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && MMC [=y]
 
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+TINYDRM_MI0283QT: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-THERMAL_WRITABLE_TRIPS: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] && ACPI [=y]
+LPC_SCH: m => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=n] && I2C [=m] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=m] && WATCHDOG [=y] && X86 [=y] && PCI [=y]
 

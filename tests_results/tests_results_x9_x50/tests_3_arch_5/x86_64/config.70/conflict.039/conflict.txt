@@ -1,18 +1,17 @@
-IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=n] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=y]
+SENSORS_SMSC47M1: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=n] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=n] && X86_LOCAL_APIC [=y]
+VIDEO_ET8EK8: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-RTC_DRV_DS1685: y => no
-      Direct dependencies: <choice>
+TOUCHSCREEN_TSC2005: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && SPI_MASTER [=y]
 
-VT: y => no
-      Direct dependencies: TTY [=y]
+DVB_ZL10036: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-REGULATOR_FIXED_VOLTAGE: y => no
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=n])
+INPUT: m => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=n] && TTY [=n] || DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y]
 

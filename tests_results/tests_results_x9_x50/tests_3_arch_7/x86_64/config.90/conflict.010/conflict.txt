@@ -1,26 +1,22 @@
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
+PHY_SAMSUNG_USB2: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (USB_EHCI_EXYNOS [=n] || USB_OHCI_EXYNOS [=n] || USB_DWC2 [=m] || COMPILE_TEST [=n])
 
-CPU_FREQ_GOV_USERSPACE: y => no
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_USERSPACE [=y] && <choice>
+USB_STORAGE_ONETOUCH: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m] && (INPUT [=y]=y || INPUT [=y]=USB_STORAGE [=m])
 
-MTD_MAP_BANK_WIDTH_2: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
+USB_STORAGE_USBAT: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+WATCHDOG_PRETIMEOUT_DEFAULT_GOV_NOOP: y => no
+      Direct dependencies: <choice> && WATCHDOG_PRETIMEOUT_GOV_NOOP [=y]
 
-CPU_FREQ_DEFAULT_GOV_USERSPACE: y => no
-      Direct dependencies: <choice>
+COMEDI_QUATECH_DAQP_CS: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCMCIA_DRIVERS [=m]
 
-LIBCRC32C: y => no
-      Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=n] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=n] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=n] && NETFILTER [=y] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=n] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=y] && INET [=n] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=n] && BLOCK [=n] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=n] || GFS2_FS [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n]
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-FUNCTION_TRACER: y => no
-      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
-      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
+CPU_FREQ_DEFAULT_GOV_CONSERVATIVE: y => no
+      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=n])
 

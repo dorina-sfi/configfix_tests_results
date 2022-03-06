@@ -1,27 +1,31 @@
-MMC_SDHCI_ACPI: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI [=m] && ACPI [=y] && PCI [=y]
+CRYPTO_CHACHA20_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
 
-COMEDI_ADDI_APCI_1500: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+BINFMT_ELF: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: IA32_EMULATION [=y] && X86_64 [=y]
 
-HID_LED: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=y]
-      Reverse dependencies: HID_THINGM [=n] && INPUT [=m] && HID [=m] && LEDS_CLASS [=y]
+CRYPTO_POLY1305_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
 
-DEFAULT_PFIFO_FAST: y => no
+CRYPTO_SERPENT_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+DEBUG_RWSEMS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+FIXED_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || NET_DSA_LOOP [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_REALTEK_SMI [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_VITESSE_VSC73XX [=n] && NETDEVICES [=y] && NET_DSA [=n] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] || BGMAC_BCMA [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && BCMA [=y] && BCMA_HOST_SOC [=n] && (BCM47XX || ARCH_BCM_5301X || COMPILE_TEST [=y]) || BGMAC_PLATFORM [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || SYSTEMPORT [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] && (NET_DSA [=n] || !NET_DSA [=n]) || UCC_GETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && QUICC_ENGINE [=y] && PPC32 || GIANFAR [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && HAS_DMA [=y] || FSL_DPAA_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && FSL_DPAA [=n] && FSL_FMAN [=n] || FWNODE_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && (ACPI [=y] || OF [=y] || COMPILE_TEST [=y]) || OF_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && OF [=y] && PHYLIB [=y] || USB_LAN78XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n]
+
+IOMMU_DEFAULT_DMA_STRICT: y => no
       Direct dependencies: <choice>
 
-IIO_BUFFER_CB: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=n] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=n] && IIO [=y] && I2C [=y]
-
-MTD_NAND_ARASAN: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
-
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
-
-COMEDI_DT3000: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 

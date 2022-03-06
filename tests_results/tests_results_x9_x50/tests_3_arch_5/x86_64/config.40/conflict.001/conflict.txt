@@ -1,17 +1,19 @@
-CRYPTO_TWOFISH_X86_64_3WAY: y => mod
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+CPU_FREQ_GOV_ONDEMAND: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_ONDEMAND [=y] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n])
 
-CRC16: y => no
-      Direct dependencies: y
-      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=m] && CAN_DEV [=m] && USB [=n] || LAN743X [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || SGI_IOC3_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI [=y] && EFI [=y] && SPI [=y] && (X86 [=y] || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=m] && W1 [=m] || W1_SLAVE_DS2423 [=m] && W1 [=m] || W1_SLAVE_DS2433_CRC [=n] && W1 [=m] && W1_SLAVE_DS2433 [=m] || W1_SLAVE_DS250X [=m] && W1 [=m] || W1_SLAVE_DS28E04 [=m] && W1 [=m] || W1_SLAVE_DS28E17 [=m] && W1 [=m] && I2C [=y] || SCD30_SERIAL [=m] && IIO [=y] && SCD30_CORE [=m] && SERIAL_DEV_BUS [=y] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
+CRYPTO_LZ4: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-INTEL_TH_ACPI: m => yes
-      Direct dependencies: INTEL_TH [=m] && ACPI [=y]
+PARAVIRT: y => no
+      Direct dependencies: HYPERVISOR_GUEST [=y] && HAVE_STATIC_CALL [=y]
+      Reverse dependencies: X86_VSMP [=n] && X86_64 [=y] && PCI [=n] && X86_EXTENDED_PLATFORM [=n] && SMP [=n] || HYPERV [=y] && ACPI [=y] && (X86 [=y] && X86_LOCAL_APIC [=y] && HYPERVISOR_GUEST [=y] || ARM64 && !CPU_BIG_ENDIAN)
 
-W1_SLAVE_DS2406: m => yes
-      Direct dependencies: W1 [=m]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 
-COMEDI_PCMDA12: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+USB_DWC3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
 

@@ -1,9 +1,11 @@
-DM_SNAPSHOT: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+INDIRECT_PIO: y => no
+      Direct dependencies: ARM64 [=y]
+      Reverse dependencies: HISILICON_LPC [=y] && (ARM64 [=y] && ARCH_HISI [=y] || COMPILE_TEST [=n] && !ALPHA && !HEXAGON && !PARISC) && HAS_IOMEM [=y] && ARM64 [=y]
 
-GOOGLE_FRAMEBUFFER_COREBOOT: m => yes
-      Direct dependencies: GOOGLE_FIRMWARE [=y] && FB_SIMPLE [=m] && GOOGLE_COREBOOT_TABLE [=m]
+MMC_REALTEK_PCI: m => yes
+      Direct dependencies: MMC [=m] && MISC_RTSX_PCI [=y]
 
-LEDS_KTD2692: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && OF [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 

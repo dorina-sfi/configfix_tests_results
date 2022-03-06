@@ -1,27 +1,27 @@
-GPIO_MADERA: m => yes
-      Direct dependencies: GPIOLIB [=y] && PINCTRL_MADERA [=m]
-
-SENSORS_MENF21BMC_HWMON: m => yes
-      Direct dependencies: HWMON [=m] && MFD_MENF21BMC [=m]
-
-FB_VIRTUAL: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
-
-SERIAL_8250_SHARE_IRQ: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_EXTENDED [=y]
-      Reverse dependencies: SERIAL_8250_IOC3 [=m] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
-
-SND_SOC_IMX_RPMSG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && RPMSG [=m]
-      Reverse dependencies: SND_SOC_FSL_RPMSG [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=n] && RPMSG [=m] && (SND_IMX_SOC [=m] || SND_IMX_SOC [=m]=n) && SND_IMX_SOC [=m]!=n
-
-REGULATOR_88PM800: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_88PM800 [=m]
-
-INPUT: y => mod
+DEBUG_KERNEL: y => no
       Direct dependencies: y
-      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 [=y] && MMU [=y] && ACPI [=n]
+      Reverse dependencies: EXPERT [=y]
 
-SND_USB_VARIAX: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_USB [=y] && USB [=y]
+VIDEO_M5MOLS: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+CRYPTO_CRC32C: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=y] && BLOCK [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=y] || EXT4_FS [=n] && BLOCK [=n] || JBD2 [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+
+PCI_IOV: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: INFINIBAND_USNIC [=n] && INFINIBAND [=m] && (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && NETDEVICES [=n] && ETHERNET [=n] && INET [=y] && PCI [=y] && INTEL_IOMMU [=y] && INFINIBAND_USER_ACCESS [=m] || CRYPTO_DEV_QAT_DH895xCCVF [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y] || CRYPTO_DEV_QAT_C3XXXVF [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y] || CRYPTO_DEV_QAT_C62XVF [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y]
+
+MTD_NAND_RICOH: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && PCI [=y]
+
+FPGA_DFL: m => yes
+      Direct dependencies: FPGA [=m] && HAS_IOMEM [=y]
+
+VIDEO_AD5820: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+SMS_SDIO_DRV: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_CORE [=y] && HAS_DMA [=y] && MMC [=y] && (!RC_CORE [=m] || RC_CORE [=m])
 

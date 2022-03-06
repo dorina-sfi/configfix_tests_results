@@ -1,12 +1,14 @@
-SENSORS_TMP103: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+IIO_SIMPLE_DUMMY: m => yes
+      Direct dependencies: IIO [=y] && IIO_SW_DEVICE [=m]
 
-ZRAM_DEF_COMP_LZORLE: y => no
-      Direct dependencies: <choice> && CRYPTO_LZO [=y]
+NLS_UTF8: y => mod
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-AM2315: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_S5K4ECGX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+CHARLCD: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=m] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
 

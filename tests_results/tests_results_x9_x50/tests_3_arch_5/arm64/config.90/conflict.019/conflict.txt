@@ -1,16 +1,18 @@
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-MC3230: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+W1_SLAVE_DS2780: y => mod
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-HID_SENSOR_ACCEL_3D: m => yes
-      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m]
+SND_SOC_TEGRA_TRIMSLICE: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && I2C [=y]
 
-COMEDI_CB_PCIDDA: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+COMEDI_ADDI_APCI_3120: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
 
-COMEDI_ADV_PCI1760: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+SND_SOC_ROCKCHIP_I2S: m => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && HAVE_CLK [=y] && SND_SOC_ROCKCHIP [=m]
+      Reverse dependencies: SND_SOC_ROCKCHIP_MAX98090 [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_ROCKCHIP_RT5645 [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_RK3288_HDMI_ANALOG [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_RK3399_GRU_SOUND [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI [=y]
 

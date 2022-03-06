@@ -1,28 +1,29 @@
-REGULATOR_ARIZONA_LDO1: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=y] || MFD_MADERA [=n]) && SND_SOC [=m]
+CAN_M_CAN_PLATFORM: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_M_CAN [=m] && HAS_IOMEM [=y]
 
-SND_SOC_DA7213: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_INTEL_BYT_CHT_DA7213_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI && (X86_INTEL_LPSS || COMPILE_TEST [=n])
+FB_OMAP2_PANEL_SHARP_LS037V7DW01: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m] && BACKLIGHT_CLASS_DEVICE [=y] && DRM_PANEL_SHARP_LS037V7DW01 [=n]=n
 
-REGULATOR_S2MPA01: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_SEC_CORE [=m] || COMPILE_TEST [=n])
+VIDEO_OV9640: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-SENSORS_THMC50: m => yes
+DVB_HELENE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && SPI_MASTER [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+COMEDI_DAS08_CS: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCMCIA_DRIVERS [=m]
+
+SENSORS_TMP102: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-SENSORS_IRPS5401: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MTD_ABSENT: m => yes
+      Direct dependencies: MTD [=m]
 
-INPUT_POWERMATE: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=y] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=n]
 
-HID_VIVALDI: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-USB_NET2272: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_IOMEM [=y]
-
-SND_SOC_MIKROE_PROTO: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && SND_SOC_I2C_AND_SPI [=m]
+TSYS02D: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

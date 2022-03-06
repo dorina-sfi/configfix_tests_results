@@ -1,22 +1,26 @@
-MSM_MMCC_8994: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+QCS_GCC_404: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: QCS_Q6SSTOP_404 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-IR_SUNXI: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=y])
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 
-TOUCHSCREEN_MTOUCH: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-ACPI_TINY_POWER_BUTTON: m => yes
-      Direct dependencies: ACPI [=y] && !ACPI_BUTTON [=m]
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-UIO_DFL: m => yes
-      Direct dependencies: UIO [=y] && FPGA_DFL [=m]
+PRINTK: y => no
+      Direct dependencies: y
 
-TOUCHSCREEN_ELAN: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+CLK_R8A77961: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77961 [=y]
 
 PM_DEVFREQ_EVENT: y => no
       Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 

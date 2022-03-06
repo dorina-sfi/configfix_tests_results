@@ -1,16 +1,19 @@
-REGULATOR_WM8994: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_WM8994 [=m]
+SCTP_DEFAULT_COOKIE_HMAC_MD5: y => no
+      Direct dependencies: <choice>
 
-SND_MESON_AXG_PDM: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MESON [=y] || COMPILE_TEST [=y] && COMMON_CLK [=y])
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-VIDEO_TW9910: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-SENSORS_SBRMI: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+INPUT: y => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && X86 && MMU [=y] && ACPI [=n]
 
-VIDEO_UPD64031A: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=n]
+MDIO_DEVICE: y => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: PHYLIB [=y] && NETDEVICES [=y]
 

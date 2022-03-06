@@ -1,33 +1,30 @@
-RUST_OPT_LEVEL_0: y => no
-      Direct dependencies: <choice>
+MMC_TEST: m => yes
+      Direct dependencies: MMC [=m]
 
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=n]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+SND_SOC_TFA9879: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-XZ_DEC_SPARC: y => no
-      Direct dependencies: XZ_DEC [=y]
+TINYDRM_ILI9341: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
+SND_SOC_WM8804_SPI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
 
-BLK_DEV_INITRD: y => no
+MOST_SND: m => yes
+      Direct dependencies: MOST [=m] && SND [=m]
+
+CRC_CCITT: y => mod
       Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+      Reverse dependencies: CAIF [=m] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=m] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=m] && AX25 [=n] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=y] && NFC [=n] || NFC_MICROREAD [=n] && NET [=y] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=n] && OF_IRQ [=n]) && HAS_DMA [=y] || PPP_ASYNC [=y] && NETDEVICES [=y] && TTY [=y] && PPP [=y] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=m] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=y] && SERIAL_DEV_BUS [=m]
 
-CONSOLE_TRANSLATIONS: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+KCMP: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=m] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-INPUT_FF_MEMLESS: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && PARPORT [=y] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=n] && JOYSTICK_XPAD [=n] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=n] && MFD_ARIZONA [=y] && SND_SOC [=y] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_PM8XXX [=n] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_MAX77693 [=n] || MFD_MAX77843 [=n]) && PWM [=y] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && PWM [=y] && MFD_MAX8997 [=n] || INPUT_GPIO_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_REGULATOR_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=n] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && TWL4030_CORE [=y] || INPUT_TWL6040_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && TWL6040_CORE [=n] || INPUT_PWM_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && PWM [=y] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_DRV2665_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=n] && INPUT [=y] && I2C [=y] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=n] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=n]) || HID_ACRUX_FF [=n] && INPUT [=y] && HID [=y] && HID_ACRUX [=n] || HID_BETOP_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=y] || HID_EMS_FF [=y] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=n] || LOGITECH_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIG940_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIWHEELS_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_MAYFLASH [=n] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=y] && INPUT [=y] && HID [=y] || NINTENDO_FF [=y] && INPUT [=y] && HID [=y] && HID_NINTENDO [=y] || PANTHERLORD_FF [=n] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=n] || PLAYSTATION_FF [=y] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=y] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=n] && INPUT [=y] && HID [=y] && HID_GREENASIA [=n] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=n] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=y]
+SND_SOC_SPDIF: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_KIRKWOOD_SOC_ARMADA370_DB [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_KIRKWOOD_SOC [=n] && (ARCH_MVEBU || COMPILE_TEST [=n]) && I2C [=y] || SND_SAMSUNG_SPDIF [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] || SND_SOC_STM32_SPDIFRX [=n] && SOUND [=y] && !UML && SND [=m] && (ARCH_STM32 && OF [=n] || COMPILE_TEST [=n]) && SND_SOC [=m] || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=n]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM6467_EVM
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
-
-CRYPTO_842: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+PSTORE_LZ4HC_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 

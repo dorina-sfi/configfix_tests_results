@@ -1,23 +1,26 @@
-RELOCATABLE: y => no
-      Direct dependencies: y
-      Reverse dependencies: RANDOMIZE_BASE [=y]
+CLK_RCAR_GEN3_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SENSORS_MAX16601: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+MFD_SUN6I_PRCM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=n] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y]
 
-VIDEO_OV5648: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && PM [=y] && VIDEO_V4L2 [=m]
+SPARSEMEM_VMEMMAP: y => no
+      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
+      Reverse dependencies: ARCH_SPARSEMEM_ENABLE [=y]
 
-INIT_STACK_NONE: y => no
+TI_MESSAGE_MANAGER: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_KEYSTONE || ARCH_K3 [=y])
+      Reverse dependencies: ARCH_K3 [=y]
+
+HZ_300: y => no
       Direct dependencies: <choice>
 
-DVB_STV6110: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=y] && SND [=n] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
 
-SI1133: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-ADXL345_I2C: m => yes
-      Direct dependencies: IIO [=m] && INPUT_ADXL34X [=n]=n && I2C [=y]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 

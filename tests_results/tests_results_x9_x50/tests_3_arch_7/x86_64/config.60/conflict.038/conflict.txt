@@ -1,22 +1,24 @@
-EPOLL: y => no
-      Direct dependencies: y
+BROADCOM_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+      Reverse dependencies: BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] && ARCH_BCM2835
 
-HW_RANDOM_NPCM: m => yes
-      Direct dependencies: HW_RANDOM [=m] && (ARCH_NPCM || COMPILE_TEST [=y])
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=m] && HAS_IOMEM [=y]
 
-NFT_BRIDGE_META: m => yes
-      Direct dependencies: NET [=y] && NETFILTER [=y] && NF_TABLES_BRIDGE [=m]
+SND_SOC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m]
 
-MULTIUSER: y => no
-      Direct dependencies: y
+INPUT_MMA8450: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && I2C [=y]
 
-LCD_LMS501KF03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y]
+SND_SOC_CS35L41_SPI: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+      Reverse dependencies: SND_SOC_AMD_VANGOGH_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP5x [=n] && I2C [=y]
 
-DM_THIN_PROVISIONING: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+SENSORS_POWR1220: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-AUDIT: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y]
+VDPA_USER: m => yes
+      Direct dependencies: VDPA [=m] && EVENTFD [=y] && MMU [=y] && HAS_DMA [=y]
 

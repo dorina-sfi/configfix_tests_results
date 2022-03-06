@@ -1,17 +1,17 @@
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=m] && PCI [=y] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
+SERIAL_8250_CS: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && PCMCIA [=m] && SERIAL_8250 [=m]
 
-AHCI_QORIQ: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
+REGULATOR_PCF50633: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_PCF50633 [=m]
 
-LCD_AMS369FG06: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+CRYPTO_CMAC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-INTEL_MEI: y => mod
-      Direct dependencies: X86 [=y] && PCI [=y]
-      Reverse dependencies: INTEL_MEI_ME [=y] && X86 [=y] && PCI [=y] || INTEL_MEI_TXE [=n] && X86 [=y] && PCI [=y]
+TCG_TIS_I2C_ATMEL: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
 
-CRAMFS_BLOCKDEV: y => no
-      Direct dependencies: MISC_FILESYSTEMS [=y] && CRAMFS [=m] && BLOCK [=y]
+CRYPTO_CHACHA20_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
 

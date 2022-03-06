@@ -1,26 +1,29 @@
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
 
-ELF_CORE: y => no
-      Direct dependencies: COREDUMP [=y]
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=n] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
 
-OSNOISE_TRACER: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
 
-ELF_CORE: y => no
-      Direct dependencies: COREDUMP [=y]
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y]
 
-KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+PREEMPT: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
 
-FILE_LOCKING: y => no
+FHANDLE: y => no
       Direct dependencies: y
 
-SYSCTL_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+CRYPTO_CMAC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n] || SCHED_TRACER [=y] && FTRACE [=y]
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 

@@ -1,23 +1,22 @@
-XZ_DEC: y => no
+USB_MUSB_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
+
+SND_SOC_OMAP_DMIC: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=y] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y] && COMMON_CLK [=y])
+      Reverse dependencies: SND_SOC_OMAP_ABE_TWL6040 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=y] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && TWL6040_CORE [=y] && COMMON_CLK [=y] && (ARCH_OMAP4 || SOC_OMAP5 && MFD_PALMAS [=n] || COMPILE_TEST [=y])
+
+PAGE_EXTENSION: y => no
       Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=y] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
-
-XZ_DEC: y => no
+MAILBOX: y => no
       Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=y] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
+      Reverse dependencies: IMX_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=n] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM && ZYNQMP_FIRMWARE [=n]
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=n] && X86
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
 
-BLK_DEV_INTEGRITY: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=n]) && ATA [=n] || DM_INTEGRITY [=n] && MD [=y] && BLK_DEV_DM [=n] || TCM_IBLOCK [=y] && TARGET_CORE [=y]
-
-CONFIGFS_FS: y => no
+KALLSYMS: y => no
       Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=y] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=n]
 

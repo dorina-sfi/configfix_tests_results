@@ -1,26 +1,24 @@
-W1_SLAVE_DS2781: y => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=m] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y]
 
-CHARLCD_BL_FLASH: y => no
-      Direct dependencies: <choice>
+SND_ATMEL_SOC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && HAS_IOMEM [=y]
 
-CRYPTO_SERPENT_AVX_X86_64: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+LEDS_LM3533: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_LM3533 [=m]
 
-RMI4_CORE: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+SND_SOC_CS4271_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_EP93XX_SOC_EDB93XX [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && (MACH_EDB9301 || MACH_EDB9302 || MACH_EDB9302A || MACH_EDB9307A || MACH_EDB9315A) && I2C [=y]
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+SENSORS_SBRMI: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-CRYPTO_SM4: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+RAID_ATTRS: m => yes
+      Direct dependencies: BLOCK [=y] && SCSI_MOD [=m]
+      Reverse dependencies: SCSI_MPT3SAS [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && !S390 || SCSI_MYRB [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] || SCSI_MYRS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] && (!CPU_BIG_ENDIAN || COMPILE_TEST [=n])
 
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+SENSORS_BEL_PFE: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 

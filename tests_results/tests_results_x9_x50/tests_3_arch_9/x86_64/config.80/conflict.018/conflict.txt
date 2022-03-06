@@ -1,27 +1,31 @@
-MEDIA_ANALOG_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
+ACPI_HED: y => mod
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_APEI_GHES [=y] && ACPI [=y] && ACPI_APEI [=y]
 
-HID_ALPS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+NETFILTER_XT_TARGET_TCPMSS: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && (IPV6 [=m] || IPV6 [=m]=n)
 
-VIDEO_OV2659: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && GPIOLIB [=y]
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
 
-HID_MALTRON: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SERIAL_8250_MEN_MCB: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && MCB [=y] && SERIAL_8250 [=m]
 
-SND_SOC_FSL_ASRC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && HAS_DMA [=y]
+XZ_DEC: y => mod
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=y] && MISC_FILESYSTEMS [=y] && SQUASHFS [=m] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
 
-ARCNET_RAW: m => yes
-      Direct dependencies: NETDEVICES [=y] && ARCNET [=m]
+6LOWPAN_GHC_EXT_HDR_FRAG: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
 
-PATA_MPIIX: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+VFIO_PLATFORM_BCMFLEXRM_RESET: m => yes
+      Direct dependencies: VFIO [=y] && VFIO_PLATFORM [=m] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
 
-DM_MULTIPATH: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m] && (!SCSI_DH [=y] || SCSI [=m])
+CRYPTO_CHACHA20POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-SCSI_FC_ATTRS: m => yes
-      Direct dependencies: SCSI [=m] && NET [=y]
+DEBUG_MEMORY_INIT: y => no
+      Direct dependencies: y
 

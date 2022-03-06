@@ -1,16 +1,17 @@
-LEDS_LM3532: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+JOYSTICK_GRIP: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-HID_SONY: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && USB_HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=m]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-REGULATOR_BD71815: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD71828 [=m]
+CAN_GS_USB: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && USB [=y]
 
-COMEDI_PCMCIA_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=y] && PCMCIA [=m]
+JOYSTICK_GUILLEMOT: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-BPF_SYSCALL: y => no
-      Direct dependencies: y
-      Reverse dependencies: AF_KCM [=m] && NET [=y] && INET [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

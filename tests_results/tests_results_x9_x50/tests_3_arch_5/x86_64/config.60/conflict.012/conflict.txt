@@ -1,15 +1,19 @@
-LEDS_LP8501: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+CRYPTO_CAST6: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CAST6_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+KPROBES: y => no
+      Direct dependencies: MODULES [=y] && HAVE_KPROBES [=y]
+      Reverse dependencies: KGDB_HONOUR_BLOCKLIST [=y] && KGDB [=y] && HAVE_KPROBES [=y] && MODULES [=y]
 
-RTC_DRV_S5M: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && (MFD_SEC_CORE [=m] || COMPILE_TEST [=n])
+DRM_DP_AUX_CHARDEV: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=y] && HAS_IOMEM [=y] && DRM_I915 [=y] && EXPERT [=y] && !COMPILE_TEST [=n]
 
-FB_VGA16: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (X86 [=y] || PPC)
+JFFS2_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=m]
 
-FB_S1D13XXX: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+PKCS7_MESSAGE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=y] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
 

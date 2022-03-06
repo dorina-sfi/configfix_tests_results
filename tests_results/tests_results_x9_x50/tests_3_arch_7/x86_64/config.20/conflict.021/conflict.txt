@@ -1,23 +1,26 @@
-CRYPTO_LIB_CHACHA: m => yes
-      Direct dependencies: CRYPTO [=m] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=m] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=m])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=m] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=m] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=m]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=m]
 
-USB_YUREX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 
-LEDS_LM3532: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+I2C: y => mod
+      Direct dependencies: y
+      Reverse dependencies: X86_INTEL_MID [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && PCI [=n] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_SJA1000 [=m] && CAN_PEAK_PCI [=n] || I3C [=m] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=y] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7793 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7791 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-CRYPTO_SHA256: m => no
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: MODULE_SIG_SHA224 [=n] && <choice> || MODULE_SIG_SHA256 [=n] && <choice> || BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_AH [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || CFG80211 [=n] && NET [=n] && WIRELESS [=n] && (RFKILL [=n] || !RFKILL [=n]) && CFG80211_USE_KERNEL_REGDB_KEYS [=n] || USB_RTL8152 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || ENCRYPTED_KEYS [=n] && KEYS [=n] || CRYPTO_SHA256_SSSE3 [=n] && CRYPTO [=m] && X86 [=y] && 64BIT [=y] || CRYPTO_SHA256_PPC_SPE [=n] && CRYPTO [=m] && PPC && SPE || CRYPTO_SHA256_OCTEON [=n] && CRYPTO [=m] && CPU_CAVIUM_OCTEON || CRYPTO_SHA256_SPARC64 [=n] && CRYPTO [=m] && SPARC64 || CRYPTO_DRBG_HASH [=n] && CRYPTO [=m] && CRYPTO_DRBG_MENU [=m] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=m] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=m] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=m] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && (ARCH_K3 || COMPILE_TEST [=n]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
+CFAG12864B: m => yes
+      Direct dependencies: AUXDISPLAY [=y] && X86 [=y] && FB [=y] && KS0108 [=m]
 
-UBIFS_FS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && MTD_UBI [=m]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-LEDS_AS3645A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
+CAN_VCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
 
-BMI160_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+NET_NSH: m => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=m] || NETFILTER_CONNCOUNT [=m]))
 

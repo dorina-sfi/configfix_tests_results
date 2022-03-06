@@ -1,19 +1,16 @@
-PREEMPT_VOLUNTARY: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+SENSIRION_SGP30: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SYSC_R8A77961: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A77961 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 
-HOTPLUG_CPU: y => no
-      Direct dependencies: y
-      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-USB_XHCI_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y]
-      Reverse dependencies: USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=y] && PHY_BRCM_USB [=y] || COMPILE_TEST [=y]) && USB_XHCI_HCD [=y] || USB_XHCI_MVEBU [=y] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && HAS_IOMEM [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y])
+REGULATOR_RT4831: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_RT4831 [=m]
 
-CRYPTO_STREEBOG: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+LIDAR_LITE_V2: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

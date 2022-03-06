@@ -1,38 +1,35 @@
-WIRELESS: y => no
-      Direct dependencies: NET [=y] && !S390
-      Reverse dependencies: WLAN [=y] && NETDEVICES [=y] && !S390 && NET [=y]
+PINCTRL_MSM8976: m => yes
+      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL_MSM [=m]
 
-XZ_DEC_SPARC: y => no
-      Direct dependencies: XZ_DEC [=y]
+HID_SENSOR_DEVICE_ROTATION: m => yes
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m]
 
-CRYPTO_LZ4: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+IIO_KFIFO_BUF: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=n] && IIO [=m] && I2C [=y] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=m] && SPI [=n] || INA2XX_ADC [=m] && IIO [=m] && I2C [=y] && !SENSORS_INA2XX [=m] || TI_AM335X_ADC [=m] && IIO [=m] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=m] && IIO [=m] && ARM_SCMI_PROTOCOL [=m] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=m] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=n] && IIO [=m] && I2C [=y] || MAX30102 [=m] && IIO [=m] && I2C [=y] || IIO_ST_LSM6DSX [=m] && IIO [=m] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=m] && IIO [=m] && ACPI [=y] || APDS9960 [=m] && IIO [=m] && I2C [=y] || ISL29501 [=n] && IIO [=m] && I2C [=y]
 
-CLK_R8A774E1: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774E1 [=y]
+HW_RANDOM: y => no
+      Direct dependencies: y
+      Reverse dependencies: TURRIS_MOX_RWTM [=m] && (ARCH_MVEBU [=y] || COMPILE_TEST [=n]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y] || UML_RANDOM [=n] && UML || CRYPTO_DEV_SUN8I_CE_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || ZCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && S390 || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_HIFN_795X [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && !ARCH_DMA_ADDR_T_64BIT [=y] && CRYPTO_DEV_HIFN_795X_RNG [=n] || CRYPTO_DEV_TALITOS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && FSL_SOC || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_TRNG [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM64 [=y] && ACPI [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=y] || COMPILE_TEST [=n]) || CRYPTO_DEV_FSL_CAAM_RNG_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y]
 
-IOMMU_SUPPORT: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
+RC_MAP: m => yes
+      Direct dependencies: RC_CORE [=m]
 
-SYSC_R8A774A1: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A774A1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-CRYPTO_MD5: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: TCP_MD5SIG [=n] && NET [=y] && INET [=n] || SCTP_COOKIE_HMAC_MD5 [=n] && NET [=y] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_MD5 [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=n] || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_MD5_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_MD5_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI [=n] && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
+HID_SENSOR_IIO_COMMON: m => no
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m]
+      Reverse dependencies: RTC_DRV_HID_SENSOR_TIME [=n] && RTC_CLASS [=n] && USB_HID [=n] && HID_SENSOR_HUB [=m] && IIO [=m] || HID_SENSOR_ACCEL_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_GYRO_3D [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_HUMIDITY [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_ALS [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_PROX [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_MAGNETOMETER_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_INCLINOMETER_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_DEVICE_ROTATION [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_CUSTOM_INTEL_HINGE [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_PRESS [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_TEMP [=m] && IIO [=m] && HID_SENSOR_HUB [=m]
 
-CRYPTO_ECDH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY [=n] || COMPILE_TEST [=y]) && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+DMARD10: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MEDIA_RADIO_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+TMP117: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MFD_STMFX: y => no
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
+PM_DEVFREQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=n] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
 

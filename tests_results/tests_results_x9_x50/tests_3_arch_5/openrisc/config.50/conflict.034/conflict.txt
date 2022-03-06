@@ -1,16 +1,18 @@
-MTK_INFRACFG: y => no
-      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
-      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+IIO_BUFFER_DMA: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: IIO_BUFFER_DMAENGINE [=m] && IIO [=m] && IIO_BUFFER [=y]
 
-VIRTIO_VSOCKETS: m => yes
-      Direct dependencies: NET [=y] && VSOCKETS [=m] && VIRTIO [=y]
+RAVE_SP_EEPROM: m => yes
+      Direct dependencies: NVMEM [=y] && RAVE_SP_CORE [=m]
 
-MMC_SPI: m => yes
-      Direct dependencies: MMC [=m] && SPI_MASTER [=y]
+SI1145: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-EXTCON_MAX14577: m => yes
-      Direct dependencies: EXTCON [=y] && MFD_MAX14577 [=m]
+SND_SOC_SGTL5000: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_IMX_SGTL5000 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=y] && I2C [=y] || SND_SOC_MXS_SGTL5000 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_MXS_SOC [=n] && I2C [=y] || SND_SOC_TEGRA_SGTL5000 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
 
-VFIO_MDEV: m => yes
-      Direct dependencies: VFIO [=m]
+SND_SOC_DA7213: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_BYT_CHT_DA7213_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI && (X86_INTEL_LPSS || COMPILE_TEST [=n])
 

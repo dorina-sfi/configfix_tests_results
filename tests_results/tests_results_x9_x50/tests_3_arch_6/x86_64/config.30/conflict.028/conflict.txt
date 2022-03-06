@@ -1,19 +1,23 @@
-INPUT_MATRIXKMAP: m => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || KEYBOARD_EP93XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_EP93XX || COMPILE_TEST [=n]) || KEYBOARD_TCA8418 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && I2C [=m] || KEYBOARD_MATRIX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || KEYBOARD_LM8333 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && I2C [=m] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && I2C [=m] || KEYBOARD_IMX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_MXC || COMPILE_TEST [=n]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_TEGRA && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && MFD_PM8XXX [=n] || KEYBOARD_SAMSUNG [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_STI || COMPILE_TEST [=n]) || KEYBOARD_STMPE [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && MFD_STMPE [=n] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && PLAT_SPEAR || KEYBOARD_TC3589X [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && MFD_TC3589X [=n] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && TWL4030_CORE [=n] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && CROS_EC [=n] || KEYBOARD_BCM [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=m] && AUXDISPLAY [=y] && FB [=m] && I2C [=m] && INPUT [=y]
+SERIAL_8250_EXTENDED: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y]
+      Reverse dependencies: SERIAL_8250_IOC3 [=y] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
 
-BACKLIGHT_SKY81452: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_SKY81452 [=m]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=n]) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
 
-TCG_TIS_ST33ZP24_I2C: m => yes
-      Direct dependencies: TCG_TPM [=y] && I2C [=m]
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-COMEDI_NI_660X: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=y] || I2C_AXXIA [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=y] && !X86_32 [=n] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y])
 
-SGETMASK_SYSCALL: y => no
-      Direct dependencies: y
+CRYPTO_GCM: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || TLS [=n] && NET [=y] && INET [=n] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || MACSEC [=n] && NETDEVICES [=y] && NET_CORE [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx
 
-LEDS_LM3697: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_TI_LMU_COMMON [=m] && I2C [=m] && OF [=y]
+JFFS2_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
 

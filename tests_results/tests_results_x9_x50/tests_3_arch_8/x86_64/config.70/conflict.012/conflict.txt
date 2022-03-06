@@ -1,27 +1,29 @@
-AFE4404: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MOUSE_PS2_SYNAPTICS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=y] && SIGNED_PE_FILE_VERIFICATION [=y]
+CPU_SUP_AMD: y => no
+      Direct dependencies: y
+      Reverse dependencies: CPU_SUP_HYGON [=y]
 
-CM3232: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+ISCSI_BOOT_SYSFS: y => no
+      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=y]
+      Reverse dependencies: ISCSI_IBFT [=y] && ACPI [=y] && SCSI [=y] && SCSI_LOWLEVEL [=y] || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || QEDI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && UIO [=y] && QED [=y]
 
-VIDEO_SAA711X: y => mod
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_STK1160 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_STK1160_COMMON [=y] || VIDEO_GO7007 [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=y] && I2C [=y] && SND [=m] && USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=n] && I2C [=y] && RC_CORE [=m] || VIDEO_MXB [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_BUZ [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_LML33R10 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+SND_PROC_FS: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && PROC_FS [=y]
 
-USB_ACM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && TTY [=y]
-      Reverse dependencies: USB_VL600 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_NET_CDCETHER [=n] && TTY [=y] || USB_PULSE8_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=n] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
 
-AD7291: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+COMPACTION: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
 
-FXAS21002C: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n])
+FAILOVER: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=y] && NETDEVICES [=y]
 
-HID_ROCCAT: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+JFFS2_CMODE_PRIORITY: y => no
+      Direct dependencies: <choice>
 

@@ -1,9 +1,12 @@
-INGENIC_ADC: m => yes
-      Direct dependencies: IIO [=m] && (MIPS || COMPILE_TEST [=y])
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-IIO_RESCALE: m => yes
-      Direct dependencies: IIO [=m] && (OF [=n] || COMPILE_TEST [=y])
+CRYPTO_CURVE25519_X86: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
 
-IPMI_IPMB: m => yes
-      Direct dependencies: IPMI_HANDLER [=m] && I2C [=m] && I2C_SLAVE [=y]
+RELAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 [=y] && PCI [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y]
 

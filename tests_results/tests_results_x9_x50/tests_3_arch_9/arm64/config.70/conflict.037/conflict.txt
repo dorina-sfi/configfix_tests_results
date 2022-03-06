@@ -1,29 +1,31 @@
-SENSORS_MAX6639: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+VIDEO_OV02A10: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
 
-W1_SLAVE_DS2781: m => yes
-      Direct dependencies: W1 [=m]
-      Reverse dependencies: BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+BACKLIGHT_QCOM_WLED: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-TIFM_7XX1: m => yes
-      Direct dependencies: PCI [=y] && TIFM_CORE [=m]
+CRYPTO_SHA512_ARM64: y => mod
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA512_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-DAX: y => no
-      Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=n] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+RAPIDIO_CPS_XX: m => yes
+      Direct dependencies: RAPIDIO [=m]
 
-SENSORS_PMBUS: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=m] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=m] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=n]
 
-MMC_DW_PCI: m => yes
-      Direct dependencies: MMC [=y] && MMC_DW [=m] && PCI [=y]
+MTD_NAND_QCOM: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-DRM_CHIPONE_ICN6211: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+PINCTRL_PFC_R8A77995: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77995 [=y]
 
-SENSORS_TMP102: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+CRYPTO_SHA256_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA2_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-BACKLIGHT_LM3630A: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y] && PWM [=y]
+BACKLIGHT_88PM860X: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_88PM860X [=y]
 

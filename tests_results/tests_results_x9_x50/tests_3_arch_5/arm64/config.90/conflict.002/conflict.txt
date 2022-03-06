@@ -1,16 +1,18 @@
-TOUCHSCREEN_AD7879_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_AD7879 [=m] && I2C [=y]
+TEGRA_BPMP: y => no
+      Direct dependencies: ARCH_TEGRA [=y] && TEGRA_HSP_MBOX [=y] && TEGRA_IVC [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y]
 
-PARPORT_AX88796: m => yes
-      Direct dependencies: PARPORT [=m]
+SND_TRIDENT: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y] && ZONE_DMA [=y]
 
-STK8BA50: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_SOC_OMAP_MCPDM: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y])
+      Reverse dependencies: SND_SOC_OMAP_ABE_TWL6040 [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && TWL6040_CORE [=y] && COMMON_CLK [=y] && (ARCH_OMAP4 || SOC_OMAP5 && MFD_PALMAS [=n] || COMPILE_TEST [=y])
 
-CRYPTO_LZO: y => mod
+CRYPTO_XXHASH: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_LZO [=y] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-USB_XHCI_PCI_RENESAS: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m]
+SND_SOC_TEGRA: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_TEGRA [=y] && TEGRA20_APB_DMA [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && RESET_CONTROLLER [=y]
 

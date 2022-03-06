@@ -1,17 +1,19 @@
-USB_CHIPIDEA_IMX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=m] && OF [=y]
-
-DRM_PANEL_ELIDA_KD35T133: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
-
-HID_GFRM: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
-
-PRIME_NUMBERS: m => no
+POWER_RESET: y => no
       Direct dependencies: y
-      Reverse dependencies: DRM_DEBUG_SELFTEST [=m] && HAS_IOMEM [=y] && DRM [=m] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+      Reverse dependencies: ARM64 [=y]
 
-MSM_GCC_8974: m => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: MSM_MMCC_8974 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+NETFILTER_NETLINK_LOG: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NETFILTER_XT_TARGET_NFLOG [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y]
+
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
+
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+
+HZ_300: y => no
+      Direct dependencies: <choice>
 

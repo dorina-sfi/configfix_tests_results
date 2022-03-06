@@ -1,34 +1,34 @@
-SCSI_ISCSI_ATTRS: y => mod
-      Direct dependencies: SCSI [=y] && NET [=y]
-      Reverse dependencies: ISCSI_TCP [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n) || SCSI_CXGB4_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n) && PTP_1588_CLOCK_OPTIONAL [=y] && ETHERNET [=n] && (TLS [=m] || TLS [=m]=n) || SCSI_BNX2_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=n] && (IPV6 [=m] || IPV6 [=m]=n) && MMU [=y] || BE2ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && NET [=y] || QEDI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && UIO [=n] && QED [=n] || INFINIBAND_ISER [=n] && INFINIBAND [=m] && SCSI [=y] && INET [=y] && INFINIBAND_ADDR_TRANS [=n]
+MTD_NAND_PL35X: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=y]) && PL353_SMC [=m]
 
-PINCTRL_RK805: m => yes
-      Direct dependencies: PINCTRL [=y] && MFD_RK808 [=m]
+SENSORS_XGENE: m => yes
+      Direct dependencies: HWMON [=y] && (XGENE_SLIMPRO_MBOX [=m] || PCC [=n])
 
-INFINIBAND_USER_MAD: m => yes
-      Direct dependencies: INFINIBAND [=m]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 
-SCSI_SAS_LIBSAS: m => no
+MULTIUSER: y => no
+      Direct dependencies: y
+
+NF_NAT: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=y]
+      Reverse dependencies: NFT_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=y]) || IP_NF_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=y] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
+
+SCSI_SAS_ATTRS: y => mod
       Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_AIC94XX [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] || SCSI_HISI_SAS [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=n]) && ATA [=m] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && X86 || SCSI_PM8001 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
 
-SERIAL_8250_UNIPHIER: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n])
+GREYBUS_LOG: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m]
 
-NET_DSA_TAG_KSZ: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_MICROCHIP_KSZ_COMMON [=n] && NETDEVICES [=y] && NET_DSA [=m]
+MTD_NAND_QCOM: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-SENSORS_MAX34440: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-B53_SRAB_DRIVER: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m] && HAS_IOMEM [=y] && (B53_SERDES [=n] || !B53_SERDES [=n])
-
-IOMMU_SUPPORT: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y]
-
-TYPEC_TPS6598X: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && I2C [=y]
+HMS_PROFINET: m => yes
+      Direct dependencies: STAGING [=y] && FIELDBUS_DEV [=m] && HMS_ANYBUSS_BUS [=m]
 

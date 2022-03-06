@@ -1,35 +1,37 @@
-BME680: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI [=n])
+THERMAL_GOV_STEP_WISE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
 
-MAX30102: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=n] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=n] && I2C [=y]
 
-MEDIA_TUNER_MXL301RF: y => mod
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: DVB_PT3 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+SND_PCM_TIMER: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y]
 
-NLS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=n] && PCI [=y] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && SCSI_DMA [=y] || USB [=n] && USB_SUPPORT [=n] && USB_ARCH_HAS_HCD [=n] || USB_GADGET [=n] && USB_SUPPORT [=n] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=n] && BLOCK [=y] || F2FS_FS [=n] && BLOCK [=y] || JOLIET [=y] && BLOCK [=y] && ISO9660_FS [=m] || UDF_FS [=y] && BLOCK [=y] || FAT_FS [=y] && BLOCK [=y] || EXFAT_FS [=n] && BLOCK [=y] || NTFS_FS [=n] && BLOCK [=y] || NTFS3_FS [=y] && BLOCK [=y] || HFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || BEFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=n] && X86 [=y] && VBOXGUEST [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y]
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-KXCJK1013: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+KUNIT_DEBUGFS: y => no
+      Direct dependencies: KUNIT [=y]
 
-SND_SOC_AK4613: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+CRYPTO_XTS: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=y] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-X86_FEATURE_NAMES: y => no
-      Direct dependencies: y
-      Reverse dependencies: X86 [=y] && PROC_FS [=y]
+SPI_ALTERA_CORE: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ALTERA [=y] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=y] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=y]
 
-KALLSYMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=y] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+CRYPTO_BLAKE2S_X86: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && X86 [=y] && 64BIT [=y]
 
-SND_SOC_CS35L33: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+SND_PCM_TIMER: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y]
 

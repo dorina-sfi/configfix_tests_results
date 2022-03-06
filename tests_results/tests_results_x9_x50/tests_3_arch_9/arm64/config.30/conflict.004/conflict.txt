@@ -1,29 +1,32 @@
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+XZ_DEC: y => no
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
+
+KUNIT_DEBUGFS: y => no
+      Direct dependencies: KUNIT [=y]
+
+CRYPTO_CRC32: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=y] && (INFINIBAND_USER_ACCESS [=y] || !INFINIBAND_USER_ACCESS [=y]) && INET [=y] && PCI [=y] && INFINIBAND [=y] && INFINIBAND_VIRT_DMA [=y] || F2FS_FS [=y] && BLOCK [=y]
+
+HZ_PERIODIC: y => no
       Direct dependencies: <choice>
 
-SOC_SAMSUNG: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_EXYNOS [=y]
+SSB_PCIHOST: y => no
+      Direct dependencies: SSB [=y] && SSB_PCIHOST_POSSIBLE [=y]
+      Reverse dependencies: B44_PCI_AUTOSELECT [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && B44 [=y] && SSB_PCIHOST_POSSIBLE [=y] || B43_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && B43 [=n] && SSB_PCIHOST_POSSIBLE [=y] || B43LEGACY_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && B43LEGACY [=n] && SSB_PCIHOST_POSSIBLE [=y]
 
-VIDEO_STI_BDISP: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_STI || COMPILE_TEST [=y])
+CFG80211_CRDA_SUPPORT: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=y]
 
-SND_SOC_WM8524: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && GPIOLIB [=y]
+TIFM_CORE: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: MMC_TIFM_SD [=y] && MMC [=y] && PCI [=y] || MEMSTICK_TIFM_MS [=n] && MEMSTICK [=n] && PCI [=y]
 
-SND_SOC_ADI_AXI_I2S: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ADI [=m]
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-VIDEO_IMX258: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
-
-MTD_NAND_TXX9NDFMC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (SOC_TX4938 || SOC_TX4939 || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
-
-SOC_TI: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_K3 [=y]
-
-SND_ATMEL_SOC_I2S: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+VT: y => no
+      Direct dependencies: TTY [=y]
 

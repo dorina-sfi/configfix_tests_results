@@ -1,19 +1,20 @@
-TI_DAC082S085: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+SENSORS_BEL_PFE: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-GPIO_TPS65912: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TPS65912 [=m]
+USB_SERIAL_NAVMAN: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
 
-ADIS16475: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+MLXREG_IO: m => yes
+      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=m]
 
-SND_SOC_IMX_SGTL5000: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y]
+HW_RANDOM_BA431: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
 
-SND_MIXART: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
+MPLS: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=m] || NETFILTER_CONNCOUNT [=m]))
 
-MEDIA_TUNER_MXL301RF: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_PT3 [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+DVB_MXL692: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_DVB [=m] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

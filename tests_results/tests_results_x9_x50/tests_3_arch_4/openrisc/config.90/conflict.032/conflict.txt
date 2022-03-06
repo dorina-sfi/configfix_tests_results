@@ -1,16 +1,13 @@
-MTD_QINFO_PROBE: y => no
-      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
-      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
-
-PAGE_POISONING: y => no
+CRC_T10DIF: y => mod
       Direct dependencies: y
-      Reverse dependencies: DEBUG_PAGEALLOC [=y] && DEBUG_KERNEL [=y] && (!HIBERNATION || ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n] && !PPC && !SPARC) && !ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n]
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] && CPU_FREQ && SCSI_FC_ATTRS [=m] && (NVME_TARGET_FC [=m] || NVME_TARGET_FC [=m]=n) && (NVME_FC [=y] || NVME_FC [=y]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=m] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m]
 
-RPMSG_NS: y => no
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+OCFS2_FS: m => yes
+      Direct dependencies: BLOCK [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=m]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=n] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
+HID_JABRA: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+W1_MASTER_MXC: m => yes
+      Direct dependencies: W1 [=m] && (ARCH_MXC || COMPILE_TEST [=y])
 

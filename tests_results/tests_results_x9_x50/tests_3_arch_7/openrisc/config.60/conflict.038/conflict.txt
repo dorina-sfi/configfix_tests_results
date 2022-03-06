@@ -1,23 +1,25 @@
-SND_SOC_TAS2562: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+ZBUD: m => yes
+      Direct dependencies: ZPOOL [=m]
+      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_ZBUD [=n] && <choice>
 
-SND_SOC_ALL_CODECS: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMPILE_TEST [=y]
+CHARLCD: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
 
-SND_SOC_CS42XX8_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_MT2701_CS42448 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT2701 [=n] && I2C [=y]
+MEDIA_TUNER_TDA827X: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_M920X [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_TDA8290 [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
 
-SENSORS_MAX16601: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+STM_DUMMY: m => yes
+      Direct dependencies: STM [=m]
 
-USB_OHCI_HCD_OMAP3: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_OHCI_HCD [=m] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y])
+REGULATOR_HI6421: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
 
-USB_SERIAL_BELKIN: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
+TCM_USER2: m => yes
+      Direct dependencies: TARGET_CORE [=m] && UIO [=m] && NET [=y]
 
-PKCS7_MESSAGE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: OPENRISC [=y]
 

@@ -1,16 +1,18 @@
-VIDEO_CX231XX: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && I2C [=y] && I2C_MUX [=y]
+SND_SOC_WM8903: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_TEGRA_WM8903 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
 
-HID_DRAGONRISE: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+COMEDI_KCOMEDILIB: m => yes
+      Direct dependencies: COMEDI [=m]
+      Reverse dependencies: COMEDI_BOND [=n] && COMEDI [=m] && COMEDI_MISC_DRIVERS [=n]
 
-USB_GSPCA_OV519: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m] && USB_GSPCA [=m]
+TINYDRM_ST7586: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=m] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
+CRYPTO_BLAKE2B: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-PINCTRL_SM8250: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+DRM_TOSHIBA_TC358775: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
 

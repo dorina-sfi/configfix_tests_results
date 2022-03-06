@@ -1,21 +1,24 @@
-LEDS_APU: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && X86 [=y] && DMI [=y]
+NLS_UTF8: y => mod
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-LEDS_LP5523: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+KEYBOARD_MTK_PMIC: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_MT6397 [=m]
 
-T5403: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_XINMO: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-MENZ069_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && MCB [=m]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=n] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 
-64BIT: y => no
-      Direct dependencies: y
+CAN_FLEXCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && (OF [=y] || COLDFIRE || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-SOUNDWIRE_QCOM: m => yes
-      Direct dependencies: SOUNDWIRE [=y] && SND_SOC [=m]
+CAN_SJA1000: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && HAS_IOMEM [=y]
 
-MEDIATEK_MT6360_ADC: m => yes
-      Direct dependencies: IIO [=m] && MFD_MT6360 [=y]
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
 

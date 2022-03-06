@@ -1,29 +1,35 @@
-VIDEO_S5K4ECGX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+USB_XHCI_RCAR: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && USB_XHCI_PLATFORM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: USB_XHCI_PLATFORM [=y] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && ARCH_RENESAS [=y]
 
-SND_SOC_DAVINCI_ASP: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_DAVINCI || COMPILE_TEST [=y])
-      Reverse dependencies: SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM355_EVM || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && SND_SOC_DM365_AIC3X_CODEC [=n] || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_EVM
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || ARCH_LAYERSCAPE [=n] || COLDFIRE) || I2C_MLXBF [=y] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n])
 
-SND_SOC_UNIPHIER_EVEA_CODEC: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_UNIPHIER [=m]
+NET_VENDOR_EMULEX: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && PCI [=y]
+      Reverse dependencies: INFINIBAND_OCRDMA [=y] && INFINIBAND [=y] && (INFINIBAND_USER_ACCESS [=y] || !INFINIBAND_USER_ACCESS [=y]) && ETHERNET [=y] && NETDEVICES [=y] && PCI [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n)
 
-SND_SOC_AC97_CODEC: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_DB1000 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AU1XAUDIO [=n] || SND_SOC_DB1200 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AU1XPSC [=n] || SND_EP93XX_SOC_SIMONE [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && MACH_SIM_ONE || SND_SH7760_AC97 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS [=n] || COMPILE_TEST [=y]) && CPU_SUBTYPE_SH7760 && SND_SOC_PCM_SH7760 [=n]
+OSNOISE_TRACER: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: TIMERLAT_TRACER [=y] && FTRACE [=y]
 
-MMC_SDHCI_ACPI: m => yes
-      Direct dependencies: MMC [=y] && MMC_SDHCI [=m] && ACPI [=y] && PCI [=y]
+CRYPTO_CHACHA20_NEON: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && (ARM || ARM64 [=y] && KERNEL_MODE_NEON [=y])
 
-SND_MXS_SOC: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MXS || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 
-VIDEO_MT9M001: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+CRYPTO_MD5: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: TCP_MD5SIG [=n] && NET [=y] && INET [=y] || SCTP_COOKIE_HMAC_MD5 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_MD5 [=y] || ISCSI_TCP [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_MD5_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_MD5_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI [=n] && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
 
-SENSORS_AHT10: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEBUG_BUGVERBOSE: y => no
+      Direct dependencies: BUG [=y] && (GENERIC_BUG [=y] || HAVE_DEBUG_BUGVERBOSE [=n])
 
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+VIDEO_SAA711X: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_STK1160 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_STK1160_COMMON [=n] || VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=y] && I2C [=y] && SND [=n] && USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] || VIDEO_MXB [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_BUZ [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_LML33R10 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

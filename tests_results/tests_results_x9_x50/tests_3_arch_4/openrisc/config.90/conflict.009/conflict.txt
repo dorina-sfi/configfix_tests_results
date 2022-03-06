@@ -1,15 +1,14 @@
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
+SND_SOC_TAS5720: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-ZRAM_DEF_COMP_LZORLE: y => no
-      Direct dependencies: <choice> && CRYPTO_LZO [=y]
+VIDEO_SAA7110: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_DC10 [=n] && STAGING [=y] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SYSFS: y => no
-      Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+MEDIA_TUNER_FC0013: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB_V2 [=n] && I2C_MUX [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SPI_MEM: y => no
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
-      Reverse dependencies: MTD_SPI_NOR [=y] && MTD [=y] && SPI_MASTER [=y] || MTD_SPI_NAND [=n] && MTD [=y] && SPI_MASTER [=y]
+PPDEV: m => yes
+      Direct dependencies: PARPORT [=m]
 

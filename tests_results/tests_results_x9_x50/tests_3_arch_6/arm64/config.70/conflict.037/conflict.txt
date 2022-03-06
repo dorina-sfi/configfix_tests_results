@@ -1,20 +1,23 @@
-ALTERA_FREEZE_BRIDGE: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=n] && AUXDISPLAY [=y] && PARPORT [=n]
 
-HID_SMARTJOYPLUS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=n] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-CRC64: m => no
-      Direct dependencies: y
-      Reverse dependencies: BCACHE [=m] && MD [=y]
+MESON_CANVAS: y => no
+      Direct dependencies: ARCH_MESON [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=y] || COMPILE_TEST [=y]) || VIDEO_MESON_VDEC [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && HAS_DMA [=y] && (ARCH_MESON [=y] || COMPILE_TEST [=y])
 
-SERIO_AMBAKMI: m => yes
-      Direct dependencies: SERIO [=m] && ARM_AMBA [=y]
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
 
-GPIO_SYSCON: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
-      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=m] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
+RMI4_F11: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-TCG_FTPM_TEE: m => yes
-      Direct dependencies: TCG_TPM [=m] && TEE [=m] && OPTEE [=m]
+DEVFREQ_GOV_USERSPACE: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) || ARM_IMX8M_DDRC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 

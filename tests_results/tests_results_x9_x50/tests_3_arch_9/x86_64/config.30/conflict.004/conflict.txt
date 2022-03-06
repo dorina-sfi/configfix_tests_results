@@ -1,30 +1,32 @@
-SLAB: y => no
-      Direct dependencies: <choice> && !PREEMPT_RT [=n]
+DA280: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-RTC_DRV_BD70528: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_ROHM_BD71828 [=m]
+ATM_AMBASSADOR: m => yes
+      Direct dependencies: ATM_DRIVERS [=y] && NETDEVICES [=y] && ATM [=m] && PCI [=y] && VIRT_TO_BUS [=y]
 
-RAVE_SP_CORE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m]
+MTD_COMPLEX_MAPPINGS: y => no
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=m] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM
 
-STM_PROTO_BASIC: m => yes
-      Direct dependencies: STM [=m]
+FB_SAVAGE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-CRYPTO_DRBG_MENU: y => mod
+SND_SOC_RT5640: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_HASWELL_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_CATPT [=n] && I2C [=y] && (I2C_DESIGNWARE_PLATFORM [=m] || COMPILE_TEST [=n]) && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_BYTCR_RT5640_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SST_ATOM_HIFI2_PLATFORM [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_TEGRA_RT5640 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] && GPIOLIB [=y]
+
+USB_APPLEDISPLAY: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+
+VIDEO_ADV7170: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33R10 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+CRYPTO_SERPENT: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-FONT_8x16: y => no
-      Direct dependencies: FONT_SUPPORT [=y]
-      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=n] && VIDEO_DEV [=y] && SND [=y] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=n] && VIDEO_DEV [=y] && SND [=y] && I2C [=y] || VIDEO_VIMC [=n] && MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] || VIDEO_VIVID [=n] && MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=n] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] && !SPARC32 && !SPARC64 && FB [=y] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=y] && (X86 [=y] || PPC) && FRAMEBUFFER_CONSOLE [=y] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=y] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=n] && USB [=n] && VT [=y] && BROKEN [=n] || FONT_AUTOSELECT [=n] && FONT_SUPPORT [=y] && !FONT_8x8 [=y] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
-
-SENSORS_PIM4328: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-MDIO_BCM_UNIMAC: y => no
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y] || BCMGENET [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && HAS_IOMEM [=y]
-
-MODIFY_LDT_SYSCALL: y => no
-      Direct dependencies: y
+DVB_M88DS3103: m => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && I2C_MUX [=y]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DVBSKY [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && INPUT [=m] && SND [=m] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_SMIPCIE [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

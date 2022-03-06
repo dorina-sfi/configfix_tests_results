@@ -1,23 +1,28 @@
-MMC_DW_HI3798CV200: m => yes
-      Direct dependencies: MMC [=y] && MMC_DW [=m]
+FPGA_REGION: y => no
+      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-SPARSE_IRQ: y => no
+PINCTRL_BCM2835: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_BCM2835 [=y]
+
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y]
+
+ARM64_ERRATUM_843419: y => no
       Direct dependencies: y
-      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+      Reverse dependencies: ARCH_MXC [=y]
 
-SND_SOC_CS4234: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 
-MPL3115: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+NET_FAILOVER: y => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: VIRTIO_NET [=y] && NETDEVICES [=y] && NET_CORE [=y] && VIRTIO [=y]
 
-SND_SOC_BD28623: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-
-SND_SOC_WM8962: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && INPUT [=y]
-      Reverse dependencies: SND_SOC_TOBERMORY [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && INPUT [=y] && I2C [=y] && (MACH_WLF_CRAGG_6410 || COMPILE_TEST [=n])
-
-SND_SOC_MIKROE_PROTO: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && SND_SOC_I2C_AND_SPI [=m]
+NET_FAILOVER: y => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: VIRTIO_NET [=y] && NETDEVICES [=y] && NET_CORE [=y] && VIRTIO [=y]
 

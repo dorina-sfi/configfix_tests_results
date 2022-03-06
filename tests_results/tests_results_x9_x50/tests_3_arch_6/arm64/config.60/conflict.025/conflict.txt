@@ -1,20 +1,23 @@
-TSL2583: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+BT_HCIUART_3WIRE: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y]
+      Reverse dependencies: BT_HCIUART_RTL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && (ACPI [=n] || SERIAL_DEV_CTRL_TTYPORT [=y])
 
-RMI4_SMB: m => yes
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m] && I2C [=y]
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=n] && SPI_MASTER [=n] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 
-AD5761: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=y] && BCACHE [=y] || DVB_C8SECTPFE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=n] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=y] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 
-MODULE_COMPRESS_XZ: y => no
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=n] && (m && MODULES [=n] || IPV6 [=n]!=m) && !ALPHA || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && ATA [=y] || SCSI_LPFC [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n)
+
+WIZNET_BUS_INDIRECT: y => no
       Direct dependencies: <choice>
 
-CRYPTO_AES_ARM64_CE: y => mod
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
-      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
-
-CGROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+CRYPTO_CRC32: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=y] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
 

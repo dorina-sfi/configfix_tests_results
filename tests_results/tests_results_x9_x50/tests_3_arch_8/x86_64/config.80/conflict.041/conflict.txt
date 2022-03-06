@@ -1,26 +1,26 @@
-HID_LENOVO: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+MS5611_I2C: m => yes
+      Direct dependencies: IIO [=y] && I2C [=y] && MS5611 [=m]
 
-CRYPTO_ECHAINIV: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+SND_ASIHPI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y] && X86 [=y]
 
-NFC_NXP_NCI_I2C: m => yes
-      Direct dependencies: NET [=y] && NFC [=y] && NFC_NXP_NCI [=m] && I2C [=y]
+NF_REJECT_IPV6: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y]
+      Reverse dependencies: NFT_REJECT_IPV6 [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && NF_TABLES [=y] && NF_TABLES_IPV6 [=y] || IP6_NF_TARGET_REJECT [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && IP6_NF_FILTER [=n]
 
-SENSORS_INA3221: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+INTEL_TH_PTI: m => yes
+      Direct dependencies: INTEL_TH [=m]
 
-REGULATOR_WM8994: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_WM8994 [=m]
+MPLS: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-FB_SM501: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && MFD_SM501 [=y]
+SND_CS46XX: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-PSTORE_LZO_COMPRESS_DEFAULT: y => no
+IR_WINBOND_CIR: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (X86 [=y] && PNP [=y] || COMPILE_TEST [=n])
+
+DEBUG_INFO_DWARF4: y => no
       Direct dependencies: <choice>
-
-MTD_CFI_AMDSTD: y => no
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=y])
 

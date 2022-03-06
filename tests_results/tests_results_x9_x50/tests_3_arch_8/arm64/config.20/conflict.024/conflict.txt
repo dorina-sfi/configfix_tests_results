@@ -1,32 +1,31 @@
-CPU_FREQ_GOV_SCHEDUTIL: y => no
-      Direct dependencies: CPU_FREQ [=y] && SMP [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=y] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=n] && CPU_FREQ [=y] && X86 && SMP [=y]
-
-SCTP_COOKIE_HMAC_MD5: y => no
-      Direct dependencies: NET [=y] && IP_SCTP [=y]
-      Reverse dependencies: SCTP_DEFAULT_COOKIE_HMAC_MD5 [=y] && <choice>
-
-TIMER_IMX_SYS_CTR: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: ARCH_MXC [=y]
-
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
-
-USB_GADGET: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_EHCI_TEGRA [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && ARCH_TEGRA [=y]
-
-INDIRECT_PIO: y => no
-      Direct dependencies: ARM64 [=y]
-      Reverse dependencies: HISILICON_LPC [=y] && (ARM64 [=y] && ARCH_HISI [=n] || COMPILE_TEST [=y] && !ALPHA && !HEXAGON && !PARISC) && HAS_IOMEM [=y] && ARM64 [=y]
-
 PARAVIRT: y => no
       Direct dependencies: y
       Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=n] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=y])
 
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+CRYPTO_SHA512_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA512_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+
+SCSI_SAS_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=y] && SCSI [=y]
+
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=n] && INPUT [=y] && (X86_64 || COMPILE_TEST [=n]) && PCI [=y] && X86
+
+NF_TABLES_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y]
+      Reverse dependencies: NF_TABLES_INET [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && IPV6 [=y]
+
+CRYPTO_LIB_CHACHA20POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+
+SCSI_ISCSI_ATTRS: y => no
+      Direct dependencies: SCSI [=y] && NET [=y]
+      Reverse dependencies: ISCSI_TCP [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || SCSI_CXGB4_ISCSI [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) && PTP_1588_CLOCK_OPTIONAL [=y] && ETHERNET [=y] && (TLS [=y] || TLS [=y]=n) || SCSI_BNX2_ISCSI [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=y] && (IPV6 [=y] || IPV6 [=y]=n) && MMU [=y] || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || SCSI_QLA_ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || QEDI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && UIO [=y] && QED [=y] || INFINIBAND_ISER [=n] && INFINIBAND [=y] && SCSI [=y] && INET [=y] && INFINIBAND_ADDR_TRANS [=n]
 

@@ -1,20 +1,24 @@
-REGULATOR_BD9571MWV: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_BD9571MWV [=m]
+KASAN_VMALLOC: y => no
+      Direct dependencies: KASAN [=y] && KASAN_GENERIC [=y] && HAVE_ARCH_KASAN_VMALLOC [=y]
+      Reverse dependencies: ARM64 [=y] && KASAN_GENERIC [=y]
 
-TOUCHSCREEN_CYTTSP4_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_CYTTSP4_CORE [=m] && I2C [=y]
+CLK_RENESAS_CPG_MSSR: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-ENCRYPTED_KEYS: y => mod
-      Direct dependencies: KEYS [=y]
-      Reverse dependencies: EVM [=y] && INTEGRITY [=y]
+VIDEO_VPX3220: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_DC30 [=y] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-PINCTRL_MSM8916: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-IPMI_DEVICE_INTERFACE: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
+SND_SOC_ES8328_I2C: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
+      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_IMX_ES8328 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && (I2C [=y] || SPI [=n]) && I2C [=y]
 
-RPMSG_NS: m => yes
-      Direct dependencies: RPMSG [=m]
-      Reverse dependencies: RPMSG_VIRTIO [=n] && HAS_DMA [=y]
+SND_SOC_MT6351: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_SOC_MT6797_MT6351 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT6797 [=y] && MTK_PMIC_WRAP [=y]
 

@@ -1,12 +1,15 @@
-MAX517: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CRYPTO_DEV_QCE_ENABLE_AEAD: y => no
+      Direct dependencies: <choice>
 
-MFD_GATEWORKS_GSC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && OF [=y]
+VIDEO_CS53L32A: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=n] && I2C [=y] && RC_CORE [=y]
 
-AD7291: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MFD_SUN6I_PRCM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=n] && COMMON_CLK [=y] && CLK_SUNXI [=y]
 
-HI6421V600_IRQ: m => yes
-      Direct dependencies: OF [=y] && SPMI [=m] && HAS_IOMEM [=y]
+BCM2835_VCHIQ: y => no
+      Direct dependencies: STAGING [=y] && BCM_VIDEOCORE [=y]
+      Reverse dependencies: SND_BCM2835 [=n] && STAGING [=y] && BCM_VIDEOCORE [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && SND [=y] || VIDEO_BCM2835 [=y] && STAGING [=y] && BCM_VIDEOCORE [=y] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y])
 

@@ -1,27 +1,29 @@
-HW_RANDOM_NOMADIK: m => yes
-      Direct dependencies: HW_RANDOM [=m] && (ARCH_NOMADIK || COMPILE_TEST [=y])
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=n])
 
-PKCS7_MESSAGE_PARSER: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=y] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+CPU_SUP_ZHAOXIN: y => no
+      Direct dependencies: y
 
-IR_SANYO_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+SCTP_COOKIE_HMAC_SHA1: y => no
+      Direct dependencies: NET [=y] && IP_SCTP [=y]
+      Reverse dependencies: SCTP_DEFAULT_COOKIE_HMAC_SHA1 [=y] && <choice>
 
-DM_LOG_WRITES: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+USB_G_DBGP_SERIAL: y => no
+      Direct dependencies: <choice> && USB_G_DBGP [=y]
 
-IPMI_IPMB: m => yes
-      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-MSM_GCC_8960: m => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_LCC_8960 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || MSM_MMCC_8960 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+UBIFS_FS_LZO: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
 
-MTD_ONENAND_SAMSUNG: m => yes
-      Direct dependencies: MTD [=m] && MTD_ONENAND [=m] && (ARCH_S3C64XX || ARCH_S5PV210 || COMPILE_TEST [=y])
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-SCHEDSTATS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
-      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+RELAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y]
 

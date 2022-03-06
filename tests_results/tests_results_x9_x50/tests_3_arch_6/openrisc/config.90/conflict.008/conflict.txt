@@ -1,22 +1,21 @@
-MEMORY: y => no
+NVMEM: y => no
       Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=y] && MTD [=y] && MTD_RAW_NAND [=y] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=n] && HAVE_ARM_SMCCC [=n] && OF [=y] && MTK_MMSYS [=n] || MTK_IOMMU [=n] && IOMMU_SUPPORT [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=n] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=m] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
 
-CRYPTO_CRCT10DIF: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
-
-HZ_PERIODIC: y => no
-      Direct dependencies: <choice>
-
-BLK_DEV_INITRD: y => no
+CRYPTO: y => mod
       Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=n] || BLK_INLINE_ENCRYPTION_FALLBACK [=n] && BLOCK [=y] && BLK_INLINE_ENCRYPTION [=n] || BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || AF_RXRPC [=y] && NET [=y] && INET [=y] || CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=m] && NET [=y] && INET [=y] || XFRM_ALGO [=y] && NET [=y] || IP_SCTP [=n] && NET [=y] && INET [=y] && (IPV6 [=m] || IPV6 [=m]=n) || TIPC_CRYPTO [=y] && NET [=y] && TIPC [=m] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || XFRM_AH [=y] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || XFRM_IPCOMP [=n] && NET [=y] && INET [=y] || TCP_MD5SIG [=y] && NET [=y] && INET [=y] || MPTCP [=n] && NET [=y] && INET [=y] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=y] && IPV6 [=m] || RXKAD [=y] && NET [=y] && AF_RXRPC [=y] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=n] || NFC_S3FWRN5 [=m] && NET [=y] && NFC [=y] || USB4 [=n] && PCI [=n] || TEE [=y] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] || CPU_SUP_AMD) || BLK_DEV_RBD [=y] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || NVME_TCP [=m] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && INET [=y] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || DM_VERITY [=n] && MD [=y] && BLK_DEV_DM [=n] || DM_INTEGRITY [=n] && MD [=y] && BLK_DEV_DM [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=y] || WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=m] || !IPV6 [=m]) || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || USB_RTL8152 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] || AIRO [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && ISA_DMA_API && (PCI [=n] || BROKEN [=n]) || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=m] || LIBIPW [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && PCI [=n] && CFG80211 [=n] || HOSTAP [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] || HERMES [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && (PPC_PMAC || PCI [=n] || PCMCIA [=m]) && CFG80211 [=n] || TCG_TPM [=y] && HAS_IOMEM [=y] || SND_SOC_CROS_EC_CODEC [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=n] && CROS_EC [=n] || RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && INET [=y] && PCI [=n] && INFINIBAND [=m] && INFINIBAND_VIRT_DMA [=y] || RTL8192U [=n] && STAGING [=n] && PCI [=n] && WLAN [=n] && USB [=n] && m && MODULES [=y] || RTL8723BS [=n] && STAGING [=n] && WLAN [=n] && MMC [=n] && CFG80211 [=n] && m && MODULES [=y] || KS7010 [=n] && STAGING [=n] && MMC [=n] && WIRELESS [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=n] && RTLLIB [=n] || RTLLIB_CRYPTO_TKIP [=n] && STAGING [=n] && RTLLIB [=n] || RTL8192E [=n] && STAGING [=n] && PCI [=n] && WLAN [=n] && RTLLIB [=n] && m && MODULES [=y] || FS_ENCRYPTION [=y] || FS_VERITY [=y] || EXT4_FS [=m] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || F2FS_FS [=m] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_ADVANCED_COMPR [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE [=n] && MISC_FILESYSTEMS [=n] && PSTORE_COMPRESS [=n] || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=y] || CEPH_FS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=n] || TRUSTED_KEYS [=n] && KEYS [=y] && TCG_TPM [=y] || ENCRYPTED_KEYS [=y] && KEYS [=y] || KEY_DH_OPERATIONS [=n] && KEYS [=y] || SECURITY_APPARMOR_HASH [=y] && SECURITY_APPARMOR [=y] || IMA [=y] && INTEGRITY [=y] || CRC_T10DIF [=m] || LIBCRC32C [=y] || SIGNATURE [=y] && KEYS [=y]
 
-AUTOFS_FS: y => no
+KALLSYMS: y => no
       Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+      Reverse dependencies: KPROBES [=n] && MODULES [=y] && HAVE_KPROBES [=n] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || FTRACE_SYSCALLS [=n] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=n]
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
+FB_OMAP2_PANEL_DPI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m]
+
+COMEDI_8255_SA: m => yes
+      Direct dependencies: COMEDI [=m]
+
+PKCS8_PRIVATE_KEY_PARSER: m => yes
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=m]
 

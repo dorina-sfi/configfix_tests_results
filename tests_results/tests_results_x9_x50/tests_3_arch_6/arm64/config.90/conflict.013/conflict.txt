@@ -1,20 +1,24 @@
-NET_DSA_TAG_HELLCREEK: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_HIRSCHMANN_HELLCREEK [=n] && NETDEVICES [=y] && HAS_IOMEM [=y] && NET_DSA [=m] && PTP_1588_CLOCK [=n] && LEDS_CLASS [=y] && NET_SCH_TAPRIO [=n]
+CLK_RCAR_CPG_LIB: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-TOUCHSCREEN_USB_EASYTOUCH: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+CORESIGHT_LINKS_AND_SINKS: y => no
+      Direct dependencies: CORESIGHT [=y]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=y] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y] || CORESIGHT_STM [=n] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-XZ_DEC_ARM: y => no
-      Direct dependencies: XZ_DEC [=y]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=n] || COMPILE_TEST [=y])
 
-PM_DEVFREQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+DVB_STV6110x: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_TECHNISAT_USB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-PINCTRL_MDM9615: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+FB_TILEBLITTING: y => no
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
+      Reverse dependencies: FB_MATROX [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_S3 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_VT8623 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=y]
 
-MTD_ROM: m => yes
-      Direct dependencies: MTD [=m]
+MFD_WM8994: y => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y]
+      Reverse dependencies: SND_MMP_SOC_BROWNSTONE [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_MMP_SOC_SSPA [=n] && MACH_BROWNSTONE && I2C [=y] || SND_SOC_FSL_ASOC_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=y] || SND_AC97_CODEC [=y]=n) || SND_SOC_SAMSUNG_SMDK_WM8994 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && I2C [=y]=y || SND_SOC_SMDK_WM8994_PCM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && I2C [=y]=y || SND_SOC_LITTLEMILL [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && I2C [=y] && (MACH_WLF_CRAGG_6410 || COMPILE_TEST [=y]) || SND_SOC_ARNDALE [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && I2C [=y]
 

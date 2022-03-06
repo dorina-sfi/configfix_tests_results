@@ -1,27 +1,24 @@
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=n] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
-
-HD44780_COMMON: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
-
-ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
-
-IIO_BUFFER_CB: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
-
-64BIT: y => no
+SPARSE_IRQ: y => no
       Direct dependencies: y
+      Reverse dependencies: X86 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-MTD_MAP_BANK_WIDTH_2: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
+USB_STORAGE_ISD200: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
 
-AUTOFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+TCG_TIS_ST33ZP24_I2C: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
+
+MTD_CMDLINE_PARTS: m => yes
+      Direct dependencies: MTD [=m]
+
+MTD_NAND_ECC_SW_HAMMING: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: SM_FTL [=m] && MTD [=m] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=m] && MTD_RAW_NAND [=m] && 4xx
+
+CRYPTO_CCM: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=y] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
+
+TCG_VTPM_PROXY: m => yes
+      Direct dependencies: TCG_TPM [=m]
 

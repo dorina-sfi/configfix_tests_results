@@ -1,20 +1,18 @@
-GAMEPORT: y => no
-      Direct dependencies: !UML
-      Reverse dependencies: JOYSTICK_ANALOG [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y]
+CORESIGHT_LINKS_AND_SINKS: m => yes
+      Direct dependencies: CORESIGHT [=m]
+      Reverse dependencies: CORESIGHT_SOURCE_ETM3X [=n] && CORESIGHT [=m] && !ARM64 [=y] || CORESIGHT_SOURCE_ETM4X [=m] && CORESIGHT [=m] && ARM64 [=y] || CORESIGHT_STM [=m] && CORESIGHT [=m] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-PINCTRL_PFC_R8A77980: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77980 [=y]
+COMEDI_KCOMEDILIB: y => no
+      Direct dependencies: COMEDI [=y]
+      Reverse dependencies: COMEDI_BOND [=m] && COMEDI [=y] && COMEDI_MISC_DRIVERS [=y]
 
-TIMER_IMX_SYS_CTR: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: ARCH_MXC [=y]
+MMA7660: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-PARAVIRT: y => no
-      Direct dependencies: y
-      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
+LEDS_TPS6105X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && TPS6105X [=m]
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+MEDIA_TUNER_TDA9887: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
 

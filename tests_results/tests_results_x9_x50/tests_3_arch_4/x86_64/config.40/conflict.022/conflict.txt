@@ -1,13 +1,15 @@
-SENSORS_LM80: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=n] && IIO [=y]
 
-SENSORS_FTSTEUTATES: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y] && WATCHDOG [=y]
+KASAN_KUNIT_TEST: y => no
+      Direct dependencies: KASAN [=y] && KUNIT [=y]
 
-SENSORS_W83L786NG: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MFD_SUN6I_PRCM: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI || COMPILE_TEST [=y])
+      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y]
 
-W1_SLAVE_DS2780: m => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS
 

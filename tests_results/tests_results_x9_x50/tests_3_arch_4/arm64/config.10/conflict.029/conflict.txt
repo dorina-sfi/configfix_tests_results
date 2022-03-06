@@ -1,12 +1,13 @@
-RTC_DRV_M41T80: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
+MCP4531: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MFD_SI476X_CORE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+VIDEO_XILINX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m] && OF [=y] && HAS_DMA [=y]
 
-SENSORS_TPS40422: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MTD_NAND_MXIC: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (HAS_IOMEM [=y] || COMPILE_TEST [=n])
 
-TOUCHSCREEN_CY8CTMG110: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+IIO_ST_MAGN_3AXIS: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
 

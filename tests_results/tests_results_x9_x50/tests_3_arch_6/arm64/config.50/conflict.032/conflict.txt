@@ -1,24 +1,21 @@
-SND_SAMSUNG_PCM: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m]
-      Reverse dependencies: SND_SOC_SMDK_WM8994_PCM [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && I2C [=y]=y
+CHARGER_TPS65217: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_TPS65217 [=m]
 
-EVENTFD: y => no
-      Direct dependencies: y
-      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=m] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+SENSORS_ADT7462: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-CRC_CCITT: y => no
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=y] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=n] || NFC_NCI_SPI [=n] && NET [=y] && NFC_NCI [=n] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=n] && NET [=y] && IEEE802154 [=n] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=m] && NET [=y] && HAMRADIO [=y] && AX25 [=m] && !S390 || BAYCOM_SER_HDX [=m] && NET [=y] && HAMRADIO [=y] && AX25 [=m] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=n] && AX25 [=m] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=n] && AX25 [=m] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=n] && NFC_NCI [=n] || NFC_PN544 [=n] && NET [=y] && NFC [=n] || NFC_MICROREAD [=n] && NET [=y] && NFC [=n] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=n] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_VIA [=n] && (PCI [=y] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=y] && TTY [=y] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=m] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=y] && MISDN [=m]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+CLKSRC_EXYNOS_MCT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
 
-I2C: y => mod
-      Direct dependencies: y
-      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_INTEL [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SOLARFLARE [=y] && PCI [=y] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=m] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-EXYNOS_PM_DOMAINS: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARCH_EXYNOS [=y] && PM_GENERIC_DOMAINS [=y]
+IIO_CROS_EC_SENSORS_CORE: m => yes
+      Direct dependencies: IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=m]
 
-VIDEO_WM8739: m => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_IVTV [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=m]
+CRYPTO_STREEBOG: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 

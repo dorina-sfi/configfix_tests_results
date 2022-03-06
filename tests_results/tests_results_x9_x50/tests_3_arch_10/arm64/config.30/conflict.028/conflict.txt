@@ -1,33 +1,34 @@
-VIDEO_AK7375: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+NFT_NUMGEN: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m]
 
-CRYPTO_GHASH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+SBP_TARGET: m => yes
+      Direct dependencies: TARGET_CORE [=m] && FIREWIRE [=y]
 
-VIDEO_IMX214: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+SC_GCC_7180: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SC_CAMCC_7180 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_DISPCC_7180 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_GPUCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_LPASS_CORECC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_MSS_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_VIDEOCC_7180 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-VT_HW_CONSOLE_BINDING: y => no
-      Direct dependencies: TTY [=y] && HW_CONSOLE [=y]
-      Reverse dependencies: DRM_INGENIC [=n] && HAS_IOMEM [=y] && (MIPS || COMPILE_TEST [=n]) && DRM [=y] && CMA [=y] && OF [=y] && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_PL111 [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && (VEXPRESS_CONFIG [=y] || VEXPRESS_CONFIG [=y]=n) && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_TVE200 [=n] && HAS_IOMEM [=y] && DRM [=y] && CMA [=y] && (ARM || COMPILE_TEST [=n]) && OF [=y] && FRAMEBUFFER_CONSOLE [=y] || DRM_MCDE [=n] && HAS_IOMEM [=y] && DRM [=y] && CMA [=y] && (ARM || COMPILE_TEST [=n]) && OF [=y] && COMMON_CLK [=y] && FRAMEBUFFER_CONSOLE [=y] || FRAMEBUFFER_CONSOLE [=y] && VT [=y] && FB [=m] && !UML
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
 
-VIDEO_BT819: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CGROUP_NET_CLASSID: y => no
+      Direct dependencies: NET [=y] && CGROUPS [=y]
+      Reverse dependencies: NETFILTER_XT_MATCH_CGROUP [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && CGROUPS [=y] || NET_CLS_CGROUP [=n] && NET [=y] && NET_SCHED [=n] && CGROUPS [=y]
 
-B53_MDIO_DRIVER: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m]
+REGULATOR_AXP20X: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_AXP20X [=m]
 
-FB_VIRTUAL: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+DRM_PANEL_SAMSUNG_S6E63M0: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-HID_SENSOR_MAGNETOMETER_3D: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+DRM_PANEL_MANTIX_MLAF057WE51: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-TI_AM335X_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_TI_AM335X_TSCADC [=m] && HAS_DMA [=y]
+BACKLIGHT_RT4831: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_RT4831 [=y]
 
-TIME_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+MPLS: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y] && (!NF_DEFRAG_IPV6 [=y] || NF_DEFRAG_IPV6 [=y]) && (!NF_NAT [=y] || NF_NAT [=y]) && (!NETFILTER_CONNCOUNT [=y] || NETFILTER_CONNCOUNT [=y]))
 

@@ -1,39 +1,38 @@
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=y] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=n] && I2C [=y] && I2C_MUX [=n] && PINCTRL [=y] && OF [=y]
 
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
-
-ACPI_BUTTON: y => no
-      Direct dependencies: ACPI [=y] && INPUT [=y]
-      Reverse dependencies: DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y]
-
-KALLSYMS: y => no
+CPU_SUP_CENTAUR: y => no
       Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=y]
 
-AUXDISPLAY: y => no
+HYPERVISOR_GUEST: y => no
       Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+      Reverse dependencies: X86_VSMP [=y] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=y]
 
-CRYPTO_HMAC: y => no
+RSEQ: y => no
+      Direct dependencies: HAVE_RSEQ [=y]
+
+EVENTFD: y => no
+      Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=y] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=y] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST [=n]
+
+CRYPTO_STREEBOG: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || XFRM_AH [=y] && NET [=y] && INET [=y] || XFRM_ESP [=n] && NET [=y] && INET [=y] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=y] && IPV6 [=n] || SCTP_COOKIE_HMAC_MD5 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_MD5 [=y] || SCTP_COOKIE_HMAC_SHA1 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_SHA1 [=y] || UBIFS_FS_AUTHENTICATION [=y] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || TRUSTED_KEYS [=n] && KEYS [=y] && TCG_TPM [=n] || ENCRYPTED_KEYS [=y] && KEYS [=y] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_DRBG_HMAC [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=n] && TRUSTED_KEYS [=n]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
 
-CLK_RCAR_CPG_LIB: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
-
-SERIAL_8250_SHARE_IRQ: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_EXTENDED [=y]
-      Reverse dependencies: SERIAL_8250_IOC3 [=y] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
-
-CPU_SUP_AMD: y => no
+KEYS: y => no
       Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=y] && INET [=n] || CEPH_LIB [=n] && NET [=y] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+
+KEYS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=y] && INET [=n] || CEPH_LIB [=n] && NET [=y] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+
+INPUT: y => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=n] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=n] || DRM_GMA500 [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=n]
 

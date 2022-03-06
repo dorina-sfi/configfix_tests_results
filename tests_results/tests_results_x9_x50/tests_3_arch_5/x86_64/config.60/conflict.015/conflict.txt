@@ -1,17 +1,18 @@
-RELAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y]
+FAILOVER: y => mod
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=y] && NETDEVICES [=y]
 
-REGULATOR_MT6358: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+REGULATOR_TPS65086: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_TPS65086 [=m]
 
-SENSORS_MAX20751: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+TCG_TIS_I2C_NUVOTON: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
 
-FB_OPENCORES: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
+NET_DSA_TAG_SJA1105: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_SJA1105 [=y] && NETDEVICES [=y] && NET_DSA [=y] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
 
-DYNAMIC_DEBUG_CORE: y => no
-      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
-      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+NET_NSH: m => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=y] || NF_NAT [=y]) && (!NETFILTER_CONNCOUNT [=m] || NETFILTER_CONNCOUNT [=m]))
 

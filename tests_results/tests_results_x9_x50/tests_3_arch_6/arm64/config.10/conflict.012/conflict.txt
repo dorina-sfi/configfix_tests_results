@@ -1,21 +1,23 @@
-SQUASHFS_DECOMP_MULTI_PERCPU: y => no
-      Direct dependencies: <choice>
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-DAMON_KUNIT_TEST: y => no
-      Direct dependencies: DAMON [=y] && KUNIT [=y]=y
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=y]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=n] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_IMX [=y] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || SPI_LM70_LLP [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=n] || SPI_OC_TINY [=n] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=y] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=y] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=y])
 
-SND_SOC_OMAP_MCPDM: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y])
-      Reverse dependencies: SND_SOC_OMAP_ABE_TWL6040 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && TWL6040_CORE [=y] && COMMON_CLK [=y] && (ARCH_OMAP4 || SOC_OMAP5 && MFD_PALMAS [=n] || COMPILE_TEST [=y])
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=y] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=n] || ARCH_HISI [=y] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=y] || ARCH_QCOM [=y] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=y] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-SUSPEND_FREEZER: y => no
-      Direct dependencies: SUSPEND [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=n] || COMPILE_TEST [=y]) && OF [=y]
 
-SND_SOC_AK5558: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
-      Reverse dependencies: SND_SOC_IMX_CARD [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y] && OF [=y] && I2C [=y]
+EXT4_FS: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
 
-VITESSE_PHY: y => no
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
-      Reverse dependencies: NET_DSA_VITESSE_VSC73XX [=y] && NETDEVICES [=y] && NET_DSA [=y]
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
 

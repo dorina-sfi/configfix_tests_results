@@ -1,22 +1,23 @@
-USB_ISIGHTFW: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+XZ_DEC: y => mod
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=m] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
 
-CRYPTO_GCM: m => yes
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || TLS [=n] && NET [=n] && INET [=n] || TIPC_CRYPTO [=n] && NET [=n] && TIPC [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || MAC80211 [=n] && NET [=n] && WIRELESS [=n] && CFG80211 [=n] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && PPC && 4xx
+XFRM_USER_COMPAT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && XFRM_USER [=m] && COMPAT_FOR_U64_ALIGNMENT [=y] && HAVE_EFFICIENT_UNALIGNED_ACCESS [=y]
 
-LEDS_LP5523: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+DEBUG_FS_ALLOW_ALL: y => no
+      Direct dependencies: <choice>
 
-DRM_PANEL_SAMSUNG_S6E63J0X03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+SENSORS_MAX16601: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-SENSORS_LM3533: m => yes
-      Direct dependencies: IIO [=m] && MFD_LM3533 [=m]
+NFC_ST95HF: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && SPI [=y] && NFC_DIGITAL [=m]
 
-LEDS_LP5562: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+HID_TIVO: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
 

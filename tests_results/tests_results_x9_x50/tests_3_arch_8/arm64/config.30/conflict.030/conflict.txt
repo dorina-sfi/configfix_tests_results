@@ -1,27 +1,30 @@
-CHARGER_BQ24190: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && EXTCON [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-IOMMU_IO_PGTABLE_LPAE: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
-      Reverse dependencies: DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=y] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=m] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=n] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=n] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=y] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
-
-LEDS_LM3533: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_LM3533 [=m]
-
-SENSORS_MAX31785: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-CRC8: m => no
+CRC4: y => no
       Direct dependencies: y
-      Reverse dependencies: PCIE_QCOM [=n] && PCI [=y] && OF [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=y] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=m] && HWMON [=y] && I2C [=m] || SENSORS_SHT4x [=m] && HWMON [=y] && I2C [=m] || SENSORS_ADM1266 [=n] && HWMON [=y] && PMBUS [=m] && GPIOLIB [=y] || MFD_MT6360 [=m] && HAS_IOMEM [=y] && I2C [=m] || AD7280 [=n] && STAGING [=n] && IIO [=m] && SPI [=y] || SCA3300 [=n] && IIO [=m] && SPI [=y] || SCD30_I2C [=m] && IIO [=m] && SCD30_CORE [=m] && I2C [=m] || SCD4X [=n] && IIO [=m] && I2C [=m] || SENSIRION_SGP30 [=m] && IIO [=m] && I2C [=m] || SENSIRION_SGP40 [=m] && IIO [=m] && I2C [=m] || SPS30_I2C [=n] && IIO [=m] && I2C [=m] || ICP10100 [=m] && IIO [=m] && I2C [=m]
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=y] && GPIOLIB [=y]
 
-SM_GCC_8150: y => mod
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SM_GPUCC_8150 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SM_VIDEOCC_8150 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+MMC_DW_PLTFM: y => no
+      Direct dependencies: MMC [=y] && MMC_DW [=y]
+      Reverse dependencies: MMC_DW_BLUEFIELD [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_EXYNOS [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_HI3798CV200 [=n] && MMC [=y] && MMC_DW [=y] || MMC_DW_K3 [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_ROCKCHIP [=y] && MMC [=y] && MMC_DW [=y] && ARCH_ROCKCHIP [=y]
 
-TRANSPARENT_HUGEPAGE_ALWAYS: y => no
+LTO_NONE: y => no
       Direct dependencies: <choice>
 
-HID_ZEROPLUS: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+QCS_GCC_404: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: QCS_Q6SSTOP_404 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+
+SPI_BITBANG: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=y]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_IMX [=y] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) || SPI_LM70_LLP [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=y] || SPI_OC_TINY [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=n] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=y] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=y])
+
+PINCONF: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: GENERIC_PINCONF [=y] && PINCTRL [=y] || PINCTRL_AT91 [=n] && PINCTRL [=y] && OF [=y] && ARCH_AT91 || PINCTRL_AMD [=n] && PINCTRL [=y] && HAS_IOMEM [=y] && (ACPI [=n] || COMPILE_TEST [=y]) || PINCTRL_DA850_PUPD [=n] && PINCTRL [=y] && OF [=y] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=y]) || PINCTRL_LANTIQ [=n] && PINCTRL [=y] && LANTIQ || PINCTRL_OXNAS [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_SX150X [=y] && PINCTRL [=y] && I2C [=y]=y || PINCTRL_ST [=n] && PINCTRL [=y] && OF [=y] || PINCTRL_KEEMBAY [=y] && PINCTRL [=y] && (ARCH_KEEMBAY [=n] || ARM64 [=y] && COMPILE_TEST [=y]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=y] && (ARCH_ACTIONS [=n] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_ASPEED [=y] && PINCTRL [=y] && (ARCH_ASPEED || COMPILE_TEST [=y]) && OF [=y] && MFD_SYSCON [=y] || PINCTRL_BCM281XX [=y] && PINCTRL [=y] && OF [=y] && (ARCH_BCM_MOBILE || COMPILE_TEST [=y]) || PINCTRL_BCM2835 [=y] && PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=y]) || PINCTRL_BCM63XX [=y] && PINCTRL [=y] || PINCTRL_IPROC_GPIO [=n] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=y]) || PINCTRL_NSP_GPIO [=y] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_BCM_NSP || COMPILE_TEST [=y]) || PINCTRL_IMX1_CORE [=n] && PINCTRL [=y] || PINCTRL_MXS [=n] && PINCTRL [=y] || PINCTRL_MVEBU [=y] && PINCTRL [=y] || PINCTRL_ARMADA_37XX [=y] && PINCTRL [=y] || PINCTRL_NPCM7XX [=n] && PINCTRL [=y] && (ARCH_NPCM7XX || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_SAMSUNG [=y] && PINCTRL [=y] && OF_GPIO [=y] || PINCTRL_SPRD [=y] && PINCTRL [=y] || PINCTRL_TEGRA [=y] && PINCTRL [=y] || PINCTRL_TEGRA_XUSB [=y] && PINCTRL [=y] || PINCTRL_MESON [=y] && PINCTRL [=y] && ARCH_MESON [=y] && OF [=y] || PINCTRL_LOCHNAGAR [=y] && PINCTRL [=y] && MFD_LOCHNAGAR [=y] || PINCTRL_EQUILIBRIUM [=y] && PINCTRL [=y] && OF [=y] && HAS_IOMEM [=y] && (X86 || COMPILE_TEST [=y]) || PINCTRL_LYNXPOINT [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=y]) && ACPI [=n] || PINCTRL_MERRIFIELD [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=y]) && X86_INTEL_MID || PINCTRL_INTEL [=n] && PINCTRL [=y] && (X86 || COMPILE_TEST [=y]) || PINCTRL_NOMADIK [=n] && PINCTRL [=y] && (ARCH_U8500 || ARCH_NOMADIK) && OF [=y] && GPIOLIB [=y] || PINCTRL_PXA [=y] && PINCTRL [=y] && (ARCH_PXA || COMPILE_TEST [=y]) || PINCTRL_MSM [=y] && PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && GPIOLIB [=y] || PINCTRL_QCOM_SPMI_PMIC [=y] && PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && OF [=y] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=y] && PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_LPASS_LPI [=y] && PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && GPIOLIB [=y] || PINCTRL_SH_PFC [=y] && PINCTRL [=y]
+
+TIME_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 

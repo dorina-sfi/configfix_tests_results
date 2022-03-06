@@ -1,26 +1,24 @@
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=y])
+COMEDI_AMPLC_PC263_PCI: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
+CAN_CC770: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && HAS_IOMEM [=y]
 
-USB_HCD_SSB: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && SSB [=y]
-      Reverse dependencies: USB_OHCI_HCD_SSB [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=y] && (SSB [=y]=y || SSB [=y]=USB_OHCI_HCD [=y])
+COMMON_CLK_MT6779_AUDSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
 
-CHARLCD_BL_OFF: y => no
-      Direct dependencies: <choice>
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=y] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=n] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=n] || ARCH_QCOM [=n] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=y] || MFD_MADERA [=m] && HAS_IOMEM [=y]
 
-ACPI_DEBUG: y => no
-      Direct dependencies: ACPI [=y]
-      Reverse dependencies: ACPI_DEBUGGER [=y] && ACPI [=y]
+TI_MESSAGE_MANAGER: y => mod
+      Direct dependencies: MAILBOX [=y] && (ARCH_KEYSTONE || ARCH_K3 [=y])
+      Reverse dependencies: ARCH_K3 [=y]
 
-ARM64_CRYPTO: y => no
-      Direct dependencies: CRYPTO [=y] && ARM64 [=y]
-      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n]) && ARM64 [=y] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=y])
+CPU_ISOLATION: y => no
+      Direct dependencies: SMP [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-SERIO_SERPORT: y => no
-      Direct dependencies: SERIO [=y] && TTY [=y]
-      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
+VFIO_PLATFORM: m => yes
+      Direct dependencies: VFIO [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y])
 

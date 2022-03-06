@@ -1,16 +1,18 @@
-MTD_NAND_INTEL_LGM: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-MSDOS_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+STM32_DFSDM_CORE: y => no
+      Direct dependencies: IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-OVERLAY_FS_REDIRECT_DIR: y => no
-      Direct dependencies: OVERLAY_FS [=m]
-      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=m]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-ECRYPT_FS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n)
+FB_BIG_ENDIAN: y => no
+      Direct dependencies: <choice>
 
-SPI_DLN2: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && MFD_DLN2 [=m]
+BRANCH_PROFILE_NONE: y => no
+      Direct dependencies: <choice>
 

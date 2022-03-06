@@ -1,25 +1,28 @@
-IIO_TIGHTLOOP_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
+EXT4_FS_POSIX_ACL: y => no
+      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
+      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
 
-HID_ACCUTOUCH: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+CPU_SUP_CENTAUR: y => no
+      Direct dependencies: y
 
-SND_SOC_STI_SAS: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+INPUT: y => no
+      Direct dependencies: y
+      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y]
 
-SENSORS_PXE1610: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SSB_PCIHOST: y => no
+      Direct dependencies: SSB [=y] && SSB_PCIHOST_POSSIBLE [=y]
+      Reverse dependencies: B44_PCI_AUTOSELECT [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && B44 [=y] && SSB_PCIHOST_POSSIBLE [=y] || B43_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && B43 [=n] && SSB_PCIHOST_POSSIBLE [=y] || B43LEGACY_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && B43LEGACY [=n] && SSB_PCIHOST_POSSIBLE [=y]
 
-CPU_FREQ_GOV_SCHEDUTIL: y => no
-      Direct dependencies: CPU_FREQ [=y] && SMP [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=y] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y] && SMP [=y]
+RAPIDIO_ENUM_BASIC: y => no
+      Direct dependencies: <choice>
 
-CHARGER_MP2629: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MP2629 [=m] && MP2629_ADC [=m] && IIO [=m]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-DA280: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+LOCK_DOWN_KERNEL_FORCE_INTEGRITY: y => no
+      Direct dependencies: <choice>
 
-SENSORS_IIO_HWMON: m => yes
-      Direct dependencies: HWMON [=y] && IIO [=m]
+SND_SOC_CS35L41_SPI: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SPI_MASTER [=n]
+      Reverse dependencies: SND_SOC_AMD_VANGOGH_MACH [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP5x [=y] && I2C [=y]
 

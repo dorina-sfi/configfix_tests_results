@@ -1,12 +1,15 @@
-REGULATOR_WM8994: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_WM8994 [=m]
+PCS_XPCS: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y]
+      Reverse dependencies: NET_DSA_SJA1105 [=n] && NETDEVICES [=y] && NET_DSA [=n] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || STMMAC_ETH [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=y] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
 
-MMA8452: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MEDIA_SDR_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-RTC_DRV_DS3232: m => yes
-      Direct dependencies: RTC_CLASS [=y] && RTC_I2C_AND_SPI [=m]
+MEDIA_TUNER_R820T: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=y] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_RTL28XXU [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-I2C_MUX_LTC4306: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 

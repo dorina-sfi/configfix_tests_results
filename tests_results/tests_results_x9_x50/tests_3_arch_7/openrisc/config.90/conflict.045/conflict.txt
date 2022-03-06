@@ -1,27 +1,22 @@
-I2C_ALGOPCA: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
+GREYBUS_I2C: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m] && GREYBUS_BRIDGED_PHY [=m] && I2C [=y]
 
-EFI_PARTITION: y => no
+COMEDI_USBDUXFAST: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_USB_DRIVERS [=m]
+
+PPDEV: m => yes
+      Direct dependencies: PARPORT [=m]
+
+AM2315: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+MSDOS_PARTITION: y => no
       Direct dependencies: BLOCK [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+BT_HCIUART: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && (SERIAL_DEV_BUS [=n] || !SERIAL_DEV_BUS [=n]) && TTY [=y]
 
-BLK_DEV_INITRD: y => no
+NLS: y => mod
       Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
-
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y]
-      Reverse dependencies: FB_ARMCLCD [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && FB [=y] && ARM_AMBA [=n] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || FB_IMX [=n] && FB [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=n] || FB_ATMEL [=n] && FB [=y] && OF [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=n]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=y]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=y]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=n]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=y] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=y] && FSL_SOC || FB_SMSCUFX [=y] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_UDL [=y] && HAS_IOMEM [=y] && FB [=y] && USB [=y] || FB_DA8XX [=n] && FB [=y] && HAVE_CLK [=n] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=n]) || FB_SM750 [=n] && STAGING [=y] && FB [=y] && PCI [=n]
-
-I2C_ALGOPCA: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
-
-CRYPTO_MANAGER: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=n] || CRYPTO_PCRYPT [=y] && CRYPTO [=y] && SMP [=y] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=n] || EXPERT [=y]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=y] && CRYPTO [=y] || CRYPTO_ECB [=y] && CRYPTO [=y] || CRYPTO_LRW [=n] && CRYPTO [=y] || CRYPTO_OFB [=n] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=y] && CRYPTO [=y] || CRYPTO_KEYWRAP [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=n] && CRYPTO [=y] || CRYPTO_VMAC [=y] && CRYPTO [=y]
+      Reverse dependencies: PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && SCSI_DMA [=y] || USB [=y] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=m] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI || JFS_FS [=n] && BLOCK [=y] || F2FS_FS [=y] && BLOCK [=y] || JOLIET [=n] && BLOCK [=y] && ISO9660_FS [=y] || UDF_FS [=y] && BLOCK [=y] || FAT_FS [=n] && BLOCK [=y] || EXFAT_FS [=m] && BLOCK [=y] || NTFS_FS [=y] && BLOCK [=y] || NTFS3_FS [=y] && BLOCK [=y] || HFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || HFSPLUS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || BEFS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 && VBOXGUEST [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 

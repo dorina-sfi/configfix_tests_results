@@ -1,14 +1,15 @@
-CRYPTO_DEFLATE: m => no
+CROS_EC_I2C: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && CROS_EC [=m] && I2C [=y]
+
+MFD_WL1273_CORE: m => no
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=y]
+      Reverse dependencies: RADIO_WL1273 [=m] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+
+CRYPTO_CHACHA20: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=m] && NET [=y] && INET [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
 
-IIO_CROS_EC_LIGHT_PROX: m => yes
-      Direct dependencies: IIO [=m] && IIO_CROS_EC_SENSORS_CORE [=m]
-
-EXTCON: y => mod
-      Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=n] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=n] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=y] || USB_EHCI_HCD [=n] && !USB_GADGET [=y] || !USB_EHCI_HCD [=n] && USB_GADGET [=y]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
-
-MLX90614: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SCSI_SAS_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && !S390 || FUSION_SAS [=m] && FUSION [=y] && PCI [=y] && SCSI [=y]
 

@@ -1,17 +1,18 @@
-SND_SOC_FSL_SPDIF: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_IMX_SPDIF [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n]
+SENSORS_INA3221: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+I2C_ALGOPCA: m => yes
+      Direct dependencies: I2C [=m]
+      Reverse dependencies: I2C_PCA_PLATFORM [=n] && I2C [=m] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=m] && HAS_IOMEM [=y] && ISA
 
-REGULATOR_ARIZONA_LDO1: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=m] || MFD_MADERA [=m]) && SND_SOC [=m]
+IIO_CONFIGFS: m => yes
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: IIO_SW_DEVICE [=m] && IIO [=m] || IIO_SW_TRIGGER [=n] && IIO [=m]
 
-SENSORS_W83791D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+IIO_ST_MAGN_3AXIS: m => no
+      Direct dependencies: IIO [=m] && (I2C [=m] || SPI_MASTER [=y]) && SYSFS [=y]
+      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=m] && (I2C [=m] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=m] && !SENSORS_LIS3_SPI [=n]
 
-MAG3110: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+GPIO_PCF857X: m => yes
+      Direct dependencies: GPIOLIB [=y] && I2C [=m]
 

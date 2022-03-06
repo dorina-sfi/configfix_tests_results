@@ -1,23 +1,20 @@
-BPF_SYSCALL: y => no
-      Direct dependencies: y
-      Reverse dependencies: AF_KCM [=y] && NET [=y] && INET [=y]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-EXT4_FS: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
+HID_SENSOR_ACCEL_3D: m => yes
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
 
-CRYPTO_ZSTD: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+NF_DUP_IPV4: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y])
+      Reverse dependencies: NETFILTER_XT_TARGET_TEE [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=n] && (IPV6 [=y] || IPV6 [=y]=n) && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y]) && (IP6_NF_IPTABLES [=n] || !IP6_NF_IPTABLES [=n]) || NFT_DUP_IPV4 [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_TABLES_IPV4 [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y])
 
-EXT4_FS_POSIX_ACL: y => no
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
-      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
+TI_EQEP: m => yes
+      Direct dependencies: COUNTER [=m] && (SOC_AM33XX || COMPILE_TEST [=y])
 
-TIMERFD: y => no
-      Direct dependencies: y
+MTD_REDBOOT_PARTS: m => yes
+      Direct dependencies: MTD [=m]
 
-NLS_UTF8: y => no
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+NFT_REDIR: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_CONNTRACK [=y] && NF_NAT [=m]
 

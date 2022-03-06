@@ -1,31 +1,25 @@
-OWL_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: ARCH_ACTIONS [=y]
+I2C_MLXCPLD: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (X86_64 || COMPILE_TEST [=y])
 
-PM_DEVFREQ_EVENT: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
+MTD_NAND_INTEL_LGM: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-MTD_PARSER_IMAGETAG: y => no
-      Direct dependencies: MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
-      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+VL53L0X_I2C: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-SND_SOC_FSL_AUD2HTX: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y])
-      Reverse dependencies: SND_SOC_IMX_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y]
+DRM_EXYNOS: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && DRM [=m] && COMMON_CLK [=y] && (ARCH_S3C64XX || ARCH_S5PV210 || ARCH_EXYNOS [=y] || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) && MMU [=y]
 
-DRM_DW_HDMI_I2S_AUDIO: y => no
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && SND_SOC [=y] && DRM_DW_HDMI [=y]
-      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=y] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && DRM_DW_HDMI [=y]
+I2C_DEMUX_PINCTRL: m => yes
+      Direct dependencies: I2C [=m] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
+
+DRM_LONTIUM_LT9611UXC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
 
 PINCTRL_EXYNOS: y => no
       Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y])
       Reverse dependencies: ARCH_EXYNOS [=y]
-
-STM32_DFSDM_CORE: y => no
-      Direct dependencies: IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: STM32_DFSDM_ADC [=y] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
-
-UNIX98_PTYS: y => no
-      Direct dependencies: TTY [=y]
 

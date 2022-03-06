@@ -1,10 +1,12 @@
-EDAC_QCOM: m => yes
-      Direct dependencies: EDAC [=m] && ARCH_QCOM [=y] && QCOM_LLCC [=y]
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 
-MEMORY: y => no
-      Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=m] && MTD [=y] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE [=n] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK [=n] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=n] || MTK_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+DRM_AMDGPU_USERPTR: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM_AMDGPU [=y] && MMU [=y]
+      Reverse dependencies: HSA_AMD [=y] && HAS_IOMEM [=y] && DRM_AMDGPU [=y] && (X86_64 || ARM64 [=y] || PPC64)
 
-KEYBOARD_ADC: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && IIO [=m]
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
 

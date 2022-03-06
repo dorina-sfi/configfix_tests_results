@@ -1,21 +1,24 @@
-PPP_SYNC_TTY: m => yes
-      Direct dependencies: NETDEVICES [=y] && TTY [=y] && PPP [=m]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-TCG_TIS_ST33ZP24_SPI: m => yes
-      Direct dependencies: TCG_TPM [=m] && SPI [=y]
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 
-MMC_TOSHIBA_PCI: m => yes
-      Direct dependencies: MMC [=m] && PCI [=y]
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
 
-YAM: m => yes
-      Direct dependencies: NET [=y] && HAMRADIO [=y] && AX25 [=m] && !S390
+CPU_IDLE_GOV_LADDER: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
 
-PCIEASPM_POWER_SUPERSAVE: y => no
-      Direct dependencies: <choice> && PCIEASPM [=y]
+HZ_250: y => no
+      Direct dependencies: <choice>
 
-REGULATOR_MT6360: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6360 [=m]
+ROMFS_BACKED_BY_BLOCK: y => no
+      Direct dependencies: <choice> && BLOCK [=y]
 
-MSM_GCC_8660: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=n] && <choice> && X86_64 [=y]
 

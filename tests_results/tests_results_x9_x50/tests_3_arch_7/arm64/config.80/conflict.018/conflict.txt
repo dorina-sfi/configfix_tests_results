@@ -1,23 +1,26 @@
-MTD_NAND_MLC_LPC32XX: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+CONFIGFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=y] || TARGET_CORE [=y] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=n] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=y])
 
-MEN_Z188_ADC: m => yes
-      Direct dependencies: IIO [=y] && MCB [=m]
+CLK_R8A774A1: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774A1 [=y]
 
-VCNL4035: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MESON_CANVAS: y => no
+      Direct dependencies: ARCH_MESON [=n] || COMPILE_TEST [=y]
+      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=n] || COMPILE_TEST [=y]) || VIDEO_MESON_VDEC [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && HAS_DMA [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=y])
 
-CLK_GFM_LPASS_SM8250: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+XZ_DEC_POWERPC: y => no
+      Direct dependencies: XZ_DEC [=y]
 
-CRYPTO_ECDSA: y => mod
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=n] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=y] || SND_AOA_ONYX [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=n] && !UML && SND [=n] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+
+CRYPTO_JITTERENTROPY: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MODULE_SIG_KEY_TYPE_ECDSA [=y] && <choice>
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-CRYPTO_DEFLATE: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=m] && NET [=y] && INET [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-MTD_PHYSMAP: m => yes
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y] && (MTD_CFI [=n] || MTD_JEDECPROBE [=m] || MTD_ROM [=m] || MTD_RAM [=m] || MTD_LPDDR [=n])
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
 

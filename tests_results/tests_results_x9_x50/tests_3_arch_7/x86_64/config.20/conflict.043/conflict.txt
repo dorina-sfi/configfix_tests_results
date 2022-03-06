@@ -1,23 +1,26 @@
-DRM_PANEL_SITRONIX_ST7703: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+NETFILTER_XT_TARGET_TEE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=n] || IPV6 [=n]=n) && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m]) && (IP6_NF_IPTABLES [=n] || !IP6_NF_IPTABLES [=n])
 
-CPU_SUP_HYGON: y => no
+RAVE_SP_EEPROM: m => yes
+      Direct dependencies: NVMEM [=y] && RAVE_SP_CORE [=m]
+
+CRYPTO_CTR: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=y] && PCMCIA [=m] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+
+CRYPTO_GCM: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=m] && NET [=y] && INET [=y] || TIPC_CRYPTO [=y] && NET [=y] && TIPC [=m] || XFRM_ESP [=y] && NET [=y] && INET [=y] || MAC80211 [=m] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx
+
+CRYPTO_CRC32C: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=m] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || ISCSI_TARGET [=m] && TARGET_CORE [=y] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+
+CRC_T10DIF: y => mod
       Direct dependencies: y
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=m] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=y] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=y] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && TARGET_CORE [=y] && SCSI_FC_ATTRS [=y] || SCSI_DEBUG [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y]
 
-LEDS_LM3692X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && OF [=y]
-
-CRYPTO_DEFLATE: m => yes
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=m] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
-
-WILCO_EC_EVENTS: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && WILCO_EC [=m]
-
-SND_SOC_CROS_EC_CODEC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && CROS_EC [=y]
-      Reverse dependencies: SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=y] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] && CROS_EC [=y]
-
-CMA_SIZE_SEL_MBYTES: y => no
-      Direct dependencies: <choice>
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

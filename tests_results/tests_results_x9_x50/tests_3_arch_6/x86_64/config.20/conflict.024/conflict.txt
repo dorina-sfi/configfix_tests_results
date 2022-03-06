@@ -1,19 +1,18 @@
-WATCHDOG_PRETIMEOUT_DEFAULT_GOV_PANIC: y => no
-      Direct dependencies: <choice> && WATCHDOG_PRETIMEOUT_GOV_PANIC [=y]
+RTL_CARDS: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_REALTEK [=y] && MAC80211 [=m] && (PCI [=n] || USB [=y])
 
-CRYPTO_TWOFISH_X86_64_3WAY: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+MTD_BLOCK2MTD: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && BLOCK [=y]
 
-PM_QOS_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]=y
+SENSORS_PC87427: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-SPARSEMEM_MANUAL: y => no
-      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
+PARPORT_PC: m => yes
+      Direct dependencies: PARPORT [=m] && ARCH_MIGHT_HAVE_PC_PARPORT [=y]
 
-FB_MB862XX_PCI_GDC: y => no
-      Direct dependencies: <choice> && PCI [=y]
+FB_OMAP2_CONNECTOR_DVI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m] && I2C [=y]
 
-KUNIT_EXAMPLE_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+MTD_CFI_NOSWAP: y => no
+      Direct dependencies: <choice> && (!ARCH_IXP4XX || CPU_BIG_ENDIAN)
 

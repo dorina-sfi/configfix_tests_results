@@ -1,38 +1,32 @@
-CRYPTO_CRC32C: y => no
+W1_SLAVE_DS2805: m => yes
+      Direct dependencies: W1 [=m]
+
+LEDS_BCM6328: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && HAS_IOMEM [=y] && OF [=y]
+
+MMC_DAVINCI: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_DAVINCI || COMPILE_TEST [=y])
+
+MMC_SDHCI_TEGRA: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_TEGRA || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m]
+
+CRYPTO_DRBG_MENU: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=n] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=n] && BLOCK [=n] || JBD2 [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-FW_LOADER_USER_HELPER: y => no
-      Direct dependencies: FW_LOADER [=y]
-      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+TIME_KUNIT_TEST: m => yes
+      Direct dependencies: KUNIT [=m]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+CHARGER_BQ25890: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-USB_MUSB_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
+MANAGER_SBS: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && I2C_MUX [=m] && GPIOLIB [=y]
 
-DVB_AU8522_DTV: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_AU0828 [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && I2C [=y] && INPUT [=y] && DVB_CORE [=y] && USB [=y] && VIDEO_V4L2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+PCF50633_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_PCF50633 [=m]
 
-MEDIA_CONTROLLER_DVB: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_CONTROLLER [=y] && DVB_CORE [=y]
-      Reverse dependencies: VIDEO_AU0828 [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && I2C [=y] && INPUT [=y] && DVB_CORE [=y] && USB [=y] && VIDEO_V4L2 [=y]
-
-DVB_STV6110: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_DW2102 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
-
-USB: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
-      Reverse dependencies: MOUSE_APPLETOUCH [=n] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=y] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=n] && INPUT [=y] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=n] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=n] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=y] && INPUT [=y] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=y] && INPUT [=y] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=y] && INPUT [=y] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=y] && INPUT [=y] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=y] && INPUT [=y] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=n] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=n]
-
-DVB_EC100: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_EC168 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y]
-
-REGULATOR: y => no
+CRC8: m => no
       Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=y] && I2C [=y] && GPIOLIB [=y] && ACPI || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=n] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=n] && GPIOLIB [=y] && SPI_MASTER [=n] || SENSORS_SHT3x [=n] && HWMON [=y] && I2C [=m] || SENSORS_SHT4x [=n] && HWMON [=y] && I2C [=m] || SENSORS_ADM1266 [=n] && HWMON [=y] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=m] && HAS_IOMEM [=y] && I2C [=m] || AD7280 [=n] && STAGING [=n] && IIO [=y] && SPI [=n] || SCA3300 [=n] && IIO [=y] && SPI [=n] || SCD30_I2C [=n] && IIO [=y] && SCD30_CORE [=y] && I2C [=m] || SCD4X [=n] && IIO [=y] && I2C [=m] || SENSIRION_SGP30 [=n] && IIO [=y] && I2C [=m] || SENSIRION_SGP40 [=m] && IIO [=y] && I2C [=m] || SPS30_I2C [=n] && IIO [=y] && I2C [=m] || ICP10100 [=n] && IIO [=y] && I2C [=m]
 

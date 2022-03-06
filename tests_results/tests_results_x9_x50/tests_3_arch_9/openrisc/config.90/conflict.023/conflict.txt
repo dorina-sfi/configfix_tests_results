@@ -1,29 +1,29 @@
-KEMPLD_WDT: m => yes
-      Direct dependencies: WATCHDOG [=y] && MFD_KEMPLD [=m]
+INV_ICM42600_SPI: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
 
-SENSORS_INSPUR_IPSPS: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+DVB_SP2: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DVBSKY [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-PAGE_POISONING: y => no
-      Direct dependencies: y
-      Reverse dependencies: DEBUG_PAGEALLOC [=y] && DEBUG_KERNEL [=y] && (!HIBERNATION || ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n] && !PPC && !SPARC) && !ARCH_SUPPORTS_DEBUG_PAGEALLOC [=n]
+CRYPTO_CTR: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=m] && NET [=y] && IEEE802154 [=y] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=y] || CRYPTO_CCM [=m] && CRYPTO [=y] || CRYPTO_GCM [=n] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=m] && IXP4XX_NPE [=m] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-USB_G_NCM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && NET [=y]
+DRM_NWL_MIPI_DSI: m => yes
+      Direct dependencies: DRM_BRIDGE [=y] && DRM [=m] && COMMON_CLK [=y] && OF [=y] && HAS_IOMEM [=y]
 
-IPMI_IPMB: m => yes
-      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
+BATTERY_BQ27XXX_I2C: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
 
-W1_SLAVE_DS28E04: m => yes
-      Direct dependencies: W1 [=m]
+MMA7660: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CRC16: y => mod
-      Direct dependencies: y
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=y] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=y] && CAN_DEV [=n] && USB [=y] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && ACPI && EFI && SPI [=n] && (X86 || COMPILE_TEST [=n]) && LEDS_CLASS [=m] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=m] && W1 [=m] || W1_SLAVE_DS2423 [=n] && W1 [=m] || W1_SLAVE_DS2433_CRC [=n] && W1 [=m] && W1_SLAVE_DS2433 [=n] || W1_SLAVE_DS250X [=n] && W1 [=m] || W1_SLAVE_DS28E04 [=m] && W1 [=m] || W1_SLAVE_DS28E17 [=n] && W1 [=m] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
+MTD_REDBOOT_PARTS: m => yes
+      Direct dependencies: MTD [=m]
 
-HID_REDRAGON: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+CAN_UCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && USB [=y]
 
-SENSORS_IBM_CFFPS: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m] && LEDS_CLASS [=m]
+PING: m => yes
+      Direct dependencies: IIO [=m] && GPIOLIB [=y]
 

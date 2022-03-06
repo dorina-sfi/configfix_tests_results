@@ -1,16 +1,17 @@
-ND_BLK: m => yes
-      Direct dependencies: LIBNVDIMM [=m]
+CMA_SIZE_SEL_MBYTES: y => no
+      Direct dependencies: <choice>
 
-SENSORS_LM85: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+TOUCHSCREEN_USB_ETURBO: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 
-RPMSG_NS: m => yes
-      Direct dependencies: RPMSG [=m]
-      Reverse dependencies: RPMSG_VIRTIO [=n] && HAS_DMA [=y]
+LOCK_DOWN_KERNEL_FORCE_INTEGRITY: y => no
+      Direct dependencies: <choice>
 
-SENSORS_HMC5843_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
+NET_NSH: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=y] || NF_DEFRAG_IPV6 [=y]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 
-GENERIC_ADC_THERMAL: m => yes
-      Direct dependencies: THERMAL [=y] && IIO [=m]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=n] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 

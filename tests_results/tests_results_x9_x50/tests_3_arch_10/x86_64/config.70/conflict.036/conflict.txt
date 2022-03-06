@@ -1,35 +1,32 @@
-CRYPTO_CHACHA20: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
+VT: y => no
+      Direct dependencies: TTY [=y]
 
-LEGACY_VSYSCALL_XONLY: y => no
-      Direct dependencies: <choice>
+HW_RANDOM_TIMERIOMEM: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
 
-LIDAR_LITE_V2: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SENSORS_IBMPEX: m => yes
+      Direct dependencies: HWMON [=y] && IPMI_HANDLER [=m]
 
-SRF04: m => yes
-      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+VIDEO_ADV7604: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: VIDEO_COBALT [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_V4L2 [=m] && I2C [=y] && PCI_MSI [=y] && MTD_COMPLEX_MAPPINGS [=n] && (GPIOLIB [=y] && DRM_I2C_ADV7511 [=n]=n || COMPILE_TEST [=y]) && SND [=n] && MTD [=n]
 
-CRC64: y => no
-      Direct dependencies: y
-      Reverse dependencies: BCACHE [=y] && MD [=y]
+ATA_FORCE: y => no
+      Direct dependencies: ATA [=m]
 
-PCF50633_ADC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && MFD_PCF50633 [=m]
+DVB_DIB7000M: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CRYPTO_STREEBOG: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+TOUCHSCREEN_CYTTSP4_I2C: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_CYTTSP4_CORE [=m] && I2C [=y]
 
-REGULATOR_FIXED_VOLTAGE: y => mod
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=n])
+VIDEO_HEXIUM_ORION: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=m] && I2C [=y]
 
-BH1780: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+EXTCON_ADC_JACK: m => yes
+      Direct dependencies: EXTCON [=m] && IIO [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=n] && GPIOLIB [=y] && SYSFS [=y]
+COMEDI_PCI_DRIVERS: m => yes
+      Direct dependencies: COMEDI [=m] && PCI [=y]
 

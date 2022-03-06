@@ -1,25 +1,32 @@
-MOUSE_SERIAL: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y]
+VIDEO_UPD64083: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-MMC_SDHCI_OF_ASPEED: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && OF_ADDRESS [=y]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-DAVICOM_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+FUNCTION_TRACER: y => no
+      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
+      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
 
-COMEDI_CONTEC_PCI_DIO: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+MFD_RDC321X: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: GPIO_RDC321X [=y] && GPIOLIB [=y] && PCI [=y]
 
-MSDOS_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+GPIOLIB: y => no
+      Direct dependencies: y
+      Reverse dependencies: STA2X11 [=n] && X86_32_NON_STANDARD [=n] && PCI [=y] || OLPC [=n] && X86_32 [=n] && !X86_PAE [=n] || ALIX [=n] && X86_32 [=n] || NET5501 [=n] && X86_32 [=n] || GEOS [=n] && X86_32 [=n] && DMI [=y] || NET_DSA_VITESSE_VSC73XX [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_XGENE [=n] && NETDEVICES [=y] && ETHERNET [=n] && (ARCH_XGENE || COMPILE_TEST [=y]) || I2C_MUX_LTC4306 [=y] && I2C [=y] && I2C_MUX [=y] || PINCTRL_APPLE_GPIO [=n] && PINCTRL [=n] && ARCH_APPLE || PINCTRL_AXP209 [=n] && PINCTRL [=n] && MFD_AXP20X [=y] && OF [=y] || PINCTRL_AT91 [=n] && PINCTRL [=n] && OF [=y] && ARCH_AT91 || PINCTRL_AT91PIO4 [=n] && PINCTRL [=n] && OF [=y] && HAS_IOMEM [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) || PINCTRL_AMD [=n] && PINCTRL [=n] && HAS_IOMEM [=y] && (ACPI [=y] || COMPILE_TEST [=y]) || PINCTRL_DA9062 [=n] && PINCTRL [=n] && MFD_DA9062 [=y] || PINCTRL_MCP23S08 [=n] && PINCTRL [=n] && (SPI_MASTER [=n] || I2C [=y]) || PINCTRL_OXNAS [=n] && PINCTRL [=n] && OF [=y] || PINCTRL_ROCKCHIP [=n] && PINCTRL [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_SX150X [=n] && PINCTRL [=n] && I2C [=y]=y || PINCTRL_INGENIC [=n] && PINCTRL [=n] && OF [=y] && (MIPS || COMPILE_TEST [=y]) || PINCTRL_RK805 [=n] && PINCTRL [=n] && MFD_RK808 [=y] || PINCTRL_OCELOT [=n] && PINCTRL [=n] && OF [=y] && HAS_IOMEM [=y] || PINCTRL_MICROCHIP_SGPIO [=n] && PINCTRL [=n] && OF [=y] && HAS_IOMEM [=y] || PINCTRL_K210 [=n] && PINCTRL [=n] && RISCV && SOC_CANAAN && OF [=y] || PINCTRL_KEEMBAY [=n] && PINCTRL [=n] && (ARCH_KEEMBAY || ARM64 && COMPILE_TEST [=y]) && HAS_IOMEM [=y] || PINCTRL_OWL [=n] && PINCTRL [=n] && (ARCH_ACTIONS || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_BCM2835 [=n] && PINCTRL [=n] && OF [=y] && (ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST [=y]) || PINCTRL_BCM63XX [=n] && PINCTRL [=n] || PINCTRL_NPCM7XX [=n] && PINCTRL [=n] && (ARCH_NPCM7XX || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MESON [=n] && PINCTRL [=n] && ARCH_MESON && OF [=y] || PINCTRL_LOCHNAGAR [=n] && PINCTRL [=n] && MFD_LOCHNAGAR [=y] || PINCTRL_TB10X [=n] && PINCTRL [=n] && OF [=y] && ARC_PLAT_TB10X || PINCTRL_EQUILIBRIUM [=n] && PINCTRL [=n] && OF [=y] && HAS_IOMEM [=y] && (X86 [=y] || COMPILE_TEST [=y]) || PINCTRL_LYNXPOINT [=n] && PINCTRL [=n] && (X86 [=y] || COMPILE_TEST [=y]) && ACPI [=y] || PINCTRL_INTEL [=n] && PINCTRL [=n] && (X86 [=y] || COMPILE_TEST [=y]) || PINCTRL_QCOM_SPMI_PMIC [=n] && PINCTRL [=n] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] && SPMI [=y] || PINCTRL_QCOM_SSBI_PMIC [=n] && PINCTRL [=n] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_SH_PFC_GPIO [=n] && PINCTRL [=n] || PINCTRL_RZA1 [=n] && PINCTRL [=n] && OF [=y] && (ARCH_R7S72100 [=n] || COMPILE_TEST [=y]) || PINCTRL_RZA2 [=n] && PINCTRL [=n] && OF [=y] && (ARCH_R7S9210 [=n] || COMPILE_TEST [=y]) || PINCTRL_RZG2L [=n] && PINCTRL [=n] && OF [=y] || PINCTRL_STM32 [=n] && PINCTRL [=n] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_SUNXI [=n] && PINCTRL [=n] && ARCH_SUNXI || EINT_MTK [=n] && PINCTRL [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (PINCTRL_MTK [=n] || PINCTRL_MTK_MOORE [=n] || PINCTRL_MTK_PARIS [=n] || COMPILE_TEST [=y]) || PINCTRL_MTK [=n] && PINCTRL [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_MOORE [=n] && PINCTRL [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=n] && PINCTRL [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || MFD_TC6393XB [=n] && HAS_IOMEM [=y] && ARM && HAVE_CLK [=y] || CEC_GPIO [=n] && MEDIA_CEC_SUPPORT [=n] && (PREEMPTION [=y] || COMPILE_TEST [=y]) || STA2X11_VIP [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=y] && VIRT_TO_BUS [=y] && I2C [=y] && (STA2X11 [=n] || COMPILE_TEST [=y]) && MEDIA_SUBDRV_AUTOSELECT [=n] || SND_SOC_RT9120 [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && I2C [=y] || SND_SOC_SIMPLE_AMPLIFIER [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] || SND_SOC_SIMPLE_MUX [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] || SND_SOC_ZL38060 [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SPI_MASTER [=n] || SND_SOC_MAX9759 [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] || OMAP_GPMC [=n] && MEMORY [=y] && OF_ADDRESS [=y] || STX104 [=y] && IIO [=y] && PC104 [=y] && X86 [=y] || AD5592R [=n] && IIO [=y] && SPI_MASTER [=n] || AD5593R [=y] && IIO [=y] && I2C [=y]
 
-EXT4_KUNIT_TESTS: m => yes
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=m] && KUNIT [=y]
+CRYPTO_CRCT10DIF: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRC_T10DIF [=y]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+TCP_CONG_VEGAS: y => no
+      Direct dependencies: NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=y]
+      Reverse dependencies: TCP_CONG_YEAH [=y] && NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=y]
 
-MMC_SDHCI_XENON: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m]
+THERMAL_GOV_STEP_WISE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
 

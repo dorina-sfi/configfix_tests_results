@@ -1,31 +1,33 @@
-POWER_RESET_ATC260X: m => yes
-      Direct dependencies: POWER_RESET [=y] && MFD_ATC260X [=m]
+ARCX_ANYBUS_CONTROLLER: m => yes
+      Direct dependencies: STAGING [=y] && HMS_ANYBUSS_BUS [=m] && OF [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && REGULATOR [=y]
 
-FB_OPENCORES: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
+KPSS_XCC: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-FONT_8x8: y => no
-      Direct dependencies: FONT_SUPPORT [=m] && (FRAMEBUFFER_CONSOLE [=y] || STI_CONSOLE [=n])
+BACKLIGHT_RAVE_SP: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && RAVE_SP_CORE [=m]
 
-HW_RANDOM_VIRTIO: m => yes
-      Direct dependencies: HW_RANDOM [=m] && VIRTIO [=m]
+GPIO_BD71828: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_ROHM_BD71828 [=m]
 
-ARM64_64K_PAGES: y => no
-      Direct dependencies: <choice>
+PINCTRL_PFC_R8A77960: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77960 [=y]
 
-FONT_8x8: y => no
-      Direct dependencies: FONT_SUPPORT [=m] && (FRAMEBUFFER_CONSOLE [=y] || STI_CONSOLE [=n])
+TCG_VTPM_PROXY: m => yes
+      Direct dependencies: TCG_TPM [=m]
 
-ARM64_PA_BITS_52: y => no
-      Direct dependencies: <choice> && ARM64_64K_PAGES [=y] && (ARM64_PAN [=n] || !ARM64_SW_TTBR0_PAN [=n])
+BRIDGE_NF_EBTABLES: m => yes
+      Direct dependencies: NET [=y] && BRIDGE [=m] && NETFILTER [=y] && NETFILTER_XTABLES [=y]
 
-CRYPTO_DEV_VIRTIO: m => yes
-      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && VIRTIO [=m]
+SCTP_COOKIE_HMAC_MD5: y => no
+      Direct dependencies: NET [=y] && IP_SCTP [=m]
+      Reverse dependencies: SCTP_DEFAULT_COOKIE_HMAC_MD5 [=y] && <choice>
 
-L2TP: m => yes
-      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n) && INET [=y]
+CRC16: y => mod
+      Direct dependencies: y
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=y] && INET [=y] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] && ACPI [=n] && EFI [=n] && SPI [=n] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=n] && W1 [=y] || W1_SLAVE_DS2423 [=n] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=m] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=y] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
 
-NET_DSA_TAG_RTL4_A: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_REALTEK_SMI [=n] && NETDEVICES [=y] && NET_DSA [=m]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 

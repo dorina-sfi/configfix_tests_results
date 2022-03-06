@@ -1,27 +1,29 @@
-MS5611: m => yes
-      Direct dependencies: IIO [=m]
-
-SND_SOC_CS35L36: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-
-SND_SOC_STA32X: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-
-AD7291: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-FPGA_REGION: y => mod
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
-
-MEMBARRIER: y => no
+VM_EVENT_COUNTERS: y => no
       Direct dependencies: y
-      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
 
-FXAS21002C: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n])
+MOUSE_PS2_ALPS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
 
-IPMI_SI: m => no
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=n] && HWMON [=y] && IPMI_HANDLER [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+
+UID16: y => no
+      Direct dependencies: HAVE_UID16 [=y] && MULTIUSER [=y]
+
+X509_CERTIFICATE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y]
+
+ACPI_HED: y => no
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_APEI_GHES [=y] && ACPI [=y] && ACPI_APEI [=y]
+
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=y] && HAVE_ARCH_SOFT_DIRTY [=y] && PROC_FS [=y]
+
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 

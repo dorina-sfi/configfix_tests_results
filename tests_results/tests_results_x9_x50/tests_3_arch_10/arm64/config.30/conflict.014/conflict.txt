@@ -1,33 +1,32 @@
-SERIAL_IPOCTAL: m => yes
-      Direct dependencies: IPACK_BUS [=m] && TTY [=y]
+L2TP_DEBUGFS: m => yes
+      Direct dependencies: NET [=y] && L2TP [=m] && DEBUG_FS [=y]
 
-REGULATOR_BD957XMUF: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD957XMUF [=m]
+I2C_MUX_MLXCPLD: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m]
 
-ISCSI_TARGET: m => yes
-      Direct dependencies: TARGET_CORE [=m] && INET [=y]
+NVME_TARGET_FCLOOP: m => yes
+      Direct dependencies: NVME_TARGET [=m] && NVME_FC [=y] && NVME_TARGET_FC [=m]
+
+NETFILTER_XT_TARGET_DSCP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && (IP_NF_MANGLE [=n] || IP6_NF_MANGLE [=m]) && NETFILTER_ADVANCED [=y]
+
+RTC_DRV_88PM80X: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_88PM800 [=m]
+
+SUNRPC_XPRT_RDMA: m => yes
+      Direct dependencies: NETWORK_FILESYSTEMS [=y] && SUNRPC [=y] && INFINIBAND [=m] && INFINIBAND_ADDR_TRANS [=y]
+
+TCG_TIS_SYNQUACER: m => yes
+      Direct dependencies: TCG_TPM [=m] && (ARCH_SYNQUACER [=n] || COMPILE_TEST [=y])
+
+DEBUG_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=y] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=n] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=y] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=n] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=n] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=n] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+
+L2TP: m => yes
+      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n) && INET [=y]
 
 CRYPTO_GCM: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=y] || TLS [=m] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=y] && NET [=y] && INET [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=n] || MACSEC [=n] && NETDEVICES [=y] && NET_CORE [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx
-
-FB_BIG_ENDIAN: y => no
-      Direct dependencies: <choice>
-
-PINCTRL_AXP209: m => yes
-      Direct dependencies: PINCTRL [=y] && MFD_AXP20X [=m] && OF [=y]
-
-CRYPTO_CHACHA20: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
-
-VIDEO_RDACM21: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-
-MEDIA_RADIO_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=y] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=y] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=m] || XFRM_ESP [=m] && NET [=y] && INET [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx
 

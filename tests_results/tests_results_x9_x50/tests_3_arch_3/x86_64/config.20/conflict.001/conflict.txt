@@ -1,9 +1,11 @@
-FTM_QUADDEC: m => yes
-      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
+INTEL_MEI_WDT: m => yes
+      Direct dependencies: WATCHDOG [=y] && INTEL_MEI [=m] && X86 [=y]
 
-ALTERA_PR_IP_CORE_PLAT: m => yes
-      Direct dependencies: FPGA [=y] && ALTERA_PR_IP_CORE [=m] && OF [=y] && HAS_IOMEM [=y]
+HID: y => mod
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=y] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=y] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=n]) && PCI [=y] && X86 [=y]
 
-SI1145: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_XTS: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=n] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=n]
 

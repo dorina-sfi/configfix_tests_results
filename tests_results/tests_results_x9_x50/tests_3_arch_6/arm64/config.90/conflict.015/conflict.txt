@@ -1,20 +1,24 @@
-MTD_NAND_QCOM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+SND_SOC_CS42XX8_I2C: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
+      Reverse dependencies: SND_SOC_MT2701_CS42448 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT2701 [=y] && I2C [=y]
 
-TIFM_CORE: m => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: MMC_TIFM_SD [=m] && MMC [=m] && PCI [=y] || MEMSTICK_TIFM_MS [=n] && MEMSTICK [=n] && PCI [=y]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 
-WANXL: m => yes
-      Direct dependencies: NETDEVICES [=y] && WAN [=y] && HDLC [=m] && PCI [=y]
+CPU_IDLE_GOV_LADDER: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
 
-VSOCKETS_LOOPBACK: m => yes
-      Direct dependencies: NET [=y] && VSOCKETS [=m]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
 
-ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=y] && ACPI [=y] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
 
-MODULE_SIG_SHA256: y => no
-      Direct dependencies: <choice>
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=y] && GPIOLIB [=y]
 

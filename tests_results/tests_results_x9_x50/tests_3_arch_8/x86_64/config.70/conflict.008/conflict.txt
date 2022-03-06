@@ -1,27 +1,31 @@
-DVB_USB_CE6230: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=y] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=y] && HAVE_ARCH_KFENCE [=y] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
 
-TWL4030_MADC: m => yes
-      Direct dependencies: IIO [=m] && TWL4030_CORE [=y]
-
-SND_HRTIMER: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && HIGH_RES_TIMERS [=y]
-
-BMA180: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y] && INPUT_BMA150 [=n]=n
-
-MODULE_SIG: y => no
-      Direct dependencies: MODULES [=y]
-      Reverse dependencies: SECURITY_LOCKDOWN_LSM [=y] && SECURITY [=y] && MODULES [=y]
-
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=m] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
-
-SND_SOC_RT5659: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-
-EXPERT: y => no
+CGROUPS: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
+
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=y] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
+
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
+
+X86_PM_TIMER: y => no
+      Direct dependencies: X86 [=y] && (ACPI [=y] || JAILHOUSE_GUEST [=n])
+      Reverse dependencies: JAILHOUSE_GUEST [=n] && HYPERVISOR_GUEST [=n] && X86_64 [=y] && PCI [=y]
+
+SND_SOC_INTEL_MACH: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=n])
+      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (X86 [=y] || COMPILE_TEST [=n]) || SND_SOC_SOF_INTEL_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n]
+
+SERIO: y => no
+      Direct dependencies: y
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=y] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_SERIAL [=y] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_VSXXXAA [=y] && INPUT [=y] && INPUT_MOUSE [=y] || JOYSTICK_WARRIOR [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_MAGELLAN [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEORB [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEBALL [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_STINGER [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TWIDJOY [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ZHENHUA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_FSIA6B [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || TABLET_SERIAL_WACOM4 [=n] && INPUT [=y] && INPUT_TABLET [=n] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=y] && INPUT [=y] && RMI4_CORE [=y] && RMI4_F03 [=y] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
+
+ETHERNET: y => no
+      Direct dependencies: NETDEVICES [=y] && NET [=y]
+      Reverse dependencies: SCSI_CXGB3_ISCSI [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || SCSI_BNX2_ISCSI [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && NET [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y] || SCSI_BNX2X_FCOE [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && LIBFC [=n] && LIBFCOE [=n] && MMU [=y]
 

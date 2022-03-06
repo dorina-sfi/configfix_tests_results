@@ -1,20 +1,24 @@
-LEDS_CPCAP: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_CPCAP [=m] && OF [=y]
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
 
-HID_MULTITOUCH: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+RMI4_F30: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-RTC_DRV_MT6397: m => yes
-      Direct dependencies: RTC_CLASS [=y] && (MFD_MT6397 [=m] || COMPILE_TEST [=n] && IRQ_DOMAIN [=y])
+PCI_SW_SWITCHTEC: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: NTB_SWITCHTEC [=y] && NTB [=y]
 
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
+SYSC_R8A779A0: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A779A0 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-LINEDISP: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=m]
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
+PINCTRL_BCM2835: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: ARCH_BCM2835 [=y]
 

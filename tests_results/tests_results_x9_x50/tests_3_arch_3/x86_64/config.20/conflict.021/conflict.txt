@@ -1,10 +1,11 @@
-MMC_SDHCI_PLTFM: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI [=m]
+NVME_TARGET_FCLOOP: m => yes
+      Direct dependencies: NVME_TARGET [=y] && NVME_FC [=y] && NVME_TARGET_FC [=m]
 
-I2C_KEMPLD: m => yes
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && MFD_KEMPLD [=m]
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-NVMEM_SYSFS: y => no
-      Direct dependencies: NVMEM [=y] && SYSFS [=y]
-      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y]
+IOSF_MBI: y => mod
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=n] && MMC_SDHCI [=n] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=n] && MMC [=n] && MMC_SDHCI [=n] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=y] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && X86 [=y] && EFI [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=n] && INTEL_ATOMISP [=y] && PMIC_OPREGION [=n] || PUNIT_ATOM_DEBUG [=m] && PCI [=y]
 

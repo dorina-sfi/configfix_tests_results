@@ -1,17 +1,18 @@
-IIO_SSP_SENSORS_COMMONS: m => yes
-      Direct dependencies: IIO [=y] && IIO_SSP_SENSORHUB [=m]
+MMC_CQHCI: y => no
+      Direct dependencies: MMC [=y] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=n] && PCI [=n] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=n] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] && OF [=n] || MMC_SDHCI_TEGRA [=n] && MMC [=y] && (ARCH_TEGRA || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_MSM [=n] && MMC [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=n] && REGMAP_MMIO [=y]
 
-COMEDI_DT2815: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-CHARLCD: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=m] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
+EFI_GENERIC_STUB_INITRD_CMDLINE_LOADER: y => no
+      Direct dependencies: EFI [=y] && EFI_STUB [=y] && (EFI_GENERIC_STUB [=n] || X86 [=y]) && !RISCV
 
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=n]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+PSTORE_ZSTD_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-STM_PROTO_BASIC: m => yes
-      Direct dependencies: STM [=m]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 

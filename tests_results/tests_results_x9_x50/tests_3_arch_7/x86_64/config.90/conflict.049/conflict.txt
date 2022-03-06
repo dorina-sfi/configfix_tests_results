@@ -1,27 +1,23 @@
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
+LEDS_GPIO: y => mod
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MERAKI_MX100 [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && GPIOLIB [=y] && GPIO_ICH [=n] && LEDS_CLASS [=y] || PCENGINES_APU2 [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
-
-AK8975: y => no
-      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-
-FUNCTION_TRACER: y => no
-      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
-      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
-
-SERIO: y => no
-      Direct dependencies: y
-      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_SERIAL [=n] && INPUT [=y] && INPUT_MOUSE [=y] || MOUSE_VSXXXAA [=y] && INPUT [=y] && INPUT_MOUSE [=y] || JOYSTICK_WARRIOR [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_MAGELLAN [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEORB [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEBALL [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_STINGER [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_TWIDJOY [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_ZHENHUA [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || JOYSTICK_FSIA6B [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] || TABLET_SERIAL_WACOM4 [=n] && INPUT [=y] && INPUT_TABLET [=n] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=y] && INPUT [=y] && RMI4_CORE [=y] && RMI4_F03 [=y] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y]
-
-BOOT_CONFIG: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOTTIME_TRACING [=y] && FTRACE [=y] && TRACING [=y]
-
-CHARLCD_BL_FLASH: y => no
+X86_INTEL_TSX_MODE_AUTO: y => no
       Direct dependencies: <choice>
+
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
+
+BT_HCIUART_H4: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=m]
+      Reverse dependencies: BT_HCIUART_NOKIA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && PM [=n] || BT_HCIUART_ATH3K [=n] && NET [=y] && BT [=y] && BT_HCIUART [=m] || BT_HCIUART_LL [=y] && NET [=y] && BT [=y] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_INTEL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=m] && GPIOLIB [=y] || BT_HCIUART_BCM [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && (!ACPI [=n] || SERIAL_DEV_CTRL_TTYPORT [=y]) && GPIOLIB [=y] || BT_HCIUART_QCA [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] || BT_HCIUART_MRVL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y]
+
+PCMCIA: m => yes
+      Direct dependencies: PCCARD [=m]
+
+PHY_CPCAP_USB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && IIO [=y] && (USB_MUSB_HDRC [=m] || USB_MUSB_HDRC [=m]=n)
+
+BT_HCIBLUECARD: m => yes
+      Direct dependencies: NET [=y] && BT [=y] && PCMCIA [=m]
 

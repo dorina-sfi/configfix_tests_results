@@ -1,24 +1,23 @@
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=n] || I2C_EMEV2 [=n] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 || I2C_PXA_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=y] && !X86_32 [=n] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y])
+COMEDI_KCOMEDILIB: y => mod
+      Direct dependencies: COMEDI [=y]
+      Reverse dependencies: COMEDI_BOND [=y] && COMEDI [=y] && COMEDI_MISC_DRIVERS [=y]
 
-X86_PAT: y => no
-      Direct dependencies: MTRR [=y]
+MFD_MADERA_I2C: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && MFD_MADERA [=m] && I2C [=y]
 
-NFC_NXP_NCI: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m]
+SENSORS_SMM665: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-IPV6_TUNNEL: y => mod
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
-      Reverse dependencies: IPV6_VTI [=m] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=n] || IPV6_FOU_TUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
+INPUT_UINPUT: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y]
 
-SLUB: y => no
-      Direct dependencies: <choice>
+SND_SOC_WM8728: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
 
-X86_PM_TIMER: y => no
-      Direct dependencies: X86 [=y] && (ACPI [=y] || JAILHOUSE_GUEST [=n])
-      Reverse dependencies: JAILHOUSE_GUEST [=n] && HYPERVISOR_GUEST [=y] && X86_64 [=y] && PCI [=n]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=y] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=y] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=y]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
 
-DM_INTEGRITY: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+TCG_ATMEL: m => yes
+      Direct dependencies: TCG_TPM [=m] && (PPC64 || HAS_IOPORT_MAP [=y])
 

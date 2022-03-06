@@ -1,22 +1,23 @@
-TOUCHSCREEN_USB_IRTOUCH: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+MMC_DW_PCI: m => yes
+      Direct dependencies: MMC [=m] && MMC_DW [=m] && PCI [=y]
 
-AK09911: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
-
-TIMERFD: y => no
-      Direct dependencies: y
-
-SND_SOC_WM8985: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-
-SND_SOC_MT6797: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && ARCH_MEDIATEK [=y]
-
-CRYPTO_ZSTD: m => no
+CRYPTO_SHA3: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE_ZSTD_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+      Reverse dependencies: CRYPTO_SHA3_ARM64 [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-LEDS_RT4505: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && OF [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
+BATTERY_CW2015: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+
+CLKSRC_EXYNOS_MCT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARCH_EXYNOS [=y]
+
+RTC_DRV_PCF50633: m => yes
+      Direct dependencies: RTC_CLASS [=y] && MFD_PCF50633 [=m]
+
+GPIO_JANZ_TTL: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_JANZ_CMODIO [=m]
+
+MTD_CFI_STAA: m => yes
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=m]
 

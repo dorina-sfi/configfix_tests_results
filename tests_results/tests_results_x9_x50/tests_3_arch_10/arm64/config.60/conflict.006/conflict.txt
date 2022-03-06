@@ -1,32 +1,32 @@
-SENSORS_IR35221: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-RADIO_SI470X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m]
+ATA_FORCE: y => no
+      Direct dependencies: ATA [=m]
 
-MTD_NAND_ROCKCHIP: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && ARCH_ROCKCHIP [=y] && HAS_IOMEM [=y]
-
-NLS: y => mod
+DEBUG_MEMORY_INIT: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=n] || PCI_LABEL [=n] && PCI [=y] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=n] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=y] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=n] && BLOCK [=n] || F2FS_FS [=n] && BLOCK [=n] || JOLIET [=n] && BLOCK [=n] && ISO9660_FS [=n] || UDF_FS [=n] && BLOCK [=n] || FAT_FS [=n] && BLOCK [=n] || EXFAT_FS [=n] && BLOCK [=n] || NTFS_FS [=n] && BLOCK [=n] || NTFS3_FS [=n] && BLOCK [=n] || HFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || BEFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 && VBOXGUEST [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-W1_SLAVE_DS2805: m => yes
-      Direct dependencies: W1 [=m]
+CONSOLE_TRANSLATIONS: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-VIDEO_IMX_PXP: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
+VFIO_FSL_MC: m => yes
+      Direct dependencies: VFIO [=m] && FSL_MC_BUS [=y]
 
-COMMON_CLK_MT6779_CAMSYS: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK_MT6779 [=m]
+REGULATOR_MT6360: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6360 [=m]
 
-VIDEO_MT9T001: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=n] || S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 
-MTD_NAND_SUNXI: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+IR_SHARP_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
 
-CRYPTO_MD5: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: TCP_MD5SIG [=y] && NET [=y] && INET [=y] || SCTP_COOKIE_HMAC_MD5 [=y] && NET [=y] && IP_SCTP [=y] && SCTP_COOKIE_HMAC_MD5 [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=y] || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=n] && PROC_FS [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_MD5_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_MD5_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_SUNXI [=y] && PM [=y] && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=n] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS
+FAT_KUNIT_TEST: m => yes
+      Direct dependencies: BLOCK [=y] && KUNIT [=m] && FAT_FS [=y]
+
+NETFILTER_XT_TARGET_NETMAP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NF_NAT [=m]
+      Reverse dependencies: IP_NF_TARGET_NETMAP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && IP_NF_NAT [=n] && NETFILTER_ADVANCED [=y]
 

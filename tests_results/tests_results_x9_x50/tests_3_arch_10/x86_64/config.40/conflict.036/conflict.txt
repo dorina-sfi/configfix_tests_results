@@ -1,33 +1,36 @@
-RFD_FTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+ATH9K_PCOEM: y => no
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && ATH9K [=y]
 
-HPET_TIMER: y => no
+VIDEO_XILINX_VTC: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=y]
+      Reverse dependencies: VIDEO_XILINX_TPG [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=y]
+
+ARCH_RANDOM: y => no
       Direct dependencies: y
 
-SND_SOC_TDA7419: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-
-SND_AMD_ACP_CONFIG: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_AMD_ACP_COMMON [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && X86 [=y] && PCI [=y] || SND_SOC_SOF_AMD_COMMON [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_AMD_TOPLEVEL [=n]
-
-EXPERT: y => no
+CPU_IDLE: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
 
-NET_SCH_FQ_PIE: m => yes
-      Direct dependencies: NET [=y] && NET_SCHED [=y] && NET_SCH_PIE [=m]
+RMI4_F03: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-TRANSPARENT_HUGEPAGE_ALWAYS: y => no
+CRYPTO_XXHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
+
+CRYPTO_CRC32: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=y] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
+
+X86_INTEL_TSX_MODE_AUTO: y => no
       Direct dependencies: <choice>
 
-PING: m => yes
-      Direct dependencies: IIO [=m] && GPIOLIB [=y]
-
-SND_SOC_RT1308_SDW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && SOUNDWIRE [=y]
-      Reverse dependencies: SND_SOC_INTEL_SOUNDWIRE_SOF_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && SND_SOC_SOF_INTEL_SOUNDWIRE [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=m] || COMPILE_TEST [=n]) && (SND_SOC_INTEL_USER_FRIENDLY_LONG_NAMES [=n] || COMPILE_TEST [=n]) && SOUNDWIRE [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n]
-
-MTD_PCMCIA: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && PCMCIA [=y] && MTD_COMPLEX_MAPPINGS [=y]
+X86_INTEL_TSX_MODE_AUTO: y => no
+      Direct dependencies: <choice>
 

@@ -1,20 +1,20 @@
-ADUX1020: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_ZEROPLUS: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-USB_MUSB_GADGET: y => no
-      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=y]) && HAS_DMA [=y]
+SENSORS_TPS53679: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-RAS: y => no
-      Direct dependencies: y
-      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=y] && PCIEPORTBUS [=n]
+USB_DWC3_OF_SIMPLE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_DWC3 [=m] && OF [=y] && COMMON_CLK [=y]
 
-SND_SOC_XILINX_AUDIO_FORMATTER: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+MTD_CFI_AMDSTD: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_TS5500 [=m] && MTD [=m] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
 
-SOC_BRCMSTB: y => no
-      Direct dependencies: ARM || ARM64 [=y] || BMIPS_GENERIC || COMPILE_TEST [=n]
-      Reverse dependencies: PHY_BRCM_USB [=y] && (ARCH_BCM4908 [=y] || ARCH_BRCMSTB [=y] || COMPILE_TEST [=n]) && OF [=y] && ARCH_BRCMSTB [=y]
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
 
-COMEDI_DAS800: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+SENSORS_DS1621: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

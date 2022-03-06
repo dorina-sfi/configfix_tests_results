@@ -1,14 +1,16 @@
-IPQ_GCC_806X: m => no
+VIRT_CPU_ACCOUNTING_GEN: y => no
+      Direct dependencies: <choice> && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y] && GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+
+TIMER_IMX_SYS_CTR: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_MXC [=y]
+
+SC_GCC_7280: y => no
       Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: IPQ_LCC_806X [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SCSI_SAS_LIBSAS: m => yes
-      Direct dependencies: SCSI [=m]
-      Reverse dependencies: SCSI_AIC94XX [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && PCI [=n] || SCSI_HISI_SAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && ATA [=m] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && PCI [=n] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m] && X86 || SCSI_PM8001 [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=m]
-
-GPIO_KEMPLD: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_KEMPLD [=m]
-
-UHID: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+MTD_CFI_AMDSTD: y => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
 

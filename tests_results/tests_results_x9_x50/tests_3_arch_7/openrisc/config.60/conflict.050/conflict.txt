@@ -1,23 +1,23 @@
-USB_ASPEED_VHUB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_ASPEED || COMPILE_TEST [=y]) && USB_LIBCOMPOSITE [=m]
+PPDEV: m => yes
+      Direct dependencies: PARPORT [=m]
 
-HID_PENMOUNT: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+SPI_BITBANG: y => mod
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=y]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=m] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=m] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=y] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || SPI_LM70_LLP [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=m] || SPI_OC_TINY [=m] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=n] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=y] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=y])
 
-SENSORS_PWM_FAN: m => yes
-      Direct dependencies: HWMON [=m] && (PWM [=y] && OF [=y] || COMPILE_TEST [=y])
+GPIO_LP3943: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_LP3943 [=m]
 
-CRYPTO_STREEBOG: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+EXTCON_USBC_TUSB320: m => yes
+      Direct dependencies: EXTCON [=m] && I2C [=y]
 
-THERMAL_GOV_USER_SPACE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=y] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=y]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=n] && THERMAL [=y] && (X86 || X86_INTEL_QUARK || COMPILE_TEST [=y]) && X86_64 && ACPI && PCI [=n]
+REGULATOR_MT6358: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
 
-SENSORS_LM83: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+REGULATOR_HI6421: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
 
-REGULATOR_DA9062: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+DEBUG_LOCK_ALLOC: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 

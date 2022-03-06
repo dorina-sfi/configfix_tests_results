@@ -1,23 +1,18 @@
-NET_NSH: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+PINCTRL_MESON_AXG: m => yes
+      Direct dependencies: PINCTRL [=y] && PINCTRL_MESON [=m] && ARM64 [=y]
 
-PM: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_MXC [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_VEXPRESS [=y] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+INPUT_MAX8925_ONKEY: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && MFD_MAX8925 [=y]
 
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+USB_DWC2_PERIPHERAL: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_DWC2 [=m])
 
-SYSC_R8A77970: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A77970 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+MTD_NAND_PL35X: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=y] && (OF [=y] || COMPILE_TEST [=y]) && PL353_SMC [=m]
 
-NETFILTER_XT_TARGET_RATEEST: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
-      Reverse dependencies: NETFILTER_XT_MATCH_RATEEST [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
+W1_SLAVE_DS28E17: m => yes
+      Direct dependencies: W1 [=m] && I2C [=y]
 
-CRYPTO_BLAKE2B: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+LEDS_LM3642: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
 

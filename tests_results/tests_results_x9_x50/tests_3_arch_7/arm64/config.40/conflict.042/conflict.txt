@@ -1,22 +1,27 @@
-MAX44009: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=y]) && OF [=y]
 
-SPEAKUP_SYNTH_SPKOUT: m => yes
-      Direct dependencies: ACCESSIBILITY [=y] && SPEAKUP [=m]
+HOTPLUG_CPU: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
 
-SND_SOC_GTM601: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+ALLOW_DEV_COREDUMP: y => no
+      Direct dependencies: y
 
-MTD_NAND_CADENCE: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+IRQ_POLL: y => no
+      Direct dependencies: y
+      Reverse dependencies: INFINIBAND [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=n] && (m && MODULES [=n] || IPV6 [=n]!=m) && !ALPHA || BE2ISCSI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_IPR [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && ATA [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && CPU_FREQ [=n] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n)
 
-IIO_TRIGGERED_EVENT: m => yes
-      Direct dependencies: IIO [=m]
-      Reverse dependencies: HI8435 [=n] && IIO [=m] && SPI [=n]
+SCSI_SPI_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_AHA152X [=n] && SCSI_LOWLEVEL [=y] && ISA && SCSI [=y] || SCSI_AIC7XXX [=y] && SCSI_LOWLEVEL [=y] && (PCI [=y] || EISA [=n]) && SCSI [=y] || SCSI_AIC79XX [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_DMX3191D [=n] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_GENERIC_NCR5380 [=n] && SCSI_LOWLEVEL [=y] && ISA && SCSI [=y] && HAS_IOPORT_MAP [=y] || SCSI_LASI700 [=n] && SCSI_LOWLEVEL [=y] && GSC && SCSI [=y] || SCSI_SNI_53C710 [=n] && SCSI_LOWLEVEL [=y] && SNI_RM && SCSI [=y] || SCSI_SYM53C8XX_2 [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_ZALON [=n] && SCSI_LOWLEVEL [=y] && GSC && SCSI [=y] || SCSI_SIM710 [=n] && SCSI_LOWLEVEL [=y] && EISA [=n] && SCSI [=y] || SCSI_DC395x [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_AM53C974 [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_ACORNSCSI_3 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=y] || SCSI_CUMANA_1 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=y] || SCSI_OAK1 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=y] || JAZZ_ESP [=n] && SCSI_LOWLEVEL [=y] && MACH_JAZZ && SCSI [=y] || SCSI_A4000T [=n] && SCSI_LOWLEVEL [=y] && AMIGA && SCSI [=y] || SCSI_ZORRO7XX [=n] && SCSI_LOWLEVEL [=y] && ZORRO && SCSI [=y] || SCSI_ZORRO_ESP [=n] && SCSI_LOWLEVEL [=y] && ZORRO && SCSI [=y] || ATARI_SCSI [=n] && SCSI_LOWLEVEL [=y] && ATARI && SCSI [=y] || MAC_SCSI [=n] && SCSI_LOWLEVEL [=y] && MAC && SCSI [=y] || SCSI_MAC_ESP [=n] && SCSI_LOWLEVEL [=y] && MAC && SCSI [=y] || MVME147_SCSI [=n] && SCSI_LOWLEVEL [=y] && MVME147 && SCSI [=y]=y || MVME16x_SCSI [=n] && SCSI_LOWLEVEL [=y] && MVME16x && SCSI [=y] || BVME6000_SCSI [=n] && SCSI_LOWLEVEL [=y] && BVME6000 && SCSI [=y] || SUN3_SCSI [=n] && SCSI_LOWLEVEL [=y] && SUN3 && SCSI [=y] || SUN3X_ESP [=n] && SCSI_LOWLEVEL [=y] && SUN3X && SCSI [=y]=y || SCSI_SUNESP [=n] && SCSI_LOWLEVEL [=y] && SBUS && SCSI [=y] || PCMCIA_AHA152X [=n] && SCSI_LOWLEVEL [=y] && SCSI_LOWLEVEL_PCMCIA [=n] && SCSI [=y] && PCMCIA [=n] && m && MODULES [=n] || FUSION_SPI [=y] && FUSION [=y] && PCI [=y] && SCSI [=y]
 
-VSOCKETS_DIAG: m => yes
-      Direct dependencies: NET [=y] && VSOCKETS [=m]
+HID_SENSOR_IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_IIO_COMMON [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_HUMIDITY [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_ALS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PROX [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_MAGNETOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_INCLINOMETER_3D [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_DEVICE_ROTATION [=n] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_CUSTOM_INTEL_HINGE [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_PRESS [=y] && IIO [=y] && HID_SENSOR_HUB [=y] || HID_SENSOR_TEMP [=n] && IIO [=y] && HID_SENSOR_HUB [=y]
 
-BT_HCIUART_NOKIA: m => yes
-      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && PM [=y]
+FAILOVER: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_FAILOVER [=y] && NETDEVICES [=y]
 

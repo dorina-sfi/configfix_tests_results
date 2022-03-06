@@ -1,28 +1,29 @@
-KEYSTONE_USB_PHY: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-RTC_DRV_DS1685: y => no
-      Direct dependencies: <choice>
+KEYBOARD_ATKBD: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y]
 
-VIDEO_AK881X: m => yes
+SENSORS_CORSAIR_PSU: m => yes
+      Direct dependencies: HWMON [=y] && HID [=m]
+
+CFG80211_USE_KERNEL_REGDB_KEYS: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m] && CFG80211_REQUIRE_SIGNED_REGDB [=y]
+
+VIDEO_DW9807_VCM: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+
+VIDEO_OV2640: m => yes
       Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_CAMERA_SUPPORT [=y]
 
-MMC_VUB300: m => yes
-      Direct dependencies: MMC [=y] && USB [=m]
+HID_ZYDACRON: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-KEYSTONE_USB_PHY: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+MDIO_BUS_MUX_MULTIPLEXER: m => yes
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=m] && MDIO_BUS [=m] && OF_MDIO [=m]
 
-QCOM_RPMPD: m => yes
-      Direct dependencies: QCOM_SMD_RPM [=m]
-
-SND_FIREWIRE_TASCAM: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_FIREWIRE [=y] && FIREWIRE [=m]
-
-MD_FAULTY: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
-
-AUXDISPLAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: PANEL [=m] && PARPORT [=y]
+VIDEO_OV7740: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 

@@ -1,24 +1,24 @@
-CPU_SUP_AMD: y => no
+NFC_DIGITAL: m => yes
+      Direct dependencies: NET [=y] && NFC [=m]
+
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+
+CRC_ITU_T: y => no
       Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+      Reverse dependencies: NFC_DIGITAL [=m] && NET [=y] && NFC [=m] || GENWQE [=n] && PCI [=n] && 64BIT [=y] || FIREWIRE [=n] && (PCI [=n] || COMPILE_TEST [=n]) || WILC1000_SPI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_MICROCHIP [=n] && CFG80211 [=y] && INET [=y] && SPI [=y] || RT61PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT73USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MOUSE_CYAPA [=m] && INPUT [=y] && INPUT_MOUSE [=y] && I2C [=y] || TOUCHSCREEN_SIS_I2C [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || MMC_SPI [=y] && MMC [=y] && SPI_MASTER [=y] || UDF_FS [=m] && BLOCK [=y] || OMFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y]
 
-HMC425: m => yes
-      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+LEDS_LP50XX: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && REGMAP_I2C [=y] && (LEDS_CLASS_MULTICOLOR [=m] || !LEDS_CLASS_MULTICOLOR [=m])
 
-SERIO_LIBPS2: m => yes
-      Direct dependencies: SERIO [=m] && (SERIO_I8042 [=m] || SERIO_I8042 [=m]=n)
-      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=n] && INPUT_MOUSE [=n]
+RTC_DRV_DA9063: m => yes
+      Direct dependencies: RTC_CLASS [=y] && (MFD_DA9063 [=n] || MFD_DA9062 [=m])
 
-DEBUG_RT_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
+SPI_DW_MMIO: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=m] && HAS_IOMEM [=y]
 
-USB_LEDS_TRIGGER_USBPORT: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && LEDS_TRIGGERS [=y]
-
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
-
-SND_SOC_CS35L32: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+SPI_ALTERA_CORE: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ALTERA [=m] && SPI [=y] && SPI_MASTER [=y] || SPI_ALTERA_DFL [=n] && SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=n]
 

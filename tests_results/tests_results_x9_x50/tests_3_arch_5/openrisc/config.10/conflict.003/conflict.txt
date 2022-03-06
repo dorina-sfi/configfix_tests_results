@@ -1,18 +1,17 @@
-W1: m => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+W1_SLAVE_DS2781: m => yes
+      Direct dependencies: W1 [=m]
+      Reverse dependencies: BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-SRAM: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: VIDEO_CODA [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=n] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && OF [=y] && (ARCH_MXC || COMPILE_TEST [=y]) || TEGRA_VDE [=m] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && (ARCH_TEGRA || COMPILE_TEST [=y]) || CRYPTO_DEV_MARVELL_CESA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (PLAT_ORION || ARCH_MVEBU)
+TOUCHSCREEN_EKTF2127: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-CGROUPS: y => no
+I2C_MUX_REG: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && HAS_IOMEM [=y]
+
+MANAGER_SBS: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
+
+OF: y => no
       Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
-
-MEDIA_DIGITAL_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
-
-TOUCHSCREEN_GUNZE: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
+      Reverse dependencies: OPENRISC [=y]
 

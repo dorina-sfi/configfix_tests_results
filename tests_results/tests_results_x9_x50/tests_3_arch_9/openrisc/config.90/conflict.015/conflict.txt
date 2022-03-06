@@ -1,29 +1,29 @@
-RC_CORE: m => yes
-      Direct dependencies: INPUT [=m]
+ADIS16475: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 
-USB_ULPI_BUS: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y]
+COMEDI_NI_DAQ_700_CS: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCMCIA_DRIVERS [=m]
 
-INPUT_GPIO_DECODER: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+DRM_UDL: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && USB [=y] && USB_ARCH_HAS_HCD [=y] && MMU [=y]
 
-SND_SOC_ADAU1761_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-W1_SLAVE_DS2805: m => yes
-      Direct dependencies: W1 [=m]
+SENSORS_LM85: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-HID_ALPS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+CRYPTO_LIB_POLY1305: m => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=m] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-MOUSE_BCM5974: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y]
+SENSORS_MAX6650: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-SPARSE_IRQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: OPENRISC [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
+MCP4531: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-HID_PLAYSTATION: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS_MULTICOLOR [=m]
+VZ89X: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

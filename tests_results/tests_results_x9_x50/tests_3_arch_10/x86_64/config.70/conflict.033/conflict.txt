@@ -1,34 +1,33 @@
-W1_SLAVE_DS2781: m => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+EXTCON_ADC_JACK: m => yes
+      Direct dependencies: EXTCON [=m] && IIO [=y]
 
-MTD_LPDDR: m => yes
-      Direct dependencies: MTD [=m]
+TINYDRM_ST7586: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-MPL115_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_OV5675: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-DEBUG_MEMORY_INIT: y => no
+CRYPTO_SM4_AESNI_AVX_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SM4_AESNI_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+ARCH_RANDOM: y => no
       Direct dependencies: y
 
-CRYPTO_DRBG_MENU: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=m]
 
-IO_URING: y => no
-      Direct dependencies: y
+SPI_ALTERA_DFL: m => yes
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=m]
 
-FXLS8962AF_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+BCMA_DRIVER_PCI: y => no
+      Direct dependencies: BCMA [=m] && PCI [=y]
+      Reverse dependencies: BCMA_HOST_PCI [=y] && BCMA [=m] && BCMA_HOST_PCI_POSSIBLE [=y]
 
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=n] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
+CRYPTO_SM4_AESNI_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SM4_AESNI_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-DEVFREQ_GOV_SIMPLE_ONDEMAND: y => mod
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=n] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=n]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=n]) || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
-
-FB_UVESA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=y] && CONNECTOR [=m]
+SPS30_SERIAL: m => yes
+      Direct dependencies: IIO [=y] && SERIAL_DEV_BUS [=m]
 

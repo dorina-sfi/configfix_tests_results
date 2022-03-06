@@ -1,16 +1,17 @@
-SLAB: y => no
-      Direct dependencies: <choice> && !PREEMPT_RT [=n]
+HID_SEMITEK: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
 CONFIGFS_FS: y => mod
       Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=m] && IIO [=y] || STM [=n]
+      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=n]
 
-SERIO_GPIO_PS2: m => yes
-      Direct dependencies: SERIO [=m] && GPIOLIB [=y]
+KALLSYMS_ALL: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
+      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-SENSORS_W83792D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+TCS3472: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-LEDS_LP8860: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=m] && OF [=y]
+IIO_SSP_SENSORHUB: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 

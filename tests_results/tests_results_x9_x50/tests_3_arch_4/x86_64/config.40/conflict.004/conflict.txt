@@ -1,14 +1,16 @@
-USB_XHCI_PLATFORM: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y]
-      Reverse dependencies: USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_XHCI_HCD [=y] || USB_XHCI_MVEBU [=n] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && HAS_IOMEM [=y] && (ARCH_MVEBU || COMPILE_TEST [=n])
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-USB_STORAGE_SDDR09: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=n] && <choice> && X86_64 [=y]
 
-SND_SOC_ADAU7002: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || SND_SOC_SC7180 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_QCOM [=n] && I2C [=y] && GPIOLIB [=y]
+USB_ISP1301: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && I2C [=y]
+      Reverse dependencies: USB_LPC32XX [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && I2C [=y]
 
-HID_STEAM: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+SND_SOC_TEGRA30_AHUB: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=y]
+      Reverse dependencies: SND_SOC_TEGRA30_I2S [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_TEGRA [=y]
 

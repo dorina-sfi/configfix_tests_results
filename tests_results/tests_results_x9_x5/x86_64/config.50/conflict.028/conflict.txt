@@ -1,19 +1,23 @@
-MCP3422: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: BT_HIDP [=n] && NET [=n] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=n] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=y] && INPUT [=y] || INTEL_ISH_HID [=y] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=y]) && PCI [=y] && X86 [=y]
 
-MODIFY_LDT_SYSCALL: y => no
+USB: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
+      Reverse dependencies: MOUSE_APPLETOUCH [=n] && INPUT [=y] && INPUT_MOUSE [=n] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=n] && INPUT [=y] && INPUT_MOUSE [=n] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=n] && INPUT [=y] && INPUT_MOUSE [=n] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=n] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=n] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=y] && INPUT [=y] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=n] && INPUT [=y] && INPUT_MISC [=n] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=n] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=n]
+
+DVB_VES1820: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_TTUSB_BUDGET [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && USB [=y] && I2C [=y] && PCI [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET [=y] && MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_AV7110 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && VIDEO_DEV [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+SYNC_FILE: y => no
       Direct dependencies: y
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=y] || AGP [=y]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-IQS624_POS: m => yes
-      Direct dependencies: IIO [=m] && (MFD_IQS62X [=y] || COMPILE_TEST [=y])
+GENERIC_CPU: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-PHY_TEGRA194_P2U: m => no
-      Direct dependencies: ARCH_TEGRA_194_SOC [=n] || COMPILE_TEST [=y]
-      Reverse dependencies: PCIE_TEGRA194_HOST [=m] && PCI [=y] && (ARCH_TEGRA_194_SOC [=n] || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=y] || PCIE_TEGRA194_EP [=n] && PCI [=y] && (ARCH_TEGRA_194_SOC [=n] || COMPILE_TEST [=y]) && PCI_ENDPOINT [=n]
-
-KEYBOARD_PMIC8XXX: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_PM8XXX [=m]
-
-USB_SERIAL_NAVMAN: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+SND_SOC_WM8750: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_I2C_AND_SPI [=y]
+      Reverse dependencies: SND_PXA2XX_SOC_SPITZ [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=y] && PXA_SHARP_Cxx00 && I2C [=y] || SND_PXA2XX_SOC_Z2 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=y] && MACH_ZIPIT2 && I2C [=y] || SND_SOC_SAMSUNG_JIVE_WM8750 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && MACH_JIVE && I2C [=y] || SND_SOC_SMARTQ [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && (MACH_SMARTQ || COMPILE_TEST [=y]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && I2C [=y]
 

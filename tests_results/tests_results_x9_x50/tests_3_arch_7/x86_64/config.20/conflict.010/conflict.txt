@@ -1,23 +1,25 @@
-FPGA_BRIDGE: m => no
-      Direct dependencies: FPGA [=y]
-      Reverse dependencies: FPGA_DFL [=m] && FPGA [=y] && HAS_IOMEM [=y]
+MD_RAID10: y => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=m] && MD [=y] && BLK_DEV_DM [=y]
 
-NOA1305: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+EXPERT: y => no
+      Direct dependencies: y
+      Reverse dependencies: EMBEDDED [=y]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+CRYPTO_POLY1305: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-IQS624_POS: m => yes
-      Direct dependencies: IIO [=m] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
+CRYPTO_CRC32C: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=m] && INET [=y] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=y] || ISCSI_TARGET [=m] && TARGET_CORE [=y] && INET [=y] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 
-CROS_EC_MKBP_PROXIMITY: m => yes
-      Direct dependencies: IIO [=m] && CROS_EC [=y]
+PTP_1588_CLOCK_IDT82P33: m => yes
+      Direct dependencies: PTP_1588_CLOCK [=m] && I2C [=y]
 
-USB_ADUTUX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+CAN_CC770: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && HAS_IOMEM [=y]
 
-MMA8452: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SENSORS_CORSAIR_PSU: m => yes
+      Direct dependencies: HWMON [=y] && HID [=m]
 

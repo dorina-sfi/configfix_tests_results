@@ -1,34 +1,38 @@
-AUXDISPLAY: y => no
+UNWINDER_FRAME_POINTER: y => no
+      Direct dependencies: <choice>
+
+RMI4_F11: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+MEMBARRIER: y => no
       Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
 
-IO_DELAY_NONE: y => no
-      Direct dependencies: <choice>
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-CHARLCD_BL_OFF: y => no
-      Direct dependencies: <choice>
+XZ_DEC: y => no
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
 
-SQUASHFS_DECOMP_MULTI_PERCPU: y => no
-      Direct dependencies: <choice>
-
-PROC_SYSCTL: y => no
-      Direct dependencies: PROC_FS [=y]
-
-CRYPTO_LZ4HC: y => no
+CRYPTO_CHACHA20: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-NO_HZ_IDLE: y => no
-      Direct dependencies: <choice>
+MPSC: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-ROMFS_BACKED_BY_BLOCK: y => no
-      Direct dependencies: <choice> && BLOCK [=y]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=y])
 
-CRYPTO_LZO: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-SERIAL_8250: y => no
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
-      Reverse dependencies: MWAVE [=y] && X86 [=y] && TTY [=y]
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 

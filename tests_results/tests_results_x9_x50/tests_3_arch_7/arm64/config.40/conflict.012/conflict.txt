@@ -1,22 +1,25 @@
-TOUCHSCREEN_USB_E2I: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=m]
+IIO_BUFFER_DMAENGINE: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
 
-USB_SERIAL_EMPEG: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_VEXPRESS [=y] || PM_SLEEP [=y] && (SUSPEND [=n] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS [=n] || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS [=n]
 
-BME680: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI [=n])
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-ACPI_DEBUG: y => no
-      Direct dependencies: ACPI [=y]
-      Reverse dependencies: ACPI_DEBUGGER [=y] && ACPI [=y]
+CONSOLE_TRANSLATIONS: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-CRC32_BIT: y => no
-      Direct dependencies: <choice>
+SND_PROC_FS: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && PROC_FS [=y]
 
-SND_ICE1712: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y] && ZONE_DMA [=y]
+RFKILL_INPUT: y => no
+      Direct dependencies: NET [=y] && RFKILL [=y] && (INPUT [=y]=y || RFKILL [=y]=INPUT [=y])
 
-TMP007: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MTD_PARSER_IMAGETAG: y => no
+      Direct dependencies: MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_BCM63XX_PARTS [=y] && MTD [=y] && (BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
 

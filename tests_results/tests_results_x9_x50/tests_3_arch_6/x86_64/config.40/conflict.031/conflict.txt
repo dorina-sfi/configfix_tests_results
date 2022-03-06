@@ -1,19 +1,21 @@
-MOTORCOMM_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+APDS9960: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-USB_G_NOKIA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=y] && TTY [=y] && PHONET [=m] && BLOCK [=y]
+SENSORS_AD7418: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-APDS9300: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+DVB_TS2020: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_DVBSKY [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=n] && PCI [=n] && I2C [=m] && INPUT [=y] && SND [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_DM1105 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && I2C_ALGOBIT [=m] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_SMIPCIE [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=n] && I2C [=m] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CHARGER_TWL4030: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && IIO [=m] && TWL4030_CORE [=y]
+SPI_MEM: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MTD_SPI_NOR [=y] && MTD [=y] && SPI_MASTER [=y] || MTD_SPI_NAND [=y] && MTD [=y] && SPI_MASTER [=y]
 
-PM_DEVFREQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+AD7091R5: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-NFC_PN533_I2C: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && I2C [=y]
+RCU_NOCB_CPU: y => no
+      Direct dependencies: TREE_RCU [=y] && (RCU_EXPERT [=y] || NO_HZ_FULL [=y])
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 

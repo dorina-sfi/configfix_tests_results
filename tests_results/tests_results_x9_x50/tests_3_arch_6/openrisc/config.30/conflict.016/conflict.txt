@@ -1,20 +1,19 @@
-SND_HDA_CODEC_ANALOG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_HDA [=m]
+JOYSTICK_GRIP_MP: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-COMEDI_8255_SA: m => yes
-      Direct dependencies: COMEDI [=m]
+IR_FINTEK: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (PNP [=n] || COMPILE_TEST [=y])
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
+CRYPTO_CBC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) || ENCRYPTED_KEYS [=m] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=m] && IXP4XX_NPE [=m] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-VIDEO_M5MOLS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
-
-HZ_100: y => no
+NO_HZ_IDLE: y => no
       Direct dependencies: <choice>
 
-SND_SOC_OMAP_DMIC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y] && COMMON_CLK [=y])
-      Reverse dependencies: SND_SOC_OMAP_ABE_TWL6040 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && TWL6040_CORE [=y] && COMMON_CLK [=y] && (ARCH_OMAP4 || SOC_OMAP5 && MFD_PALMAS [=n] || COMPILE_TEST [=y])
+MODULE_COMPRESS_ZSTD: y => no
+      Direct dependencies: <choice>
+
+SENSORS_IIO_HWMON: m => yes
+      Direct dependencies: HWMON [=m] && IIO [=y]
 

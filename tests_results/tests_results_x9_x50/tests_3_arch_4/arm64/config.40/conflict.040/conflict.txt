@@ -1,12 +1,16 @@
-RCAR_GYRO_ADC: m => yes
-      Direct dependencies: IIO [=m] && (ARCH_RCAR_GEN2 [=n] || COMPILE_TEST [=y])
-
-ARM64_PA_BITS_48: y => no
+FB_LITTLE_ENDIAN: y => no
       Direct dependencies: <choice>
+      Reverse dependencies: FB_MB862XX_LIME [=n] && <choice> && OF [=y] && PPC
 
-MOUSE_PS2: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MOUSE [=y]
+EXTCON: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=y])
 
-GPIO_LP873X: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP873X [=m]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: QORIQ_CPUFREQ [=y] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=y])
+
+FAIR_GROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 

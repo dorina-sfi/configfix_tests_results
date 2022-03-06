@@ -1,30 +1,27 @@
-TOUCHSCREEN_CY8CTMA140: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+FUTEX: y => no
+      Direct dependencies: y
 
-CDROM_PKTCDVD: m => yes
-      Direct dependencies: BLK_DEV [=y] && !UML && SCSI [=m]
+SENSORS_MAX8688: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-SND_SOC_FSL_ESAI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=n] || SND_AC97_CODEC [=n]=n)
+USB_ATM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && ATM [=m]
 
-DVB_DIB8000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+USB_MUSB_GADGET: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=m]=y || USB_GADGET [=m]=USB_MUSB_HDRC [=m]) && HAS_DMA [=y]
 
-INPUT_BMA150: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && I2C [=y]
+IR_RX51: m => yes
+      Direct dependencies: RC_DEVICES [=y] && (OMAP_DM_TIMER [=n] && PWM_OMAP_DMTIMER [=n] && ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && RC_CORE [=m]
 
-INPUT_PCF8574: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && I2C [=y]
+HZ_250: y => no
+      Direct dependencies: <choice>
 
-NET_DSA_TAG_LAN9303: m => yes
-      Direct dependencies: NET [=y] && NET_DSA [=m]
-      Reverse dependencies: NET_DSA_SMSC_LAN9303 [=m] && NETDEVICES [=y] && NET_DSA [=m]
+APPLE_MFI_FASTCHARGE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-BLK_DEV_RNBD_SERVER: m => yes
-      Direct dependencies: BLK_DEV [=y] && INFINIBAND_RTRS_SERVER [=m]
+NETFILTER_XT_MATCH_DEVGROUP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
 
-BACKLIGHT_BD6107: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
+ISA_DMA_API: y => no
+      Direct dependencies: y
 

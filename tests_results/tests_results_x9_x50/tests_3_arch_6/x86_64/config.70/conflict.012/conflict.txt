@@ -1,24 +1,19 @@
-RADIO_SAA7706H: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=y]
-      Reverse dependencies: RADIO_TIMBERDALE [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && MFD_TIMBERDALE [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+HW_RANDOM_STM32: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-PM_DEVFREQ_EVENT: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n])
+COMEDI_ME_DAQ: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
 
-HID: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: BT_HIDP [=n] && NET [=y] && BT_BREDR [=n] && INPUT [=y] || I2C_HID_CORE [=n] && INPUT [=y] || SURFACE_HID_CORE [=n] && INPUT [=y] || USB_HID [=n] && USB [=n] && INPUT [=y] || INTEL_ISH_HID [=y] && INPUT [=y] && (X86_64 [=y] || COMPILE_TEST [=y]) && PCI [=y] && X86 [=y]
+CROS_USBPD_NOTIFY: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m]
 
-CRYPTO_ECB: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_XTS [=n] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_MXC && OF [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+INPUT_PCF50633_PMU: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && MFD_PCF50633 [=y]
 
-NLS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=n] && PCI [=y] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=n] && USB_SUPPORT [=n] && USB_ARCH_HAS_HCD [=n] || USB_GADGET [=n] && USB_SUPPORT [=n] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=y] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=n] && BLOCK [=n] || F2FS_FS [=n] && BLOCK [=n] || JOLIET [=n] && BLOCK [=n] && ISO9660_FS [=n] || UDF_FS [=n] && BLOCK [=n] || FAT_FS [=n] && BLOCK [=n] || EXFAT_FS [=n] && BLOCK [=n] || NTFS_FS [=n] && BLOCK [=n] || NTFS3_FS [=n] && BLOCK [=n] || HFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=n] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=n] || BEFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=n] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=n] && X86 [=y] && VBOXGUEST [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=n] && FILE_LOCKING [=y]
+COMEDI_S626: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
 
-NET_DSA_TAG_QCA: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_QCA8K [=y] && NETDEVICES [=y] && NET_DSA [=y]
+IOMMU_IO_PGTABLE_ARMV7S: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y])
+      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=y]) || MTK_IOMMU [=m] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 

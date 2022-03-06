@@ -1,15 +1,17 @@
-USB_RTL8153_ECM: m => yes
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_NET_CDCETHER [=m] && (USB_RTL8152 [=m] || USB_RTL8152 [=m]=n)
+MS5637: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-LEDS_AAT1290: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n]) && (GPIOLIB [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL [=y]
-
-MTD_NAND_CADENCE: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
-
-GPIO_ARIZONA: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_ARIZONA [=m]
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 
 SND_SERIAL_U16550: m => yes
       Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_DRIVERS [=y]
+
+MTD_RAM: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=m] && HAS_IOMEM [=y]
+
+DVB_ISL6421: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=m] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

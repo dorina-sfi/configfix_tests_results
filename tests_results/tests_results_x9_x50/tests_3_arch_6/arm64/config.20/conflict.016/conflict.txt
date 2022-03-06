@@ -1,24 +1,23 @@
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
+I2C_SLAVE: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=y] || I2C_AXXIA [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=y] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=n] || ARCH_LAYERSCAPE [=n] || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=y] && ARM64 [=y] || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=y] && !X86_32 || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y])
 
-HD44780_COMMON: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=n] && AUXDISPLAY [=y] && PARPORT [=n]
+THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
+      Direct dependencies: <choice>
 
-XZ_DEC: y => no
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
-
-RST_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
-
-CRYPTO_CRC32C: y => no
+CRYPTO_DES: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+      Reverse dependencies: CRYPTO_DEV_SUN8I_CE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=y] && NETDEVICES [=n] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=n]
 
-MMC_DW_PLTFM: y => no
-      Direct dependencies: MMC [=y] && MMC_DW [=y]
-      Reverse dependencies: MMC_DW_BLUEFIELD [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_EXYNOS [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_HI3798CV200 [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_K3 [=n] && MMC [=y] && MMC_DW [=y] || MMC_DW_ROCKCHIP [=n] && MMC [=y] && MMC_DW [=y] && ARCH_ROCKCHIP [=n]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+
+CLK_RCAR_GEN2_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A7742 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7743 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7745 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77470 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7790 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7791 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7792 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7794 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+
+OWL_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: ARCH_ACTIONS [=y]
 

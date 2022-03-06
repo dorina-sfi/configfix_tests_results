@@ -1,12 +1,15 @@
-IR_XMP_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+USB_DWC3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
 
-STK3310: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_SM4_AESNI_AVX_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SM4_AESNI_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-COMEDI_ADL_PCI7X3X: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+CRYPTO_CAST6: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CAST6_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-CXL_PMEM: m => yes
-      Direct dependencies: CXL_BUS [=y] && LIBNVDIMM [=m]
+FPGA_BRIDGE: y => no
+      Direct dependencies: FPGA [=y]
+      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
 

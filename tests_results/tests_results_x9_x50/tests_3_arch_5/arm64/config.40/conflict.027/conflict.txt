@@ -1,17 +1,18 @@
-USB_DWC3_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=y])
-
-SND_SOC_PCM3168A_I2C: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
-      Reverse dependencies: SND_SOC_J721E_EVM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_K3 [=y] || COMPILE_TEST [=y] && COMMON_CLK [=y]) && I2C [=y]
-
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
-
-AUXDISPLAY: y => no
+CRC_T10DIF: y => mod
       Direct dependencies: y
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=m] || NVME_TARGET_FC [=m]=n) && (NVME_FC [=m] || NVME_FC [=m]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n]
 
-CPU_BIG_ENDIAN: y => no
-      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=m] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
+
+SND_DESIGNWARE_I2S: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && HAVE_CLK [=y]
+
+EXTCON: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=n] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=m] && OF [=y] && (ARCH_BCM_IPROC [=y] || COMPILE_TEST [=n])
+
+SND_SOC_INNO_RK3036: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
 

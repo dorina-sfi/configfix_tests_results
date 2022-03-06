@@ -1,27 +1,25 @@
-SECURITYFS: y => no
+TOUCHSCREEN_MELFAS_MIP4: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+
+CGROUPS: y => no
       Direct dependencies: y
-      Reverse dependencies: SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=n] && INTEGRITY [=n]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-PROC_SYSCTL: y => no
-      Direct dependencies: PROC_FS [=y]
+HID_XINMO: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-PRINTK: y => no
-      Direct dependencies: y
+RC_ATI_REMOTE: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && USB [=y]
 
-MSDOS_PARTITION: y => no
-      Direct dependencies: BLOCK [=y]
+USB_DWC3_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_DWC3 [=m])
 
-SLUB: y => no
-      Direct dependencies: <choice>
+IR_SANYO_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
 
-SECURITY_TOMOYO_OMIT_USERSPACE_LOADER: y => no
-      Direct dependencies: SECURITY_TOMOYO [=y]
-      Reverse dependencies: SECURITY_TOMOYO_INSECURE_BUILTIN_SETTING [=y] && SECURITY_TOMOYO [=y]
+TOUCHSCREEN_PENMOUNT: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
 
-FHANDLE: y => no
-      Direct dependencies: y
-
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+SND_SEQUENCER: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m]
 

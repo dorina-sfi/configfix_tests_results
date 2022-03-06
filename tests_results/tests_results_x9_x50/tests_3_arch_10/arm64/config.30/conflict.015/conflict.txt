@@ -1,32 +1,34 @@
-VIDEO_MT9T001: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+TI_MESSAGE_MANAGER: y => mod
+      Direct dependencies: MAILBOX [=y] && (ARCH_KEYSTONE || ARCH_K3 [=y])
+      Reverse dependencies: ARCH_K3 [=y]
 
-FB_IBM_GXT4500: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+TCG_TIS_I2C_CR50: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
 
-SENSORS_LTC2978: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SYSCTL_KUNIT_TEST: y => no
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-IIO_CROS_EC_SENSORS_CORE: m => yes
-      Direct dependencies: IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=m]
+DEVFREQ_GOV_USERSPACE: y => mod
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || ARM_IMX8M_DDRC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 
-BT_HCIVHCI: m => yes
-      Direct dependencies: NET [=y] && BT [=m]
+ROCKCHIP_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
+      Reverse dependencies: ARCH_ROCKCHIP [=y]
 
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+NF_TABLES_BRIDGE: m => yes
+      Direct dependencies: NET [=y] && BRIDGE [=m] && NETFILTER [=y] && NF_TABLES [=m]
 
-MAGIC_SYSRQ: y => no
-      Direct dependencies: !UML
-      Reverse dependencies: KGDB_SERIAL_CONSOLE [=m] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
+NVME_TARGET_FC: m => yes
+      Direct dependencies: NVME_TARGET [=m] && HAS_DMA [=y]
 
-SENSORS_PM6764TR: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+RST_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
 
-FB_ARMCLCD: m => yes
-      Direct dependencies: (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && FB [=m] && ARM_AMBA [=y] && HAS_IOMEM [=y]
+MSM_MMCC_8974: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-GPIO_BD70528: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_ROHM_BD70528 [=m]
+BACKLIGHT_ARCXCNN: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
 

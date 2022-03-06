@@ -1,26 +1,29 @@
-RFD_FTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=y] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=y] && IOMMU_SUPPORT [=y] && (ARCH_APPLE || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=n] && IOMMU_SUPPORT [=y] && (ARM64 || ARM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
 
-CARDMAN_4040: m => yes
-      Direct dependencies: PCMCIA [=m]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-INPUT_MOUSEDEV: m => yes
-      Direct dependencies: INPUT [=m]
+ROMFS_BACKED_BY_BLOCK: y => no
+      Direct dependencies: <choice> && BLOCK [=y]
 
-DVB_TDA10023: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_ANYSEE [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && VIDEO_DEV [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_MANTIS [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && MANTIS_CORE [=n] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=n] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=y] && HAVE_ARCH_SOFT_DIRTY [=y] && PROC_FS [=y]
 
-CRYPTO_SERPENT: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+MAILBOX: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CPPC_LIB [=n] && ACPI [=y] && ACPI_PROCESSOR [=y] || IMX_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=n] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=y] || ST_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM [=y] && ZYNQMP_FIRMWARE [=n]
 
-TCS3414: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_TWOFISH_X86_64_3WAY: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-DM_WRITECACHE: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
+KASAN_STACK: y => no
+      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
 
-SND_SOC_SSM2602_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 

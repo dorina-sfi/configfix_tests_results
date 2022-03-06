@@ -1,14 +1,14 @@
-HZ_PERIODIC: y => no
-      Direct dependencies: <choice>
+SENSORS_SBTSI: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-WATCHDOG_PRETIMEOUT_DEFAULT_GOV_NOOP: y => no
-      Direct dependencies: <choice> && WATCHDOG_PRETIMEOUT_GOV_NOOP [=y]
+CRYPTO_NULL: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=y] && CRYPTO [=y] && NET [=y]
 
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-CGROUP_NET_CLASSID: y => no
-      Direct dependencies: NET [=y] && CGROUPS [=y]
-      Reverse dependencies: NETFILTER_XT_MATCH_CGROUP [=n] && NET [=y] && INET [=n] && NETFILTER [=n] && NETFILTER_XTABLES [=n] && NETFILTER_ADVANCED [=n] && CGROUPS [=y] || NET_CLS_CGROUP [=y] && NET [=y] && NET_SCHED [=y] && CGROUPS [=y]
+SCA3000: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 

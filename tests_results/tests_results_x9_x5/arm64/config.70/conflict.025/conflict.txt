@@ -1,18 +1,20 @@
-CC_OPTIMIZE_FOR_SIZE: y => no
-      Direct dependencies: <choice>
-
-ATA_FORCE: y => no
-      Direct dependencies: ATA [=y]
-
-MAGIC_SYSRQ: y => no
-      Direct dependencies: !UML
-      Reverse dependencies: KGDB_SERIAL_CONSOLE [=y] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
-
-PM_DEVFREQ_EVENT: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=n] || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=n] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
-
-AUTOFS_FS: y => no
+RELOCATABLE: y => no
       Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
+      Reverse dependencies: RANDOMIZE_BASE [=y]
+
+TI_MESSAGE_MANAGER: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_KEYSTONE || ARCH_K3 [=y])
+      Reverse dependencies: ARCH_K3 [=y]
+
+PRIME_NUMBERS: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_DEBUG_SELFTEST [=y] && HAS_IOMEM [=y] && DRM [=y] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+
+INTERCONNECT: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM_TEGRA [=n] && HAS_IOMEM [=y] && (ARCH_TEGRA [=n] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=y] && OF [=y] || TEGRA_MC [=y] && MEMORY [=y] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y] && COMMON_CLK [=y])
+
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=y] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 

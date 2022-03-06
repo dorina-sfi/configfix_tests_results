@@ -1,27 +1,30 @@
-LPC_SCH: y => mod
-      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
-      Reverse dependencies: I2C_ISCH [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 && PCI [=y]
+W1_SLAVE_DS2780: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-CLK_INTEL_SOCFPGA: y => no
-      Direct dependencies: COMMON_CLK [=y]
+MTK_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: ARCH_MEDIATEK [=y]
 
-IR_SANYO_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=y] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=y] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=y] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=y] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=y] && IIO [=y] && IIO_SSP_SENSORHUB [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=n] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=y] || I3C [=n]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-CGROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
 
-IR_NEC_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+IIO_TRIGGERED_EVENT: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: HI8435 [=y] && IIO [=y] && SPI [=y]
 
-DAX: y => no
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-COMEDI_ADL_PCI9118: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m] && HAS_DMA [=y]
+MOUSE_PS2_SYNAPTICS_SMBUS: y => no
+      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y] && (I2C [=y]=y || I2C [=y]=MOUSE_PS2 [=y])
 
-CM3323: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+RTC_DRV_DS17485: y => no
+      Direct dependencies: <choice>
 

@@ -1,16 +1,18 @@
-SYSCTL_KUNIT_TEST: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+MTD_CFI: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-HPET_TIMER: y => no
-      Direct dependencies: y
+UBIFS_FS_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && UBIFS_FS [=y]
 
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
 
-CROS_EC_VBC: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m] && OF [=y]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=n] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=y] && ACPI [=y] || MFD_INTEL_LPSS [=y] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 [=y] && PCI [=n]
 
-CAN_VXCAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+COMPACTION: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: TRANSPARENT_HUGEPAGE [=y] && HAVE_ARCH_TRANSPARENT_HUGEPAGE [=y] && !PREEMPT_RT [=n]
 

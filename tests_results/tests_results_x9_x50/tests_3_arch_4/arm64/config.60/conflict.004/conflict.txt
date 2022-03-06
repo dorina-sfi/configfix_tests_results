@@ -1,13 +1,12 @@
-IPMB_DEVICE_INTERFACE: m => yes
-      Direct dependencies: I2C [=m] && I2C_SLAVE [=y]
+TYPEC_QCOM_PMIC: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && (USB_ROLE_SWITCH [=y] || !USB_ROLE_SWITCH [=y])
 
-REGULATOR_PCA9450: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+VIDEO_MAX9286: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && I2C_MUX [=m] && OF_GPIO [=y]
 
-MTD_CFI_AMDSTD: y => mod
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
+TINYDRM_ST7586: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-BATTERY_MAX17042: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+NET_DSA_MV88E6060: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
 

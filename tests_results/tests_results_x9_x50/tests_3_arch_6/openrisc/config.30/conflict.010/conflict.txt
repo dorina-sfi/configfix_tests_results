@@ -1,20 +1,21 @@
-IPMI_SI: y => mod
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=y]
+QCS_GCC_404: y => mod
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: QCS_Q6SSTOP_404 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-SND_SOC_TEGRA_WM8753: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && I2C [=y] && GPIOLIB [=y]
-
-REGULATOR_LM363X: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TI_LMU [=m]
-
-MSM_GCC_8939: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-
-SC_GPUCC_7180: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
 
 DEVFREQ_GOV_SIMPLE_ONDEMAND: y => no
       Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=y]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n]) || TEGRA20_EMC [=m] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: SCSI_UFSHCD [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=y]) && MMU [=y] && COMMON_CLK [=y] && OF [=y] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=y]) && MMU [=y] || ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y]) || ARM_RK3399_DMC_DEVFREQ [=n] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP && HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=n]) || TEGRA20_EMC [=y] && MEMORY [=y] && TEGRA_MC [=y] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=y])
+
+PINCTRL_MSM8998: m => yes
+      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+
+SERIO: y => no
+      Direct dependencies: y
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=m] && INPUT_MOUSE [=y] || MOUSE_SERIAL [=m] && INPUT [=m] && INPUT_MOUSE [=y] || MOUSE_VSXXXAA [=m] && INPUT [=m] && INPUT_MOUSE [=y] || JOYSTICK_WARRIOR [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_MAGELLAN [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEORB [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_SPACEBALL [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_STINGER [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_TWIDJOY [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_ZHENHUA [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_FSIA6B [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || TABLET_SERIAL_WACOM4 [=m] && INPUT [=m] && INPUT_TABLET [=y] || TOUCHSCREEN_DYNAPRO [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_HAMPSHIRE [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_GUNZE [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_ELO [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_MTOUCH [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_INEXIO [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_PENMOUNT [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHRIGHT [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHWIN [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TOUCHIT213 [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || TOUCHSCREEN_TSC_SERIO [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] || RMI4_F03_SERIO [=m] && INPUT [=m] && RMI4_CORE [=m] && RMI4_F03 [=y] || I2C_TAOS_EVM [=n] && I2C [=n] && HAS_IOMEM [=y] && TTY [=n] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=n] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=n]
+
+MMC_DAVINCI: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_DAVINCI || COMPILE_TEST [=y])
 

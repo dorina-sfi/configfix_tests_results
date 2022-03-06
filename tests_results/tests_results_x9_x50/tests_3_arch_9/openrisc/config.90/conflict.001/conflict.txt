@@ -1,28 +1,29 @@
-HID_SAMSUNG: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SENSORS_LM95241: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-HID_TOPSEED: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+INV_ICM42600_SPI: m => yes
+      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
 
-SND_SOC_SSM2602_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+DVB_TUNER_CX24113: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SENSORS_LTC2992: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y] && GPIOLIB [=y]
+HID_SONY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=y]
 
-VFIO_MDEV: m => yes
-      Direct dependencies: VFIO [=m]
+DVB_DIB7000M: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SENSORS_STPDDC60: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+BATTERY_BQ27XXX_I2C: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && BATTERY_BQ27XXX [=m] && I2C [=y]
 
-REGULATOR_FIXED_VOLTAGE: m => no
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
+HID_SENSOR_PROX: m => yes
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m]
 
-USB_DWC2_DUAL_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y && USB_GADGET [=m]=y || USB_DWC2 [=m]=m && USB [=y] && USB_GADGET [=m])
+SENSORS_ADM1026: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-REGULATOR_BD957XMUF: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD957XMUF [=m]
+TI_ADS1015: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

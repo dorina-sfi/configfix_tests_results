@@ -1,9 +1,12 @@
-MTD_QCOMSMEM_PARTS: m => yes
-      Direct dependencies: MTD [=y] && QCOM_SMEM [=m]
+AUTOFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-AS73211: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+LPC_SCH: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 && PCI [=y]
 
-SND_SOC_FSL_RPMSG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y] && RPMSG [=y] && (SND_IMX_SOC [=m] || SND_IMX_SOC [=m]=n)
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 

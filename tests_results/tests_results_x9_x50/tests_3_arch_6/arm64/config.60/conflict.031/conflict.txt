@@ -1,22 +1,21 @@
-SI7005: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-REGULATOR_FIXED_VOLTAGE: m => no
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=n] && IIO [=n] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=n] && I2C [=y]
 
-INV_MPU6050_SPI: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+DAMON_VADDR_KUNIT_TEST: y => no
+      Direct dependencies: DAMON_VADDR [=y] && KUNIT [=y]=y
 
-PID_IN_CONTEXTIDR: y => no
-      Direct dependencies: y
-      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
+CPU_LITTLE_ENDIAN: y => no
+      Direct dependencies: <choice>
 
-RESET_HISI: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n]) || COMMON_CLK_HI3798CV200 [=m] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=n])
+MDM_GCC_9615: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: MDM_LCC_9615 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+MDIO_XGENE: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (ARCH_XGENE [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: NET_XGENE [=y] && NETDEVICES [=y] && ETHERNET [=y] && (ARCH_XGENE [=n] || COMPILE_TEST [=y])
 

@@ -1,27 +1,32 @@
-HID_CHERRY: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+VIDEO_WM8775: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] || VIDEO_CX88 [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-COMEDI_AMPLC_PC236_PCI: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
+INPUT_MATRIXKMAP: y => no
+      Direct dependencies: INPUT [=y]
+      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && OF_GPIO [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || KEYBOARD_EP93XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_EP93XX || COMPILE_TEST [=y]) || KEYBOARD_TCA8418 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && I2C [=y] || KEYBOARD_MATRIX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || KEYBOARD_LM8333 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_LPC32XX && OF [=y] || KEYBOARD_MAX7359 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && I2C [=y] || KEYBOARD_IMX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_MXC || COMPILE_TEST [=y]) || KEYBOARD_NOMADIK [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_NSPIRE && OF [=y] || KEYBOARD_TEGRA [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_TEGRA && OF [=y] || KEYBOARD_PXA27x [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && MFD_PM8XXX [=n] || KEYBOARD_SAMSUNG [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (ARCH_STI || COMPILE_TEST [=y]) || KEYBOARD_STMPE [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && MFD_STMPE [=y] && OF [=y] || KEYBOARD_OMAP [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && (OF [=y] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && PLAT_SPEAR || KEYBOARD_TC3589X [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && MFD_TC3589X [=y] || KEYBOARD_TWL4030 [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && TWL4030_CORE [=y] || KEYBOARD_CROS_EC [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && CROS_EC [=y] || KEYBOARD_BCM [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
 
-CRYPTO_DEFLATE: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=y] && INET [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+HWMON: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: HABANA_AI [=y] && PCI [=y] && HAS_IOMEM [=y] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && (AGP [=y] || !AGP [=y]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] || EEEPC_LAPTOP [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && HOTPLUG_PCI [=y] && BACKLIGHT_CLASS_DEVICE [=y] || HP_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=y] && ACPI_BATTERY [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=n] || CPU_HWMON [=n] && MIPS && MIPS_PLATFORM_DEVICES [=n] && MACH_LOONGSON64 || NTB_IDT [=y] && NTB [=y] && PCI [=y]
 
-MICREL_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
-      Reverse dependencies: KS8851 [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICREL [=n] && SPI [=n] || KS8851_MLL [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICREL [=n] && HAS_IOMEM [=y]
+MFD_STM32_TIMERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 
-LEDS_AAT1290: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n]) && (GPIOLIB [=y] || COMPILE_TEST [=n]) && OF [=y] && PINCTRL [=y]
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=y] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=n] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=n] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=n] || GFS2_FS [=n] && BLOCK [=n] || BTRFS_FS [=n] && BLOCK [=n] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-HID_CHERRY: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-HID_SENSOR_HUMIDITY: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+NLS: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=y] && PCI [=y] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=n] && USB_SUPPORT [=n] && USB_ARCH_HAS_HCD [=n] || USB_GADGET [=n] && USB_SUPPORT [=n] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=y] || JFS_FS [=n] && BLOCK [=n] || F2FS_FS [=n] && BLOCK [=n] || JOLIET [=n] && BLOCK [=n] && ISO9660_FS [=n] || UDF_FS [=n] && BLOCK [=n] || FAT_FS [=n] && BLOCK [=n] || EXFAT_FS [=n] && BLOCK [=n] || NTFS_FS [=n] && BLOCK [=n] || NTFS3_FS [=n] && BLOCK [=n] || HFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || BEFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=n] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 [=y] && VBOXGUEST [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 

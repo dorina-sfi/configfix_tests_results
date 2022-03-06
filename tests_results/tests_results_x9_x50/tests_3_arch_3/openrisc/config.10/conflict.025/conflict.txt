@@ -1,11 +1,10 @@
-RADIO_TEA5764: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+TPS65010: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && GPIOLIB [=y]
 
-CRYPTO_842: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+PKCS7_MESSAGE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
 
-XZ_DEC: y => mod
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
+SENSORS_MAX6650: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 

@@ -1,18 +1,16 @@
-LEDS_PCA963X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+SENSORS_IBMAEM: m => yes
+      Direct dependencies: HWMON [=y] && IPMI_HANDLER [=m]
 
-NF_SOCKET_IPV6: m => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
-      Reverse dependencies: NFT_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=n] && (IPV6 [=y] || IPV6 [=y]=n) && NF_TABLES_IPV6 [=n] || NETFILTER_XT_MATCH_SOCKET [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=y] || IPV6 [=y]=n) && (IP6_NF_IPTABLES [=m] || IP6_NF_IPTABLES [=m]=n) && IP6_NF_IPTABLES [=m]
+USB_XUSBATM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_ATM [=m]
 
-USB_CHIPIDEA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=n] || USB_EHCI_HCD [=m] && !USB_GADGET [=n] || !USB_EHCI_HCD [=m] && USB_GADGET [=n]) && HAS_DMA [=y]
-      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && ARCH_TEGRA
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=y] && SYSFS [=y] && BLOCK [=n] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=y] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-KEYBOARD_ADC: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && IIO [=y]
+MAX5821: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y] && OF [=y]
 
-TCG_TIS: m => yes
-      Direct dependencies: TCG_TPM [=m] && (X86 || OF [=y])
-      Reverse dependencies: IMA [=n] && INTEGRITY [=n] && TCG_TPM [=m] && X86
+HID_STEAM: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 

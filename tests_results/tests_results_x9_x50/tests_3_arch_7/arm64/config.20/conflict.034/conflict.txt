@@ -1,23 +1,26 @@
-USB_SERIAL_F81232: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+I2C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 
-SCSI_SAS_LIBSAS: m => no
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_AIC94XX [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] || SCSI_HISI_SAS [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) && ATA [=m] || SCSI_MVSAS [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && PCI [=n] || SCSI_ISCI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && X86 || SCSI_PM8001 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y]
+CRYPTO_STREEBOG: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-MTD_SPEAR_SMI: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (PLAT_SPEAR || COMPILE_TEST [=y])
+I2C_ALGOPCA: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
 
-PARPORT_PANEL: y => mod
-      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=y]
-      Reverse dependencies: PANEL [=y] && PARPORT [=y]
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-SENSORS_MAX1668: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+TI_MESSAGE_MANAGER: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_KEYSTONE || ARCH_K3 [=y])
+      Reverse dependencies: ARCH_K3 [=y]
 
-W1_SLAVE_DS2405: m => yes
-      Direct dependencies: W1 [=m]
+TRANSPARENT_HUGEPAGE_MADVISE: y => no
+      Direct dependencies: <choice>
 
-CLK_RENESAS: y => no
-      Direct dependencies: COMMON_CLK [=y]
+DVB_LG2160: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_USB_MXL111SF [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

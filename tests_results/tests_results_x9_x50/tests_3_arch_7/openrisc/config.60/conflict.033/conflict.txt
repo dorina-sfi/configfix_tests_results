@@ -1,23 +1,27 @@
-USB_STORAGE: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && SCSI [=y]
+MTD_CFI: y => mod
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-SENSORS_MAX6642: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-RMI4_SMB: m => yes
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m] && I2C [=y]
+LEDS_LM3533: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_LM3533 [=y]
 
-SCSI: y => mod
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=m] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=m] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-SENSORS_ADM1025: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+CRYPTO_GHASH: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-VIRTIO_FS: m => yes
-      Direct dependencies: FUSE_FS [=m]
-
-BLK_DEV_INITRD: y => no
+PAGE_REPORTING: y => no
       Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+      Reverse dependencies: VIRTIO_BALLOON [=m] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
+
+PARPORT_PANEL: m => yes
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=m]
+      Reverse dependencies: PANEL [=n] && PARPORT [=m]
 

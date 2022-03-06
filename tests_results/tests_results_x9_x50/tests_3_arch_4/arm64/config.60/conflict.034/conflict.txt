@@ -1,13 +1,14 @@
-DRM_UDL: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && USB [=y] && USB_ARCH_HAS_HCD [=y] && MMU [=y]
+ROMFS_BACKED_BY_MTD: y => no
+      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=m]=m && MTD [=y])
 
-VIDEO_OV5695: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=m] && VIDEO_V4L2 [=m]
+DVB_ASCOT2E: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_NETUP_UNIDVB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && SPI_MASTER [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MUX_ADG792A: m => yes
-      Direct dependencies: MULTIPLEXER [=y] && I2C [=m]
+MEDIA_TUNER_TEA5767: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 
-LWTUNNEL: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: IPV6_ILA [=m] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] || IPV6_SEG6_LWTUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_RPL_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_IOAM6_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
+DRM_RADEON: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n])
 

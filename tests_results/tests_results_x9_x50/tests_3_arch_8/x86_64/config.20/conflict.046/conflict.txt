@@ -1,27 +1,26 @@
-TCG_TIS_I2C_INFINEON: m => yes
-      Direct dependencies: TCG_TPM [=m] && I2C [=y]
+MSDOS_PARTITION: y => no
+      Direct dependencies: BLOCK [=y]
 
-INET_UDP_DIAG: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && INET_DIAG [=y] && (IPV6 [=m] || IPV6 [=m]=n)
+CRYPTO_NULL: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
 
-MTD_SPEAR_SMI: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (PLAT_SPEAR || COMPILE_TEST [=y])
+DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-CRC8: y => mod
-      Direct dependencies: y
-      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=m] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=y] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=m] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=m] && HWMON [=y] && PMBUS [=m] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=n] && SPI [=y] || SCA3300 [=n] && IIO [=n] && SPI [=y] || SCD30_I2C [=n] && IIO [=n] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP30 [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP40 [=n] && IIO [=n] && I2C [=y] || SPS30_I2C [=n] && IIO [=n] && I2C [=y] || ICP10100 [=n] && IIO [=n] && I2C [=y]
+LEGACY_VSYSCALL_EMULATE: y => no
+      Direct dependencies: <choice>
 
-TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
-      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=n]
+UNWINDER_ORC: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 
-INFINIBAND_USER_MAD: m => yes
-      Direct dependencies: INFINIBAND [=m]
+CPU_FREQ_DEFAULT_GOV_ONDEMAND: y => no
+      Direct dependencies: <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=n])
 
-NFC_ST_NCI_I2C: m => yes
-      Direct dependencies: NET [=y] && NFC [=y] && NFC_NCI [=m] && I2C [=y]
+FIXED_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || NET_DSA_LOOP [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_REALTEK_SMI [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_VITESSE_VSC73XX [=n] && NETDEVICES [=y] && NET_DSA [=n] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] || BGMAC_BCMA [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && BCMA [=n] && BCMA_HOST_SOC [=n] && (BCM47XX || ARCH_BCM_5301X || COMPILE_TEST [=n]) || BGMAC_PLATFORM [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || SYSTEMPORT [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] && (NET_DSA [=n] || !NET_DSA [=n]) || UCC_GETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && QUICC_ENGINE [=n] && PPC32 || GIANFAR [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && HAS_DMA [=y] || FSL_DPAA_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && FSL_DPAA [=n] && FSL_FMAN [=n] || FWNODE_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && (ACPI [=n] || OF [=y] || COMPILE_TEST [=n]) || OF_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && OF [=y] && PHYLIB [=y] || USB_LAN78XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n]
 
-FSL_IFC: y => no
-      Direct dependencies: MEMORY [=y] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_NAND_FSL_IFC [=m] && MTD [=m] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+TCP_CONG_CUBIC: y => no
+      Direct dependencies: NET [=y] && INET [=y] && TCP_CONG_ADVANCED [=n] || NET [=y] && INET [=y] && !TCP_CONG_ADVANCED [=n]
 

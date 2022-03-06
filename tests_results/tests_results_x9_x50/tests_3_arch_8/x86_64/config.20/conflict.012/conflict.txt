@@ -1,25 +1,30 @@
-RDMA_SIW: m => yes
-      Direct dependencies: (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=y] && INFINIBAND [=m] && LIBCRC32C [=y] && INFINIBAND_VIRT_DMA [=y]
+DMA_CMA: y => no
+      Direct dependencies: HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
+      Reverse dependencies: DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || DRM_ASPEED_GFX [=n] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (COMPILE_TEST [=n] || ARCH_ASPEED) && MMU [=y] && HAVE_DMA_CONTIGUOUS [=y] || FB_HYPERV [=n] && HAS_IOMEM [=y] && FB [=y] && HYPERV [=n] && HAVE_DMA_CONTIGUOUS [=y] && CMA [=y]
 
-SENSORS_UCD9200: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SPARSEMEM_MANUAL: y => no
+      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
 
-DYNAMIC_DEBUG_CORE: y => no
-      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
-      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 
-HID_PICOLCD_FB: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=FB [=y] || FB [=y]=y)
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 
-MTD_HYPERBUS: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
 
-6LOWPAN_NHC: m => yes
-      Direct dependencies: NET [=y] && 6LOWPAN [=m]
+ZRAM_DEF_COMP_LZORLE: y => no
+      Direct dependencies: <choice> && CRYPTO_LZO [=y]
 
-BLK_DEV_RNBD_SERVER: m => yes
-      Direct dependencies: BLK_DEV [=y] && INFINIBAND_RTRS_SERVER [=m]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-COMMON_CLK_MT6779_MFGCFG: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
+FIXED_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || NET_DSA_LOOP [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_REALTEK_SMI [=n] && NETDEVICES [=y] && NET_DSA [=n] || NET_DSA_VITESSE_VSC73XX [=n] && NETDEVICES [=y] && NET_DSA [=n] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] || BGMAC_BCMA [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && BCMA [=n] && BCMA_HOST_SOC [=n] && (BCM47XX || ARCH_BCM_5301X || COMPILE_TEST [=n]) || BGMAC_PLATFORM [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || SYSTEMPORT [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y] && (NET_DSA [=n] || !NET_DSA [=n]) || UCC_GETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && QUICC_ENGINE [=n] && PPC32 || GIANFAR [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && HAS_DMA [=y] || FSL_DPAA_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && FSL_DPAA [=n] && FSL_FMAN [=n] || FWNODE_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && (ACPI [=n] || OF [=y] || COMPILE_TEST [=n]) || OF_MDIO [=y] && NETDEVICES [=y] && MDIO_DEVICE [=y] && OF [=y] && PHYLIB [=y] || USB_LAN78XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n]
 

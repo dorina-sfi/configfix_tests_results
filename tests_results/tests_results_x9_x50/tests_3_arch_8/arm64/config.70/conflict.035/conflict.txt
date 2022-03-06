@@ -1,25 +1,30 @@
-I2C_MT65XX: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+CLK_INTEL_SOCFPGA: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-DRM_TI_SN65DSI86: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+CPU_ISOLATION: y => no
+      Direct dependencies: SMP [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
 
-HI6421V600_IRQ: m => yes
-      Direct dependencies: OF [=y] && SPMI [=m] && HAS_IOMEM [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-PWM_ATMEL_HLCDC_PWM: m => yes
-      Direct dependencies: PWM [=y] && MFD_ATMEL_HLCDC [=m] && HAVE_CLK [=y]
+CLK_RCAR_GEN3_CPG: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A774A1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774B1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774C0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A774E1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7795 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77960 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77961 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77965 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77970 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77980 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77990 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A77995 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SENSORS_BEL_PFE: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-MTD_NAND_HISI504: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_HISI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+CC_OPTIMIZE_FOR_PERFORMANCE: y => no
+      Direct dependencies: <choice>
 
-CRYPTO_BLAKE2B: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 

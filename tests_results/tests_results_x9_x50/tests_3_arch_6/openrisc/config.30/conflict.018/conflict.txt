@@ -1,20 +1,21 @@
-MD_RAID0: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
-      Reverse dependencies: DM_RAID [=n] && MD [=y] && BLK_DEV_DM [=n]
+MQ_IOSCHED_DEADLINE: y => mod
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
 
-RETU_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && MFD_RETU [=m]
+CLK_RENESAS_DIV6: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-VIDEO_RCAR_CSI2: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=y])
+PHY_QCOM_USB_HS_28NM: m => yes
+      Direct dependencies: OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && (EXTCON [=m] || !EXTCON [=m])
 
-VIDEO_AD9389B: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-VIDEO_STM32_DMA2D: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_STM32 || COMPILE_TEST [=y])
+FB_S1D13XXX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
 
-SND_SOC_AK5558: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_IMX_CARD [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y]
+JOYSTICK_WARRIOR: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 

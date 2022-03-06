@@ -1,9 +1,11 @@
-ROMFS_BACKED_BY_MTD: y => no
-      Direct dependencies: <choice> && (MTD [=y]=y || ROMFS_FS [=m]=m && MTD [=y])
+KERNEL_LZO: y => no
+      Direct dependencies: <choice> && HAVE_KERNEL_LZO [=y]
 
-CM32181: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
 
-INFINIBAND_QIB: m => yes
-      Direct dependencies: INFINIBAND [=m] && (INFINIBAND_USER_ACCESS [=m] || !INFINIBAND_USER_ACCESS [=m]) && 64BIT [=y] && INFINIBAND_RDMAVT [=m] && PCI [=y]
+REALTEK_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: NET_DSA_REALTEK_SMI [=y] && NETDEVICES [=y] && NET_DSA [=y] || R8169 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_REALTEK [=n] && PCI [=n]
 

@@ -1,19 +1,20 @@
-BT: m => yes
-      Direct dependencies: NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m])
+SENSORS_LM3533: m => yes
+      Direct dependencies: IIO [=m] && MFD_LM3533 [=y]
 
-PREEMPT: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+ROCKER: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_ROCKER [=y] && PCI [=y] && NET_SWITCHDEV [=y] && BRIDGE [=m]
 
-DRM_PANEL_TPO_TD043MTEA1: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && REGULATOR [=y] && SPI [=y]
+CRYPTO_STREEBOG: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=m] && CRYPTO [=y]
 
-SND_SOC_WM8750: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-      Reverse dependencies: SND_PXA2XX_SOC_SPITZ [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_PXA2XX_SOC [=n] && PXA_SHARP_Cxx00 && I2C [=y] || SND_PXA2XX_SOC_Z2 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_PXA2XX_SOC [=n] && MACH_ZIPIT2 && I2C [=y] || SND_SOC_SAMSUNG_JIVE_WM8750 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MACH_JIVE && I2C [=y] || SND_SOC_SMARTQ [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && (MACH_SMARTQ || COMPILE_TEST [=n]) && (GPIOLIB [=y] || COMPILE_TEST [=n]) && I2C [=y]
+DNS_RESOLVER: m => no
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=n] && NET [=y] && CEPH_LIB [=m] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-SND_SOC_SSM2305: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+IP_SET_HASH_NETNET: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_SET [=m]
 
-DRM_PANEL_LVDS: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+MTD_CFI_LE_BYTE_SWAP: y => no
+      Direct dependencies: <choice> && !ARCH_IXP4XX
 

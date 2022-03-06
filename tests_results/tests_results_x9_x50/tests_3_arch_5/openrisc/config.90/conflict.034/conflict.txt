@@ -1,15 +1,17 @@
-I2C_SLAVE_TESTUNIT: m => yes
-      Direct dependencies: I2C [=m] && I2C_SLAVE [=y]
+FB_OPENCORES: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
 
-RENESAS_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+REGULATOR_MP8859: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
 
-LEDS_CPCAP: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_CPCAP [=m] && OF [=y]
+MMC_HSQ: m => yes
+      Direct dependencies: MMC [=m]
+      Reverse dependencies: MMC_SDHCI_SPRD [=n] && MMC [=m] && (ARCH_SPRD || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n]
 
-SENSORS_W83781D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+HID_CHICONY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-MC3230: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+VIDEO_KS0127: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

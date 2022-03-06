@@ -1,19 +1,18 @@
-USB_XHCI_PLATFORM: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y]
-      Reverse dependencies: USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=y] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=y] && PHY_BRCM_USB [=y] || COMPILE_TEST [=y]) && USB_XHCI_HCD [=y] || USB_XHCI_MVEBU [=y] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && HAS_IOMEM [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y])
+HID_GREENASIA: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+SND_SOC_WM8962: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && INPUT [=m]
+      Reverse dependencies: SND_SOC_TOBERMORY [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && INPUT [=m] && I2C [=y] && (MACH_WLF_CRAGG_6410 || COMPILE_TEST [=y])
 
-EXYNOS_PMU: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] || (ARM || ARM64 [=y]) && COMPILE_TEST [=y])
+SND_SAMSUNG_SPDIF: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y]
+      Reverse dependencies: SND_SOC_SAMSUNG_SMDK_SPDIF [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y]
+
+PINCTRL_EXYNOS: y => no
+      Direct dependencies: PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=y])
       Reverse dependencies: ARCH_EXYNOS [=y]
 
-PARAVIRT: y => no
-      Direct dependencies: y
-      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
-
-KASAN_KUNIT_TEST: y => no
-      Direct dependencies: KASAN [=y] && KUNIT [=y]
+HID_GFRM: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 

@@ -1,29 +1,30 @@
-MLXREG_LC: m => yes
-      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=y] && I2C [=m]
+GPIO_SYSCON: m => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
+      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=m] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
 
-IIO_ST_ACCEL_3AXIS: m => yes
-      Direct dependencies: IIO [=y] && (I2C [=m] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=m]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=y] && (I2C [=m] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=m]
+HID_XIAOMI: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-MFD_TPS65912_I2C: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+CLK_RENESAS_DIV6: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SM_VIDEOCC_8250: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+HID_MICROSOFT: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-REGULATOR_ACT8865: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && POWER_SUPPLY [=y]
+DVB_DIB9000: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
 
-REGULATOR_TPS65218: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TPS65218 [=m] && OF [=y]
+CM36651: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-INPUT_FF_MEMLESS: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && PARPORT [=m] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=n] && JOYSTICK_XPAD [=n] && INPUT [=y] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=y] && INPUT_MISC [=y] && MFD_ARIZONA [=m] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=m] && INPUT [=y] && INPUT_MISC [=y] && (MFD_PM8XXX [=n] || MFD_SPMI_PMIC [=y]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_MAX77693 [=m] || MFD_MAX77843 [=n]) && PWM [=n] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=n] && MFD_MAX8997 [=n] || INPUT_GPIO_VIBRA [=m] && INPUT [=y] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_REGULATOR_HAPTIC [=m] && INPUT [=y] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL4030_CORE [=n] || INPUT_TWL6040_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL6040_CORE [=n] || INPUT_PWM_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && PWM [=n] || INPUT_DRV260X_HAPTICS [=m] && INPUT_MISC [=y] && INPUT [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || INPUT_DRV2665_HAPTICS [=m] && INPUT_MISC [=y] && INPUT [=y] && I2C [=m] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=y] && I2C [=m] || INPUT_SC27XX_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=n]) || HID_ACRUX_FF [=n] && INPUT [=y] && HID [=y] && HID_ACRUX [=y] || HID_BETOP_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=y] && HID [=y] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=y] && INPUT [=y] && HID [=y] && HID_DRAGONRISE [=y] || HID_EMS_FF [=m] && INPUT [=y] && HID [=y] || HOLTEK_FF [=n] && INPUT [=y] && HID [=y] && HID_HOLTEK [=n] || LOGITECH_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIRUMBLEPAD2_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIG940_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || LOGIWHEELS_FF [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_MAYFLASH [=y] && INPUT [=y] && HID [=y] || HID_MICROSOFT [=n] && INPUT [=y] && HID [=y] || NINTENDO_FF [=y] && INPUT [=y] && HID [=y] && HID_NINTENDO [=m] || PANTHERLORD_FF [=y] && INPUT [=y] && HID [=y] && HID_PANTHERLORD [=y] || PLAYSTATION_FF [=y] && INPUT [=y] && HID [=y] && HID_PLAYSTATION [=m] || SONY_FF [=n] && INPUT [=y] && HID [=y] && HID_SONY [=n] || GREENASIA_FF [=y] && INPUT [=y] && HID [=y] && HID_GREENASIA [=m] || SMARTJOYPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_SMARTJOYPLUS [=n] || THRUSTMASTER_FF [=n] && INPUT [=y] && HID [=y] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=n] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || ZEROPLUS_FF [=n] && INPUT [=y] && HID [=y] && HID_ZEROPLUS [=n]
+MAC80211_RC_DEFAULT_MINSTREL: y => no
+      Direct dependencies: <choice> && MAC80211_RC_MINSTREL [=y]
 
-REGULATOR_AXP20X: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_AXP20X [=m]
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: QORIQ_CPUFREQ [=m] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=n] || COMPILE_TEST [=y])
 
-COMEDI_TESTS_EXAMPLE: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_TESTS [=m]
+TI_ADC081C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

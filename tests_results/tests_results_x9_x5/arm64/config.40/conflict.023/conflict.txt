@@ -1,16 +1,17 @@
-TOUCHSCREEN_TI_AM335X_TSC: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && MFD_TI_AM335X_TSCADC [=m]
+SENSORS_LTC2947_SPI: m => yes
+      Direct dependencies: HWMON [=m] && SPI_MASTER [=y]
 
-SND_SOC_MT8183: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && ARCH_MEDIATEK [=y]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=y] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 
-CRYPTO_LZ4: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+VIDEO_WM8739: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=m] && RC_CORE [=n]
 
-TOUCHSCREEN_USB_GOTOP: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+SENSORS_ADT7411: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=m]
 
-TOUCHSCREEN_USB_IRTOUCH: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+SENSORS_LTC3815: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 

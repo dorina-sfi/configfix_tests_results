@@ -1,22 +1,23 @@
+MTD_QINFO_PROBE: y => no
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=y]
+      Reverse dependencies: MTD_LPDDR [=y] && MTD [=y]
+
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
+
+LEDS_TRIGGER_AUDIO: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_TRIGGERS [=y]
+      Reverse dependencies: SND_CTL_LED [=y] && SOUND [=y] && !UML && SND [=y] && SND_CTL_LED [=y] || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=n] || RFKILL [=n]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+
 NAMESPACES: y => no
       Direct dependencies: MULTIUSER [=y]
 
-IIO_ST_MAGN_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=n] && IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=y] && !SENSORS_LIS3_SPI [=y]
-
-SECURITYFS: y => no
+PPS: y => no
       Direct dependencies: y
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=n] && INTEGRITY [=n]
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
 
-HID_LOGITECH_HIDPP: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_LOGITECH [=m]
-      Reverse dependencies: HID_LOGITECH_DJ [=m] && INPUT [=y] && HID [=y] && USB_HID [=y] && HIDRAW [=y] && HID_LOGITECH [=m]
-
-VCNL4035: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-ARM64_MODULE_PLTS: y => no
-      Direct dependencies: MODULES [=y]
-      Reverse dependencies: RANDOMIZE_BASE [=n] && MODULES [=y] || ARM64_ERRATUM_843419 [=y] && MODULES [=y]
+BNX2: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y]
+      Reverse dependencies: CNIC [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y]
 

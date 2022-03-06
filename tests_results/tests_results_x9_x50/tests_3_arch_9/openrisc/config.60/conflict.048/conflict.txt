@@ -1,34 +1,35 @@
-CRYPTO_SM3: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
+NET_SWITCHDEV: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NET_DSA [=y] && NET [=y] && (BRIDGE [=n] || BRIDGE [=n]=n) && (HSR [=y] || HSR [=y]=n) && INET [=y] && NETDEVICES [=y]
 
-USB_DWC2_PERIPHERAL: y => no
-      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_DWC2 [=y])
+NET_DSA_TAG_KSZ: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_MICROCHIP_KSZ_COMMON [=y] && NETDEVICES [=y] && NET_DSA [=y]
 
-PAGE_EXTENSION: y => no
+NET_DSA_TAG_DSA: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_MV88E6XXX [=y] && NETDEVICES [=y] && NET_DSA [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+
+CRC4: y => no
       Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
 
-FONT_8x16: y => no
-      Direct dependencies: FONT_SUPPORT [=y]
-      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=n] && VIDEO_DEV [=y] && SND [=n] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_CAMERA_SUPPORT [=n] && PCI [=n] && VIDEO_DEV [=y] && SND [=n] && I2C [=y] || VIDEO_VIMC [=y] && MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] || VIDEO_VIVID [=y] && MEDIA_SUPPORT [=y] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] && !SPARC32 && !SPARC64 && FB [=y] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=y] && (X86 || PPC) && FRAMEBUFFER_CONSOLE [=n] || FB_S3 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=n] || FB_VT8623 [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=n] || FB_ARK [=n] && HAS_IOMEM [=y] && FB [=y] && PCI [=n] && FRAMEBUFFER_CONSOLE [=n] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=y] && USB [=y] && VT [=n] && BROKEN [=n] || FONT_AUTOSELECT [=y] && FONT_SUPPORT [=y] && !FONT_8x8 [=n] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
+SECURITY_TOMOYO_OMIT_USERSPACE_LOADER: y => no
+      Direct dependencies: SECURITY_TOMOYO [=y]
+      Reverse dependencies: SECURITY_TOMOYO_INSECURE_BUILTIN_SETTING [=y] && SECURITY_TOMOYO [=y]
 
-HZ_PERIODIC: y => no
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+
+NET_DSA_TAG_AR9331: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_AR9331 [=y] && NETDEVICES [=y] && NET_DSA [=y]
+
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+
+LTO_NONE: y => no
       Direct dependencies: <choice>
-
-CRYPTO_GHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
-
-CRYPTO_CRCT10DIF: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
-
-AUTOFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: AUTOFS4_FS [=y]
-
-MEDIA_TUNER_TDA9887: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=y] && I2C [=y]
 

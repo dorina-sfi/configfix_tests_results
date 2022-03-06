@@ -1,33 +1,29 @@
-KCMP: y => no
+MMC_CQHCI: m => yes
+      Direct dependencies: MMC [=m] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=m] && MMC_SDHCI [=n] && PCI [=n] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=m] && MMC_SDHCI_PLTFM [=n] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=m] && (ARCH_MXC || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] && OF [=y] || MMC_SDHCI_TEGRA [=n] && MMC [=m] && (ARCH_TEGRA || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_MSM [=n] && MMC [=m] && (ARCH_QCOM || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_MTK [=n] && MMC [=m] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=m] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_AM654 [=n] && MMC [=m] && MMC_SDHCI_PLTFM [=n] && OF [=y] && REGMAP_MMIO [=y]
+
+CAIF_NETDEV: m => yes
+      Direct dependencies: NET [=y] && CAIF [=m]
+
+VIDEO_ML86V7667: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+
+PACKING: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+      Reverse dependencies: NET_DSA_TAG_OCELOT [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_TAG_SJA1105 [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_SJA1105 [=n] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=n] && PTP_1588_CLOCK_OPTIONAL [=m] || MSCC_OCELOT_SWITCH_LIB [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICROSEMI [=n]
 
-AUXDISPLAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: PANEL [=m] && PARPORT [=y]
+TOUCHSCREEN_INEXIO: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
 
-KEYSTONE_USB_PHY: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (ARCH_KEYSTONE || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=m]
+RC_CORE: m => yes
+      Direct dependencies: INPUT [=m]
 
-CHARGER_MT6360: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MT6360 [=m] && REGULATOR [=y]
+GPIO_TPS65218: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_TPS65218 [=m]
 
-CRYPTO_SHA1: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MODULE_SIG_SHA1 [=n] && <choice> || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || TEE [=n] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=y] || CPU_SUP_AMD) || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || TRUSTED_KEYS [=m] && KEYS [=y] && TCG_TPM [=m] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_SHA1_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT || CRYPTO_SHA1_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA1_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DEV_SUN4I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_SUNXI && PM && CRYPTO_DEV_ALLWINNER [=n] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=m] && !CRYPTO_DEV_EXYNOS_RNG [=y] && CRYPTO_DEV_EXYNOS_RNG [=y]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC && MAILBOX [=n] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=y] || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=m] && TRUSTED_KEYS [=m] || SIGNATURE [=n] && KEYS [=y]
+TOUCHSCREEN_CYTTSP_I2C: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_CYTTSP_CORE [=m] && I2C [=y]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-
-MFD_STMFX: y => no
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y] && (OF [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: PINCTRL_STMFX [=y] && PINCTRL [=y] && I2C [=y] && OF_GPIO [=y]
-
-USB_STORAGE_CYPRESS_ATACB: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_STORAGE [=m]
-
-CRYPTO_NULL: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
+VIDEO_MEM2MEM_DEINTERLACE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && HAS_DMA [=y]
 

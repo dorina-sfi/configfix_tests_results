@@ -1,9 +1,11 @@
-BH1780: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
+VT_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-MTD_NAND_INTEL_LGM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+ACPI_PROCESSOR: y => no
+      Direct dependencies: ACPI [=y] && (X86 [=y] || IA64 || ARM64 || LOONGARCH)
+      Reverse dependencies: X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y] && ACPI [=y]
 
-VIDEO_ASPEED: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m]
+REGULATOR: y => no
+      Direct dependencies: y
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=y] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=n])
 

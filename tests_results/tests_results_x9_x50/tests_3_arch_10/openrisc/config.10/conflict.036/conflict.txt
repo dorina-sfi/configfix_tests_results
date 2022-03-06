@@ -1,39 +1,40 @@
-HZ_300: y => no
-      Direct dependencies: <choice>
-
-MEDIA_TUNER_TDA827X: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: DVB_USB_M920X [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_TTUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_SAA7134 [=n] && DVB_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_BUDGET_CI [=n] && MEDIA_SUPPORT [=y] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=n] && DVB_BUDGET_CORE [=n] && I2C [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || MEDIA_TUNER_TDA8290 [=y] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-
-I2C_ALGOPCA: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
-
-LINEDISP: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: IMG_ASCII_LCD [=n] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=y] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
-
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
-
-CRYPTO_ECDH: y => no
+CRYPTO_DRBG_MENU: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=n] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_KEEMBAY || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-USB_NET_CDCETHER: y => no
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
-      Reverse dependencies: USB_NET_CDC_NCM [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_RNDIS_HOST [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_ZAURUS [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_RNDIS_WLAN [=y] && NETDEVICES [=y] && WLAN [=y] && USB [=y] && CFG80211 [=y]
+NET_IFE: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: NET_ACT_IFE [=y] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y]
 
-CRYPTO_ZSTD: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_ZSTD [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=y] || PSTORE_ZSTD_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=n]) || I2C_BCM_IPROC [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=n] && !X86_32 || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n])
+CRYPTO: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || BLK_INLINE_ENCRYPTION_FALLBACK [=y] && BLOCK [=y] && BLK_INLINE_ENCRYPTION [=y] || BT [=n] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || AF_RXRPC [=n] && NET [=y] && INET [=n] || CEPH_LIB [=n] && NET [=y] && INET [=n] || TLS [=n] && NET [=y] && INET [=n] || XFRM_ALGO [=n] && NET [=y] || IP_SCTP [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || MAC802154 [=n] && NET [=y] && IEEE802154 [=y] || XFRM_AH [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || XFRM_IPCOMP [=n] && NET [=y] && INET [=n] || TCP_MD5SIG [=n] && NET [=y] && INET [=n] || MPTCP [=n] && NET [=y] && INET [=n] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=n] && IPV6 [=n] || RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || NFC_S3FWRN5 [=y] && NET [=y] && NFC [=y] || USB4 [=n] && PCI [=n] || TEE [=n] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=n] || CPU_SUP_AMD) || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=n] && BLOCK [=y] || NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=n] || DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=y] || TRUSTED_KEYS [=y]=n) || DM_VERITY [=y] && MD [=y] && BLK_DEV_DM [=y] || DM_INTEGRITY [=y] && MD [=y] && BLK_DEV_DM [=y] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=n] || WIREGUARD [=n] && NETDEVICES [=y] && NET_CORE [=n] && NET [=y] && INET [=n] && (IPV6 [=n] || !IPV6 [=n]) || MACSEC [=n] && NETDEVICES [=y] && NET_CORE [=n] || PPP_MPPE [=n] && NETDEVICES [=y] && PPP [=y] || USB_RTL8152 [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] || AIRO [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=y] && ISA_DMA_API && (PCI [=n] || BROKEN [=n]) || AIRO_CS [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=y] && PCMCIA [=y] || LIBIPW [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && PCI [=n] && CFG80211 [=y] || HOSTAP [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] || HERMES [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && (PPC_PMAC || PCI [=n] || PCMCIA [=y]) && CFG80211 [=y] || TCG_TPM [=y] && HAS_IOMEM [=y] || SND_SOC_CROS_EC_CODEC [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && CROS_EC [=n] || RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || RTL8192U [=n] && STAGING [=n] && PCI [=n] && WLAN [=n] && USB [=y] && m && MODULES [=n] || RTL8723BS [=n] && STAGING [=n] && WLAN [=n] && MMC [=n] && CFG80211 [=y] && m && MODULES [=n] || KS7010 [=n] && STAGING [=n] && MMC [=n] && WIRELESS [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=n] && RTLLIB [=n] || RTLLIB_CRYPTO_TKIP [=n] && STAGING [=n] && RTLLIB [=n] || RTL8192E [=n] && STAGING [=n] && PCI [=n] && WLAN [=n] && RTLLIB [=n] && m && MODULES [=n] || FS_ENCRYPTION [=n] || FS_VERITY [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=n] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || F2FS_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ADVANCED_COMPR [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_LZO [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZSTD [=n] || PSTORE [=y] && MISC_FILESYSTEMS [=y] && PSTORE_COMPRESS [=y] || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || TRUSTED_KEYS [=y] && KEYS [=y] && TCG_TPM [=y] || ENCRYPTED_KEYS [=n] && KEYS [=y] || KEY_DH_OPERATIONS [=y] && KEYS [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || CRC_T10DIF [=y] || LIBCRC32C [=y] || SIGNATURE [=n] && KEYS [=y]
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=n] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
+CRC8: y => no
+      Direct dependencies: y
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=y] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=n] && HWMON [=n] && I2C [=y] || SENSORS_SHT4x [=n] && HWMON [=n] && I2C [=y] || SENSORS_ADM1266 [=n] && HWMON [=n] && PMBUS [=n] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=n] && STAGING [=n] && IIO [=n] && SPI [=y] || SCA3300 [=n] && IIO [=n] && SPI [=y] || SCD30_I2C [=n] && IIO [=n] && SCD30_CORE [=n] && I2C [=y] || SCD4X [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP30 [=n] && IIO [=n] && I2C [=y] || SENSIRION_SGP40 [=n] && IIO [=n] && I2C [=y] || SPS30_I2C [=n] && IIO [=n] && I2C [=y] || ICP10100 [=n] && IIO [=n] && I2C [=y]
+
+LCD_ILI9320: y => no
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI [=y]
+      Reverse dependencies: LCD_VGG2432A4 [=y] && HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=y] && SPI_MASTER [=y]
+
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
+
+PPP: y => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: IPWIRELESS [=y] && PCMCIA [=y] && NETDEVICES [=y] && TTY [=y]
+
+USB_ULPI_BUS: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y]
+
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: OPENRISC [=y]
 

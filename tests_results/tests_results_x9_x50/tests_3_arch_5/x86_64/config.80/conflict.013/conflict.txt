@@ -1,20 +1,19 @@
-PPS: y => no
+W1_SLAVE_DS2780: m => yes
+      Direct dependencies: W1 [=m]
+      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+
+MXM_WMI: m => no
+      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=m]
+      Reverse dependencies: DRM_NOUVEAU [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y]
+
+EVENTFD: y => no
       Direct dependencies: y
-      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
+      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=y] && VIRT_DRIVERS [=y] && ACRN_GUEST [=y]
 
-CRYPTO_CRYPTD: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+GREYBUS_I2C: m => yes
+      Direct dependencies: STAGING [=y] && GREYBUS [=m] && GREYBUS_BRIDGED_PHY [=m] && I2C [=y]
 
-AK8975: y => no
-      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
-
-PSAMPLE: y => no
-      Direct dependencies: NET [=y]
-      Reverse dependencies: NET_ACT_SAMPLE [=y] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y]
-
-CRYPTO_RSA: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
+B53: y => mod
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
 

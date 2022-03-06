@@ -1,14 +1,16 @@
-LIBNVDIMM: y => no
-      Direct dependencies: PHYS_ADDR_T_64BIT [=y] && HAS_IOMEM [=y] && BLK_DEV [=y]
-      Reverse dependencies: X86_PMEM_LEGACY [=m] && PHYS_ADDR_T_64BIT [=y] && BLK_DEV [=y] || ACPI_NFIT [=n] && ACPI [=n] && PHYS_ADDR_T_64BIT [=y] && BLK_DEV [=y] && ARCH_HAS_PMEM_API [=y]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 [=y] || COMPILE_TEST [=y])
 
-CRYPTO_LIB_CHACHA20POLY1305: m => yes
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
-      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
+USB_ISP1301: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && I2C [=y]
+      Reverse dependencies: USB_LPC32XX [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && I2C [=y]
 
-SCSI_VIRTIO: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && SCSI [=m] && VIRTIO [=y]
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=n] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y]
 
-SND_SOC_TFA9879: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 

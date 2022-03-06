@@ -1,27 +1,28 @@
-MTD_MAP_BANK_WIDTH_1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+SCSI: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
 
-KERNEL_LZMA: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_LZMA [=y]
+ACPI_FAN: y => no
+      Direct dependencies: ACPI [=y] && THERMAL [=y]
+      Reverse dependencies: INT340X_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_64 [=y] && ACPI [=y] && PCI [=y]
 
-CRC_CCITT: y => no
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=n] && NET [=y] || NFC_DIGITAL [=y] && NET [=y] && NFC [=y] || NFC_NCI_SPI [=y] && NET [=y] && NFC_NCI [=y] && SPI [=y] || NFC_SHDLC [=y] && NET [=y] && NFC_HCI [=y] || MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || NETLABEL [=n] && NET [=y] && INET [=n] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_SER_HDX [=y] && NET [=y] && HAMRADIO [=y] && AX25 [=y] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=y] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=y] && !64BIT [=y] || NFC_FDP [=y] && NET [=y] && NFC [=y] && NFC_NCI [=y] || NFC_PN544 [=y] && NET [=y] && NFC [=y] || NFC_MICROREAD [=y] && NET [=y] && NFC [=y] || NFC_ST21NFCA [=y] && NET [=y] && NFC [=y] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=y] || OF_ADDRESS [=n] && OF_IRQ [=n]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=n] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=y] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && I2C [=y] || RAVE_SP_CORE [=y] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=y] && SURFACE_PLATFORMS [=y] && SERIAL_DEV_BUS [=y]
+CONNECTOR: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: DM_LOG_USERSPACE [=y] && MD [=y] && DM_MIRROR [=y] && NET [=y]
 
-IOMMU_IO_PGTABLE_LPAE: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
-      Reverse dependencies: DRM_PANFROST [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=n] && IOMMU_SUPPORT [=y] && (ARCH_APPLE || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 || ARM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+CRYPTO_CRCT10DIF: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRC_T10DIF [=y]
 
-IOSF_MBI: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=y] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=n] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=y] && MMC [=y] && MMC_SDHCI [=y] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && X86 [=y] && EFI [=n] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=y] || PUNIT_ATOM_DEBUG [=y] && PCI [=y]
+THERMAL_GOV_USER_SPACE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_USER_SPACE [=n] && <choice> || X86_PKG_TEMP_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=n] || INT340X_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_64 [=y] && ACPI [=y] && PCI [=y]
 
-PARAVIRT: y => no
-      Direct dependencies: HYPERVISOR_GUEST [=y] && HAVE_STATIC_CALL [=y]
-      Reverse dependencies: X86_VSMP [=n] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=n] || HYPERV [=y] && ACPI [=y] && (X86 [=y] && X86_LOCAL_APIC [=y] && HYPERVISOR_GUEST [=y] || ARM64 && !CPU_BIG_ENDIAN)
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-STACKTRACE: y => no
-      Direct dependencies: STACKTRACE_SUPPORT [=y]
-      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=y] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || TRACING [=y] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=y] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=n] || SLUB [=n]) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=n] && STACKTRACE_SUPPORT [=y] && !X86_64 [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y])
+CRYPTO_CCM: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=n] || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || RTL8192U [=n] && STAGING [=n] && PCI [=y] && WLAN [=n] && USB [=y] && m && MODULES [=n] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=n] && RTLLIB [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
 

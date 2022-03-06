@@ -1,17 +1,16 @@
-AD5696_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+COMEDI_ME4000: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
 
-IIO_ST_GYRO_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n]) && SYSFS [=y]
+XILINX_PR_DECOUPLER: m => yes
+      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
 
-MEDIA_ANALOG_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+MMC_SDHCI_OF_ESDHC: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && (PPC || ARCH_MXC [=y] || ARCH_LAYERSCAPE [=n] || COMPILE_TEST [=y])
 
-I2C_MUX: y => mod
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=m] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=m] && IIO [=m] && I2C [=y] || INV_MPU6050_I2C [=m] && IIO [=m] && I2C [=y]
+SENSORS_PC87360: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-USB_XHCI_PLATFORM: m => no
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m]
-      Reverse dependencies: USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_XHCI_HCD [=m] || USB_BRCMSTB [=n] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=n] || COMPILE_TEST [=n]) && USB_XHCI_HCD [=m] || USB_XHCI_MVEBU [=n] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=m] && HAS_IOMEM [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=n])
+SND_SOC_ES8328_I2C: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_RK3288_HDMI_ANALOG [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=m] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_IMX_ES8328 [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && (I2C [=y] || SPI [=y]) && I2C [=y]
 

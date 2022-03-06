@@ -1,17 +1,20 @@
-CHARLCD_BL_ON: y => no
-      Direct dependencies: <choice>
+USB_XHCI_RCAR: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && USB_XHCI_PLATFORM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: USB_XHCI_PLATFORM [=y] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && ARCH_RENESAS [=y]
 
-MEDIA_TUNER_MT2063: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_AZ6007 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=y] && SND [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
-
-W1_SLAVE_DS2438: m => yes
-      Direct dependencies: W1 [=m]
-
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
       Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-COMEDI_DAS800: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+USB_ACM: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && TTY [=y]
+      Reverse dependencies: USB_VL600 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] && USB_NET_CDCETHER [=n] && TTY [=y] || USB_PULSE8_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
+
+USB_CONN_GPIO: y => no
+      Direct dependencies: USB_SUPPORT [=y] && GPIOLIB [=y]
+      Reverse dependencies: PHY_TEGRA_XUSB [=y] && ARCH_TEGRA [=y] && USB_SUPPORT [=y]
+
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=y] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=y] && (MACH_LOONGSON64 || COMPILE_TEST [=y]) && PCI [=y]
 

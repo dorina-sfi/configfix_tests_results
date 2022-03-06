@@ -1,13 +1,13 @@
-DEBUG_FS_ALLOW_NONE: y => no
-      Direct dependencies: <choice>
+KEYBOARD_OPENCORES: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && HAS_IOMEM [=y]
 
-SENSORS_LM85: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+TOUCHSCREEN_TOUCHWIN: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
 
-CRYPTO_CHACHA20: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+DEBUG_RT_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && RT_MUTEXES [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && RT_MUTEXES [=y]
 
-SENSORS_SHT15: m => yes
-      Direct dependencies: HWMON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+SENSORS_W83795: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 

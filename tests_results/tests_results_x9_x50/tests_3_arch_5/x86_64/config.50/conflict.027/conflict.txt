@@ -1,16 +1,18 @@
-ITG3200: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SLUB: y => no
+      Direct dependencies: <choice>
 
-SRF04: m => yes
-      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+CHARLCD: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=n] && AUXDISPLAY [=y] && I2C [=y]
 
-SYSTEM_TRUSTED_KEYRING: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=n] && SIGNED_PE_FILE_VERIFICATION [=n]
+RUST_BUILD_ASSERT_ALLOW: y => no
+      Direct dependencies: <choice>
 
-NET_SCH_ATM: m => yes
-      Direct dependencies: NET [=y] && NET_SCHED [=y] && ATM [=m]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 
-SENSORS_K8TEMP: m => yes
-      Direct dependencies: HWMON [=m] && X86 [=y] && PCI [=y]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 

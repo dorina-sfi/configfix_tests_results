@@ -1,16 +1,17 @@
-REGULATOR_LP8755: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+CAN_CC770: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && HAS_IOMEM [=y]
 
-GAMEPORT_NS558: m => yes
-      Direct dependencies: GAMEPORT [=m]
+PHY_TUSB1210: m => yes
+      Direct dependencies: USB_ULPI_BUS [=m]
 
-PINCTRL: y => no
+TYPEC_TCPCI: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && TYPEC_TCPM [=m] && I2C [=y]
+
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=y] && COMMON_CLK [=y]
+
+DEBUG_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: MFD_MADERA [=m] && HAS_IOMEM [=y]
-
-CARDMAN_4040: m => yes
-      Direct dependencies: PCMCIA [=m]
-
-REGULATOR_MAX8952: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=y] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=n] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=y] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=n] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 

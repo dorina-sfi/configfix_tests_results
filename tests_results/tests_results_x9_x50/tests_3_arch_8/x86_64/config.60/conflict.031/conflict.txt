@@ -1,27 +1,30 @@
-INPUT_AD714X_I2C: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && INPUT_AD714X [=m] && I2C [=y]
+VIDEO_DEV: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-REGULATOR_FIXED_VOLTAGE: m => no
-      Direct dependencies: REGULATOR [=y]
-      Reverse dependencies: TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 [=y] || COMPILE_TEST [=n])
+IPMI_SI: y => no
+      Direct dependencies: IPMI_HANDLER [=y]
+      Reverse dependencies: SENSORS_IBMAEM [=y] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
 
-DMARD10: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+X86_UMIP: y => no
+      Direct dependencies: y
 
-INPUT_EVBUG: m => yes
-      Direct dependencies: INPUT [=m]
-
-HID_CHICONY: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-HID_CHERRY: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-CRYPTO_LZ4: y => no
+CRYPTO_CAST6: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4 [=n] && <choice> || PSTORE_LZ4_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+      Reverse dependencies: CRYPTO_CAST6_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-SND_SOC_TS3A227E: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_ROCKCHIP_MAX98090 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] || SND_SOC_INTEL_CHT_BSW_MAX98090_TI_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=y] && (SND_SST_ATOM_HIFI2_PLATFORM [=m] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n])
+CRYPTO_TWOFISH_X86_64_3WAY: y => no
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || KEXEC_BZIMAGE_VERIFY_SIG [=n] && KEXEC_SIG [=n] && SIGNED_PE_FILE_VERIFICATION [=y]
+
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=y] && I2C [=y]
+
+RESET_CONTROLLER: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_UFS_QCOM [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n] && SCSI_UFSHCD_PLATFORM [=n] && ARCH_QCOM || HISI_FEMAC [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_HISILICON [=n] && HAS_IOMEM [=y] || SPARX5_SWITCH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && NET_SWITCHDEV [=n] && HAS_IOMEM [=y] && OF [=y] && (ARCH_SPARX5 || COMPILE_TEST [=y]) || STMMAC_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) && ARCH_RCAR_GEN3 [=n] || ASM9260_WATCHDOG [=y] && WATCHDOG [=y] && (MACH_ASM9260 || COMPILE_TEST [=y]) && OF [=y] || MEDIATEK_WATCHDOG [=n] && WATCHDOG [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || VIDEO_RCAR_CSI2 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=y] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || VIDEO_RCAR_ISP [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=y] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || DRM_STI [=n] && HAS_IOMEM [=y] && OF [=y] && DRM [=n] && (ARCH_STI || ARCH_MULTIPLATFORM) || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || MMC_SDHI [=n] && MMC [=y] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=y]) && ARCH_RENESAS || COMMON_CLK_GEMINI [=y] && COMMON_CLK [=y] && (ARCH_GEMINI || COMPILE_TEST [=y]) || COMMON_CLK_ASPEED [=y] && COMMON_CLK [=y] && (ARCH_ASPEED || COMPILE_TEST [=y]) || CLK_ACTIONS [=n] && COMMON_CLK [=y] && (ARCH_ACTIONS || COMPILE_TEST [=y]) || CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || RESET_HISI [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_QCOM [=y] && COMMON_CLK [=y] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) || SUNXI_CCU [=n] && COMMON_CLK [=y] && (ARCH_SUNXI || COMPILE_TEST [=y]) || CLK_BT1_CCU_DIV [=n] && COMMON_CLK [=y] && CLK_BAIKAL_T1 [=n] || COMMON_CLK_MEDIATEK [=y] && COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || COMMON_CLK_MESON_AO_CLKC [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=y]) || COMMON_CLK_MESON8B [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=y]) && ARM || CLK_RCAR_USB2_CLOCK_SEL [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || CLK_RZG2L [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SIFIVE_PRCI [=y] && COMMON_CLK [=y] && CLK_SIFIVE [=y] || BCM2835_POWER [=y] && (ARCH_BCM2835 || COMPILE_TEST [=y] && OF [=y]) || RENESAS_RPCIF [=y] && MEMORY [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || PHY_ATH79_USB [=y] && OF [=y] && (ATH79 || COMPILE_TEST [=y]) || PHY_ROCKCHIP_TYPEC [=y] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y])
 

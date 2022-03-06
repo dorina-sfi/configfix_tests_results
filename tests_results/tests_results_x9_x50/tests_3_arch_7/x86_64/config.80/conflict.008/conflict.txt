@@ -1,21 +1,26 @@
-VIDEO_ASPEED: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m]
+CRYPTO_RSA: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-SENSORS_MAX8688: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+CRYPTO_SERPENT: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-SLIM_QCOM_CTRL: m => yes
-      Direct dependencies: SLIMBUS [=m] && HAS_IOMEM [=y]
+DAX: y => no
+      Direct dependencies: y
+      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
 
-IIO_TIGHTLOOP_TRIGGER: m => yes
-      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
+FILE_LOCKING: y => no
+      Direct dependencies: y
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+SOFTLOCKUP_DETECTOR: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !S390
+      Reverse dependencies: HARDLOCKUP_DETECTOR_PERF [=y]
 
-GP2AP020A00F: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+LIBNVDIMM: y => no
+      Direct dependencies: PHYS_ADDR_T_64BIT [=y] && HAS_IOMEM [=y] && BLK_DEV [=y]
+      Reverse dependencies: X86_PMEM_LEGACY [=n] && PHYS_ADDR_T_64BIT [=y] && BLK_DEV [=y] || ACPI_NFIT [=y] && ACPI [=y] && PHYS_ADDR_T_64BIT [=y] && BLK_DEV [=y] && ARCH_HAS_PMEM_API [=y]
 
-I2C_ARB_GPIO_CHALLENGE: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n])
+USB_ISP1760_GADGET_ROLE: y => no
+      Direct dependencies: <choice> && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_ISP1760 [=y])
 

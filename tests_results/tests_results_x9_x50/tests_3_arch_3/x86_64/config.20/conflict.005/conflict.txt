@@ -1,9 +1,10 @@
-SQUASHFS_FILE_CACHE: y => no
-      Direct dependencies: <choice>
+GPIO_LP87565: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP87565 [=m]
 
-KUNIT_EXAMPLE_TEST: m => yes
-      Direct dependencies: KUNIT [=m]
+ITCO_WDT: m => yes
+      Direct dependencies: WATCHDOG [=y] && (X86 [=y] || IA64) && PCI [=y] && (I2C [=y] || I2C [=y]=n) && (MFD_INTEL_PMC_BXT [=m] || !MFD_INTEL_PMC_BXT [=m])
 
-SLIM_QCOM_CTRL: m => yes
-      Direct dependencies: SLIMBUS [=m] && HAS_IOMEM [=y]
+CPU_FREQ_GOV_SCHEDUTIL: y => no
+      Direct dependencies: CPU_FREQ [=y] && SMP [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y] && SMP [=y]
 

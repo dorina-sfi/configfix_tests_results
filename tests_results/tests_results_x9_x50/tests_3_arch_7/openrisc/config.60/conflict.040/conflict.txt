@@ -1,21 +1,23 @@
-TCM_FILEIO: m => yes
-      Direct dependencies: TARGET_CORE [=m]
+MTD_NAND_OMAP2: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARCH_OMAP2PLUS || ARCH_KEYSTONE || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-SND_SEQ_DUMMY: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SEQUENCER [=m]
+MDIO_BCM_UNIMAC: m => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=n] && NETDEVICES [=y] && NET_DSA [=n] && HAS_IOMEM [=y] || BCMGENET [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && HAS_IOMEM [=y]
 
-SENSORS_ADS7828: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+EXTCON_PALMAS: m => yes
+      Direct dependencies: EXTCON [=m] && MFD_PALMAS [=y]
 
-USB_KBD: m => yes
-      Direct dependencies: USB_HID [=m]!=y && EXPERT [=y] && USB [=m] && INPUT [=y]
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=n] && FSI [=m] && GPIOLIB [=y]
 
-SENSORS_W83791D: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+PSTORE_DEFLATE_COMPRESS: m => yes
+      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
 
-SENSORS_MAX31790: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+UNICODE_NORMALIZATION_SELFTEST: m => yes
+      Direct dependencies: UNICODE_UTF8_DATA [=m]
 
-SENSORS_MCP3021: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+I2C_AT91_SLAVE_EXPERIMENTAL: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=m]
 

@@ -1,19 +1,17 @@
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+JOYSTICK_GRIP: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-CRYPTO_GHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+IIO_KFIFO_BUF: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=m] && STAGING [=y] && IIO [=m] && I2C [=y] || IIO_TRIGGERED_BUFFER [=m] && IIO [=m] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=m] && SPI [=n] || INA2XX_ADC [=n] && IIO [=m] && I2C [=y] && !SENSORS_INA2XX [=n] || TI_AM335X_ADC [=m] && IIO [=m] && MFD_TI_AM335X_TSCADC [=m] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=m] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=m] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=m] && IIO_SIMPLE_DUMMY [=m] || MAX30100 [=m] && IIO [=m] && I2C [=y] || MAX30102 [=m] && IIO [=m] && I2C [=y] || IIO_ST_LSM6DSX [=n] && IIO [=m] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=m] && IIO [=m] && ACPI [=y] || APDS9960 [=m] && IIO [=m] && I2C [=y] || ISL29501 [=n] && IIO [=m] && I2C [=y]
 
-DW_APB_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
+UHID: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-USB_MUSB_HOST: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
+SC27XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y])
 

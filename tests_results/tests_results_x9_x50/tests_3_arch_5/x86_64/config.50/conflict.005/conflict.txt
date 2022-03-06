@@ -1,16 +1,19 @@
-MMA7455_SPI: m => yes
-      Direct dependencies: IIO [=m] && SPI_MASTER [=y]
+DYNAMIC_DEBUG_CORE: y => no
+      Direct dependencies: PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
+      Reverse dependencies: DYNAMIC_DEBUG [=y] && PRINTK [=y] && (DEBUG_FS [=y] || PROC_FS [=y])
 
-NFT_DUP_IPV6: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && NF_TABLES [=m] && NF_TABLES_IPV6 [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y])
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-NF_TPROXY_IPV4: m => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: NFT_TPROXY [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && (IPV6 [=m] || IPV6 [=m]=n) || NETFILTER_XT_TARGET_TPROXY [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=n] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n) && IP_NF_MANGLE [=n]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-PCIEASPM: y => no
-      Direct dependencies: PCI [=y]
+CRYPTO_ECDH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=n] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=n]) && (OF [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-PCIEASPM: y => no
-      Direct dependencies: PCI [=y]
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 

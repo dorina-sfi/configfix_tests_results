@@ -1,32 +1,30 @@
-DVB_TUNER_DIB0070: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=m] && INPUT [=n] && SND [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+FSI_MASTER_ASPEED: m => yes
+      Direct dependencies: FSI [=m] && HAS_IOMEM [=y]
 
-SND_PCM_OSS: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_OSSEMUL [=y]
+I2C_IOP3XX: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_IOP32X || ARCH_IXP4XX || COMPILE_TEST [=y])
 
-SMS_SDIO_DRV: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_CORE [=m] && HAS_DMA [=y] && MMC [=m] && (!RC_CORE [=n] || RC_CORE [=n])
+I2C_VIRTIO: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
 
-SND_IMX_SOC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MXC || COMPILE_TEST [=y])
+LEDS_LP55XX_COMMON: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=m] || !LEDS_CLASS_MULTICOLOR [=m]) && OF [=y] && I2C [=m]
 
-DRM_MSM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n)
+SERIAL_SC16IS7XX: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && (SPI_MASTER [=n] && !I2C [=m] || I2C [=m])
 
-DRM_PANEL_INNOLUX_EJ030NA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && SPI [=y]
+MCP4018: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-SERIAL_OF_PLATFORM: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && OF [=y]
+SENSORS_LTC4151: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=m]
 
-DRM_PANEL_ILITEK_ILI9341: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && SPI [=y] && DRM_KMS_HELPER [=m] && DRM_KMS_CMA_HELPER [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+DRM_RCAR_DW_HDMI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y]
 
-DRM_LONTIUM_LT9611UXC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+PTP_1588_CLOCK_IDT82P33: m => yes
+      Direct dependencies: PTP_1588_CLOCK [=y] && I2C [=m]
 
-CRYPTO_CRC32C: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+I2C_SH_MOBILE: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_SHMOBILE || ARCH_RENESAS || COMPILE_TEST [=y])
 

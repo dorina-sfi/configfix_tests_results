@@ -1,9 +1,11 @@
-USB_ISP1760_HOST_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=y])
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=m] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=m]
 
-CRC32_BIT: y => no
-      Direct dependencies: <choice>
+VIDEO_CS5345: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX18 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_V4L2 [=m] && DVB_CORE [=n] && PCI [=n] && I2C [=y] && RC_CORE [=m]
 
-TIME_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+I2C_MUX_PCA9541: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m]
 

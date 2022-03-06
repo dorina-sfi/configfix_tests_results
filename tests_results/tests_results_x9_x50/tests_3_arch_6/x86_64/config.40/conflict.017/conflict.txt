@@ -1,21 +1,19 @@
-CRC4: y => mod
-      Direct dependencies: y
-      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
+BACKLIGHT_PCF50633: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_PCF50633 [=m]
 
-PNP: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
-      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
+HID_ALPS: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-SENSORS_XDPE122: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+MD_RAID10: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=m]
+      Reverse dependencies: DM_RAID [=n] && MD [=y] && BLK_DEV_DM [=m]
 
-VIDEO_VP27SMPX: m => no
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_IVTV [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=y]
+LEDS_LM3601X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && LEDS_CLASS [=y] && I2C [=m]
 
-USB_MR800: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && USB [=y] && VIDEO_V4L2 [=m]
+SPARSEMEM_MANUAL: y => no
+      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
 
-KASAN_KUNIT_TEST: m => yes
-      Direct dependencies: KASAN [=y] && KUNIT [=m]
+COMEDI_DAS800: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 

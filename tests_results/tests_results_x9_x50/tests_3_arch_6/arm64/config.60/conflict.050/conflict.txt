@@ -1,19 +1,22 @@
-COMEDI_PCMCIA_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=m] && PCMCIA [=m]
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
 
-ADI_AXI_ADC: m => yes
-      Direct dependencies: IIO [=m] && HAS_IOMEM [=y] && OF [=y]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-AD7780: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+MD_RAID0: y => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
 
-USB_FOTG210_UDC: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_DMA [=y]
+W1_SLAVE_DS2781: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-MESON_CANVAS: m => no
-      Direct dependencies: ARCH_MESON [=y] || COMPILE_TEST [=n]
-      Reverse dependencies: DRM_MESON [=n] && HAS_IOMEM [=y] && DRM [=n] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=y] || COMPILE_TEST [=n]) || VIDEO_MESON_VDEC [=m] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_DEV [=y] && VIDEO_V4L2 [=y] && HAS_DMA [=y] && (ARCH_MESON [=y] || COMPILE_TEST [=n])
+LTO_NONE: y => no
+      Direct dependencies: <choice>
 
-UIO_PDRV_GENIRQ: m => yes
-      Direct dependencies: UIO [=m]
+ARM_TIMER_SP804: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
+      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=y]
 

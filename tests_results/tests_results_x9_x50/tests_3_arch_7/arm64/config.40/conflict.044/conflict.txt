@@ -1,22 +1,26 @@
-MTD_NAND_MARVELL: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (PXA3xx || ARCH_MMP || PLAT_ORION || ARCH_MVEBU [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+FHANDLE: y => no
+      Direct dependencies: y
 
-SND_SOC_RT5631: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_ARNDALE [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && I2C [=y]
+CRYPTO_CRC32C: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 
-MUX_ADG792A: m => yes
-      Direct dependencies: MULTIPLEXER [=m] && I2C [=y]
+SYSFS_SYSCALL: y => no
+      Direct dependencies: y
 
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=n] && IOMMU_SUPPORT [=n] && X86_64 && PCI [=y] && ACPI [=n] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=y] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=y]) && PCI [=y]
 
-ST_UVIS25: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI [=n])
+FSL_IFC: y => no
+      Direct dependencies: MEMORY [=y] && (FSL_SOC || ARCH_LAYERSCAPE [=y] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_NAND_FSL_IFC [=y] && MTD [=y] && MTD_RAW_NAND [=y] && (FSL_SOC || ARCH_LAYERSCAPE [=y] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-I2C_MUX_GPIO: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && GPIOLIB [=y]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=y] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-SND_HDA_CODEC_CS8409: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_HDA [=m]
+SCSI_SAS_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] && !S390 || FUSION_SAS [=y] && FUSION [=y] && PCI [=y] && SCSI [=y]
 

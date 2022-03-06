@@ -1,27 +1,23 @@
-USB_ROLE_SWITCH: y => no
-      Direct dependencies: USB_SUPPORT [=y]
-      Reverse dependencies: USB_CONN_GPIO [=y] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=y] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=n]=y || USB_GADGET [=n]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=y] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=y]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=y] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] && (ARCH_RENESAS || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=n] && ACPI [=y] && INTEL_SCU_IPC [=y] || EXTCON_AXP288 [=y] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 [=y] && ACPI [=y] && IOSF_MBI [=y]
+UIO_CIF: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
 
-CGROUPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+SND_SOC_TLV320AIC23_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_EP93XX_SOC_SNAPPERCL15 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && MACH_SNAPPER_CL15 && I2C [=y] || SND_SOC_EUKREA_TLV320 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && ARCH_MXC && !ARM64 && I2C [=y] || SND_SOC_SAMSUNG_SIMTEC_TLV320AIC23 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && ARCH_S3C24XX && I2C [=y] || SND_SOC_TEGRA_TRIMSLICE [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] || SND_SOC_OMAP_OSK5912 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=n]) && MACH_OMAP_OSK && I2C [=y]
 
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+SND_SOC_TAS2552: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-CPU_IDLE_GOV_LADDER: y => no
-      Direct dependencies: CPU_IDLE [=y]
-      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
+SND_ICE1724: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
 
-PRIME_NUMBERS: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM_DEBUG_SELFTEST [=y] && HAS_IOMEM [=y] && DRM [=y] && DEBUG_KERNEL [=y] || DRM_I915_SELFTEST [=n] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=n]
+CAN_JANZ_ICAN3: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && MFD_JANZ_CMODIO [=y]
 
-PREEMPT_VOLUNTARY: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+ASYMMETRIC_PUBLIC_KEY_SUBTYPE: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-CGROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+M62332: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

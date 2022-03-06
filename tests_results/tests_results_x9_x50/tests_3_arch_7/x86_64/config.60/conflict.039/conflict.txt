@@ -1,24 +1,23 @@
-USB_STORAGE_ISD200: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+SND_SOC_IMG_I2S_OUT: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_IMG [=y]
 
-BLK_DEV_INTEGRITY: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_HISI_SAS [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && HAS_IOMEM [=y] && (ARM64 || COMPILE_TEST [=y]) && ATA [=y] || DM_INTEGRITY [=m] && MD [=y] && BLK_DEV_DM [=m] || TCM_IBLOCK [=n] && TARGET_CORE [=y]
+SPI_BITBANG: m => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: SPI_ATH79 [=n] && SPI [=y] && SPI_MASTER [=y] && (ATH79 || COMPILE_TEST [=n]) || SPI_AU1550 [=n] && SPI [=y] && SPI_MASTER [=y] && MIPS_ALCHEMY || SPI_BUTTERFLY [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=n] || SPI_DAVINCI [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_DAVINCI || ARCH_KEYSTONE) || SPI_GPIO [=m] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_IMX [=n] && SPI [=y] && SPI_MASTER [=y] && (ARCH_MXC || COMPILE_TEST [=n]) || SPI_LM70_LLP [=n] && SPI [=y] && SPI_MASTER [=y] && PARPORT [=n] || SPI_OC_TINY [=n] && SPI [=y] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || SPI_OMAP_UWIRE [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_OMAP1 || SPI_PPC4xx [=n] && SPI [=y] && SPI_MASTER [=y] && PPC32 && 4xx || SPI_S3C24XX [=n] && SPI [=y] && SPI_MASTER [=y] && ARCH_S3C24XX || SPI_SH_SCI [=n] && SPI [=y] && SPI_MASTER [=y] && SUPERH || SPI_XILINX [=n] && SPI [=y] && SPI_MASTER [=y] && HAS_IOMEM [=y] || SPI_XTENSA_XTFPGA [=n] && SPI [=y] && SPI_MASTER [=y] && (XTENSA && XTENSA_PLATFORM_XTFPGA || COMPILE_TEST [=n])
 
-NETFILTER_NETLINK_OSF: y => mod
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=y]
-      Reverse dependencies: NFT_OSF [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NETFILTER_ADVANCED [=y] || NETFILTER_XT_MATCH_OSF [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=n] && NETFILTER_ADVANCED [=y]
+SERIO_LIBPS2: m => yes
+      Direct dependencies: SERIO [=m] && (SERIO_I8042 [=m] || SERIO_I8042 [=m]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=m] && INPUT_MOUSE [=y]
 
-SM_FTL: m => yes
-      Direct dependencies: MTD [=m] && BLOCK [=y]
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=m]
 
-NFC_MRVL_USB: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m] && USB [=y]
+SENSORS_MAX15301: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-ASYMMETRIC_TPM_KEY_SUBTYPE: m => yes
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=y] && TRUSTED_KEYS [=m]
+SENSORS_G762: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-LIBCRC32C: y => no
-      Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || IPV6 [=y]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y] || IP_VS_PROTO_SCTP [=y] && NET [=y] && NETFILTER [=y] && IP_VS [=m] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=y] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=y] || MD_RAID456 [=n] && MD [=y] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=m] && MD [=y] && BLK_DEV_DM [=m] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=m] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+DEFXX: m => yes
+      Direct dependencies: NETDEVICES [=y] && FDDI [=m] && (PCI [=n] || EISA [=y] || TC)
 

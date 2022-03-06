@@ -1,32 +1,32 @@
-DEBUG_IRQFLAGS: y => no
-      Direct dependencies: y
-      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
-
-DRM_PANEL_SAMSUNG_S6E63M0_DSI: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && DRM_MIPI_DSI [=y] && DRM_PANEL_SAMSUNG_S6E63M0 [=m]
-
-PREEMPT_NONE: y => no
+HZ_PERIODIC: y => no
       Direct dependencies: <choice>
 
-CRYPTO_CHACHA20POLY1305: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
-
-HOTPLUG_CPU: y => no
-      Direct dependencies: y
-      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
-
-DRM_DW_HDMI_CEC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && DRM_DW_HDMI [=m]
-
-VIDEO_OV2659: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && GPIOLIB [=y]
-
-NVMEM: y => no
-      Direct dependencies: y
-      Reverse dependencies: USB4 [=y] && PCI [=y] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+STACKTRACE: y => no
+      Direct dependencies: STACKTRACE_SUPPORT [=y]
+      Reverse dependencies: DM_DEBUG_BLOCK_STACK_TRACING [=n] && MD [=n] && STACKTRACE_SUPPORT [=y] && DM_DEBUG_BLOCK_MANAGER_LOCKING [=n] || STACKDEPOT [=y] || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || TRACING [=n] && STACKTRACE_SUPPORT [=y] || KCSAN [=n] && HAVE_ARCH_KCSAN [=n] && HAVE_KCSAN_COMPILER [=n] && DEBUG_KERNEL [=y] && !KASAN [=n] && !KCSAN_KCOV_BROKEN [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] && STACKTRACE_SUPPORT [=y] || KFENCE [=n] && HAVE_ARCH_KFENCE [=y] && (SLAB [=y] || SLUB [=n]) || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || FAULT_INJECTION_STACKTRACE_FILTER [=n] && FAULT_INJECTION_DEBUG_FS [=y] && STACKTRACE_SUPPORT [=y] && !X86_64 && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
 MMC_CQHCI: y => no
       Direct dependencies: MMC [=y] && HAS_DMA [=y]
-      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=n] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] && OF [=y] || MMC_SDHCI_TEGRA [=n] && MMC [=y] && (ARCH_TEGRA [=n] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_MSM [=n] && MMC [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB [=y] || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=n] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=y] && REGMAP_MMIO [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=n] || MMC_SDHCI_OF_ARASAN [=y] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] && OF [=y] || MMC_SDHCI_TEGRA [=y] && MMC [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_MSM [=y] && MMC [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=y] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB [=n] || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_AM654 [=y] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y] && REGMAP_MMIO [=y]
+
+SECURITYFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=y] && INTEGRITY [=y]
+
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+
+DEVFREQ_EVENT_EXYNOS_PPMU: y => no
+      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+
+RESET_SUNXI: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+
+MEDIA_TEST_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 

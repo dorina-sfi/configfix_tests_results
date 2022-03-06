@@ -1,19 +1,24 @@
-HP_WMI: m => yes
-      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_WMI [=m] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n)
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=y] && HAS_IOMEM [=y] && X86 [=y] && ACPI [=y] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=n] || FB [=n]=y)
 
-BACKLIGHT_PCF50633: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_PCF50633 [=m]
-
-INTEL_MEI_WDT: m => yes
-      Direct dependencies: WATCHDOG [=y] && INTEL_MEI [=m] && X86 [=y]
-
-DEBUG_FS: y => no
+DAX: y => no
       Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=m] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=n] && !COMPILE_TEST [=n] || EDAC_DEBUG [=y] && EDAC [=y] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || PUNIT_ATOM_DEBUG [=n] && PCI [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
 
-YENTA: m => yes
-      Direct dependencies: PCCARD [=m] && PCI [=y]
+SND_SOC_MAX98390: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=y]
 
-SENSORS_WM8350: m => yes
-      Direct dependencies: HWMON [=m] && MFD_WM8350 [=y]
+PCI_IOV: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: INFINIBAND_USNIC [=n] && INFINIBAND [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && NETDEVICES [=n] && ETHERNET [=n] && INET [=n] && PCI [=y] && INTEL_IOMMU [=y] && INFINIBAND_USER_ACCESS [=n] || CRYPTO_DEV_QAT_DH895xCCVF [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y] || CRYPTO_DEV_QAT_C3XXXVF [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y] || CRYPTO_DEV_QAT_C62XVF [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && X86 [=y] && PCI [=y]
+
+DEBUG_WW_MUTEX_SLOWPATH: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
 

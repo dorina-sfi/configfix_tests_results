@@ -1,12 +1,15 @@
-POWER_RESET_ATC260X: m => yes
-      Direct dependencies: POWER_RESET [=y] && MFD_ATC260X [=m]
+SND_SOC_FSL_SAI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=m] || SND_AC97_CODEC [=m]=n) || SND_SOC_IMX_AUDMIX [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] || SND_SOC_IMX_HDMI [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] || SND_SOC_IMX_CARD [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y]
 
-AFE4404: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+HID_SENSOR_IIO_TRIGGER: m => no
+      Direct dependencies: IIO [=m] && HID_SENSOR_HUB [=m] && HID_SENSOR_IIO_COMMON [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: HID_SENSOR_ACCEL_3D [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_IIO_COMMON [=m] && IIO [=m] && HID_SENSOR_HUB [=m] && IIO_BUFFER [=y] || HID_SENSOR_GYRO_3D [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_HUMIDITY [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_ALS [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_PROX [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_MAGNETOMETER_3D [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_INCLINOMETER_3D [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_DEVICE_ROTATION [=n] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_CUSTOM_INTEL_HINGE [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_PRESS [=m] && IIO [=m] && HID_SENSOR_HUB [=m] || HID_SENSOR_TEMP [=m] && IIO [=m] && HID_SENSOR_HUB [=m]
 
-USB_CHIPIDEA_IMX: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+MEDIA_TUNER_MT20XX: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-HTS221: m => yes
-      Direct dependencies: IIO [=y] && (I2C [=m] || SPI [=n])
+VIDEO_IMX274: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 

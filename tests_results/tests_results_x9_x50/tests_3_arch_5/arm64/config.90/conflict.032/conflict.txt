@@ -1,16 +1,18 @@
-GPIO_CDEV: y => no
-      Direct dependencies: GPIOLIB [=y]
-      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
+PERF_EVENTS: y => no
+      Direct dependencies: HAVE_PERF_EVENTS [=y]
+      Reverse dependencies: CORESIGHT [=m] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-SENSORS_IR38064: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
 
-VIRTIO_FS: m => yes
-      Direct dependencies: FUSE_FS [=m]
+COMEDI_DAS08_PCI: m => yes
+      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
 
-MLX90632: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_SOC_TEGRA20_DAS: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m]
+      Reverse dependencies: SND_SOC_TEGRA20_AC97 [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] || SND_SOC_TEGRA20_I2S [=m] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m]
 
-PREEMPT: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+CORESIGHT_CATU: m => yes
+      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINK_AND_SINK_TMC [=m]
 

@@ -1,30 +1,29 @@
-SND_SOC_RT5616: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+IR_IMON_DECODER: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
 
-SND_SOC_WCD938X_SDW: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SOUNDWIRE [=y]
+HISI_HIKEY_USB: m => yes
+      Direct dependencies: (OF [=n] && GPIOLIB [=y] || COMPILE_TEST [=y]) && USB_ROLE_SWITCH [=m]
 
-BRCMSMAC: m => yes
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_BROADCOM [=y] && MAC80211 [=m] && BCMA_POSSIBLE [=y]
+CRYPTO_CHACHA20POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-NET_DSA_VITESSE_VSC73XX_SPI: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && SPI [=y]
+NETFILTER_XT_MATCH_L2TP: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
 
-DVB_LGDT3306A: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y] && I2C_MUX [=y]
-      Reverse dependencies: VIDEO_PVRUSB2_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX231XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+VIDEO_KS0127: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-GREYBUS_AUDIO_APB_CODEC: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=y] && SND_SOC [=m] && GREYBUS_AUDIO [=m]
+KEYBOARD_CROS_EC: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && CROS_EC [=m]
 
-SND_SOC_RT5631: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_ARNDALE [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && I2C [=y]
+NETFILTER_XT_MATCH_SOCKET: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y] && (IPV6 [=m] || IPV6 [=m]=n) && (IP6_NF_IPTABLES [=m] || IP6_NF_IPTABLES [=m]=n)
 
-HID_SAMSUNG: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+DRM_V3D: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_BCM || ARCH_BRCMSTB || COMPILE_TEST [=y]) && DRM [=m] && COMMON_CLK [=y] && MMU [=y]
 
-NLS: y => mod
-      Direct dependencies: y
-      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=n] && PCI [=y] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m] && SCSI_DMA [=y] || USB [=n] && USB_SUPPORT [=n] && USB_ARCH_HAS_HCD [=n] || USB_GADGET [=n] && USB_SUPPORT [=n] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=n] && BLOCK [=y] || F2FS_FS [=m] && BLOCK [=y] || JOLIET [=y] && BLOCK [=y] && ISO9660_FS [=m] || UDF_FS [=n] && BLOCK [=y] || FAT_FS [=y] && BLOCK [=y] || EXFAT_FS [=y] && BLOCK [=y] || NTFS_FS [=n] && BLOCK [=y] || NTFS3_FS [=n] && BLOCK [=y] || HFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || BEFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=n] && X86 [=y] && VBOXGUEST [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+IBM_ASM: m => yes
+      Direct dependencies: X86 [=y] && PCI [=y] && INPUT [=y] && (SERIAL_8250 [=m] || SERIAL_8250 [=m]=n)
 

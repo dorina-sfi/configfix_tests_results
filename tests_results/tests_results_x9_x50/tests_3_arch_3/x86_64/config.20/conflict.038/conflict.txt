@@ -1,9 +1,11 @@
-PARIDE_PCD: m => yes
-      Direct dependencies: BLK_DEV [=y] && PARIDE [=m]
+DVB_BCM3510: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-FAT_KUNIT_TEST: m => yes
-      Direct dependencies: BLOCK [=y] && KUNIT [=m] && FAT_FS [=y]
+HID_PICOLCD_FB: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=FB [=m] || FB [=m]=y)
 
-IIO_ST_GYRO_3AXIS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y]
+RELAY: y => no
+      Direct dependencies: y
+      Reverse dependencies: ATH9K_COMMON_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && (ATH9K_DEBUGFS [=n] || ATH9K_HTC_DEBUGFS [=n]) || ATH10K_SPECTRAL [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_ATH [=n] && ATH10K_DEBUGFS [=n] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y]
 

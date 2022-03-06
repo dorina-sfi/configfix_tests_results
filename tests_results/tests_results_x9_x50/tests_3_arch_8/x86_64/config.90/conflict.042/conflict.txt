@@ -1,28 +1,30 @@
-MTD_PCMCIA: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && PCMCIA [=m] && MTD_COMPLEX_MAPPINGS [=y]
+VIDEO_WM8739: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-IPMI_SI: m => no
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=n] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=y]
+ARMADA_37XX_RWTM_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU || COMPILE_TEST [=y]) && OF [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
+
+CRYPTO_LIB_CURVE25519: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=y] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=y])
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n])
+
+CRYPTO_SEQIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+
+CRYPTO_DH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y]
 
 LEGACY_VSYSCALL_EMULATE: y => no
       Direct dependencies: <choice>
 
-ATH6KL_SDIO: m => yes
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && ATH6KL [=m] && MMC [=m]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-SCSI_MPT3SAS: y => no
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y]
-      Reverse dependencies: SCSI_MPT2SAS [=m] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y]
-
-CRYPTO_CBC: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
-
-KERNEL_GZIP: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_GZIP [=y]
-
-XZ_DEC: y => mod
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=m] || MLXFW [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=y] || EROFS_FS_ZIP_LZMA [=y] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=y] || DECOMPRESS_XZ [=n]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 

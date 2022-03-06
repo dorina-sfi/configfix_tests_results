@@ -1,18 +1,20 @@
-VIDEO_XILINX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=m] && OF [=y] && HAS_DMA [=y]
+INPUT_FF_MEMLESS: m => yes
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: JOYSTICK_GAMECON [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] && PARPORT [=n] || JOYSTICK_XPAD_FF [=n] && INPUT_JOYSTICK [=y] && JOYSTICK_XPAD [=n] && INPUT [=m] || JOYSTICK_PSXPAD_SPI_FF [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] && JOYSTICK_PSXPAD_SPI [=n] || INPUT_ARIZONA_HAPTICS [=n] && INPUT [=m] && INPUT_MISC [=y] && MFD_ARIZONA [=n] && SND_SOC [=n] || INPUT_PM8XXX_VIBRATOR [=n] && INPUT [=m] && INPUT_MISC [=y] && (MFD_PM8XXX [=m] || MFD_SPMI_PMIC [=n]) || INPUT_MAX77693_HAPTIC [=n] && INPUT [=m] && INPUT_MISC [=y] && (MFD_MAX77693 [=n] || MFD_MAX77843 [=n]) && PWM [=n] || INPUT_MAX8997_HAPTIC [=n] && INPUT [=m] && INPUT_MISC [=y] && PWM [=n] && MFD_MAX8997 [=n] || INPUT_GPIO_VIBRA [=n] && INPUT [=m] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_REGULATOR_HAPTIC [=m] && INPUT [=m] && INPUT_MISC [=y] && REGULATOR [=y] || INPUT_TWL4030_VIBRA [=n] && INPUT [=m] && INPUT_MISC [=y] && TWL4030_CORE [=n] || INPUT_TWL6040_VIBRA [=n] && INPUT [=m] && INPUT_MISC [=y] && TWL6040_CORE [=n] || INPUT_PWM_VIBRA [=n] && INPUT [=m] && INPUT_MISC [=y] && PWM [=n] || INPUT_DRV260X_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=m] && I2C [=n] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || INPUT_DRV2665_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=m] && I2C [=n] || INPUT_DRV2667_HAPTICS [=n] && INPUT_MISC [=y] && INPUT [=m] && I2C [=n] || INPUT_SC27XX_VIBRA [=m] && INPUT [=m] && INPUT_MISC [=y] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y]) || HID_ACRUX_FF [=y] && INPUT [=m] && HID [=m] && HID_ACRUX [=m] || HID_BETOP_FF [=n] && INPUT [=m] && HID [=m] && USB_HID [=n] || HID_BIGBEN_FF [=n] && INPUT [=m] && HID [=m] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || DRAGONRISE_FF [=n] && INPUT [=m] && HID [=m] && HID_DRAGONRISE [=n] || HID_EMS_FF [=m] && INPUT [=m] && HID [=m] || HOLTEK_FF [=n] && INPUT [=m] && HID [=m] && HID_HOLTEK [=n] || LOGITECH_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || LOGIRUMBLEPAD2_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || LOGIG940_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || LOGIWHEELS_FF [=n] && INPUT [=m] && HID [=m] && HID_LOGITECH [=n] || HID_MAYFLASH [=m] && INPUT [=m] && HID [=m] || HID_MICROSOFT [=m] && INPUT [=m] && HID [=m] || NINTENDO_FF [=y] && INPUT [=m] && HID [=m] && HID_NINTENDO [=m] || PANTHERLORD_FF [=n] && INPUT [=m] && HID [=m] && HID_PANTHERLORD [=n] || PLAYSTATION_FF [=y] && INPUT [=m] && HID [=m] && HID_PLAYSTATION [=m] || SONY_FF [=n] && INPUT [=m] && HID [=m] && HID_SONY [=n] || GREENASIA_FF [=y] && INPUT [=m] && HID [=m] && HID_GREENASIA [=m] || SMARTJOYPLUS_FF [=n] && INPUT [=m] && HID [=m] && HID_SMARTJOYPLUS [=m] || THRUSTMASTER_FF [=n] && INPUT [=m] && HID [=m] && HID_THRUSTMASTER [=n] || HID_WIIMOTE [=n] && INPUT [=m] && HID [=m] && LEDS_CLASS [=y] || ZEROPLUS_FF [=y] && INPUT [=m] && HID [=m] && HID_ZEROPLUS [=m]
 
-SND_SOC_TEGRA_WM9712: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m] && GPIOLIB [=y]
+HID_ACRUX: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-SND_AT73C213: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SPI [=y] && ATMEL_SSC [=m]
+CROS_EC_VBC: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m] && OF [=y]
 
-VIDEO_MX2_EMMAPRP: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (SOC_IMX27 || COMPILE_TEST [=y])
+MTD_CFI_AMDSTD: m => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=m]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=m] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
 
-W1_SLAVE_THERM: m => yes
-      Direct dependencies: W1 [=m]
+JOYSTICK_SPACEORB: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y]
 
-QCOM_A7PLL: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+HID_KEYTOUCH: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 

@@ -1,16 +1,18 @@
-AUXDISPLAY: y => no
-      Direct dependencies: y
-      Reverse dependencies: PANEL [=m] && PARPORT [=m]
+CRYPTO_DEV_QCE_ENABLE_SKCIPHER: y => no
+      Direct dependencies: <choice>
 
-HID_STEELSERIES: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+USB_MUSB_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
 
-DRM_ANALOGIX_ANX6345: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=y] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=y]
 
-SENSORS_GL520SM: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-SENSORS_POWR1220: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+CRYPTO_SEQIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
 

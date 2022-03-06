@@ -1,25 +1,24 @@
-MTD_RAM: m => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=y] && HAS_IOMEM [=y]
+REGULATOR_FIXED_VOLTAGE: m => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: MFD_MADERA [=y] && HAS_IOMEM [=y]
+COMEDI_KCOMEDILIB: m => yes
+      Direct dependencies: COMEDI [=m]
+      Reverse dependencies: COMEDI_BOND [=n] && COMEDI [=m] && COMEDI_MISC_DRIVERS [=n]
 
-XZ_DEC: y => mod
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
+I2C_ALGOPCA: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
 
-COMEDI_ADQ12B: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+BGMAC_BCMA: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && BCMA [=m] && BCMA_HOST_SOC [=y] && (BCM47XX || ARCH_BCM_5301X || COMPILE_TEST [=y])
 
-DEBUG_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ZSMALLOC_STAT [=y] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y] || EDAC_DEBUG [=n] && EDAC [=n] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=y] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=n] || BLK_DEV_IO_TRACE [=y] && FTRACE [=y] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=y] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=y] && FAULT_INJECTION [=y] && FUTEX [=y] || KCOV [=n] && ARCH_HAS_KCOV [=n] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
+LEDS_LM36274: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_TI_LMU_COMMON [=m] && MFD_TI_LMU [=y]
 
-SND_SOC_PCM1789_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+STM32_TIMER_CNT: m => yes
+      Direct dependencies: COUNTER [=m] && (MFD_STM32_TIMERS [=m] || COMPILE_TEST [=y])
 
-FB_OMAP2_CONNECTOR_DVI: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m] && I2C [=y]
+LEDS_SGM3140: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 

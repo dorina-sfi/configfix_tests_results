@@ -1,32 +1,38 @@
-DRM_ITE_IT66121: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
 
-ENVELOPE_DETECTOR: m => yes
-      Direct dependencies: IIO [=m] && OF [=y]
+FUNCTION_TRACER: y => no
+      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
+      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
 
-DRM_PANEL_OLIMEX_LCD_OLINUXINO: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && I2C [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+PINCTRL_PFC_R8A77950: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77950 [=y]
 
-DRM_PANEL_SAMSUNG_S6E63J0X03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+MD_RAID0: y => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
 
-SERIO_SERPORT: m => no
-      Direct dependencies: SERIO [=y] && TTY [=y]
-      Reverse dependencies: I2C_TAOS_EVM [=m] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=y] && TTY [=y]
+SUN4I_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: ARCH_SUNXI [=y]
 
-CRYPTO_GCM: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=n] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=y] && NET [=y] && INET [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=m] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-DRM_PANEL_SAMSUNG_S6E63J0X03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+TEGRA_BPMP: y => no
+      Direct dependencies: ARCH_TEGRA [=y] && TEGRA_HSP_MBOX [=y] && TEGRA_IVC [=y]
+      Reverse dependencies: ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=y] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=y] && ARCH_TEGRA [=y] && ARM64 [=y]
 
-VDPA_USER: m => yes
-      Direct dependencies: VDPA [=m] && EVENTFD [=y] && MMU [=y] && HAS_DMA [=y]
+CRYPTO_AES_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=y])
 
-REGULATOR_SKY81452: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_SKY81452 [=m]
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
 
-SND_SOC_NAU8315: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && GPIOLIB [=y]
+TOUCHSCREEN_USB_PANJIT: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 

@@ -1,16 +1,18 @@
-MTD_PLATRAM: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+CPU_FREQ_DEFAULT_GOV_USERSPACE: y => no
+      Direct dependencies: <choice>
 
-MMC_VIA_SDMMC: m => yes
-      Direct dependencies: MMC [=m] && PCI [=y]
+LCD_LMS283GF05: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-TCG_VTPM_PROXY: m => yes
-      Direct dependencies: TCG_TPM [=m]
+LINEDISP: m => yes
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=m] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=m] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=y]
 
-SENSORS_STPDDC60: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+CRYPTO_ECHAINIV: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=m] && NET [=y] && INET [=y]
 
-I2C_ALGOPCA: y => mod
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=y] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
+INTEL_MEI_ME: y => no
+      Direct dependencies: X86 [=y] && PCI [=y]
+      Reverse dependencies: INTEL_MEI_HDCP [=m] && DRM_I915 [=y] || INTEL_MEI_PXP [=y] && DRM_I915 [=y]
 

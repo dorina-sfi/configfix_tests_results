@@ -1,12 +1,14 @@
-TINYDRM_REPAPER: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
+I2C_MUX_PCA954x: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-IR_SANYO_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+TYPEC_STUSB160X: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=m] && (USB_ROLE_SWITCH [=y] || !USB_ROLE_SWITCH [=y]) && I2C [=y]
 
-DRM_PANEL_SAMSUNG_S6E88A0_AMS452EF01: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
 
-DRM_PANEL_ABT_Y030XX067A: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && SPI [=y]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_SCPSYS [=n] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
 

@@ -1,14 +1,15 @@
-CRYPTO_CURVE25519_X86: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y]) && X86 [=y] && 64BIT [=y]
+LINEDISP: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=m] && I2C [=y] && INPUT [=m]
 
-CPU_SUP_ZHAOXIN: y => no
+BACKLIGHT_DA903X: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && PMIC_DA903X [=y]
+
+EVENTFD: y => no
       Direct dependencies: y
+      Reverse dependencies: HAVE_KVM_EVENTFD [=n] || MEMCG [=n] && CGROUPS [=n] || VFIO_VIRQFD [=m] && VFIO [=m] || VFIO_FSL_MC [=n] && VFIO [=m] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST [=y]
 
-CEPH_LIB: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
-
-CPU_SUP_ZHAOXIN: y => no
-      Direct dependencies: y
+MTK_SMI: y => no
+      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=n] || MTK_IOMMU [=m] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 

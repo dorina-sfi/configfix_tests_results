@@ -1,19 +1,20 @@
-ARM_IMX6Q_CPUFREQ: m => yes
-      Direct dependencies: CPU_FREQ [=y] && (ARM || ARM64 [=y]) && ARCH_MXC [=y] && REGULATOR_ANATOP [=y] && (NVMEM_IMX_OCOTP [=m] || COMPILE_TEST [=n])
+REGULATOR_QCOM_RPM: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_QCOM_RPM [=m]
 
-ADXL313_SPI: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+DRM_PANEL_SAMSUNG_S6E63M0_DSI: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && DRM_MIPI_DSI [=y] && DRM_PANEL_SAMSUNG_S6E63M0 [=m]
 
-CRYPTO_LIB_CHACHA: y => mod
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+SENSORS_NCT7802: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-INTEL_TH_MSU: m => yes
-      Direct dependencies: INTEL_TH [=m]
+DVB_DRXD: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_DVB [=m] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=m] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SND_SOC_TSCS454: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+USB_ROLE_SWITCH: y => mod
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=n] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] || USB_DWC3 [=m] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=y] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=m] || USB_EHCI_HCD [=y] && !USB_GADGET [=m] || !USB_EHCI_HCD [=y] && USB_GADGET [=m]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=m]) && (USB_GADGET [=m]=y || USB_GADGET [=m]=USB_MTU3 [=m]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=m]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=y] && (MIPS || COMPILE_TEST [=y]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=n]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && NOP_USB_XCEIV [=n] || USB_DWC3_MESON_G12A [=m] && USB_SUPPORT [=y] && USB_DWC3 [=m] && OF [=y] && COMMON_CLK [=y] && (ARCH_MESON [=n] || COMPILE_TEST [=y]) || USB_RENESAS_USB3 [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_RENESAS [=y] || COMPILE_TEST [=y]) && EXTCON [=y] || TYPEC_TCPM [=m] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=m] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=y] && ACPI [=n] && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=m] && USB_SUPPORT [=y] && X86 && ACPI [=n] && IOSF_MBI
 
-ADE7854_I2C: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=m] && ADE7854 [=m] && I2C [=y]
+BRIDGE: m => yes
+      Direct dependencies: NET [=y] && (IPV6 [=m] || IPV6 [=m]=n)
 

@@ -1,30 +1,30 @@
-KEYBOARD_MAX7359: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=m]
+BMI160_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SENSORS_AD7418: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+MCP4018: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-TSL2591: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+SC27XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && (MFD_SC27XX_PMIC [=n] || COMPILE_TEST [=y])
 
-KEYBOARD_IQS62X: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && MFD_IQS62X [=m]
+HID_CHERRY: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-NLS_CODEPAGE_864: m => yes
-      Direct dependencies: NLS [=m]
-
-PM: y => no
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: ARCH_MXC [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=y] || ARCH_VEXPRESS [=n] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-IOMMU_IO_PGTABLE_ARMV7S: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: MSM_IOMMU [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MSM8X60 || ARCH_MSM8960 || COMPILE_TEST [=n]) || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+MDIO_BITBANG: y => mod
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y]
+      Reverse dependencies: NET_DSA_MICROCHIP_KSZ8863_SMI [=n] && NETDEVICES [=y] && NET_DSA [=n] && NET_DSA_MICROCHIP_KSZ8795 [=n] || FS_ENET_MDIO_FCC [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_FREESCALE [=n] && FS_ENET [=n] && CPM2 || AX88796 [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_8390 [=y] && (ARM || MIPS || SUPERH || ZORRO || COMPILE_TEST [=y]) || SH_ETH [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_RENESAS [=y] && (ARCH_RENESAS [=n] || SUPERH || COMPILE_TEST [=y]) || RAVB [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_RENESAS [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y]) && PTP_1588_CLOCK_OPTIONAL [=y]
 
-RMI4_F12: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
-      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
+PCIEASPM_PERFORMANCE: y => no
+      Direct dependencies: <choice> && PCIEASPM [=y]
 
-BITS_TEST: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+CRYPTO_DEV_ATMEL_SHA: y => no
+      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+      Reverse dependencies: CRYPTO_DEV_ATMEL_AES [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && CRYPTO_DEV_ATMEL_AUTHENC [=y]
+
+SND_SOC_FSL_ASOC_CARD: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=m] || SND_AC97_CODEC [=m]=n)
 

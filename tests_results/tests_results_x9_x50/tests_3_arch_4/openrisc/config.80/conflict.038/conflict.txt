@@ -1,12 +1,14 @@
-LEDS_MAX77650: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_MAX77650 [=y]
-
-CC_OPTIMIZE_FOR_PERFORMANCE: y => no
-      Direct dependencies: <choice>
-
-SENSORS_W83791D: m => yes
+SENSORS_LM80: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-SENSORS_IR35221: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+
+EXT4_FS_SECURITY: y => no
+      Direct dependencies: BLOCK [=y] && EXT4_FS [=m]
+      Reverse dependencies: EXT3_FS_SECURITY [=y] && BLOCK [=y] && EXT3_FS [=m]
+
+SENSORS_W83L785TS: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

@@ -1,7 +1,8 @@
-SPRD_SC9860_CLK: m => yes
-      Direct dependencies: COMMON_CLK [=y] && SPRD_COMMON_CLK [=m] && (ARM64 && ARCH_SPRD || COMPILE_TEST [=y])
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-KEYBOARD_GPIO_POLLED: y => no
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y]
-      Reverse dependencies: PCENGINES_APU2 [=m] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && GPIOLIB [=y] && LEDS_CLASS [=y]
+TRACER_SNAPSHOT: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=n] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
 

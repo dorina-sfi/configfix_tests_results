@@ -1,24 +1,26 @@
-CRYPTO_GCM: y => mod
+CRYPTO_NULL: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=y] && NET [=y] && INET [=y] || TIPC_CRYPTO [=n] && NET [=y] && TIPC [=n] || XFRM_ESP [=y] && NET [=y] && INET [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=n] && CFG80211 [=n] || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx
+      Reverse dependencies: CRYPTO_AUTHENC [=m] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=n] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
 
-USB_HCD_BCMA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && BCMA [=m]
+SND_SOC_TPA6130A2: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_NOKIA_RX51 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=n]) && ARCH_OMAP3 && I2C [=y] && GPIOLIB [=y]
 
-CRYPTO_XXHASH: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+SND_SOC_FSL_EASRC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_FSL_ASRC [=m]
 
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
-      Direct dependencies: <choice>
+SMSC_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+      Reverse dependencies: SMSC9420 [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SMSC [=n] && PCI [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n]
 
-CRYPTO_LIB_CHACHA20POLY1305: m => yes
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=m])
-      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+INPUT_DRV2665_HAPTICS: m => yes
+      Direct dependencies: INPUT_MISC [=y] && INPUT [=m] && I2C [=y]
 
-MTD_ONENAND_GENERIC: m => yes
-      Direct dependencies: MTD [=m] && MTD_ONENAND [=m]
+CRC16: y => mod
+      Direct dependencies: y
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=n] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && ACPI [=n] && EFI [=n] && SPI [=y] && (X86 [=y] || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=n] && W1 [=y] || W1_SLAVE_DS2433_CRC [=n] && W1 [=y] && W1_SLAVE_DS2433 [=m] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=y] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=n] && SCD30_CORE [=n] && SERIAL_DEV_BUS [=m] || EXT4_FS [=n] && BLOCK [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=m] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
 
-STUB_CLK_HI3660: y => no
-      Direct dependencies: COMMON_CLK [=y] && (COMMON_CLK_HI3660 [=y] || COMPILE_TEST [=y]) && MAILBOX [=y]
+INPUT_MATRIXKMAP: m => no
+      Direct dependencies: INPUT [=m]
+      Reverse dependencies: KEYBOARD_CLPS711X [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && OF_GPIO [=n] && (ARCH_CLPS711X || COMPILE_TEST [=n]) || KEYBOARD_EP93XX [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (ARCH_EP93XX || COMPILE_TEST [=n]) || KEYBOARD_TCA8418 [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && I2C [=y] || KEYBOARD_MATRIX [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || KEYBOARD_LM8333 [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && I2C [=y] || KEYBOARD_LPC32XX [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && ARCH_LPC32XX && OF [=n] || KEYBOARD_MAX7359 [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && I2C [=y] || KEYBOARD_IMX [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (ARCH_MXC || COMPILE_TEST [=n]) || KEYBOARD_NOMADIK [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (ARCH_NOMADIK || ARCH_U8500) || KEYBOARD_NSPIRE [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && ARCH_NSPIRE && OF [=n] || KEYBOARD_TEGRA [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && ARCH_TEGRA && OF [=n] || KEYBOARD_PXA27x [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (PXA27x || PXA3xx || ARCH_MMP) || KEYBOARD_PMIC8XXX [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && MFD_PM8XXX [=n] || KEYBOARD_SAMSUNG [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && HAVE_CLK [=y] || KEYBOARD_ST_KEYSCAN [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (ARCH_STI || COMPILE_TEST [=n]) || KEYBOARD_STMPE [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && MFD_STMPE [=n] && OF [=n] || KEYBOARD_OMAP [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && ARCH_OMAP1 || KEYBOARD_OMAP4 [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && (OF [=n] && HAS_IOMEM [=y] || ARCH_OMAP2PLUS) || KEYBOARD_SPEAR [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && PLAT_SPEAR || KEYBOARD_TC3589X [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && MFD_TC3589X [=n] || KEYBOARD_TWL4030 [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && TWL4030_CORE [=n] || KEYBOARD_CROS_EC [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && CROS_EC [=n] || KEYBOARD_BCM [=n] && INPUT [=m] && INPUT_KEYBOARD [=n] && OF [=n] && HAVE_CLK [=y] && HAS_IOMEM [=y] || HT16K33 [=m] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=m]
 

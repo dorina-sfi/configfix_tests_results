@@ -1,29 +1,31 @@
-HPET_TIMER: y => no
+USB_NET_PLUSB: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
+
+HID_XIAOMI: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
+
+STK8312: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+LEDS_INTEL_SS4200: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && PCI [=y] && DMI [=y] && X86 [=y]
+
+SENSIRION_SGP40: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+VIDEO_WM8739: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m]
+
+RMI4_F11: y => no
+      Direct dependencies: INPUT [=m] && RMI4_CORE [=m]
+      Reverse dependencies: HID_RMI [=m] && INPUT [=m] && HID [=m]
+
+VIDEO_OV2640: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=m] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_CAMERA_SUPPORT [=y]
+
+AUTOFS_FS: y => no
       Direct dependencies: y
-
-NET_DSA_SMSC_LAN9303_MDIO: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
-
-HID_SENSOR_CUSTOM_SENSOR: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_SENSOR_HUB [=m]
-
-ARCNET_COM90xx: m => yes
-      Direct dependencies: NETDEVICES [=y] && ARCNET [=m]
-
-SFP: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y] && I2C [=y] && PHYLINK [=m] && (HWMON [=y] || HWMON [=y]=n)
-
-NLS: y => mod
-      Direct dependencies: y
-      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_DMA [=n] || USB [=n] && USB_SUPPORT [=n] && USB_ARCH_HAS_HCD [=n] || USB_GADGET [=n] && USB_SUPPORT [=n] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=y] || JFS_FS [=y] && BLOCK [=y] || F2FS_FS [=y] && BLOCK [=y] || JOLIET [=n] && BLOCK [=y] && ISO9660_FS [=y] || UDF_FS [=y] && BLOCK [=y] || FAT_FS [=m] && BLOCK [=y] || EXFAT_FS [=n] && BLOCK [=y] || NTFS_FS [=y] && BLOCK [=y] || NTFS3_FS [=m] && BLOCK [=y] || HFS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || HFSPLUS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || BEFS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 [=y] && VBOXGUEST [=n] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
-
-NETFILTER_XT_MARK: y => no
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y]
-      Reverse dependencies: NETFILTER_XT_TARGET_MARK [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] || NETFILTER_XT_MATCH_MARK [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y]
-
-NET_DSA_AR9331: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
-
-PREEMPT_VOLUNTARY: y => no
-      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
+      Reverse dependencies: AUTOFS4_FS [=y]
 

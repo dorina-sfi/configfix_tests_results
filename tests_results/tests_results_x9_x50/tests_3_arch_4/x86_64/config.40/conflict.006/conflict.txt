@@ -1,12 +1,15 @@
-MOUSE_PS2_LIFEBOOK: y => no
-      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=m] && X86 [=y] && DMI [=y]
+AIO: y => no
+      Direct dependencies: y
 
-REGULATOR_TPS6105X: m => yes
-      Direct dependencies: REGULATOR [=y] && TPS6105X [=m]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-HID_GT683R: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m] && LEDS_CLASS [=y] && USB_HID [=m]
+HD44780_COMMON: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
 
-MMC_SDHCI_PLTFM: m => yes
-      Direct dependencies: MMC [=y] && MMC_SDHCI [=m]
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=y] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
 

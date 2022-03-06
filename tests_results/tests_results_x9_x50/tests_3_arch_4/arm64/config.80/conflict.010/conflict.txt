@@ -1,15 +1,14 @@
-PPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
+REGULATOR_TPS6105X: m => yes
+      Direct dependencies: REGULATOR [=y] && TPS6105X [=m]
 
-CRYPTO_CRC32: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=y] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=y] && BLOCK [=y]
+VEML6030: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-PCIEASPM_POWER_SUPERSAVE: y => no
-      Direct dependencies: <choice> && PCIEASPM [=y]
+USB_OHCI_HCD_PLATFORM: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m]
+      Reverse dependencies: USB_BRCMSTB [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_BRCMSTB [=n] && PHY_BRCM_USB [=m] || COMPILE_TEST [=y]) && USB_OHCI_HCD [=m] || USB_HCD_BCMA [=m] && USB_SUPPORT [=y] && USB [=y] && BCMA [=m] && USB_OHCI_HCD [=m] || USB_HCD_SSB [=m] && USB_SUPPORT [=y] && USB [=y] && SSB [=m] && USB_OHCI_HCD [=m] || USB_OHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (ARCH_STI || COMPILE_TEST [=y]) && OF [=y] || USB_OHCI_HCD_OMAP3 [=m] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (ARCH_OMAP3 || ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y]) || USB_OHCI_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (SSB [=m]=y || SSB [=m]=USB_OHCI_HCD [=m]) || USB_OHCI_SH [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (SUPERH || COMPILE_TEST [=y]) || USB_CNS3XXX_OHCI [=y] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && (ARCH_CNS3XXX || COMPILE_TEST [=y]) || USB_OCTEON_OHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_OHCI_HCD [=m] && CAVIUM_OCTEON_SOC
 
-FPGA_BRIDGE: y => no
-      Direct dependencies: FPGA [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+IIO_CONFIGFS: m => no
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: IIO_SW_DEVICE [=m] && IIO [=m] || IIO_SW_TRIGGER [=m] && IIO [=m]
 

@@ -1,19 +1,21 @@
-PATA_CMD640_PCI: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+SND_SOC_DAVINCI_MCASP: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+      Reverse dependencies: SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=y] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM6467_EVM || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=y] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DA830_EVM || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=y] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DA850_EVM || SND_SOC_J721E_EVM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=y] || COMPILE_TEST [=y]) && (ARCH_K3 [=y] || COMPILE_TEST [=y] && COMMON_CLK [=y]) && I2C [=y]
 
-CPU_BIG_ENDIAN: y => no
-      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
+FAT_KUNIT_TEST: y => no
+      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=y]
 
-MB1232: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-COMEDI_ADQ12B: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
-
-CONFIGFS_FS: y => mod
+UNMAP_KERNEL_AT_EL0: y => no
       Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=m] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=m] || CORESIGHT [=y] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-IR_GPIO_CIR: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (OF [=y] && GPIOLIB [=y] || COMPILE_TEST [=n])
+PM_QOS_KUNIT_TEST: y => no
+      Direct dependencies: KUNIT [=y]=y
+
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+OF_OVERLAY: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
 

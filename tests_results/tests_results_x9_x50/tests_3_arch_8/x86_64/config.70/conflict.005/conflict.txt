@@ -1,25 +1,28 @@
-T5403: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+RFKILL_INPUT: y => no
+      Direct dependencies: NET [=y] && RFKILL [=y] && (INPUT [=y]=y || RFKILL [=y]=INPUT [=y])
 
-USB_CHIPIDEA_MSM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=m]
+FIRMWARE_MEMMAP: y => no
+      Direct dependencies: y
 
-UCB1400_CORE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && AC97_BUS [=m] && GPIOLIB [=y]
+SQUASHFS_DECOMP_MULTI: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_ALC5623: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+PCI_PRI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || INTEL_IOMMU_SVM [=n] && IOMMU_SUPPORT [=y] && INTEL_IOMMU [=n] && X86_64 [=y]
 
-USB_ISP1760_HOST_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=m])
+SHMEM: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=y] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=y]
 
-CROS_EC_I2C: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && CROS_EC [=m] && I2C [=y]
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
 
-SND_SOC_SSM2518: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+CHARLCD_BL_ON: y => no
+      Direct dependencies: <choice>
 

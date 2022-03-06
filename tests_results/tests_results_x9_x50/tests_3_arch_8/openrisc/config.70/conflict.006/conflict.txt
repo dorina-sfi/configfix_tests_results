@@ -1,26 +1,30 @@
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=m] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
+MFD_STM32_TIMERS: y => no
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=y] && IIO [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 
-AUXDISPLAY: y => no
+SLUB: y => no
+      Direct dependencies: <choice>
+
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=y] && IIO [=y]
+
+SYNC_FILE: y => no
       Direct dependencies: y
-      Reverse dependencies: PANEL [=m] && PARPORT [=m]
+      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=n] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-CROS_EC_SENSORHUB: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m]
+XZ_DEC: y => no
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=y] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=y] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
 
-SENSORS_SBRMI: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MCTP_TEST: y => no
+      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
 
-EXT4_KUNIT_TESTS: m => yes
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y] && KUNIT [=m]
+CONFIGFS_FS: y => no
+      Direct dependencies: y
+      Reverse dependencies: TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y]
 
-RTC_LIB_KUNIT_TEST: m => yes
-      Direct dependencies: RTC_CLASS [=y] && KUNIT [=m]
-
-SENSORS_SL28CPLD: m => yes
-      Direct dependencies: HWMON [=m] && (MFD_SL28CPLD [=y] || COMPILE_TEST [=y])
-
-MTD_CFI_I2: y => no
-      Direct dependencies: MTD [=m]
+RMI4_F11: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 

@@ -1,32 +1,36 @@
-DEVFREQ_EVENT_ROCKCHIP_DFI: m => no
-      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_ROCKCHIP [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARM_RK3399_DMC_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_ROCKCHIP [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=n] && HAVE_ARM_SMCCC [=y])
+SLAB: y => no
+      Direct dependencies: <choice> && !PREEMPT_RT [=n]
 
-TOUCHSCREEN_CYTTSP4_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_CYTTSP4_CORE [=m] && I2C [=y]
-
-MTD_NAND_DISKONCHIP: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && HAS_IOMEM [=y]
-
-SIGNALFD: y => no
+BLK_DEV_INITRD: y => no
       Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-SPI_ALTERA_DFL: m => yes
-      Direct dependencies: SPI [=y] && SPI_MASTER [=y] && FPGA_DFL [=m]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-MODULE_SIG_SHA512: y => no
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+
+HZ_1000: y => no
       Direct dependencies: <choice>
 
-CRYPTO_CHACHA20_NEON: m => no
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
-      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y]) && (ARM || ARM64 [=y] && KERNEL_MODE_NEON [=y])
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=n] && (ARM64 [=y] || COMPILE_TEST [=n]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=n] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-AHCI_QORIQ: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
 
-GAMEPORT_L4: m => yes
-      Direct dependencies: GAMEPORT [=m]
+CLK_RZG2L: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R9A07G044 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-SENSORS_SL28CPLD: m => yes
-      Direct dependencies: HWMON [=y] && (MFD_SL28CPLD [=m] || COMPILE_TEST [=n])
+CLK_R8A77995: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77995 [=y]
+
+THERMAL_DEFAULT_GOV_USER_SPACE: y => no
+      Direct dependencies: <choice>
 

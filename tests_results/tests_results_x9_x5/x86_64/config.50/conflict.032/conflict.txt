@@ -1,24 +1,27 @@
-MTD_NAND_MLC_LPC32XX: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+KASAN_GENERIC: y => no
+      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
 
-HID_ELAN: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y] && USB_HID [=m]
+SND_SOC_INTEL_MACH: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (SND_SOC_INTEL_SST_TOPLEVEL [=y] || SND_SOC_SOF_INTEL_TOPLEVEL [=y])
+      Reverse dependencies: SND_SOC_INTEL_SST_TOPLEVEL [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (X86 [=y] || COMPILE_TEST [=y]) || SND_SOC_SOF_INTEL_COMMON [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SOF_TOPLEVEL [=y] && SND_SOC_SOF_INTEL_TOPLEVEL [=y]
 
-FONT_8x16: y => no
-      Direct dependencies: FONT_SUPPORT [=y]
-      Reverse dependencies: VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_DEV [=m] && SND [=n] && I2C [=y] || VIDEO_SOLO6X10 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_DEV [=m] && SND [=n] && I2C [=y] || VIDEO_VIMC [=m] && MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] || VIDEO_VIVID [=m] && MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && V4L_TEST_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && !SPARC32 && !SPARC64 && FB [=y] && HAS_DMA [=y] || FB_VGA16 [=n] && HAS_IOMEM [=y] && FB [=y] && (X86 [=y] || PPC) && FRAMEBUFFER_CONSOLE [=y] || FB_S3 [=m] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && FRAMEBUFFER_CONSOLE [=y] || FB_VT8623 [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && FRAMEBUFFER_CONSOLE [=y] || FB_ARK [=y] && HAS_IOMEM [=y] && FB [=y] && PCI [=y] && FRAMEBUFFER_CONSOLE [=y] || USB_SISUSBVGA_CON [=n] && USB_SUPPORT [=y] && USB [=y] && VT [=y] && BROKEN [=n] || FONT_AUTOSELECT [=n] && FONT_SUPPORT [=y] && !FONT_8x8 [=y] && !FONT_6x11 [=n] && !FONT_7x14 [=n] && !FONT_PEARL_8x8 [=n] && !FONT_ACORN_8x8 [=n] && !FONT_MINI_4x6 [=n] && !FONT_6x10 [=n] && !FONT_SUN8x16 [=n] && !FONT_SUN12x22 [=n] && !FONT_10x18 [=n] && !FONT_TER16x32 [=n] && !FONT_6x8 [=n]
+INTEL_MEI: y => no
+      Direct dependencies: X86 [=y] && PCI [=y]
+      Reverse dependencies: INTEL_MEI_ME [=y] && X86 [=y] && PCI [=y] || INTEL_MEI_TXE [=n] && X86 [=y] && PCI [=y]
 
-COREDUMP: y => no
-      Direct dependencies: y
+COMEDI_KCOMEDILIB: y => no
+      Direct dependencies: COMEDI [=y]
+      Reverse dependencies: COMEDI_BOND [=y] && COMEDI [=y] && COMEDI_MISC_DRIVERS [=y]
 
-DRM_VGEM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
-      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=m] && EXPERT [=n] && !COMPILE_TEST [=y]
+SND_SOC_OMAP_MCPDM: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP4 || SOC_OMAP5 || COMPILE_TEST [=y])
+      Reverse dependencies: SND_SOC_OMAP_ABE_TWL6040 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && TWL6040_CORE [=y] && COMMON_CLK [=y] && (ARCH_OMAP4 || SOC_OMAP5 && MFD_PALMAS [=y] || COMPILE_TEST [=y])
 
-CRYPTO_ECDH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=y]) && (OF [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=n] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-USB_NET_CX82310_ETH: m => yes
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=m]
+LPC_SCH: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 [=y] && PCI [=y]
 

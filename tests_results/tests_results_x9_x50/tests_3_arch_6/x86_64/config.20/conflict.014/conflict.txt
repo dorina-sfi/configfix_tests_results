@@ -1,22 +1,20 @@
-CPU_SUP_ZHAOXIN: y => no
-      Direct dependencies: y
+SENSORS_HIH6130: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-CRYPTO_CRC32C: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=n] && INET [=n] || EXT4_FS [=n] && BLOCK [=y] || JBD2 [=n] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
+ORINOCO_USB: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTERSIL [=y] && USB [=y] && HERMES [=m]
 
-64BIT: y => no
-      Direct dependencies: y
+BT_HCIBTUSB: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && USB [=y]
 
-BLK_DEV_INITRD: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+USB_ULPI: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y])
+      Reverse dependencies: USB_TEGRA_PHY [=y] && USB_SUPPORT [=y] && (ARCH_TEGRA || COMPILE_TEST [=y])
 
-CPU_FREQ_GOV_PERFORMANCE: y => no
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=n] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=y] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=y] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y]
+INTEL_TH_GTH: m => yes
+      Direct dependencies: INTEL_TH [=m]
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y]
 

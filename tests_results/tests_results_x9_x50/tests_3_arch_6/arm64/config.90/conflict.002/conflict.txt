@@ -1,20 +1,23 @@
-PCS_XPCS: m => no
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y]
-      Reverse dependencies: NET_DSA_SJA1105 [=m] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || STMMAC_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
+DW_APB_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
+      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
 
-USB_MUSB_DUAL_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=m]) && (USB_GADGET [=y]=y || USB_GADGET [=y]=USB_MUSB_HDRC [=m]) && HAS_DMA [=y]
+DVB_TDA18271C2DD: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SYSC_R8A77960: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A77960 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+PAGE_REPORTING: y => no
+      Direct dependencies: y
+      Reverse dependencies: VIRTIO_BALLOON [=n] && VIRTIO_MENU [=n] && VIRTIO [=y] || HYPERV_BALLOON [=y] && HYPERV [=y]
 
-HW_RANDOM_BCM2835: m => yes
-      Direct dependencies: HW_RANDOM [=m] && (ARCH_BCM2835 [=n] || ARCH_BCM_NSP || ARCH_BCM_5301X || ARCH_BCM_63XX || BCM63XX || BMIPS_GENERIC || COMPILE_TEST [=y])
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-AHCI_QORIQ: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && OF [=y]
+W1: y => no
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-PANEL: m => yes
-      Direct dependencies: PARPORT [=m]
+DRM_RCAR_VSP: y => no
+      Direct dependencies: HAS_IOMEM [=y] && DRM_RCAR_DU [=y] && (VIDEO_RENESAS_VSP1 [=y]=y || VIDEO_RENESAS_VSP1 [=y] && DRM_RCAR_DU [=y]=m)
 

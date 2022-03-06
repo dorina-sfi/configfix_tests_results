@@ -1,15 +1,14 @@
-VCNL4000: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MTD_SC520CDP: m => yes
+      Direct dependencies: MTD [=y] && HAS_IOMEM [=y] && (MELAN [=n] || COMPILE_TEST [=y]) && MTD_CFI [=m]
 
-F2FS_FS_XATTR: y => no
-      Direct dependencies: BLOCK [=y] && F2FS_FS [=m]
-      Reverse dependencies: F2FS_FS [=m] && BLOCK [=y] && FS_ENCRYPTION [=y]
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=m] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=n] && TTY [=y]
 
-DNS_RESOLVER: y => mod
-      Direct dependencies: NET [=y] && KEYS [=y]
-      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=n] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
+TMPFS_XATTR: y => no
+      Direct dependencies: TMPFS [=y]
+      Reverse dependencies: TMPFS_POSIX_ACL [=y] && TMPFS [=y]
 
-NLS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=y] || PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_DMA [=y] || USB [=y] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=y] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=m] && BLOCK [=y] || F2FS_FS [=m] && BLOCK [=y] || JOLIET [=n] && BLOCK [=y] && ISO9660_FS [=n] || UDF_FS [=y] && BLOCK [=y] || FAT_FS [=y] && BLOCK [=y] || EXFAT_FS [=y] && BLOCK [=y] || NTFS_FS [=y] && BLOCK [=y] || NTFS3_FS [=y] && BLOCK [=y] || HFS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || BEFS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=y] && X86 [=y] && VBOXGUEST [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y]
+STA2X11_VIP: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=m] && VIRT_TO_BUS [=y] && I2C [=y] && (STA2X11 [=n] || COMPILE_TEST [=y])
 

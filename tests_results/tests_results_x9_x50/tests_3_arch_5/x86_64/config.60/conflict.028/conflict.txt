@@ -1,16 +1,17 @@
-TCM_IBLOCK: m => yes
-      Direct dependencies: TARGET_CORE [=m]
+LCD_TDO24M: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y]
 
-TEST_SORT: y => mod
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
+HW_RANDOM_VIA: m => yes
+      Direct dependencies: HW_RANDOM [=m] && X86 [=y]
 
-FPGA_MGR_ICE40_SPI: m => yes
-      Direct dependencies: FPGA [=m] && OF [=y] && SPI [=y]
+SERIAL_8250_DW: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m]
 
-SECURITY_PATH: y => no
-      Direct dependencies: SECURITY [=y]
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
+MTD_QINFO_PROBE: m => yes
+      Direct dependencies: MTD [=y] && MTD_LPDDR [=m]
+      Reverse dependencies: MTD_LPDDR [=m] && MTD [=y]
 
-SATA_SX4: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && PCI [=y]
+SENSORS_DELL_SMM: y => no
+      Direct dependencies: HWMON [=y] && X86 [=y]
+      Reverse dependencies: I8K [=m] && HWMON [=y] && PROC_FS [=y]
 

@@ -1,18 +1,16 @@
-THERMAL_WRITABLE_TRIPS: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: X86_PKG_TEMP_THERMAL [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86_THERMAL_VECTOR [=y] || INTEL_SOC_DTS_THERMAL [=n] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=n] && ACPI [=n]
+LEDS_PM8058: m => yes
+      Direct dependencies: NEW_LEDS [=y] && MFD_PM8XXX [=m] && LEDS_CLASS [=y]
 
-CRYPTO_JITTERENTROPY: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+DVB_C8SECTPFE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_PLATFORM_DRIVERS [=y] && PINCTRL [=y] && DVB_CORE [=m] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=y])
 
-CPU_SUP_AMD: y => no
+IR_WINBOND_CIR: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (X86 [=y] && PNP [=y] || COMPILE_TEST [=y])
+
+SENSORS_LM87: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+EXTCON: y => mod
       Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
-
-ALLOW_DEV_COREDUMP: y => no
-      Direct dependencies: y
-
-THERMAL_DEFAULT_GOV_USER_SPACE: y => no
-      Direct dependencies: <choice>
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=n] && (RC_CORE [=m] || !RC_CORE [=m]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=n] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=n] && OF [=n] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
 

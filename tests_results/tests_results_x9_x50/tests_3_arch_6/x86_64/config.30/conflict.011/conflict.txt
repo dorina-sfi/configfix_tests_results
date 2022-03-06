@@ -1,18 +1,23 @@
-ASYMMETRIC_TPM_KEY_SUBTYPE: m => yes
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=y] && TRUSTED_KEYS [=m]
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-M62332: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-CPU_SUP_ZHAOXIN: y => no
-      Direct dependencies: y
+MAC80211_LEDS: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && MAC80211 [=y] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=y])
+      Reverse dependencies: ATH5K [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=n] && (PCI [=y] || ATH25) && MAC80211 [=y] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=y]) || ATH9K [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=n] && MAC80211 [=y] && HAS_DMA [=y] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=y]) || ATH9K_HTC [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=n] && USB [=n] && MAC80211 [=y] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=y]) || IWLEGACY [=y] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=y] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=y] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n])
 
-REGULATOR_MT6359: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+JFFS2_RTIME: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
 
-USB_STORAGE_JUMPSHOT: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_STORAGE [=m]
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=y] || TI_AM335X_ADC [=y] && IIO [=y] && MFD_TI_AM335X_TSCADC [=y] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=y] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=n] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=n] && IIO [=y] && ACPI [=n] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-MODIFY_LDT_SYSCALL: y => no
-      Direct dependencies: y
+AK8975: y => no
+      Direct dependencies: IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: AK09911 [=y] && IIO [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 

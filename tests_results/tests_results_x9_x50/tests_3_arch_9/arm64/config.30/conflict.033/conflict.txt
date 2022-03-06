@@ -1,28 +1,31 @@
-SND_SOC_SMARTQ: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && (MACH_SMARTQ || COMPILE_TEST [=y]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && I2C [=y]
+CPU_IDLE_GOV_LADDER: y => no
+      Direct dependencies: CPU_IDLE [=y]
+      Reverse dependencies: CPU_IDLE [=y] && !NO_HZ [=n] && !NO_HZ_IDLE [=n]
 
-INTERCONNECT_QCOM_SM8350: m => yes
-      Direct dependencies: INTERCONNECT [=y] && INTERCONNECT_QCOM_RPMH_POSSIBLE [=m]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-SENSORS_PC87427: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+CMA_SIZE_SEL_MAX: y => no
+      Direct dependencies: <choice>
 
-MTD_NAND_NANDSIM: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m]
+VIDEO_CS53L32A: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_IVTV [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=y]
 
-PROC_CHILDREN: y => no
+FHANDLE: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-REGULATOR_BD71815: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_ROHM_BD71828 [=m]
+INIT_STACK_NONE: y => no
+      Direct dependencies: <choice>
 
-DRM_PANEL_SHARP_LS060T1SX01: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+LIBCRC32C: y => no
+      Direct dependencies: y
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || IP_SCTP [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=y] || NF_CONNTRACK [=y] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=y] || NF_NAT [=y]) && (!NETFILTER_CONNCOUNT [=y] || NETFILTER_CONNCOUNT [=y])) || NF_TABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || NF_CT_PROTO_SCTP [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=y] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=y] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=n] && PROC_FS [=y] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=n] && INET [=y] && BLOCK [=y] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=n] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
 
-DRM_RCAR_VSP: y => no
-      Direct dependencies: HAS_IOMEM [=y] && DRM_RCAR_DU [=m] && (VIDEO_RENESAS_VSP1 [=m]=y || VIDEO_RENESAS_VSP1 [=m] && DRM_RCAR_DU [=m]=m)
+INFINIBAND_IPOIB_DEBUG: y => no
+      Direct dependencies: INFINIBAND [=y] && INFINIBAND_IPOIB [=y]
 
-RADIO_RTRACK: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && V4L_RADIO_ISA_DRIVERS [=y] && (ISA || COMPILE_TEST [=y]) && VIDEO_V4L2 [=m]
+SERIAL_SH_SCI_CONSOLE: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_SH_SCI [=y]=y
 

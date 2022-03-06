@@ -1,28 +1,32 @@
-COMEDI_PCMDA12: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+REGULATOR_MT6397: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
 
-SENSORS_TC74: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+LPC_SCH: m => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 && PCI [=y]
 
-UIO_PDRV_GENIRQ: m => yes
-      Direct dependencies: UIO [=m]
+GPIO_BD70528: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_ROHM_BD70528 [=m]
 
-COMMON_CLK_MT6779_VENCSYS: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && COMMON_CLK_MT6779 [=m]
+VIDEO_HI556: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
 
-CAN_M_CAN_PCI: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && CAN_M_CAN [=m] && PCI [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=m] && SPI [=y] && SYSFS [=y]
 
-VIDEO_ZORAN_ZR36060: m => yes
-      Direct dependencies: STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN [=m]
+VIDEO_AD5820: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-SENSORS_INA209: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=m] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=m] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-CRYPTO_CHACHA20: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_ADIANTUM [=m] && CRYPTO [=y]
+BNX2: m => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y]
+      Reverse dependencies: CNIC [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y]
 
-SENSORS_OCC_P9_SBE: m => yes
-      Direct dependencies: HWMON [=m] && FSI_OCC [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=n])
+DVB_TDA10086: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 

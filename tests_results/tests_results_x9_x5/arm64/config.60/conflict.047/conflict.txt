@@ -1,32 +1,31 @@
-CORESIGHT_LINK_AND_SINK_TMC: m => yes
-      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINKS_AND_SINKS [=m]
+NFC_NCI_UART: m => yes
+      Direct dependencies: NET [=y] && NFC_NCI [=m] && TTY [=y]
 
-DVB_CX24123: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+IPMI_SI: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+      Reverse dependencies: SENSORS_IBMAEM [=n] && HWMON [=y] && IPMI_HANDLER [=m] || SENSORS_IBMPEX [=m] && HWMON [=y] && IPMI_HANDLER [=m]
 
-NET_DSA: m => yes
-      Direct dependencies: NET [=y] && (BRIDGE [=m] || BRIDGE [=m]=n) && (HSR [=m] || HSR [=m]=n) && INET [=y] && NETDEVICES [=y]
+SCSI_ARCMSR: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
 
-USERIO: m => yes
-      Direct dependencies: SERIO [=m]
+SCSI_BFA_FC: m => yes
+      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m] && SCSI_FC_ATTRS [=m]
 
-NET_VENDOR_BROADCOM: y => no
-      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && (SSB_POSSIBLE [=y] && HAS_DMA [=y] || PCI [=y] || BCM63XX || SIBYTE_SB1xxx_SOC)
-      Reverse dependencies: SCSI_BNX2_ISCSI [=m] && SCSI_LOWLEVEL [=y] && SCSI [=m] && NET [=y] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && MMU [=y] || SCSI_BNX2X_FCOE [=n] && SCSI_LOWLEVEL [=y] && SCSI [=m] && PCI [=y] && (IPV6 [=n] || IPV6 [=n]=n) && LIBFC [=m] && LIBFCOE [=n] && MMU [=y]
+TCS3414: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SERIO_AMBAKMI: m => yes
-      Direct dependencies: SERIO [=m] && ARM_AMBA [=y]
+BACKLIGHT_PWM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && PWM [=y]
 
-FSI_SBEFIFO: m => yes
-      Direct dependencies: FSI [=m] && OF_ADDRESS [=y]
+DWMAC_SUN8I: m => yes
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_STMICRO [=y] && STMMAC_ETH [=m] && STMMAC_PLATFORM [=m] && OF [=y] && (ARCH_SUNXI [=n] || COMPILE_TEST [=y])
 
-CPU_LITTLE_ENDIAN: y => no
-      Direct dependencies: <choice>
+FXOS8700_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-B53_SERDES: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m]
+CRYPTO_DEV_VIRTIO: m => yes
+      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && VIRTIO [=m]
 
-LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY: y => no
-      Direct dependencies: <choice>
+PTP_1588_CLOCK_QORIQ: m => yes
+      Direct dependencies: (GIANFAR [=n] || FSL_DPAA_ETH [=n] || FSL_DPAA2_ETH [=n] || FSL_ENETC [=n] || FSL_ENETC_VF [=n] || COMPILE_TEST [=y]) && PTP_1588_CLOCK [=m]
 

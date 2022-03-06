@@ -1,29 +1,31 @@
-HID_PICOLCD_BACKLIGHT: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
+W1_SLAVE_DS2780: y => mod
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-SND_PCM_TIMER: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y]
+ASYMMETRIC_TPM_KEY_SUBTYPE: m => yes
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && TCG_TPM [=m] && TRUSTED_KEYS [=m]
 
-MTD_NAND_ECC_SW_HAMMING: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=y] && 4xx
+SND_SOC_CS35L41_I2C: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-HZ_100: y => no
-      Direct dependencies: <choice>
+SND_SOC_AK4458: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_IMX_CARD [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=n] && I2C [=y]
 
-SGETMASK_SYSCALL: y => no
-      Direct dependencies: y
+TCG_ATMEL: m => yes
+      Direct dependencies: TCG_TPM [=m] && (PPC64 || HAS_IOPORT_MAP [=y])
 
-CPU_SUP_CENTAUR: y => no
-      Direct dependencies: y
+USB_ROLE_SWITCH: y => no
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=m] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] || USB_DWC3 [=y] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=m] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=n]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=n] || USB_EHCI_HCD [=y] && !USB_GADGET [=n] || !USB_EHCI_HCD [=y] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=n] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=n]) && (USB_GADGET [=n]=y || USB_GADGET [=n]=USB_MTU3 [=n]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=n]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=n] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=y]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=y] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=y] && OF [=n] && COMMON_CLK [=n] && (ARCH_MESON || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=n] && (ARCH_RENESAS || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=n] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=n] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=n] && ACPI [=y] && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=m] && USB_SUPPORT [=y] && X86 [=y] && ACPI [=y] && IOSF_MBI [=n]
 
-MULTIUSER: y => no
-      Direct dependencies: y
+BT_HCIUART_H4: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=m]
+      Reverse dependencies: BT_HCIUART_NOKIA [=m] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && PM [=y] || BT_HCIUART_ATH3K [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] || BT_HCIUART_LL [=y] && NET [=y] && BT [=y] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_INTEL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=m] && GPIOLIB [=y] || BT_HCIUART_BCM [=n] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] && (!ACPI [=y] || SERIAL_DEV_CTRL_TTYPORT [=n]) && GPIOLIB [=y] || BT_HCIUART_QCA [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] || BT_HCIUART_MRVL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=m] && BT_HCIUART_SERDEV [=y]
 
-VT_CONSOLE: y => no
-      Direct dependencies: TTY [=y] && VT [=y]
+SND_SOC_MAX9860: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-DAX: y => no
-      Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=n] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+CHARGER_MAX8998: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX8998 [=y] && REGULATOR_MAX8998 [=m]
 

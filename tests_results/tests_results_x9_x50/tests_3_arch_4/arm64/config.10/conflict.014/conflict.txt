@@ -1,12 +1,14 @@
-HW_RANDOM_OPTEE: m => yes
-      Direct dependencies: HW_RANDOM [=m] && OPTEE [=m]
+USB_ROLE_SWITCH: y => mod
+      Direct dependencies: USB_SUPPORT [=y]
+      Reverse dependencies: USB_CONN_GPIO [=m] && USB_SUPPORT [=y] && GPIOLIB [=y] || USB_CDNS_SUPPORT [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] || USB_DWC3 [=n] && USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_DMA [=y] && USB_DWC3_DUAL_ROLE [=n] || USB_DWC2 [=n] && USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=y] || USB_GADGET [=m]) && HAS_IOMEM [=y] || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=m] || USB_EHCI_HCD [=m] && !USB_GADGET [=m] || !USB_EHCI_HCD [=m] && USB_GADGET [=m]) && HAS_DMA [=y] || USB_MTU3_DUAL_ROLE [=y] && <choice> && (USB [=y]=y || USB [=y]=USB_MTU3 [=m]) && (USB_GADGET [=m]=y || USB_GADGET [=m]=USB_MTU3 [=m]) && (EXTCON [=y]=y || EXTCON [=y]=USB_MTU3 [=m]) || USB_MUSB_JZ4740 [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && OF [=y] && (MIPS || COMPILE_TEST [=n]) && USB_MUSB_GADGET [=n] && (USB [=y]=n || USB_OTG_DISABLE_EXTERNAL_HUB [=y]) || USB_MUSB_MEDIATEK [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && NOP_USB_XCEIV [=n] || USB_DWC3_MESON_G12A [=n] && USB_SUPPORT [=y] && USB_DWC3 [=n] && OF [=y] && COMMON_CLK [=y] && (ARCH_MESON [=y] || COMPILE_TEST [=n]) || USB_RENESAS_USB3 [=n] && USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n]) && EXTCON [=y] || TYPEC_TCPM [=m] && USB_SUPPORT [=y] && TYPEC [=m] && USB [=y] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=y] && TYPEC [=m] && I2C [=y] || TYPEC_MUX_INTEL_PMC [=n] && USB_SUPPORT [=y] && TYPEC [=m] && ACPI [=n] && INTEL_SCU_IPC [=n] || EXTCON_AXP288 [=n] && EXTCON [=y] && MFD_AXP20X [=y] && USB_SUPPORT [=y] && X86 && ACPI [=n] && IOSF_MBI
 
-RTC_DRV_PCF8523: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y]
 
-SM_GCC_6115: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+IIO_SW_TRIGGER: m => yes
+      Direct dependencies: IIO [=m]
 
-I2C_NVIDIA_GPU: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
+NAU7802: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 

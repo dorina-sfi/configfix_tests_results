@@ -1,17 +1,18 @@
-FPGA_REGION: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m]
-      Reverse dependencies: FPGA_DFL [=n] && FPGA [=m] && HAS_IOMEM [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-SENSORS_W83773G: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+HZ_1000: y => no
+      Direct dependencies: <choice>
 
-POSIX_TIMERS: y => no
-      Direct dependencies: y
+MDIO_XGENE: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (ARCH_XGENE [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: NET_XGENE [=y] && NETDEVICES [=y] && ETHERNET [=y] && (ARCH_XGENE [=y] || COMPILE_TEST [=n])
 
-I2C: y => mod
-      Direct dependencies: y
-      Reverse dependencies: CAN_PEAK_PCIEC [=n] && NET [=n] && CAN [=n] && CAN_DEV [=n] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=y] || IGB [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SFC_FALCON [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=n] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=m] && HAS_IOMEM [=y] || DRM [=n] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=y] || SND_AOA_ONYX [=n] && SOUND [=m] && !UML && SND [=m] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=m] && !UML && SND [=m] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n] || ARCH_R8A7793 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n] || ARCH_R8A7791 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=n] || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
+RTC_LIB_KUNIT_TEST: y => no
+      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
 
-SENSORS_HIH6130: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+W1_SLAVE_DS2780: y => no
+      Direct dependencies: W1 [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 

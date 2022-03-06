@@ -1,34 +1,33 @@
-HID_PICOLCD_BACKLIGHT: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
+HID_LOGITECH: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=m]
 
-SGETMASK_SYSCALL: y => no
-      Direct dependencies: y
+SND_SOC_PCM1789_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m]
 
-SLUB: y => no
-      Direct dependencies: <choice>
+REGULATOR_RT4801: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
 
-UNIX98_PTYS: y => no
-      Direct dependencies: TTY [=y]
+MMC_SDHCI_PLTFM: m => yes
+      Direct dependencies: MMC [=y] && MMC_SDHCI [=m]
 
-ROMFS_BACKED_BY_BLOCK: y => no
-      Direct dependencies: <choice> && BLOCK [=y]
+BATTERY_GAUGE_LTC2941: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
 
-PNP: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
-      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
+MEDIA_TUNER_MT2266: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-X86_16BIT: y => no
-      Direct dependencies: MODIFY_LDT_SYSCALL [=y]
+HID_MICROSOFT: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-ACPI_VIDEO: y => no
-      Direct dependencies: ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y]
-      Reverse dependencies: DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || DRM_NOUVEAU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_I915 [=y] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y] || DRM_GMA500 [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && X86 [=y] && MMU [=y] && ACPI [=y] || ACER_WMI [=y] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && BACKLIGHT_CLASS_DEVICE [=y] && SERIO_I8042 [=y] && INPUT [=y] && (RFKILL [=n] || RFKILL [=n]=n) && ACPI_WMI [=y] && ACPI [=y]
+HID_UDRAW_PS3: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-PARAVIRT: y => no
-      Direct dependencies: HYPERVISOR_GUEST [=y] && HAVE_STATIC_CALL [=y]
-      Reverse dependencies: X86_VSMP [=n] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=n] && SMP [=n] || HYPERV [=y] && ACPI [=y] && (X86 [=y] && X86_LOCAL_APIC [=y] && HYPERVISOR_GUEST [=y] || ARM64 && !CPU_BIG_ENDIAN)
+IOSF_MBI: y => mod
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=n]) && X86 [=y] && PCI [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=m] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=n] && MMC [=y] && MMC_SDHCI [=m] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && X86 [=y] && EFI [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=y] || PUNIT_ATOM_DEBUG [=m] && PCI [=y]
 
-CRYPTO_TWOFISH_X86_64_3WAY: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+SND_SOC_TPA6130A2: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m]
+      Reverse dependencies: SND_SOC_NOKIA_RX51 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=n]) && ARCH_OMAP3 && I2C [=m] && GPIOLIB [=y]
 

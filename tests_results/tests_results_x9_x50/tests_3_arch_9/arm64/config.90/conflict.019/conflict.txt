@@ -1,28 +1,30 @@
-REGULATOR_MAX77802: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_MAX77686 [=m] || COMPILE_TEST [=n])
+IIO_SYSFS_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && SYSFS [=y]
 
-SC_GPUCC_7280: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+CONFIGFS_FS: y => mod
+      Direct dependencies: y
+      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=y] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=n] && USB_SUPPORT [=n] && USB_GADGET [=n] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=m] || CORESIGHT [=m] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
 
-I2C_MUX_MLXCPLD: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m]
+QCOM_RPMPD: m => yes
+      Direct dependencies: QCOM_SMD_RPM [=m]
 
-SENSORS_LTC2992: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m] && GPIOLIB [=y]
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 
-SENSORS_DS1621: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+SND_SOC_UNIPHIER_AIO: m => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=y]
+      Reverse dependencies: SND_SOC_UNIPHIER_LD11 [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=y] || SND_SOC_UNIPHIER_PXS2 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=y]
 
-SC_GCC_7280: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-      Reverse dependencies: SC_CAMCC_7280 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_DISPCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_GPUCC_7280 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_LPASSCC_7280 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SC_VIDEOCC_7280 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+IIO_SIMPLE_DUMMY: m => yes
+      Direct dependencies: IIO [=m] && IIO_SW_DEVICE [=m]
 
-COMEDI_ADV_PCI1710: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+HT16K33: m => yes
+      Direct dependencies: AUXDISPLAY [=y] && FB [=m] && I2C [=y] && INPUT [=y]
 
-I2C_UNIPHIER: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n])
+HID_STEAM: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-COMEDI_ME_DAQ: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+BATTERY_INGENIC: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && (MIPS || COMPILE_TEST [=y]) && INGENIC_ADC [=m]
 

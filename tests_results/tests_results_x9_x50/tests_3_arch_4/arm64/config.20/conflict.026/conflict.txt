@@ -1,15 +1,16 @@
-EXYNOS_PMU: y => no
-      Direct dependencies: SOC_SAMSUNG [=y] && (ARCH_EXYNOS [=y] || (ARM || ARM64 [=y]) && COMPILE_TEST [=n])
+CLKSRC_EXYNOS_MCT: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y]) && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
       Reverse dependencies: ARCH_EXYNOS [=y]
 
-CRYPTO_LZO: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+SERIO_LIBPS2: y => no
+      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=n] && INPUT [=y] && INPUT_MOUSE [=n]
 
-KASAN_STACK: y => no
-      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
 
-NVMEM: y => no
+NLS: y => no
       Direct dependencies: y
-      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=y] && SYSFS [=y] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
+      Reverse dependencies: ACPI [=n] && ARCH_SUPPORTS_ACPI [=n] || PCI_LABEL [=n] && PCI [=n] || SCSI_UFSHCD [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || USB [=y] && USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y] || USB_GADGET [=y] && USB_SUPPORT [=y] || DELL_WMI_SYSMAN [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && ACPI_WMI [=n] && DMI [=n] || JFS_FS [=y] && BLOCK [=y] || F2FS_FS [=n] && BLOCK [=y] || JOLIET [=n] && BLOCK [=y] && ISO9660_FS [=n] || UDF_FS [=n] && BLOCK [=y] || FAT_FS [=y] && BLOCK [=y] || EXFAT_FS [=y] && BLOCK [=y] || NTFS_FS [=y] && BLOCK [=y] || NTFS3_FS [=y] && BLOCK [=y] || HFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || HFSPLUS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || BEFS_FS [=n] && MISC_FILESYSTEMS [=n] && BLOCK [=y] || VBOXSF_FS [=n] && MISC_FILESYSTEMS [=n] && X86 && VBOXGUEST [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=y]
 

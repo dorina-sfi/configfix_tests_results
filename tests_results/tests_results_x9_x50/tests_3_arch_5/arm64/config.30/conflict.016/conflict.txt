@@ -1,15 +1,17 @@
-HID_GEMBIRD: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SENSORS_MAX16064: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-MMC_SDHI: m => yes
-      Direct dependencies: MMC [=m] && (SUPERH || ARCH_RENESAS [=y] || COMPILE_TEST [=y])
+USB_USS720: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && PARPORT [=m]
 
-FB_OPENCORES: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
+FSL_DPAA2_QDMA: m => yes
+      Direct dependencies: DMADEVICES [=y] && ARM64 [=y] && FSL_MC_BUS [=y] && FSL_MC_DPIO [=m]
 
-NLS_MAC_GREEK: m => yes
-      Direct dependencies: NLS [=m]
+VIDEO_SAA7110: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_ZORAN_DC10 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-TOUCHSCREEN_BU21029: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 

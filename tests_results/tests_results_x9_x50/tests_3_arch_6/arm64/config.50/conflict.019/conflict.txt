@@ -1,19 +1,19 @@
-PSTORE_RAM: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m] && HAS_IOMEM [=y]
+IRQ_UNIPHIER_AIDET: y => no
+      Direct dependencies: ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]
 
-SND_SOC_TFA989X: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
+KASAN_STACK: y => no
+      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
 
-JFFS2_FS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && MTD [=m]
+PHY_MTK_UFS: y => no
+      Direct dependencies: (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && OF [=y]
+      Reverse dependencies: SCSI_UFS_MEDIATEK [=m] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_UFSHCD [=m] && SCSI_UFSHCD_PLATFORM [=m] && ARCH_MEDIATEK [=y]
 
-SND_SOC_ADAU7118_HW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m]
+SENSORS_IBMAEM: m => yes
+      Direct dependencies: HWMON [=m] && IPMI_HANDLER [=y]
 
-MTD_SST25L: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && SPI_MASTER [=y]
+TCM_IBLOCK: m => yes
+      Direct dependencies: TARGET_CORE [=m]
 
-IMX_GPCV2_PM_DOMAINS: y => no
-      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=n] && OF [=y]) && PM [=y]
-      Reverse dependencies: ARCH_MXC [=y]
+USB_GPIO_VBUS: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (USB_GADGET [=m] || !USB_GADGET [=m])
 

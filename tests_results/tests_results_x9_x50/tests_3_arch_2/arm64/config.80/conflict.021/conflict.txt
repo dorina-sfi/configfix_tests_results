@@ -1,6 +1,8 @@
-SENSORS_SIS5595: m => yes
-      Direct dependencies: HWMON [=m] && PCI [=y]
+PROC_CHILDREN: y => no
+      Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y]
 
-CPU_LITTLE_ENDIAN: y => no
-      Direct dependencies: <choice>
+USB_ULPI: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: USB_TEGRA_PHY [=y] && USB_SUPPORT [=y] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y])
 

@@ -1,30 +1,31 @@
-KXSD9_I2C: m => yes
-      Direct dependencies: IIO [=y] && KXSD9 [=m] && I2C [=y]
+HD44780_COMMON: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=y] && AUXDISPLAY [=y] && PARPORT [=y]
 
-CPU_FREQ_GOV_SCHEDUTIL: y => no
-      Direct dependencies: CPU_FREQ [=y] && SMP [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=y] && CPU_FREQ [=y] && X86 [=y] && SMP [=y]
+SND_SOC_PCM512x_I2C: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_ATMEL_SOC_TSE850_PCM5142 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && ARCH_AT91 && OF [=y] && ATMEL_SSC [=n] && I2C [=y] || SND_SOC_INTEL_SOF_PCM512x_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=n] && (SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=m] || COMPILE_TEST [=n]) || SND_SOC_SOF_BAYTRAIL [=n] && (X86_INTEL_LPSS [=n] || COMPILE_TEST [=n])) && SND_HDA_CODEC_HDMI [=n]
 
-REGULATOR_MAX8907: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_MAX8907 [=m] || COMPILE_TEST [=n])
+MTD_NAND_CADENCE: m => yes
+      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-CRYPTO_GHASH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+HX711: m => yes
+      Direct dependencies: IIO [=m] && GPIOLIB [=y]
 
-CRC_T10DIF: y => no
-      Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=m] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=n] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=n] && SCSI [=n] && TARGET_CORE [=n] && SCSI_FC_ATTRS [=n] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n]
+USB_SERIAL_SIERRAWIRELESS: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-LCD_AMS369FG06: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+USB_SERIAL_SSU100: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-FSI_MASTER_HUB: m => yes
-      Direct dependencies: FSI [=m]
+SND_SOC_WM8750: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
+      Reverse dependencies: SND_PXA2XX_SOC_SPITZ [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_PXA2XX_SOC [=n] && PXA_SHARP_Cxx00 && I2C [=y] || SND_PXA2XX_SOC_Z2 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_PXA2XX_SOC [=n] && MACH_ZIPIT2 && I2C [=y] || SND_SOC_SAMSUNG_JIVE_WM8750 [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && MACH_JIVE && I2C [=y] || SND_SOC_SMARTQ [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && (MACH_SMARTQ || COMPILE_TEST [=n]) && (GPIOLIB [=y] || COMPILE_TEST [=n]) && I2C [=y]
 
-ATM_CLIP: m => yes
-      Direct dependencies: NET [=y] && ATM [=m] && INET [=y]
+I2C_ROBOTFUZZ_OSIF: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && USB [=m]
 
-SPS30_SERIAL: m => yes
-      Direct dependencies: IIO [=y] && SERIAL_DEV_BUS [=m]
+SERIAL_8250: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
+      Reverse dependencies: MWAVE [=m] && X86 [=y] && TTY [=y]
 

@@ -1,13 +1,14 @@
-OR1K_1200: y => no
-      Direct dependencies: <choice>
+NF_REJECT_IPV6: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y]
+      Reverse dependencies: NFT_REJECT_IPV6 [=m] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && NF_TABLES [=y] && NF_TABLES_IPV6 [=y] || IP6_NF_TARGET_REJECT [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=n] && IP6_NF_FILTER [=n]
 
-LTC2485: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+DM_MULTIPATH: m => yes
+      Direct dependencies: MD [=y] && BLK_DEV_DM [=m] && (!SCSI_DH [=n] || SCSI [=m])
 
-I2C_SMBUS: y => mod
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_I801 [=n] && I2C [=y] && HAS_IOMEM [=y] && PCI [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT && PCI [=n] && (ARM64 || COMPILE_TEST [=n]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=n] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+CRYPTO_LZO: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=m] && UBIFS_FS_LZO [=n] || PSTORE_LZO_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-PHY_QCOM_USB_HS: m => yes
-      Direct dependencies: USB_ULPI_BUS [=m] && (EXTCON [=y] || !EXTCON [=y])
+VIDEO_IMX274: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 

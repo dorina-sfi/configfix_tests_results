@@ -1,16 +1,19 @@
-IIO_ST_PRESS: m => yes
-      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y]
+BCMA_DRIVER_PCI: y => no
+      Direct dependencies: BCMA [=y] && PCI [=y]
+      Reverse dependencies: BCMA_HOST_PCI [=y] && BCMA [=y] && BCMA_HOST_PCI_POSSIBLE [=y]
 
-SND_PCM_OSS: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_OSSEMUL [=y]
+X86_MPPARSE: y => no
+      Direct dependencies: X86_LOCAL_APIC [=y]
 
-ADI_AXI_ADC: m => yes
-      Direct dependencies: IIO [=m] && HAS_IOMEM [=y] && OF [=y]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=y] && I2C [=y] && INPUT [=n]
 
-SND_SOC_PCM512x_SPI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+MFD_RDC321X: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: GPIO_RDC321X [=y] && GPIOLIB [=y] && PCI [=y]
 
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+KALLSYMS: y => no
+      Direct dependencies: y
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=n] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=n] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86 [=y]) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=y] && HAVE_SYSCALL_TRACEPOINTS [=y]
 

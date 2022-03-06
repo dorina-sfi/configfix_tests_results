@@ -1,29 +1,31 @@
-DRM_NOUVEAU: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
+BRIDGE_EBT_AMONG: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && BRIDGE_NF_EBTABLES [=m]
 
-DRM_AMDGPU: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
-
-MTD_UBI_GLUEBI: m => yes
-      Direct dependencies: MTD [=m] && MTD_UBI [=m]
-
-JOYSTICK_DB9: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && PARPORT [=y]
-
-VIDEO_ML86V7667: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-
-DVB_TDA826X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_TTUSB2 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_LME2510 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-DAX: y => mod
+MAILBOX: y => no
       Direct dependencies: y
-      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
+      Reverse dependencies: ACPI_CPPC_LIB [=n] && ACPI [=y] && ACPI_PROCESSOR [=y] || IMX_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_MXC && HAVE_ARM_SMCCC [=n] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=n] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=y] || ST_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=n] || TI_K3_DSP_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || TI_K3_R5_REMOTEPROC [=n] && REMOTEPROC [=n] && ARCH_K3 || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA && ARM64 || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA && ARM64 || ZYNQMP_POWER [=n] && PM [=y] && ZYNQMP_FIRMWARE [=n]
 
-NF_CONNTRACK_IRC: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
+TCG_TPM: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: IMA [=y] && INTEGRITY [=y] && HAS_IOMEM [=y] && !UML
 
-VIDEO_OV2659: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y] && GPIOLIB [=y]
+IPMI_WATCHDOG: m => yes
+      Direct dependencies: IPMI_HANDLER [=m]
+
+PCIEASPM: y => no
+      Direct dependencies: PCI [=y]
+
+INTEL_MEI: y => no
+      Direct dependencies: X86 [=y] && PCI [=y]
+      Reverse dependencies: INTEL_MEI_ME [=y] && X86 [=y] && PCI [=y] || INTEL_MEI_TXE [=n] && X86 [=y] && PCI [=y]
+
+RAS: y => no
+      Direct dependencies: y
+      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=y] && PCIEPORTBUS [=n]
+
+THERMAL_DEFAULT_GOV_USER_SPACE: y => no
+      Direct dependencies: <choice>
+
+MTD_CFI_I2: y => no
+      Direct dependencies: MTD [=y]
 

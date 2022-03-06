@@ -1,22 +1,24 @@
-POWER_SUPPLY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_AC [=m] && ACPI [=y] || ACPI_BATTERY [=y] && ACPI [=y] || ACPI_SBS [=m] && ACPI [=y] && X86 [=y] || OLPC_XO1_SCI [=n] && X86_32 [=n] && OLPC [=n] && OLPC_XO1_PM [=n] && GPIO_CS5535 [=n]=y && INPUT [=y]=y || OLPC_XO15_SCI [=n] && X86_32 [=n] && OLPC [=n] && ACPI [=y] || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=y] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=y] && HID [=y] || HID_ASUS [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=y] && INPUT [=y] && HID [=y] && HID_LOGITECH [=y] || HID_NINTENDO [=n] && INPUT [=y] && HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=m] && INPUT [=y] && HID [=y] && LEDS_CLASS_MULTICOLOR [=m] || HID_SONY [=n] && INPUT [=y] && HID [=y] && USB_HID [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=y] && INPUT [=y] && HID [=y] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || HID_WIIMOTE [=m] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y] || USB_CONN_GPIO [=m] && USB_SUPPORT [=y] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=m] && USB_SUPPORT [=y] && USB [=y] || TYPEC_TCPM [=n] && USB_SUPPORT [=y] && TYPEC [=y] && USB [=y] || TYPEC_TPS6598X [=y] && USB_SUPPORT [=y] && TYPEC [=y] && I2C [=y] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=y] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=m] || ACPI_VIDEO [=m]=n) && (RFKILL [=m] || RFKILL [=m]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=y] && DELL_SMBIOS [=n]
+CRYPTO_CHACHA20: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
 
-SERIAL_MEN_Z135: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && MCB [=m]
+SND_SOC_PCM179X_SPI: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
 
-LCD_OTM3225A: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI [=y]
+CRYPTO_LIB_CURVE25519: m => yes
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=m] || !CRYPTO_ARCH_HAVE_LIB_CURVE25519 [=m])
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=n] && (IPV6 [=n] || !IPV6 [=n])
 
-IP_VS: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && (NF_CONNTRACK [=m] || NF_CONNTRACK [=m]=n)
+SND_SOC_LPASS_WSA_MACRO: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y]
 
-RETU_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && MFD_RETU [=m]
+REGULATOR_ARIZONA_MICSUPP: m => yes
+      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=m] || MFD_MADERA [=m]) && SND_SOC [=m]
 
-CAN_RCAR: m => yes
-      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && (ARCH_RENESAS || COMPILE_TEST [=y])
+SND_SOC_CS42XX8_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_MT2701_CS42448 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT2701 [=n] && I2C [=y]
 
-CAN_CC770: m => yes
-      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && HAS_IOMEM [=y]
+SENSORS_ZL6100: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 

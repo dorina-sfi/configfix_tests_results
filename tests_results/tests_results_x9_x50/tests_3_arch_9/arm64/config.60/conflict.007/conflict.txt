@@ -1,35 +1,33 @@
-CRYPTO_AES_ARM64_CE: y => no
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
-      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
-
-QCS_GCC_404: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: QCS_Q6SSTOP_404 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-SYNC_FILE: y => no
-      Direct dependencies: y
-      Reverse dependencies: DRM [=y] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
-
-MSM_GCC_8994: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: MSM_MMCC_8994 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-SDM_GCC_845: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SDM_CAMCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_VIDEOCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_DISPCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_LPASSCC_845 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-
-CRYPTO_DEFLATE: y => no
+CRYPTO_SM3: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=m] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y]
 
-MTD_CFI_LE_BYTE_SWAP: y => no
-      Direct dependencies: <choice> && !ARCH_IXP4XX
-
-MTD_COMPLEX_MAPPINGS: y => no
-      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=n] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
-
-CRYPTO_LZO: y => no
+CRYPTO_STREEBOG: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZO [=n] && <choice> || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_LZO [=y] || PSTORE_LZO_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
+
+WATCHDOG_PRETIMEOUT_GOV_PANIC: y => no
+      Direct dependencies: WATCHDOG [=y] && WATCHDOG_PRETIMEOUT_GOV [=y] && WATCHDOG_CORE [=y]
+      Reverse dependencies: WATCHDOG_PRETIMEOUT_GOV_SEL [=m] && WATCHDOG [=y] && WATCHDOG_PRETIMEOUT_GOV [=y] && WATCHDOG_PRETIMEOUT_GOV_NOOP [=n]=n
+
+SDM_GCC_660: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SDM_MMCC_660 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_GPUCC_660 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+
+MEDIA_TUNER_TEA5767: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=n]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
+
+NFC_NCI: m => yes
+      Direct dependencies: NET [=y] && NFC [=m]
+
+IPV6_GRE: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NET_IPGRE_DEMUX [=y]
+
+SERIAL_IMX_CONSOLE: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_IMX [=m]
+
+VIDEO_BT856: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

@@ -1,18 +1,16 @@
-CRYPTO_ECDSA: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MODULE_SIG_KEY_TYPE_ECDSA [=y] && <choice>
+LEDS_AS3645A: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && I2C [=y] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 
-REGULATOR_RTQ2134: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+I2C_MUX: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y] || MPU3050_I2C [=n] && IIO [=n] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=n] && I2C [=y]
 
-MFD_SI476X_CORE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+NFC_ST_NCI_I2C: m => yes
+      Direct dependencies: NET [=y] && NFC [=m] && NFC_NCI [=m] && I2C [=y]
 
-CRYPTO_DRBG_MENU: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+CDNS_I3C_MASTER: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 

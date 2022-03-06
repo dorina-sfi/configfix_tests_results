@@ -1,26 +1,24 @@
-CRC32_SLICEBY4: y => no
+MOST_COMPONENTS: m => yes
+      Direct dependencies: STAGING [=y] && HAS_DMA [=y] && CONFIGFS_FS [=y] && MOST [=m]
+
+Z3FOLD: m => yes
+      Direct dependencies: ZPOOL [=m]
+      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_Z3FOLD [=n] && <choice>
+
+CRYPTO_SERPENT: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+
+CHARGER_AXP20X: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_AXP20X [=y] && AXP20X_ADC [=m] && IIO [=y]
+
+TRANSPARENT_HUGEPAGE_ALWAYS: y => no
       Direct dependencies: <choice>
 
-PERF_EVENTS: y => no
-      Direct dependencies: HAVE_PERF_EVENTS [=y]
-      Reverse dependencies: X86 [=y] || KVM [=n] && VIRTUALIZATION [=y] && HAVE_KVM [=y] && HIGH_RES_TIMERS [=n] && X86_LOCAL_APIC [=y]
+COMEDI_DAS1800: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-CRYPTO_NULL: y => no
+CRYPTO_CCM: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=y] && CRYPTO [=y] && NET [=y]
-
-PROFILE_ANNOTATED_BRANCHES: y => no
-      Direct dependencies: <choice>
-
-NETFS_STATS: y => no
-      Direct dependencies: NETFS_SUPPORT [=y] && PROC_FS [=y]
-      Reverse dependencies: FSCACHE_STATS [=y] && FSCACHE [=y] && PROC_FS [=y]
-
-IIO_TRIGGER: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: IIO_TRIGGERED_EVENT [=y] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=y] && IIO [=y] && HID_SENSOR_HUB [=y] && HID_SENSOR_IIO_COMMON [=y] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n]
-
-CRYPTO_CRYPTD: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=y] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=y] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=n] && MULTIUSER [=n] && FILE_LOCKING [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN
 

@@ -1,16 +1,18 @@
-MFD_TI_LP87565: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && OF [=y]
+RTC_DRV_DS1685: y => no
+      Direct dependencies: <choice>
 
-SENSORS_IBMPEX: m => yes
-      Direct dependencies: HWMON [=y] && IPMI_HANDLER [=m]
+CRYPTO_DEV_QCE_ENABLE_SKCIPHER: y => no
+      Direct dependencies: <choice>
 
-TOUCHSCREEN_ILI210X: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+NETWORK_SECMARK: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: SECURITY_SELINUX [=y] && SECURITY_NETWORK [=y] && AUDIT [=y] && NET [=y] && INET [=y]
 
-SCSI_SAS_ATTRS: y => mod
-      Direct dependencies: SCSI [=y]
-      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] && !S390 || FUSION_SAS [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=n] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 
-HPET_TIMER: y => no
-      Direct dependencies: y
+IPV6_TUNNEL: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
+      Reverse dependencies: IPV6_VTI [=y] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=n] || IPV6_FOU_TUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
 

@@ -1,33 +1,38 @@
-ROCKCHIP_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
-      Reverse dependencies: ARCH_ROCKCHIP [=y]
+OMAP2PLUS_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_OMAP2PLUS || ARCH_K3 [=y])
+      Reverse dependencies: OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || TI_K3_DSP_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y] || TI_K3_R5_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y]
 
-CPU_BIG_ENDIAN: y => no
-      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
-
-FPGA_MGR_ALTERA_PS_SPI: m => yes
-      Direct dependencies: FPGA [=m] && SPI [=y]
-
-IR_NEC_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
-
-MULTIUSER: y => no
+DEBUG_FS: y => no
       Direct dependencies: y
+      Reverse dependencies: ZSMALLOC_STAT [=n] && ZSMALLOC [=y] || BCACHE_CLOSURES_DEBUG [=n] && MD [=n] && BCACHE [=n] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=n] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) || DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n] || EDAC_DEBUG [=y] && EDAC [=y] || SUNRPC_DEBUG [=n] && NETWORK_FILESYSTEMS [=n] && SUNRPC [=n] && SYSCTL [=n] || PAGE_OWNER [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || BLK_DEV_IO_TRACE [=n] && FTRACE [=n] && SYSFS [=y] && BLOCK [=y] || NOTIFIER_ERROR_INJECTION [=n] && DEBUG_KERNEL [=y] || FAIL_FUTEX [=n] && FAULT_INJECTION [=n] && FUTEX [=n] || KCOV [=n] && ARCH_HAS_KCOV [=y] && (CC_HAS_SANCOV_TRACE_PC [=y] || GCC_PLUGINS [=n])
 
-PANEL: m => yes
-      Direct dependencies: PARPORT [=m]
+MTD_NAND_ECC_SW_HAMMING: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: SM_FTL [=y] && MTD [=y] && BLOCK [=y] || MTD_NAND_NDFC [=n] && MTD [=y] && MTD_RAW_NAND [=n] && 4xx
 
-PROC_PAGE_MONITOR: y => no
-      Direct dependencies: PROC_FS [=y] && MMU [=y]
-      Reverse dependencies: HWPOISON_INJECT [=n] && MEMORY_FAILURE [=n] && DEBUG_KERNEL [=n] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
 
-FHANDLE: y => no
+PSTORE_842_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
+
+DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT: y => no
+      Direct dependencies: <choice>
+
+CRYPTO_DRBG_MENU: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+
+SERIO: y => no
       Direct dependencies: y
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_LKKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_HIL [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && (GSC || HP300) || KEYBOARD_NEWTON [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_STOWAWAY [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_SUNKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || KEYBOARD_XTKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=n] && INPUT_MOUSE [=n] || MOUSE_SERIAL [=n] && INPUT [=n] && INPUT_MOUSE [=n] || MOUSE_VSXXXAA [=n] && INPUT [=n] && INPUT_MOUSE [=n] || JOYSTICK_WARRIOR [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_MAGELLAN [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEORB [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_SPACEBALL [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_STINGER [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_TWIDJOY [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_ZHENHUA [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || JOYSTICK_FSIA6B [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] || TABLET_SERIAL_WACOM4 [=n] && INPUT [=n] && INPUT_TABLET [=n] || TOUCHSCREEN_DYNAPRO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_HAMPSHIRE [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_EGALAX_SERIAL [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_FUJITSU [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_GUNZE [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_ELO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_WACOM_W8001 [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_MTOUCH [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_INEXIO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_PENMOUNT [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHRIGHT [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHWIN [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TOUCHIT213 [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || TOUCHSCREEN_TSC_SERIO [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] || RMI4_F03_SERIO [=n] && INPUT [=n] && RMI4_CORE [=n] && RMI4_F03 [=n] || I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y] || USB_RAINSHADOW_CEC [=n] && MEDIA_CEC_SUPPORT [=n] && USB_SUPPORT [=n] && TTY [=y]
 
-OF_OVERLAY: y => no
-      Direct dependencies: OF [=y]
-      Reverse dependencies: DRM_RCAR_LVDS [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
+MAILBOX: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_K3 [=y] || ACPI_CPPC_LIB [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || IMX_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC [=n] && HAVE_ARM_SMCCC [=y] || IMX_DSP_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_MXC [=n] && HAVE_ARM_SMCCC [=y] || OMAP_REMOTEPROC [=n] && REMOTEPROC [=y] && (ARCH_OMAP4 || SOC_OMAP5 || SOC_DRA7XX) && OMAP_IOMMU [=n] || ST_REMOTEPROC [=n] && REMOTEPROC [=y] && ARCH_STI || STM32_RPROC [=n] && ARCH_STM32 && REMOTEPROC [=y] || TI_K3_DSP_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y] || TI_K3_R5_REMOTEPROC [=y] && REMOTEPROC [=y] && ARCH_K3 [=y] || MTK_CMDQ [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || ARCH_TEGRA_186_SOC [=n] && ARCH_TEGRA [=n] && ARM64 [=y] || ARCH_TEGRA_194_SOC [=n] && ARCH_TEGRA [=n] && ARM64 [=y] || ARCH_TEGRA_234_SOC [=n] && ARCH_TEGRA [=n] && ARM64 [=y] || ZYNQMP_POWER [=n] && PM [=y] && ZYNQMP_FIRMWARE [=n]
 
-IR_NEC_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+SDM_GCC_845: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SDM_CAMCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_VIDEOCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_DISPCC_845 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_LPASSCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 

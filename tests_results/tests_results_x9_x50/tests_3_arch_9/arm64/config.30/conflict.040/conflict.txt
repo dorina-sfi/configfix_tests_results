@@ -1,29 +1,34 @@
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
-
-DRM_RADEON: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n])
-
-SND_SOC_WM8776: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-      Reverse dependencies: SND_SOC_P1022_DS [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_DS && I2C [=y]
-
-CRYPTO_CTR: y => no
+CRYPTO_XXHASH: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=m] || CRYPTO_CCM [=n] && CRYPTO [=y] || CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=m] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=y] && IXP4XX_NPE [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-DRM_PANEL_SITRONIX_ST7701: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+ARM64_CRYPTO: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64 [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && ARM64 [=y] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=y] || COMPILE_TEST [=n])
 
-SND_SOC_WCD934X: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y] && MFD_WCD934X [=m]
+CRYPTO_SEQIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
 
-USB_RENESAS_USBHS_UDC: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=y] && USB_RENESAS_USBHS [=m]
+USB_XHCI_RCAR: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && USB_XHCI_PLATFORM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: USB_XHCI_PLATFORM [=y] && USB_SUPPORT [=y] && USB [=y] && USB_XHCI_HCD [=y] && ARCH_RENESAS [=y]
 
-GPIO_KEMPLD: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_KEMPLD [=m]
+FRAME_POINTER: y => no
+      Direct dependencies: DEBUG_KERNEL [=n] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
+      Reverse dependencies: ARM64 [=y]
 
-DRM_SUN8I_DW_HDMI: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM_SUN4I [=m]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_VEXPRESS [=n] || PM_SLEEP [=y] && (SUSPEND [=n] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || SPI_DW_BT1 [=n] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=n] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
+
+VM_EVENT_COUNTERS: y => no
+      Direct dependencies: y
+
+TOUCHSCREEN_USB_GENERAL_TOUCH: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 

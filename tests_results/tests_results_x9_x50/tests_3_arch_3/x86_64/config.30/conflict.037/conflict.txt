@@ -1,9 +1,11 @@
-BMA180: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m] && INPUT_BMA150 [=n]=n
+SYNTH_EVENTS: y => no
+      Direct dependencies: FTRACE [=y]
+      Reverse dependencies: HIST_TRIGGERS [=y] && FTRACE [=y] && ARCH_HAVE_NMI_SAFE_CMPXCHG [=y]
 
-IR_RC5_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
+BLOCK: y => no
+      Direct dependencies: y
 
-MFD_NTXEC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && (OF [=n] || COMPILE_TEST [=y]) && I2C [=m]
+CEPH_LIB: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: BLK_DEV_RBD [=y] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || CEPH_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 

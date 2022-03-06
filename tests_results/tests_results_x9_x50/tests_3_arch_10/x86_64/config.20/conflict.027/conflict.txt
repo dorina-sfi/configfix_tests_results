@@ -1,39 +1,33 @@
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-CPU_ISOLATION: y => no
-      Direct dependencies: SMP [=y] || COMPILE_TEST [=y]
-      Reverse dependencies: NO_HZ_FULL [=y] && <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+X86_MPPARSE: y => no
+      Direct dependencies: X86_LOCAL_APIC [=y]
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+CCS811: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SND_SOC_FSL_AUD2HTX: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (ARCH_MXC || COMPILE_TEST [=y])
-      Reverse dependencies: SND_SOC_IMX_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_IMX_SOC [=y]
+CRYPTO_SERPENT_AVX_X86_64: y => mod
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_SERPENT_AVX2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-FPGA_BRIDGE: y => no
-      Direct dependencies: FPGA [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+STM32_ADC: m => yes
+      Direct dependencies: IIO [=m] && STM32_ADC_CORE [=m]
 
-CRYPTO_SHA3: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+VFIO_PLATFORM_CALXEDAXGMAC_RESET: m => yes
+      Direct dependencies: VFIO [=y] && VFIO_PLATFORM [=m]
 
-ZONE_DMA32: y => no
-      Direct dependencies: !X86_32 [=n]
-      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
+ZBUD: m => yes
+      Direct dependencies: ZPOOL [=m]
+      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_ZBUD [=n] && <choice>
 
-MFD_TWL4030_AUDIO: y => no
-      Direct dependencies: HAS_IOMEM [=y] && TWL4030_CORE [=y]
-      Reverse dependencies: INPUT_TWL4030_VIBRA [=n] && INPUT [=y] && INPUT_MISC [=y] && TWL4030_CORE [=y] || SND_SOC_TWL4030 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && TWL4030_CORE [=y]
+LEDS_COBALT_QUBE: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (MIPS_COBALT || COMPILE_TEST [=y])
 
-CRYPTO_CAST5: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+SERIAL_8250_BCM7271: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_BRCMSTB || COMPILE_TEST [=y])
 
-CRYPTO_CRYPTD: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+LEDS_TPS6105X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && TPS6105X [=m]
 

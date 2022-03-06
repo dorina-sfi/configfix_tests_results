@@ -1,37 +1,34 @@
-ACPI_CONTAINER: y => no
-      Direct dependencies: ACPI [=y]
-      Reverse dependencies: ACPI_HOTPLUG_CPU [=y] && ACPI [=y] && ACPI_PROCESSOR [=y] && HOTPLUG_CPU [=y]
+MTK_CMDQ_MBOX: m => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y])
 
-VIDEO_DEV: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+NLS_ISO8859_8: m => yes
+      Direct dependencies: NLS [=m]
 
-RENESAS_IRQC: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_R8A73A4 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+IIO_CROS_EC_SENSORS_LID_ANGLE: m => yes
+      Direct dependencies: IIO [=y] && IIO_CROS_EC_SENSORS_CORE [=m]
 
-SH_TIMER_TMU: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
+USB_HSIC_USB4604: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && I2C [=y]
 
-COMMON_CLK_SAMSUNG: y => no
-      Direct dependencies: COMMON_CLK [=y]
-      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
+SND_SOC_JZ4760_CODEC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (MACH_INGENIC || COMPILE_TEST [=y]) && OF [=y]
 
-IPQ_GCC_806X: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: IPQ_LCC_806X [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+ARMADA_37XX_RWTM_MBOX: y => mod
+      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y]) && OF [=y]
+      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
 
-CLK_R8A779A0: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A779A0 [=y]
-
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
-
-SCTP_DEFAULT_COOKIE_HMAC_MD5: y => no
+MODULE_COMPRESS_GZIP: y => no
       Direct dependencies: <choice>
 
-SDM_GCC_845: y => no
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
-      Reverse dependencies: SDM_CAMCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_GPUCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_VIDEOCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_DISPCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SDM_LPASSCC_845 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+SND_SOC_RCAR: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && (OF [=y] || COMPILE_TEST [=y])
+
+SND_SOC_IMX_AUDMUX: m => no
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_SOC_EUKREA_TLV320 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && ARCH_MXC [=y] && !ARM64 [=y] && I2C [=y] || SND_SOC_IMX_ES8328 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && (I2C [=y] || SPI [=y]) || SND_SOC_IMX_SGTL5000 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y] || SND_SOC_FSL_ASOC_CARD [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=m] || SND_AC97_CODEC [=m]=n)
+
+SDM_GCC_845: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+      Reverse dependencies: SDM_CAMCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_GPUCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_VIDEOCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_DISPCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] || SDM_LPASSCC_845 [=m] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 

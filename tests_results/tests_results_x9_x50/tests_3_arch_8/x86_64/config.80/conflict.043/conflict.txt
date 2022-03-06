@@ -1,28 +1,25 @@
-FB_S1D13XXX: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+NTB_IDT: m => yes
+      Direct dependencies: NTB [=m] && PCI [=y]
 
-SENSORS_SL28CPLD: m => yes
-      Direct dependencies: HWMON [=m] && (MFD_SL28CPLD [=y] || COMPILE_TEST [=y])
-
-CRYPTO_XXHASH: y => no
+CRYPTO_STREEBOG: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+      Reverse dependencies: CRYPTO_ECRDSA [=m] && CRYPTO [=y]
 
-CRYPTO_ECDH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=y] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=y]) && (OF [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+SND_SEQUENCER: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m]
 
-MTD_RAM: m => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_PLATRAM [=m] && MTD [=y] && HAS_IOMEM [=y]
+VIDEO_ML86V7667: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
 
-SENSORS_EMC6W201: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SND_INDIGOIO: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-CRYPTO_SEQIV: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+I2C_NFORCE2_S4985: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && I2C_NFORCE2 [=m] && X86 [=y]
 
-SENSORS_G762: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+6LOWPAN: m => yes
+      Direct dependencies: NET [=y] && IPV6 [=m]
+
+SENSORS_FSP_3Y: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 

@@ -1,27 +1,26 @@
-HID_ITE: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+VIDEO_HI846: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-LIBCRC32C: y => mod
-      Direct dependencies: y
-      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=y] || IP_SCTP [=n] && NET [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n) || BATMAN_ADV [=y] && NET [=y] || OPENVSWITCH [=n] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n])) || NF_TABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=n] || NF_CT_PROTO_SCTP [=n] && NET [=y] && INET [=y] && NETFILTER [=n] && NF_CONNTRACK [=n] && NETFILTER_ADVANCED [=n] || IP_VS_PROTO_SCTP [=n] && NET [=y] && NETFILTER [=n] && IP_VS [=n] || NET_ACT_CSUM [=n] && NET [=y] && NET_SCHED [=y] && NET_CLS_ACT [=n] && INET [=y] || BLK_DEV_DRBD [=n] && BLK_DEV [=y] && PROC_FS [=n] && INET [=y] || BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=y] && BLOCK [=y] || MD_RAID456 [=n] && MD [=n] && BLK_DEV_MD [=n] || DM_PERSISTENT_DATA [=n] && MD [=n] && BLK_DEV_DM [=n] || BNX2X [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || BNXT [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || LIQUIDIO [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_CAVIUM [=n] && 64BIT [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || XFS_FS [=n] && BLOCK [=y] || GFS2_FS [=n] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || EROFS_FS [=n] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-KEYS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=m] && NET [=y] && INET [=y] || CEPH_LIB [=n] && NET [=y] && INET [=y] || FS_ENCRYPTION [=n] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=m] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+NF_DUP_IPV6: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n])
+      Reverse dependencies: NETFILTER_XT_TARGET_TEE [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=n] && (IPV6 [=m] || IPV6 [=m]=n) && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n]) && (IP6_NF_IPTABLES [=n] || !IP6_NF_IPTABLES [=n]) && IP6_NF_IPTABLES [=n] || NFT_DUP_IPV6 [=m] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && NF_TABLES [=y] && NF_TABLES_IPV6 [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n])
 
-MEDIA_TEST_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+SENSORS_FSP_3Y: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-SND_SOC_SIMPLE_AMPLIFIER: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+VIDEO_AD5820: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && GPIOLIB [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-HID_KENSINGTON: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+SND_ENS1371: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-SENSORS_ARM_SCMI: m => yes
-      Direct dependencies: HWMON [=m] && ARM_SCMI_PROTOCOL [=y] && (THERMAL [=n] || !THERMAL_OF [=n])
+SND_INDIGOIO: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-DEVFREQ_GOV_PASSIVE: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS || COMPILE_TEST [=y])
+SND_AU8820: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 

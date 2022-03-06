@@ -1,29 +1,31 @@
-NETFILTER_XTABLES: y => mod
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
-      Reverse dependencies: IP_NF_IPTABLES [=y] && NET [=y] && INET [=y] && NETFILTER [=y] || IP_NF_ARPTABLES [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=n] || IP6_NF_IPTABLES [=n] && NET [=y] && NETFILTER [=y] && INET [=y] && IPV6 [=n]
+MTD_CFI_AMDSTD: m => no
+      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 [=n] || COMPILE_TEST [=y])
 
-LEDS_REGULATOR: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGULATOR [=y]
+USB_SERIAL_CYPRESS_M8: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-VIDEO_TVP514X: m => yes
+IR_FINTEK: m => yes
+      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (PNP [=y] || COMPILE_TEST [=y])
+
+YENTA_ENE_TUNE: y => no
+      Direct dependencies: PCCARD [=y] && YENTA_TI [=y] && CARDBUS [=y]
+
+I2C_SMBUS: y => mod
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=m] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=y] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y]) || I2C_PARPORT [=n] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=m] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
+
+CFG80211_USE_KERNEL_REGDB_KEYS: y => no
+      Direct dependencies: NET [=y] && WIRELESS [=y] && CFG80211 [=m] && CFG80211_REQUIRE_SIGNED_REGDB [=y]
+
+VGA_ARB: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y] && !S390
+      Reverse dependencies: VGA_SWITCHEROO [=n] && HAS_IOMEM [=y] && X86 [=y] && ACPI [=y] && PCI [=y] && (!FRAMEBUFFER_CONSOLE [=y] || FB [=y]=y)
+
+VIDEO_TVP5150: m => yes
       Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=n] || MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-INIT_STACK_NONE: y => no
-      Direct dependencies: <choice>
-
-DVB_MXL692: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_EM28XX_DVB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-HID_EMS_FF: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
-
-DRM_PANEL_SAMSUNG_S6E8AA0: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y]
-
-DRM_SIL_SII8620: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=m] || !RC_CORE [=m])
-
-DRM_PANEL_LVDS: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+NETFILTER_XT_MATCH_OSF: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
 

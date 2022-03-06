@@ -1,12 +1,11 @@
-IIO_TRIGGERED_EVENT: y => no
-      Direct dependencies: IIO [=y]
-      Reverse dependencies: HI8435 [=y] && IIO [=y] && SPI [=y]
+LPC32XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-PARAVIRT: y => no
-      Direct dependencies: HYPERVISOR_GUEST [=y] && HAVE_STATIC_CALL [=y]
-      Reverse dependencies: X86_VSMP [=y] && X86_64 [=y] && PCI [=y] && X86_EXTENDED_PLATFORM [=y] && SMP [=y] || HYPERV [=y] && ACPI [=y] && (X86 [=y] && X86_LOCAL_APIC [=y] && HYPERVISOR_GUEST [=y] || ARM64 && !CPU_BIG_ENDIAN)
+X509_CERTIFICATE_PARSER: y => mod
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+FAULT_INJECTION: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: DRM_I915_SELFTEST [=y] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=m]
 

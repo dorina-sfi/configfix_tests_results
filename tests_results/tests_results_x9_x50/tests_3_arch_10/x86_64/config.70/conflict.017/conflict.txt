@@ -1,32 +1,36 @@
-AD5696_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+VIDEO_STI_HVA: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_STI || COMPILE_TEST [=y])
 
-FILE_LOCKING: y => no
+SCSI: m => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=m] && HAS_IOMEM [=y] && BLOCK [=y]
+
+SLIM_QCOM_CTRL: m => yes
+      Direct dependencies: SLIMBUS [=m] && HAS_IOMEM [=y]
+
+IIO_CONFIGFS: y => mod
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=n] && IIO [=y]
+
+IOMMU_IO_PGTABLE_LPAE: y => no
+      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+      Reverse dependencies: DRM_PANFROST [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARM || ARM64 || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=y] && IOMMU_SUPPORT [=y] && (ARCH_APPLE || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=m] && IOMMU_SUPPORT [=y] && (ARM64 || ARM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=n] && IOMMU_SUPPORT [=y] && ARM64 || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM || COMPILE_TEST [=y] && !GENERIC_ATOMIC64 [=n])
+
+MMC_BLOCK: m => yes
+      Direct dependencies: MMC [=m] && BLOCK [=y]
+
+HW_RANDOM_XIPHERA: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
+
+IOSF_MBI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=y] && X86 [=y] && ACPI [=y] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=y] && THERMAL [=y] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=y] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=m] && MMC_SDHCI [=n] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=n] && MMC [=m] && MMC_SDHCI [=n] && ACPI [=y] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && X86 [=y] && EFI [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=n] || PUNIT_ATOM_DEBUG [=y] && PCI [=y]
+
+COMEDI_KCOMEDILIB: m => yes
+      Direct dependencies: COMEDI [=m]
+      Reverse dependencies: COMEDI_BOND [=m] && COMEDI [=m] && COMEDI_MISC_DRIVERS [=y]
+
+MEMORY: y => no
       Direct dependencies: y
-
-KASAN_GENERIC: y => no
-      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
-
-PSTORE_LZ4_COMPRESS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
-
-UIO_PRUSS: m => yes
-      Direct dependencies: UIO [=m] && HAS_IOMEM [=y] && HAS_DMA [=y]
-
-KXCJK1013: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-XZ_DEC_IA64: y => no
-      Direct dependencies: XZ_DEC [=y]
-
-W1_SLAVE_DS2780: y => mod
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
-
-PSTORE_LZ4_COMPRESS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
-
-CRYPTO_842: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+      Reverse dependencies: MTD_NAND_FSL_IFC [=n] && MTD [=n] && MTD_RAW_NAND [=n] && (FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_MEDIATEK || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=n] && OF [=n] && MTK_MMSYS [=y] || MTK_IOMMU [=y] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 

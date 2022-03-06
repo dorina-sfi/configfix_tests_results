@@ -1,22 +1,26 @@
-SM_GPUCC_8250: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+RELOCATABLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: RANDOMIZE_BASE [=y]
 
-BMI160_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+FAT_KUNIT_TEST: y => no
+      Direct dependencies: BLOCK [=y] && KUNIT [=y] && FAT_FS [=y]
 
-HID_SENSOR_ACCEL_3D: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+RAS: y => no
+      Direct dependencies: y
+      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=n] && PCIEPORTBUS [=n]
 
-I2C_SLAVE_EEPROM: m => yes
-      Direct dependencies: I2C [=m] && I2C_SLAVE [=y]
+DEVFREQ_GOV_USERSPACE: y => no
+      Direct dependencies: PM_DEVFREQ [=y]
+      Reverse dependencies: ARM_IMX_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || ARM_IMX8M_DDRC_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_MXC [=y] && HAVE_ARM_SMCCC [=y] || COMPILE_TEST [=y] && HAVE_ARM_SMCCC [=y])
 
-RTC_DRV_ABX80X: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
+USB_ISP1301: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (USB [=y] || USB_GADGET [=y]) && I2C [=y]
+      Reverse dependencies: USB_LPC32XX [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] && (ARCH_LPC32XX || COMPILE_TEST [=y]) && I2C [=y]
 
-CRYPTO_CBC: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_ESP [=m] && NET [=y] && INET [=y] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=m] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=n]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=n] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=y] || ARCH_HISI [=n] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=n] || ARCH_QCOM [=n] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=n] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-MENF21BMC_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && (MFD_MENF21BMC [=n] || COMPILE_TEST [=y]) && I2C [=m]
+SPRD_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y] && (ARCH_SPRD [=y] || COMPILE_TEST [=y])
 

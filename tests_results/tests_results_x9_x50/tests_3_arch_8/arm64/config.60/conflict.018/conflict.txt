@@ -1,28 +1,30 @@
-SYSFS: y => no
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
+
+PM: y => no
       Direct dependencies: y
-      Reverse dependencies: CONFIGFS_FS [=y]
+      Reverse dependencies: ARCH_MXC [=n] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=n] || ARCH_VEXPRESS [=y] || PM_SLEEP [=y] && (SUSPEND [=y] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS [=n] || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS [=n]
 
-FB_TMIO: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && (MFD_TMIO [=n] || COMPILE_TEST [=y])
+DEBUG_FS_ALLOW_ALL: y => no
+      Direct dependencies: <choice>
 
-SYSC_R8A7795: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A77950 [=n] && SOC_RENESAS [=y] && ARM64 [=y] || ARCH_R8A77951 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-REGULATOR_SKY81452: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_SKY81452 [=m]
+CRYPTO_CHACHA20: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y]
 
-CLK_R8A779A0: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A779A0 [=y]
+KASAN_VMALLOC: y => no
+      Direct dependencies: KASAN [=y] && KASAN_GENERIC [=y] && HAVE_ARCH_KASAN_VMALLOC [=y]
+      Reverse dependencies: ARM64 [=y] && KASAN_GENERIC [=y]
 
-SCSI_3W_9XXX: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
+CRYPTO_DEFLATE: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=n] && MISC_FILESYSTEMS [=y] && PSTORE [=n]
 
-CROS_EC_DEBUGFS: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m] && DEBUG_FS [=y]
-
-POWER_SUPPLY: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARM64 [=y] || ACPI_AC [=n] && ACPI [=n] || ACPI_BATTERY [=n] && ACPI [=n] || ACPI_SBS [=n] && ACPI [=n] && X86 || AB8500_CORE [=n] && HAS_IOMEM [=y] && ABX500_CORE [=y] && MFD_DB8500_PRCMU [=n] || DRM_RADEON [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] && (AGP [=n] || !AGP [=n]) || DRM_AMDGPU [=y] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=y] && MMU [=y] || HID_BATTERY_STRENGTH [=n] && INPUT [=n] && HID [=n] || HID_ASUS [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] && LEDS_CLASS [=y] && (ASUS_WMI [=n] || ASUS_WMI [=n]=n) || HID_LOGITECH_HIDPP [=n] && INPUT [=n] && HID [=n] && HID_LOGITECH [=n] || HID_NINTENDO [=n] && INPUT [=n] && HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_PLAYSTATION [=n] && INPUT [=n] && HID [=n] && LEDS_CLASS_MULTICOLOR [=y] || HID_SONY [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] || HID_STEAM [=n] && INPUT [=n] && HID [=n] || HID_WACOM [=n] && INPUT [=n] && HID [=n] && USB_HID [=n] || HID_WIIMOTE [=n] && INPUT [=n] && HID [=n] && LEDS_CLASS [=y] || USB_CONN_GPIO [=n] && USB_SUPPORT [=n] && GPIOLIB [=y] || APPLE_MFI_FASTCHARGE [=n] && USB_SUPPORT [=n] && USB [=n] || TYPEC_TCPM [=n] && USB_SUPPORT [=n] && TYPEC [=n] && USB [=n] || TYPEC_TPS6598X [=n] && USB_SUPPORT [=n] && TYPEC [=n] && I2C [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=m] || RFKILL [=m]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
 

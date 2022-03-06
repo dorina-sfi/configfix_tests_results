@@ -1,37 +1,34 @@
-THERMAL_DEFAULT_GOV_STEP_WISE: y => no
-      Direct dependencies: <choice>
+DVB_TDA10048: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_PVRUSB2_DVB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_PVRUSB2 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_TTUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=m] && INPUT [=m] && SND [=m] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134_DVB [=m] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=m] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7164 [=m] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MMC_CQHCI: y => no
-      Direct dependencies: MMC [=y] && HAS_DMA [=y]
-      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=n] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=y] && OF [=n] || MMC_SDHCI_TEGRA [=y] && MMC [=y] && (ARCH_TEGRA || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_MSM [=y] && MMC [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=y] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=n] && REGMAP_MMIO [=y]
+DRM_SIS: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_LEGACY [=y] && DRM [=m] && AGP [=m] && (FB_SIS [=n] || FB_SIS [=n]=n)
 
-FILE_LOCKING: y => no
-      Direct dependencies: y
+DVB_DDBRIDGE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=m]
 
-CGROUPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+IIO_SYSFS_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && SYSFS [=y]
 
-RESET_HISI: y => no
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
-      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=y] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=y])
+SND_SOC_AC97_CODEC: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_SOC_DB1000 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AU1XAUDIO [=n] || SND_SOC_DB1200 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_AU1XPSC [=n] || SND_EP93XX_SOC_SIMONE [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && MACH_SIM_ONE || SND_SH7760_AC97 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && CPU_SUBTYPE_SH7760 && SND_SOC_PCM_SH7760 [=n]
 
-I2C_GPIO: y => no
-      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
-      Reverse dependencies: VIDEO_MMP_CAMERA [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && I2C [=y] && VIDEO_V4L2 [=y] && (ARCH_MMP || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+VIDEO_BT819: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-MOUSE_PS2_ALPS: y => no
-      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
+CRYPTO_HMAC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || XFRM_AH [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || SCTP_COOKIE_HMAC_MD5 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_MD5 [=n] || SCTP_COOKIE_HMAC_SHA1 [=n] && NET [=n] && IP_SCTP [=n] && SCTP_COOKIE_HMAC_SHA1 [=n] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=n] || TRUSTED_KEYS [=n] && KEYS [=n] && TCG_TPM [=n] || ENCRYPTED_KEYS [=n] && KEYS [=n] || IMA [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n] || CRYPTO_DRBG_HMAC [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_QAT [=y] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=n] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=n] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=y] || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || ASYMMETRIC_TPM_KEY_SUBTYPE [=n] && CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=n] && TCG_TPM [=n] && TRUSTED_KEYS [=n]
 
-KEYS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || AF_RXRPC [=n] && NET [=n] && INET [=n] || CEPH_LIB [=n] && NET [=n] && INET [=n] || FS_ENCRYPTION [=n] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=y] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+HW_RANDOM_XIPHERA: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+HW_RANDOM_AMD: m => yes
+      Direct dependencies: HW_RANDOM [=m] && (X86 [=y] || PPC_MAPLE) && PCI [=y]
 
-CGROUPS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+INV_ICM42600_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 

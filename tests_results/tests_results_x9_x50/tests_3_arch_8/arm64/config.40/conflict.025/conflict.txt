@@ -1,32 +1,27 @@
-ARM_TIMER_SP804: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
-      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=n]
+DHT11: m => yes
+      Direct dependencies: IIO [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
 
-PCI_SW_SWITCHTEC: y => no
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: NTB_SWITCHTEC [=y] && NTB [=y]
+HID_SENSOR_CUSTOM_SENSOR: m => yes
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_SENSOR_HUB [=m]
 
-FRAME_POINTER: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && (M68K || UML || SUPERH) || ARCH_WANT_FRAME_POINTERS [=y]
-      Reverse dependencies: ARM64 [=y]
+HD44780_COMMON: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=y] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
 
-TI_K3_RINGACC: y => no
-      Direct dependencies: SOC_TI [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=n]) && TI_SCI_INTA_IRQCHIP [=y]
-      Reverse dependencies: TI_K3_UDMA [=y] && DMADEVICES [=y] && ARCH_K3 [=y] && TI_SCI_PROTOCOL [=y] && TI_SCI_INTA_IRQCHIP [=y]
+POWER_RESET_ATC260X: m => yes
+      Direct dependencies: POWER_RESET [=y] && MFD_ATC260X [=m]
 
-KALLSYMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+INPUT_PCF50633_PMU: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_MISC [=y] && MFD_PCF50633 [=m]
 
-CRYPTO_SM3: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=n] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=n] && ACPI [=n] || TARGET_CORE [=n] && BLOCK [=n] || PCI_ENDPOINT_CONFIGFS [=y] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=y] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=y] && IIO [=y] || STM [=y] || CORESIGHT [=n] && (ARM || ARM64 [=y]) && (OF [=y] || ACPI [=n])
+PINCTRL_EXYNOS_ARM64: y => no
+      Direct dependencies: PINCTRL [=y] && PINCTRL_EXYNOS [=y]
+      Reverse dependencies: PINCTRL_EXYNOS [=y] && PINCTRL [=y] && OF_GPIO [=y] && (ARCH_EXYNOS [=y] || ARCH_S5PV210 || COMPILE_TEST [=n]) && ARM64 [=y] && ARCH_EXYNOS [=y]
 
-CRYPTO_NULL: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=n]
+I2C_DEMUX_PINCTRL: m => yes
+      Direct dependencies: I2C [=y] && I2C_MUX [=m] && PINCTRL [=y] && OF [=y]
 

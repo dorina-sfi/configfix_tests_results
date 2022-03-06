@@ -1,29 +1,30 @@
-W1_MASTER_GPIO: m => yes
-      Direct dependencies: W1 [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+THERMAL_DEFAULT_GOV_USER_SPACE: y => no
+      Direct dependencies: <choice>
 
-EVENTFD: y => no
+FB_OPENCORES: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
+
+SC27XX_EFUSE: m => yes
+      Direct dependencies: NVMEM [=y] && (MFD_SC27XX_PMIC [=m] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+
+DRM_PANEL_SEIKO_43WVF1G: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+KXSD9_SPI: m => yes
+      Direct dependencies: IIO [=y] && KXSD9 [=m] && SPI [=y]
+
+DVB_MT312: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_DW2102 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_SAA7134_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_SAA7134 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+PAGE_EXTENSION: y => no
       Direct dependencies: y
-      Reverse dependencies: HAVE_KVM_EVENTFD [=y] || MEMCG [=n] && CGROUPS [=y] || VFIO_VIRQFD [=m] && VFIO [=y] || VFIO_FSL_MC [=n] && VFIO [=y] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-BACKLIGHT_LM3533: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_LM3533 [=y]
+CRYPTO_XXHASH: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
 
-COMEDI_C6XDIGIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
-
-PATA_ATP867X: m => yes
-      Direct dependencies: ATA [=m] && ATA_SFF [=y] && ATA_BMDMA [=y] && PCI [=y]
-
-CAIF_NETDEV: m => yes
-      Direct dependencies: NET [=y] && CAIF [=m]
-
-NFC_PN544_I2C: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && NFC_HCI [=m] && I2C [=y] && NFC_SHDLC [=y]
-
-LPC_SCH: m => no
-      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
-      Reverse dependencies: I2C_ISCH [=m] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 && PCI [=y]
-
-W1_SLAVE_DS2805: m => yes
-      Direct dependencies: W1 [=m]
+BITFIELD_KUNIT: m => yes
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
 

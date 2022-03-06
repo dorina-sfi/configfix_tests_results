@@ -1,23 +1,23 @@
-HYPERV_BALLOON: m => yes
-      Direct dependencies: HYPERV [=m]
+INPUT_REGULATOR_HAPTIC: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && REGULATOR [=y]
 
-MOUSE_PS2_SYNAPTICS: y => no
-      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=y]
+CRYPTO_GHASH: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=m] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-VIDEO_THS7303: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_DAVINCI_VPIF_DISPLAY [=n] && MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=m] && (ARCH_DAVINCI || COMPILE_TEST [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+SND_SOC_FSL_RPMSG: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y] && RPMSG [=m] && (SND_IMX_SOC [=n] || SND_IMX_SOC [=n]=n)
 
-CRYPTO_TWOFISH_X86_64_3WAY: y => no
-      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+SND_SOC_TAS2770: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-SQUASHFS_FILE_DIRECT: y => no
-      Direct dependencies: <choice>
+SENSORS_IR38064: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 
-AIO: y => no
+DEBUG_IRQFLAGS: y => no
       Direct dependencies: y
+      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
 
-SUNRPC_XPRT_RDMA: m => yes
-      Direct dependencies: NETWORK_FILESYSTEMS [=y] && SUNRPC [=y] && INFINIBAND [=m] && INFINIBAND_ADDR_TRANS [=y]
+NFC_HCI: m => yes
+      Direct dependencies: NET [=y] && NFC [=m]
 

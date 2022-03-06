@@ -1,33 +1,31 @@
-I2C_MUX_MLXCPLD: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m]
+LEDS_PCA963X: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m]
 
-DVB_LGS8GXX: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+IIO_BUFFER_DMAENGINE: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=n] && IIO [=m] && HAS_IOMEM [=y] && OF [=y]
 
-MMC_S3C: m => yes
-      Direct dependencies: MMC [=m] && (ARCH_S3C24XX || COMPILE_TEST [=y]) && (S3C24XX_DMAC [=y] || COMPILE_TEST [=y])
+USB_EHCI_HCD_ORION: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (PLAT_ORION || ARCH_MVEBU || COMPILE_TEST [=y])
 
-VIDEO_ALLEGRO_DVT: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_ZYNQMP || COMPILE_TEST [=y])
+BATTERY_SBS: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
 
-SI7020: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MAX1363: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-VIDEO_OV9282: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && OF_GPIO [=y] && I2C [=m] && VIDEO_V4L2 [=m]
+GPIO_TPS65218: m => yes
+      Direct dependencies: GPIOLIB [=y] && MFD_TPS65218 [=m]
 
-SND_MESON_AXG_TDMIN: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (ARCH_MESON || COMPILE_TEST [=y] && COMMON_CLK [=y])
+DRM_PANEL_ARM_VERSATILE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && MFD_SYSCON [=y]
 
-SND_SOC_FSL_SSI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_MPC8610_HPCD [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && MPC8610_HPCD && I2C [=m] || SND_SOC_P1022_DS [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_DS && I2C [=m] || SND_SOC_P1022_RDK [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_RDK && I2C [=m] || SND_SOC_EUKREA_TLV320 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && ARCH_MXC && !ARM64 && I2C [=m] || SND_SOC_IMX_ES8328 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && (I2C [=m] || SPI [=y]) || SND_SOC_IMX_SGTL5000 [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=m] || SND_SOC_FSL_ASOC_CARD [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=m] && (SND_AC97_CODEC [=m] || SND_AC97_CODEC [=m]=n)
+PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-SND_SOC_OMAP_MCBSP: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP || ARCH_OMAP1 || COMPILE_TEST [=y] && COMMON_CLK [=y])
-      Reverse dependencies: SND_SOC_NOKIA_N810 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && MACH_NOKIA_N810 && I2C [=m] || SND_SOC_NOKIA_RX51 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_OMAP3 && I2C [=m] && GPIOLIB [=y] || SND_SOC_OMAP3_PANDORA [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_OMAP3 && TWL4030_CORE [=n] || SND_SOC_OMAP3_TWL4030 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_OMAP3 || COMPILE_TEST [=y] && COMMON_CLK [=y]) && TWL4030_CORE [=n] || SND_SOC_OMAP_AMS_DELTA [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && MACH_AMS_DELTA && TTY [=y] || SND_SOC_OMAP_OSK5912 [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && MACH_OMAP_OSK && I2C [=m]
+DPOT_DAC: m => yes
+      Direct dependencies: IIO [=m] && OF [=y]
 
-SENSORS_ISL29028: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MHI_WWAN_MBIM: m => yes
+      Direct dependencies: NETDEVICES [=y] && WWAN [=y] && MHI_BUS [=m]
 

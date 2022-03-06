@@ -1,33 +1,34 @@
-NET_SWITCHDEV: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NET_DSA [=m] && NET [=y] && (BRIDGE [=m] || BRIDGE [=m]=n) && (HSR [=n] || HSR [=n]=n) && INET [=y] && NETDEVICES [=y]
+DRM_PANEL_XINPENG_XPP055C272: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-SMC: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && INFINIBAND [=m]
+MTD_MAP_BANK_WIDTH_4: y => no
+      Direct dependencies: MTD [=y]
 
-MTD_CFI_AMDSTD: y => mod
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=y]
-      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_TS5500 [=n] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=n])
+MTD_NAND_BRCMNAND: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARM || ARM64 [=y] || MIPS || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 
-MEDIA_ANALOG_TV_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+DRM_PANEL_ASUS_Z00T_TM5P5_NT35596: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-SENSORS_ISL68137: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+TCG_VTPM_PROXY: m => yes
+      Direct dependencies: TCG_TPM [=m]
 
-BT: m => yes
-      Direct dependencies: NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m])
+CRYPTO_ECB: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_XTS [=n] && CRYPTO [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SL3516 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_GEMINI || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=m] || CRYPTO_DEV_SAHARA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_MXC [=y] && OF [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-PAGE_REPORTING: y => no
-      Direct dependencies: y
-      Reverse dependencies: VIRTIO_BALLOON [=m] && VIRTIO_MENU [=y] && VIRTIO [=m] || HYPERV_BALLOON [=n] && HYPERV [=n]
+THERMAL_GOV_STEP_WISE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
 
-STM_SOURCE_CONSOLE: m => yes
-      Direct dependencies: STM [=m]
+SYSC_R8A77995: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77995 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-VIDEO_OV772X: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+REGULATOR_HI655X: m => yes
+      Direct dependencies: REGULATOR [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) && MFD_HI655X_PMIC [=m] && OF [=y]
 
-STM_SOURCE_CONSOLE: m => yes
-      Direct dependencies: STM [=m]
+NETFILTER_XT_NAT: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NF_NAT [=y]
+      Reverse dependencies: IP_NF_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=y] || IP6_NF_NAT [=n] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && NF_CONNTRACK [=y] && NETFILTER_ADVANCED [=y]
 

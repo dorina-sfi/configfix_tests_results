@@ -1,16 +1,17 @@
-CM32181: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_ES1968: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y] && ZONE_DMA [=y]
 
-INTERRUPT_CNT: m => yes
-      Direct dependencies: COUNTER [=m] && GPIOLIB [=y]
+SENSORS_TMP108: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-GPIO_TQMX86: m => yes
-      Direct dependencies: GPIOLIB [=y] && (MFD_TQMX86 [=m] || COMPILE_TEST [=n]) && HAS_IOPORT_MAP [=y]
+VIDEO_THS7303: y => mod
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_DAVINCI_VPIF_DISPLAY [=y] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_V4L2 [=y] && (ARCH_DAVINCI || COMPILE_TEST [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-AM2315: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SENSORS_ADM1177: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-MTD_CFI_BE_BYTE_SWAP: y => no
-      Direct dependencies: <choice>
-      Reverse dependencies: MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM && CPU_BIG_ENDIAN [=n]
+ARM64_ERRATUM_843419: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_MXC [=y]
 

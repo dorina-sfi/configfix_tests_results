@@ -1,22 +1,26 @@
-CPU_LITTLE_ENDIAN: y => no
-      Direct dependencies: <choice>
+CLK_RENESAS: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-W1_SLAVE_DS2781: m => yes
-      Direct dependencies: W1 [=m]
-      Reverse dependencies: BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+PINCTRL_RZG2L: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R9A07G044 [=y]
 
-SENSORS_LTC2978: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+MEDIA_TUNER_TEA5767: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] && MEDIA_RADIO_SUPPORT [=y]
 
-SENSORS_PC87360: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+CLK_QORIQ: y => no
+      Direct dependencies: COMMON_CLK [=y] && OF [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: QORIQ_CPUFREQ [=y] && CPU_FREQ [=y] && OF [=y] && COMMON_CLK [=y] && (PPC_E500MC || SOC_LS1021A || ARCH_LAYERSCAPE [=y] || COMPILE_TEST [=n])
 
-W1_MASTER_SGI: m => yes
-      Direct dependencies: W1 [=m]
+MEDIA_DIGITAL_TV_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-HID_GYRATION: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SYSC_R8A77960: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77960 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-INPUT_EVBUG: m => yes
-      Direct dependencies: INPUT [=m]
+PINCTRL_PFC_R8A77990: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A77990 [=y]
 

@@ -1,23 +1,24 @@
-BLK_DEV_INITRD: y => no
-      Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+HZ_100: y => no
+      Direct dependencies: <choice>
 
-REGULATOR_MT6397: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+TI_SCI_PROTOCOL: y => no
+      Direct dependencies: TI_MESSAGE_MANAGER [=y]
+      Reverse dependencies: ARCH_K3 [=y]
 
-AXP20X_ADC: m => yes
-      Direct dependencies: IIO [=m] && MFD_AXP20X [=m]
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-SENSORS_HMC5843_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+MTD_SPI_NOR_SWP_KEEP: y => no
+      Direct dependencies: <choice>
 
-PSTORE_LZ4_COMPRESS: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
+MTD_SPI_NOR_SWP_KEEP: y => no
+      Direct dependencies: <choice>
 
-CLK_R8A774A1: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774A1 [=y]
+PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-COMMON_CLK_HI655X: y => mod
-      Direct dependencies: COMMON_CLK [=y] && (MFD_HI655X_PMIC [=y] || COMPILE_TEST [=n]) && REGMAP [=y]
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || SPI_DW_BT1 [=n] && SPI [=y] && SPI_MASTER [=y] && SPI_DESIGNWARE [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=n] && (OF [=y] && ARCH_K3 [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
 

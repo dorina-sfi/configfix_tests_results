@@ -1,11 +1,10 @@
-USB_ISP1760_HOST_ROLE: y => no
-      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_ISP1760 [=m])
+USB_TEGRA_PHY: m => no
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=m] || USB_EHCI_HCD [=y] && !USB_GADGET [=m] || !USB_EHCI_HCD [=y] && USB_GADGET [=m]) && HAS_DMA [=y] && ARCH_TEGRA [=y]
 
-NLS_UTF8: y => mod
-      Direct dependencies: NLS [=y]
-      Reverse dependencies: HFSPLUS_FS [=y] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y]
+REGULATOR_ATC260X: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_ATC260X [=m]
 
-PINCTRL_PFC_R8A774E1: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774E1 [=y]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 

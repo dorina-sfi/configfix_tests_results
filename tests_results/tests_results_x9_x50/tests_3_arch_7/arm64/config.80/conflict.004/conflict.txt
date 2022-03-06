@@ -1,22 +1,25 @@
-ARM_TIMER_SP804: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
-      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=n]
+SERIAL_SH_SCI_DMA: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_SH_SCI [=y] && DMA_ENGINE [=y]
 
-BACKLIGHT_LP855X: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=m] && PWM [=y]
+DEBUG_MEMORY_INIT: y => no
+      Direct dependencies: y
 
-SDM_GPUCC_660: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
+COMMON_CLK_HI655X: y => no
+      Direct dependencies: COMMON_CLK [=y] && (MFD_HI655X_PMIC [=y] || COMPILE_TEST [=y]) && REGMAP [=y]
 
-CHARGER_MAX77650: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && MFD_MAX77650 [=m]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=y] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=y])
 
-OPT3001: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+SC_GCC_7280: y => no
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
+      Reverse dependencies: SC_CAMCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_DISPCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_GPUCC_7280 [=n] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_LPASSCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] || SC_VIDEOCC_7280 [=y] && COMMON_CLK [=y] && COMMON_CLK_QCOM [=y]
 
-VIRTIO_VSOCKETS: m => yes
-      Direct dependencies: NET [=y] && VSOCKETS [=m] && VIRTIO [=y]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=y] && ACPI [=y] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
 
-I2C_MUX_LTC4306: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m]
+FRAMEBUFFER_CONSOLE: y => no
+      Direct dependencies: VT [=y] && FB [=y] && !UML
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && !EXPERT [=n]
 

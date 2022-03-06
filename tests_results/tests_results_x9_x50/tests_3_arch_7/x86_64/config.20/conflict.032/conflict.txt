@@ -1,24 +1,24 @@
-SND_VIRMIDI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_DRIVERS [=y] && SND_SEQUENCER [=m]
+HID_HYPERV_MOUSE: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m] && HYPERV [=y]
 
-CRYPTO_PCBC: m => yes
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: RXKAD [=n] && NET [=n] && AF_RXRPC [=n]
+IP_VS_SED: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=m]
 
-PNP: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ISA [=n] || ACPI [=y])
-      Reverse dependencies: ACPI [=y] && ARCH_SUPPORTS_ACPI [=y]
+BLK_DEV_INITRD: y => no
+      Direct dependencies: y
+      Reverse dependencies: BOOT_CONFIG [=y]
 
-PSTORE_RAM: m => yes
-      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m] && HAS_IOMEM [=y]
+MPLS: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=m] || NETFILTER_CONNCOUNT [=m]))
 
-CRYPTO_CRCT10DIF: m => yes
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: CRC_T10DIF [=m]
+PM: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP [=y] && (SUSPEND [=n] || HIBERNATE_CALLBACKS [=y]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=n] || ARCH_RCAR_GEN3 [=n] && SOC_RENESAS [=n] || ARCH_RMOBILE [=n] && SOC_RENESAS [=n] || ARCH_R7S72100 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R7S9210 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS
 
-IPMI_WATCHDOG: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
+PSTORE_LZO_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-DPOT_DAC: m => yes
-      Direct dependencies: IIO [=m] && OF [=y]
+PARIDE_PCD: m => yes
+      Direct dependencies: BLK_DEV [=y] && PARIDE [=m]
 

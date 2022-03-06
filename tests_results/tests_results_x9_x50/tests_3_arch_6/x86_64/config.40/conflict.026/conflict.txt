@@ -1,20 +1,19 @@
-IR_IMG_HW: y => no
-      Direct dependencies: RC_CORE [=y] && RC_DEVICES [=y] && IR_IMG [=y]
-      Reverse dependencies: IR_IMG [=y] && RC_DEVICES [=y] && RC_CORE [=y] && (MIPS || COMPILE_TEST [=y]) && !IR_IMG_RAW [=n]
+UNWINDER_FRAME_POINTER: y => no
+      Direct dependencies: <choice>
 
-CONFIGFS_FS: y => mod
-      Direct dependencies: y
-      Reverse dependencies: ACPI_CONFIGFS [=m] && ACPI [=y] || TARGET_CORE [=n] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=y] && PCI_ENDPOINT [=y] || PCI_EPF_NTB [=n] && PCI [=y] && PCI_ENDPOINT [=y] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=n] || GPIO_SIM [=m] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=y] && USB_SUPPORT [=y] && USB_GADGET [=y] || IIO_CONFIGFS [=m] && IIO [=m] || STM [=n]
+TMP006: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-DVB_AV7110: m => yes
-      Direct dependencies: STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_DEV [=m]
+FB_SIMPLE: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y] && !DRM_SIMPLEDRM [=m]
 
-MTD_CFI_STAA: m => yes
-      Direct dependencies: MTD [=y] && MTD_GEN_PROBE [=m]
+MTD_RAM: y => mod
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-NAU7802: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+ADJD_S311: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-DVB_USB_DVBSKY: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m]
+BATTERY_RT5033: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
 

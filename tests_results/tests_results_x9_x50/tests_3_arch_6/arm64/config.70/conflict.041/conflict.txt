@@ -1,21 +1,22 @@
-FPGA_MGR_ALTERA_PS_SPI: m => yes
-      Direct dependencies: FPGA [=m] && SPI [=y]
+MFD_VX855: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: GPIO_VX855 [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && (X86 || COMPILE_TEST [=y]) && PCI [=y]
 
-MFD_SUN6I_PRCM: y => no
-      Direct dependencies: HAS_IOMEM [=y] && (ARCH_SUNXI [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: CLK_SUNXI_PRCM_SUN6I [=y] && COMMON_CLK [=y] && CLK_SUNXI [=y] || CLK_SUNXI_PRCM_SUN8I [=n] && COMMON_CLK [=y] && CLK_SUNXI [=y]
+ROCKCHIP_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
+      Reverse dependencies: ARCH_ROCKCHIP [=y]
 
-HID_SMARTJOYPLUS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=y]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=y] && IIO [=y] && I2C [=y]
 
-IOMMU_IO_PGTABLE_LPAE: y => no
-      Direct dependencies: IOMMU_SUPPORT [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
-      Reverse dependencies: DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || IPMMU_VMSA [=n] && IOMMU_SUPPORT [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || APPLE_DART [=m] && IOMMU_SUPPORT [=y] && (ARCH_APPLE [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU [=y] && IOMMU_SUPPORT [=y] && (ARM64 [=y] || ARM || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) || ARM_SMMU_V3 [=y] && IOMMU_SUPPORT [=y] && ARM64 [=y] || QCOM_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n])
+SERIO_LIBPS2: y => no
+      Direct dependencies: SERIO [=y] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=y] && INPUT_KEYBOARD [=y] || MOUSE_PS2 [=y] && INPUT [=y] && INPUT_MOUSE [=y]
 
-RMI4_F55: y => no
-      Direct dependencies: INPUT [=m] && RMI4_CORE [=m]
-      Reverse dependencies: RMI4_F54 [=y] && INPUT [=m] && RMI4_CORE [=m] && (VIDEO_V4L2 [=y]=y || RMI4_CORE [=m]=m && VIDEO_V4L2 [=y]=m)
+CMA_SIZE_SEL_MAX: y => no
+      Direct dependencies: <choice>
 
-RTC_DRV_CPCAP: m => yes
-      Direct dependencies: RTC_CLASS [=y] && MFD_CPCAP [=m]
+HZ_300: y => no
+      Direct dependencies: <choice>
 

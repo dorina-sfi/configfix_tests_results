@@ -1,12 +1,13 @@
-MMC_SDHI: m => yes
-      Direct dependencies: MMC [=m] && (SUPERH || ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 
-SND_SEQUENCER: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m]
+MFD_88PM800: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
 
-SENSORS_WM8350: m => yes
-      Direct dependencies: HWMON [=m] && MFD_WM8350 [=y]
+MFD_STW481X: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (ARCH_NOMADIK || COMPILE_TEST [=y])
 
-PSTORE_DEFLATE_COMPRESS_DEFAULT: y => no
-      Direct dependencies: <choice>
+W1_MASTER_DS2482: m => yes
+      Direct dependencies: W1 [=y] && I2C [=m]
 

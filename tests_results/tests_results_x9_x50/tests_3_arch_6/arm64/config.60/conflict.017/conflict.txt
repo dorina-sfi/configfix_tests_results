@@ -1,18 +1,22 @@
-REGULATOR_RK808: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_RK808 [=m]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-COMEDI_PCI_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=m] && PCI [=y]
+MEDIA_SDR_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-COMEDI_ADV_PCI1710: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+I2C_SMBUS: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: I2C_I801 [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || I2C_STM32F7 [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_THUNDERX [=n] && I2C [=y] && HAS_IOMEM [=y] && 64BIT [=y] && PCI [=y] && (ARM64 [=y] || COMPILE_TEST [=y]) || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS [=n] || COMPILE_TEST [=y]) || I2C_PARPORT [=y] && I2C [=y] && HAS_IOMEM [=y] && PARPORT [=y] || MANAGER_SBS [=y] && POWER_SUPPLY [=y] && I2C [=y] && I2C_MUX [=y] && GPIOLIB [=y]
 
-ADE7854_SPI: m => yes
-      Direct dependencies: STAGING [=y] && IIO [=m] && ADE7854 [=m] && SPI [=y]
+SSB_PCIHOST: y => no
+      Direct dependencies: SSB [=y] && SSB_PCIHOST_POSSIBLE [=y]
+      Reverse dependencies: B44_PCI_AUTOSELECT [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_BROADCOM [=y] && B44 [=y] && SSB_PCIHOST_POSSIBLE [=y] || B43_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && B43 [=n] && SSB_PCIHOST_POSSIBLE [=y] || B43LEGACY_PCI_AUTOSELECT [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_BROADCOM [=n] && B43LEGACY [=n] && SSB_PCIHOST_POSSIBLE [=y]
 
-SPRD_SC9863A_CLK: m => yes
-      Direct dependencies: COMMON_CLK [=y] && SPRD_COMMON_CLK [=m] && (ARM64 [=y] && ARCH_SPRD [=y] || COMPILE_TEST [=n])
+ARM64_PA_BITS_52: y => no
+      Direct dependencies: <choice> && ARM64_64K_PAGES [=y] && (ARM64_PAN [=n] || !ARM64_SW_TTBR0_PAN [=n])
 
-ARM64_VA_BITS_42: y => no
-      Direct dependencies: <choice> && ARM64_64K_PAGES [=y]
+CRYPTO_NULL: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=y] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
 

@@ -1,20 +1,22 @@
-IIO_BUFFER_HW_CONSUMER: m => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=m] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=m] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
+MTD_RAM: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_PLATRAM [=y] && MTD [=y] && HAS_IOMEM [=y]
 
-IRQ_POLL: y => no
-      Direct dependencies: y
-      Reverse dependencies: INFINIBAND [=m] && HAS_IOMEM [=y] && HAS_DMA [=y] && NET [=y] && INET [=y] && (m && MODULES [=y] || IPV6 [=m]!=m) && !ALPHA || BE2ISCSI [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && NET [=y] || CXLFLASH [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && (CXL [=n] || OCXL [=n]) && EEH || MEGARAID_SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] || SCSI_IPR [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && ATA [=m] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=n] && (NVME_TARGET_FC [=n] || NVME_TARGET_FC [=n]=n) && (NVME_FC [=y] || NVME_FC [=y]=n)
+GPIO_GENERIC_PLATFORM: y => no
+      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MFD_VEXPRESS_SYSREG [=y] && HAS_IOMEM [=y] && VEXPRESS_CONFIG [=y] && GPIOLIB [=y]
 
-SENSORS_ZL6100: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+KASAN_OUTLINE: y => no
+      Direct dependencies: <choice>
 
-USB_CDNS3_IMX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_CDNS3 [=m] && (ARCH_MXC [=y] || COMPILE_TEST [=y])
+CRYPTO_XTS: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=y] && NETDEVICES [=n] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=y] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=n]
 
-MMC_SDHCI: m => yes
-      Direct dependencies: MMC [=m] && HAS_DMA [=y]
+MEDIA_CAMERA_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-PINCTRL_SM8250: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL_MSM [=m]
+SND_SOC_CROS_EC_CODEC: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && CROS_EC [=y]
+      Reverse dependencies: SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=y] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=y] && CROS_EC [=y]
 

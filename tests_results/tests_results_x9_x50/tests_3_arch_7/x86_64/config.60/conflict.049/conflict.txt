@@ -1,26 +1,24 @@
-MAGIC_SYSRQ: y => no
-      Direct dependencies: !UML
-      Reverse dependencies: KGDB_SERIAL_CONSOLE [=y] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
+CRYPTO_CRYPTD: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-CPU_SUP_AMD: y => no
+BCM84881_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+
+PPS: y => no
       Direct dependencies: y
-      Reverse dependencies: CPU_SUP_HYGON [=y]
+      Reverse dependencies: PTP_1588_CLOCK [=y] && NET [=y] && POSIX_TIMERS [=y]
 
-CDNS_I3C_MASTER: m => yes
-      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
+SENSORS_MCP3021: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-NET_MPLS_GSO: m => no
-      Direct dependencies: NET [=y] && MPLS [=y]
-      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=m] || NF_CONNTRACK [=m] && (!NF_DEFRAG_IPV6 [=m] || NF_DEFRAG_IPV6 [=m]) && (!NF_NAT [=m] || NF_NAT [=m]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+SND_SOC_WM8782: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
 
-VIDEO_SAA6588: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_BT848 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=y] && MEDIA_RADIO_SUPPORT [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_SAA7134 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
-
-HID_PICOLCD_BACKLIGHT: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
+SENSORS_ZL6100: m => yes
+      Direct dependencies: HWMON [=m] && PMBUS [=m]
 

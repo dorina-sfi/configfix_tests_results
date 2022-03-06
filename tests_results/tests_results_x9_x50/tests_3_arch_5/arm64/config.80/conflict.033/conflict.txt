@@ -1,18 +1,17 @@
-CRYPTO_DH: y => no
+ADF4350: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
+
+VIDEO_SAA7164: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=y] && I2C [=y]
+
+CRYPTO_DRBG_MENU: y => mod
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]
+USB_BDC_UDC: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_DMA [=y]
 
-PINCTRL_BCM2835: y => no
-      Direct dependencies: PINCTRL [=y] && OF [=y] && (ARCH_BCM2835 [=y] || ARCH_BRCMSTB [=n] || COMPILE_TEST [=y])
-      Reverse dependencies: ARCH_BCM2835 [=y]
-
-HZ_100: y => no
-      Direct dependencies: <choice>
-
-ARMADA_37XX_RWTM_MBOX: y => no
-      Direct dependencies: MAILBOX [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y]) && OF [=y]
-      Reverse dependencies: TURRIS_MOX_RWTM [=y] && (ARCH_MVEBU [=y] || COMPILE_TEST [=y]) && HAS_DMA [=y] && OF [=y] && MAILBOX [=y]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=n] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
 

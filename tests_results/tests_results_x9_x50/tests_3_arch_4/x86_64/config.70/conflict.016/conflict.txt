@@ -1,12 +1,13 @@
-I2C_SIMTEC: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
+SND_SOC_MAX98088: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-BATTERY_RT5033: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+MAX9611: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-SENSORS_ADT7475: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+SERIO_ALTERA_PS2: m => yes
+      Direct dependencies: SERIO [=m] && HAS_IOMEM [=y]
 
-USB_CHIPIDEA_GENERIC: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y]
+IIO_STM32_TIMER_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && (ARCH_STM32 && OF [=y] && MFD_STM32_TIMERS [=m] || COMPILE_TEST [=y])
+      Reverse dependencies: STM32_ADC_CORE [=m] && IIO [=m] && (ARCH_STM32 || COMPILE_TEST [=y]) && OF [=y] && REGULATOR [=y] && HAS_IOMEM [=y]
 

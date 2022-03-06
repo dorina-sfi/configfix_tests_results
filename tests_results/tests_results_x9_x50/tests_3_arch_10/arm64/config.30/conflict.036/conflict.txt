@@ -1,36 +1,34 @@
-USB_CHIPIDEA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y]
-      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && ARCH_TEGRA [=n]
+ROCKCHIP_TIMER: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && (ARM || ARM64 [=y])
+      Reverse dependencies: ARCH_ROCKCHIP [=y]
 
-GAMEPORT: y => mod
-      Direct dependencies: !UML
-      Reverse dependencies: JOYSTICK_ANALOG [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y]
+NF_LOG_IPV6: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y]
+      Reverse dependencies: NETFILTER_XT_TARGET_LOG [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && IP6_NF_IPTABLES [=m]
 
-REGULATOR_DA9062: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+BACKLIGHT_QCOM_WLED: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-HID_SENSOR_PRESS: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+NETFILTER_XT_TARGET_CHECKSUM: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && (IP_NF_MANGLE [=n] || IP6_NF_MANGLE [=m]) && NETFILTER_ADVANCED [=y]
 
-VIDEO_CS53L32A: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=m]
+HID_LED: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: HID_THINGM [=y] && INPUT [=y] && HID [=y] && LEDS_CLASS [=y]
 
-IPV6_TUNNEL: m => no
-      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
-      Reverse dependencies: IPV6_VTI [=m] && NET [=y] && INET [=y] && IPV6 [=m] || IPV6_GRE [=m] && NET [=y] && INET [=y] && IPV6 [=m] && NET_IPGRE_DEMUX [=m] || IPV6_FOU_TUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=m]
+CRC32_BIT: y => no
+      Direct dependencies: <choice>
 
-EXPERT: y => no
+DRM_PANEL_ASUS_Z00T_TM5P5_NT35596: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && GPIOLIB [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
+
+REGULATOR: y => no
       Direct dependencies: y
-      Reverse dependencies: EMBEDDED [=y]
+      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=y] && PINCTRL [=y] || TPS6105X [=n] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=m] || QCOM_COMMAND_DB [=m]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=n] && MMC [=n] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=y])
 
-CRYPTO_GHASH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_VMX [=n]
+NETFILTER_XT_TARGET_CHECKSUM: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && (IP_NF_MANGLE [=n] || IP6_NF_MANGLE [=m]) && NETFILTER_ADVANCED [=y]
 
-PPP_BSDCOMP: m => yes
-      Direct dependencies: NETDEVICES [=y] && PPP [=m]
-
-IIO_CROS_EC_SENSORS_CORE: m => yes
-      Direct dependencies: IIO [=y] && SYSFS [=y] && CROS_EC_SENSORHUB [=m]
+FUTEX: y => no
+      Direct dependencies: y
 

@@ -1,33 +1,32 @@
-CRYPTO_CTR: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MAC802154 [=m] && NET [=y] && IEEE802154 [=y] || AIRO_CS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=m] && PCMCIA [=m] || CRYPTO_CCM [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DRBG_CTR [=n] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+SENSORS_RM3100_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-DEFAULT_FQ: y => no
-      Direct dependencies: <choice>
+TI_ADS1015: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-NET_FOU: y => no
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NET_FOU_IP_TUNNELS [=y] && NET [=y] && INET [=y] && (NET_IPIP [=m] || NET_IPGRE [=n] || IPV6_SIT [=y])
+SND_SOC_FSL_ESAI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=m] || SND_AC97_CODEC [=m]=n)
 
-STM_DUMMY: m => yes
-      Direct dependencies: STM [=m]
+SND_SOC_SSM4567: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_INTEL_SKL_NAU88L25_SSM4567_MACH [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_SKL [=n] && I2C [=y] && ACPI [=n] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=m] || COMPILE_TEST [=n])
 
-HID_PICOLCD_LEDS: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=LEDS_CLASS [=y] || LEDS_CLASS [=y]=y)
+SND_SOC_WM8776: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
+      Reverse dependencies: SND_SOC_P1022_DS [=n] && SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_DS && I2C [=y]
 
-IIO_BUFFER_CB: y => mod
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=y] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=y] && STM32_DFSDM_ADC [=n] || LMP91000 [=m] && IIO [=y] && I2C [=y]
+USB_CYPRESS_CY7C63: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
 
-NET_FOU: y => mod
-      Direct dependencies: NET [=y] && INET [=y]
-      Reverse dependencies: NET_FOU_IP_TUNNELS [=y] && NET [=y] && INET [=y] && (NET_IPIP [=m] || NET_IPGRE [=n] || IPV6_SIT [=y])
+HID_SPEEDLINK: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-MFD_WL1273_CORE: y => mod
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=y]
-      Reverse dependencies: RADIO_WL1273 [=y] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=y]
+WLCORE: m => yes
+      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && MAC80211 [=m]
+      Reverse dependencies: WL12XX [=m] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && MAC80211 [=m] || WL18XX [=m] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_TI [=y] && MAC80211 [=m]
 
-CRYPTO_SEQIV: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
+VIDEO_XILINX_VTC: m => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=m]
+      Reverse dependencies: VIDEO_XILINX_TPG [=m] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_XILINX [=m]
 

@@ -1,28 +1,34 @@
-I2C_RCAR: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+DVB_RTL2832: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y] && I2C_MUX [=m]
+      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=m] || DVB_RTL2832_SDR [=n] && MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y] && I2C_MUX [=m] && VIDEO_V4L2 [=m] && MEDIA_SDR_SUPPORT [=y] && USB [=n]
 
-SPMI_PMIC_CLKDIV: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m] && (SPMI [=y] || COMPILE_TEST [=n])
-
-CLK_R8A774B1: y => no
+CLK_RENESAS_DIV6: y => no
       Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774B1 [=y]
+      Reverse dependencies: CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-MFD_88PM800: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+SENSEAIR_SUNRISE_CO2: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-MLXREG_LC: m => yes
-      Direct dependencies: MELLANOX_PLATFORM [=y] && REGMAP [=y] && HWMON [=y] && I2C [=m]
+MICREL_PHY: y => mod
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: KS8851 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=y] && SPI [=n] || KS8851_MLL [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=y] && HAS_IOMEM [=y]
 
-I2C_SLAVE_EEPROM: m => yes
-      Direct dependencies: I2C [=m] && I2C_SLAVE [=y]
+BATTERY_RX51: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && TWL4030_MADC [=m]
 
-SENSORS_LM95245: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+MDIO_OCTEON: y => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (64BIT [=y] && OF_MDIO [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+      Reverse dependencies: OCTEON_MGMT_ETHERNET [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_CAVIUM [=n] && CAVIUM_OCTEON_SOC || OCTEON_ETHERNET [=y] && STAGING [=y] && (CAVIUM_OCTEON_SOC || COMPILE_TEST [=y]) && NETDEVICES [=y]
 
-EEPROM_EE1004: m => yes
-      Direct dependencies: I2C [=m] && SYSFS [=y]
+PARAVIRT: y => no
+      Direct dependencies: y
+      Reverse dependencies: PARAVIRT_TIME_ACCOUNTING [=y] || XEN [=y] && ARM64 [=y] && OF [=y] || HYPERV [=n] && ACPI [=n] && (X86 && X86_LOCAL_APIC && HYPERVISOR_GUEST || ARM64 [=y] && !CPU_BIG_ENDIAN [=n])
 
-ICP10100: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+MEDIA_TUNER_XC4000: m => yes
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+
+DEBUG_KERNEL: y => no
+      Direct dependencies: y
+      Reverse dependencies: EXPERT [=y]
 

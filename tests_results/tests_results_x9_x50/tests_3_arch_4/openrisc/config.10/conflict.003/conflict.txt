@@ -1,13 +1,12 @@
-CAN_CC770_ISA: m => yes
-      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_CC770 [=m]
+SENSORS_EMC6W201: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-PAGE_EXTENSION: y => no
-      Direct dependencies: y
-      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
+INPUT_DA9063_ONKEY: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (MFD_DA9063 [=n] || MFD_DA9062 [=m])
 
-FB_OPENCORES: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && HAS_DMA [=y]
+CHARGER_TPS65217: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_TPS65217 [=m]
 
-DRIVER_PE_KUNIT_TEST: y => no
-      Direct dependencies: KUNIT [=y]=y
+I2C_ARB_GPIO_CHALLENGE: m => yes
+      Direct dependencies: I2C [=m] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n])
 

@@ -1,17 +1,18 @@
-XZ_DEC: y => mod
-      Direct dependencies: y
-      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=y]
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-NET_DSA_XRS700X_I2C: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && I2C [=y]
+CC_OPTIMIZE_FOR_SIZE: y => no
+      Direct dependencies: <choice>
 
-SPEAKUP_SYNTH_DECTLK: m => yes
-      Direct dependencies: ACCESSIBILITY [=y] && SPEAKUP [=m]
+MEDIA_TUNER_MT20XX: y => no
+      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-REGULATOR_MT6359: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+MCTP_TEST: y => no
+      Direct dependencies: NET [=y] && MCTP [=y] && KUNIT [=y]=y
 
-CHARLCD: y => no
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=y] && AUXDISPLAY [=y] && I2C [=y]
+SND_SOC_DAVINCI_MCASP: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y]
+      Reverse dependencies: SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM6467_EVM || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DA830_EVM || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DA850_EVM || SND_SOC_J721E_EVM [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_K3 || COMPILE_TEST [=y] && COMMON_CLK [=y]) && I2C [=y]
 

@@ -1,23 +1,23 @@
-I2C_MUX_REG: m => yes
-      Direct dependencies: I2C [=m] && I2C_MUX [=m] && HAS_IOMEM [=y]
+HID_PICOLCD_FB: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=FB [=y] || FB [=y]=y)
 
-HID_SUNPLUS: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+CLK_R8A779A0: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A779A0 [=y]
 
-KEYBOARD_TM2_TOUCHKEY: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && I2C [=m] && LEDS_CLASS [=m]
+HID_PICOLCD_LEDS: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=LEDS_CLASS [=y] || LEDS_CLASS [=y]=y)
 
-SYSC_R8A774B1: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_R8A774B1 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
+CHARLCD_BL_OFF: y => no
+      Direct dependencies: <choice>
 
-MEMORY: y => no
+USB_CHIPIDEA_TEGRA: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+      Reverse dependencies: USB_EHCI_TEGRA [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && ARCH_TEGRA [=n]
+
+NO_HZ_FULL: y => no
+      Direct dependencies: <choice> && SMP [=y] && HAVE_CONTEXT_TRACKING [=y] && HAVE_VIRT_CPU_ACCOUNTING_GEN [=y]
+
+TIMERFD: y => no
       Direct dependencies: y
-      Reverse dependencies: MTD_NAND_FSL_IFC [=m] && MTD [=y] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE [=n] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK [=n] || ARM && COMPILE_TEST [=y]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=n] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
-
-MEN_Z188_ADC: m => yes
-      Direct dependencies: IIO [=y] && MCB [=m]
-
-MTD_NAND_GPIO: m => yes
-      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

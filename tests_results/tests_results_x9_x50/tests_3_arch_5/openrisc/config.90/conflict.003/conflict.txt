@@ -1,15 +1,17 @@
-NATIONAL_PHY: m => yes
-      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+TSL4531: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-MDIO_BUS_MUX_MMIOREG: m => yes
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=m] && MDIO_BUS [=m] && OF_MDIO [=m] && HAS_IOMEM [=y]
+CRYPTO_RSA: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=n] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-SND_SOC_MIKROE_PROTO: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_ATMEL_SOC [=m] && OF [=y] && SND_SOC_I2C_AND_SPI [=m]
+IIO_MUX: m => yes
+      Direct dependencies: IIO [=m] && (OF [=y] || COMPILE_TEST [=n])
 
-HDC100X: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+SECURITYFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=n] && INTEGRITY [=y]
 
-SND_USB_CAIAQ: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_USB [=y] && USB [=y]
+SI7020: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 

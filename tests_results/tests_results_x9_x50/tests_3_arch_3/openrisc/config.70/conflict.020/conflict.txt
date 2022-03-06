@@ -1,9 +1,11 @@
-JOYSTICK_QWIIC: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && I2C [=y]
+SCSI: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
 
-IR_HIX5HD2: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && (OF [=y] && HAS_IOMEM [=y] || COMPILE_TEST [=n])
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-INPUT_GPIO_DECODER: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+MD_RAID456: y => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=y] && MD [=y] && BLK_DEV_DM [=y]
 

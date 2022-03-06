@@ -1,28 +1,34 @@
-DEBUG_FS_DISALLOW_MOUNT: y => no
-      Direct dependencies: <choice>
+CRYPTO_TWOFISH_X86_64_3WAY: y => mod
+      Direct dependencies: CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_AVX_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-SENSORS_MAX31785: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+VIDEO_SAA711X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_STK1160 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_STK1160_COMMON [=n] || VIDEO_GO7007 [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_DEV [=m] && I2C [=y] && SND [=n] && USB [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_V4L2 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=y] && RC_CORE [=n] || VIDEO_MXB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_BUZ [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_ZORAN_LML33R10 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-MTD_UBI_GLUEBI: m => yes
-      Direct dependencies: MTD [=y] && MTD_UBI [=m]
+CRYPTO: y => no
+      Direct dependencies: y
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=n] || BLK_INLINE_ENCRYPTION_FALLBACK [=n] && BLOCK [=y] && BLK_INLINE_ENCRYPTION [=n] || BT [=n] && NET [=n] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || AF_RXRPC [=n] && NET [=n] && INET [=n] || CEPH_LIB [=n] && NET [=n] && INET [=n] || TLS [=n] && NET [=n] && INET [=n] || XFRM_ALGO [=n] && NET [=n] || IP_SCTP [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || IPV6 [=n]=n) || TIPC_CRYPTO [=n] && NET [=n] && TIPC [=n] || MAC802154 [=n] && NET [=n] && IEEE802154 [=n] || XFRM_AH [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || TCP_MD5SIG [=n] && NET [=n] && INET [=n] || MPTCP [=n] && NET [=n] && INET [=n] || IPV6_SEG6_HMAC [=n] && NET [=n] && INET [=n] && IPV6 [=n] || RXKAD [=n] && NET [=n] && AF_RXRPC [=n] || LIB80211_CRYPT_CCMP [=n] && NET [=n] && WIRELESS [=n] || MAC80211 [=n] && NET [=n] && WIRELESS [=n] && CFG80211 [=n] || NFC_S3FWRN5 [=n] && NET [=n] && NFC [=n] || USB4 [=n] && PCI [=n] || TEE [=n] && (HAVE_ARM_SMCCC [=n] || COMPILE_TEST [=n] || CPU_SUP_AMD [=y]) || BLK_DEV_RBD [=n] && BLK_DEV [=y] && INET [=n] && BLOCK [=y] || NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && INET [=n] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n) || DM_VERITY [=n] && MD [=n] && BLK_DEV_DM [=n] || DM_INTEGRITY [=n] && MD [=n] && BLK_DEV_DM [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=m] && INET [=n] || WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n]) || MACSEC [=n] && NETDEVICES [=n] && NET_CORE [=n] || PPP_MPPE [=n] && NETDEVICES [=n] && PPP [=n] || USB_RTL8152 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] || AIRO [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && ISA_DMA_API [=y] && (PCI [=n] || BROKEN [=n]) || AIRO_CS [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_CISCO [=n] && CFG80211 [=n] && PCMCIA [=m] || LIBIPW [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && PCI [=n] && CFG80211 [=n] || HOSTAP [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] || HERMES [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && (PPC_PMAC || PCI [=n] || PCMCIA [=m]) && CFG80211 [=n] || TCG_TPM [=m] && HAS_IOMEM [=y] || SND_SOC_CROS_EC_CODEC [=n] && SOUND [=m] && !UML && SND [=n] && SND_SOC [=n] && CROS_EC [=n] || RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=n] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=m] && m && MODULES [=y] || RTL8723BS [=n] && STAGING [=y] && WLAN [=n] && MMC [=m] && CFG80211 [=n] && m && MODULES [=y] || KS7010 [=n] && STAGING [=y] && MMC [=m] && WIRELESS [=n] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || RTLLIB_CRYPTO_TKIP [=n] && STAGING [=y] && RTLLIB [=n] || RTL8192E [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && RTLLIB [=n] && m && MODULES [=y] || FS_ENCRYPTION [=y] || FS_VERITY [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || F2FS_FS [=m] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_ADVANCED_COMPR [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_LZO [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=n] && MTD_UBI [=n] && UBIFS_FS_ZSTD [=n] || PSTORE [=n] && MISC_FILESYSTEMS [=n] && PSTORE_COMPRESS [=n] || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=n] || CEPH_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || TRUSTED_KEYS [=m] && KEYS [=y] && TCG_TPM [=m] || ENCRYPTED_KEYS [=y] && KEYS [=y] || KEY_DH_OPERATIONS [=n] && KEYS [=y] || SECURITY_APPARMOR_HASH [=n] && SECURITY_APPARMOR [=n] || IMA [=n] && INTEGRITY [=n] || CRC_T10DIF [=y] || LIBCRC32C [=m] || SIGNATURE [=n] && KEYS [=y]
 
-XZ_DEC_IA64: y => no
-      Direct dependencies: XZ_DEC [=y]
+XZ_DEC: y => mod
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=y] && FW_LOADER [=y] || MLXFW [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MELLANOX [=n] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
 
-COMEDI_NI_65XX: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+USB_USS720: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && PARPORT [=y]
 
-COMEDI_AMPLC_PC236_PCI: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
+DVB_MB86A20S: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_CX231XX_DVB [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX231XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_EM28XX_DVB [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-CRYPTO_CRC32: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: RDMA_RXE [=n] && (INFINIBAND_USER_ACCESS [=n] || !INFINIBAND_USER_ACCESS [=n]) && INET [=n] && PCI [=y] && INFINIBAND [=n] && INFINIBAND_VIRT_DMA [=n] || F2FS_FS [=m] && BLOCK [=y]
+NVMEM: y => no
+      Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=y]
 
-MMC_TIFM_SD: m => yes
-      Direct dependencies: MMC [=m] && PCI [=y]
+DVB_S5H1420: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BUDGET [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
 
-REGULATOR_MT6360: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6360 [=m]
+MMC_SPI: m => yes
+      Direct dependencies: MMC [=m] && SPI_MASTER [=y]
 

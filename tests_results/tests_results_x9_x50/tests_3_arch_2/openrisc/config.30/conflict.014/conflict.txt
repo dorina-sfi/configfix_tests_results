@@ -1,6 +1,7 @@
-IPMI_KCS_BMC_SERIO: m => yes
-      Direct dependencies: IPMI_KCS_BMC [=m] && SERIO [=y]
+QCOM_STATS: m => yes
+      Direct dependencies: (ARCH_QCOM && DEBUG_FS [=y] || COMPILE_TEST [=y]) && QCOM_SMEM [=m]
 
-COREDUMP: y => no
+NVMEM: y => no
       Direct dependencies: y
+      Reverse dependencies: USB4 [=n] && PCI [=n] || EEPROM_AT24 [=m] && I2C [=m] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=n] && SYSFS [=y] || EEPROM_93XX46 [=n] && SPI [=n] && SYSFS [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=n] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || RTC_NVMEM [=n] && RTC_CLASS [=n]
 

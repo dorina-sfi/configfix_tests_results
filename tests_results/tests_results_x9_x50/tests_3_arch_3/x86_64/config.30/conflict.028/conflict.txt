@@ -1,9 +1,12 @@
-SERIO_GPIO_PS2: m => yes
-      Direct dependencies: SERIO [=m] && GPIOLIB [=y]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
 
-VIDEO_LM3646: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=m] && VIDEO_V4L2 [=m]
+DNS_RESOLVER: y => no
+      Direct dependencies: NET [=y] && KEYS [=y]
+      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=n] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=y] && NFS_V4 [=y] && !NFS_USE_LEGACY_DNS [=y] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || AFS_FS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y]
 
-I2C_EMEV2: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && HAVE_CLK [=y]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 

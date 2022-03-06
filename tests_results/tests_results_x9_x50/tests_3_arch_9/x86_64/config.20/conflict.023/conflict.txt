@@ -1,31 +1,31 @@
-RMI4_F11: y => no
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 
-USB4_DMA_TEST: m => yes
-      Direct dependencies: USB4 [=m] && DEBUG_FS [=y]
+SENSORS_LTC2947_I2C: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-EXT4_KUNIT_TESTS: m => yes
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y] && KUNIT [=m]
+VIDEO_OV2685: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
 
-UNIX98_PTYS: y => no
-      Direct dependencies: TTY [=y]
+NO_HZ_IDLE: y => no
+      Direct dependencies: <choice>
 
-MMC_HSQ: m => yes
-      Direct dependencies: MMC [=m]
-      Reverse dependencies: MMC_SDHCI_SPRD [=n] && MMC [=m] && (ARCH_SPRD || COMPILE_TEST [=n]) && MMC_SDHCI_PLTFM [=n]
+FSI_MASTER_HUB: m => yes
+      Direct dependencies: FSI [=m]
 
-ACPI_BUTTON: m => no
-      Direct dependencies: ACPI [=y] && INPUT [=y]
-      Reverse dependencies: DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=y] && ACPI [=y]
+DVB_DUMMY_FE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_TEST_SUPPORT [=y] && DVB_CORE [=m]
 
-MERAKI_MX100: m => yes
-      Direct dependencies: X86 [=y] && X86_PLATFORM_DEVICES [=y] && GPIOLIB [=y] && GPIO_ICH [=m] && LEDS_CLASS [=y]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-FPGA_REGION: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m]
-      Reverse dependencies: FPGA_DFL [=n] && FPGA [=m] && HAS_IOMEM [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=y] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
 
-NTB_IDT: m => yes
-      Direct dependencies: NTB [=m] && PCI [=y]
+RADIO_SAA7706H: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+      Reverse dependencies: RADIO_TIMBERDALE [=n] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && MFD_TIMBERDALE [=n] && VIDEO_V4L2 [=m] && I2C [=y]
 

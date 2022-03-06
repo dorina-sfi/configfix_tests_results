@@ -1,24 +1,27 @@
-CHR_DEV_ST: m => yes
-      Direct dependencies: SCSI [=m]
+HID_PICOLCD_BACKLIGHT: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=y] && (HID_PICOLCD [=y]=BACKLIGHT_CLASS_DEVICE [=y] || BACKLIGHT_CLASS_DEVICE [=y]=y)
 
-JOYSTICK_ADC: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_JOYSTICK [=y] && IIO [=m]
+CPU_SUP_CENTAUR: y => no
+      Direct dependencies: y
 
-CARDMAN_4040: m => yes
-      Direct dependencies: PCMCIA [=m]
-
-TOUCHSCREEN_ELO: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y]
-
-FB_BOTH_ENDIAN: y => no
+IOMMU_DEFAULT_DMA_LAZY: y => no
       Direct dependencies: <choice>
 
-SND_MPU401: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_DRIVERS [=y]
+X509_CERTIFICATE_PARSER: y => no
+      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && ASYMMETRIC_PUBLIC_KEY_SUBTYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-MTD_PHYSMAP: m => yes
-      Direct dependencies: MTD [=m] && HAS_IOMEM [=y] && (MTD_CFI [=m] || MTD_JEDECPROBE [=m] || MTD_ROM [=n] || MTD_RAM [=m] || MTD_LPDDR [=m])
+X86_VSYSCALL_EMULATION: y => no
+      Direct dependencies: X86_64 [=y]
 
-HMC425: m => yes
-      Direct dependencies: IIO [=m] && GPIOLIB [=y]
+MUX_MMIO: y => no
+      Direct dependencies: MULTIPLEXER [=y] && (OF [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: MTD_PHYSMAP_BT1_ROM [=n] && MTD [=n] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || SPI_DW_BT1 [=n] && SPI [=n] && SPI_MASTER [=n] && SPI_DESIGNWARE [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=y]) || PHY_AM654_SERDES [=y] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || PHY_J721E_WIZ [=y] && (OF [=y] && ARCH_K3 || COMPILE_TEST [=y]) && HAS_IOMEM [=y] && OF_ADDRESS [=y] && COMMON_CLK [=y]
+
+CRYPTO_LZ4HC: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_LZ4HC [=n] && <choice> || PSTORE_LZ4HC_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
+
+SQUASHFS_DECOMP_SINGLE: y => no
+      Direct dependencies: <choice>
 

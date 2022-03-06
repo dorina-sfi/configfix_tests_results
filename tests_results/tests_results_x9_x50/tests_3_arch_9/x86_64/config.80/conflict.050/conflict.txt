@@ -1,35 +1,30 @@
-LEDS_TRIGGERS: y => no
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m]
-      Reverse dependencies: BT_LEDS [=y] && NET [=y] && BT [=m] && LEDS_CLASS [=m] || CAN_LEDS [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=m] && BROKEN [=n] || MAC80211_LEDS [=y] && NET [=y] && WIRELESS [=y] && MAC80211 [=m] && (LEDS_CLASS [=m]=y || LEDS_CLASS [=m]=MAC80211 [=m]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=m] || IWLEGACY [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=m]=y || LEDS_CLASS [=m]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=m] && !UML && SND [=m] && SND_CTL_LED [=n] || HID_WACOM [=n] && INPUT [=m] && HID [=m] && USB_HID [=n] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=m]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=m] && SPARC64 || HUAWEI_WMI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=m] || THINKPAD_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=m] && (RFKILL [=m] || RFKILL [=m]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y] && DRM [=m] || SYSTEM76_ACPI [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && ACPI [=n] && ACPI_BATTERY [=n] && HWMON [=y] && INPUT [=m] || DELL_LAPTOP [=n] && X86 [=y] && X86_PLATFORM_DEVICES [=y] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=m] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=m] || RFKILL [=m]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=m] && DELL_SMBIOS [=n]
+INTEL_TH_MSU: m => yes
+      Direct dependencies: INTEL_TH [=m]
 
-MTD_CFI_I1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+USB_DWC2: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && HAS_DMA [=y] && (USB [=m] || USB_GADGET [=m]) && HAS_IOMEM [=y]
 
-MEDIA_TUNER_XC4000: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+IP_VS_DH: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=m]
 
-TIFM_CORE: y => mod
-      Direct dependencies: PCI [=y]
-      Reverse dependencies: MMC_TIFM_SD [=m] && MMC [=m] && PCI [=y] || MEMSTICK_TIFM_MS [=y] && MEMSTICK [=y] && PCI [=y]
+VIDEO_BT856: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_LML33 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SND_SOC_MAX98390: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_INTEL_MACH [=n]
+CRYPTO_CURVE25519: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_HISI_HPRE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y]
 
-DVB_NXT6000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIGITV [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=y] && I2C [=y] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
-
-TOUCHSCREEN_BU21013: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
-
-CRC_T10DIF: y => no
+HPET_TIMER: y => no
       Direct dependencies: y
-      Reverse dependencies: BLK_DEV_INTEGRITY_T10 [=y] && BLOCK [=y] && BLK_DEV_INTEGRITY [=y] || TARGET_CORE [=m] && BLOCK [=y] || SCSI_LPFC [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=m] && CPU_FREQ [=y] && SCSI_FC_ATTRS [=m] && (NVME_TARGET_FC [=m] || NVME_TARGET_FC [=m]=n) && (NVME_FC [=n] || NVME_FC [=n]=n) || SCSI_EFCT [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=m] && TARGET_CORE [=m] && SCSI_FC_ATTRS [=m] || SCSI_DEBUG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=m]
 
-ATH5K_PCI: y => no
-      Direct dependencies: NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && !ATH25 && PCI [=y]
-      Reverse dependencies: ATH5K [=m] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_ATH [=y] && (PCI [=y] || ATH25) && MAC80211 [=m] && !ATH25
+INTEGRITY_AUDIT: y => no
+      Direct dependencies: INTEGRITY [=y] && AUDIT [=y]
+      Reverse dependencies: IMA [=y] && INTEGRITY [=y] && AUDIT [=y]
+
+IP6_NF_MATCH_FRAG: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && NETFILTER_ADVANCED [=y]
+
+SENSORS_MAX34440: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 

@@ -1,31 +1,34 @@
-AHCI_MVEBU: m => yes
-      Direct dependencies: ATA [=m] && HAS_DMA [=y] && ARCH_MVEBU [=y]
+AD8366: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y] && GPIOLIB [=y]
 
-FB_TFT_ILI9325: m => yes
-      Direct dependencies: STAGING [=y] && FB_TFT [=m]
+SENSORS_W83L786NG: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-MTD_SPI_NOR: m => yes
-      Direct dependencies: MTD [=m] && SPI_MASTER [=y]
+SLIM_QCOM_CTRL: m => yes
+      Direct dependencies: SLIMBUS [=m] && HAS_IOMEM [=y]
 
-VIRTIO_INPUT: m => yes
-      Direct dependencies: VIRTIO_MENU [=y] && VIRTIO [=m] && INPUT [=y]
+BCM84881_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
 
-ARM64_VA_BITS_47: y => no
-      Direct dependencies: <choice> && ARM64_16K_PAGES [=y]
+FRAMEBUFFER_CONSOLE_DETECT_PRIMARY: y => no
+      Direct dependencies: VT [=y] && FRAMEBUFFER_CONSOLE [=y]
+      Reverse dependencies: DRM_FBDEV_EMULATION [=y] && HAS_IOMEM [=y] && DRM_KMS_HELPER [=y] && (FB [=y]=y || FB [=y]=DRM_KMS_HELPER [=y]) && FRAMEBUFFER_CONSOLE [=y]
 
-CRYPTO_SHA256: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MODULE_SIG_SHA224 [=n] && <choice> || MODULE_SIG_SHA256 [=n] && <choice> || BT [=m] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_AH [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=n] && IPV6 [=n] || CFG80211 [=n] && NET [=y] && WIRELESS [=n] && (RFKILL [=m] || !RFKILL [=m]) && CFG80211_USE_KERNEL_REGDB_KEYS [=n] || USB_RTL8152 [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] || BTRFS_FS [=n] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFSD [=n] && PROC_FS [=y] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=y] || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_SHA256_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT [=y] || CRYPTO_SHA256_PPC_SPE [=n] && CRYPTO [=y] && PPC && SPE || CRYPTO_SHA256_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA256_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DRBG_HASH [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (MIPS || COMPILE_TEST [=n]) || CRYPTO_DEV_ROCKCHIP [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=n]) && OF [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=n]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_CCP [=y] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=n]
+MDIO_BITBANG: m => yes
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=m] && MDIO_BUS [=m]
+      Reverse dependencies: NET_DSA_MICROCHIP_KSZ8863_SMI [=m] && NETDEVICES [=y] && NET_DSA [=m] && NET_DSA_MICROCHIP_KSZ8795 [=m] || FS_ENET_MDIO_FCC [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_FREESCALE [=n] && FS_ENET [=n] && CPM2 || AX88796 [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_8390 [=n] && (ARM || MIPS || SUPERH || ZORRO || COMPILE_TEST [=n]) || SH_ETH [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_RENESAS [=n] && (ARCH_RENESAS [=y] || SUPERH || COMPILE_TEST [=n]) || RAVB [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_RENESAS [=n] && (ARCH_RENESAS [=y] || COMPILE_TEST [=n]) && PTP_1588_CLOCK_OPTIONAL [=y]
 
-I2C_MUX_REG: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && HAS_IOMEM [=y]
+VL53L0X_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CAN_SLCAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && TTY [=y]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-REGULATOR_MAX14577: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MAX14577 [=m]
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 
-MTD_RAW_NAND: m => yes
-      Direct dependencies: MTD [=m]
+NET_DSA_TAG_AR9331: m => no
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_AR9331 [=m] && NETDEVICES [=y] && NET_DSA [=m]
 

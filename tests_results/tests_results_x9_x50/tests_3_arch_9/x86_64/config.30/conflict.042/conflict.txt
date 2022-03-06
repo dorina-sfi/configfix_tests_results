@@ -1,31 +1,28 @@
-NET_DSA_MV88E6XXX: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && PTP_1588_CLOCK_OPTIONAL [=y]
+UHID: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-CRYPTO_CBC: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=m] && NET [=y] && INET [=y] || XFRM_ESP [=y] && NET [=y] && INET [=y] || DM_CRYPT [=n] && MD [=n] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n) || ECRYPT_FS [=y] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=n] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=n] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+USB_NET_RNDIS_HOST: m => yes
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
+      Reverse dependencies: USB_NET_RNDIS_WLAN [=m] && NETDEVICES [=y] && WLAN [=y] && USB [=m] && CFG80211 [=y]
 
-EARLY_PRINTK: y => no
-      Direct dependencies: y
+SND_OXFW: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_FIREWIRE [=y] && FIREWIRE [=m]
 
-CRYPTO_LIB_BLAKE2S: m => yes
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=m])
-      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=y] && NET_CORE [=n] && NET [=y] && INET [=y] && (IPV6 [=y] || !IPV6 [=y])
+VL53L0X_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-RTC_DRV_AS3722: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_AS3722 [=m]
+FB_VT8623: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-BT_MRVL: m => yes
-      Direct dependencies: NET [=y] && BT [=m]
+BATTERY_RX51: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && TWL4030_MADC [=m]
 
-COMEDI_NI_ATMIO: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+INPUT_EVBUG: m => yes
+      Direct dependencies: INPUT [=m]
 
-CRC16: y => no
-      Direct dependencies: y
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=m] && INET [=y] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=y] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROCHIP [=y] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=y] && INPUT_KEYBOARD [=n] && ACPI [=y] && EFI [=n] && SPI [=y] && (X86 [=y] || COMPILE_TEST [=n]) && LEDS_CLASS [=y] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=y] && W1 [=y] || W1_SLAVE_DS2423 [=m] && W1 [=y] || W1_SLAVE_DS2433_CRC [=y] && W1 [=y] && W1_SLAVE_DS2433 [=y] || W1_SLAVE_DS250X [=n] && W1 [=y] || W1_SLAVE_DS28E04 [=m] && W1 [=y] || W1_SLAVE_DS28E17 [=n] && W1 [=y] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=y] && SERIAL_DEV_BUS [=m] || EXT4_FS [=m] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=y]
+HID_TWINHAN: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-CRYPTO_XTS: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=y] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=y]
+CHARGER_LP8788: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_LP8788 [=y] && LP8788_ADC [=m] && IIO [=m]
 

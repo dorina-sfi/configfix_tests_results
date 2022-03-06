@@ -1,22 +1,24 @@
-FB_TFT: m => yes
-      Direct dependencies: STAGING [=y] && FB [=m] && SPI [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+ADXL313_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-GPIO_WCD934X: m => yes
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_WCD934X [=m] && OF_GPIO [=y]
+MXC6255: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-LEDS_LP8860: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && OF [=y]
+ATLAS_EZO_SENSOR: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-LEDS_TLC591XX: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-LEDS_LM36274: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_TI_LMU_COMMON [=m] && MFD_TI_LMU [=y]
+HP03: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-HID_BIGBEN_FF: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && USB_HID [=m] && NEW_LEDS [=y] && LEDS_CLASS [=m]
+XZ_DEC: m => no
+      Direct dependencies: y
+      Reverse dependencies: FW_LOADER_COMPRESS [=n] && FW_LOADER [=y] || MLXFW [=m] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MELLANOX [=y] || SQUASHFS_XZ [=n] && MISC_FILESYSTEMS [=n] && SQUASHFS [=n] || EROFS_FS_ZIP_LZMA [=n] && MISC_FILESYSTEMS [=n] && EROFS_FS_ZIP [=n] || DECOMPRESS_XZ [=n]
 
-CRYPTO_ECDH: m => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m]) || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=n] && 64BIT) && ACPI || CRYPTO_DEV_KEEMBAY_OCS_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_KEEMBAY || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+USB_NET_CDCETHER: y => mod
+      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y]
+      Reverse dependencies: USB_NET_CDC_NCM [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_RNDIS_HOST [=y] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_ZAURUS [=m] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=y] || USB_NET_RNDIS_WLAN [=y] && NETDEVICES [=y] && WLAN [=y] && USB [=y] && CFG80211 [=y]
 

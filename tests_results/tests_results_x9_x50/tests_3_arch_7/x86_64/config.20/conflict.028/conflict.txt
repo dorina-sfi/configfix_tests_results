@@ -1,24 +1,26 @@
-CRYPTO_XTS: m => yes
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: CRYPTO_DEV_FSL_DPAA2_CAAM [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && FSL_MC_DPIO [=n] && NETDEVICES [=n] || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=m] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_FSL_CAAM_CRYPTO_API_QI [=n] && CRYPTO [=m] && CRYPTO_HW [=y] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] && FSL_DPAA [=n] && NET [=n]
+RAS: y => no
+      Direct dependencies: y
+      Reverse dependencies: MEMORY_FAILURE [=y] && MMU [=y] && ARCH_SUPPORTS_MEMORY_FAILURE [=y] || PCIEAER [=n] && PCI [=n] && PCIEPORTBUS [=n]
 
-CRYPTO_SERPENT: m => no
-      Direct dependencies: CRYPTO [=m]
-      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=n] && CRYPTO [=m] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=m] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=m] && CRYPTO [=m] && X86 [=y] && 64BIT [=y]
+HID_A4TECH: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-SND_SOC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m]
+CAN_MCP251X: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && SPI [=y]
 
-KXSD9: m => yes
-      Direct dependencies: IIO [=m]
+NF_REJECT_IPV4: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_REJECT_IPV4 [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NF_TABLES_IPV4 [=n] || IP_NF_TARGET_REJECT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && IP_NF_FILTER [=m]
 
-CHARLCD: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=m] && AUXDISPLAY [=y] && I2C [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-GP2AP020A00F: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=y] && X86_TSC [=y] && PCI [=n] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=y] && PCI [=n] || X86_AMD_PLATFORM_DEVICE [=n] && ACPI [=y] || MFD_INTEL_LPSS [=m] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 [=y] && PCI [=n]
 
-AD5110: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+HID_LOGITECH_HIDPP: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m] && HID_LOGITECH [=m]
+      Reverse dependencies: HID_LOGITECH_DJ [=n] && INPUT [=y] && HID [=m] && USB_HID [=n] && HIDRAW [=y] && HID_LOGITECH [=m]
 

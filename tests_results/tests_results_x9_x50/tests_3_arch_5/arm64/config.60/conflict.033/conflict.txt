@@ -1,17 +1,18 @@
-CRYPTO_DH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=y] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n]
+IOMMU_DEFAULT_DMA_LAZY: y => no
+      Direct dependencies: <choice>
 
-COMEDI_PCM3724: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+PPP: y => no
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: IPWIRELESS [=y] && PCMCIA [=y] && NETDEVICES [=y] && TTY [=y]
 
-CLK_R8A77980: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A77980 [=y]
+ARM64_64K_PAGES: y => no
+      Direct dependencies: <choice>
 
-IO_URING: y => no
-      Direct dependencies: y
+SCHEDSTATS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && PROC_FS [=y]
+      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86)
 
-GPIO_WM8994: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_WM8994 [=m]
+FUNCTION_TRACER: y => no
+      Direct dependencies: FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
+      Reverse dependencies: STACK_TRACER [=y] && FTRACE [=y] && HAVE_FUNCTION_TRACER [=y]
 

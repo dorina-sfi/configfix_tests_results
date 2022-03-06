@@ -1,30 +1,31 @@
-STRICT_KERNEL_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
+VIDEO_VPX3220: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_DC30 [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+FXLS8962AF_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
+
+SND_SOC_MAX9867: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+
+IIO_BUFFER_CB: m => yes
+      Direct dependencies: IIO [=m] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=m] && INPUT_JOYSTICK [=n] && IIO [=m] || TOUCHSCREEN_ADC [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=n] && IIO [=m] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=m] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=m] && STM32_DFSDM_ADC [=n] || LMP91000 [=m] && IIO [=m] && I2C [=y]
+
+VIDEO_CCS: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m] && HAVE_CLK [=y]
+
+USB: m => no
+      Direct dependencies: USB_SUPPORT [=y] && USB_ARCH_HAS_HCD [=y]
+      Reverse dependencies: MOUSE_APPLETOUCH [=m] && INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_BCM5974 [=m] && INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || MOUSE_SYNAPTICS_USB [=m] && INPUT [=m] && INPUT_MOUSE [=y] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_XPAD [=n] && INPUT [=m] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || JOYSTICK_PXRC [=n] && INPUT [=m] && INPUT_JOYSTICK [=n] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_ACECAD [=m] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_AIPTEK [=m] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_HANWANG [=n] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_KBTAB [=n] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TABLET_USB_PEGASUS [=m] && INPUT [=m] && INPUT_TABLET [=y] && USB_ARCH_HAS_HCD [=y] || TOUCHSCREEN_USB_COMPOSITE [=n] && INPUT [=m] && INPUT_TOUCHSCREEN [=n] && USB_ARCH_HAS_HCD [=y] || INPUT_ATI_REMOTE2 [=m] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_KEYSPAN_REMOTE [=n] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_POWERMATE [=m] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_YEALINK [=n] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || INPUT_CM109 [=n] && INPUT [=m] && INPUT_MISC [=y] && USB_ARCH_HAS_HCD [=y] || USB_PULSE8_CEC [=n] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=m] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
+
+VIDEO_TVAUDIO: m => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_BT848 [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && VIDEO_V4L2 [=m] && RC_CORE [=m] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+LEDS_RT8515: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && GPIOLIB [=y] && (V4L2_FLASH_LED_CLASS [=m] || !V4L2_FLASH_LED_CLASS [=m])
 
 SENSORS_Q54SJ108A2: m => yes
       Direct dependencies: HWMON [=y] && PMBUS [=m]
-
-NETFILTER_XT_TARGET_TCPOPTSTRIP: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && (IP_NF_MANGLE [=m] || IP6_NF_MANGLE [=n]) && NETFILTER_ADVANCED [=y]
-
-SND_SOC_MAX98357A: y => no
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && GPIOLIB [=y]
-      Reverse dependencies: SND_SOC_AMD_CZ_DA7219MX98357_MACH [=m] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=m] && I2C [=y] && GPIOLIB [=y] && ACPI [=y] || SND_SOC_AMD_RV_RT5682_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP3x [=n] && I2C [=y] && CROS_EC [=n] && GPIOLIB [=y] || SND_SOC_MT8183_MT6358_TS3A227E_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y] && GPIOLIB [=y] && SND_SOC_MT8183 [=n] || SND_SOC_MT8183_DA7219_MAX98357A [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_MT8183 [=n] && I2C [=y] && GPIOLIB [=y] || SND_SOC_RK3399_GRU_SOUND [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_ROCKCHIP [=n] && I2C [=y] && GPIOLIB [=y] && HAVE_CLK [=y] && SPI [=y] || SND_SOC_AMD_MACH_COMMON [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP_COMMON [=n] && X86 [=y] && PCI [=n] && I2C [=y] || SND_SOC_INTEL_DA7219_MAX98357A_GENERIC [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] || SND_SOC_INTEL_SKL_NAU88L25_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_INTEL_SKL [=n] && I2C [=y] && ACPI [=y] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_GLK_RT5682_MAX98357A_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && SND_SOC_SOF_GEMINILAKE [=n] && I2C [=y] && ACPI [=y] && GPIOLIB [=y] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] || SND_SOC_INTEL_SOF_CS42L42_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_INTEL_SOF_NAU8825_MACH [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_MACH [=n] && (SND_SOC_SOF_HDA_LINK [=n] || SND_SOC_SOF_BAYTRAIL [=n]) && I2C [=y] && ACPI [=y] && GPIOLIB [=y] && SND_HDA_CODEC_HDMI [=n] && SND_SOC_SOF_HDA_AUDIO_CODEC [=n] && (MFD_INTEL_LPSS [=n] || COMPILE_TEST [=n]) || SND_SOC_STORM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=n] && GPIOLIB [=y] || SND_SOC_SC7180 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_QCOM [=n] && I2C [=y] && GPIOLIB [=y]
-
-SERIAL_OF_PLATFORM: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && OF [=y]
-
-SQUASHFS_DECOMP_SINGLE: y => no
-      Direct dependencies: <choice>
-
-CRYPTO_CRCT10DIF: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRC_T10DIF [=y]
-
-SND_SOC_AMD_CZ_RT5645_MACH: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_AMD_ACP [=m] && I2C [=y]
-
-I2C_ALGOPCA: m => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA [=n]
 

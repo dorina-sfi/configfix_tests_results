@@ -1,14 +1,16 @@
-USB_SERIAL_IR: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-SENSORS_BPA_RS600: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+STACK_VALIDATION: y => no
+      Direct dependencies: HAVE_STACK_VALIDATION [=y]
+      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=y]) || UNWINDER_ORC [=n] && <choice> && X86_64 [=y]
 
-ZBUD: y => mod
-      Direct dependencies: ZPOOL [=y]
-      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_ZBUD [=y] && <choice>
+CRYPTO_842: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_842 [=n] && <choice> || PSTORE_842_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
 
-F2FS_FS_XATTR: y => no
-      Direct dependencies: BLOCK [=y] && F2FS_FS [=m]
-      Reverse dependencies: F2FS_FS [=m] && BLOCK [=y] && FS_ENCRYPTION [=y]
+DEBUG_IRQFLAGS: y => no
+      Direct dependencies: y
+      Reverse dependencies: DEBUG_LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCKDEP [=y]
 

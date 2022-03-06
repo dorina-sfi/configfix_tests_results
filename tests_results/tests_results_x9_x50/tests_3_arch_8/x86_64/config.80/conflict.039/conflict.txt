@@ -1,25 +1,27 @@
-SENSORS_MLXREG_FAN: m => yes
-      Direct dependencies: HWMON [=m] && MELLANOX_PLATFORM [=y]
+IEEE802154_6LOWPAN: m => yes
+      Direct dependencies: NET [=y] && IEEE802154 [=y] && 6LOWPAN [=m]
 
-HID_SENSOR_ALS: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+SYSCTL_KUNIT_TEST: y => mod
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
-HID_ZEROPLUS: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+CAN_PEAK_PCIEFD: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && PCI [=y]
 
-SND_SOC_PCM179X_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+SENSORS_TPS40422: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 
-HID_SENSOR_PROX: m => yes
-      Direct dependencies: IIO [=y] && HID_SENSOR_HUB [=m]
+VIDEO_VP27SMPX: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m]
 
-DEBUG_WW_MUTEX_SLOWPATH: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+NETFILTER_XT_MARK: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m]
+      Reverse dependencies: NETFILTER_XT_TARGET_MARK [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=n] || NETFILTER_XT_MATCH_MARK [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=n]
 
-SENSORS_AXI_FAN_CONTROL: m => yes
-      Direct dependencies: HWMON [=m]
+WILCO_EC_TELEMETRY: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && WILCO_EC [=m]
 
-HID_ALPS: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=n] && MTD [=y] && HAS_IOMEM [=y]
 

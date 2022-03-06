@@ -1,20 +1,19 @@
-NET_TEAM_MODE_ACTIVEBACKUP: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_CORE [=y] && NET_TEAM [=m]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-VIDEO_CX88_BLACKBIRD: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && PCI [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=m]
+CROS_EC_LIGHTBAR: m => yes
+      Direct dependencies: CHROME_PLATFORMS [=y] && MFD_CROS_EC_DEV [=m]
 
-MTK_SMI: m => yes
-      Direct dependencies: MEMORY [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: DRM_MEDIATEK [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARCH_MEDIATEK [=y] || ARM && COMPILE_TEST [=n]) && COMMON_CLK [=y] && HAVE_ARM_SMCCC [=y] && OF [=y] && MTK_MMSYS [=y] || MTK_IOMMU [=m] && IOMMU_SUPPORT [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) || MTK_IOMMU_V1 [=n] && IOMMU_SUPPORT [=y] && ARM && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n])
+MTD_SLRAM: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
 
-KUNIT_EXAMPLE_TEST: m => yes
-      Direct dependencies: KUNIT [=y]
+SENSORS_IBMAEM: m => yes
+      Direct dependencies: HWMON [=m] && IPMI_HANDLER [=y]
 
-RAPIDIO_TSI57X: m => yes
-      Direct dependencies: RAPIDIO [=m]
+IIO_TRIGGER: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_TRIGGERED_EVENT [=n] && IIO [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || AD7266 [=n] && IIO [=y] && SPI_MASTER [=n] || AD7768_1 [=n] && IIO [=y] && SPI [=n] || HID_SENSOR_IIO_TRIGGER [=n] && IIO [=y] && HID_SENSOR_HUB [=n] && HID_SENSOR_IIO_COMMON [=n] && IIO_BUFFER [=y] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=m]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+SENSORS_LTC2945: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

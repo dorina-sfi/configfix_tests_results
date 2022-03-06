@@ -1,26 +1,25 @@
-CRYPTO_LIB_POLY1305: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+HD44780_COMMON: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=m] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
 
-MTD_CFI_I2: y => no
-      Direct dependencies: MTD [=y]
+DEBUG_FS_ALLOW_NONE: y => no
+      Direct dependencies: <choice>
 
-CPU_IDLE_GOV_MENU: y => no
-      Direct dependencies: CPU_IDLE [=y]
-      Reverse dependencies: CPU_IDLE [=y] && (NO_HZ [=y] || NO_HZ_IDLE [=y]) && !CPU_IDLE_GOV_TEO [=n]
+XILLYBUS_OF: m => yes
+      Direct dependencies: XILLYBUS [=m] && OF [=y] && HAS_DMA [=y]
 
-USB_CHIPIDEA_IMX: y => no
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+IPV6_VTI: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=m]
 
-GPIO_GENERIC_PLATFORM: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: MFD_VEXPRESS_SYSREG [=y] && HAS_IOMEM [=y] && VEXPRESS_CONFIG [=y] && GPIOLIB [=y]
+USB_EHCI_ROOT_HUB_TT: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_EHCI_HCD [=m]
+      Reverse dependencies: USB_EHCI_FSL [=m] && USB_SUPPORT [=y] && USB [=m] && USB_EHCI_HCD [=m] || USB_EHCI_MV [=m] && USB_SUPPORT [=y] && USB [=m] && USB_EHCI_HCD [=m] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=y]) || USB_CHIPIDEA_HOST [=n] && USB_SUPPORT [=y] && USB_CHIPIDEA [=n] && USB_EHCI_HCD [=m]
 
-INPUT: y => no
-      Direct dependencies: y
-      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && MMU [=y] && ACPI [=y] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=n] && X86 && PCI [=n] && ACPI [=y] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=n] && X86 && MMU [=y] && ACPI [=y]
+CRYPTO_POLY1305: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y]
 
-EXT4_FS: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: EXT3_FS [=y] && BLOCK [=y]
+PARPORT_PANEL: m => yes
+      Direct dependencies: AUXDISPLAY [=y] && PARPORT [=m]
+      Reverse dependencies: PANEL [=m] && PARPORT [=m]
 

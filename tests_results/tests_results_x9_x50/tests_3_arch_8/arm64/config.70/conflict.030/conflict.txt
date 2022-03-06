@@ -1,25 +1,32 @@
-DRM_PANEL_OLIMEX_LCD_OLINUXINO: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && I2C [=m] && BACKLIGHT_CLASS_DEVICE [=y]
+USB_TEGRA_PHY: y => no
+      Direct dependencies: USB_SUPPORT [=y] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: USB_CHIPIDEA [=y] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=y] || USB_EHCI_HCD [=y] && !USB_GADGET [=y] || !USB_EHCI_HCD [=y] && USB_GADGET [=y]) && HAS_DMA [=y] && ARCH_TEGRA [=y]
 
-SENSORS_MLXREG_FAN: m => yes
-      Direct dependencies: HWMON [=m] && MELLANOX_PLATFORM [=y]
+CLK_R8A774E1: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A774E1 [=y]
 
-CRYPTO_DEV_ATMEL_ECC: m => yes
-      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=m]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-LEDS_AN30259A: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m] && OF [=y]
+GPIO_CDEV: y => no
+      Direct dependencies: GPIOLIB [=y]
+      Reverse dependencies: GPIO_SYSFS [=y] && GPIOLIB [=y] && SYSFS [=y]
 
-IMX_GPCV2_PM_DOMAINS: y => no
-      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=y] && OF [=y]) && PM [=y]
-      Reverse dependencies: ARCH_MXC [=y]
+CLK_RCAR_CPG_LIB: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A779A0 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-CHARGER_BQ24735: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+POWER_RESET: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
 
-MMC_SUNXI: m => yes
-      Direct dependencies: MMC [=m] && (ARCH_SUNXI [=y] || COMPILE_TEST [=y])
+TMPFS: y => no
+      Direct dependencies: SHMEM [=y]
+      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=y] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=y] || QCOM_OCMEM [=y]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
 
-CRYPTO_DEV_ATMEL_ECC: m => yes
-      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && I2C [=m]
+COMMON_CLK: y => no
+      Direct dependencies: !HAVE_LEGACY_CLK [=n]
+      Reverse dependencies: ARM64 [=y] || ARCH_MESON [=y] || MFD_INTEL_LPSS [=n] && HAS_IOMEM [=y] || PMC_ATOM [=n] && X86 && PCI [=n]
 

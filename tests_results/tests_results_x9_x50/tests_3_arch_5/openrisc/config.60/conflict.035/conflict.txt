@@ -1,17 +1,19 @@
-VIDEO_DW9768: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m]
+MEDIA_SDR_SUPPORT: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y]
 
-CRYPTO_LIB_CHACHA: y => mod
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=y] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=y] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 
-TOUCHSCREEN_CYTTSP4_I2C: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_CYTTSP4_CORE [=m] && I2C [=y]
+MTD_JEDECPROBE: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_TS5500 [=y] && MTD [=y] && HAS_IOMEM [=y] && (TS5500 || COMPILE_TEST [=y])
 
-CAN_SOFTING: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && HAS_IOMEM [=y]
+SND_DYNAMIC_MINORS: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y]
+      Reverse dependencies: SND_HDA_CODEC_HDMI [=y] && SOUND [=y] && !UML && SND [=y] && SND_HDA [=y] || SND_SOC_TOPOLOGY [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
 
-CRC4: y => no
-      Direct dependencies: y
-      Reverse dependencies: FSI [=m] && OF [=y] || FSI_MASTER_GPIO [=m] && FSI [=m] && GPIOLIB [=y]
+CGROUP_NET_CLASSID: y => no
+      Direct dependencies: NET [=y] && CGROUPS [=y]
+      Reverse dependencies: NETFILTER_XT_MATCH_CGROUP [=y] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && CGROUPS [=y] || NET_CLS_CGROUP [=n] && NET [=y] && NET_SCHED [=n] && CGROUPS [=y]
 

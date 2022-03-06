@@ -1,23 +1,23 @@
-INTEL_TH_MSU: m => yes
-      Direct dependencies: INTEL_TH [=m]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-SENSORS_MAX1619: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+OVERLAY_FS_REDIRECT_DIR: y => no
+      Direct dependencies: OVERLAY_FS [=y]
+      Reverse dependencies: OVERLAY_FS_METACOPY [=y] && OVERLAY_FS [=y]
 
-MIGRATION: y => no
-      Direct dependencies: (NUMA || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=n] || CMA [=y]) && MMU [=y]
-      Reverse dependencies: COMPACTION [=n] && MMU [=y] || CMA [=y] && MMU [=y]
+MTD_CFI_NOSWAP: y => no
+      Direct dependencies: <choice> && (!ARCH_IXP4XX || CPU_BIG_ENDIAN [=y])
 
-DRM_VGEM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
-      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n]
+KUNIT_EXAMPLE_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-LEDS_LP55XX_COMMON: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (LEDS_CLASS_MULTICOLOR [=n] || !LEDS_CLASS_MULTICOLOR [=n]) && OF [=y] && I2C [=y]
+RTC_LIB_KUNIT_TEST: y => no
+      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
 
-SENSORS_W83627HF: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+EXT4_KUNIT_TESTS: y => no
+      Direct dependencies: BLOCK [=y] && EXT4_FS [=y] && KUNIT [=y]
 
-COMMON_CLK_RK808: m => yes
-      Direct dependencies: COMMON_CLK [=y] && MFD_RK808 [=m]
+IMA_DEFAULT_HASH_SHA1: y => no
+      Direct dependencies: <choice> && CRYPTO_SHA1 [=y]=y
 

@@ -1,18 +1,17 @@
-RTC_DRV_S5M: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && (MFD_SEC_CORE [=m] || COMPILE_TEST [=n])
+B53_MDIO_DRIVER: m => yes
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=y] && B53 [=m]
 
-EXTCON: y => mod
-      Direct dependencies: y
-      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=y] || !RC_CORE [=y]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=n] && (USB_EHCI_HCD [=n] && USB_GADGET [=n] || USB_EHCI_HCD [=n] && !USB_GADGET [=n] || !USB_EHCI_HCD [=n] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=n] && USB_SUPPORT [=n] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=n])
+CHARGER_MT6360: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && MFD_MT6360 [=m] && REGULATOR [=y]
 
-DRM_AMDGPU_USERPTR: y => no
-      Direct dependencies: HAS_IOMEM [=y] && DRM_AMDGPU [=m] && MMU [=y]
-      Reverse dependencies: HSA_AMD [=y] && HAS_IOMEM [=y] && DRM_AMDGPU [=m] && (X86_64 [=y] || ARM64 || PPC64)
+ZBUD: m => yes
+      Direct dependencies: ZPOOL [=m]
+      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_ZBUD [=n] && <choice>
 
-ALTERA_PR_IP_CORE_PLAT: m => yes
-      Direct dependencies: FPGA [=m] && ALTERA_PR_IP_CORE [=m] && OF [=y] && HAS_IOMEM [=y]
+CRYPTO_ECHAINIV: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=m] && NET [=y] && INET [=y]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+IPMI_SSIF: m => yes
+      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y]
 

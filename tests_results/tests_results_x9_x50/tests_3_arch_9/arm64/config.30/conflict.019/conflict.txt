@@ -1,27 +1,30 @@
-DRM_SUN4I_BACKEND: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM_SUN4I [=m]
+CRYPTO_LIB_CHACHA: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=y] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=y]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=y])
 
-MFD_SPMI_PMIC: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && OF [=y] && SPMI [=m]
+SERIAL_8250_DMA: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && DMADEVICES [=y]
 
-VIDEO_OV6650: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+SCTP_COOKIE_HMAC_MD5: y => no
+      Direct dependencies: NET [=y] && IP_SCTP [=y]
+      Reverse dependencies: SCTP_DEFAULT_COOKIE_HMAC_MD5 [=y] && <choice>
 
-DRM_RCAR_CMM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y] && DRM_RCAR_DU [=m]
+LEDS_TRIGGERS: y => no
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y]
+      Reverse dependencies: BT_LEDS [=n] && NET [=y] && BT [=n] && LEDS_CLASS [=y] || CAN_LEDS [=n] && NET [=y] && CAN [=n] && CAN_DEV [=n] && LEDS_CLASS [=y] && BROKEN [=n] || MAC80211_LEDS [=n] && NET [=y] && WIRELESS [=y] && MAC80211 [=y] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=MAC80211 [=y]) || ADB_PMU_LED_DISK [=n] && MACINTOSH_DRIVERS [=n] && ADB_PMU_LED [=n] && LEDS_CLASS [=y] || IWLEGACY [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] || IWLWIFI_LEDS [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_INTEL [=n] && IWLWIFI [=n] && (LEDS_CLASS [=y]=y || LEDS_CLASS [=y]=IWLWIFI [=n]) && (IWLMVM [=n] || IWLDVM [=n]) || SND_CTL_LED [=n] && SOUND [=y] && !UML && SND [=n] && SND_CTL_LED [=n] || HID_WACOM [=y] && INPUT [=y] && HID [=y] && USB_HID [=y] || LEDS_COBALT_RAQ [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y]=y && (MIPS_COBALT || COMPILE_TEST [=n]) || LEDS_SUNFIRE [=n] && NEW_LEDS [=y] && LEDS_CLASS [=y] && SPARC64 || HUAWEI_WMI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI_BATTERY [=n] && ACPI_WMI [=n] && INPUT [=y] || THINKPAD_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && INPUT [=y] && (RFKILL [=y] || RFKILL [=y]=n) && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && BACKLIGHT_CLASS_DEVICE [=y] && I2C [=y] && DRM [=y] || SYSTEM76_ACPI [=n] && X86 && X86_PLATFORM_DEVICES [=n] && ACPI [=n] && ACPI_BATTERY [=n] && HWMON [=y] && INPUT [=y] || DELL_LAPTOP [=n] && X86 && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && DMI [=n] && BACKLIGHT_CLASS_DEVICE [=y] && (ACPI_VIDEO [=n] || ACPI_VIDEO [=n]=n) && (RFKILL [=y] || RFKILL [=y]=n) && (DELL_WMI [=n] || DELL_WMI [=n]=n) && SERIO_I8042 [=n] && DELL_SMBIOS [=n]
 
-MTD_NAND_MESON: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (ARCH_MESON [=n] || COMPILE_TEST [=y])
+PROC_FS: y => no
+      Direct dependencies: y
 
-CHARLCD_BL_FLASH: y => no
+USB_G_DBGP_SERIAL: y => no
+      Direct dependencies: <choice> && USB_G_DBGP [=y]
+
+LTO_NONE: y => no
       Direct dependencies: <choice>
 
-INTERCONNECT_QCOM_SM8250: m => yes
-      Direct dependencies: INTERCONNECT [=y] && INTERCONNECT_QCOM_RPMH_POSSIBLE [=m]
+IRQ_UNIPHIER_AIDET: y => no
+      Direct dependencies: ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]
 
-SND_VIRTIO: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && VIRTIO [=y]
-
-DRM_PANEL_SAMSUNG_S6E63J0X03: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+ZONE_DMA: y => no
+      Direct dependencies: y
 

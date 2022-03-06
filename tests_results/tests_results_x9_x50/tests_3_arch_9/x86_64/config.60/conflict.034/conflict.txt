@@ -1,34 +1,27 @@
-LIST_KUNIT_TEST: y => no
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
-
-ENCRYPTED_KEYS: y => no
-      Direct dependencies: KEYS [=y]
-      Reverse dependencies: EVM [=y] && INTEGRITY [=y]
-
-SHMEM: y => no
-      Direct dependencies: MMU [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 [=y] && PCI [=n] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
-
-CRYPTO_DEFLATE: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=y] && MISC_FILESYSTEMS [=y] && MTD_UBI [=y] && UBIFS_FS_ZLIB [=y] || PSTORE_DEFLATE_COMPRESS [=y] && MISC_FILESYSTEMS [=y] && PSTORE [=y]
-
-MQ_IOSCHED_DEADLINE: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: BLK_DEV_ZONED [=y] && BLOCK [=y]
-
-64BIT: y => no
+VM_EVENT_COUNTERS: y => no
       Direct dependencies: y
 
-CRYPTO_CHACHA20: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=n] && CRYPTO [=y] || CRYPTO_ADIANTUM [=y] && CRYPTO [=y]
+STM_PROTO_BASIC: m => yes
+      Direct dependencies: STM [=m]
 
-W1_SLAVE_DS2780: y => no
-      Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+PREEMPT_NONE: y => no
+      Direct dependencies: <choice>
 
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+ALLOW_DEV_COREDUMP: y => no
+      Direct dependencies: y
+
+HID_PICOLCD_LEDS: y => no
+      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=LEDS_CLASS [=m] || LEDS_CLASS [=m]=y)
+
+SERIAL_8250_MEN_MCB: m => yes
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && MCB [=y] && SERIAL_8250 [=m]
+
+LEDS_TLC591XX: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+
+KEYBOARD_TM2_TOUCHKEY: m => yes
+      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=y] && LEDS_CLASS [=m]
+
+SYNCLINK_CS: m => yes
+      Direct dependencies: PCMCIA [=m] && TTY [=y]
 

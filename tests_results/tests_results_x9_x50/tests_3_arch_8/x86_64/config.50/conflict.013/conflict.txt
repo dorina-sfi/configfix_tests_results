@@ -1,30 +1,27 @@
-LCD_CLASS_DEVICE: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: FB_CLPS711X [=y] && HAS_IOMEM [=y] && FB [=y] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=y] && FB [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC || COMPILE_TEST [=y])
+64BIT: y => no
+      Direct dependencies: y
 
-GPIO_SYSCON: y => no
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF [=y]
-      Reverse dependencies: GPIO_SAMA5D2_PIOBU [=y] && GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_SYSCON [=y] && OF_GPIO [=y]
+RTC_DRV_PCF8563: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
 
-HZ_PERIODIC: y => no
-      Direct dependencies: <choice>
+SND_ISA: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && (ISA [=n] || COMPILE_TEST [=y]) && ISA_DMA_API [=y] && !M68K
+      Reverse dependencies: RADIO_MIROPCM20 [=m] && MEDIA_SUPPORT [=m] && RADIO_ADAPTERS [=y] && V4L_RADIO_ISA_DRIVERS [=y] && (ISA [=n] || COMPILE_TEST [=y]) && ISA_DMA_API [=y] && VIDEO_V4L2 [=m] && SND [=y]
 
-I2C_SLAVE: y => no
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_AT91_SLAVE_EXPERIMENTAL [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_AT91 [=n] || I2C_AXXIA [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_AXXIA || COMPILE_TEST [=y]) || I2C_BCM_IPROC [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y]) || I2C_DESIGNWARE_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_DESIGNWARE_CORE [=y] || I2C_EMEV2 [=y] && I2C [=y] && HAS_IOMEM [=y] && HAVE_CLK [=y] || I2C_IMX [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_MXC || ARCH_LAYERSCAPE || COLDFIRE) || I2C_MLXBF [=n] && I2C [=y] && HAS_IOMEM [=y] && MELLANOX_PLATFORM [=n] && ARM64 || I2C_PXA_SLAVE [=n] && I2C [=y] && HAS_IOMEM [=y] && I2C_PXA [=y] && !X86_32 [=n] || I2C_STM32F7 [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_STM32 || COMPILE_TEST [=y]) || I2C_RCAR [=y] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=y])
+THERMAL_DEFAULT_GOV_POWER_ALLOCATOR: y => no
+      Direct dependencies: <choice> && THERMAL_GOV_POWER_ALLOCATOR [=y]
 
-LEGACY_VSYSCALL_EMULATE: y => no
-      Direct dependencies: <choice>
+SECURITY_TOMOYO_OMIT_USERSPACE_LOADER: y => no
+      Direct dependencies: SECURITY_TOMOYO [=y]
+      Reverse dependencies: SECURITY_TOMOYO_INSECURE_BUILTIN_SETTING [=y] && SECURITY_TOMOYO [=y]
 
-PHY_DA8XX_USB: y => no
-      Direct dependencies: ARCH_DAVINCI_DA8XX || COMPILE_TEST [=y]
-      Reverse dependencies: USB_OHCI_HCD_DAVINCI [=y] && USB_SUPPORT [=y] && USB [=y] && (ARCH_DAVINCI_DA8XX || COMPILE_TEST [=y]) && USB_OHCI_HCD [=y] || USB_MUSB_DA8XX [=n] && USB_SUPPORT [=y] && USB_MUSB_HDRC [=n] && ARCH_DAVINCI_DA8XX && NOP_USB_XCEIV [=n]
+REGULATOR_DA9121: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
 
-CRYPTO_CBC: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=n] && NET [=n] && INET [=n] || XFRM_ESP [=n] && NET [=n] && INET [=n] || DM_CRYPT [=y] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=y] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=y] || CRYPTO_DEV_CCREE [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
+RTC_DRV_MAX77686: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m] && (MFD_MAX77686 [=n] || MFD_MAX77620 [=n] || COMPILE_TEST [=y])
 
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+I2C: m => no
+      Direct dependencies: y
+      Reverse dependencies: X86_INTEL_MID [=n] && X86_EXTENDED_PLATFORM [=n] && X86_PLATFORM_DEVICES [=y] && PCI [=y] && (X86_64 [=y] || PCI_GOANY [=n] && X86_32 [=n]) && X86_IO_APIC [=y] || CAN_PEAK_PCIEC [=n] && NET [=y] && CAN [=y] && CAN_DEV [=y] && CAN_SJA1000 [=n] && CAN_PEAK_PCI [=n] || I3C [=n] || IGB [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_INTEL [=n] && PCI [=y] && PTP_1588_CLOCK_OPTIONAL [=m] || SFC_FALCON [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SOLARFLARE [=n] && PCI [=y] || MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=m] && HAS_IOMEM [=y] || DRM [=m] && HAS_IOMEM [=y] && (AGP [=m] || AGP [=m]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || FB_DDC [=n] && HAS_IOMEM [=y] && FB [=n] || SND_AOA_ONYX [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || SND_AOA_TAS [=n] && SOUND [=y] && !UML && SND [=y] && SND_AOA [=n] || ARCH_R8A7790 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7793 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || ARCH_R8A7791 [=n] && SOC_RENESAS [=n] && ARM && ARCH_RENESAS || PHY_EXYNOS5250_SATA [=n] && SOC_EXYNOS5250 && HAS_IOMEM [=y] && OF [=y]
 

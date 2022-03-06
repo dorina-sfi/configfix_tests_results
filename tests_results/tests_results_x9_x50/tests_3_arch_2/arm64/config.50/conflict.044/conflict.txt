@@ -1,7 +1,7 @@
-PROC_SYSCTL: y => no
-      Direct dependencies: PROC_FS [=y]
+HW_RANDOM_IMX_RNGC: m => yes
+      Direct dependencies: HW_RANDOM [=m] && HAS_IOMEM [=y] && HAVE_CLK [=y] && (SOC_IMX25 || SOC_IMX6SL || SOC_IMX6SLL || SOC_IMX6UL || COMPILE_TEST [=y])
 
-TMPFS: y => no
-      Direct dependencies: SHMEM [=y]
-      Reverse dependencies: DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=y] && X86 && PCI [=n] || DRM_MSM [=y] && HAS_IOMEM [=y] && DRM [=y] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=y] || QCOM_LLCC [=y]=n) && (QCOM_COMMAND_DB [=y] || QCOM_COMMAND_DB [=y]=n) || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y]
+CRYPTO_LIB_BLAKE2S: m => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=n] || !CRYPTO_ARCH_HAVE_LIB_BLAKE2S [=n])
+      Reverse dependencies: WIREGUARD [=m] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=m] || !IPV6 [=m])
 

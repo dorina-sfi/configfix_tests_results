@@ -1,19 +1,22 @@
-MEDIA_SDR_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+PCI_MSI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: AMD_IOMMU [=y] && IOMMU_SUPPORT [=y] && X86_64 [=y] && PCI [=y] && ACPI [=y] && HAVE_CMPXCHG_DOUBLE [=y] || ARM_GIC_V2M [=n] && PCI [=y] || ARMADA_370_XP_IRQ [=n] && PCI [=y] || ALPINE_MSI [=n] && PCI [=y] || LOONGSON_PCH_MSI [=n] && (MACH_LOONGSON64 || COMPILE_TEST [=n]) && PCI [=y]
 
-RPMSG_NS: y => mod
-      Direct dependencies: RPMSG [=y]
-      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
+DEBUG_INFO_DWARF5: y => no
+      Direct dependencies: <choice> && (!CC_IS_CLANG [=n] || CC_IS_CLANG [=n] && (AS_IS_LLVM [=n] || AS_IS_GNU [=y] && AS_VERSION [=23400]>=23502)) && !DEBUG_INFO_BTF [=n]
 
-DEBUG_MEMORY_INIT: y => no
+SND_SOC_INTEL_SKL: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
+      Reverse dependencies: SND_SOC_INTEL_SKYLAKE [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_INTEL_SST_TOPLEVEL [=y] && PCI [=y] && ACPI [=y] && COMMON_CLK [=y]
+
+BT_HCIUART_H4: y => no
+      Direct dependencies: NET [=y] && BT [=y] && BT_HCIUART [=y]
+      Reverse dependencies: BT_HCIUART_NOKIA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && GPIOLIB [=y] && PM [=y] || BT_HCIUART_ATH3K [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_LL [=n] && NET [=y] && BT [=y] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_INTEL [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && GPIOLIB [=y] || BT_HCIUART_BCM [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] && (!ACPI [=y] || SERIAL_DEV_CTRL_TTYPORT [=y]) && GPIOLIB [=y] || BT_HCIUART_QCA [=n] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y] || BT_HCIUART_AG6XX [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] || BT_HCIUART_MRVL [=y] && NET [=y] && BT [=y] && BT_HCIUART [=y] && BT_HCIUART_SERDEV [=y]
+
+64BIT: y => no
       Direct dependencies: y
 
-COMEDI_8255_PCI: m => yes
-      Direct dependencies: COMEDI [=y] && COMEDI_PCI_DRIVERS [=m]
-
-DRM_PANEL_RASPBERRYPI_TOUCHSCREEN: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && DRM_MIPI_DSI [=y]
-
-HID_PICOLCD_FB: y => no
-      Direct dependencies: INPUT [=y] && HID [=y] && HID_PICOLCD [=m] && (HID_PICOLCD [=m]=FB [=y] || FB [=y]=y)
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=y] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
 

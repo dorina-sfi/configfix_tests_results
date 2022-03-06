@@ -1,22 +1,23 @@
-COMEDI_USB_DRIVERS: m => yes
-      Direct dependencies: COMEDI [=m] && USB [=m]
+MDIO_XGENE: m => no
+      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && (ARCH_XGENE || COMPILE_TEST [=y])
+      Reverse dependencies: NET_XGENE [=m] && NETDEVICES [=y] && ETHERNET [=y] && (ARCH_XGENE || COMPILE_TEST [=y])
 
-SENSORS_LTC4245: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DW_I3C_MASTER: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y] && !ALPHA && !PARISC
 
-SND_HDA_CODEC_CIRRUS: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_HDA [=m]
+PSTORE_LZ4HC_COMPRESS: m => yes
+      Direct dependencies: MISC_FILESYSTEMS [=y] && PSTORE [=m]
 
-FB_OMAP2: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB [=m] && DRM_OMAP [=n]=n && GPIOLIB [=y]
+CRC16: y => mod
+      Direct dependencies: y
+      Reverse dependencies: BT [=m] && NET [=y] && !S390 && (RFKILL [=n] || !RFKILL [=n]) || BATMAN_ADV_BLA [=n] && NET [=y] && BATMAN_ADV [=m] && INET [=n] || MKISS [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && TTY [=n] || CAN_ETAS_ES58X [=n] && NET [=y] && CAN [=m] && CAN_DEV [=n] && USB [=n] || LAN743X [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICROCHIP [=n] && PCI [=n] && PTP_1588_CLOCK_OPTIONAL [=y] || SGI_IOC3_ETH [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SGI [=n] && PCI [=n] && SGI_MFD_IOC3 [=n] || USB_NET_SMSC75XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n] || KEYBOARD_APPLESPI [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] && ACPI && EFI && SPI [=y] && (X86 || COMPILE_TEST [=y]) && LEDS_CLASS [=m] || HMC_DRV [=n] && S390 || W1_SLAVE_DS2406 [=n] && W1 [=n] || W1_SLAVE_DS2423 [=n] && W1 [=n] || W1_SLAVE_DS2433_CRC [=n] && W1 [=n] && W1_SLAVE_DS2433 [=n] || W1_SLAVE_DS250X [=n] && W1 [=n] || W1_SLAVE_DS28E04 [=n] && W1 [=n] || W1_SLAVE_DS28E17 [=n] && W1 [=n] && I2C [=y] || SCD30_SERIAL [=n] && IIO [=y] && SCD30_CORE [=y] && SERIAL_DEV_BUS [=n] || EXT4_FS [=y] && BLOCK [=y] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] || CRYPTO_DEV_ATMEL_ECC [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y] || CRYPTO_DEV_ATMEL_SHA204A [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && I2C [=y]
 
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
+BD957XMUF_WATCHDOG: m => yes
+      Direct dependencies: WATCHDOG [=y] && MFD_ROHM_BD957XMUF [=m]
 
-USB_STORAGE_KARMA: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_STORAGE [=m]
+CAN_BCM: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
 
-USB_M66592: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_IOMEM [=y]
+MTD_NAND_BRCMNAND: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (ARM || ARM64 || MIPS || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
 

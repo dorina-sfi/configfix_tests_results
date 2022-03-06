@@ -1,25 +1,27 @@
-SERIAL_OF_PLATFORM: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && OF [=y]
+PREEMPT_VOLUNTARY: y => no
+      Direct dependencies: <choice> && !ARCH_NO_PREEMPT [=n]
 
-REGULATOR_MT6397: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
+SERIAL_8250_FSL: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_CONSOLE [=y]
 
-QUOTA: y => no
+DVB_STV0367: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=y] && VIDEO_DEV [=y] && PCI [=y] && I2C [=y] && INPUT [=n] && SND [=y] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_C8SECTPFE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PLATFORM_SUPPORT [=n] && DVB_PLATFORM_DRIVERS [=n] && PINCTRL [=y] && DVB_CORE [=y] && I2C [=y] && (ARCH_STI || ARCH_MULTIPLATFORM || COMPILE_TEST [=n]) && MEDIA_SUBDRV_AUTOSELECT [=y]
+
+CPU_FREQ_DEFAULT_GOV_USERSPACE: y => no
+      Direct dependencies: <choice>
+
+CHARLCD_BL_ON: y => no
+      Direct dependencies: <choice>
+
+DEBUG_FS_ALLOW_ALL: y => no
+      Direct dependencies: <choice>
+
+AUTOFS_FS: y => no
       Direct dependencies: y
-      Reverse dependencies: OCFS2_FS [=y] && BLOCK [=y] && INET [=y] && SYSFS [=y] && CONFIGFS_FS [=y]
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-SND_SOC_CS42L56: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m] && INPUT [=y]
-
-LEDS_COBALT_QUBE: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (MIPS_COBALT || COMPILE_TEST [=y])
-
-MFD_DA9062: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
-
-UIO_DFL: m => yes
-      Direct dependencies: UIO [=y] && FPGA_DFL [=m]
-
-USB_CDNS3_IMX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_CDNS3 [=m] && (ARCH_MXC [=n] || COMPILE_TEST [=y])
+CRYPTO_GHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 

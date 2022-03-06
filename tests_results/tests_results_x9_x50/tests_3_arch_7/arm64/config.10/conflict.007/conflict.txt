@@ -1,25 +1,22 @@
-COMMON_CLK_HI655X: y => no
-      Direct dependencies: COMMON_CLK [=y] && (MFD_HI655X_PMIC [=y] || COMPILE_TEST [=y]) && REGMAP [=y]
+DRM_ZYNQMP_DPSUB: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && (ARCH_ZYNQMP [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && DRM [=y] && OF [=y] && DMADEVICES [=y] && PHY_XILINX_ZYNQMP [=m] && XILINX_ZYNQMP_DPDMA [=m]
 
-DEBUG_RWSEMS: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+CAN_UCAN: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && USB [=m]
 
-CPU_IDLE: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_PROCESSOR_IDLE [=y] && ACPI [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=y]
+USB_SERIAL_PL2303: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && USB_SERIAL [=m]
 
-TOUCHSCREEN_USB_ELO: y => no
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
+FB_RADEON: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
 
-IIO_BUFFER_DMAENGINE: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y]
+MMC_SUNXI: m => yes
+      Direct dependencies: MMC [=m] && (ARCH_SUNXI [=y] || COMPILE_TEST [=y])
 
-PROC_PAGE_MONITOR: y => no
-      Direct dependencies: PROC_FS [=y] && MMU [=y]
-      Reverse dependencies: HWPOISON_INJECT [=y] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=y] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
+CAN_PEAK_PCI: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && CAN_SJA1000 [=m] && PCI [=y]
 

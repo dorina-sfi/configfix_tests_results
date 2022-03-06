@@ -1,29 +1,28 @@
-REGULATOR_BCM590XX: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_BCM590XX [=m]
-
-HID_THINGM: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS [=m]
-
-INPUT_BMA150: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && I2C [=y]
-
-SND_SOC_WM8776: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_I2C_AND_SPI [=m]
-      Reverse dependencies: SND_SOC_P1022_DS [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_POWERPC_SOC [=n] && P1022_DS && I2C [=y]
-
-SENSORS_MAX127: m => yes
+SENSORS_DS620: m => yes
       Direct dependencies: HWMON [=m] && I2C [=y]
 
-INPUT_MAX77650_ONKEY: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && MFD_MAX77650 [=m]
+DMARD06: m => yes
+      Direct dependencies: IIO [=m] && (OF [=y] || COMPILE_TEST [=y]) && I2C [=y]
 
-Z3FOLD: m => yes
-      Direct dependencies: ZPOOL [=m]
-      Reverse dependencies: ZSWAP_ZPOOL_DEFAULT_Z3FOLD [=n] && <choice>
+VIDEO_STI_BDISP: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_MEM2MEM_DRIVERS [=y] && VIDEO_DEV [=m] && VIDEO_V4L2 [=m] && (ARCH_STI || COMPILE_TEST [=y])
 
-IPMI_POWEROFF: m => yes
-      Direct dependencies: IPMI_HANDLER [=m]
+CAN_SJA1000: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=m] && HAS_IOMEM [=y]
 
-USB_ZERO: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
+EXTCON: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=m] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=n] && HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=n] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=n] || USB_EHCI_HCD [=m] && !USB_GADGET [=n] || !USB_EHCI_HCD [=m] && USB_GADGET [=n]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=m] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=y]) || PHY_NS2_USB_DRD [=m] && OF [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
+
+FB_OMAP2_PANEL_SHARP_LS037V7DW01: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB_OMAP2 [=m] && FB_OMAP2_DSS [=m] && BACKLIGHT_CLASS_DEVICE [=y] && DRM_PANEL_SHARP_LS037V7DW01 [=n]=n
+
+PREEMPT_NONE: y => no
+      Direct dependencies: <choice>
+
+SENSORS_F75375S: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
+
+GPIO_VIPERBOARD: m => yes
+      Direct dependencies: GPIOLIB [=y] && USB [=y] && MFD_VIPERBOARD [=m]
 

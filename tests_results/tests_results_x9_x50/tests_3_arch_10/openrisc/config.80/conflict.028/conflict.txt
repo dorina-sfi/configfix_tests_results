@@ -1,34 +1,31 @@
-I2C_SYNQUACER: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_SYNQUACER || COMPILE_TEST [=y])
+HT16K33: m => yes
+      Direct dependencies: AUXDISPLAY [=y] && FB [=y] && I2C [=m] && INPUT [=y]
 
-MMC_SDHCI_PXAV3: m => yes
-      Direct dependencies: MMC [=m] && HAVE_CLK [=y] && MMC_SDHCI_PLTFM [=m] && (ARCH_BERLIN || ARCH_MMP || ARCH_MVEBU || COMPILE_TEST [=y])
+AL3010: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-VIDEO_M52790: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=m]
-      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=n] && I2C [=m] && RC_CORE [=n]
+HD44780_COMMON: m => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780 [=n] && AUXDISPLAY [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y]) || PARPORT_PANEL [=m] && AUXDISPLAY [=y] && PARPORT [=m]
 
-SND_SOC_CS4349: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=m]
+VF610_ADC: m => yes
+      Direct dependencies: IIO [=m] && OF [=y] && HAS_IOMEM [=y]
 
-DVB_CX24110: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_BT8XX [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && PCI [=n] && I2C [=m] && VIDEO_BT848 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+USB_SERIAL_KLSI: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
 
-EVENTFD: y => no
+DRM_PARADE_PS8640: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+
+VSOCKETS_LOOPBACK: m => yes
+      Direct dependencies: NET [=y] && VSOCKETS [=m]
+
+DRM_PANEL_OLIMEX_LCD_OLINUXINO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && I2C [=m] && BACKLIGHT_CLASS_DEVICE [=m]
+
+GPIO_MAX7300: m => yes
+      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+
+PRINTK: y => no
       Direct dependencies: y
-      Reverse dependencies: MEMCG [=y] && CGROUPS [=y] || VFIO_VIRQFD [=n] && VFIO [=n] || VFIO_FSL_MC [=n] && VFIO [=n] && FSL_MC_BUS [=n] || ACRN_HSM [=n] && VIRT_DRIVERS [=n] && ACRN_GUEST
-
-ALTERA_PR_IP_CORE: m => yes
-      Direct dependencies: FPGA [=m]
-
-MEDIA_TEST_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=m]
-
-DM_SWITCH: m => yes
-      Direct dependencies: MD [=y] && BLK_DEV_DM [=m]
-
-PAGE_REPORTING: y => no
-      Direct dependencies: y
-      Reverse dependencies: VIRTIO_BALLOON [=y] && VIRTIO_MENU [=y] && VIRTIO [=y] || HYPERV_BALLOON [=n] && HYPERV [=n]
 

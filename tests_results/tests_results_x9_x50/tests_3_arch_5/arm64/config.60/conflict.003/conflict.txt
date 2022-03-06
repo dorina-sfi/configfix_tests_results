@@ -1,16 +1,19 @@
-GREYBUS_AUDIO: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m] && SOUND [=m] && SND_SOC [=m]
+CRC4: y => no
+      Direct dependencies: y
+      Reverse dependencies: FSI [=y] && OF [=y] || FSI_MASTER_GPIO [=y] && FSI [=y] && GPIOLIB [=y]
 
-STUB_CLK_HI3660: y => no
-      Direct dependencies: COMMON_CLK [=y] && (COMMON_CLK_HI3660 [=y] || COMPILE_TEST [=y]) && MAILBOX [=y]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 
-SENSORS_SL28CPLD: m => yes
-      Direct dependencies: HWMON [=m] && (MFD_SL28CPLD [=y] || COMPILE_TEST [=y])
+OF_DYNAMIC: y => no
+      Direct dependencies: OF [=y]
+      Reverse dependencies: HOTPLUG_PCI_POWERNV [=n] && PCI [=n] && HOTPLUG_PCI [=n] && PPC_POWERNV && EEH || OF_OVERLAY [=y] && OF [=y] || I2C_DEMUX_PINCTRL [=y] && I2C [=y] && I2C_MUX [=y] && PINCTRL [=y] && OF [=y]
 
-SND_JZ4740_SOC_I2S: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (MIPS || COMPILE_TEST [=y]) && OF [=y] && HAS_IOMEM [=y]
+PROC_PAGE_MONITOR: y => no
+      Direct dependencies: PROC_FS [=y] && MMU [=y]
+      Reverse dependencies: HWPOISON_INJECT [=y] && MEMORY_FAILURE [=y] && DEBUG_KERNEL [=y] && PROC_FS [=y] || MEM_SOFT_DIRTY [=n] && CHECKPOINT_RESTORE [=n] && HAVE_ARCH_SOFT_DIRTY [=n] && PROC_FS [=y]
 
-VIDEO_TEA6420: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_MXB [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && PCI [=n] && VIDEO_V4L2 [=m] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+IPV6_TUNNEL: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y]
+      Reverse dependencies: IPV6_VTI [=y] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_GRE [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NET_IPGRE_DEMUX [=n] || IPV6_FOU_TUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y]
 

@@ -1,17 +1,17 @@
-STM32_TIMER_CNT: m => yes
-      Direct dependencies: COUNTER [=m] && (MFD_STM32_TIMERS [=y] || COMPILE_TEST [=y])
+SENSORS_TSL2563: m => yes
+      Direct dependencies: IIO [=y] && I2C [=m]
 
-KEYBOARD_LM8333: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && I2C [=y]
+VIDEO_EXYNOS_FIMC_LITE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && V4L_PLATFORM_DRIVERS [=y] && VIDEO_SAMSUNG_EXYNOS4_IS [=m] && I2C [=m] && (SOC_EXYNOS4412 || SOC_EXYNOS5250 || COMPILE_TEST [=y]) && HAS_DMA [=y]
 
-COMEDI_PCL816: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+IIO_BUFFER_HW_CONSUMER: y => mod
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y])
 
-DRM_VGEM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
-      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=y]
+SYSTEM_TRUSTED_KEYRING: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y] && ASYMMETRIC_KEY_TYPE [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y]
 
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
-      Reverse dependencies: FB_ARMCLCD [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && FB [=m] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=m] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=m] && FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || FB_UVESA [=n] && HAS_IOMEM [=y] && FB [=m] && CONNECTOR [=n] || FB_ATMEL [=m] && FB [=m] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_RIVA [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_SAVAGE [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_TRIDENT [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=n] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=m]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=m]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=y]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=m] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=m] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=m] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=m] && USB [=n] || FB_DA8XX [=m] && FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y]) || FB_SM750 [=n] && STAGING [=n] && FB [=m] && PCI [=n]
+REGULATOR_FAN53880: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
 

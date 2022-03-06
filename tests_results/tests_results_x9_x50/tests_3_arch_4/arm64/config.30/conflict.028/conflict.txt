@@ -1,13 +1,15 @@
-MMC_ARMMMCI: m => yes
-      Direct dependencies: MMC [=m] && ARM_AMBA [=y]
+ARM64_MODULE_PLTS: y => no
+      Direct dependencies: MODULES [=y]
+      Reverse dependencies: RANDOMIZE_BASE [=y] && MODULES [=y] || ARM64_ERRATUM_843419 [=y] && MODULES [=y]
 
-SND_SOC_SAMSUNG: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y]
+TINYDRM_REPAPER: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
 
-CRYPTO_DEFLATE: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: ZSWAP_COMPRESSOR_DEFAULT_DEFLATE [=n] && <choice> || XFRM_IPCOMP [=n] && NET [=n] && INET [=n] || UBIFS_FS [=n] && MISC_FILESYSTEMS [=y] && MTD_UBI [=n] && UBIFS_FS_ZLIB [=n] || PSTORE_DEFLATE_COMPRESS [=m] && MISC_FILESYSTEMS [=y] && PSTORE [=m]
+CGROUP_SCHED: y => no
+      Direct dependencies: CGROUPS [=y]
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 
-SND_SOC_CS35L35: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+SYSC_R8A77960: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77960 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 

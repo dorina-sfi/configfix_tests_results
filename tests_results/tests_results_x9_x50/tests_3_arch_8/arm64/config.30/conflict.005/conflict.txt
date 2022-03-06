@@ -1,25 +1,31 @@
-MFD_MC13XXX_I2C: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+CRYPTO_SM3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
 
-AD7091R5: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
+CRYPTO_ECHAINIV: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: XFRM_ESP [=y] && NET [=y] && INET [=y]
 
-KALLSYMS_ALL: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && KALLSYMS [=y]
-      Reverse dependencies: LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+NF_REJECT_IPV6: y => no
+      Direct dependencies: NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_REJECT_IPV6 [=n] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && NF_TABLES [=n] && NF_TABLES_IPV6 [=n] || IP6_NF_TARGET_REJECT [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] && IP6_NF_IPTABLES [=y] && IP6_NF_FILTER [=y]
 
-AD2S1200: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+TIFM_CORE: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: MMC_TIFM_SD [=y] && MMC [=y] && PCI [=y] || MEMSTICK_TIFM_MS [=n] && MEMSTICK [=n] && PCI [=y]
 
-CHARGER_BQ256XX: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+LWTUNNEL: y => no
+      Direct dependencies: NET [=y]
+      Reverse dependencies: IPV6_ILA [=y] && NET [=y] && INET [=y] && IPV6 [=y] && NETFILTER [=y] || IPV6_SEG6_LWTUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_RPL_LWTUNNEL [=n] && NET [=y] && INET [=y] && IPV6 [=y] || IPV6_IOAM6_LWTUNNEL [=y] && NET [=y] && INET [=y] && IPV6 [=y]
 
-FB_S3: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && PCI [=y]
+DEBUG_SPINLOCK: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
 
-AD5624R_SPI: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+SLOB: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
 
-LEDS_AAT1290: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && OF [=y] && PINCTRL [=y]
+THERMAL_GOV_FAIR_SHARE: y => no
+      Direct dependencies: THERMAL [=y]
+      Reverse dependencies: THERMAL_DEFAULT_GOV_FAIR_SHARE [=y] && <choice>
 

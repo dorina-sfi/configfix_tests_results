@@ -1,40 +1,33 @@
-MEDIA_TUNER_TDA9887: y => no
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
-      Reverse dependencies: MEDIA_TUNER [=y] && MEDIA_SUPPORT [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER_SIMPLE [=y] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=y] && I2C [=y]
+DRM_VGEM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=n] && !COMPILE_TEST [=n]
 
-DEBUG_MUTEXES: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
+ZYNQMP_IPI_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && ARCH_ZYNQMP [=y] && OF [=y]
+      Reverse dependencies: ZYNQMP_POWER [=y] && PM [=y] && ZYNQMP_FIRMWARE [=y]
 
-SYSC_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: SYSC_R8A77995 [=y] && SOC_RENESAS [=y] || SYSC_R8A7794 [=n] && SOC_RENESAS [=y] || SYSC_R8A77990 [=y] && SOC_RENESAS [=y] || SYSC_R8A7779 [=n] && SOC_RENESAS [=y] || SYSC_R8A7790 [=n] && SOC_RENESAS [=y] || SYSC_R8A7795 [=y] && SOC_RENESAS [=y] || SYSC_R8A7791 [=n] && SOC_RENESAS [=y] || SYSC_R8A77965 [=y] && SOC_RENESAS [=y] || SYSC_R8A77960 [=y] && SOC_RENESAS [=y] || SYSC_R8A77961 [=y] && SOC_RENESAS [=y] || SYSC_R8A7792 [=n] && SOC_RENESAS [=y] || SYSC_R8A77980 [=n] && SOC_RENESAS [=y] || SYSC_R8A77970 [=y] && SOC_RENESAS [=y] || SYSC_R8A77470 [=y] && SOC_RENESAS [=y] || SYSC_R8A7745 [=n] && SOC_RENESAS [=y] || SYSC_R8A7742 [=y] && SOC_RENESAS [=y] || SYSC_R8A7743 [=y] && SOC_RENESAS [=y] || SYSC_R8A774C0 [=y] && SOC_RENESAS [=y] || SYSC_R8A774E1 [=y] && SOC_RENESAS [=y] || SYSC_R8A774A1 [=y] && SOC_RENESAS [=y] || SYSC_R8A774B1 [=y] && SOC_RENESAS [=y]
+MUX_ADG792A: m => yes
+      Direct dependencies: MULTIPLEXER [=m] && I2C [=y]
 
-PINCTRL_PFC_R8A774C0: y => no
-      Direct dependencies: PINCTRL [=y]
-      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774C0 [=y]
+SND_SOC_FSL_RPMSG: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y] && RPMSG [=m] && (SND_IMX_SOC [=n] || SND_IMX_SOC [=n]=n)
 
-PKCS7_MESSAGE_PARSER: y => no
-      Direct dependencies: CRYPTO [=y] && ASYMMETRIC_KEY_TYPE [=y] && X509_CERTIFICATE_PARSER [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || IMA_APPRAISE_MODSIG [=n] && INTEGRITY [=n] && IMA_APPRAISE [=n] && INTEGRITY_ASYMMETRIC_KEYS [=n]
+HBMC_AM654: m => yes
+      Direct dependencies: MTD [=m] && MTD_HYPERBUS [=m] && (ARM64 [=y] || COMPILE_TEST [=n])
 
-DRM_DISPLAY_CONNECTOR: y => no
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y]
-      Reverse dependencies: DRM_MESON [=y] && HAS_IOMEM [=y] && DRM [=y] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_MESON [=y] || COMPILE_TEST [=y])
+DRM_PANEL_PANASONIC_VVX10F034N00: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-THERMAL: y => no
-      Direct dependencies: y
-      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=n] && X86 && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=n] && ACPI [=n] || ACPI_THERMAL [=n] && ACPI [=n] && ACPI_PROCESSOR [=n] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_ETNAVIV [=y] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=y] || MMC_SDHCI_OMAP [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=n] && OF [=y]
+CM3605: m => yes
+      Direct dependencies: IIO [=m] && OF [=y]
 
-RMI4_CORE: y => no
-      Direct dependencies: INPUT [=y]
-      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+BACKLIGHT_ADP8860: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
 
-HOTPLUG_CPU: y => no
-      Direct dependencies: y
-      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
+CRYPTO_AES_ARM64_NEON_BLK: y => mod
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: CRYPTO_AES_ARM64_BS [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-DW_APB_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y]
-      Reverse dependencies: DW_APB_TIMER_OF [=y] && GENERIC_CLOCKEVENTS [=y]
+AHCI_XGENE: m => yes
+      Direct dependencies: ATA [=y] && HAS_DMA [=y] && PHY_XGENE [=m]
 

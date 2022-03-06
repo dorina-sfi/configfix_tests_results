@@ -1,22 +1,21 @@
-MTD_CFI_I1: y => no
-      Direct dependencies: MTD [=y]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
 
-NET_DSA_TAG_XRS700X: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: NET_DSA_XRS700X [=y] && NETDEVICES [=y] && NET_DSA [=y]
+MTD_CFI: m => yes
+      Direct dependencies: MTD [=m]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y]
 
-IO_URING: y => no
+EINT_MTK: y => no
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && OF [=y]
+
+TOUCHSCREEN_IPROC: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && (ARCH_BCM_IPROC || COMPILE_TEST [=y])
+
+KCMP: y => no
       Direct dependencies: y
+      Reverse dependencies: CHECKPOINT_RESTORE [=y] || DRM [=m] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
 
-SCSI: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
-
-NET_DSA_TAG_BRCM: y => no
-      Direct dependencies: NET [=y] && NET_DSA [=y]
-      Reverse dependencies: B53 [=y] && NETDEVICES [=y] && NET_DSA [=y] || NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
-
-SIGNALFD: y => no
-      Direct dependencies: y
+MMC_SDHCI_AM654: m => yes
+      Direct dependencies: MMC [=m] && MMC_SDHCI_PLTFM [=m] && OF [=y] && REGMAP_MMIO [=y]
 

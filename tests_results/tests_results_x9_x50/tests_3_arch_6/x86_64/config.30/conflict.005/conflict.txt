@@ -1,18 +1,24 @@
-AD525X_DPOT: m => yes
-      Direct dependencies: (I2C [=m] || SPI [=n]) && SYSFS [=y]
+CRYPTO_CRYPTD: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-IMA_TEMPLATE: y => no
-      Direct dependencies: <choice>
+LPC_SCH: y => no
+      Direct dependencies: HAS_IOMEM [=y] && PCI [=y]
+      Reverse dependencies: I2C_ISCH [=y] && I2C [=y] && HAS_IOMEM [=y] && PCI [=y] || IE6XX_WDT [=n] && WATCHDOG [=n] && X86 [=y] && PCI [=y]
 
-SENSORS_TMP102: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+CRYPTO_GHASH: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_DEV_VMX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_VMX [=n]
 
-SENSORS_RM3100_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
-
-X86_SMAP: y => no
+AUTOFS_FS: y => no
       Direct dependencies: y
+      Reverse dependencies: AUTOFS4_FS [=y]
 
-IIO_ST_GYRO_3AXIS: m => yes
-      Direct dependencies: IIO [=y] && (I2C [=m] || SPI_MASTER [=n]) && SYSFS [=y]
+MTD_MAP_BANK_WIDTH_2: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y]
+
+SERIAL_8250_EXTENDED: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y]
+      Reverse dependencies: SERIAL_8250_IOC3 [=y] && TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=y] && (SGI_MFD_IOC3 [=n] || COMPILE_TEST [=y])
 

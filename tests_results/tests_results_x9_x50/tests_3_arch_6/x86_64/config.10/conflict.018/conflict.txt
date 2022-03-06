@@ -1,18 +1,19 @@
-SND_SOC_STI_SAS: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=n] || COMPACTION [=y] || CMA [=n]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=n] && MMU [=y]
 
-I2C_MUX_PCA954x: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+CACHEFILES: m => yes
+      Direct dependencies: FSCACHE [=m] && BLOCK [=y]
 
-MFD_WCD934X: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && SLIMBUS [=m]
+SENSORS_W83781D: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-SLUB: y => no
-      Direct dependencies: <choice>
+SENSORS_LM87: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 
-DRM_PANEL_OLIMEX_LCD_OLINUXINO: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && I2C [=y] && BACKLIGHT_CLASS_DEVICE [=y]
+TCM_USER2: m => yes
+      Direct dependencies: TARGET_CORE [=m] && UIO [=y] && NET [=y]
 
-SND_SOC_PCM179X_SPI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+FB_UVESA: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && CONNECTOR [=m]
 

@@ -1,21 +1,24 @@
-INFINIBAND_SRP: m => yes
-      Direct dependencies: INFINIBAND [=m] && SCSI [=y] && INFINIBAND_ADDR_TRANS [=y]
+CB710_CORE: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: MMC_CB710 [=y] && MMC [=y] && PCI [=y]
 
-VIDEO_SAA7185: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_BUZ [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CB710_CORE: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: MMC_CB710 [=y] && MMC [=y] && PCI [=y]
 
-MXS_LRADC_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_MXS_LRADC [=m]
+DVB_CXD2099: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y]
+      Reverse dependencies: DVB_NGENE [=y] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_DDBRIDGE [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && PCI [=y] && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-DEVFREQ_GOV_PASSIVE: y => no
-      Direct dependencies: PM_DEVFREQ [=y]
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=m] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
+CLK_RENESAS_CPG_MSTP: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RZA1 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7778 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7779 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-PACKING: y => no
-      Direct dependencies: y
-      Reverse dependencies: NET_DSA_TAG_OCELOT [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_TAG_SJA1105 [=m] && NET [=y] && NET_DSA [=m] || NET_DSA_SJA1105 [=m] && NETDEVICES [=y] && NET_DSA [=m] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || MSCC_OCELOT_SWITCH_LIB [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_MICROSEMI [=n]
+VIDEO_VPX3220: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_ZORAN_DC30 [=y] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-GPIO_VIPERBOARD: m => yes
-      Direct dependencies: GPIOLIB [=y] && USB [=y] && MFD_VIPERBOARD [=m]
+CRYPTO_SHA256_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA2_ARM64_CE [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 

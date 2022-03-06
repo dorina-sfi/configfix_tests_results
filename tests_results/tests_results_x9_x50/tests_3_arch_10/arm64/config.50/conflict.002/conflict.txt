@@ -1,34 +1,35 @@
-FB_SH_MOBILE_LCDC: m => yes
-      Direct dependencies: FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (SUPERH || ARCH_RENESAS [=y] || COMPILE_TEST [=n])
+IIO_TIGHTLOOP_TRIGGER: m => yes
+      Direct dependencies: IIO [=m] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
 
-PID_IN_CONTEXTIDR: y => no
+NET_SWITCHDEV: y => no
+      Direct dependencies: NET [=y] && INET [=y]
+      Reverse dependencies: NET_DSA [=m] && NET [=y] && (BRIDGE [=m] || BRIDGE [=m]=n) && (HSR [=m] || HSR [=m]=n) && INET [=y] && NETDEVICES [=y]
+
+NET_DSA_TAG_MTK: m => yes
+      Direct dependencies: NET [=y] && NET_DSA [=m]
+      Reverse dependencies: NET_DSA_MT7530 [=n] && NETDEVICES [=y] && NET_DSA [=m]
+
+COMEDI_TESTS_NI_ROUTES: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_TESTS [=m]
+
+SMSC_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+      Reverse dependencies: SMSC9420 [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_SMSC [=n] && PCI [=n] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=n] && USB_USBNET [=n]
+
+INTEL_XWAY_PHY: m => yes
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=m]
+
+ZONE_DMA: y => no
       Direct dependencies: y
-      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
 
-INPUT: y => mod
-      Direct dependencies: y
-      Reverse dependencies: VT [=y] && TTY [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=n] && MMU [=y] && ACPI [=n] && X86 || DRM_I915 [=n] && HAS_IOMEM [=y] && DRM [=m] && X86 && PCI [=n] && ACPI [=n] || DRM_GMA500 [=n] && HAS_IOMEM [=y] && DRM [=m] && PCI [=n] && X86 && MMU [=y] && ACPI [=n]
+MAX5821: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y] && OF [=y]
 
-SRAM: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: VIDEO_CODA [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_MEM2MEM_DRIVERS [=n] && VIDEO_DEV [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n]) || TEGRA_VDE [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=n] && (ARCH_TEGRA [=y] || COMPILE_TEST [=n]) || CRYPTO_DEV_MARVELL_CESA [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (PLAT_ORION || ARCH_MVEBU [=y])
+CRYPTO_CBC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_ESP [=n] && NET [=y] && INET [=y] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) && (TRUSTED_KEYS [=n] || TRUSTED_KEYS [=n]=n) || ECRYPT_FS [=n] && MISC_FILESYSTEMS [=n] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n) || ENCRYPTED_KEYS [=y] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=n] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=n] || CRYPTO_DEV_MXS_DCP [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=n]) || CRYPTO_DEV_QCE_SKCIPHER [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=m] || CRYPTO_DEV_CCREE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-MTD_MAP_BANK_WIDTH_4: y => no
-      Direct dependencies: MTD [=m]
-
-HID_STEAM: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
-
-REGULATOR: y => no
-      Direct dependencies: y
-      Reverse dependencies: OLPC_EC [=n] || PINCTRL_PFC_SH73A0 [=n] && PINCTRL [=y] || TPS6105X [=m] && HAS_IOMEM [=y] && I2C [=y] || DRM_MSM [=n] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM [=n] || SOC_IMX5 || COMPILE_TEST [=n]) && IOMMU_SUPPORT [=y] && (OF [=y] && COMMON_CLK [=y] || COMPILE_TEST [=n]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=n] || QCOM_LLCC [=n]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || SND_SOC_AMD_CZ_DA7219MX98357_MACH [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=n] && SND_SOC_AMD_ACP [=n] && I2C [=y] && GPIOLIB [=y] && ACPI [=n] || MMC_MTK [=y] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=n] && (X86 || COMPILE_TEST [=n])
-
-MTD_AFS_PARTS: m => yes
-      Direct dependencies: MTD [=m] && (ARM || ARM64 [=y])
-
-KASAN_GENERIC: y => no
-      Direct dependencies: <choice> && HAVE_ARCH_KASAN [=y] && CC_HAS_KASAN_GENERIC [=y] && CC_HAS_WORKING_NOSANITIZE_ADDRESS [=y]
-
-FB_TFT_SH1106: m => yes
-      Direct dependencies: STAGING [=y] && FB_TFT [=m]
+NET_MPLS_GSO: y => no
+      Direct dependencies: NET [=y] && MPLS [=y]
+      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
 

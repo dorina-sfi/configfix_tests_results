@@ -1,15 +1,13 @@
-BLK_DEV_BSGLIB: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=n] || SCSI_SAS_ATTRS [=y] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-FPGA_REGION: y => no
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=y]
-      Reverse dependencies: FPGA_DFL [=y] && FPGA [=y] && HAS_IOMEM [=y]
+QCOM_SPMI_ADC_TM5: m => yes
+      Direct dependencies: THERMAL [=y] && (ARCH_QCOM [=y] && OF [=y] || COMPILE_TEST [=n]) && OF [=y] && SPMI [=y] && IIO [=m]
 
-MEDIA_TEST_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+SCSI_SAS_ATTRS: y => mod
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_SAS_LIBSAS [=y] && SCSI [=y] || SCSI_HPSA [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] || SCSI_MPT3SAS [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] || SCSI_SMARTPQI [=n] && SCSI_LOWLEVEL [=n] && PCI [=y] && SCSI [=y] && !S390 || FUSION_SAS [=m] && FUSION [=y] && PCI [=y] && SCSI [=y]
 
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+MEDIATEK_MT6577_AUXADC: m => yes
+      Direct dependencies: IIO [=m] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 

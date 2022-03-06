@@ -1,29 +1,29 @@
-RMI4_SPI: m => yes
-      Direct dependencies: INPUT [=y] && RMI4_CORE [=m] && SPI [=y]
+REGULATOR_HI6421V530: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
 
-REGULATOR_PV88060: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m]
+LEDS_REGULATOR: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && REGULATOR [=y]
 
-IQS620AT_TEMP: m => yes
-      Direct dependencies: IIO [=y] && (MFD_IQS62X [=m] || COMPILE_TEST [=n])
+MCP4531: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-BATTERY_CW2015: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+BT_HCIUART: m => yes
+      Direct dependencies: NET [=y] && BT [=m] && (SERIAL_DEV_BUS [=n] || !SERIAL_DEV_BUS [=n]) && TTY [=y]
 
-HZ_300: y => no
-      Direct dependencies: <choice>
+BATTERY_LEGO_EV3: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && OF [=y] && IIO [=m] && GPIOLIB [=y] && (ARCH_DAVINCI_DA850 || COMPILE_TEST [=y])
 
-I2C_I801: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
-      Reverse dependencies: ITCO_WDT [=n] && WATCHDOG [=y] && (X86 || IA64) && PCI [=y] && (I2C [=m] || I2C [=m]=n) && (MFD_INTEL_PMC_BXT [=n] || !MFD_INTEL_PMC_BXT [=n]) && !EXPERT [=y] && I2C [=m]
+CRYPTO_SHA256_ARM64: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA2_ARM64_CE [=m] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
 
-DEVFREQ_EVENT_EXYNOS_PPMU: y => mod
-      Direct dependencies: PM_DEVFREQ [=y] && PM_DEVFREQ_EVENT [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
-      Reverse dependencies: ARM_EXYNOS_BUS_DEVFREQ [=y] && PM_DEVFREQ [=y] && (ARCH_EXYNOS [=y] || COMPILE_TEST [=n])
+HID_VIVALDI: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-BITS_TEST: m => yes
-      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=m]
+PLIP: m => yes
+      Direct dependencies: NETDEVICES [=y] && PARPORT [=m]
 
-SENSORS_TSL2563: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=m] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=y]) && OF [=y]
 

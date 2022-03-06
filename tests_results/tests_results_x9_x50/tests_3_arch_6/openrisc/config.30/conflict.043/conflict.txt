@@ -1,20 +1,19 @@
-VIDEO_CCS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && VIDEO_V4L2 [=m] && HAVE_CLK [=y]
+SENSORS_NPCM7XX: m => yes
+      Direct dependencies: HWMON [=m]
 
-TICK_CPU_ACCOUNTING: y => no
-      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+SENSORS_VT1211: m => yes
+      Direct dependencies: HWMON [=m] && !PPC
 
-VIDEO_ADV7170: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_LML33R10 [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=m] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+REGULATOR_HI6421V530: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_HI6421_PMIC [=m] && OF [=y]
 
-SND_SOC_STM32_SAI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) && COMMON_CLK [=y] && SND_SOC [=m]
+PHY_QCOM_USB_SS: m => yes
+      Direct dependencies: OF [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && (EXTCON [=m] || !EXTCON [=m])
 
-SND_SOC_FSL_SAI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=m] || SND_AC97_CODEC [=m]=n) || SND_SOC_IMX_AUDMIX [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] || SND_SOC_IMX_HDMI [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] || SND_SOC_IMX_CARD [=m] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=m] && OF [=y] && I2C [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=m] && (ARCH_BCM2835 || COMPILE_TEST [=y]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=y] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER || COMPILE_TEST [=y]) && OF [=y]
 
-LEDS_LM3533: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && MFD_LM3533 [=m]
+MICROCHIP_TCB_CAPTURE: m => yes
+      Direct dependencies: COUNTER [=m] && HAS_IOMEM [=y] && OF [=y]
 

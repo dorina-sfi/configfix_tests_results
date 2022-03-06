@@ -1,27 +1,30 @@
-REGULATOR_PFUZE100: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && OF [=y]
+TCG_TIS_I2C_NUVOTON: m => yes
+      Direct dependencies: TCG_TPM [=m] && I2C [=y]
 
-W1_MASTER_SGI: m => yes
-      Direct dependencies: W1 [=m]
+BMP280: m => yes
+      Direct dependencies: IIO [=m] && (I2C [=y] || SPI_MASTER [=n])
 
-SENSORS_IBMAEM: m => yes
-      Direct dependencies: HWMON [=y] && IPMI_HANDLER [=m]
+CLK_RENESAS_DIV6: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_R8A73A4 [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
 
-STM_SOURCE_HEARTBEAT: m => yes
-      Direct dependencies: STM [=m]
+EXTCON_FSA9480: m => yes
+      Direct dependencies: EXTCON [=m] && INPUT [=y] && I2C [=y]
 
-QCOM_RPMH: m => yes
-      Direct dependencies: (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && (QCOM_COMMAND_DB [=m] || !QCOM_COMMAND_DB [=m])
+MTD_CFI: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=y] && HAS_IOMEM [=y]
 
-I2C_ALI15X3: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && PCI [=y]
+CRYPTO_CBC: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CEPH_LIB [=n] && NET [=y] && INET [=n] || XFRM_ESP [=n] && NET [=y] && INET [=n] || DM_CRYPT [=n] && MD [=y] && BLK_DEV_DM [=n] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n) || ECRYPT_FS [=m] && MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=n] || ENCRYPTED_KEYS [=n]=n) || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_DEV_SUN8I_CE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_SUN8I_SS [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_ALLWINNER [=y] && PM [=y] || CRYPTO_DEV_IXP4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && ARCH_IXP4XX && IXP4XX_QMGR [=n] && IXP4XX_NPE [=m] || CRYPTO_DEV_MXS_DCP [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_MXS || ARCH_MXC [=y]) || CRYPTO_DEV_QCE_SKCIPHER [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_AMLOGIC_GXL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && HAS_IOMEM [=y] || CRYPTO_DEV_OMAP_AES [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && CRYPTO_DEV_OMAP [=n] && (ARCH_OMAP2 || ARCH_OMAP3 || ARCH_OMAP2PLUS)
 
-KEYBOARD_TM2_TOUCHKEY: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_KEYBOARD [=y] && I2C [=m] && LEDS_CLASS [=y]
+IEEE802154_SOCKET: m => yes
+      Direct dependencies: NET [=y] && IEEE802154 [=m]
 
-MFD_BCM590XX: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
+ADJD_S311: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-LEDS_PCA955X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=y] && I2C [=m]
+LEDS_LP55XX_COMMON: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && (LEDS_CLASS_MULTICOLOR [=m] || !LEDS_CLASS_MULTICOLOR [=m]) && OF [=y] && I2C [=y]
 

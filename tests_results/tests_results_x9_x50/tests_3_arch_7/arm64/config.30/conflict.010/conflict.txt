@@ -1,22 +1,27 @@
-NAU7802: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+PID_IN_CONTEXTIDR: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_SOURCE_ETM4X [=y] && CORESIGHT [=y] && ARM64 [=y]
 
-VIDEO_IMX335: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && OF_GPIO [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+PAGE_EXTENSION: y => no
+      Direct dependencies: y
+      Reverse dependencies: PAGE_IDLE_FLAG [=y] && !64BIT [=y] || PAGE_OWNER [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y]
 
-MEDIA_TUNER_MAX2165: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=n] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+STM: y => no
+      Direct dependencies: y
+      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
 
-HID_MAYFLASH: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+PINCTRL_RENESAS: y => no
+      Direct dependencies: PINCTRL [=y]
 
-DS4424: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SND_SOC_SPDIF: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y]
+      Reverse dependencies: SND_KIRKWOOD_SOC_ARMADA370_DB [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_KIRKWOOD_SOC [=y] && (ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && I2C [=y] || SND_SAMSUNG_SPDIF [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] || SND_SOC_STM32_SPDIFRX [=n] && SOUND [=y] && !UML && SND [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=y]) && SND_SOC [=y] || SND_SOC_DAVINCI_EVM [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && (DMA_OMAP [=y] || TI_EDMA [=y] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && ARCH_DAVINCI && I2C [=y] && MACH_DAVINCI_DM6467_EVM
 
-MXC4005: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+CRYPTO_JITTERENTROPY: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
 
-SENSORS_RASPBERRYPI_HWMON: m => yes
-      Direct dependencies: HWMON [=y] && (RASPBERRYPI_FIRMWARE [=m] || COMPILE_TEST [=n] && !RASPBERRYPI_FIRMWARE [=m])
+CRYPTO_LIB_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
 

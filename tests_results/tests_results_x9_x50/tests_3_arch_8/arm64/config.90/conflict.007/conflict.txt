@@ -1,25 +1,29 @@
-REGULATOR_MAX77686: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_MAX77686 [=m] || COMPILE_TEST [=n])
+SND_PROC_FS: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && PROC_FS [=y]
 
-IR_NEC_DECODER: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DECODERS [=y]
-
-USB_NET_KALMIA: m => yes
-      Direct dependencies: NETDEVICES [=y] && USB_NET_DRIVERS [=m] && USB_USBNET [=m]
-
-CCS811: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
-
-MOUSE_PS2_TRACKPOINT: y => no
-      Direct dependencies: INPUT [=y] && INPUT_MOUSE [=y] && MOUSE_PS2 [=m]
-
-CRYPTO_ESSIV: y => no
+CRYPTO_SM3: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: DM_CRYPT [=m] && MD [=y] && BLK_DEV_DM [=y] && (ENCRYPTED_KEYS [=m] || ENCRYPTED_KEYS [=m]=n) && (TRUSTED_KEYS [=m] || TRUSTED_KEYS [=m]=n)
+      Reverse dependencies: CRYPTO_SM3_ARM64_CE [=n] && CRYPTO [=y] && ARM64_CRYPTO [=n] && KERNEL_MODE_NEON [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y]
 
-SOC_RENESAS: y => no
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
+
+XZ_DEC_X86: y => no
+      Direct dependencies: XZ_DEC [=y]
+
+CRYPTO_BLAKE2B: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+
+CRC8: y => no
       Direct dependencies: y
+      Reverse dependencies: PCIE_QCOM [=n] && PCI [=n] && OF [=y] && (ARCH_QCOM [=n] || COMPILE_TEST [=n]) && PCI_MSI_IRQ_DOMAIN [=n] || QED [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_QLOGIC [=n] && PCI [=n] || GPIO_MAX3191X [=y] && GPIOLIB [=y] && SPI_MASTER [=y] || SENSORS_SHT3x [=y] && HWMON [=y] && I2C [=y] || SENSORS_SHT4x [=y] && HWMON [=y] && I2C [=y] || SENSORS_ADM1266 [=y] && HWMON [=y] && PMBUS [=y] && GPIOLIB [=y] || MFD_MT6360 [=y] && HAS_IOMEM [=y] && I2C [=y] || AD7280 [=y] && STAGING [=y] && IIO [=y] && SPI [=y] || SCA3300 [=y] && IIO [=y] && SPI [=y] || SCD30_I2C [=y] && IIO [=y] && SCD30_CORE [=y] && I2C [=y] || SCD4X [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP30 [=y] && IIO [=y] && I2C [=y] || SENSIRION_SGP40 [=y] && IIO [=y] && I2C [=y] || SPS30_I2C [=y] && IIO [=y] && I2C [=y] || ICP10100 [=y] && IIO [=y] && I2C [=y]
 
-MMC_USHC: m => yes
-      Direct dependencies: MMC [=m] && USB [=y]
+FW_LOADER_USER_HELPER: y => no
+      Direct dependencies: FW_LOADER [=y]
+      Reverse dependencies: LEDS_LP55XX_COMMON [=y] && NEW_LEDS [=y] && LEDS_CLASS [=y] && (LEDS_CLASS_MULTICOLOR [=y] || !LEDS_CLASS_MULTICOLOR [=y]) && OF [=y] && I2C [=y] || DELL_RBU [=n] && X86_PLATFORM_DEVICES [=n] && X86_PLATFORM_DRIVERS_DELL [=n] && X86
+
+ARM64_VA_BITS_39: y => no
+      Direct dependencies: <choice> && ARM64_4K_PAGES [=y]
 

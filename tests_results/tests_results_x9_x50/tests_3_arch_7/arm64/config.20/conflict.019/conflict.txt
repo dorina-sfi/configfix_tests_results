@@ -1,25 +1,28 @@
-INPUT_JOYDEV: m => yes
-      Direct dependencies: INPUT [=m]
+PINCTRL_RZG2L: y => no
+      Direct dependencies: PINCTRL [=y] && OF [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R9A07G044 [=y]
 
-GAMEPORT: m => no
-      Direct dependencies: !UML
-      Reverse dependencies: JOYSTICK_ANALOG [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=n] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=m] && INPUT [=m] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=m] && INPUT [=m] && INPUT_JOYSTICK [=y]
-
-BLK_DEV_INITRD: y => no
+KALLSYMS: y => no
       Direct dependencies: y
-      Reverse dependencies: BOOT_CONFIG [=y]
+      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=y] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=y] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=n] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
 
-MTD_CFI_I1: y => no
-      Direct dependencies: MTD [=m]
-      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=m] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_CFI_I2 [=y] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+SYSC_R8A77990: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77990 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-MTD_NAND_MARVELL: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (PXA3xx || ARCH_MMP || PLAT_ORION || ARCH_MVEBU [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-MTD_NAND_FSL_IFC: m => yes
-      Direct dependencies: MTD [=m] && MTD_RAW_NAND [=m] && (FSL_SOC || ARCH_LAYERSCAPE [=y] || SOC_LS1021A || COMPILE_TEST [=y]) && HAS_IOMEM [=y]
+SPARSE_IRQ: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y] || ATMEL_AIC_IRQ [=n] || ATMEL_AIC5_IRQ [=n] || FARADAY_FTINTC010 [=n] || IXP4XX_IRQ [=n] || CLPS711X_IRQCHIP [=n] && ARCH_CLPS711X
 
-DEBUG_LIST: y => no
-      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
-      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
+PINCTRL_PFC_R8A774A1: y => no
+      Direct dependencies: PINCTRL [=y]
+      Reverse dependencies: PINCTRL_RENESAS [=y] && PINCTRL [=y] && ARCH_R8A774A1 [=y]
+
+VIDEO_MSP3400: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y] || VIDEO_EM28XX_V4L2 [=n] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=n] && I2C [=y] && RC_CORE [=n] || VIDEO_BT848 [=n] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_DEV [=y] && PCI [=n] && I2C [=y] && VIDEO_V4L2 [=y] && RC_CORE [=n] && MEDIA_RADIO_SUPPORT [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
 

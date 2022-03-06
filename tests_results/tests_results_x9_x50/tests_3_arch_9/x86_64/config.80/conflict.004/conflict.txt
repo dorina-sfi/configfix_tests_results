@@ -1,29 +1,33 @@
-DVB_DIB8000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CRYPTO_CURVE25519: m => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_HISI_HPRE [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && PCI [=y] && PCI_MSI [=y] && (UACCE [=y] || UACCE [=y]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=y]
 
-NFC_PN532_UART: m => yes
-      Direct dependencies: NET [=y] && NFC [=m] && SERIAL_DEV_BUS [=y]
+CRYPTO_DRBG_MENU: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-SND_SOC_FSL_ASRC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && HAS_DMA [=y]
+SYNC_FILE: y => no
+      Direct dependencies: y
+      Reverse dependencies: DRM [=m] && HAS_IOMEM [=y] && (AGP [=n] || AGP [=n]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=m] && X86 [=y] && PCI [=y] || DRM_MSM [=m] && HAS_IOMEM [=y] && DRM [=m] && (ARCH_QCOM || SOC_IMX5 || COMPILE_TEST [=y]) && IOMMU_SUPPORT [=y] && (OF [=n] && COMMON_CLK [=y] || COMPILE_TEST [=y]) && (QCOM_OCMEM [=n] || QCOM_OCMEM [=n]=n) && (QCOM_LLCC [=m] || QCOM_LLCC [=m]=n) && (QCOM_COMMAND_DB [=n] || QCOM_COMMAND_DB [=n]=n) || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
 
-NET_DSA_MICROCHIP_KSZ8863_SMI: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && NET_DSA_MICROCHIP_KSZ8795 [=m]
+IIO_CONFIGFS: y => no
+      Direct dependencies: IIO [=y]
+      Reverse dependencies: IIO_SW_DEVICE [=y] && IIO [=y] || IIO_SW_TRIGGER [=n] && IIO [=y]
 
-AXP288_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_AXP20X [=m]
+VIDEO_WM8775: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_PVRUSB2 [=n] && USB [=m] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && I2C [=y] || VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && MEDIA_ANALOG_TV_SUPPORT [=n] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m] || VIDEO_CX88 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=n] || MEDIA_DIGITAL_TV_SUPPORT [=n]) && VIDEO_DEV [=m] && PCI [=y] && I2C [=y] && RC_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-SND_SOC_FSL_SAI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
-      Reverse dependencies: SND_SOC_FSL_ASOC_CARD [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=y] && I2C [=y] && (SND_AC97_CODEC [=n] || SND_AC97_CODEC [=n]=n) || SND_SOC_IMX_AUDMIX [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] || SND_SOC_IMX_HDMI [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] || SND_SOC_IMX_CARD [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_IMX_SOC [=n] && OF [=y] && I2C [=y]
+REGULATOR_MT6315: m => yes
+      Direct dependencies: REGULATOR [=y] && SPMI [=m]
 
-MAC802154: m => yes
-      Direct dependencies: NET [=y] && IEEE802154 [=m]
+USB_SERIAL: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=m] && TTY [=y]
 
-LCD_PLATFORM: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m]
+NETFILTER_XT_MATCH_ECN: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: IP_NF_MATCH_ECN [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=m] && NETFILTER_ADVANCED [=y]
 
-ATM_LANE: m => yes
-      Direct dependencies: NET [=y] && ATM [=m]
+W1_SLAVE_DS2413: m => yes
+      Direct dependencies: W1 [=m]
 

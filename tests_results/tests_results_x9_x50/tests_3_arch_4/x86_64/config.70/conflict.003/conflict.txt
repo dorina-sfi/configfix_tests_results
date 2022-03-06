@@ -1,12 +1,14 @@
-USB_CHIPIDEA_IMX: y => mod
-      Direct dependencies: USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && OF [=y]
+REGULATOR_MAX14577: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MAX14577 [=m]
 
-I2C_OCORES: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y]
+W1: y => mod
+      Direct dependencies: HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2780 [=y] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=n] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-MS5611_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m] && MS5611 [=m]
+JSA1212: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-RC_LOOPBACK: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y]
+CRYPTO_TWOFISH_X86_64: y => no
+      Direct dependencies: CRYPTO [=y] && (X86 [=y] || UML_X86) && 64BIT [=y]
+      Reverse dependencies: CRYPTO_TWOFISH_X86_64_3WAY [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_TWOFISH_AVX_X86_64 [=n] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 

@@ -1,26 +1,30 @@
-FB_MODE_HELPERS: y => no
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
-      Reverse dependencies: FB_ARMCLCD [=m] && (ARM || ARM64 [=y] || COMPILE_TEST [=y]) && FB [=m] && ARM_AMBA [=y] && HAS_IOMEM [=y] && OF [=y] || FB_CLPS711X [=n] && HAS_IOMEM [=y] && FB [=m] && (ARCH_CLPS711X || COMPILE_TEST [=y]) || FB_IMX [=n] && FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=y]) || FB_UVESA [=m] && HAS_IOMEM [=y] && FB [=m] && CONNECTOR [=m] || FB_ATMEL [=m] && FB [=m] && OF [=y] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (HAVE_FB_ATMEL [=n] || COMPILE_TEST [=y]) || FB_NVIDIA [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_RIVA [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_I740 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_I810 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && X86_32 && AGP_INTEL [=n] || FB_LE80578 [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && X86 || FB_INTEL [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] && X86 && AGP_INTEL [=n] && EXPERT [=y] && !DRM_I915 [=n] || FB_RADEON [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_SAVAGE [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_NEOMAGIC [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_3DFX [=n] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_TRIDENT [=m] && HAS_IOMEM [=y] && FB [=m] && PCI [=y] || FB_VT8500 [=n] && HAS_IOMEM [=y] && FB [=m]=y && ARM && ARCH_VT8500 || FB_WM8505 [=n] && FB [=m]=y && HAS_IOMEM [=y] && (ARCH_VT8500 || COMPILE_TEST [=y]) || FB_PXA [=n] && HAS_IOMEM [=y] && FB [=m] && ARCH_PXA && OF [=y] || FB_FSL_DIU [=n] && HAS_IOMEM [=y] && FB [=m] && FSL_SOC || FB_SMSCUFX [=n] && HAS_IOMEM [=y] && FB [=m] && USB [=n] || FB_UDL [=n] && HAS_IOMEM [=y] && FB [=m] && USB [=n] || FB_DA8XX [=m] && FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y]) || FB_SM750 [=n] && STAGING [=n] && FB [=m] && PCI [=y]
+ARM_TIMER_SP804: y => no
+      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && GENERIC_SCHED_CLOCK [=y] && HAVE_CLK [=y]
+      Reverse dependencies: ARCH_BCM2835 [=y] || ARCH_HISI [=y]
 
-MMP_FB: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && MMP_DISP [=y] && FB [=m]
+GAMEPORT: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: JOYSTICK_ANALOG [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_A3D [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_ADI [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] && ADI [=n]!=m || JOYSTICK_COBRA [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GF2K [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GRIP_MP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_GUILLEMOT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_INTERACT [=y] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_SIDEWINDER [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_TMDC [=n] && INPUT [=y] && INPUT_JOYSTICK [=y] || JOYSTICK_JOYDUMP [=y] && INPUT [=y] && INPUT_JOYSTICK [=y]
 
-GAMEPORT_FM801: m => yes
-      Direct dependencies: GAMEPORT [=m] && PCI [=y]
+RESET_SIMPLE: y => no
+      Direct dependencies: RESET_CONTROLLER [=y]
+      Reverse dependencies: CLK_BCM2711_DVP [=y] && (ARCH_BCM2835 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=n] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=y] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=y] || COMPILE_TEST [=n]) && OF [=y]
 
-ARM64_4K_PAGES: y => no
-      Direct dependencies: <choice>
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-CRYPTO_NULL: y => mod
+TRACER_SNAPSHOT_PER_CPU_SWAP: y => no
+      Direct dependencies: FTRACE [=y] && TRACER_SNAPSHOT [=y]
+      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y]
+
+MTD_CFI_I1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=y] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=y] && !MTD_CFI_I2 [=n] && !MTD_CFI_I4 [=n] && !MTD_CFI_I8 [=n]
+
+CRYPTO_DRBG_MENU: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_SEQIV [=y] && CRYPTO [=y] || CRYPTO_ECHAINIV [=m] && CRYPTO [=y] || CRYPTO_USER_API_AEAD [=n] && CRYPTO [=y] && NET [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-MMC_SDHCI_S3C: m => yes
-      Direct dependencies: MMC [=m] && MMC_SDHCI [=m] && (PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS [=y] || COMPILE_TEST [=y])
-
-SCSI_MPT2SAS: m => yes
-      Direct dependencies: SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=m]
-
-BACKLIGHT_PCF50633: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_PCF50633 [=m]
+KASAN_OUTLINE: y => no
+      Direct dependencies: <choice>
 

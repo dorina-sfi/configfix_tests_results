@@ -1,24 +1,31 @@
-SENSORS_ADS7871: m => yes
-      Direct dependencies: HWMON [=m] && SPI [=y]
+CLK_R8A7795: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && (ARCH_R8A77950 [=y] || ARCH_R8A77951 [=n])
 
-SENSORS_TC74: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=m]
+KUNIT_EXAMPLE_TEST: y => no
+      Direct dependencies: KUNIT [=y]
 
-MFD_DA9062: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m]
-
-TINYDRM_ST7586: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && SPI [=y]
-
-REGULATOR_SY8824X: m => yes
-      Direct dependencies: REGULATOR [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
-
-SIGNALFD: y => no
+PINCTRL: y => no
       Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=n] || ARCH_SUNXI [=y] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=y] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=n] || ARCH_QCOM [=y] || ARCH_RENESAS [=y] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-TCG_TIS_I2C_ATMEL: m => yes
-      Direct dependencies: TCG_TPM [=y] && I2C [=m]
+SYSFS: y => no
+      Direct dependencies: y
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-TOUCHSCREEN_HYCON_HY46XX: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+USB_EHCI_ROOT_HUB_TT: y => no
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y]
+      Reverse dependencies: USB_EHCI_FSL [=y] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] || USB_EHCI_MV [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=y] && (ARCH_PXA || ARCH_MMP || COMPILE_TEST [=n]) || USB_CHIPIDEA_HOST [=y] && USB_SUPPORT [=y] && USB_CHIPIDEA [=y] && USB_EHCI_HCD [=y]
+
+POWER_RESET: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
+
+RMI4_F12: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
+
+CRYPTO_POLY1305: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_CHACHA20POLY1305 [=y] && CRYPTO [=y]
 

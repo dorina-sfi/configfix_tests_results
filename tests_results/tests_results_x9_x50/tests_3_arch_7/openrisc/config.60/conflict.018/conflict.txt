@@ -1,23 +1,25 @@
-COMEDI_PCMDA12: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=y] && MAILBOX [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_CMDQ [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
 
-W1_SLAVE_DS250X: m => yes
-      Direct dependencies: W1 [=m]
+REGULATOR_MT6358: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_MT6397 [=m]
 
-I2C_MUX_GPMUX: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (OF [=y] || COMPILE_TEST [=y])
+PACKET_DIAG: m => yes
+      Direct dependencies: NET [=y] && PACKET [=m]
 
-DEBUG_KERNEL: y => no
-      Direct dependencies: y
-      Reverse dependencies: EXPERT [=y]
+MTD_NAND_AMS_DELTA: m => yes
+      Direct dependencies: MTD [=y] && MTD_RAW_NAND [=m] && (MACH_AMS_DELTA || COMPILE_TEST [=y])
 
-COMEDI_NI_USB6501: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_USB_DRIVERS [=m]
+CRYPTO_RSA: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=n] || INTEGRITY_ASYMMETRIC_KEYS [=y] && INTEGRITY [=y] && INTEGRITY_SIGNATURE [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 || COMPILE_TEST [=y] && 64BIT) && ACPI || CRYPTO_DEV_FSL_CAAM_PKC_API [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_FSL_CAAM [=n] && CRYPTO_DEV_FSL_CAAM_JR [=n] || CRYPTO_DEV_CCP_CRYPTO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && CRYPTO_DEV_SP_CCP [=n]
 
-USB_M66592: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && HAS_IOMEM [=y]
+SERIO_LIBPS2: m => yes
+      Direct dependencies: SERIO [=m] && (SERIO_I8042 [=n] || SERIO_I8042 [=n]=n)
+      Reverse dependencies: KEYBOARD_ATKBD [=n] && INPUT [=n] && INPUT_KEYBOARD [=n] || MOUSE_PS2 [=n] && INPUT [=n] && INPUT_MOUSE [=n]
 
-SND_SOC_PCM3168A_I2C: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SOC_J721E_EVM [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (DMA_OMAP [=y] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=y]) && (ARCH_K3 || COMPILE_TEST [=y] && COMMON_CLK [=n]) && I2C [=y]
+RPMSG_NS: y => no
+      Direct dependencies: RPMSG [=y]
+      Reverse dependencies: RPMSG_VIRTIO [=y] && HAS_DMA [=y]
 

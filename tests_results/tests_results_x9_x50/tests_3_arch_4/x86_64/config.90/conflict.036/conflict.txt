@@ -1,14 +1,14 @@
-STACK_VALIDATION: y => no
-      Direct dependencies: HAVE_STACK_VALIDATION [=y]
-      Reverse dependencies: X86 [=y] && HAVE_STACK_VALIDATION [=y] && (HAVE_STATIC_CALL_INLINE [=y] || RETPOLINE [=n]) || UNWINDER_ORC [=y] && <choice> && X86_64 [=y]
+ASYMMETRIC_KEY_TYPE: y => no
+      Direct dependencies: CRYPTO [=y] && KEYS [=y]
+      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
 
-IPMI_SI: y => no
-      Direct dependencies: IPMI_HANDLER [=y]
-      Reverse dependencies: SENSORS_IBMAEM [=n] && HWMON [=y] && IPMI_HANDLER [=y] || SENSORS_IBMPEX [=y] && HWMON [=y] && IPMI_HANDLER [=y]
+MTD_CFI_INTELEXT: m => yes
+      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
 
-KASAN_INLINE: y => no
-      Direct dependencies: <choice> && !ARCH_DISABLE_KASAN_INLINE [=n]
+BMA220: m => yes
+      Direct dependencies: IIO [=m] && SPI [=y]
 
-CRC32_BIT: y => no
-      Direct dependencies: <choice>
+MFD_STMFX: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=n])
+      Reverse dependencies: PINCTRL_STMFX [=n] && PINCTRL [=n] && I2C [=m] && OF_GPIO [=y]
 

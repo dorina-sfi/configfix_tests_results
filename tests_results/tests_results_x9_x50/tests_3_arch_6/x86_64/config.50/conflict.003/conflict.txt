@@ -1,18 +1,23 @@
-CCS811: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+IIO_BUFFER_HW_CONSUMER: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: ADI_AXI_ADC [=y] && IIO [=y] && HAS_IOMEM [=y] && OF [=y] || STM32_DFSDM_ADC [=n] && IIO [=y] && (ARCH_STM32 && OF [=y] || COMPILE_TEST [=n])
 
-EXT4_KUNIT_TESTS: m => yes
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=m] && KUNIT [=y]
+LINEDISP: y => no
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: IMG_ASCII_LCD [=y] && AUXDISPLAY [=y] && HAS_IOMEM [=y] || HT16K33 [=n] && AUXDISPLAY [=y] && FB [=n] && I2C [=y] && INPUT [=y]
 
-SIGNALFD: y => no
+SERIAL_8250: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && !S390
+      Reverse dependencies: MWAVE [=y] && X86 [=y] && TTY [=y]
+
+KASAN_INLINE: y => no
+      Direct dependencies: <choice> && !ARCH_DISABLE_KASAN_INLINE [=n]
+
+CRYPTO_CRCT10DIF: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRC_T10DIF [=y]
+
+THERMAL: y => no
       Direct dependencies: y
-
-I2C_ARB_GPIO_CHALLENGE: m => yes
-      Direct dependencies: I2C [=y] && I2C_MUX [=m] && (GPIOLIB [=y] || COMPILE_TEST [=n]) && (OF [=y] || COMPILE_TEST [=n])
-
-SIGNALFD: y => no
-      Direct dependencies: y
-
-LTPC: m => yes
-      Direct dependencies: NET [=y] && DEV_APPLETALK [=m] && (ISA [=n] || EISA [=y]) && ISA_DMA_API [=y] && VIRT_TO_BUS [=y]
+      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=n] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=y] && ACPI [=y] || ACPI_THERMAL [=y] && ACPI [=y] && ACPI_PROCESSOR [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=n] && PCI [=y] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=n] && MMU [=y] && DRM_ETNAVIV_THERMAL [=n] || MMC_SDHCI_OMAP [=y] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y]
 

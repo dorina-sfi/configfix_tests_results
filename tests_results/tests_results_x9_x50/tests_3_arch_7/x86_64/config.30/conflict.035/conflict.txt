@@ -1,23 +1,24 @@
-KCMP: y => no
+UNWINDER_GUESS: y => no
+      Direct dependencies: <choice> && EXPERT [=y] && !STACKDEPOT [=n]
+
+DAX: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=n] || DRM [=y] && HAS_IOMEM [=y] && (AGP [=y] || AGP [=y]=n) && !EMULATED_CMPXCHG && HAS_DMA [=y]
+      Reverse dependencies: DAX_DRIVER [=y] || FS_DAX [=y] && BLOCK [=y] && MMU [=y] && !ARM && !MIPS && !SPARC
 
-GREYBUS_BRIDGED_PHY: m => yes
-      Direct dependencies: STAGING [=y] && GREYBUS [=m]
-
-SDM_LPASSCC_845: m => yes
-      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
-
-RTC_DRV_DS17885: y => no
+LEGACY_VSYSCALL_EMULATE: y => no
       Direct dependencies: <choice>
 
-FB_DA8XX: m => yes
-      Direct dependencies: FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_DAVINCI_DA8XX || SOC_AM33XX || COMPILE_TEST [=y])
+DEFAULT_SECURITY_DAC: y => no
+      Direct dependencies: <choice>
 
-W1_MASTER_GPIO: m => yes
-      Direct dependencies: W1 [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
+HZ_250: y => no
+      Direct dependencies: <choice>
 
-FAIR_GROUP_SCHED: y => no
-      Direct dependencies: CGROUPS [=y] && CGROUP_SCHED [=y]
-      Reverse dependencies: SCHED_AUTOGROUP [=y]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
+
+LIBNVDIMM: y => no
+      Direct dependencies: PHYS_ADDR_T_64BIT [=y] && HAS_IOMEM [=y] && BLK_DEV [=y]
+      Reverse dependencies: X86_PMEM_LEGACY [=y] && PHYS_ADDR_T_64BIT [=y] && BLK_DEV [=y] || ACPI_NFIT [=n] && ACPI [=n] && PHYS_ADDR_T_64BIT [=y] && BLK_DEV [=y] && ARCH_HAS_PMEM_API [=y]
 

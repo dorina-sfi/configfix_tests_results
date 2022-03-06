@@ -1,16 +1,15 @@
-IIO_SW_TRIGGER: m => yes
-      Direct dependencies: IIO [=m]
+DEBUG_FS_DISALLOW_MOUNT: y => no
+      Direct dependencies: <choice>
 
-AD7291: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
+TOUCHSCREEN_USB_EASYTOUCH: y => no
+      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && TOUCHSCREEN_USB_COMPOSITE [=y]
 
-I2C_MT65XX: m => yes
-      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y])
+LOCK_DOWN_KERNEL_FORCE_INTEGRITY: y => no
+      Direct dependencies: <choice>
 
-CHARLCD: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=m] && AUXDISPLAY [=y] && I2C [=m]
+USB_MUSB_HOST: y => no
+      Direct dependencies: <choice> && (USB [=y]=y || USB [=y]=USB_MUSB_HDRC [=y])
 
-DRM_PANEL_ARM_VERSATILE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && MFD_SYSCON [=y]
+MPSC: y => no
+      Direct dependencies: <choice> && X86_64 [=y]
 

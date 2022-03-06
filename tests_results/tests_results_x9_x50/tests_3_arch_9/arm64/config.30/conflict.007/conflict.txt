@@ -1,29 +1,32 @@
-MMC_DW_PLTFM: y => mod
-      Direct dependencies: MMC [=y] && MMC_DW [=y]
-      Reverse dependencies: MMC_DW_BLUEFIELD [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_EXYNOS [=y] && MMC [=y] && MMC_DW [=y] || MMC_DW_HI3798CV200 [=m] && MMC [=y] && MMC_DW [=y] || MMC_DW_K3 [=n] && MMC [=y] && MMC_DW [=y] || MMC_DW_ROCKCHIP [=n] && MMC [=y] && MMC_DW [=y] && ARCH_ROCKCHIP [=n]
+CRYPTO_CHACHA20_NEON: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
+      Reverse dependencies: WIREGUARD [=y] && NETDEVICES [=y] && NET_CORE [=y] && NET [=y] && INET [=y] && (IPV6 [=n] || !IPV6 [=n]) && (ARM || ARM64 [=y] && KERNEL_MODE_NEON [=y])
 
-SENSORS_INA3221: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+MTD_COMPLEX_MAPPINGS: y => no
+      Direct dependencies: MTD [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_HYPERBUS [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=y] && MTD [=y] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=y] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=y] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=y] && ARM
 
-VIDEO_IMX219: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+IMA_DEFAULT_HASH_SHA1: y => no
+      Direct dependencies: <choice> && CRYPTO_SHA1 [=y]=y
 
-SND_SOC_SNOW: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && I2C [=y]
+B53: y => no
+      Direct dependencies: NETDEVICES [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_BCM_SF2 [=y] && NETDEVICES [=y] && NET_DSA [=y] && HAS_IOMEM [=y]
 
-VIDEO_BT866: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_AVS6EYES [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+CONSOLE_TRANSLATIONS: y => no
+      Direct dependencies: TTY [=y] && VT [=y]
 
-SND_SOC_CS43130: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+JFFS2_ZLIB: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && JFFS2_FS [=y]
 
-VIDEO_MT9P031: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+CLK_R8A779A0: y => no
+      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
+      Reverse dependencies: CLK_RENESAS [=y] && COMMON_CLK [=y] && ARCH_R8A779A0 [=y]
 
-USB_ZR364XX: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && VIDEO_V4L2 [=m]
+ZONE_DMA: y => no
+      Direct dependencies: y
 
-COMMON_CLK_MT6779_AUDSYS: m => yes
-      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=y] || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
+NET_DSA_TAG_SJA1105: y => no
+      Direct dependencies: NET [=y] && NET_DSA [=y]
+      Reverse dependencies: NET_DSA_SJA1105 [=y] && NETDEVICES [=y] && NET_DSA [=y] && SPI [=y] && PTP_1588_CLOCK_OPTIONAL [=y]
 

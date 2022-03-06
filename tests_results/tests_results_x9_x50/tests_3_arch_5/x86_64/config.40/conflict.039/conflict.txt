@@ -1,17 +1,18 @@
-CAN_GRCAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && OF [=y] && HAS_DMA [=y] && HAS_IOMEM [=y]
+SENSORS_DELL_SMM: y => no
+      Direct dependencies: HWMON [=y] && X86 [=y]
+      Reverse dependencies: I8K [=y] && HWMON [=y] && PROC_FS [=y]
 
-SERIO_I8042: y => mod
-      Direct dependencies: SERIO [=y] && ARCH_MIGHT_HAVE_PC_SERIO [=y]
-      Reverse dependencies: KEYBOARD_ATKBD [=y] && INPUT [=y] && INPUT_KEYBOARD [=y] && ARCH_MIGHT_HAVE_PC_SERIO [=y] || MOUSE_PS2 [=m] && INPUT [=y] && INPUT_MOUSE [=y] && ARCH_MIGHT_HAVE_PC_SERIO [=y]
+PSTORE_ZSTD_COMPRESS_DEFAULT: y => no
+      Direct dependencies: <choice>
 
-CRYPTO_XXHASH: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
+MTD_MAP_BANK_WIDTH_1: y => no
+      Direct dependencies: MTD [=y]
+      Reverse dependencies: MTD_CFI_GEOMETRY [=n] && MTD [=y] && MTD_CFI_ADV_OPTIONS [=n] && !MTD_MAP_BANK_WIDTH_2 [=y] && !MTD_MAP_BANK_WIDTH_4 [=y] && !MTD_MAP_BANK_WIDTH_8 [=n] && !MTD_MAP_BANK_WIDTH_16 [=n] && !MTD_MAP_BANK_WIDTH_32 [=n]
 
-COMEDI_DT2814: m => yes
-      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
+THERMAL_DEFAULT_GOV_STEP_WISE: y => no
+      Direct dependencies: <choice>
 
-INTEL_TH_PTI: m => yes
-      Direct dependencies: INTEL_TH [=m]
+MIGRATION: y => no
+      Direct dependencies: (NUMA [=n] || ARCH_ENABLE_MEMORY_HOTREMOVE [=y] || COMPACTION [=y] || CMA [=y]) && MMU [=y]
+      Reverse dependencies: COMPACTION [=y] && MMU [=y] || CMA [=y] && MMU [=y]
 

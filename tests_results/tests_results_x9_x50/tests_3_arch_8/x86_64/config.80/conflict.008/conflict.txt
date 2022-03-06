@@ -1,25 +1,28 @@
-SENSORS_VT1211: m => yes
-      Direct dependencies: HWMON [=m] && !PPC
+VIDEO_OV7740: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
 
-SND_BCM63XX_I2S_WHISTLER: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+SND_CTXFI: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_PCI [=y]
 
-FB_SIMPLE: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && !DRM_SIMPLEDRM [=m]
+RTC_DRV_DS17285: y => no
+      Direct dependencies: <choice>
 
-SENSORS_G762: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-USB_CDNS3_IMX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_CDNS3 [=m] && (ARCH_MXC || COMPILE_TEST [=y])
-
-W1_SLAVE_DS2780: m => no
+W1_SLAVE_DS2781: m => no
       Direct dependencies: W1 [=y]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+      Reverse dependencies: BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
 
-FB_UVESA: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && CONNECTOR [=y]
+IIO_BUFFER_CB: m => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=m] && INPUT [=y] && INPUT_JOYSTICK [=y] && IIO [=y] || TOUCHSCREEN_ADC [=m] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=m] && (ARCH_STM32 || COMPILE_TEST [=n]) && SND_SOC [=n] && STM32_DFSDM_ADC [=n] || LMP91000 [=m] && IIO [=y] && I2C [=y]
 
-DLN2_ADC: m => yes
-      Direct dependencies: IIO [=y] && MFD_DLN2 [=m]
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+
+RELOCATABLE: y => no
+      Direct dependencies: y
+      Reverse dependencies: EFI_STUB [=y] && EFI [=y] && !X86_USE_3DNOW [=n] && (y || X86_32 [=n])
+
+CGROUPS: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCHED_AUTOGROUP [=y]
 

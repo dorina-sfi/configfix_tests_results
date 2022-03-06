@@ -1,21 +1,20 @@
-SND_SOC_PCM186X_SPI: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SPI_MASTER [=y]
+COMEDI_ADV_PCI1760: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_PCI_DRIVERS [=m]
 
-LCD_TDO24M: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && LCD_CLASS_DEVICE [=m] && SPI_MASTER [=y]
+MIPI_I3C_HCI: m => yes
+      Direct dependencies: I3C [=m] && HAS_IOMEM [=y]
 
-CRYPTO_ECDSA: y => mod
+VIDEO_SAA717X: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && VIDEO_V4L2 [=m] && I2C [=y]
+      Reverse dependencies: VIDEO_IVTV [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=m] && PCI [=y] && I2C [=y] && RC_CORE [=n]
+
+IP_VS_DH: m => yes
+      Direct dependencies: NET [=y] && NETFILTER [=y] && IP_VS [=m]
+
+CRYPTO_CAST5: m => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: MODULE_SIG_KEY_TYPE_ECDSA [=y] && <choice>
+      Reverse dependencies: CRYPTO_CAST5_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
 
-SND_SOC_WM8978: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_SIU_MIGOR [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && SH_MIGOR && I2C [=y]
-
-CRYPTO_SERPENT: y => no
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SERPENT_SSE2_X86_64 [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y] || CRYPTO_SERPENT_SSE2_586 [=n] && CRYPTO [=y] && X86 [=y] && !64BIT [=y] || CRYPTO_SERPENT_AVX_X86_64 [=m] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
-
-DRM_TOSHIBA_TC358767: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_BRIDGE [=y] && OF [=y]
+SMS_SDIO_DRV: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PLATFORM_SUPPORT [=y] && DVB_CORE [=m] && HAS_DMA [=y] && MMC [=y] && (!RC_CORE [=n] || RC_CORE [=n])
 

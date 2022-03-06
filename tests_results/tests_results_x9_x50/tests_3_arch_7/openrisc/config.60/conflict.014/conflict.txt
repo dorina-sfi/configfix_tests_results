@@ -1,22 +1,23 @@
-SERIAL_8250_BCM7271: m => yes
-      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250 [=m] && (ARCH_BRCMSTB || COMPILE_TEST [=y])
+EXTCON_USB_GPIO: m => yes
+      Direct dependencies: EXTCON [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-USB_RAW_GADGET: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m]
+SERIO_APBPS2: m => yes
+      Direct dependencies: SERIO [=m] && OF [=y] && HAS_IOMEM [=y]
 
-SENSORS_PXE1610: m => yes
-      Direct dependencies: HWMON [=m] && PMBUS [=m]
+REGULATOR_AXP20X: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_AXP20X [=m]
 
-TCG_TIS_SYNQUACER: m => yes
-      Direct dependencies: TCG_TPM [=m] && (ARCH_SYNQUACER || COMPILE_TEST [=y])
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-CONFIGFS_FS: y => no
-      Direct dependencies: y
-      Reverse dependencies: TARGET_CORE [=m] && BLOCK [=y] || PCI_ENDPOINT_CONFIGFS [=n] && PCI [=n] && PCI_ENDPOINT [=n] || PCI_EPF_NTB [=n] && PCI [=n] && PCI_ENDPOINT [=n] || BLK_DEV_NULL_BLK [=n] && BLK_DEV [=y] || GPIO_SIM [=n] && GPIOLIB [=y] || USB_LIBCOMPOSITE [=m] && USB_SUPPORT [=y] && USB_GADGET [=m] || IIO_CONFIGFS [=n] && IIO [=n] || STM [=m]
+LEDS_CLASS_FLASH: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m]
 
-SLOB: y => no
-      Direct dependencies: <choice> && EXPERT [=y] && !PREEMPT_RT [=n]
+REGULATOR_TPS65086: m => yes
+      Direct dependencies: REGULATOR [=y] && MFD_TPS65086 [=m]
 
-SND_SOC_JZ4725B_CODEC: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && (MACH_INGENIC || COMPILE_TEST [=y]) && OF [=y]
+NLS_UTF8: y => no
+      Direct dependencies: NLS [=y]
+      Reverse dependencies: HFSPLUS_FS [=m] && MISC_FILESYSTEMS [=y] && BLOCK [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] && MULTIUSER [=y] && FILE_LOCKING [=n]
 

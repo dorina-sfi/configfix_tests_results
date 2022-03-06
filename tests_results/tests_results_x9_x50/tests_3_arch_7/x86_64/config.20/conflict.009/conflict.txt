@@ -1,23 +1,25 @@
-SND_SOC_TAS571X: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+HID_KEYTOUCH: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 
-USB_ADUTUX: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=m]
+SIOX_BUS_GPIO: m => yes
+      Direct dependencies: SIOX [=m]
 
-LEDS_LP8501: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y] && LEDS_LP55XX_COMMON [=m]
+NF_SOCKET_IPV4: m => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y]
+      Reverse dependencies: NFT_SOCKET [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && (IPV6 [=n] || IPV6 [=n]=n) || NETFILTER_XT_MATCH_SOCKET [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=y] && NETFILTER_ADVANCED [=y] && (IPV6 [=n] || IPV6 [=n]=n) && (IP6_NF_IPTABLES [=n] || IP6_NF_IPTABLES [=n]=n)
 
-CHARLCD: y => mod
-      Direct dependencies: AUXDISPLAY [=y]
-      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=m] && AUXDISPLAY [=y] && I2C [=y]
+CRYPTO_DRBG_MENU: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
 
-RESET_CONTROLLER: y => no
+MD_RAID456: m => no
+      Direct dependencies: MD [=y] && BLK_DEV_MD [=y]
+      Reverse dependencies: DM_RAID [=m] && MD [=y] && BLK_DEV_DM [=y]
+
+CRC_CCITT: y => no
       Direct dependencies: y
-      Reverse dependencies: SCSI_UFS_QCOM [=n] && SCSI_LOWLEVEL [=n] && SCSI [=n] && SCSI_UFSHCD [=n] && SCSI_UFSHCD_PLATFORM [=n] && ARCH_QCOM || HISI_FEMAC [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_HISILICON [=n] && HAS_IOMEM [=y] || SPARX5_SWITCH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_MICROCHIP [=n] && NET_SWITCHDEV [=n] && HAS_IOMEM [=y] && OF [=y] && (ARCH_SPARX5 || COMPILE_TEST [=n]) || STMMAC_ETH [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_STMICRO [=n] && HAS_IOMEM [=y] && HAS_DMA [=y] && PTP_1588_CLOCK_OPTIONAL [=y] || I2C_RCAR [=n] && I2C [=y] && HAS_IOMEM [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) && ARCH_RCAR_GEN3 [=n] || ASM9260_WATCHDOG [=n] && WATCHDOG [=y] && (MACH_ASM9260 || COMPILE_TEST [=n]) && OF [=y] || MEDIATEK_WATCHDOG [=n] && WATCHDOG [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) || VIDEO_RCAR_CSI2 [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || VIDEO_RCAR_ISP [=n] && MEDIA_SUPPORT [=n] && MEDIA_PLATFORM_SUPPORT [=n] && V4L_PLATFORM_DRIVERS [=n] && VIDEO_V4L2 [=n] && OF [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || DRM_STI [=n] && HAS_IOMEM [=y] && OF [=y] && DRM [=y] && (ARCH_STI || ARCH_MULTIPLATFORM) || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=m] && USB_GADGET [=y] || USB_EHCI_HCD [=m] && !USB_GADGET [=y] || !USB_EHCI_HCD [=m] && USB_GADGET [=y]) && HAS_DMA [=y] || MMC_SDHI [=n] && MMC [=y] && (SUPERH || ARCH_RENESAS || COMPILE_TEST [=n]) && ARCH_RENESAS || COMMON_CLK_GEMINI [=n] && COMMON_CLK [=y] && (ARCH_GEMINI || COMPILE_TEST [=n]) || COMMON_CLK_ASPEED [=n] && COMMON_CLK [=y] && (ARCH_ASPEED || COMPILE_TEST [=n]) || CLK_ACTIONS [=n] && COMMON_CLK [=y] && (ARCH_ACTIONS || COMPILE_TEST [=n]) || CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 || COMPILE_TEST [=n]) && COMMON_CLK [=y] || RESET_HISI [=n] && COMMON_CLK [=y] && (ARCH_HISI || COMPILE_TEST [=n]) || COMMON_CLK_QCOM [=n] && COMMON_CLK [=y] && OF [=y] && (ARCH_QCOM || COMPILE_TEST [=n]) || SUNXI_CCU [=n] && COMMON_CLK [=y] && (ARCH_SUNXI || COMPILE_TEST [=n]) || CLK_BT1_CCU_DIV [=n] && COMMON_CLK [=y] && CLK_BAIKAL_T1 [=n] || COMMON_CLK_MEDIATEK [=n] && COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=n]) || COMMON_CLK_MESON_AO_CLKC [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) || COMMON_CLK_MESON8B [=n] && COMMON_CLK [=y] && (ARCH_MESON || COMPILE_TEST [=n]) && ARM || CLK_RCAR_USB2_CLOCK_SEL [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] && (ARCH_RENESAS || COMPILE_TEST [=n]) || CLK_RZG2L [=n] && COMMON_CLK [=y] && CLK_RENESAS [=n] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || BCM2835_POWER [=n] && (ARCH_BCM2835 || COMPILE_TEST [=n] && OF [=y]) || RENESAS_RPCIF [=n] && MEMORY [=y] && (ARCH_RENESAS || COMPILE_TEST [=n]) || PHY_ATH79_USB [=n] && OF [=y] && (ATH79 || COMPILE_TEST [=n]) || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP || COMPILE_TEST [=n])
+      Reverse dependencies: CAIF [=m] && NET [=y] || NFC_DIGITAL [=m] && NET [=y] && NFC [=m] || NFC_NCI_SPI [=m] && NET [=y] && NFC_NCI [=m] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=n] || MAC802154 [=n] && NET [=y] && IEEE802154 [=m] || NETLABEL [=y] && NET [=y] && INET [=y] && SECURITY [=y] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_SER_HDX [=n] && NET [=y] && HAMRADIO [=n] && AX25 [=n] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=m] && AX25 [=n] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=n] && PARPORT [=m] && AX25 [=n] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=m] && NFC_NCI [=m] || NFC_PN544 [=n] && NET [=y] && NFC [=m] || NFC_MICROREAD [=n] && NET [=y] && NFC [=m] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=m] || VIA_VELOCITY [=n] && NETDEVICES [=n] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=n] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=n] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=m] || RT2800PCI [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=n] || RT2800USB [=n] && NETDEVICES [=n] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=n] && MISDN [=n]!=n || TOUCHSCREEN_ILI210X [=y] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=m] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=m] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=m]
 
-CROS_KBD_LED_BACKLIGHT: m => yes
-      Direct dependencies: CHROME_PLATFORMS [=y] && LEDS_CLASS [=m] && ACPI [=y]
-
-MFD_VIPERBOARD: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && USB [=m]
+HID_LENOVO: m => yes
+      Direct dependencies: INPUT [=y] && HID [=m]
 

@@ -1,15 +1,17 @@
-HID_ELECOM: m => yes
-      Direct dependencies: INPUT [=m] && HID [=m]
+SND_SOC_RT5631: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+      Reverse dependencies: SND_SOC_ARNDALE [=n] && SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_SAMSUNG [=n] && I2C [=y]
 
-RTC_DRV_BD70528: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_ROHM_BD71828 [=m]
+CPCAP_ADC: m => yes
+      Direct dependencies: IIO [=m] && MFD_CPCAP [=y]
 
-SERIO_SUN4I_PS2: m => yes
-      Direct dependencies: SERIO [=m] && (ARCH_SUNXI || COMPILE_TEST [=y])
+SND_SOC_SSM2602_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-REGULATOR_LP87565: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TI_LP87565 [=m] && OF [=y]
+NVMEM_SYSFS: y => no
+      Direct dependencies: NVMEM [=y] && SYSFS [=y]
+      Reverse dependencies: EEPROM_AT24 [=n] && I2C [=y] && SYSFS [=y] || EEPROM_AT25 [=n] && SPI [=y] && SYSFS [=y] || EEPROM_93XX46 [=y] && SPI [=y] && SYSFS [=y]
 
-IR_GPIO_TX: m => yes
-      Direct dependencies: RC_CORE [=m] && RC_DEVICES [=y] && LIRC [=y] && (OF [=y] && GPIOLIB [=y] || COMPILE_TEST [=y])
+ELF_CORE: y => no
+      Direct dependencies: COREDUMP [=y]
 

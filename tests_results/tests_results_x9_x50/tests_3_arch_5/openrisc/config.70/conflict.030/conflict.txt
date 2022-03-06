@@ -1,15 +1,16 @@
-MMA8452: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+CAN_DEV: m => yes
+      Direct dependencies: NET [=y] && CAN [=m]
 
-BMG160: m => yes
-      Direct dependencies: IIO [=y] && (I2C [=m] || SPI_MASTER [=n])
+DEBUG_MUTEXES: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] && !PREEMPT_RT [=n]
+      Reverse dependencies: PROVE_LOCKING [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_WW_MUTEX_SLOWPATH [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] && !PREEMPT_RT [=n]
 
-TOUCHSCREEN_ILI210X: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && I2C [=m]
+CAN_SUN4I: m => yes
+      Direct dependencies: NET [=y] && CAN [=m] && CAN_DEV [=m] && (MACH_SUN4I || MACH_SUN7I || COMPILE_TEST [=y])
 
-ST_UVIS25: m => yes
-      Direct dependencies: IIO [=y] && (I2C [=m] || SPI [=n])
+BT_HCIDTL1: m => yes
+      Direct dependencies: NET [=y] && BT [=y] && PCMCIA [=m]
 
-SCR24X: m => yes
-      Direct dependencies: PCMCIA [=m]
+NFC_DIGITAL: m => yes
+      Direct dependencies: NET [=y] && NFC [=m]
 

@@ -1,24 +1,26 @@
-SENSORS_SHT3x: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
-
-TRACER_SNAPSHOT: y => no
-      Direct dependencies: FTRACE [=y]
-      Reverse dependencies: IRQSOFF_TRACER [=y] && FTRACE [=y] && TRACE_IRQFLAGS_SUPPORT [=y] || PREEMPT_TRACER [=n] && FTRACE [=y] && PREEMPTION [=y] || SCHED_TRACER [=y] && FTRACE [=y]
-
-CRYPTO_DRBG_MENU: y => mod
+CRYPTO_CHACHA20POLY1305: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_RNG_DEFAULT [=y] && CRYPTO [=y]
+      Reverse dependencies: CRYPTO_DEV_SAFEXCEL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (OF [=y] || PCI [=n] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
 
-FXLS8962AF_I2C: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+SYSC_RCAR: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: SYSC_R8A77995 [=n] && SOC_RENESAS [=y] || SYSC_R8A7794 [=n] && SOC_RENESAS [=y] || SYSC_R8A77990 [=y] && SOC_RENESAS [=y] || SYSC_R8A7779 [=n] && SOC_RENESAS [=y] || SYSC_R8A7790 [=n] && SOC_RENESAS [=y] || SYSC_R8A7795 [=n] && SOC_RENESAS [=y] || SYSC_R8A7791 [=n] && SOC_RENESAS [=y] || SYSC_R8A77965 [=n] && SOC_RENESAS [=y] || SYSC_R8A77960 [=n] && SOC_RENESAS [=y] || SYSC_R8A77961 [=n] && SOC_RENESAS [=y] || SYSC_R8A7792 [=n] && SOC_RENESAS [=y] || SYSC_R8A77980 [=y] && SOC_RENESAS [=y] || SYSC_R8A77970 [=n] && SOC_RENESAS [=y] || SYSC_R8A77470 [=n] && SOC_RENESAS [=y] || SYSC_R8A7745 [=n] && SOC_RENESAS [=y] || SYSC_R8A7742 [=n] && SOC_RENESAS [=y] || SYSC_R8A7743 [=n] && SOC_RENESAS [=y] || SYSC_R8A774C0 [=n] && SOC_RENESAS [=y] || SYSC_R8A774E1 [=n] && SOC_RENESAS [=y] || SYSC_R8A774A1 [=y] && SOC_RENESAS [=y] || SYSC_R8A774B1 [=n] && SOC_RENESAS [=y]
 
-DA9062_WATCHDOG: m => yes
-      Direct dependencies: WATCHDOG [=y] && (MFD_DA9062 [=m] || COMPILE_TEST [=n]) && I2C [=y]
+CPU_BIG_ENDIAN: y => no
+      Direct dependencies: <choice> && (!LD_IS_LLD [=n] || LLD_VERSION [=0]>=130000)
 
-CARDBUS: y => no
-      Direct dependencies: PCCARD [=m] && PCI [=y]
-      Reverse dependencies: YENTA [=m] && PCCARD [=m] && PCI [=y] && !EXPERT [=n]
+ARM64_CRYPTO: y => no
+      Direct dependencies: CRYPTO [=y] && ARM64 [=y]
+      Reverse dependencies: WIREGUARD [=n] && NETDEVICES [=n] && NET_CORE [=n] && NET [=n] && INET [=n] && (IPV6 [=n] || !IPV6 [=n]) && ARM64 [=y] || CRYPTO_DEV_SA2UL [=y] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_K3 [=y] || COMPILE_TEST [=n])
 
-IPMI_IPMB: m => yes
-      Direct dependencies: IPMI_HANDLER [=m] && I2C [=y] && I2C_SLAVE [=y]
+MTD_SPI_NOR_SWP_KEEP: y => no
+      Direct dependencies: <choice>
+
+MEMBARRIER: y => no
+      Direct dependencies: y
+      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
+
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
 

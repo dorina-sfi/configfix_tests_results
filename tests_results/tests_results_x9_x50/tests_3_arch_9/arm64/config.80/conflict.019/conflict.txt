@@ -1,29 +1,30 @@
-CLK_RCAR_CPG_LIB: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: ARCH_EXYNOS [=y] || S3C2410_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 
-REGULATOR_MAX77650: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_MAX77650 [=m] || COMPILE_TEST [=n])
+SCD30_CORE: m => yes
+      Direct dependencies: IIO [=m]
 
-MTD_OF_PARTS: m => yes
-      Direct dependencies: MTD [=m] && OF [=y]
+DRM_VGEM: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && MMU [=y]
+      Reverse dependencies: DRM_I915_DEBUG [=n] && HAS_IOMEM [=y] && DRM_I915 [=n] && EXPERT [=y] && !COMPILE_TEST [=n]
 
-TOUCHSCREEN_WDT87XX_I2C: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
+DRM_MALI_DISPLAY: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (ARM || ARM64 [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y]
 
-ASYMMETRIC_KEY_TYPE: y => no
-      Direct dependencies: CRYPTO [=y] && KEYS [=y]
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=y] || INTEGRITY_ASYMMETRIC_KEYS [=n] && INTEGRITY [=n] && INTEGRITY_SIGNATURE [=n]
+DRM_BOCHS: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && MMU [=y]
 
-SPMI_HISI3670: m => yes
-      Direct dependencies: SPMI [=m] && HAS_IOMEM [=y]
+SND_SOC_TLV320AIC3X_I2C: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
 
-LEDS_MAX8997: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_MAX8997 [=y]
+MTD_MTDRAM: m => yes
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
 
-ALTERA_FREEZE_BRIDGE: m => yes
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
+IIO_CONFIGFS: m => yes
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: IIO_SW_DEVICE [=m] && IIO [=m] || IIO_SW_TRIGGER [=n] && IIO [=m]
 
-REGULATOR_DA9062: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_DA9062 [=m]
+BACKLIGHT_RT4831: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && MFD_RT4831 [=m]
 

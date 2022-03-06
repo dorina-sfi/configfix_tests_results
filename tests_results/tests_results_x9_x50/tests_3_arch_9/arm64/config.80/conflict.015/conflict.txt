@@ -1,32 +1,30 @@
-SECURITY_PATH: y => no
-      Direct dependencies: SECURITY [=y]
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=n] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=n] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
+SND_SOC_LPASS_RX_MACRO: m => yes
+      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y]
 
-CRYPTO_JITTERENTROPY: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+KASAN_STACK: y => no
+      Direct dependencies: KASAN [=y] && (KASAN_GENERIC [=y] || KASAN_SW_TAGS [=n]) && !ARCH_DISABLE_KASAN_INLINE [=n]
 
-CRYPTO_LIB_CHACHA: y => no
-      Direct dependencies: CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n])
-      Reverse dependencies: CRYPTO_LIB_CHACHA20POLY1305 [=y] && CRYPTO [=y] && (CRYPTO_ARCH_HAVE_LIB_CHACHA [=n] || !CRYPTO_ARCH_HAVE_LIB_CHACHA [=n]) && (CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n] || !CRYPTO_ARCH_HAVE_LIB_POLY1305 [=n])
+IMX_GPCV2_PM_DOMAINS: y => no
+      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=n] && OF [=y]) && PM [=y]
+      Reverse dependencies: ARCH_MXC [=y]
 
-GPIO_LP873X: m => yes
-      Direct dependencies: GPIOLIB [=y] && MFD_TI_LP873X [=m]
+DEBUG_LIST: y => no
+      Direct dependencies: DEBUG_KERNEL [=y] || BUG_ON_DATA_CORRUPTION [=y]
+      Reverse dependencies: BUG_ON_DATA_CORRUPTION [=y]
 
-ALTERA_FREEZE_BRIDGE: m => yes
-      Direct dependencies: FPGA [=y] && FPGA_BRIDGE [=m] && HAS_IOMEM [=y]
-
-RST_RCAR: y => no
-      Direct dependencies: SOC_RENESAS [=y]
-      Reverse dependencies: ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y]
-
-I2C_ALGOPCA: m => yes
-      Direct dependencies: I2C [=y]
-      Reverse dependencies: I2C_PCA_PLATFORM [=m] && I2C [=y] && HAS_IOMEM [=y] || I2C_PCA_ISA [=n] && I2C [=y] && HAS_IOMEM [=y] && ISA
-
-TOUCHSCREEN_BU21013: m => yes
+TOUCHSCREEN_TSC2007: m => yes
       Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y]
 
-SENSORS_VEXPRESS: m => yes
-      Direct dependencies: HWMON [=y] && VEXPRESS_CONFIG [=m]
+CRYPTO_SHA3: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_SHA3_ARM64 [=m] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=y] || COMPILE_TEST [=n]) && HAS_IOMEM [=y]
+
+UIO_NETX: m => yes
+      Direct dependencies: UIO [=m] && PCI [=y]
+
+INTEL_QEP: m => yes
+      Direct dependencies: COUNTER [=m] && PCI [=y]
+
+HID_PLAYSTATION: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m] && LEDS_CLASS_MULTICOLOR [=m]
 

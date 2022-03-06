@@ -1,16 +1,20 @@
-SENSORS_MAX16601: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+ACPI_CONTAINER: y => no
+      Direct dependencies: ACPI [=y]
+      Reverse dependencies: ACPI_HOTPLUG_CPU [=y] && ACPI [=y] && ACPI_PROCESSOR [=y] && HOTPLUG_CPU [=y]
 
-FPGA_REGION: m => yes
-      Direct dependencies: FPGA [=m] && FPGA_BRIDGE [=m]
-      Reverse dependencies: FPGA_DFL [=m] && FPGA [=m] && HAS_IOMEM [=y]
+IIO_KFIFO_BUF: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: AD5933 [=n] && STAGING [=y] && IIO [=y] && I2C [=y] || IIO_TRIGGERED_BUFFER [=y] && IIO [=y] && IIO_BUFFER [=y] || SCA3000 [=n] && IIO [=y] && SPI [=n] || INA2XX_ADC [=n] && IIO [=y] && I2C [=y] && !SENSORS_INA2XX [=y] || TI_AM335X_ADC [=n] && IIO [=y] && MFD_TI_AM335X_TSCADC [=n] && HAS_DMA [=y] || IIO_SCMI [=n] && IIO [=y] && ARM_SCMI_PROTOCOL [=n] || IIO_SSP_SENSORS_COMMONS [=n] && IIO [=y] && IIO_SSP_SENSORHUB [=n] || IIO_SIMPLE_DUMMY_BUFFER [=n] && IIO [=y] && IIO_SIMPLE_DUMMY [=n] || MAX30100 [=y] && IIO [=y] && I2C [=y] || MAX30102 [=y] && IIO [=y] && I2C [=y] || IIO_ST_LSM6DSX [=y] && IIO [=y] && (I2C [=y] || SPI [=n] || I3C [=y]) || ACPI_ALS [=y] && IIO [=y] && ACPI [=y] || APDS9960 [=y] && IIO [=y] && I2C [=y] || ISL29501 [=y] && IIO [=y] && I2C [=y]
 
-STM_DUMMY: m => yes
-      Direct dependencies: STM [=m]
+DVB_RTL2832: y => no
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && I2C_MUX [=y]
+      Reverse dependencies: DVB_USB_RTL28XXU [=y] && USB [=y] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=y] && I2C_MUX [=y] || DVB_RTL2832_SDR [=n] && MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=y] && I2C [=y] && I2C_MUX [=y] && VIDEO_V4L2 [=n] && MEDIA_SDR_SUPPORT [=y] && USB [=y]
 
-REGULATOR_LM363X: m => yes
-      Direct dependencies: REGULATOR [=y] && MFD_TI_LMU [=m]
+THERMAL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ACPI_VIDEO [=n] && ACPI [=y] && X86 [=y] && BACKLIGHT_CLASS_DEVICE [=y] && INPUT [=y] || ACPI_CPU_FREQ_PSS [=y] && ACPI [=y] || ACPI_THERMAL [=n] && ACPI [=y] && ACPI_PROCESSOR [=y] || DRM_NOUVEAU [=n] && HAS_IOMEM [=y] && DRM [=y] && PCI [=n] && MMU [=y] && ACPI [=y] && X86 [=y] || DRM_ETNAVIV [=n] && HAS_IOMEM [=y] && DRM [=y] && MMU [=y] && DRM_ETNAVIV_THERMAL [=n] || MMC_SDHCI_OMAP [=n] && MMC [=n] && MMC_SDHCI_PLTFM [=n] && OF [=n]
 
-LEDS_LM3601X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && LEDS_CLASS [=y] && I2C [=y]
+RMI4_F11: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=y]
+      Reverse dependencies: HID_RMI [=y] && INPUT [=y] && HID [=y]
 

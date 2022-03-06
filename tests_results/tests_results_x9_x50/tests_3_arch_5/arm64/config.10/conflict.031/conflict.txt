@@ -1,19 +1,16 @@
-SECURITYFS: y => no
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
+
+KEYBOARD_LKKBD: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y]
+
+PINCTRL: y => no
       Direct dependencies: y
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_SAFESETID [=y] && SECURITY [=y] || IMA [=n] && INTEGRITY [=n]
+      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=n] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=y] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=n] || ARCH_QCOM [=n] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=n] || ARCH_TEGRA [=y] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 
-SLAB: y => no
-      Direct dependencies: <choice> && !PREEMPT_RT [=n]
+BMC150_MAGN_I2C: m => yes
+      Direct dependencies: IIO [=m] && I2C [=y]
 
-CRYPTO_AES_ARM64_CE: y => no
-      Direct dependencies: CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y]
-      Reverse dependencies: CRYPTO_AES_ARM64_CE_CCM [=n] && CRYPTO [=y] && ARM64_CRYPTO [=y] && ARM64 [=y] && KERNEL_MODE_NEON [=y] || CRYPTO_AES_ARM64_CE_BLK [=y] && CRYPTO [=y] && ARM64_CRYPTO [=y] && KERNEL_MODE_NEON [=y]
-
-DNS_RESOLVER: y => no
-      Direct dependencies: NET [=y] && KEYS [=y]
-      Reverse dependencies: CEPH_LIB_USE_DNS_RESOLVER [=y] && NET [=y] && CEPH_LIB [=y] || NFS_USE_KERNEL_DNS [=n] && NETWORK_FILESYSTEMS [=n] && NFS_V4 [=n] && !NFS_USE_LEGACY_DNS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y] || AFS_FS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=y]
-
-MTK_TIMER: y => no
-      Direct dependencies: GENERIC_CLOCKEVENTS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: ARCH_MEDIATEK [=y]
+SND_SOC_UNIPHIER_EVEA_CODEC: m => yes
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_UNIPHIER [=m]
 

@@ -1,33 +1,34 @@
-IMX_DSP: m => yes
-      Direct dependencies: IMX_MBOX [=m]
+QCOM_SPMI_TEMP_ALARM: m => yes
+      Direct dependencies: THERMAL [=y] && (ARCH_QCOM [=y] && OF [=y] || COMPILE_TEST [=y]) && OF [=y] && SPMI [=m] && IIO [=y]
 
-CRYPTO_DH: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: KEY_DH_OPERATIONS [=y] && KEYS [=y] || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_HISI_HPRE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=y] && PCI_MSI [=y] && (UACCE [=n] || UACCE [=n]=n) && (ARM64 [=y] || COMPILE_TEST [=n] && 64BIT [=y]) && ACPI [=n]
+CLK_INTEL_SOCFPGA: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-ZOPT2201: m => yes
-      Direct dependencies: IIO [=m] && I2C [=y]
+NETFILTER_NETLINK_OSF: y => no
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_ADVANCED [=y]
+      Reverse dependencies: NFT_OSF [=n] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m] && NETFILTER_ADVANCED [=y] || NETFILTER_XT_MATCH_OSF [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NETFILTER_XTABLES [=m] && NETFILTER_ADVANCED [=y]
 
-MMC_MESON_GX: m => yes
-      Direct dependencies: MMC [=m] && (ARCH_MESON [=y] || COMPILE_TEST [=n]) && COMMON_CLK [=y]
+IIO_TIGHTLOOP_TRIGGER: m => yes
+      Direct dependencies: IIO [=y] && IIO_TRIGGER [=y] && IIO_SW_TRIGGER [=m]
 
-GPIO_WCD934X: m => yes
-      Direct dependencies: GPIOLIB [=y] && HAS_IOMEM [=y] && MFD_WCD934X [=m] && OF_GPIO [=y]
+DRM_RCAR_DU: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && OF [=y] && (ARM || ARM64 [=y]) && (ARCH_RENESAS [=n] || COMPILE_TEST [=y])
 
-RADIO_TEF6862: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && I2C [=y] && VIDEO_V4L2 [=m]
-      Reverse dependencies: RADIO_TIMBERDALE [=n] && MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && MFD_TIMBERDALE [=n] && VIDEO_V4L2 [=m] && I2C [=y]
+CAN_CC770_PLATFORM: m => yes
+      Direct dependencies: NET [=y] && CAN [=y] && CAN_DEV [=y] && CAN_CC770 [=m]
 
-VIDEO_OV2640: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_EM28XX_V4L2 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && (MEDIA_CAMERA_SUPPORT [=y] || MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_EM28XX [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_CAMERA_SUPPORT [=y]
+DVB_CX22702: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX88_DVB [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && VIDEO_CX88 [=n] && DVB_CORE [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-RADIO_SI4713: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && RADIO_ADAPTERS [=y] && VIDEO_V4L2 [=m]
+RMI4_F30: y => no
+      Direct dependencies: INPUT [=y] && RMI4_CORE [=m]
+      Reverse dependencies: HID_RMI [=m] && INPUT [=y] && HID [=y]
 
-MODULE_COMPRESS_GZIP: y => no
-      Direct dependencies: <choice>
+DVB_LG2160: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
+      Reverse dependencies: DVB_USB_MXL111SF [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
 
-NET_DSA_MT7530: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m]
+DRM_PANEL_ORISETECH_OTM8009A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=m] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 

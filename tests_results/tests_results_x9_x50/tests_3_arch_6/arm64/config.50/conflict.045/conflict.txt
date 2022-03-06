@@ -1,22 +1,20 @@
-MTD_CFI_STAA: m => yes
-      Direct dependencies: MTD [=m] && MTD_GEN_PROBE [=m]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-CLK_RENESAS_DIV6: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R8A73A4 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A7740 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_SH73A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RENESAS_CPG_MSSR [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+CHARGER_ISP1704: m => yes
+      Direct dependencies: POWER_SUPPLY [=y] && USB_PHY [=y] && (USB_GADGET [=m] || !USB_GADGET [=m])
 
-PM: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_MXC [=y] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_VEXPRESS [=n] || PM_SLEEP [=n] && (SUSPEND [=n] || HIBERNATE_CALLBACKS [=n]) || SOC_K210_SYSCTL [=n] && RISCV && SOC_CANAAN && OF [=y] || ARCH_RCAR_GEN1 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN2 [=n] && SOC_RENESAS [=y] || ARCH_RCAR_GEN3 [=y] && SOC_RENESAS [=y] || ARCH_RMOBILE [=n] && SOC_RENESAS [=y] || ARCH_R7S72100 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y] || ARCH_R7S9210 [=n] && SOC_RENESAS [=y] && ARM && ARCH_RENESAS [=y]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-SND_SOC_TLV320AIC23_I2C: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && I2C [=y]
-      Reverse dependencies: SND_EP93XX_SOC_SNAPPERCL15 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_EP93XX_SOC [=n] && MACH_SNAPPER_CL15 && I2C [=y] || SND_SOC_EUKREA_TLV320 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_IMX_SOC [=m] && ARCH_MXC [=y] && !ARM64 [=y] && I2C [=y] || SND_SOC_SAMSUNG_SIMTEC_TLV320AIC23 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_SAMSUNG [=m] && ARCH_S3C24XX && I2C [=y] || SND_SOC_TEGRA_TRIMSLICE [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && SND_SOC_TEGRA [=n] && I2C [=y] || SND_SOC_OMAP_OSK5912 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=m] && (DMA_OMAP [=n] || TI_EDMA [=n] || TI_K3_UDMA [=n] || COMPILE_TEST [=n]) && MACH_OMAP_OSK && I2C [=y]
+CRYPTO_STREEBOG: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: CRYPTO_ECRDSA [=y] && CRYPTO [=y]
 
-VIDEO_VP27SMPX: m => no
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=y] && I2C [=y]
-      Reverse dependencies: VIDEO_IVTV [=m] && MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_ANALOG_TV_SUPPORT [=y] && VIDEO_V4L2 [=y] && PCI [=y] && I2C [=y] && RC_CORE [=m]
+MTD_COMPLEX_MAPPINGS: y => no
+      Direct dependencies: MTD [=m] && HAS_IOMEM [=y]
+      Reverse dependencies: MTD_HYPERBUS [=m] && MTD [=m] && HAS_IOMEM [=y] || MTD_MAP_BANK_WIDTH_32 [=y] && MTD [=m] && HAS_IOMEM [=y] || MTD_PHYSMAP_BT1_ROM [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && (MIPS_BAIKAL_T1 || COMPILE_TEST [=n]) || MTD_PHYSMAP_GEMINI [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && MFD_SYSCON [=y] || MTD_PHYSMAP_IXP4XX [=n] && MTD [=m] && HAS_IOMEM [=y] && MTD_PHYSMAP_OF [=n] && ARM
 
-BT_VIRTIO: m => yes
-      Direct dependencies: NET [=y] && BT [=m] && VIRTIO [=y]
+SENSORS_TMP513: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

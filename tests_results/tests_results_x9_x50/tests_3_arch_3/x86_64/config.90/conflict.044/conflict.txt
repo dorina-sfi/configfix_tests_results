@@ -1,12 +1,11 @@
-IIO_BUFFER_CB: y => no
-      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
-      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=n] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=n] && INPUT_TOUCHSCREEN [=n] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=y]) && SND_SOC [=n] && STM32_DFSDM_ADC [=y] || LMP91000 [=y] && IIO [=y] && I2C [=y]
+KERNEL_BZIP2: y => no
+      Direct dependencies: <choice> && HAVE_KERNEL_BZIP2 [=y]
 
-CRYPTO_BLAKE2B: y => no
+ZPOOL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ZSWAP [=y] && FRONTSWAP [=y] && CRYPTO [=y]=y
+
+CRYPTO_CRC32C: y => no
       Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB
-
-SCSI: y => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: ATA [=y] && HAS_IOMEM [=y] && BLOCK [=y]
+      Reverse dependencies: NVME_TCP [=n] && INET [=n] && BLOCK [=y] || ISCSI_TCP [=n] && SCSI_LOWLEVEL [=y] && SCSI [=y] && INET [=n] || ISCSI_TARGET [=n] && TARGET_CORE [=y] && INET [=n] || EXT4_FS [=y] && BLOCK [=y] || JBD2 [=y] && BLOCK [=y] || BTRFS_FS [=y] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || LIBCRC32C [=y]
 

@@ -1,25 +1,23 @@
-ZYNQMP_IPI_MBOX: y => no
-      Direct dependencies: MAILBOX [=y] && ARCH_ZYNQMP [=y] && OF [=y]
-      Reverse dependencies: ZYNQMP_POWER [=y] && PM [=y] && ZYNQMP_FIRMWARE [=y]
+BACKLIGHT_SKY81452: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && MFD_SKY81452 [=m]
 
-STM: y => no
+FB_IMX: m => yes
+      Direct dependencies: FB [=m] && HAVE_CLK [=y] && HAS_IOMEM [=y] && (ARCH_MXC [=y] || COMPILE_TEST [=n])
+
+DW_EDMA: y => mod
+      Direct dependencies: DMADEVICES [=y] && PCI [=y] && PCI_MSI [=y]
+      Reverse dependencies: DW_EDMA_PCIE [=y] && DMADEVICES [=y] && PCI [=y] && PCI_MSI [=y]
+
+SYSFS: y => no
       Direct dependencies: y
-      Reverse dependencies: CORESIGHT_STM [=y] && CORESIGHT [=y] && (ARM && !CPU_32v3 && !CPU_32v4 && !CPU_32v4T || ARM64 [=y])
+      Reverse dependencies: CONFIGFS_FS [=y]
 
-KALLSYMS: y => no
-      Direct dependencies: y
-      Reverse dependencies: KPROBES [=n] && MODULES [=n] && HAVE_KPROBES [=y] || CFI_CLANG [=n] && LTO_CLANG [=n] && ARCH_SUPPORTS_CFI_CLANG [=y] && CLANG_VERSION [=0]>=120000 || LATENCYTOP [=n] && DEBUG_KERNEL [=y] && STACKTRACE_SUPPORT [=y] && PROC_FS [=n] && (FRAME_POINTER [=y] || MIPS || PPC || S390 || MICROBLAZE || ARM || ARC || X86) || DEBUG_KMEMLEAK [=y] && DEBUG_KERNEL [=y] && HAVE_DEBUG_KMEMLEAK [=y] || LOCKDEP [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || FUNCTION_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || STACK_TRACER [=n] && FTRACE [=n] && HAVE_FUNCTION_TRACER [=y] || FTRACE_SYSCALLS [=n] && FTRACE [=n] && HAVE_SYSCALL_TRACEPOINTS [=y]
+6LOWPAN_GHC_EXT_HDR_HOP: m => yes
+      Direct dependencies: NET [=y] && 6LOWPAN_NHC [=m]
 
-KEYS: y => no
-      Direct dependencies: y
-      Reverse dependencies: SYSTEM_DATA_VERIFICATION [=n] || AF_RXRPC [=n] && NET [=n] && INET [=n] || CEPH_LIB [=n] && NET [=n] && INET [=n] || FS_ENCRYPTION [=y] || UBIFS_FS_AUTHENTICATION [=n] && MISC_FILESYSTEMS [=n] && UBIFS_FS [=n] || NFS_V4 [=n] && NETWORK_FILESYSTEMS [=n] && NFS_FS [=n] || CIFS [=n] && NETWORK_FILESYSTEMS [=n] && INET [=n] || INTEGRITY_SIGNATURE [=n] && INTEGRITY [=n] || EVM [=n] && INTEGRITY [=n]
+DRM_PANEL_JDI_LT070ME05000: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM [=y] && DRM_PANEL [=y] && OF [=y] && DRM_MIPI_DSI [=y] && BACKLIGHT_CLASS_DEVICE [=m]
 
-DEFAULT_SECURITY_DAC: y => no
-      Direct dependencies: <choice>
-
-THERMAL_DEFAULT_GOV_FAIR_SHARE: y => no
-      Direct dependencies: <choice>
-
-CRC32_SLICEBY4: y => no
-      Direct dependencies: <choice>
+SENSORS_DS620: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=y]
 

@@ -1,32 +1,33 @@
-XEN_FBDEV_FRONTEND: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m] && XEN [=y]
+EINT_MTK: y => mod
+      Direct dependencies: PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && (PINCTRL_MTK [=y] || PINCTRL_MTK_MOORE [=y] || PINCTRL_MTK_PARIS [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: PINCTRL_MTK [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && OF [=y] || PINCTRL_MTK_PARIS [=y] && PINCTRL [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && OF [=y]
 
-IIO_CROS_EC_SENSORS: m => yes
-      Direct dependencies: IIO [=y] && IIO_CROS_EC_SENSORS_CORE [=m]
+COMMON_CLK_MT6779_IMGSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
 
-FB_VIRTUAL: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
+CRYPTO_SHA256: y => no
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MODULE_SIG_SHA224 [=n] && <choice> || MODULE_SIG_SHA256 [=n] && <choice> || BT [=m] && NET [=y] && !S390 && (RFKILL [=y] || !RFKILL [=y]) || CEPH_LIB [=y] && NET [=y] && INET [=y] || XFRM_AH [=y] && NET [=y] && INET [=y] || XFRM_ESP [=m] && NET [=y] && INET [=y] || IPV6_SEG6_HMAC [=n] && NET [=y] && INET [=y] && IPV6 [=m] || CFG80211 [=y] && NET [=y] && WIRELESS [=y] && (RFKILL [=y] || !RFKILL [=y]) && CFG80211_USE_KERNEL_REGDB_KEYS [=y] || USB_RTL8152 [=n] && NETDEVICES [=n] && USB_NET_DRIVERS [=n] || BTRFS_FS [=m] && BLOCK [=y] && !PPC_256K_PAGES && !PAGE_SIZE_256KB || NFSD_V4 [=n] && NETWORK_FILESYSTEMS [=y] && NFSD [=m] && PROC_FS [=y] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || ENCRYPTED_KEYS [=n] && KEYS [=y] || CRYPTO_SHA256_SSSE3 [=n] && CRYPTO [=y] && X86 && 64BIT [=y] || CRYPTO_SHA256_PPC_SPE [=n] && CRYPTO [=y] && PPC && SPE || CRYPTO_SHA256_OCTEON [=n] && CRYPTO [=y] && CPU_CAVIUM_OCTEON || CRYPTO_SHA256_SPARC64 [=n] && CRYPTO [=y] && SPARC64 || CRYPTO_DRBG_HASH [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y] || CRYPTO_DEV_SUN8I_CE_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_CE [=n] || CRYPTO_DEV_SUN8I_SS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_SUN8I_SS [=n] || CRYPTO_DEV_PADLOCK_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_PADLOCK [=n] || CRYPTO_DEV_NIAGARA2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && SPARC64 || CRYPTO_DEV_EXYNOS_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_S5P [=n] && !CRYPTO_DEV_EXYNOS_RNG [=n] && CRYPTO_DEV_EXYNOS_RNG [=n]!=m || CRYPTO_DEV_QAT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] || CRYPTO_DEV_QCE_SHA [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_QCE [=n] || CRYPTO_DEV_IMGTEC_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (MIPS || COMPILE_TEST [=y]) || CRYPTO_DEV_ROCKCHIP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && ARCH_ROCKCHIP [=y] || CRYPTO_DEV_CHELSIO [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CHELSIO_T4 [=n] || CRYPTO_DEV_BCM_SPU [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_BCM_IPROC [=y] && MAILBOX [=y] || CRYPTO_DEV_STM32_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARCH_STM32 && HAS_DMA [=y] || CRYPTO_DEV_SAFEXCEL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (OF [=y] || PCI [=n] || COMPILE_TEST [=y]) && HAS_IOMEM [=y] || CRYPTO_DEV_ARTPEC6 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && ARM && (ARCH_ARTPEC || COMPILE_TEST [=y]) && OF [=y] || CRYPTO_DEV_CCREE [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && OF [=y] && HAS_DMA [=y] || CRYPTO_DEV_HISI_SEC2 [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PCI [=n] && PCI_MSI [=n] && (UACCE [=m] || UACCE [=m]=n) && (ARM64 [=y] || COMPILE_TEST [=y] && 64BIT [=y]) && ACPI [=n] || CRYPTO_DEV_SA2UL [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && (ARCH_K3 [=y] || COMPILE_TEST [=y]) || CRYPTO_DEV_OMAP_SHAM [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_OMAP [=n] && ARCH_OMAP2PLUS || CRYPTO_DEV_UX500_HASH [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_UX500 [=n] || CRYPTO_DEV_SP_CCP [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_CCP [=n] && CRYPTO_DEV_CCP_DD [=n] && DMADEVICES [=n]
 
-USB_EHCI_HCD_PLATFORM: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m]
-      Reverse dependencies: USB_HCD_BCMA [=n] && USB_SUPPORT [=y] && USB [=y] && BCMA [=m] && USB_EHCI_HCD [=m] || USB_HCD_SSB [=n] && USB_SUPPORT [=y] && USB [=y] && SSB [=n] && USB_EHCI_HCD [=m] || USB_EHCI_HCD_STI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (ARCH_STI || COMPILE_TEST [=n]) && OF [=y] || USB_CNS3XXX_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && (ARCH_CNS3XXX || COMPILE_TEST [=n]) || USB_OCTEON_EHCI [=n] && USB_SUPPORT [=y] && USB [=y] && USB_EHCI_HCD [=m] && CAVIUM_OCTEON_SOC
+FSI_MASTER_ASPEED: m => yes
+      Direct dependencies: FSI [=m] && HAS_IOMEM [=y]
 
-B53_MDIO_DRIVER: m => yes
-      Direct dependencies: NETDEVICES [=y] && NET_DSA [=m] && B53 [=m]
+BACKLIGHT_GPIO: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && (GPIOLIB [=y] || COMPILE_TEST [=y])
 
-HID_GOOGLE_HAMMER: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m] && LEDS_CLASS [=y] && CROS_EC [=y]
+BACKLIGHT_LM3630A: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y] && PWM [=y]
 
-VIRTIO_FS: m => yes
-      Direct dependencies: FUSE_FS [=m]
+TEST_SORT: y => mod
+      Direct dependencies: RUNTIME_TESTING_MENU [=y] && KUNIT [=y]
 
 BACKLIGHT_RAVE_SP: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=y] && RAVE_SP_CORE [=m]
+      Direct dependencies: HAS_IOMEM [=y] && BACKLIGHT_CLASS_DEVICE [=m] && RAVE_SP_CORE [=m]
 
-RTC_DRV_RC5T619: m => yes
-      Direct dependencies: RTC_CLASS [=y] && I2C [=y] && MFD_RN5T618 [=m]
+SYSC_R8A77990: y => no
+      Direct dependencies: SOC_RENESAS [=y]
+      Reverse dependencies: ARCH_R8A77990 [=y] && SOC_RENESAS [=y] && ARM64 [=y]
 
-NET_MPLS_GSO: y => no
-      Direct dependencies: NET [=y] && MPLS [=y]
-      Reverse dependencies: OPENVSWITCH [=m] && NET [=y] && INET [=y] && (!NF_CONNTRACK [=n] || NF_CONNTRACK [=n] && (!NF_DEFRAG_IPV6 [=n] || NF_DEFRAG_IPV6 [=n]) && (!NF_NAT [=n] || NF_NAT [=n]) && (!NETFILTER_CONNCOUNT [=n] || NETFILTER_CONNCOUNT [=n]))
+NF_TABLES_BRIDGE: m => yes
+      Direct dependencies: NET [=y] && BRIDGE [=m] && NETFILTER [=y] && NF_TABLES [=m]
 

@@ -1,17 +1,16 @@
-INPUT_REGULATOR_HAPTIC: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_MISC [=y] && REGULATOR [=y]
+AD525X_DPOT: m => yes
+      Direct dependencies: (I2C [=m] || SPI [=n]) && SYSFS [=y]
 
-CRYPTO_JITTERENTROPY: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_DRBG [=y] && CRYPTO [=y] && CRYPTO_DRBG_MENU [=y]
+SENSORS_F75375S: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=m]
 
-MEDIA_CAMERA_SUPPORT: y => no
-      Direct dependencies: MEDIA_SUPPORT [=y]
+CRYPTO_DEV_ATMEL_SHA: m => no
+      Direct dependencies: CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y])
+      Reverse dependencies: CRYPTO_DEV_ATMEL_AES [=m] && CRYPTO [=y] && CRYPTO_HW [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && CRYPTO_DEV_ATMEL_AUTHENC [=y]
 
-DEBUG_SPINLOCK: y => no
-      Direct dependencies: DEBUG_KERNEL [=y]
-      Reverse dependencies: PROVE_LOCKING [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || LOCK_STAT [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_WW_MUTEX_SLOWPATH [=n] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y] || DEBUG_LOCK_ALLOC [=y] && DEBUG_KERNEL [=y] && LOCK_DEBUGGING_SUPPORT [=y]
+SENSORS_LM85: m => yes
+      Direct dependencies: HWMON [=m] && I2C [=m]
 
-KEYBOARD_EP93XX: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_KEYBOARD [=y] && (ARCH_EP93XX || COMPILE_TEST [=y])
+TICK_CPU_ACCOUNTING: y => no
+      Direct dependencies: <choice> && !S390 && !NO_HZ_FULL [=n]
 

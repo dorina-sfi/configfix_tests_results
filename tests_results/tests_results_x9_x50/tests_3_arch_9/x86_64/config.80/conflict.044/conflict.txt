@@ -1,31 +1,32 @@
-SND_SOC_NAU8810: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && I2C [=y]
+PSTORE: y => mod
+      Direct dependencies: MISC_FILESYSTEMS [=y]
+      Reverse dependencies: ACPI_APEI [=y] && ACPI [=y] && HAVE_ACPI_APEI [=y]
 
-CRYPTO_GCM: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CEPH_LIB [=y] && NET [=y] && INET [=y] || TLS [=n] && NET [=y] && INET [=y] || TIPC_CRYPTO [=y] && NET [=y] && TIPC [=m] || XFRM_ESP [=n] && NET [=y] && INET [=y] || MAC80211 [=m] && NET [=y] && WIRELESS [=y] && CFG80211 [=m] || MACSEC [=n] && NETDEVICES [=y] && NET_CORE [=y] || CIFS [=y] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=y] && PPC && 4xx
+QCOM_SPMI_IADC: m => yes
+      Direct dependencies: IIO [=y] && SPMI [=m]
 
-DVB_TUNER_CX24113: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_B2C2_FLEXCOP [=n] && MEDIA_SUPPORT [=m] && DVB_CORE [=m] && I2C [=y] && (DVB_B2C2_FLEXCOP_PCI [=n] || DVB_B2C2_FLEXCOP_USB [=n]) && MEDIA_SUBDRV_AUTOSELECT [=n]
+USB_ASPEED_VHUB: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_GADGET [=m] && (ARCH_ASPEED || COMPILE_TEST [=y]) && USB_LIBCOMPOSITE [=m]
 
-VIDEO_OV8865: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && I2C [=y] && PM [=y] && VIDEO_V4L2 [=m]
+INTEL_MEI_PXP: m => yes
+      Direct dependencies: DRM_I915 [=m]
 
-TOUCHSCREEN_MSG2638: m => yes
-      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] && (GPIOLIB [=y] || COMPILE_TEST [=n])
+IIO_BUFFER_CB: y => no
+      Direct dependencies: IIO [=y] && IIO_BUFFER [=y]
+      Reverse dependencies: JOYSTICK_ADC [=n] && INPUT [=y] && INPUT_JOYSTICK [=n] && IIO [=y] || TOUCHSCREEN_ADC [=n] && INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=y] || SND_SOC_STM32_DFSDM [=n] && SOUND [=y] && !UML && SND [=n] && (ARCH_STM32 || COMPILE_TEST [=y]) && SND_SOC [=n] && STM32_DFSDM_ADC [=m] || LMP91000 [=y] && IIO [=y] && I2C [=y]
 
-BT: m => yes
-      Direct dependencies: NET [=y] && !S390 && (RFKILL [=m] || !RFKILL [=m])
+FB_UDL: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=y] && USB [=m]
 
-MEDIA_TUNER_MC44S803: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_AF9015 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=n] || MEDIA_TUNER [=m] && MEDIA_SUPPORT [=m] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && I2C [=y] && MEDIA_SUBDRV_AUTOSELECT [=n]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 
-LEDS_PCA955X: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && I2C [=y]
+SECURITY_PATH: y => no
+      Direct dependencies: SECURITY [=y]
+      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
 
-CRC_CCITT: m => no
-      Direct dependencies: y
-      Reverse dependencies: CAIF [=n] && NET [=y] || NFC_DIGITAL [=n] && NET [=y] && NFC [=m] || NFC_NCI_SPI [=m] && NET [=y] && NFC_NCI [=m] && SPI [=y] || NFC_SHDLC [=n] && NET [=y] && NFC_HCI [=m] || MAC802154 [=m] && NET [=y] && IEEE802154 [=m] || NETLABEL [=n] && NET [=y] && INET [=y] && SECURITY [=n] && IPV6 [=n] || BAYCOM_SER_FDX [=n] && NET [=y] && HAMRADIO [=y] && AX25 [=m] && !S390 || BAYCOM_SER_HDX [=m] && NET [=y] && HAMRADIO [=y] && AX25 [=m] && !S390 || BAYCOM_PAR [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=m] || BAYCOM_EPP [=n] && NET [=y] && HAMRADIO [=y] && PARPORT [=y] && AX25 [=m] && !64BIT [=y] || NFC_FDP [=n] && NET [=y] && NFC [=m] && NFC_NCI [=m] || NFC_PN544 [=m] && NET [=y] && NFC [=m] || NFC_MICROREAD [=m] && NET [=y] && NFC [=m] || NFC_ST21NFCA [=n] && NET [=y] && NFC [=m] || VIA_VELOCITY [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_VIA [=n] && (PCI [=y] || OF_ADDRESS [=y] && OF_IRQ [=y]) && HAS_DMA [=y] || PPP_ASYNC [=n] && NETDEVICES [=y] && TTY [=n] && PPP [=n] || P54_COMMON [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_INTERSIL [=n] && MAC80211 [=m] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800USB [=n] && NETDEVICES [=y] && WLAN [=y] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && USB [=n] || MISDN_HDLC [=n] && ISDN [=y] && MISDN [=m]!=n || TOUCHSCREEN_ILI210X [=m] && INPUT [=m] && INPUT_TOUCHSCREEN [=y] && I2C [=y] || RAVE_SP_CORE [=n] && HAS_IOMEM [=y] && SERIAL_DEV_BUS [=y] || DRM_SUN6I_DSI [=n] && HAS_IOMEM [=y] && DRM_SUN4I [=n] || SURFACE_AGGREGATOR [=n] && SURFACE_PLATFORMS [=n] && SERIAL_DEV_BUS [=y]
+COMMON_CLK_SAMSUNG: y => no
+      Direct dependencies: COMMON_CLK [=y]
+      Reverse dependencies: S3C2410_COMMON_CLK [=y] && COMMON_CLK [=y] || S3C2410_COMMON_DCLK [=n] && COMMON_CLK [=y] || S3C2412_COMMON_CLK [=n] && COMMON_CLK [=y] || S3C2443_COMMON_CLK [=n] && COMMON_CLK [=y]
 

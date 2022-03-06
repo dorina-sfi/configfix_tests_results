@@ -1,28 +1,33 @@
-SENSORS_INA238: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+REGULATOR_RASPBERRYPI_TOUCHSCREEN_ATTINY: m => yes
+      Direct dependencies: REGULATOR [=y] && BACKLIGHT_CLASS_DEVICE [=m] && I2C [=y]
 
-STM_PROTO_SYS_T: m => yes
-      Direct dependencies: STM [=m]
+MAGIC_SYSRQ: y => no
+      Direct dependencies: !UML
+      Reverse dependencies: KGDB_SERIAL_CONSOLE [=m] && KGDB [=y] && TTY [=y] && HW_CONSOLE [=y]
 
-CLK_RENESAS_CPG_MSSR: y => no
-      Direct dependencies: COMMON_CLK [=y] && CLK_RENESAS [=y]
-      Reverse dependencies: CLK_R7S9210 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_R8A779A0 [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN2_CPG [=n] && COMMON_CLK [=y] && CLK_RENESAS [=y] || CLK_RCAR_GEN3_CPG [=y] && COMMON_CLK [=y] && CLK_RENESAS [=y]
+MTK_INFRACFG: y => no
+      Direct dependencies: ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]
+      Reverse dependencies: MTK_CMDQ_MBOX [=m] && MAILBOX [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_CMDQ [=m] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y]) || MTK_SCPSYS [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
 
-ITG3200: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+LEDS_ACER_A500: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && MFD_ACER_A500_EC [=y]
 
-SPS30_I2C: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+QCOM_SPMI_ADC5: m => yes
+      Direct dependencies: IIO [=m] && SPMI [=m]
 
-BATTERY_CW2015: m => yes
-      Direct dependencies: POWER_SUPPLY [=y] && I2C [=m]
+CHARLCD: y => mod
+      Direct dependencies: AUXDISPLAY [=y]
+      Reverse dependencies: HD44780_COMMON [=y] && AUXDISPLAY [=y] || LCD2S [=m] && AUXDISPLAY [=y] && I2C [=y]
 
-SENSORS_INSPUR_IPSPS: m => yes
-      Direct dependencies: HWMON [=y] && PMBUS [=m]
+SND_SOC_WM8750: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_I2C_AND_SPI [=y]
+      Reverse dependencies: SND_PXA2XX_SOC_SPITZ [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=n] && PXA_SHARP_Cxx00 && I2C [=y] || SND_PXA2XX_SOC_Z2 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_PXA2XX_SOC [=n] && MACH_ZIPIT2 && I2C [=y] || SND_SOC_SAMSUNG_JIVE_WM8750 [=n] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && MACH_JIVE && I2C [=y] || SND_SOC_SMARTQ [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_SOC_SAMSUNG [=y] && (MACH_SMARTQ || COMPILE_TEST [=y]) && (GPIOLIB [=y] || COMPILE_TEST [=y]) && I2C [=y]
 
-NLS_CODEPAGE_865: m => yes
-      Direct dependencies: NLS [=m]
+MDIO_DEVICE: y => mod
+      Direct dependencies: NETDEVICES [=y]
+      Reverse dependencies: PHYLIB [=y] && NETDEVICES [=y]
 
-DLHL60D: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+BLK_DEV_BSGLIB: y => no
+      Direct dependencies: BLOCK [=y]
+      Reverse dependencies: SCSI_FC_ATTRS [=n] && SCSI [=y] && NET [=y] || SCSI_ISCSI_ATTRS [=n] && SCSI [=y] && NET [=y] || SCSI_SAS_ATTRS [=m] && SCSI [=y] || SCSI_UFS_BSG [=n] && SCSI_LOWLEVEL [=n] && SCSI [=y] && SCSI_UFSHCD [=n]
 

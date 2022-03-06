@@ -1,31 +1,31 @@
-SENSORS_MAX16065: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+ZONE_DMA32: y => no
+      Direct dependencies: !X86_32 [=n]
+      Reverse dependencies: X86_64 [=y] && 64BIT [=y]
 
-DVB_LG2160: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_MXL111SF [=m] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+IIO_TRIGGERED_EVENT: m => yes
+      Direct dependencies: IIO [=m]
+      Reverse dependencies: HI8435 [=n] && IIO [=m] && SPI [=n]
 
-KUNIT_EXAMPLE_TEST: m => yes
-      Direct dependencies: KUNIT [=m]
+REGULATOR_ACT8865: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m] && POWER_SUPPLY [=y]
 
-THERMAL_GOV_STEP_WISE: y => no
-      Direct dependencies: THERMAL [=y]
-      Reverse dependencies: THERMAL_DEFAULT_GOV_STEP_WISE [=y] && <choice>
+DS4424: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-SENSORS_LM73: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+STA2X11_VIP: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_PCI_SUPPORT [=y] && MEDIA_CAMERA_SUPPORT [=y] && PCI [=y] && VIDEO_V4L2 [=m] && VIRT_TO_BUS [=y] && I2C [=m] && (STA2X11 [=n] || COMPILE_TEST [=y])
 
-DVB_TUNER_DIB0070: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || DVB_USB_CXUSB [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=n] && PCI [=n] && I2C [=y] && INPUT [=n] && SND [=n] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+IOSF_MBI: y => no
+      Direct dependencies: PCI [=y]
+      Reverse dependencies: X86_INTEL_QUARK [=n] && X86_32 [=n] && X86_EXTENDED_PLATFORM [=y] && X86_PLATFORM_DEVICES [=n] && X86_TSC [=y] && PCI [=y] && PCI_GOANY [=n] && X86_IO_APIC [=y] || X86_INTEL_LPSS [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || INTEL_SOC_DTS_IOSF_CORE [=n] && THERMAL [=n] && (X86 [=y] || X86_INTEL_QUARK [=n] || COMPILE_TEST [=y]) && X86 [=y] && PCI [=y] || DRM_I915 [=m] && HAS_IOMEM [=y] && DRM [=m] && PCI [=y] && X86 [=y] || SND_SST_ATOM_HIFI2_PLATFORM_ACPI [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_INTEL_SST_TOPLEVEL [=n] && X86 [=y] && ACPI [=n] && PCI [=y] || SND_SOC_SOF_BAYTRAIL [=n] && SOUND [=n] && !UML && SND [=n] && SND_SOC [=n] && SND_SOC_SOF_TOPLEVEL [=n] && SND_SOC_SOF_INTEL_TOPLEVEL [=n] && SND_SOC_SOF_ACPI [=n] && X86 [=y] && PCI [=y] || MMC_SDHCI_PCI [=n] && MMC [=n] && MMC_SDHCI [=n] && PCI [=y] && X86 [=y] || MMC_SDHCI_ACPI [=n] && MMC [=n] && MMC_SDHCI [=n] && ACPI [=n] && PCI [=y] && X86 [=y] || INTEL_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && X86 [=y] && EFI [=n] && PCI [=y] && ACPI [=n] && COMMON_CLK [=y] || VIDEO_ATOMISP [=n] && STAGING [=y] && STAGING_MEDIA [=y] && MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && INTEL_ATOMISP [=n] && PMIC_OPREGION [=n] || PUNIT_ATOM_DEBUG [=m] && PCI [=y]
 
-KERNEL_LZO: y => no
-      Direct dependencies: <choice> && HAVE_KERNEL_LZO [=y]
+DVB_EC100: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
+      Reverse dependencies: DVB_USB_EC168 [=n] && USB [=n] && MEDIA_SUPPORT [=y] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n]
 
-MEDIA_TUNER_FC0012: m => yes
-      Direct dependencies: (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y] || MEDIA_RADIO_SUPPORT [=y] || MEDIA_SDR_SUPPORT [=y]) && MEDIA_SUPPORT [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_RTL28XXU [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && I2C_MUX [=y] && MEDIA_SUBDRV_AUTOSELECT [=y]
+VCNL3020: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-DVB_USB_MXL111SF: m => yes
-      Direct dependencies: USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m]
+COMMON_CLK_MT6779_MFGCFG: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
 

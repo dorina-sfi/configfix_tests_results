@@ -1,33 +1,31 @@
-MTD_RAW_NAND: m => yes
-      Direct dependencies: MTD [=m]
+KHADAS_MCU_FAN_THERMAL: m => yes
+      Direct dependencies: THERMAL [=y] && (OF [=n] || COMPILE_TEST [=y]) && MFD_KHADAS_MCU [=m]
 
-MTD_ROM: m => yes
-      Direct dependencies: MTD [=m]
+FPGA_DFL_FME_BRIDGE: m => yes
+      Direct dependencies: FPGA [=y] && FPGA_DFL_FME [=m] && HAS_IOMEM [=y]
 
-HZ_1000: y => no
-      Direct dependencies: <choice>
+TCG_CRB: m => yes
+      Direct dependencies: TCG_TPM [=m] && ACPI [=y]
+      Reverse dependencies: IMA [=n] && INTEGRITY [=n] && TCG_TPM [=m] && ACPI [=y]
 
-CAN_VXCAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+SATA_GEMINI: m => yes
+      Direct dependencies: ATA [=m] && HAS_DMA [=y] && (ARCH_GEMINI || COMPILE_TEST [=y])
 
-GENERIC_CPU: y => no
-      Direct dependencies: <choice> && X86_64 [=y]
+DVB_DDBRIDGE: m => yes
+      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && PCI [=y] && I2C [=y]
 
-CRYPTO_CRYPTD: y => mod
-      Direct dependencies: CRYPTO [=y]
-      Reverse dependencies: CRYPTO_SIMD [=y] && CRYPTO [=y] || CRYPTO_GHASH_CLMUL_NI_INTEL [=y] && CRYPTO [=y] && X86 [=y] && 64BIT [=y]
+MMC_WBSD: m => yes
+      Direct dependencies: MMC [=m] && ISA_DMA_API [=y] && !M68K
 
-PM_DEVFREQ: y => no
-      Direct dependencies: y
-      Reverse dependencies: SCSI_UFSHCD [=y] && SCSI_LOWLEVEL [=y] && SCSI [=y] && SCSI_DMA [=y] || DRM_LIMA [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n]) && MMU [=y] && COMMON_CLK [=y] && OF [=n] || DRM_PANFROST [=n] && HAS_IOMEM [=y] && DRM [=n] && (ARM || ARM64 || COMPILE_TEST [=n] && !GENERIC_ATOMIC64 [=n]) && MMU [=y] || TEGRA20_EMC [=n] && MEMORY [=y] && TEGRA_MC [=n] && (ARCH_TEGRA_2x_SOC [=n] || COMPILE_TEST [=n])
+COMEDI_DT2801: m => yes
+      Direct dependencies: COMEDI [=m] && COMEDI_ISA_DRIVERS [=y]
 
-SECURITY_PATH: y => no
-      Direct dependencies: SECURITY [=y]
-      Reverse dependencies: SECURITY_TOMOYO [=n] && SECURITY [=y] && NET [=y] || SECURITY_APPARMOR [=n] && SECURITY [=y] && NET [=y] || SECURITY_LANDLOCK [=y] && SECURITY [=y] && !ARCH_EPHEMERAL_INODES [=n]
+I2C_AMD756_S4882: m => yes
+      Direct dependencies: I2C [=y] && HAS_IOMEM [=y] && I2C_AMD756 [=m] && X86 [=y]
 
-CAN_ISOTP: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+ATA_FORCE: y => no
+      Direct dependencies: ATA [=m]
 
-NET_9P_VIRTIO: m => yes
-      Direct dependencies: NET [=y] && NET_9P [=y] && VIRTIO [=m]
+CRAMFS_BLOCKDEV: y => no
+      Direct dependencies: MISC_FILESYSTEMS [=y] && CRAMFS [=y] && BLOCK [=y]
 

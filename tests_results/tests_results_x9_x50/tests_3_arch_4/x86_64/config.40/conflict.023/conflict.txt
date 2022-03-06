@@ -1,13 +1,15 @@
-SPARSEMEM_VMEMMAP: y => no
-      Direct dependencies: SPARSEMEM [=y] && SPARSEMEM_VMEMMAP_ENABLE [=y]
-      Reverse dependencies: X86_5LEVEL [=y] && X86_64 [=y]
+BINFMT_ELF: y => no
+      Direct dependencies: MMU [=y]
+      Reverse dependencies: IA32_EMULATION [=y] && X86_64 [=y]
 
-MULTIUSER: y => no
+ZONE_DMA: y => no
       Direct dependencies: y
 
-SCR24X: m => yes
-      Direct dependencies: PCMCIA [=m]
+MEMBARRIER: y => no
+      Direct dependencies: y
+      Reverse dependencies: RSEQ [=y] && HAVE_RSEQ [=y]
 
-USB_SERIAL_IPAQ: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
+SND_SOC_WM8904: y => no
+      Direct dependencies: SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && I2C [=y]
+      Reverse dependencies: SND_ATMEL_SOC_WM8904 [=y] && SOUND [=y] && !UML && SND [=y] && SND_SOC [=y] && SND_ATMEL_SOC [=y] && (ARCH_AT91 || COMPILE_TEST [=y]) && ATMEL_SSC [=y] && I2C [=y]
 

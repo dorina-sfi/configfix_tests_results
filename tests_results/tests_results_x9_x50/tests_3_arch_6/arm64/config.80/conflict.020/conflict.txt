@@ -1,19 +1,21 @@
-SND_SOC_LPASS_RX_MACRO: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && COMMON_CLK [=y]
+DRM_ANALOGIX_ANX7625: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && DRM_BRIDGE [=y] && DRM [=m] && OF [=y]
 
-TI_ADC084S021: m => yes
-      Direct dependencies: IIO [=m] && SPI [=y]
+IMX_IRQSTEER: y => no
+      Direct dependencies: ARCH_MXC [=y] || COMPILE_TEST [=y]
+      Reverse dependencies: DRM_IMX_DCSS [=m] && HAS_IOMEM [=y] && DRM [=m] && ARCH_MXC [=y] && ARM64 [=y]
 
-SND_SOC_SIMPLE_MUX: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+RESET_HISI: y => no
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: COMMON_CLK_HI3516CV300 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3519 [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3559A [=y] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y]) || COMMON_CLK_HI3798CV200 [=n] && COMMON_CLK [=y] && (ARCH_HISI [=y] || COMPILE_TEST [=y])
 
-NFT_LOG: m => yes
-      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=m]
+NF_NAT: m => yes
+      Direct dependencies: NET [=y] && INET [=y] && NETFILTER [=y] && NF_CONNTRACK [=m]
+      Reverse dependencies: NFT_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && NF_TABLES [=y] && NF_CONNTRACK [=m] && (NF_TABLES_IPV4 [=y] || NF_TABLES_IPV6 [=y]) || IP_NF_NAT [=m] && NET [=y] && INET [=y] && NETFILTER [=y] && IP_NF_IPTABLES [=y] && NF_CONNTRACK [=m] || IP6_NF_NAT [=m] && NET [=y] && INET [=y] && IPV6 [=m] && NETFILTER [=y] && IP6_NF_IPTABLES [=m] && NF_CONNTRACK [=m] && NETFILTER_ADVANCED [=y]
 
-DVB_DIB8000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+USB_DWC3_OF_SIMPLE: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB_DWC3 [=m] && OF [=y] && COMMON_CLK [=y]
 
-SND_SOC_PCM5102A: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m]
+SERIAL_8250_FSL: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_8250_CONSOLE [=y]
 

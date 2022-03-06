@@ -1,35 +1,33 @@
-VIDEO_M5MOLS: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && I2C [=y] && VIDEO_V4L2 [=m]
+SDM_VIDEOCC_845: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=m]
 
-FB_BIG_ENDIAN: y => no
+SQUASHFS_FILE_DIRECT: y => no
       Direct dependencies: <choice>
 
-CPU_FREQ_GOV_PERFORMANCE: y => mod
-      Direct dependencies: CPU_FREQ [=y]
-      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_PERFORMANCE [=y] && <choice> || CPU_FREQ_DEFAULT_GOV_ONDEMAND [=n] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_CONSERVATIVE [=n] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=y]) || CPU_FREQ_DEFAULT_GOV_SCHEDUTIL [=n] && <choice> && SMP [=y] || X86_INTEL_PSTATE [=n] && CPU_FREQ [=y] && X86
+INTEL_STRATIX10_RSU: m => yes
+      Direct dependencies: INTEL_STRATIX10_SERVICE [=m]
 
-CAN_VCAN: m => yes
-      Direct dependencies: NET [=y] && CAN [=m]
+CLK_INTEL_SOCFPGA: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-PROC_CHILDREN: y => no
+CRYPTO_CCM: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: MAC802154 [=y] && NET [=y] && IEEE802154 [=y] || LIB80211_CRYPT_CCMP [=n] && NET [=y] && WIRELESS [=y] || MAC80211 [=n] && NET [=y] && WIRELESS [=y] && CFG80211 [=y] || RTL8192U [=n] && STAGING [=y] && PCI [=n] && WLAN [=n] && USB [=n] && m && MODULES [=y] || RTLLIB_CRYPTO_CCMP [=n] && STAGING [=y] && RTLLIB [=n] || CIFS [=m] && NETWORK_FILESYSTEMS [=y] && INET [=y] || SMB_SERVER [=n] && NETWORK_FILESYSTEMS [=y] && INET [=y] && MULTIUSER [=y] && FILE_LOCKING [=y] || CRYPTO_DEV_PPC4XX [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && PPC && 4xx || CRYPTO_DEV_NX_ENCRYPT [=n] && CRYPTO [=y] && CRYPTO_HW [=n] && CRYPTO_DEV_NX [=n] && PPC_PSERIES && IBMVIO && !CPU_LITTLE_ENDIAN [=n]
+
+FB_OMAP2: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && OF [=y] && (ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && FB [=m] && DRM_OMAP [=n]=n && GPIOLIB [=y]
+
+SOC_TI: y => no
       Direct dependencies: y
-      Reverse dependencies: CHECKPOINT_RESTORE [=y]
+      Reverse dependencies: ARCH_K3 [=y]
 
-RTC_LIB_KUNIT_TEST: y => no
-      Direct dependencies: RTC_CLASS [=y] && KUNIT [=y]
+FB_IBM_GXT4500: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && FB [=m]
 
-IIO_CROS_EC_LIGHT_PROX: m => yes
-      Direct dependencies: IIO [=y] && IIO_CROS_EC_SENSORS_CORE [=m]
+CLK_INTEL_SOCFPGA: y => no
+      Direct dependencies: COMMON_CLK [=y]
 
-MDIO_BCM_UNIMAC: m => no
-      Direct dependencies: NETDEVICES [=y] && MDIO_DEVICE [=y] && MDIO_BUS [=y] && HAS_IOMEM [=y]
-      Reverse dependencies: NET_DSA_BCM_SF2 [=m] && NETDEVICES [=y] && NET_DSA [=m] && HAS_IOMEM [=y] || BCMGENET [=n] && NETDEVICES [=y] && ETHERNET [=n] && NET_VENDOR_BROADCOM [=n] && HAS_IOMEM [=y]
-
-EXT4_FS: m => no
-      Direct dependencies: BLOCK [=y]
-      Reverse dependencies: EXT3_FS [=m] && BLOCK [=y]
-
-PINCTRL: y => no
-      Direct dependencies: y
-      Reverse dependencies: ARCH_ACTIONS [=y] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=n] || ARCH_BCM_IPROC [=y] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=y] || ARCH_SPARX5 [=y] || ARCH_HISI [=n] || ARCH_MEDIATEK [=n] || ARCH_MVEBU [=n] || ARCH_QCOM [=n] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
+MTK_CMDQ_MBOX: y => no
+      Direct dependencies: MAILBOX [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
+      Reverse dependencies: MTK_CMDQ [=y] && (ARCH_MEDIATEK [=n] || COMPILE_TEST [=y])
 

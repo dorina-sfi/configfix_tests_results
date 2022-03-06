@@ -1,15 +1,19 @@
-AD7150: m => yes
-      Direct dependencies: IIO [=m] && I2C [=m]
+SERIO_SERPORT: y => no
+      Direct dependencies: SERIO [=y] && TTY [=y]
+      Reverse dependencies: I2C_TAOS_EVM [=y] && I2C [=y] && HAS_IOMEM [=y] && TTY [=y] || USB_PULSE8_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y] || USB_RAINSHADOW_CEC [=y] && MEDIA_CEC_SUPPORT [=y] && USB_SUPPORT [=y] && TTY [=y]
 
-TOUCHSCREEN_ADC: m => yes
-      Direct dependencies: INPUT [=y] && INPUT_TOUCHSCREEN [=y] && IIO [=m]
+SCSI_SPI_ATTRS: y => no
+      Direct dependencies: SCSI [=y]
+      Reverse dependencies: SCSI_AHA152X [=n] && SCSI_LOWLEVEL [=y] && ISA [=n] && SCSI [=y] || SCSI_AIC7XXX [=y] && SCSI_LOWLEVEL [=y] && (PCI [=n] || EISA [=y]) && SCSI [=y] || SCSI_AIC79XX [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_DMX3191D [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_GENERIC_NCR5380 [=n] && SCSI_LOWLEVEL [=y] && ISA [=n] && SCSI [=y] && HAS_IOPORT_MAP [=y] || SCSI_LASI700 [=n] && SCSI_LOWLEVEL [=y] && GSC && SCSI [=y] || SCSI_SNI_53C710 [=n] && SCSI_LOWLEVEL [=y] && SNI_RM && SCSI [=y] || SCSI_SYM53C8XX_2 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_ZALON [=n] && SCSI_LOWLEVEL [=y] && GSC && SCSI [=y] || SCSI_SIM710 [=y] && SCSI_LOWLEVEL [=y] && EISA [=y] && SCSI [=y] || SCSI_DC395x [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_AM53C974 [=n] && SCSI_LOWLEVEL [=y] && PCI [=n] && SCSI [=y] || SCSI_ACORNSCSI_3 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=y] || SCSI_CUMANA_1 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=y] || SCSI_OAK1 [=n] && SCSI_LOWLEVEL [=y] && ARCH_ACORN && SCSI [=y] || JAZZ_ESP [=n] && SCSI_LOWLEVEL [=y] && MACH_JAZZ && SCSI [=y] || SCSI_A4000T [=n] && SCSI_LOWLEVEL [=y] && AMIGA && SCSI [=y] || SCSI_ZORRO7XX [=n] && SCSI_LOWLEVEL [=y] && ZORRO && SCSI [=y] || SCSI_ZORRO_ESP [=n] && SCSI_LOWLEVEL [=y] && ZORRO && SCSI [=y] || ATARI_SCSI [=n] && SCSI_LOWLEVEL [=y] && ATARI && SCSI [=y] || MAC_SCSI [=n] && SCSI_LOWLEVEL [=y] && MAC && SCSI [=y] || SCSI_MAC_ESP [=n] && SCSI_LOWLEVEL [=y] && MAC && SCSI [=y] || MVME147_SCSI [=n] && SCSI_LOWLEVEL [=y] && MVME147 && SCSI [=y]=y || MVME16x_SCSI [=n] && SCSI_LOWLEVEL [=y] && MVME16x && SCSI [=y] || BVME6000_SCSI [=n] && SCSI_LOWLEVEL [=y] && BVME6000 && SCSI [=y] || SUN3_SCSI [=n] && SCSI_LOWLEVEL [=y] && SUN3 && SCSI [=y] || SUN3X_ESP [=n] && SCSI_LOWLEVEL [=y] && SUN3X && SCSI [=y]=y || SCSI_SUNESP [=n] && SCSI_LOWLEVEL [=y] && SBUS [=n] && SCSI [=y] || PCMCIA_AHA152X [=n] && SCSI_LOWLEVEL [=y] && SCSI_LOWLEVEL_PCMCIA [=y] && SCSI [=y] && PCMCIA [=y] && m && MODULES [=n] || FUSION_SPI [=n] && FUSION [=n] && PCI [=n] && SCSI [=y]
 
-KFENCE_KUNIT_TEST: m => yes
-      Direct dependencies: KFENCE [=y] && TRACEPOINTS [=y] && KUNIT [=m]
+MMC_CQHCI: y => no
+      Direct dependencies: MMC [=y] && HAS_DMA [=y]
+      Reverse dependencies: MMC_SDHCI_PCI [=n] && MMC [=y] && MMC_SDHCI [=y] && PCI [=n] || MMC_SDHCI_OF_ARASAN [=y] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=n] && MMC [=y] && (ARCH_MXC || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=y] && OF [=y] || MMC_SDHCI_TEGRA [=y] && MMC [=y] && (ARCH_TEGRA || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_MSM [=y] && MMC [=y] && (ARCH_QCOM || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=y] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=y] || MMC_SDHCI_AM654 [=n] && MMC [=y] && MMC_SDHCI_PLTFM [=y] && OF [=y] && REGMAP_MMIO [=y]
 
-SENSORS_ADT7410: m => yes
-      Direct dependencies: HWMON [=y] && I2C [=m]
+CPU_FREQ_GOV_ONDEMAND: y => no
+      Direct dependencies: CPU_FREQ [=y]
+      Reverse dependencies: CPU_FREQ_DEFAULT_GOV_ONDEMAND [=y] && <choice> && (!X86_INTEL_PSTATE [=n] || !SMP [=n])
 
-HID_JABRA: m => yes
-      Direct dependencies: INPUT [=y] && HID [=m]
+HZ_PERIODIC: y => no
+      Direct dependencies: <choice>
 

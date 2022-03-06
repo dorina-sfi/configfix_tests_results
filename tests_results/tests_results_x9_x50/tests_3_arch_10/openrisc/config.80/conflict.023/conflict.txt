@@ -1,33 +1,31 @@
-SND_SOC_SC7180: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_QCOM [=m] && I2C [=m] && GPIOLIB [=y]
+REGULATOR_MAX8952: m => yes
+      Direct dependencies: REGULATOR [=y] && I2C [=m]
 
-DVB_EC100: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_USB_EC168 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=n]
+SENSORS_LIS3_I2C: m => yes
+      Direct dependencies: I2C [=m] && INPUT [=y]
 
-TYPEC_MUX_PI3USB30532: m => yes
-      Direct dependencies: USB_SUPPORT [=y] && TYPEC [=y] && I2C [=m]
+USB_SERIAL_TI: m => yes
+      Direct dependencies: USB_SUPPORT [=y] && USB [=y] && USB_SERIAL [=m]
 
-LEDS_OT200: m => yes
-      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS [=m] && HAS_IOMEM [=y] && (X86_32 || COMPILE_TEST [=y])
+MFD_GATEWORKS_GSC: m => yes
+      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && OF [=y]
 
-GPIO_PCF857X: m => yes
-      Direct dependencies: GPIOLIB [=y] && I2C [=m]
+LEDS_SGM3140: m => yes
+      Direct dependencies: NEW_LEDS [=y] && LEDS_CLASS_FLASH [=m] && (V4L2_FLASH_LED_CLASS [=n] || !V4L2_FLASH_LED_CLASS [=n])
 
-DVB_DIB7000P: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || DVB_USB_CXUSB [=n] && USB [=n] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=n] && I2C [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=n] || VIDEO_CX23885 [=n] && MEDIA_SUPPORT [=m] && MEDIA_PCI_SUPPORT [=n] && (MEDIA_ANALOG_TV_SUPPORT [=y] || MEDIA_DIGITAL_TV_SUPPORT [=y]) && DVB_CORE [=m] && VIDEO_DEV [=m] && PCI [=n] && I2C [=m] && INPUT [=n] && SND [=m] && RC_CORE [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+INA2XX_ADC: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m] && !SENSORS_INA2XX [=m]
 
-DVB_TDA8261: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=m]
-      Reverse dependencies: DVB_BUDGET_AV [=n] && MEDIA_SUPPORT [=m] && PCI [=n] && MEDIA_PCI_SUPPORT [=n] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_BUDGET_CORE [=n] && I2C [=m] && VIDEO_DEV [=m] && MEDIA_SUBDRV_AUTOSELECT [=n]
+IIO_SW_DEVICE: m => yes
+      Direct dependencies: IIO [=m]
 
-AL3320A: m => yes
-      Direct dependencies: IIO [=y] && I2C [=m]
+NAU7802: m => yes
+      Direct dependencies: IIO [=m] && I2C [=m]
 
-MFD_MAX77686: m => yes
-      Direct dependencies: HAS_IOMEM [=y] && I2C [=m] && (OF [=y] || COMPILE_TEST [=y])
+I2C_OWL: m => yes
+      Direct dependencies: I2C [=m] && HAS_IOMEM [=y] && (ARCH_ACTIONS || COMPILE_TEST [=y])
 
-FPGA_MGR_SOCFPGA: m => yes
-      Direct dependencies: FPGA [=m] && (ARCH_INTEL_SOCFPGA || COMPILE_TEST [=y])
+CRYPTO_MANAGER: y => mod
+      Direct dependencies: CRYPTO [=y]
+      Reverse dependencies: RXKAD [=n] && NET [=y] && AF_RXRPC [=n] || CRYPTO_USER [=n] && CRYPTO [=y] && NET [=y] || CRYPTO_PCRYPT [=n] && CRYPTO [=y] && SMP [=n] || CRYPTO_CRYPTD [=y] && CRYPTO [=y] || CRYPTO_AUTHENC [=y] && CRYPTO [=y] || CRYPTO_TEST [=n] && CRYPTO [=y] && (m && MODULES [=y] || EXPERT [=n]) || CRYPTO_RSA [=y] && CRYPTO [=y] || CRYPTO_SM2 [=y] && CRYPTO [=y] || CRYPTO_CCM [=m] && CRYPTO [=y] || CRYPTO_GCM [=y] && CRYPTO [=y] || CRYPTO_CHACHA20POLY1305 [=m] && CRYPTO [=y] || CRYPTO_SEQIV [=m] && CRYPTO [=y] || CRYPTO_ECHAINIV [=n] && CRYPTO [=y] || CRYPTO_CBC [=y] && CRYPTO [=y] || CRYPTO_CFB [=y] && CRYPTO [=y] || CRYPTO_CTR [=y] && CRYPTO [=y] || CRYPTO_CTS [=n] && CRYPTO [=y] || CRYPTO_ECB [=m] && CRYPTO [=y] || CRYPTO_LRW [=y] && CRYPTO [=y] || CRYPTO_OFB [=y] && CRYPTO [=y] || CRYPTO_PCBC [=y] && CRYPTO [=y] || CRYPTO_XTS [=n] && CRYPTO [=y] || CRYPTO_KEYWRAP [=y] && CRYPTO [=y] || CRYPTO_ADIANTUM [=n] && CRYPTO [=y] || CRYPTO_CMAC [=y] && CRYPTO [=y] || CRYPTO_HMAC [=y] && CRYPTO [=y] || CRYPTO_XCBC [=y] && CRYPTO [=y] || CRYPTO_VMAC [=n] && CRYPTO [=y]
 

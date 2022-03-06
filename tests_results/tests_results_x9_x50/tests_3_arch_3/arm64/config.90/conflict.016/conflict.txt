@@ -1,9 +1,11 @@
-CORESIGHT_LINK_AND_SINK_TMC: m => yes
-      Direct dependencies: CORESIGHT [=m] && CORESIGHT_LINKS_AND_SINKS [=m]
+QCOM_CLK_RPMH: m => yes
+      Direct dependencies: COMMON_CLK [=y] && COMMON_CLK_QCOM [=y] && QCOM_RPMH [=m]
 
-CLK_RENESAS: y => no
-      Direct dependencies: COMMON_CLK [=y]
+OF: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARM64 [=y]
 
-HID_HOLTEK: m => yes
-      Direct dependencies: INPUT [=y] && HID [=y] && USB_HID [=m]
+EXTCON: y => mod
+      Direct dependencies: y
+      Reverse dependencies: CHARGER_MANAGER [=y] && POWER_SUPPLY [=y] && REGULATOR [=y] || DRM_SIL_SII8620 [=y] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] && (RC_CORE [=n] || !RC_CORE [=n]) || USB_CHIPIDEA [=m] && USB_SUPPORT [=y] && (USB_EHCI_HCD [=y] && USB_GADGET [=m] || USB_EHCI_HCD [=y] && !USB_GADGET [=m] || !USB_EHCI_HCD [=y] && USB_GADGET [=m]) && HAS_DMA [=y] || USB_PHY [=y] && USB_SUPPORT [=y] || PHY_ROCKCHIP_TYPEC [=n] && OF [=y] && (ARCH_ROCKCHIP [=n] || COMPILE_TEST [=n]) || PHY_NS2_USB_DRD [=n] && OF [=y] && (ARCH_BCM_IPROC [=n] || COMPILE_TEST [=n])
 

@@ -1,30 +1,29 @@
-SENSORS_HIH6130: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+DEBUG_OBJECTS: y => no
+      Direct dependencies: DEBUG_KERNEL [=y]
+      Reverse dependencies: DRM_I915_SW_FENCE_DEBUG_OBJECTS [=y] && HAS_IOMEM [=y] && EXPERT [=y] && DRM_I915 [=m]
 
-SENSORS_LTC4151: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+COMMON_CLK_MT6779_IMGSYS: m => yes
+      Direct dependencies: COMMON_CLK [=y] && (ARCH_MEDIATEK || COMPILE_TEST [=y]) && COMMON_CLK_MT6779 [=m]
 
-DVB_ZD1301_DEMOD: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_ZD1301 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB_V2 [=m] && MEDIA_SUBDRV_AUTOSELECT [=y]
+RTC_DRV_X1205: m => yes
+      Direct dependencies: RTC_CLASS [=y] && I2C [=m]
 
-IIO_ST_ACCEL_3AXIS: m => no
-      Direct dependencies: IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
-      Reverse dependencies: IIO_ST_LSM9DS0 [=m] && IIO [=y] && (I2C [=y] || SPI_MASTER [=y]) && SYSFS [=y] && !SENSORS_LIS3_I2C [=n] && !SENSORS_LIS3_SPI [=n]
+SENSORS_MAX6639: m => yes
+      Direct dependencies: HWMON [=y] && I2C [=m]
 
-DVB_DIB8000: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=m] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_CORE [=m] && I2C [=y]
-      Reverse dependencies: DVB_USB_DIB0700 [=n] && USB [=y] && MEDIA_SUPPORT [=m] && MEDIA_USB_SUPPORT [=y] && I2C [=y] && MEDIA_DIGITAL_TV_SUPPORT [=y] && DVB_USB [=n] && MEDIA_SUBDRV_AUTOSELECT [=y]
+IIO_SIMPLE_DUMMY: m => yes
+      Direct dependencies: IIO [=m] && IIO_SW_DEVICE [=m]
 
-W1_SLAVE_DS28E04: m => yes
-      Direct dependencies: W1 [=m]
+TOUCHSCREEN_MX25: m => yes
+      Direct dependencies: INPUT [=m] && INPUT_TOUCHSCREEN [=y] && MFD_MX25_TSADC [=y]
 
-STRICT_MODULE_RWX: y => no
-      Direct dependencies: ARCH_HAS_STRICT_MODULE_RWX [=y] && MODULES [=y]
+UHID: m => yes
+      Direct dependencies: INPUT [=m] && HID [=m]
 
-SPARSEMEM_MANUAL: y => no
-      Direct dependencies: <choice> && ARCH_SPARSEMEM_ENABLE [=y]
+ARCH_CPUIDLE_HALTPOLL: y => no
+      Direct dependencies: HYPERVISOR_GUEST [=y]
+      Reverse dependencies: KVM_GUEST [=y] && HYPERVISOR_GUEST [=y] && PARAVIRT [=y]
 
-SENSORS_AXI_FAN_CONTROL: m => yes
-      Direct dependencies: HWMON [=m]
+SENSORS_MAX20751: m => yes
+      Direct dependencies: HWMON [=y] && PMBUS [=m]
 

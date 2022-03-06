@@ -1,24 +1,25 @@
-W1: y => no
-      Direct dependencies: HAS_IOMEM [=y]
-      Reverse dependencies: BATTERY_DS2780 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y] || BATTERY_DS2781 [=m] && POWER_SUPPLY [=y] && HAS_IOMEM [=y]
+ARM64_PA_BITS_48: y => no
+      Direct dependencies: <choice>
 
-RESET_SIMPLE: y => no
-      Direct dependencies: RESET_CONTROLLER [=y]
-      Reverse dependencies: CLK_BCM2711_DVP [=n] && (ARCH_BCM2835 [=n] || COMPILE_TEST [=n]) && COMMON_CLK [=y] || CLK_SIFIVE_PRCI [=n] && COMMON_CLK [=y] && CLK_SIFIVE [=n] || RESET_SOCFPGA [=n] && RESET_CONTROLLER [=y] || RESET_SUNXI [=y] && RESET_CONTROLLER [=y] || RESET_UNIPHIER_GLUE [=n] && RESET_CONTROLLER [=y] && (ARCH_UNIPHIER [=n] || COMPILE_TEST [=n]) && OF [=y]
+SMSC_PHY: y => no
+      Direct dependencies: NETDEVICES [=y] && PHYLIB [=y]
+      Reverse dependencies: SMSC9420 [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_SMSC [=y] && PCI [=y] || USB_NET_SMSC95XX [=n] && NETDEVICES [=y] && USB_NET_DRIVERS [=y] && USB_USBNET [=n]
 
-SND_PCXHR: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y]
+YENTA_RICOH: y => no
+      Direct dependencies: PCCARD [=y] && YENTA [=y]
 
-EXT4_FS_POSIX_ACL: y => no
-      Direct dependencies: BLOCK [=y] && EXT4_FS [=y]
-      Reverse dependencies: EXT3_FS_POSIX_ACL [=y] && BLOCK [=y] && EXT3_FS [=y]
+TIMERFD: y => no
+      Direct dependencies: y
 
-SND_AZT3328: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_PCI [=y] && ZONE_DMA [=y]
+IMX_GPCV2_PM_DOMAINS: y => no
+      Direct dependencies: (ARCH_MXC [=y] || COMPILE_TEST [=y] && OF [=y]) && PM [=y]
+      Reverse dependencies: ARCH_MXC [=y]
 
-SND_SOC_WCD9335: m => yes
-      Direct dependencies: SOUND [=m] && !UML && SND [=m] && SND_SOC [=m] && SLIMBUS [=y]
+TI_DAVINCI_MDIO: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARCH_DAVINCI || ARCH_OMAP2PLUS || ARCH_KEYSTONE || ARCH_K3 [=y] || COMPILE_TEST [=y])
+      Reverse dependencies: TI_DAVINCI_EMAC [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARM && (ARCH_DAVINCI || ARCH_OMAP3) || COMPILE_TEST [=y]) || TI_CPSW [=y] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARCH_DAVINCI || ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && (TI_CPTS [=n] || !TI_CPTS [=n]) || TI_CPSW_SWITCHDEV [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && (ARCH_DAVINCI || ARCH_OMAP2PLUS || COMPILE_TEST [=y]) && NET_SWITCHDEV [=n] && (TI_CPTS [=n] || !TI_CPTS [=n]) || TI_K3_AM65_CPSW_NUSS [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && ARCH_K3 [=y] && OF [=y] && TI_K3_UDMA_GLUE_LAYER [=n] && (TI_K3_AM65_CPTS [=n] || !TI_K3_AM65_CPTS [=n]) || TI_KEYSTONE_NETCP [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_TI [=y] && OF [=y] && KEYSTONE_NAVIGATOR_DMA [=n] && KEYSTONE_NAVIGATOR_QMSS [=n] && (TI_CPTS [=n] || !TI_CPTS [=n])
 
-PINCTRL_QDF2XXX: m => yes
-      Direct dependencies: PINCTRL [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=n]) && ACPI [=y] && PINCTRL_MSM [=m]
+PINCTRL: y => no
+      Direct dependencies: y
+      Reverse dependencies: ARCH_ACTIONS [=n] || ARCH_SUNXI [=n] || ARCH_BCM2835 [=y] || ARCH_BCM_IPROC [=n] || ARCH_BERLIN [=y] || ARCH_BRCMSTB [=n] || ARCH_EXYNOS [=n] || ARCH_SPARX5 [=n] || ARCH_HISI [=n] || ARCH_MEDIATEK [=y] || ARCH_MVEBU [=n] || ARCH_QCOM [=y] || ARCH_RENESAS [=n] || ARCH_ROCKCHIP [=y] || ARCH_TEGRA [=n] || ARCH_UNIPHIER [=y] || ARCH_VISCONTI [=n] || MFD_MADERA [=y] && HAS_IOMEM [=y]
 

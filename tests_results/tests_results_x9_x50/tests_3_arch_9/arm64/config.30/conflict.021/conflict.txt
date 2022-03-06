@@ -1,29 +1,33 @@
-PREEMPT_NONE: y => no
-      Direct dependencies: <choice>
+HOTPLUG_CPU: y => no
+      Direct dependencies: y
+      Reverse dependencies: PM_SLEEP_SMP [=y] && SMP [=y] && (ARCH_SUSPEND_POSSIBLE [=y] || ARCH_HIBERNATION_POSSIBLE [=y]) && PM_SLEEP [=y]
 
-MMC_SDHCI_TEGRA: m => yes
-      Direct dependencies: MMC [=y] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m]
+SPI_MEM: y => no
+      Direct dependencies: SPI [=y] && SPI_MASTER [=y]
+      Reverse dependencies: MTD_SPI_NOR [=y] && MTD [=y] && SPI_MASTER [=y] || MTD_SPI_NAND [=n] && MTD [=y] && SPI_MASTER [=y]
 
-VIDEO_SAA7185: m => yes
-      Direct dependencies: MEDIA_SUPPORT [=y] && VIDEO_V4L2 [=m] && I2C [=y]
-      Reverse dependencies: VIDEO_ZORAN_BUZ [=n] && STAGING [=n] && STAGING_MEDIA [=n] && MEDIA_SUPPORT [=y] && VIDEO_ZORAN_ZR36060 [=n] && MEDIA_SUBDRV_AUTOSELECT [=n]
+STRICT_KERNEL_RWX: y => no
+      Direct dependencies: ARCH_HAS_STRICT_KERNEL_RWX [=y]
 
-SND_SOC_MT8173_MAX98090: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_MT8173 [=m] && I2C [=y]
+REGULATOR_FIXED_VOLTAGE: y => no
+      Direct dependencies: REGULATOR [=y]
+      Reverse dependencies: TPS6105X [=y] && HAS_IOMEM [=y] && I2C [=y] || USB_LGM_PHY [=n] && USB_SUPPORT [=y] && (X86 || COMPILE_TEST [=n])
 
-SND_SOC_AMD_ACP: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m]
+NET_VENDOR_EMULEX: y => no
+      Direct dependencies: NETDEVICES [=y] && ETHERNET [=y] && PCI [=y]
+      Reverse dependencies: INFINIBAND_OCRDMA [=y] && INFINIBAND [=y] && (INFINIBAND_USER_ACCESS [=y] || !INFINIBAND_USER_ACCESS [=y]) && ETHERNET [=y] && NETDEVICES [=y] && PCI [=y] && INET [=y] && (IPV6 [=n] || IPV6 [=n]=n)
 
-MMC_CQHCI: m => no
-      Direct dependencies: MMC [=y] && HAS_DMA [=y]
-      Reverse dependencies: MMC_SDHCI_PCI [=m] && MMC [=y] && MMC_SDHCI [=m] && PCI [=y] || MMC_SDHCI_OF_ARASAN [=m] && MMC [=y] && MMC_SDHCI_PLTFM [=m] && OF [=y] && COMMON_CLK [=y] || MMC_SDHCI_ESDHC_IMX [=m] && MMC [=y] && (ARCH_MXC [=n] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] && OF [=y] || MMC_SDHCI_TEGRA [=m] && MMC [=y] && (ARCH_TEGRA [=n] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] || MMC_SDHCI_MSM [=n] && MMC [=y] && (ARCH_QCOM [=y] || COMPILE_TEST [=y]) && MMC_SDHCI_PLTFM [=m] || MMC_MTK [=n] && MMC [=y] && HAS_DMA [=y] && COMMON_CLK [=y] || MMC_SDHCI_BRCMSTB [=n] && MMC [=y] && (ARCH_BRCMSTB [=n] || BMIPS_GENERIC) && MMC_SDHCI_PLTFM [=m] || MMC_SDHCI_AM654 [=m] && MMC [=y] && MMC_SDHCI_PLTFM [=m] && OF [=y] && REGMAP_MMIO [=y]
+EEPROM_93CX6: y => no
+      Direct dependencies: y
+      Reverse dependencies: SCSI_WD719X [=y] && SCSI_LOWLEVEL [=y] && PCI [=y] && SCSI [=y] || KS8851 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=n] && SPI [=y] || KS8851_MLL [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_MICREL [=n] && HAS_IOMEM [=y] || AX88796_93CX6 [=n] && NETDEVICES [=y] && ETHERNET [=y] && NET_VENDOR_8390 [=n] && AX88796 [=n] || ADM8211 [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_ADMTEK [=n] && MAC80211 [=y] && PCI [=y] || RT2400PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2500PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT61PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RT2800PCI [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_RALINK [=n] && RT2X00 [=n] && PCI [=y] || RTL8180 [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_REALTEK [=n] && MAC80211 [=y] && PCI [=y] || RTL8187 [=n] && NETDEVICES [=y] && WLAN [=n] && WLAN_VENDOR_REALTEK [=n] && MAC80211 [=y] && USB [=y]
 
-SENSORS_LTC4261: m => yes
-      Direct dependencies: HWMON [=m] && I2C [=y]
+SERIAL_SH_SCI_DMA: y => no
+      Direct dependencies: TTY [=y] && HAS_IOMEM [=y] && SERIAL_SH_SCI [=y] && DMA_ENGINE [=y]
 
-SND_SOC_TEGRA20_SPDIF: m => yes
-      Direct dependencies: SOUND [=y] && !UML && SND [=m] && SND_SOC [=m] && SND_SOC_TEGRA [=m]
+POSIX_TIMERS: y => no
+      Direct dependencies: y
 
-REGULATOR_ARIZONA_MICSUPP: m => yes
-      Direct dependencies: REGULATOR [=y] && (MFD_ARIZONA [=n] || MFD_MADERA [=m]) && SND_SOC [=m]
+I2C_MUX: y => no
+      Direct dependencies: I2C [=y]
+      Reverse dependencies: MEDIA_SUBDRV_AUTOSELECT [=n] && MEDIA_SUPPORT [=y] && HAS_IOMEM [=y] || DRM_SII902X [=n] && HAS_IOMEM [=y] && DRM [=y] && DRM_BRIDGE [=y] && OF [=y] || MPU3050_I2C [=y] && IIO [=y] && I2C [=y] || INV_MPU6050_I2C [=n] && IIO [=y] && I2C [=y]
 
